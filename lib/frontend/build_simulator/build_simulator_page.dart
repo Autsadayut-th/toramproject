@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'build_simulator_coordinator.dart';
 import '../equipment_library/models/equipment_library_item.dart';
 import '../equipment_library/repository/equipment_library_repository.dart';
+import 'services/ai_build_recommendation_service.dart';
 import 'services/build_calculator_service.dart';
 import 'services/build_persistence_service.dart';
 import 'services/build_recommendation_service.dart';
@@ -32,6 +35,8 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   final TextEditingController _buildNameController = TextEditingController();
   final EquipmentLibraryRepository _equipmentRepository =
       EquipmentLibraryRepository();
+  final AiBuildRecommendationService _aiRecommendationService =
+      const AiBuildRecommendationService();
 
   static const List<String> _characterStatKeys =
       BuildPersistenceService.characterStatKeys;
@@ -97,11 +102,12 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     BuildCalculatorService.summaryTemplate,
   );
 
-  List<String> _recommendations = <String>[
-    'Choose a main weapon that matches your core stats.',
-    'Use crystals that increase ATK or Critical Rate.',
-    'Balance DEF and MDEF to fit your build.',
-  ];
+  List<String> _recommendations = const <String>[];
+  Timer? _aiRecommendationDebounce;
+  int _aiRecommendationRequestToken = 0;
+  bool _isAiRecommendationLoading = false;
+  String _aiRecommendationSource = 'rule';
+  String _aiRecommendationMessage = 'Using local recommendation rules.';
   bool _showRecommendationsPanel = true;
 
   final List<Map<String, dynamic>> _savedBuilds = <Map<String, dynamic>>[];
@@ -125,6 +131,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
 
   @override
   void dispose() {
+    _aiRecommendationDebounce?.cancel();
     widget.coordinator?.detachHandlers();
     _buildNameController.dispose();
     super.dispose();
@@ -271,6 +278,9 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       enhanceRing: _enhRing,
       equippedItems: _equippedItems(),
     );
+    final List<EquipmentLibraryItem> equippedItems = _equippedItems().toList(
+      growable: false,
+    );
     _recommendations = BuildRecommendationService.generate(
       summary: _summary,
       character: _character,
@@ -286,8 +296,108 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       enhanceArmor: _enhArmor,
       enhanceHelmet: _enhHelmet,
       enhanceRing: _enhRing,
-      equippedItems: _equippedItems(),
+      equippedItems: equippedItems,
     );
+    _aiRecommendationSource = 'rule';
+    _aiRecommendationMessage = 'Using local recommendation rules.';
+    _scheduleAiRecommendations(equippedItems);
+  }
+
+  void _scheduleAiRecommendations(List<EquipmentLibraryItem> equippedItems) {
+    _aiRecommendationDebounce?.cancel();
+    final Map<String, dynamic> payload = _buildAiRequestPayload(
+      equippedItems: equippedItems,
+      fallbackRecommendations: _recommendations,
+    );
+    _aiRecommendationDebounce = Timer(const Duration(milliseconds: 650), () {
+      final int token = ++_aiRecommendationRequestToken;
+      _refreshAiRecommendations(token: token, payload: payload);
+    });
+  }
+
+  Map<String, dynamic> _buildAiRequestPayload({
+    required List<EquipmentLibraryItem> equippedItems,
+    required List<String> fallbackRecommendations,
+  }) {
+    return <String, dynamic>{
+      'level': _level,
+      'personalStatType': _personalStatType,
+      'personalStatValue': _personalStatValue,
+      'character': Map<String, dynamic>.from(_character),
+      'summary': Map<String, num>.from(_summary),
+      'equipmentSlots': <String, dynamic>{
+        'mainWeaponId': _mainWeaponId,
+        'subWeaponId': _subWeaponId,
+        'armorId': _armorId,
+        'helmetId': _helmetId,
+        'ringId': _ringId,
+        'enhanceMain': _enhMain,
+        'enhanceArmor': _enhArmor,
+        'enhanceHelmet': _enhHelmet,
+        'enhanceRing': _enhRing,
+      },
+      'equippedItems': equippedItems
+          .map(
+            (EquipmentLibraryItem item) => <String, dynamic>{
+              'name': item.name,
+              'type': item.type,
+              'stats': item.stats
+                  .map(
+                    (EquipmentStat stat) => <String, dynamic>{
+                      'statKey': stat.statKey,
+                      'value': stat.value,
+                      'valueType': stat.valueType,
+                    },
+                  )
+                  .toList(growable: false),
+            },
+          )
+          .toList(growable: false),
+      'fallbackRecommendations': List<String>.from(fallbackRecommendations),
+    };
+  }
+
+  Future<void> _refreshAiRecommendations({
+    required int token,
+    required Map<String, dynamic> payload,
+  }) async {
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _isAiRecommendationLoading = true;
+      _aiRecommendationMessage = 'AI analyzing your build...';
+    });
+    _syncCoordinatorSnapshot();
+
+    try {
+      final AiBuildRecommendationResult result = await _aiRecommendationService
+          .fetchRecommendations(payload: payload);
+      if (!mounted || token != _aiRecommendationRequestToken) {
+        return;
+      }
+      setState(() {
+        _recommendations = result.recommendations;
+        _isAiRecommendationLoading = false;
+        _aiRecommendationSource = result.source;
+        _aiRecommendationMessage = result.source == 'openai'
+            ? 'AI recommendations from OpenAI.'
+            : 'AI unavailable. Using fallback recommendations.';
+      });
+      _syncCoordinatorSnapshot();
+    } catch (_) {
+      if (!mounted || token != _aiRecommendationRequestToken) {
+        return;
+      }
+      setState(() {
+        _isAiRecommendationLoading = false;
+        _aiRecommendationSource = 'fallback';
+        _aiRecommendationMessage =
+            'AI unavailable. Using local recommendation rules.';
+      });
+      _syncCoordinatorSnapshot();
+    }
   }
 
   int _findBuildIndexById(String buildId) {
@@ -334,7 +444,9 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       build['enhSub'],
     ).clamp(0, 15).toInt();
 
-    _armorId = BuildPersistenceService.readOptionalStringValue(build['armorId']);
+    _armorId = BuildPersistenceService.readOptionalStringValue(
+      build['armorId'],
+    );
     _enhArmor = BuildPersistenceService.readIntValue(
       build['enhArmor'],
     ).clamp(0, 15).toInt();
@@ -369,15 +481,33 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       build['ringCrystal2'],
     );
 
-    _gacha1Stat1 = BuildPersistenceService.readStringValue(build['gacha1Stat1']);
-    _gacha1Stat2 = BuildPersistenceService.readStringValue(build['gacha1Stat2']);
-    _gacha1Stat3 = BuildPersistenceService.readStringValue(build['gacha1Stat3']);
-    _gacha2Stat1 = BuildPersistenceService.readStringValue(build['gacha2Stat1']);
-    _gacha2Stat2 = BuildPersistenceService.readStringValue(build['gacha2Stat2']);
-    _gacha2Stat3 = BuildPersistenceService.readStringValue(build['gacha2Stat3']);
-    _gacha3Stat1 = BuildPersistenceService.readStringValue(build['gacha3Stat1']);
-    _gacha3Stat2 = BuildPersistenceService.readStringValue(build['gacha3Stat2']);
-    _gacha3Stat3 = BuildPersistenceService.readStringValue(build['gacha3Stat3']);
+    _gacha1Stat1 = BuildPersistenceService.readStringValue(
+      build['gacha1Stat1'],
+    );
+    _gacha1Stat2 = BuildPersistenceService.readStringValue(
+      build['gacha1Stat2'],
+    );
+    _gacha1Stat3 = BuildPersistenceService.readStringValue(
+      build['gacha1Stat3'],
+    );
+    _gacha2Stat1 = BuildPersistenceService.readStringValue(
+      build['gacha2Stat1'],
+    );
+    _gacha2Stat2 = BuildPersistenceService.readStringValue(
+      build['gacha2Stat2'],
+    );
+    _gacha2Stat3 = BuildPersistenceService.readStringValue(
+      build['gacha2Stat3'],
+    );
+    _gacha3Stat1 = BuildPersistenceService.readStringValue(
+      build['gacha3Stat1'],
+    );
+    _gacha3Stat2 = BuildPersistenceService.readStringValue(
+      build['gacha3Stat2'],
+    );
+    _gacha3Stat3 = BuildPersistenceService.readStringValue(
+      build['gacha3Stat3'],
+    );
 
     _isCharacterStatsExpanded = BuildPersistenceService.readBoolValue(
       build['isCharacterStatsExpanded'],
@@ -536,9 +666,9 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   void _onReplaceSavedBuilds(List<Map<String, dynamic>> rawBuilds) {
     final List<Map<String, dynamic>> normalized =
         BuildPersistenceService.normalizeBuildList(
-      rawBuilds,
-      summaryTemplate: BuildCalculatorService.summaryTemplate,
-    );
+          rawBuilds,
+          summaryTemplate: BuildCalculatorService.summaryTemplate,
+        );
     _setUiState(() {
       _savedBuilds
         ..clear()
@@ -554,10 +684,10 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
 
     final List<Map<String, dynamic>> normalized =
         BuildPersistenceService.normalizeBuildList(
-      rawBuilds,
-      reservedIds: reservedIds,
-      summaryTemplate: BuildCalculatorService.summaryTemplate,
-    );
+          rawBuilds,
+          reservedIds: reservedIds,
+          summaryTemplate: BuildCalculatorService.summaryTemplate,
+        );
     if (normalized.isEmpty) {
       return;
     }

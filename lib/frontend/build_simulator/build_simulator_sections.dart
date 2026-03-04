@@ -224,7 +224,39 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _sectionTitle(Icons.lightbulb, 'AI Recommendations'),
-          const SizedBox(height: 16),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Icon(
+                _isAiRecommendationLoading
+                    ? Icons.sync
+                    : _aiRecommendationSource == 'openai'
+                    ? Icons.psychology
+                    : Icons.rule,
+                size: 14,
+                color: _isAiRecommendationLoading
+                    ? const Color(0xFFFFE082)
+                    : _aiRecommendationSource == 'openai'
+                    ? const Color(0xFFB7FFC6)
+                    : const Color(0xFFFFCCBC),
+              ),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  _aiRecommendationMessage,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: _isAiRecommendationLoading
+                        ? const Color(0xFFFFF8E1)
+                        : Colors.white70,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
           Column(children: children),
         ],
       ),
