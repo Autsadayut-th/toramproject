@@ -5,6 +5,7 @@ import '../equipment_library/models/equipment_library_item.dart';
 import '../equipment_library/repository/equipment_library_repository.dart';
 import 'services/build_calculator_service.dart';
 import 'services/build_persistence_service.dart';
+import 'services/build_recommendation_service.dart';
 import 'widgets/armor_selector.dart';
 import 'widgets/character_stats_selector.dart';
 import 'widgets/gacha_card.dart';
@@ -96,7 +97,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     BuildCalculatorService.summaryTemplate,
   );
 
-  final List<String> _recommendations = <String>[
+  List<String> _recommendations = <String>[
     'Choose a main weapon that matches your core stats.',
     'Use crystals that increase ATK or Critical Rate.',
     'Balance DEF and MDEF to fit your build.',
@@ -264,6 +265,23 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       level: _level,
       personalStatType: _personalStatType,
       personalStatValue: _personalStatValue,
+      enhanceMain: _enhMain,
+      enhanceArmor: _enhArmor,
+      enhanceHelmet: _enhHelmet,
+      enhanceRing: _enhRing,
+      equippedItems: _equippedItems(),
+    );
+    _recommendations = BuildRecommendationService.generate(
+      summary: _summary,
+      character: _character,
+      level: _level,
+      personalStatType: _personalStatType,
+      personalStatValue: _personalStatValue,
+      mainWeaponId: _mainWeaponId,
+      subWeaponId: _subWeaponId,
+      armorId: _armorId,
+      helmetId: _helmetId,
+      ringId: _ringId,
       enhanceMain: _enhMain,
       enhanceArmor: _enhArmor,
       enhanceHelmet: _enhHelmet,
