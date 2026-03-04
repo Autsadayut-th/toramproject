@@ -13,43 +13,50 @@ class SkillTreeWidgets {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: trees.map((String treeName) {
-          final bool selected = treeName == activeTree;
-          return Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: InkWell(
-              onTap: () => onSelected(treeName),
-              borderRadius: BorderRadius.circular(999),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                decoration: BoxDecoration(
-                  gradient: selected
-                      ? const LinearGradient(
-                          colors: [Color(0xFF4A4A4A), Color(0xFF3A3A3A)],
-                        )
-                      : const LinearGradient(
-                          colors: [Color(0xFF2A2A2A), Color(0xFF1A1A1A)],
-                        ),
+        children: trees
+            .map((String treeName) {
+              final bool selected = treeName == activeTree;
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: InkWell(
+                  onTap: () => onSelected(treeName),
                   borderRadius: BorderRadius.circular(999),
-                  border: Border.all(
-                    color: selected
-                        ? const Color(0xFF888888)
-                        : const Color(0xFF666666),
-                    width: selected ? 2 : 1,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      gradient: selected
+                          ? const LinearGradient(
+                              colors: [Color(0xFF4A4A4A), Color(0xFF3A3A3A)],
+                            )
+                          : const LinearGradient(
+                              colors: [Color(0xFF2A2A2A), Color(0xFF1A1A1A)],
+                            ),
+                      borderRadius: BorderRadius.circular(999),
+                      border: Border.all(
+                        color: selected
+                            ? const Color(0xFF888888)
+                            : const Color(0xFF666666),
+                        width: selected ? 2 : 1,
+                      ),
+                    ),
+                    child: Text(
+                      treeName,
+                      style: TextStyle(
+                        color: selected ? Colors.white : Colors.white70,
+                        fontSize: 12,
+                        fontWeight: selected
+                            ? FontWeight.w700
+                            : FontWeight.w600,
+                      ),
+                    ),
                   ),
                 ),
-                child: Text(
-                  treeName,
-                  style: TextStyle(
-                    color: selected ? Colors.white : Colors.white70,
-                    fontSize: 12,
-                    fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-          );
-        }).toList(growable: false),
+              );
+            })
+            .toList(growable: false),
       ),
     );
   }
@@ -103,7 +110,9 @@ class SkillTreeWidgets {
                       children: <Widget>[
                         Positioned.fill(
                           child: CustomPaint(
-                            painter: _SkillTreeConnectorPainter(edges: layout.edges),
+                            painter: _SkillTreeConnectorPainter(
+                              edges: layout.edges,
+                            ),
                           ),
                         ),
                         ...layout.nodes.map((_SkillTreeNodeLayout node) {
@@ -130,10 +139,7 @@ class SkillTreeWidgets {
 }
 
 class _SkillTreeNode extends StatelessWidget {
-  const _SkillTreeNode({
-    required this.skill,
-    required this.onTap,
-  });
+  const _SkillTreeNode({required this.skill, required this.onTap});
 
   final SkillEntry skill;
   final VoidCallback onTap;
@@ -142,38 +148,44 @@ class _SkillTreeNode extends StatelessWidget {
   Widget build(BuildContext context) {
     final String imageAssetPath = skill.imageAssetPath.trim();
     return Tooltip(
-      message:
-          '${skill.name} (Lv ${skill.unlockLevel?.toString() ?? '-'})',
+      message: '${skill.name} (Lv ${skill.unlockLevel?.toString() ?? '-'})',
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(999),
         child: Container(
           width: _SkillTreeLayout.nodeDiameter,
           height: _SkillTreeLayout.nodeDiameter,
-          padding: const EdgeInsets.all(3),
+          padding: const EdgeInsets.all(2.6),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            gradient: const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Color(0xFFFFFFFF), Color(0xFFEDEDED)],
-            ),
-            border: Border.all(color: const Color(0xFFF5F5F5), width: 1.2),
+            color: const Color(0xFF000000),
+            border: Border.all(color: const Color(0xFFFFFFFF), width: 1.4),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFFFFFFFF).withValues(alpha: 0.12),
+                blurRadius: 6,
+                spreadRadius: 0.5,
+              ),
+            ],
           ),
           child: Container(
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xFFFFFFFF),
+              color: Color(0xFF000000),
             ),
             child: ClipOval(
               child: imageAssetPath.isEmpty
-                  ? const Icon(Icons.auto_awesome, color: Color(0xFF6A6A6A), size: 20)
+                  ? const Icon(
+                      Icons.auto_awesome,
+                      color: Color(0xFFBDBDBD),
+                      size: 20,
+                    )
                   : Image.asset(
                       imageAssetPath,
                       fit: BoxFit.cover,
                       errorBuilder: (_, __, ___) => const Icon(
                         Icons.auto_awesome,
-                        color: Color(0xFF6A6A6A),
+                        color: Color(0xFFBDBDBD),
                         size: 20,
                       ),
                     ),
@@ -193,7 +205,7 @@ class _SkillTreeConnectorPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final Paint linePaint = Paint()
-      ..color = const Color(0xFFF2F2F2)
+      ..color = const Color(0xFFFFFFFF)
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
@@ -210,7 +222,7 @@ class _SkillTreeConnectorPainter extends CustomPainter {
         edge.to.center.dx - _SkillTreeLayout.nodeRadius + 1,
         edge.to.center.dy,
       );
-      final double midX = (from.dx + to.dx) / 2;
+      final double midX = edge.bendX ?? (from.dx + to.dx) / 2;
 
       final Path path = Path()
         ..moveTo(from.dx, from.dy)
@@ -432,18 +444,26 @@ class _SkillTreeLayout {
       <String>['hard hit', 'sonic blade'],
       <String>['sonic blade', 'spiral air'],
       <String>['spiral air', 'sword tempest'],
-      <String>['sword tempest', 'buster blade'],
+      <String>['spiral air', 'buster blade'],
       <String>['buster blade', 'aura blade'],
       <String>['sword mastery', 'quick slash'],
       <String>['quick slash', 'sword techniques'],
-      <String>['sword techniques', 'war cry'],
+      <String>['quick slash', 'war cry'],
       <String>['war cry', 'berserk'],
       <String>['berserk', 'gladiate'],
     ];
 
+    const Map<String, double> bladeEdgeBendGridByPair = <String, double>{
+      'trigger slash->shut-out': 2.55,
+      'spiral air->buster blade': 2.55,
+      'quick slash->war cry': 1.55,
+    };
+
     final List<SkillEntry> orderedSkills = List<SkillEntry>.from(skills)
       ..sort((SkillEntry a, SkillEntry b) {
-        final int byLevel = (a.unlockLevel ?? 99).compareTo(b.unlockLevel ?? 99);
+        final int byLevel = (a.unlockLevel ?? 99).compareTo(
+          b.unlockLevel ?? 99,
+        );
         if (byLevel != 0) {
           return byLevel;
         }
@@ -451,7 +471,8 @@ class _SkillTreeLayout {
       });
 
     final List<_SkillTreeNodeLayout> nodes = <_SkillTreeNodeLayout>[];
-    final Map<String, _SkillTreeNodeLayout> nodeByName = <String, _SkillTreeNodeLayout>{};
+    final Map<String, _SkillTreeNodeLayout> nodeByName =
+        <String, _SkillTreeNodeLayout>{};
     final List<Offset> usedGridPoints = <Offset>[];
     int fallbackIndex = 0;
 
@@ -486,7 +507,15 @@ class _SkillTreeLayout {
       if (fromNode == null || toNode == null) {
         continue;
       }
-      edges.add(_SkillTreeEdgeLayout(from: fromNode, to: toNode));
+      final String edgeKey = '${pair[0]}->${pair[1]}';
+      final double? bendGrid = bladeEdgeBendGridByPair[edgeKey];
+      edges.add(
+        _SkillTreeEdgeLayout(
+          from: fromNode,
+          to: toNode,
+          bendX: bendGrid == null ? null : _centerXFromGrid(bendGrid),
+        ),
+      );
     }
 
     final int maxCol = usedGridPoints
@@ -515,22 +544,22 @@ class _SkillTreeLayout {
     }
 
     const Map<String, Offset> shotGridBySkill = <String, Offset>{
-      'power shot': Offset(0, 2),
-      'bullseye': Offset(1, 2),
-      'arrow rain': Offset(2, 2),
-      'snipe': Offset(4, 2),
-      'cross fire': Offset(6, 2),
-      'piercing shot': Offset(5, 1),
-      'vanquisher': Offset(6, 1),
-      'twin storm': Offset(5, 3),
+      'power shot': Offset(0, 3),
+      'bullseye': Offset(1, 3),
+      'arrow rain': Offset(2, 3),
+      'snipe': Offset(4, 3),
+      'cross fire': Offset(6, 1),
+      'piercing shot': Offset(5, 2),
+      'vanquisher': Offset(6, 3),
+      'twin storm': Offset(5, 5),
       'retrograde shot': Offset(5, 0),
-      'quick loader': Offset(4, 0),
+      'quick loader': Offset(3, 1),
       'moeba shot': Offset(1, 4),
       'paralysis shot': Offset(2, 4),
       'smoke dust': Offset(3, 4),
       'arm break': Offset(4, 4),
       'parabola cannon': Offset(6, 4),
-      'spread shot': Offset(5, 5),
+      'spread shot': Offset(5, 6),
       'shot mastery': Offset(0, 6),
       'long range': Offset(2, 6),
       'quick draw': Offset(3, 6),
@@ -546,12 +575,12 @@ class _SkillTreeLayout {
       <String>['power shot', 'bullseye'],
       <String>['bullseye', 'arrow rain'],
       <String>['arrow rain', 'snipe'],
-      <String>['snipe', 'cross fire'],
-      <String>['snipe', 'piercing shot'],
-      <String>['piercing shot', 'vanquisher'],
-      <String>['snipe', 'twin storm'],
-      <String>['quick loader', 'retrograde shot'],
       <String>['bullseye', 'quick loader'],
+      <String>['quick loader', 'cross fire'],
+      <String>['quick loader', 'retrograde shot'],
+      <String>['snipe', 'piercing shot'],
+      <String>['snipe', 'vanquisher'],
+      <String>['snipe', 'twin storm'],
       <String>['bullseye', 'moeba shot'],
       <String>['moeba shot', 'paralysis shot'],
       <String>['paralysis shot', 'smoke dust'],
@@ -568,9 +597,22 @@ class _SkillTreeLayout {
       <String>['sneak attack', 'fatal shot'],
     ];
 
+    const Map<String, double> shotEdgeBendGridByPair = <String, double>{
+      'bullseye->quick loader': 1.3,
+      'quick loader->retrograde shot': 3.05,
+      'snipe->piercing shot': 4.95,
+      'snipe->vanquisher': 4.95,
+      'snipe->twin storm': 4.95,
+      'arm break->spread shot': 4.95,
+      'shot mastery->sneak attack': 0.05,
+      'sneak attack->fatal shot': 0.05,
+    };
+
     final List<SkillEntry> orderedSkills = List<SkillEntry>.from(skills)
       ..sort((SkillEntry a, SkillEntry b) {
-        final int byLevel = (a.unlockLevel ?? 99).compareTo(b.unlockLevel ?? 99);
+        final int byLevel = (a.unlockLevel ?? 99).compareTo(
+          b.unlockLevel ?? 99,
+        );
         if (byLevel != 0) {
           return byLevel;
         }
@@ -614,7 +656,15 @@ class _SkillTreeLayout {
       if (fromNode == null || toNode == null) {
         continue;
       }
-      edges.add(_SkillTreeEdgeLayout(from: fromNode, to: toNode));
+      final String edgeKey = '${pair[0]}->${pair[1]}';
+      final double? bendGrid = shotEdgeBendGridByPair[edgeKey];
+      edges.add(
+        _SkillTreeEdgeLayout(
+          from: fromNode,
+          to: toNode,
+          bendX: bendGrid == null ? null : _centerXFromGrid(bendGrid),
+        ),
+      );
     }
 
     final int maxCol = usedGridPoints
@@ -665,10 +715,15 @@ class _SkillTreeLayout {
       <String>['floating kick', 'annihilator'],
       <String>['annihilator', 'geyser kick'],
     ];
+    const Map<String, double> crusherEdgeBendGridByPair = <String, double>{
+      'breathwork->floating kick': 0.55,
+    };
 
     final List<SkillEntry> orderedSkills = List<SkillEntry>.from(skills)
       ..sort((SkillEntry a, SkillEntry b) {
-        final int byLevel = (a.unlockLevel ?? 99).compareTo(b.unlockLevel ?? 99);
+        final int byLevel = (a.unlockLevel ?? 99).compareTo(
+          b.unlockLevel ?? 99,
+        );
         if (byLevel != 0) {
           return byLevel;
         }
@@ -712,7 +767,15 @@ class _SkillTreeLayout {
       if (fromNode == null || toNode == null) {
         continue;
       }
-      edges.add(_SkillTreeEdgeLayout(from: fromNode, to: toNode));
+      final String edgeKey = '${pair[0]}->${pair[1]}';
+      final double? bendGrid = crusherEdgeBendGridByPair[edgeKey];
+      edges.add(
+        _SkillTreeEdgeLayout(
+          from: fromNode,
+          to: toNode,
+          bendX: bendGrid == null ? null : _centerXFromGrid(bendGrid),
+        ),
+      );
     }
 
     final int maxCol = usedGridPoints
@@ -742,6 +805,10 @@ class _SkillTreeLayout {
     );
   }
 
+  static double _centerXFromGrid(double gridX) {
+    return horizontalPadding + nodeRadius + gridX * horizontalGap;
+  }
+
   static String _normalizeSkillName(String value) {
     return value.trim().toLowerCase();
   }
@@ -763,8 +830,10 @@ class _SkillTreeEdgeLayout {
   const _SkillTreeEdgeLayout({
     required this.from,
     required this.to,
+    this.bendX,
   });
 
   final _SkillTreeNodeLayout from;
   final _SkillTreeNodeLayout to;
+  final double? bendX;
 }

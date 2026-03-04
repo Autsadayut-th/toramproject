@@ -63,6 +63,9 @@ flutter:
   assets:
     - assets/data/equipment_library/
     - assets/data/skill_menu/
+    - assets/data/skill_menu/images/blade/
+    - assets/data/skill_menu/images/Shot/
+    - assets/data/skill_menu/images/Crusher/
     - assets/data/monster_library/
 
   # An image asset can refer to one or more resolution-specific "variants", see

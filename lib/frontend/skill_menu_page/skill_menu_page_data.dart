@@ -108,7 +108,9 @@ class SkillLibraryData {
           entry.value as List<dynamic>? ?? const <dynamic>[];
       final List<SkillEntry> skills = rawSkills
           .whereType<Map<String, dynamic>>()
-          .map(SkillEntry.fromJson)
+          .map((Map<String, dynamic> raw) {
+            return SkillEntry.fromJson(raw, treeName: treeName);
+          })
           .where((SkillEntry skill) => skill.name.trim().isNotEmpty)
           .toList(growable: false);
       if (skills.isEmpty) {
@@ -155,11 +157,21 @@ class SkillEntry {
   final String description;
   final String imageAssetPath;
 
-  factory SkillEntry.fromJson(Map<String, dynamic> json) {
+  factory SkillEntry.fromJson(
+    Map<String, dynamic> json, {
+    required String treeName,
+  }) {
     final String imageValue = _stringValue(json['image']);
+    final String imagePathValue = _stringValue(json['image_path']);
+    final String fallbackImageAssetPath = _defaultImageAssetPath(
+      treeName: treeName,
+      skillName: _stringValue(json['name']),
+    );
     final String imageAssetPath = imageValue.isNotEmpty
         ? imageValue
-        : _stringValue(json['image_path']);
+        : imagePathValue.isNotEmpty
+        ? imagePathValue
+        : fallbackImageAssetPath;
     return SkillEntry(
       name: _stringValue(json['name']),
       unlockLevel: _intValue(json['unlock_level']),
@@ -173,6 +185,47 @@ class SkillEntry {
       imageAssetPath: imageAssetPath,
     );
   }
+}
+
+String _defaultImageAssetPath({
+  required String treeName,
+  required String skillName,
+}) {
+  final String normalizedTree = treeName.trim().toLowerCase();
+  final String normalizedSkillName = skillName.trim().toLowerCase();
+  final String normalizedFileName = _normalizeSkillImageFileName(skillName);
+  if (normalizedFileName.isEmpty) {
+    return '';
+  }
+  if (normalizedTree == 'blade') {
+    const Map<String, String> bladeFileOverrides = <String, String>{
+      'trigger slash': 'tiggerslash.png',
+    };
+    final String fileName =
+        bladeFileOverrides[normalizedSkillName] ?? '$normalizedFileName.png';
+    return 'assets/data/skill_menu/images/blade/$fileName';
+  }
+  if (normalizedTree == 'shot') {
+    return 'assets/data/skill_menu/images/Shot/$normalizedFileName.png';
+  }
+  if (normalizedTree == 'crusher') {
+    const Map<String, String> crusherFileOverrides = <String, String>{
+      'forefist punch': 'forefist punch.png',
+      'goliath punch': 'goliath punch.png',
+      'god hand': 'god hand.png',
+      'divine rigid body': 'divine rigid body.png',
+      'floating kick': 'floating kick.png',
+      'geyser kick': 'geyser kick.png',
+    };
+    final String fileName =
+        crusherFileOverrides[normalizedSkillName] ?? '$normalizedFileName.png';
+    return 'assets/data/skill_menu/images/Crusher/$fileName';
+  }
+  return '';
+}
+
+String _normalizeSkillImageFileName(String skillName) {
+  return skillName.trim().toLowerCase().replaceAll(RegExp(r'[^a-z0-9]+'), '');
 }
 
 String _stringValue(dynamic value) {
