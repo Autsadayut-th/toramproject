@@ -1,0 +1,3144 @@
+[
+  {
+    "id": 1,
+    "key": "pomie_chan_iii",
+    "display": {
+      "name": "Pomie Chan III",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "absolute_dodge",
+        "value": 10,
+        "value_type": "percent",
+        "condition": {
+          "main_weapon": "KNUCKLE"
+        }
+      }
+    ],
+    "upgrade": {
+      "from": "Pomie Chan II"
+    }
+  },
+  {
+    "id": 2,
+    "key": "ultra_potum",
+    "display": {
+      "name": "Ultra Potum",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "evasion_recharge",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "additional_melee",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Miracle Potum"
+    }
+  },
+  {
+    "id": 3,
+    "key": "supreme_evil_crystal_beast",
+    "display": {
+      "name": "Supreme Evil Crystal Beast",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 8,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Vlam the Flame Dragon"
+    }
+  },
+  {
+    "id": 5,
+    "key": "springtime_sakura",
+    "display": {
+      "name": "Springtime Sakura",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 13,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Kuzto"
+    }
+  },
+  {
+    "id": 6,
+    "key": "bakuzan",
+    "display": {
+      "name": "Bakuzan",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 7,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Trickster Dragon Mimyugon"
+    }
+  },
+  {
+    "id": 8,
+    "key": "meduso",
+    "display": {
+      "name": "Meduso",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "guard_power",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_recharge",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 1,
+        "value_type": "percent",
+        "condition": {
+          "armor_type": "HEAVY"
+        }
+      },
+      {
+        "stat_key": "aggro",
+        "value": 20,
+        "value_type": "percent",
+        "condition": {
+          "armor_type": "LIGHT"
+        }
+      }
+    ],
+    "upgrade": {
+      "from": "Builder Golem"
+    }
+  },
+  {
+    "id": 9,
+    "key": "queen_rosemee",
+    "display": {
+      "name": "Queen Rosemee",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "magic_pierce",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Clawed Iron Witch"
+    }
+  },
+  {
+    "id": 10,
+    "key": "menti",
+    "display": {
+      "name": "Menti",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 14,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 250,
+        "value_type": "flat",
+        "condition": {
+          "sub_weapon": "SHIELD"
+        }
+      }
+    ],
+    "upgrade": {
+      "from": "Oculasignio"
+    }
+  },
+  {
+    "id": 11,
+    "key": "fubbit",
+    "display": {
+      "name": "Fubbit",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Devil Dango"
+    }
+  },
+  {
+    "id": 12,
+    "key": "megiston_the_champion_vii",
+    "display": {
+      "name": "Megiston The Champion VII",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 2200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 29,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "earth_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Megiston the Champion VI"
+    }
+  },
+  {
+    "id": 13,
+    "key": "hero_potum_iv",
+    "display": {
+      "name": "Hero Potum IV",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 13,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 19,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 22,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 16,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 14,
+    "key": "deformis",
+    "display": {
+      "name": "Deformis",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 14,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Velum"
+    }
+  },
+  {
+    "id": 15,
+    "key": "raging_dragon_bovinari",
+    "display": {
+      "name": "Raging Dragon Bovinari",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_barrier",
+        "value": 3000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_barrier",
+        "value": 3000,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 16,
+    "key": "doridodi",
+    "display": {
+      "name": "Doridodi",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 17,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Arbogazella"
+    }
+  },
+  {
+    "id": 17,
+    "key": "vatudo",
+    "display": {
+      "name": "Vatudo",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mdef",
+        "value": -30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -11,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Irestida"
+    }
+  },
+  {
+    "id": 18,
+    "key": "don_profundo",
+    "display": {
+      "name": "Don Profundo",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "def",
+        "value": -27,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 8,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Hexter"
+    }
+  },
+  {
+    "id": 20,
+    "key": "primordial_moonlit",
+    "display": {
+      "name": "Primordial Moonlit",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": -200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 21,
+    "key": "diark",
+    "display": {
+      "name": "Diark",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": -16,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": ""
+    }
+  },
+  {
+    "id": 22,
+    "key": "megiston_the_champion_vi",
+    "display": {
+      "name": "Megiston the Champion VI",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 2000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 26,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "earth_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Megiston the Champion V"
+    }
+  },
+  {
+    "id": 23,
+    "key": "brass_dragon_reguita",
+    "display": {
+      "name": "Brass Dragon Reguita",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "natural_hp_regen",
+        "value": -12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "natural_mp_regen",
+        "value": -12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Repthon"
+    }
+  },
+  {
+    "id": 24,
+    "key": "wicked_dragon_fazzino",
+    "display": {
+      "name": "Wicked Dragon Fazzino",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Pisteus"
+    }
+  },
+  {
+    "id": 25,
+    "key": "cat_claw_guardkissa",
+    "display": {
+      "name": "Cat Claw Guardkissa",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "hp",
+        "value": -12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Blancanine the White Fang"
+    }
+  },
+  {
+    "id": 26,
+    "key": "zega_vii",
+    "display": {
+      "name": "Zega VII",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 9,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Zega VI"
+    }
+  },
+  {
+    "id": 27,
+    "key": "xmas_princess_in_black",
+    "display": {
+      "name": "Xmas Princess in Black",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "int",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "tumble_unavailable",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -50,
+        "value_type": "percent",
+        "condition": {
+          "sub_weapon": "SHIELD"
+        }
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 28,
+    "key": "pomie_chan_ii",
+    "display": {
+      "name": "Pomie Chan II",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "absolute_dodge",
+        "value": 5,
+        "value_type": "percent",
+        "condition": {
+          "main_weapon": "KNUCKLE"
+        }
+      }
+    ],
+    "upgrade": {
+      "from": "Pomie Chan"
+    }
+  },
+  {
+    "id": 29,
+    "key": "hero_potum_iii",
+    "display": {
+      "name": "Hero Potum III",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 16,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 18,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 14,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Hero Potum II"
+    }
+  },
+  {
+    "id": 30,
+    "key": "trickster_dragon_mimyugon",
+    "display": {
+      "name": "Trickster Dragon Mimyugon",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Vulture"
+    }
+  },
+  {
+    "id": 32,
+    "key": "megiston_the_champion_v",
+    "display": {
+      "name": "Megiston the Champion V",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1800,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 23,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "earth_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Megiston the Champion IV"
+    }
+  },
+  {
+    "id": 33,
+    "key": "florizard",
+    "display": {
+      "name": "Florizard",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "stability",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Armasite"
+    }
+  },
+  {
+    "id": 34,
+    "key": "pedrio",
+    "display": {
+      "name": "Pedrio",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -40,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_(bullet)",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_(bowling)",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Neo Maton Sword"
+    }
+  },
+  {
+    "id": 35,
+    "key": "oculasignio",
+    "display": {
+      "name": "Oculasignio",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 13,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Finstern the Dark Dragon"
+    }
+  },
+  {
+    "id": 36,
+    "key": "velum",
+    "display": {
+      "name": "Velum",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 13,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Mardula"
+    }
+  },
+  {
+    "id": 37,
+    "key": "vlam_the_flame_dragon",
+    "display": {
+      "name": "Vlam the Flame Dragon",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 6,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Ultimate Machina"
+    }
+  },
+  {
+    "id": 38,
+    "key": "zega_vi",
+    "display": {
+      "name": "Zega VI",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 900,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 8,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Zega V"
+    }
+  },
+  {
+    "id": 39,
+    "key": "crimson_one_eyed_wolf",
+    "display": {
+      "name": "Crimson One-Eyed Wolf",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": -16,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 1,
+        "value_type": "percent",
+        "condition": {
+          "sub_weapon": "DAGGER"
+        }
+      },
+      {
+        "stat_key": "aggro",
+        "value": -20,
+        "value_type": "percent",
+        "condition": {
+          "main_weapon": "DUAL_SWORDS"
+        }
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 40,
+    "key": "devil_dango",
+    "display": {
+      "name": "Devil Dango",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 41,
+    "key": "arbogazella",
+    "display": {
+      "name": "Arbogazella",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -28,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 14,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 7,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 42,
+    "key": "megiston_the_champion_iv",
+    "display": {
+      "name": "Megiston the Champion IV",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Megiston the Champion III"
+    }
+  },
+  {
+    "id": 44,
+    "key": "midsummer_passion",
+    "display": {
+      "name": "Midsummer Passion",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "recoil",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 45,
+    "key": "clawed_iron_witch",
+    "display": {
+      "name": "Clawed Iron Witch",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_barrier",
+        "value": 2000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_barrier",
+        "value": 2000,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Zahhak Machina"
+    }
+  },
+  {
+    "id": 46,
+    "key": "irestida",
+    "display": {
+      "name": "Irestida",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mdef",
+        "value": -24,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -9,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Shampy"
+    }
+  },
+  {
+    "id": 47,
+    "key": "hero_potum_ii",
+    "display": {
+      "name": "Hero Potum II",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 13,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 14,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 12,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Hero Potum"
+    }
+  },
+  {
+    "id": 48,
+    "key": "hexter",
+    "display": {
+      "name": "Hexter",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "def",
+        "value": -21,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 6,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Gwaimol"
+    }
+  },
+  {
+    "id": 49,
+    "key": "lil_wonder_rat",
+    "display": {
+      "name": "Lil Wonder Rat",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "aggro",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 6,
+        "value_type": "percent",
+        "condition": {
+          "main_weapon": "STAFF"
+        }
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 50,
+    "key": "pisteus",
+    "display": {
+      "name": "Pisteus",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Mozto Machina"
+    }
+  },
+  {
+    "id": 51,
+    "key": "zega_v",
+    "display": {
+      "name": "Zega V",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 800,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 7,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Zega IV"
+    }
+  },
+  {
+    "id": 52,
+    "key": "megiston_the_champion_iii",
+    "display": {
+      "name": "Megiston the Champion III",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 18,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Megiston the Champion II"
+    }
+  },
+  {
+    "id": 53,
+    "key": "megiston_the_champion_ii",
+    "display": {
+      "name": "Megiston the Champion II",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 16,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Megiston The Champion"
+    }
+  },
+  {
+    "id": 54,
+    "key": "vulture",
+    "display": {
+      "name": "Vulture",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Tyrant Machina"
+    }
+  },
+  {
+    "id": 56,
+    "key": "repthon",
+    "display": {
+      "name": "Repthon",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "natural_hp_regen",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "natural_mp_regen",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 6,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Zolban"
+    }
+  },
+  {
+    "id": 57,
+    "key": "blood_smeared_crystal",
+    "display": {
+      "name": "Blood Smeared Crystal",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 7,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Evil Magic Sword"
+    }
+  },
+  {
+    "id": 58,
+    "key": "jeandoux",
+    "display": {
+      "name": "Jeandoux",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 7,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 59,
+    "key": "kuzto",
+    "display": {
+      "name": "Kuzto",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 7,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -7,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 60,
+    "key": "zega_iv",
+    "display": {
+      "name": "Zega IV",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 700,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Zega III"
+    }
+  },
+  {
+    "id": 61,
+    "key": "blancanine_the_white_fang",
+    "display": {
+      "name": "Blancanine the White Fang",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "hp",
+        "value": -12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 62,
+    "key": "armasite",
+    "display": {
+      "name": "Armasite",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 63,
+    "key": "drama_clown",
+    "display": {
+      "name": "Drama Clown",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 64,
+    "key": "usasama_the_necromancer_ii",
+    "display": {
+      "name": "Usasama the Necromancer II",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 14,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": -30,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Usasama the Necromancer"
+    }
+  },
+  {
+    "id": 65,
+    "key": "giant_moon_crab",
+    "display": {
+      "name": "Giant Moon Crab",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Ganglef"
+    }
+  },
+  {
+    "id": 66,
+    "key": "neo_maton_sword",
+    "display": {
+      "name": "Neo Maton Sword",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -28,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_(bullet)",
+        "value": 14,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_(bowling)",
+        "value": 14,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 68,
+    "key": "finstern_the_dark_dragon",
+    "display": {
+      "name": "Finstern the Dark Dragon",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 12,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Imitacia"
+    }
+  },
+  {
+    "id": 69,
+    "key": "bubble_bogey",
+    "display": {
+      "name": "Bubble Bogey",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_barrier",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "additional_magic",
+        "value": 125,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Lapin The Necromancer"
+    }
+  },
+  {
+    "id": 70,
+    "key": "mardula",
+    "display": {
+      "name": "Mardula",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 12,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Imitator"
+    }
+  },
+  {
+    "id": 71,
+    "key": "zega_iii",
+    "display": {
+      "name": "Zega III",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 72,
+    "key": "pomie_chan",
+    "display": {
+      "name": "Pomie Chan",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "absolute_dodge",
+        "value": 5,
+        "value_type": "percent",
+        "condition": {
+          "main_weapon": "KNUCKLE"
+        }
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 73,
+    "key": "usasama_the_necromancer",
+    "display": {
+      "name": "Usasama the Necromancer",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": -50,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 74,
+    "key": "shampy",
+    "display": {
+      "name": "Shampy",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mdef",
+        "value": -18,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -7,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Evil Crystal Beast"
+    }
+  },
+  {
+    "id": 75,
+    "key": "hero_potum",
+    "display": {
+      "name": "Hero Potum",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 76,
+    "key": "megiston_the_champion",
+    "display": {
+      "name": "Megiston The Champion",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 77,
+    "key": "cursed_crysta",
+    "display": {
+      "name": "Cursed Crysta",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stability",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "recoil",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 78,
+    "key": "ultimate_machina",
+    "display": {
+      "name": "Ultimate Machina",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 4,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Pillar Golem"
+    }
+  },
+  {
+    "id": 80,
+    "key": "gwaimol",
+    "display": {
+      "name": "Gwaimol",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "def",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 4,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Black Knight of Delusion"
+    }
+  },
+  {
+    "id": 81,
+    "key": "zahhak_machina",
+    "display": {
+      "name": "Zahhak Machina",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_barrier",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_barrier",
+        "value": 1000,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 82,
+    "key": "commander_golem",
+    "display": {
+      "name": "Commander Golem",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_barrier",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "additional_melee",
+        "value": 100,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 83,
+    "key": "grecia",
+    "display": {
+      "name": "Grecia",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_recharge",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stronger_against_neutral",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 84,
+    "key": "mozto_machina",
+    "display": {
+      "name": "Mozto Machina",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Demon's Gate"
+    }
+  },
+  {
+    "id": 85,
+    "key": "tyrant_machina",
+    "display": {
+      "name": "Tyrant Machina",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Ganglef"
+    }
+  },
+  {
+    "id": 86,
+    "key": "builder_golem",
+    "display": {
+      "name": "Builder Golem",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "guard_power",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_recharge",
+        "value": 7,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Excavated Golem"
+    }
+  },
+  {
+    "id": 87,
+    "key": "evil_magic_sword",
+    "display": {
+      "name": "Evil Magic Sword",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 88,
+    "key": "zega_ii",
+    "display": {
+      "name": "Zega II",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Zega"
+    }
+  },
+  {
+    "id": 89,
+    "key": "imitacia",
+    "display": {
+      "name": "Imitacia",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 90,
+    "key": "imitator",
+    "display": {
+      "name": "Imitator",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 2,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 92,
+    "key": "marchitar",
+    "display": {
+      "name": "Marchitar",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "stability",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 93,
+    "key": "lapin_the_necromancer",
+    "display": {
+      "name": "Lapin The Necromancer",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_barrier",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "additional_magic",
+        "value": 100,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 94,
+    "key": "zolban",
+    "display": {
+      "name": "Zolban",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "natural_hp_regen",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "natural_mp_regen",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 4,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 95,
+    "key": "nightmare_potum",
+    "display": {
+      "name": "Nightmare Potum",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 96,
+    "key": "evil_crystal_beast",
+    "display": {
+      "name": "Evil Crystal Beast",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 97,
+    "key": "black_knight_of_delusion",
+    "display": {
+      "name": "Black Knight of Delusion",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "def",
+        "value": -9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 98,
+    "key": "zega",
+    "display": {
+      "name": "Zega",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 99,
+    "key": "death_colon",
+    "display": {
+      "name": "Death Colon",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -2000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 100,
+    "key": "pillar_golem",
+    "display": {
+      "name": "Pillar Golem",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 101,
+    "key": "moonlight_potum",
+    "display": {
+      "name": "Moonlight Potum",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": -90,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 102,
+    "key": "miracle_potum",
+    "display": {
+      "name": "Miracle Potum",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 104,
+    "key": "ganglef",
+    "display": {
+      "name": "Ganglef",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 105,
+    "key": "excavated_golem",
+    "display": {
+      "name": "Excavated Golem",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "guard_power",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_recharge",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 106,
+    "key": "demon_s_gate",
+    "display": {
+      "name": "Demon's Gate",
+      "color": "red"
+    },
+    "type": "weapon",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  }
+]

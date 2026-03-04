@@ -1,0 +1,593 @@
+﻿{
+    "Smith":  [
+                  {
+                      "name":  "Refine Equipment",
+                      "unlock_level":  1,
+                      "mp":  "0",
+                      "type":  "EX Skill",
+                      "element":  "Neutral",
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  "0",
+                      "description":  "Refine equipment by yourself. The success rate is lower than the blacksmiths but you don\u0027t need Spina."
+                  },
+                  {
+                      "name":  "Novice\u0027s Anvil",
+                      "unlock_level":  1,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Increases the proficiency limit of blacksmithing. You can level up the proficiency up to Lv50 without this skill."
+                  },
+                  {
+                      "name":  "Craftsman\u0027s Anvil",
+                      "unlock_level":  2,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Increases the proficiency limit of blacksmithing by 5 per skill level."
+                  },
+                  {
+                      "name":  "Blacksmith\u0027s Anvil",
+                      "unlock_level":  3,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Increases the proficiency limit of blacksmithing by 5 per skill level."
+                  },
+                  {
+                      "name":  "Master\u0027s Anvil",
+                      "unlock_level":  4,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Increases the proficiency limit of blacksmithing by 5 per skill level."
+                  },
+                  {
+                      "name":  "Master\u0027s Anvil II",
+                      "unlock_level":  5,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Increases the proficiency limit of blacksmithing by 5 per skill level."
+                  },
+                  {
+                      "name":  "Mid-Class Refinement",
+                      "unlock_level":  2,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Increases the success rate of [Refine Equipment] a little."
+                  },
+                  {
+                      "name":  "High-Class Refinement",
+                      "unlock_level":  3,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Increases the success rate of [Refine Equipment]."
+                  },
+                  {
+                      "name":  "Expert\u0027s Refinement",
+                      "unlock_level":  4,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Increases the success rate of [Refine Equipment] more."
+                  },
+                  {
+                      "name":  "Create Equipment",
+                      "unlock_level":  1,
+                      "mp":  "0",
+                      "type":  "EX Skill",
+                      "element":  "Neutral",
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  "0",
+                      "description":  "Create equipment by yourself. [Create Equipment] is required to attach stats."
+                  },
+                  {
+                      "name":  "Careful Creation",
+                      "unlock_level":  2,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "The potential of the equipment created by [Create equipment] increases."
+                  },
+                  {
+                      "name":  "Expert\u0027s Creation",
+                      "unlock_level":  4,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "The potential of the equipment created by [Create Equipment] increases."
+                  },
+                  {
+                      "name":  "Customize Equipment",
+                      "unlock_level":  2,
+                      "mp":  "0",
+                      "type":  "EX Skill",
+                      "element":  "Neutral",
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  "0",
+                      "description":  "Consume potential and attach stats to the equipment created by [Create Equipment]."
+                  },
+                  {
+                      "name":  "Accurate Customization",
+                      "unlock_level":  3,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "The success rate of [Customize Equipment] increase a little. The number of abilities that you can add increase."
+                  },
+                  {
+                      "name":  "Expert\u0027s Customization",
+                      "unlock_level":  4,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "The number of abilities you can add with [Customize Equipment] increases."
+                  },
+                  {
+                      "name":  "Expert\u0027s Customization II",
+                      "unlock_level":  5,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "The ability in the first slot may remain unchanged even when Skill: [Customize Equipment] fails.\nProcess Materials"
+                  },
+                  {
+                      "name":  "Process Materials",
+                      "unlock_level":  1,
+                      "mp":  "0",
+                      "type":  "EX Skill",
+                      "element":  "Neutral",
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  "0",
+                      "description":  "Process materials by yourself. The success rate increases as the skill levels up. It is a common skill in Smith and Alchemy Skills."
+                  },
+                  {
+                      "name":  "Metal Compassion",
+                      "unlock_level":  5,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Reduces the\nMetal\npoints consumed by Skill: [Customize Equipment]."
+                  },
+                  {
+                      "name":  "Fabric Compassion",
+                      "unlock_level":  5,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Reduces the\nFabric\npoints consumed by Skill: [Customize Equipment]."
+                  },
+                  {
+                      "name":  "Beast Compassion",
+                      "unlock_level":  5,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Reduces the\nBeast\npoints consumed by Skill: [Customize Equipment]."
+                  },
+                  {
+                      "name":  "Wood Compassion",
+                      "unlock_level":  5,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Reduces the\nWood\npoints consumed by Skill: [Customize Equipment]."
+                  },
+                  {
+                      "name":  "Medicine Compassion",
+                      "unlock_level":  5,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Reduces the\nMedicine\npoints consumed by Skill: [Customize Equipment]."
+                  },
+                  {
+                      "name":  "Mana Compassion",
+                      "unlock_level":  5,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Reduces the\nMana\npoints consumed by Skill: [Customize Equipment]."
+                  }
+              ],
+    "Alchemy":  [
+                    {
+                        "name":  "Item Synthesis",
+                        "unlock_level":  1,
+                        "mp":  "0",
+                        "type":  "EX Skill",
+                        "element":  "Neutral",
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  "0",
+                        "description":  "You can synthesize items by yourself. The success rate is lower than the synthesists but you don\u0027t need Spina.\nNovice\u0027s Bottle"
+                    },
+                    {
+                        "name":  "Novice\u0027s Bottle",
+                        "unlock_level":  1,
+                        "mp":  null,
+                        "type":  "Passive",
+                        "element":  null,
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  null,
+                        "description":  "Increases the limit of synthesis proficiency level. You can level up the proficiency up to Lv50 without this skill."
+                    },
+                    {
+                        "name":  "Craftsman\u0027s Bottle",
+                        "unlock_level":  2,
+                        "mp":  null,
+                        "type":  "Passive",
+                        "element":  null,
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  null,
+                        "description":  "Increases the limit of proficiency level by 5 per skill level."
+                    },
+                    {
+                        "name":  "Synthesist\u0027s Bottle",
+                        "unlock_level":  3,
+                        "mp":  null,
+                        "type":  "Passive",
+                        "element":  null,
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  null,
+                        "description":  "Increases the limit of proficiency level by 5 per skill level."
+                    },
+                    {
+                        "name":  "Master\u0027s Bottle",
+                        "unlock_level":  4,
+                        "mp":  null,
+                        "type":  "Passive",
+                        "element":  null,
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  null,
+                        "description":  "Increases the limit of profiency level by 5 per skill level.\nMaster\u0027s Bottle II"
+                    },
+                    {
+                        "name":  "Master\u0027s Bottle II",
+                        "unlock_level":  5,
+                        "mp":  null,
+                        "type":  "Passive",
+                        "element":  null,
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  null,
+                        "description":  "Increases the limit of profiency level by 5 per skill level.\nMid-Class Synthesis"
+                    },
+                    {
+                        "name":  "Mid-Class Synthesis",
+                        "unlock_level":  2,
+                        "mp":  null,
+                        "type":  "Passive",
+                        "element":  null,
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  null,
+                        "description":  "Increases the success rate of [Item Synthesist] a little.\nHigh-Class Synthesis"
+                    },
+                    {
+                        "name":  "High-Class Synthesis",
+                        "unlock_level":  3,
+                        "mp":  null,
+                        "type":  "Passive",
+                        "element":  null,
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  null,
+                        "description":  "Increases the success rate of [Item Synthesist].\nExpert\u0027s Synthesis"
+                    },
+                    {
+                        "name":  "Expert\u0027s Synthesis",
+                        "unlock_level":  4,
+                        "mp":  null,
+                        "type":  "Passive",
+                        "element":  null,
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  null,
+                        "description":  "Increases the success rate of [Item Synthesis] more.\nExpert\u0027s Synthesis II"
+                    },
+                    {
+                        "name":  "Expert\u0027s Synthesis II",
+                        "unlock_level":  5,
+                        "mp":  null,
+                        "type":  "Passive",
+                        "element":  null,
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  null,
+                        "description":  "Moderately increases the success rates of Skill: [Item Synthesis].\nSynthesize Equipment"
+                    },
+                    {
+                        "name":  "Synthesize Equipment",
+                        "unlock_level":  2,
+                        "mp":  "0",
+                        "type":  "EX Skill",
+                        "element":  "Neutral",
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  "0",
+                        "description":  "You can synthesize items by yourself. The success rate is lower than synthesists but you don\u0027t need Spina."
+                    },
+                    {
+                        "name":  "Technical Synthesis I",
+                        "unlock_level":  3,
+                        "mp":  null,
+                        "type":  "Passive",
+                        "element":  null,
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  null,
+                        "description":  "Increases the success rates of Skill: [Synthesize Equipment] and enables the new\nEX Skill \"Color Saving\"\n.\nTechnical Synthesis II"
+                    },
+                    {
+                        "name":  "Technical Synthesis II",
+                        "unlock_level":  4,
+                        "mp":  null,
+                        "type":  "Passive",
+                        "element":  null,
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  null,
+                        "description":  "Increases the success rates of Skill: [Synthesize Equipment].\nTechnical Synthesis III"
+                    },
+                    {
+                        "name":  "Technical Synthesis III",
+                        "unlock_level":  5,
+                        "mp":  null,
+                        "type":  "Passive",
+                        "element":  null,
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  null,
+                        "description":  "Increases the success rates of Skill: [Synthesize Equipment].\nProcess Materials"
+                    },
+                    {
+                        "name":  "Process Materials",
+                        "unlock_level":  1,
+                        "mp":  "0",
+                        "type":  "EX Skill",
+                        "element":  "Neutral",
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  "0",
+                        "description":  "Process materials by yourself. The success rate increases as the skill levels up. It is a common skill in Smith and Alchemy Skills."
+                    }
+                ],
+    "Tamer":  [
+                  {
+                      "name":  "Taming",
+                      "unlock_level":  1,
+                      "mp":  "300",
+                      "type":  "Active",
+                      "element":  "Neutral",
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  "8",
+                      "description":  "Capture the monsters weaker than you. The Max Lv of them and time limit increase. The chance of breaking Cages decreases as the skill levels up.\nConsume [Cage] x1."
+                  },
+                  {
+                      "name":  "Capture Technique I",
+                      "unlock_level":  1,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "The Max Lv of the monsters that can be captured and time limit increase."
+                  },
+                  {
+                      "name":  "Capture Technique II",
+                      "unlock_level":  2,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "The Max Lv of the monsters that can be captured and time limit increase more."
+                  },
+                  {
+                      "name":  "Skillful Capture",
+                      "unlock_level":  1,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Chance to raise the growth limit of the captured monsters.\nCareful Capture"
+                  },
+                  {
+                      "name":  "Careful Capture",
+                      "unlock_level":  2,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Chance to capture monsters with a little high Potential.\nPet Heal"
+                  },
+                  {
+                      "name":  "Pet Heal",
+                      "unlock_level":  1,
+                      "mp":  "100",
+                      "type":  "Active",
+                      "element":  "Neutral",
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  "0",
+                      "description":  "Restore the called pet\u0027s HP. Unavailable on other players\u0027 pets.\nBow\nBoost on heal amount by 15% of max HP. Charge time is shortened by 50%.\nStaff\nBoost on heal amount. by 15% of max HP Charge time is shortened by 33%."
+                  },
+                  {
+                      "name":  "Pet MP Charge",
+                      "unlock_level":  2,
+                      "mp":  "300",
+                      "type":  "Active",
+                      "element":  "Neutral",
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  "0",
+                      "description":  "Restore the called pet\u0027s MP. Unavailable on other players\u0027 pets.\nBow\nCharge time shortened by 50%.\nStaff\nCharge time shortened by 33%."
+                  }
+              ],
+    "Scroll":  [
+                   {
+                       "name":  "Kunai Throw",
+                       "unlock_level":  1,
+                       "mp":  "300",
+                       "type":  "Active, Physical skill",
+                       "element":  "Weapon Dependent",
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  "8",
+                       "description":  "Attacks by throwing concealed kunai.\nAttacks repeatedly until you move and the attack will miss when it is out of range.\nNormal proration occurs when hitting the target and MP is slightly restored."
+                   },
+                   {
+                       "name":  "Fire Release",
+                       "unlock_level":  1,
+                       "mp":  "600",
+                       "type":  "Active, Magic skill",
+                       "element":  "Weapon Dependent",
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  "8",
+                       "description":  "Deals magic damage based on MATK and may inflict [Ignite] on the target.\nIf the conditions are met, it will be changed to an AOE attack with a higher power, and further additional attack that is not affected by combo will be activated."
+                   },
+                   {
+                       "name":  "Water Release",
+                       "unlock_level":  1,
+                       "mp":  "700",
+                       "type":  "Active",
+                       "element":  "Neutral",
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  "0",
+                       "description":  "Creates a pool of water under you.\nStanding above the water lowers the damage from poison and ignite, as well as relieving the disadvantages from slow, stop, and freeze.\nIf the conditions are met, it will be changed to a physical damage skill which depends on MATK."
+                   },
+                   {
+                       "name":  "Earth Release",
+                       "unlock_level":  1,
+                       "mp":  "600",
+                       "type":  "Active, Magic skill",
+                       "element":  "Weapon Dependent",
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  "0",
+                       "description":  "Creates a shield with rocks and reduces long range damage received for certain times.\nWhen the effect ends, it will deal magic damage depending on MATK and the remaining number of protection."
+                   },
+                   {
+                       "name":  "Wind Release",
+                       "unlock_level":  1,
+                       "mp":  "500",
+                       "type":  "Active, Magic skill",
+                       "element":  "Weapon Dependent",
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  "2",
+                       "description":  "Flies high while wrapped in the wind. Deals magic damage to nearby enemies based on MATK when landing. The skill direction changes according to the user\u0027s moving direction.\nDeals damage with either ATK or MATK depending on which is higher when it changes with katana. Gets an increased ASPD and critical rate for 20 seconds when active.\nKatana\u0027s power is further increased when it changes."
+                   },
+                   {
+                       "name":  "Demon Wind Shuriken",
+                       "unlock_level":  1,
+                       "mp":  "500",
+                       "type":  "Active, Physical skill",
+                       "element":  "Weapon Dependent",
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  "12",
+                       "description":  "Throws gigantic shuriken.\nDeals damage within a narrow range and returns to the user after traveling a certain distance.\nWhen it hits a wall, the skill ends immediately."
+                   },
+                   {
+                       "name":  "Cloning",
+                       "unlock_level":  1,
+                       "mp":  "600",
+                       "type":  "Active",
+                       "element":  "Neutral",
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  "24",
+                       "description":  "Attacks more frequently with a clone. Teleports to the clone\u0027s position and restore MP when Cloning is used again.\nMaxHP will be reduced while using the clone and you will be unable to control the clone if you are too far from it.\nIf Shukuchi is learned, the clone will be accelerated by chance just once.\nIf Decoy Shot is used, the clone will be replaced."
+                   },
+                   {
+                       "name":  "Thunder Release",
+                       "unlock_level":  1,
+                       "mp":  "600",
+                       "type":  "Active, Physical skill",
+                       "element":  "Weapon Dependent",
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  "12",
+                       "description":  "Moves toward target quickly like a lightning and deals physical damage with either ATK or MATK depending on which is higher. Critical is guaranteed when used with katana."
+                   }
+               ]
+}

@@ -1,0 +1,3799 @@
+[
+  {
+    "id": 1,
+    "key": "cake_potum",
+    "display": {
+      "name": "Cake Potum",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Platinum Potum"
+    }
+  },
+  {
+    "id": 2,
+    "key": "colon_boss",
+    "display": {
+      "name": "Colon Boss",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -40,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Boss Goblin"
+    }
+  },
+  {
+    "id": 3,
+    "key": "vevela",
+    "display": {
+      "name": "Vevela",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "ailment_resistance",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_power",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_recharge",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Caspy"
+    }
+  },
+  {
+    "id": 4,
+    "key": "wild_beast_lixi",
+    "display": {
+      "name": "Wild Beast Lixi",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": -100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Rhinosaur"
+    }
+  },
+  {
+    "id": 5,
+    "key": "piscruva",
+    "display": {
+      "name": "Piscruva",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": -300,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Guard Golem"
+    }
+  },
+  {
+    "id": 6,
+    "key": "dex_8",
+    "display": {
+      "name": "DEX+8",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 8,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 8,
+    "key": "remnant_of_beyond",
+    "display": {
+      "name": "Remnant of Beyond",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "physical_pierce",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 9,
+    "key": "hp_800",
+    "display": {
+      "name": "HP+800",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 800,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 10,
+    "key": "wiltileaf",
+    "display": {
+      "name": "Wiltileaf",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 12,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 0,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Ageladanios"
+    }
+  },
+  {
+    "id": 11,
+    "key": "vit_8",
+    "display": {
+      "name": "VIT+8",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [],
+    "upgrade": null
+  },
+  {
+    "id": 12,
+    "key": "cspd_160",
+    "display": {
+      "name": "CSPD+160",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 160,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 13,
+    "key": "mp_400",
+    "display": {
+      "name": "MP+400",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 14,
+    "key": "limacina",
+    "display": {
+      "name": "Limacina",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Seraph Machina"
+    }
+  },
+  {
+    "id": 15,
+    "key": "torexesa",
+    "display": {
+      "name": "Torexesa",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Black Shadow"
+    }
+  },
+  {
+    "id": 16,
+    "key": "red_ash_dragon_rudis",
+    "display": {
+      "name": "Red Ash Dragon Rudis",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -7,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 9,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Gravicep"
+    }
+  },
+  {
+    "id": 17,
+    "key": "accuracy_16",
+    "display": {
+      "name": "Accuracy+16",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 16,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 18,
+    "key": "kuffania",
+    "display": {
+      "name": "Kuffania",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "stability",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -12,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Mithurna Lynx"
+    }
+  },
+  {
+    "id": 20,
+    "key": "lilicarolla",
+    "display": {
+      "name": "Lilicarolla",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 3,
+        "value_type": "percent",
+        "condition": {
+          "main_weapon": "KATANA"
+        }
+      }
+    ],
+    "upgrade": {
+      "from": "Tappler"
+    }
+  },
+  {
+    "id": 21,
+    "key": "dodge_16",
+    "display": {
+      "name": "Dodge+16",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 16,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 22,
+    "key": "charugon",
+    "display": {
+      "name": "Charugon",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 6,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Flare Volg"
+    }
+  },
+  {
+    "id": 23,
+    "key": "aspd_160",
+    "display": {
+      "name": "ASPD+160",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 160,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 24,
+    "key": "orictoceras",
+    "display": {
+      "name": "Orictoceras",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 9,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "reduce_dmg_(player_epicenter)",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_(foe_epicenter)",
+        "value": -3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Fanadon"
+    }
+  },
+  {
+    "id": 25,
+    "key": "aspd_140",
+    "display": {
+      "name": "ASPD+140",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 140,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 26,
+    "key": "illuminitor",
+    "display": {
+      "name": "Illuminitor",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": -25,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "additional_melee",
+        "value": 25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "additional_magic",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 27,
+    "key": "dex_7",
+    "display": {
+      "name": "DEX+7",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 7,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 28,
+    "key": "brassozard",
+    "display": {
+      "name": "Brassozard",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Volotur"
+    }
+  },
+  {
+    "id": 29,
+    "key": "int_7",
+    "display": {
+      "name": "INT+7",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 7,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 30,
+    "key": "melancia",
+    "display": {
+      "name": "Melancia",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "stability",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Radibat"
+    }
+  },
+  {
+    "id": 32,
+    "key": "str_7",
+    "display": {
+      "name": "STR+7",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 7,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 33,
+    "key": "cspd_140",
+    "display": {
+      "name": "CSPD+140",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 140,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 34,
+    "key": "gigantic_octopus",
+    "display": {
+      "name": "Gigantic Octopus",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": -4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": -2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "reduce_dmg_(bowling)",
+        "value": -1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 35,
+    "key": "guard_golem",
+    "display": {
+      "name": "Guard Golem",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -225,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": -225,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Guignol"
+    }
+  },
+  {
+    "id": 36,
+    "key": "rampion",
+    "display": {
+      "name": "Rampion",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "stability",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": -1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 37,
+    "key": "mp_350",
+    "display": {
+      "name": "MP+350",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 350,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 38,
+    "key": "agi_7",
+    "display": {
+      "name": "AGI+7",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 7,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 39,
+    "key": "blazingur",
+    "display": {
+      "name": "Blazingur",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Aranea"
+    }
+  },
+  {
+    "id": 40,
+    "key": "accuracy_14",
+    "display": {
+      "name": "Accuracy+14",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 14,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 41,
+    "key": "dodge_14",
+    "display": {
+      "name": "Dodge+14",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 14,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 42,
+    "key": "dutannen",
+    "display": {
+      "name": "Dutannen",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 6,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Shawle"
+    }
+  },
+  {
+    "id": 44,
+    "key": "bullamius",
+    "display": {
+      "name": "Bullamius",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Salamander"
+    }
+  },
+  {
+    "id": 45,
+    "key": "vit_7",
+    "display": {
+      "name": "VIT+7",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 7,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 46,
+    "key": "hp_700",
+    "display": {
+      "name": "HP+700",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 700,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 47,
+    "key": "rhinosaur",
+    "display": {
+      "name": "Rhinosaur",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Minotaur"
+    }
+  },
+  {
+    "id": 48,
+    "key": "panchos_kita_makura",
+    "display": {
+      "name": "Panchos Kita Makura",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "exp_gain",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 49,
+    "key": "black_shadow",
+    "display": {
+      "name": "Black Shadow",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Tuscog"
+    }
+  },
+  {
+    "id": 50,
+    "key": "cspd_120",
+    "display": {
+      "name": "CSPD+120",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 120,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 51,
+    "key": "int_6",
+    "display": {
+      "name": "INT +6",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 52,
+    "key": "ageladanios",
+    "display": {
+      "name": "Ageladanios",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": -1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Lyark Master Specialist"
+    }
+  },
+  {
+    "id": 53,
+    "key": "mp_300",
+    "display": {
+      "name": "MP+300",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 54,
+    "key": "str_6",
+    "display": {
+      "name": "STR+6",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 56,
+    "key": "tappler",
+    "display": {
+      "name": "Tappler",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 12,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Odelon Machina"
+    }
+  },
+  {
+    "id": 57,
+    "key": "agi_6",
+    "display": {
+      "name": "AGI+6",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 58,
+    "key": "hp_600",
+    "display": {
+      "name": "HP+600",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 600,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 59,
+    "key": "gravicep",
+    "display": {
+      "name": "Gravicep",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 7,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 60,
+    "key": "vit_6",
+    "display": {
+      "name": "VIT+6",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 61,
+    "key": "dodge_12",
+    "display": {
+      "name": "Dodge+12",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 12,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 62,
+    "key": "aspd_120",
+    "display": {
+      "name": "ASPD+120",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 120,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 63,
+    "key": "shawle",
+    "display": {
+      "name": "Shawle",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 64,
+    "key": "nuthoreth",
+    "display": {
+      "name": "Nuthoreth",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 150,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Nurethoth"
+    }
+  },
+  {
+    "id": 65,
+    "key": "radibat",
+    "display": {
+      "name": "Radibat",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "stability",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 4,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 66,
+    "key": "gerumi",
+    "display": {
+      "name": "Gerumi",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 68,
+    "key": "dex_6",
+    "display": {
+      "name": "Dex+6",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 69,
+    "key": "tuscog",
+    "display": {
+      "name": "Tuscog",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "York"
+    }
+  },
+  {
+    "id": 70,
+    "key": "accuracy_12",
+    "display": {
+      "name": "Accuracy+12",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 12,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 71,
+    "key": "critical_rate_5",
+    "display": {
+      "name": "Critical Rate +5",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 72,
+    "key": "str_5",
+    "display": {
+      "name": "STR+5",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 73,
+    "key": "carbuncle",
+    "display": {
+      "name": "Carbuncle",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reflect",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 74,
+    "key": "vit_5",
+    "display": {
+      "name": "VIT+5",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 75,
+    "key": "mithurna_lynx",
+    "display": {
+      "name": "Mithurna Lynx",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "stability",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -9,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 76,
+    "key": "hp_500",
+    "display": {
+      "name": "HP+500",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 77,
+    "key": "yashiro_azuki",
+    "display": {
+      "name": "Yashiro Azuki",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "exp_gain",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 78,
+    "key": "fanadon",
+    "display": {
+      "name": "Fanadon",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "reduce_dmg_(player_epicenter)",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_(foe_epicenter)",
+        "value": -3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 80,
+    "key": "int_5",
+    "display": {
+      "name": "INT+5",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 81,
+    "key": "dex_5",
+    "display": {
+      "name": "DEX+5",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 82,
+    "key": "seraph_machina",
+    "display": {
+      "name": "Seraph Machina",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Big Coryn"
+    }
+  },
+  {
+    "id": 83,
+    "key": "amoeba_machina",
+    "display": {
+      "name": "Amoeba Machina",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 4,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Crimsosch"
+    }
+  },
+  {
+    "id": 84,
+    "key": "aspd_100",
+    "display": {
+      "name": "ASPD+100",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 85,
+    "key": "p_avatar",
+    "display": {
+      "name": "P. Avatar",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "fire_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "earth_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "exp_gain",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 86,
+    "key": "volotur",
+    "display": {
+      "name": "Volotur",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Gigant Knight"
+    }
+  },
+  {
+    "id": 87,
+    "key": "dodge_10",
+    "display": {
+      "name": "Dodge+10",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 88,
+    "key": "lyark_master_specialist",
+    "display": {
+      "name": "Lyark Master Specialist",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": -2,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Metal Stinger"
+    }
+  },
+  {
+    "id": 89,
+    "key": "cspd_100",
+    "display": {
+      "name": "CSPD+100",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 90,
+    "key": "guignol",
+    "display": {
+      "name": "Guignol",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -175,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": -175,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Nurethoth"
+    }
+  },
+  {
+    "id": 92,
+    "key": "accuracy_10",
+    "display": {
+      "name": "Accuracy+10",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 93,
+    "key": "agi_5",
+    "display": {
+      "name": "AGI+5",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 94,
+    "key": "dodge_8",
+    "display": {
+      "name": "Dodge+8",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 8,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 95,
+    "key": "dex_4",
+    "display": {
+      "name": "DEX+4",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 96,
+    "key": "critical_rate_4",
+    "display": {
+      "name": "Critical Rate +4",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 97,
+    "key": "odelon_machina",
+    "display": {
+      "name": "Odelon Machina",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 98,
+    "key": "mp_250",
+    "display": {
+      "name": "MP+250",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 250,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 99,
+    "key": "mp_200",
+    "display": {
+      "name": "MP+200",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 100,
+    "key": "int_4",
+    "display": {
+      "name": "INT+4",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 101,
+    "key": "aspd_80",
+    "display": {
+      "name": "ASPD+80",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 80,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 102,
+    "key": "york",
+    "display": {
+      "name": "York",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -75,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Brutal Dragon Decel"
+    }
+  },
+  {
+    "id": 104,
+    "key": "agi_4",
+    "display": {
+      "name": "AGI+4",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 105,
+    "key": "platinum_potum",
+    "display": {
+      "name": "Platinum Potum",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "King Potum"
+    }
+  },
+  {
+    "id": 106,
+    "key": "vit_4",
+    "display": {
+      "name": "VIT+4",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 107,
+    "key": "salamander",
+    "display": {
+      "name": "Salamander",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Gespenst"
+    }
+  },
+  {
+    "id": 108,
+    "key": "hp_400",
+    "display": {
+      "name": "HP+400",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 400,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 109,
+    "key": "cspd_80",
+    "display": {
+      "name": "CSPD+80",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 80,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 110,
+    "key": "super_night_mushroom",
+    "display": {
+      "name": "Super Night Mushroom",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 111,
+    "key": "str_4",
+    "display": {
+      "name": "STR+4",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 112,
+    "key": "aranea",
+    "display": {
+      "name": "Aranea",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 113,
+    "key": "accuracy_8",
+    "display": {
+      "name": "Accuracy+8",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 8,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 114,
+    "key": "aspd_60",
+    "display": {
+      "name": "ASPD+60",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 60,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 116,
+    "key": "agi_3",
+    "display": {
+      "name": "AGI+3",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 117,
+    "key": "inzanio",
+    "display": {
+      "name": "Inzanio",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "guard_recharge",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": -1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "weapon_atk",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 118,
+    "key": "hp_300",
+    "display": {
+      "name": "HP+300",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 119,
+    "key": "critical_rate_3",
+    "display": {
+      "name": "Critical Rate+3",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 120,
+    "key": "int_3",
+    "display": {
+      "name": "INT+3",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 121,
+    "key": "dex_3",
+    "display": {
+      "name": "DEX+3",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 122,
+    "key": "cspd_60",
+    "display": {
+      "name": "CSPD+60",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 60,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 123,
+    "key": "scrader",
+    "display": {
+      "name": "Scrader",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "natural_mp_regen",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "hp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 124,
+    "key": "mp_150",
+    "display": {
+      "name": "MP+150",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 150,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 125,
+    "key": "str_3",
+    "display": {
+      "name": "STR+3",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 126,
+    "key": "metal_stinger",
+    "display": {
+      "name": "Metal Stinger",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": -1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 128,
+    "key": "megiston",
+    "display": {
+      "name": "Megiston",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "int",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "vit",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "agi",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dex",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 50,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 129,
+    "key": "dodge_6",
+    "display": {
+      "name": "Dodge+6",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 130,
+    "key": "nurethoth",
+    "display": {
+      "name": "Nurethoth",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": -150,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 131,
+    "key": "vit_3",
+    "display": {
+      "name": "VIT+3",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 132,
+    "key": "hp_200",
+    "display": {
+      "name": "HP+200",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 133,
+    "key": "b_b_goblin",
+    "display": {
+      "name": "B.B. Goblin",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 134,
+    "key": "masked_warrior",
+    "display": {
+      "name": "Masked Warrior",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 135,
+    "key": "int_2",
+    "display": {
+      "name": "INT+2",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 136,
+    "key": "accuracy_4",
+    "display": {
+      "name": "Accuracy+4",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 137,
+    "key": "caspy",
+    "display": {
+      "name": "Caspy",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "ailment_resistance",
+        "value": -6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_power",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_recharge",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 138,
+    "key": "vit_2",
+    "display": {
+      "name": "VIT+2",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 140,
+    "key": "str_2",
+    "display": {
+      "name": "STR+2",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 141,
+    "key": "str_1",
+    "display": {
+      "name": "STR+1",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 142,
+    "key": "silver_roar",
+    "display": {
+      "name": "Silver Roar",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 143,
+    "key": "ruin_golem",
+    "display": {
+      "name": "Ruin Golem",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mdef",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 144,
+    "key": "mp_50",
+    "display": {
+      "name": "MP+50",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 50,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 145,
+    "key": "mp_100",
+    "display": {
+      "name": "MP+100",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 146,
+    "key": "mochelo",
+    "display": {
+      "name": "Mochelo",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 147,
+    "key": "minotaur",
+    "display": {
+      "name": "Minotaur",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 148,
+    "key": "mauez",
+    "display": {
+      "name": "Mauez",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 149,
+    "key": "king_potum",
+    "display": {
+      "name": "King Potum",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 150,
+    "key": "int_1",
+    "display": {
+      "name": "INT+1",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 152,
+    "key": "hp_100",
+    "display": {
+      "name": "HP+100",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 153,
+    "key": "gigant_knight",
+    "display": {
+      "name": "Gigant Knight",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 154,
+    "key": "gespenst",
+    "display": {
+      "name": "Gespenst",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": -1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": -1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 155,
+    "key": "forest_wolf",
+    "display": {
+      "name": "Forest Wolf",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 156,
+    "key": "flare_volg",
+    "display": {
+      "name": "Flare Volg",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 157,
+    "key": "dodge_4",
+    "display": {
+      "name": "Dodge+4",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 158,
+    "key": "dodge_2",
+    "display": {
+      "name": "Dodge+2",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 159,
+    "key": "dex_2",
+    "display": {
+      "name": "DEX+2",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 160,
+    "key": "dex_1",
+    "display": {
+      "name": "DEX+1",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 161,
+    "key": "cspd_40",
+    "display": {
+      "name": "CSPD+40",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 40,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 162,
+    "key": "cspd_20",
+    "display": {
+      "name": "CSPD+20",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 20,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 164,
+    "key": "critical_rate_2",
+    "display": {
+      "name": "Critical Rate+2",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 165,
+    "key": "critical_rate_1",
+    "display": {
+      "name": "Critical Rate+1",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 166,
+    "key": "crimsosch",
+    "display": {
+      "name": "Crimsosch",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -9,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 167,
+    "key": "brutal_dragon_decel",
+    "display": {
+      "name": "Brutal Dragon Decel",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 168,
+    "key": "boss_goblin",
+    "display": {
+      "name": "Boss Goblin",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 169,
+    "key": "boss_colon",
+    "display": {
+      "name": "Boss Colon",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 70,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 30,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 170,
+    "key": "big_coryn",
+    "display": {
+      "name": "Big Coryn",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 171,
+    "key": "astol",
+    "display": {
+      "name": "Astol",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 172,
+    "key": "aspd_40",
+    "display": {
+      "name": "ASPD+40",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 40,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 173,
+    "key": "aspd_20",
+    "display": {
+      "name": "ASPD+20",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 20,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 174,
+    "key": "agi_2",
+    "display": {
+      "name": "AGI+2",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 176,
+    "key": "agi_1",
+    "display": {
+      "name": "AGI+1",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 177,
+    "key": "accuracy_2",
+    "display": {
+      "name": "Accuracy+2",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  }
+]
