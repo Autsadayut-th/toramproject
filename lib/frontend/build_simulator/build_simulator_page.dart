@@ -407,6 +407,9 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     if (source == 'openai') {
       return 'AI recommendations from OpenAI.';
     }
+    if (source == 'gemini') {
+      return 'AI recommendations from Google Gemini.';
+    }
 
     final String sanitized = _sanitizeAiStatusDetails(details);
     if (sanitized.isEmpty) {

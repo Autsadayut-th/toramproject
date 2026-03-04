@@ -43,12 +43,14 @@ function normalizeRecommendations(value, fallback) {
 }
 
 function pickFields(input) {
-  const summary = typeof input.summary === 'object' && input.summary != null
-    ? input.summary
-    : {};
-  const character = typeof input.character === 'object' && input.character != null
-    ? input.character
-    : {};
+  const summary =
+    typeof input.summary === 'object' && input.summary != null
+      ? input.summary
+      : {};
+  const character =
+    typeof input.character === 'object' && input.character != null
+      ? input.character
+      : {};
   const equipmentSlots =
     typeof input.equipmentSlots === 'object' && input.equipmentSlots != null
       ? input.equipmentSlots
@@ -120,6 +122,67 @@ function extractJson(text) {
   throw new Error('No JSON object found in model response.');
 }
 
+function buildPromptText(input) {
+  const promptData = JSON.stringify(input);
+  return (
+    'You are a Toram build assistant. ' +
+    'Return only valid JSON with key "recommendations" as an array of 1-6 concise actionable strings. ' +
+    'No markdown, no extra keys.\n' +
+    promptData
+  );
+}
+
+function resolveProvider() {
+  const configured = (process.env.AI_PROVIDER || '').trim().toLowerCase();
+  if (configured === 'gemini' || configured === 'openai') {
+    return configured;
+  }
+  if (configured && configured !== 'auto') {
+    throw new Error(
+      'Invalid AI_PROVIDER. Use "gemini", "openai", or leave empty.',
+    );
+  }
+
+  if (process.env.GEMINI_API_KEY) {
+    return 'gemini';
+  }
+  if (process.env.OPENAI_API_KEY) {
+    return 'openai';
+  }
+  return 'gemini';
+}
+
+function providerLabel(provider) {
+  if (provider === 'gemini') {
+    return 'Google Gemini';
+  }
+  if (provider === 'openai') {
+    return 'OpenAI';
+  }
+  return 'AI';
+}
+
+function extractGeminiText(json) {
+  const candidates = Array.isArray(json?.candidates) ? json.candidates : [];
+  const parts = candidates[0]?.content?.parts;
+  if (!Array.isArray(parts)) {
+    const blockReason = json?.promptFeedback?.blockReason;
+    if (blockReason) {
+      throw new Error(`Gemini blocked response: ${blockReason}`);
+    }
+    throw new Error('Gemini response missing text parts.');
+  }
+
+  const combined = parts
+    .map((part) => (typeof part?.text === 'string' ? part.text : ''))
+    .join('\n')
+    .trim();
+  if (!combined) {
+    throw new Error('Gemini response has empty text.');
+  }
+  return combined;
+}
+
 async function requestOpenAiRecommendations(input) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
@@ -127,7 +190,7 @@ async function requestOpenAiRecommendations(input) {
   }
 
   const model = process.env.OPENAI_MODEL || 'gpt-4o-mini';
-  const promptData = JSON.stringify(input);
+  const promptText = buildPromptText(input);
 
   const response = await fetch('https://api.openai.com/v1/responses', {
     method: 'POST',
@@ -141,15 +204,8 @@ async function requestOpenAiRecommendations(input) {
       max_output_tokens: 400,
       input: [
         {
-          role: 'system',
-          content:
-            'You are a Toram build assistant. Return only valid JSON with key "recommendations" as an array of 1-6 concise actionable strings.',
-        },
-        {
           role: 'user',
-          content:
-            `Analyze this build data and suggest up to 6 practical improvements. ` +
-            `Do not include markdown or extra keys.\n${promptData}`,
+          content: promptText,
         },
       ],
     }),
@@ -168,7 +224,76 @@ async function requestOpenAiRecommendations(input) {
   }
 
   const parsed = extractJson(outputText);
-  return normalizeRecommendations(parsed.recommendations, DEFAULT_FALLBACK);
+  return {
+    provider: 'openai',
+    model,
+    recommendations: normalizeRecommendations(
+      parsed.recommendations,
+      DEFAULT_FALLBACK,
+    ),
+  };
+}
+
+async function requestGeminiRecommendations(input) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    throw new Error('GEMINI_API_KEY is not configured.');
+  }
+
+  const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+  const promptText = buildPromptText(input);
+  const endpoint =
+    `https://generativelanguage.googleapis.com/v1beta/models/` +
+    `${model}:generateContent`;
+
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'x-goog-api-key': apiKey,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      contents: [
+        {
+          role: 'user',
+          parts: [{ text: promptText }],
+        },
+      ],
+      generationConfig: {
+        temperature: 0.2,
+        maxOutputTokens: 400,
+      },
+    }),
+  });
+
+  if (!response.ok) {
+    const bodyText = await response.text();
+    throw new Error(`Gemini request failed (${response.status}): ${bodyText}`);
+  }
+
+  const json = await response.json();
+  const outputText = extractGeminiText(json);
+  const parsed = extractJson(outputText);
+
+  return {
+    provider: 'gemini',
+    model,
+    recommendations: normalizeRecommendations(
+      parsed.recommendations,
+      DEFAULT_FALLBACK,
+    ),
+  };
+}
+
+async function requestAiRecommendations(input) {
+  const provider = resolveProvider();
+  if (provider === 'openai') {
+    return requestOpenAiRecommendations(input);
+  }
+  if (provider === 'gemini') {
+    return requestGeminiRecommendations(input);
+  }
+  throw new Error(`Unsupported provider: ${provider}`);
 }
 
 module.exports = async function handler(req, res) {
@@ -185,10 +310,11 @@ module.exports = async function handler(req, res) {
   const compactInput = pickFields(input);
 
   try {
-    const recommendations = await requestOpenAiRecommendations(compactInput);
+    const aiResult = await requestAiRecommendations(compactInput);
     return res.status(200).json({
-      source: 'openai',
-      recommendations,
+      source: aiResult.provider,
+      message: `${providerLabel(aiResult.provider)} (${aiResult.model})`,
+      recommendations: aiResult.recommendations,
     });
   } catch (error) {
     return res.status(200).json({

@@ -177,6 +177,9 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
   }
 
   Widget _buildRecommendationsSection() {
+    final bool hasRemoteAi =
+        _aiRecommendationSource == 'openai' ||
+        _aiRecommendationSource == 'gemini';
     final children = <Widget>[];
     for (int i = 0; i < _recommendations.length; i++) {
       children.add(
@@ -230,13 +233,13 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
               Icon(
                 _isAiRecommendationLoading
                     ? Icons.sync
-                    : _aiRecommendationSource == 'openai'
+                    : hasRemoteAi
                     ? Icons.psychology
                     : Icons.rule,
                 size: 14,
                 color: _isAiRecommendationLoading
                     ? const Color(0xFFFFE082)
-                    : _aiRecommendationSource == 'openai'
+                    : hasRemoteAi
                     ? const Color(0xFFB7FFC6)
                     : const Color(0xFFFFCCBC),
               ),
