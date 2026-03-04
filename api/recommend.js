@@ -4,6 +4,19 @@ const DEFAULT_FALLBACK = [
   'Balance damage stats with survivability so your combo can run consistently.',
 ];
 
+const RECOMMENDATION_SCHEMA = {
+  type: 'OBJECT',
+  required: ['recommendations'],
+  properties: {
+    recommendations: {
+      type: 'ARRAY',
+      minItems: 1,
+      maxItems: 6,
+      items: { type: 'STRING' },
+    },
+  },
+};
+
 function parseBody(req) {
   if (!req || req.body == null) {
     return {};
@@ -122,6 +135,72 @@ function extractJson(text) {
   throw new Error('No JSON object found in model response.');
 }
 
+function stripCodeFence(text) {
+  return text
+    .replace(/^\s*```[a-zA-Z]*\s*/g, '')
+    .replace(/\s*```\s*$/g, '')
+    .trim();
+}
+
+function extractTextRecommendations(text) {
+  const lines = text
+    .split('\n')
+    .map((line) =>
+      line
+        .trim()
+        .replace(/^\d+[\).:-]\s*/, '')
+        .replace(/^[-*•]\s*/, '')
+        .trim(),
+    )
+    .filter((line) => line.length > 0);
+  return normalizeRecommendations(lines, DEFAULT_FALLBACK);
+}
+
+function parseModelRecommendations(text) {
+  const cleaned = stripCodeFence(text);
+  if (!cleaned) {
+    throw new Error('Model response is empty.');
+  }
+
+  try {
+    const direct = JSON.parse(cleaned);
+    if (Array.isArray(direct)) {
+      return normalizeRecommendations(direct, DEFAULT_FALLBACK);
+    }
+    if (direct && typeof direct === 'object') {
+      return normalizeRecommendations(direct.recommendations, DEFAULT_FALLBACK);
+    }
+  } catch (_) {
+    // Continue with fallback parsers below.
+  }
+
+  try {
+    const objectPayload = extractJson(cleaned);
+    return normalizeRecommendations(objectPayload.recommendations, DEFAULT_FALLBACK);
+  } catch (_) {
+    // Continue with fallback parsers below.
+  }
+
+  const firstBracket = cleaned.indexOf('[');
+  const lastBracket = cleaned.lastIndexOf(']');
+  if (firstBracket >= 0 && lastBracket > firstBracket) {
+    try {
+      const listPayload = JSON.parse(cleaned.slice(firstBracket, lastBracket + 1));
+      if (Array.isArray(listPayload)) {
+        return normalizeRecommendations(listPayload, DEFAULT_FALLBACK);
+      }
+    } catch (_) {
+      // Continue with text fallback.
+    }
+  }
+
+  const textRecommendations = extractTextRecommendations(cleaned);
+  if (textRecommendations.length > 0) {
+    return textRecommendations;
+  }
+  throw new Error('Unable to parse AI recommendations from model response.');
+}
+
 function buildPromptText(input) {
   const promptData = JSON.stringify(input);
   return (
@@ -183,6 +262,31 @@ function extractGeminiText(json) {
   return combined;
 }
 
+function extractOpenAiText(json) {
+  const outputText =
+    typeof json?.output_text === 'string' ? json.output_text.trim() : '';
+  if (outputText) {
+    return outputText;
+  }
+
+  const outputs = Array.isArray(json?.output) ? json.output : [];
+  const chunks = [];
+  for (const output of outputs) {
+    const content = Array.isArray(output?.content) ? output.content : [];
+    for (const part of content) {
+      if (typeof part?.text === 'string' && part.text.trim()) {
+        chunks.push(part.text.trim());
+      }
+    }
+  }
+
+  const combined = chunks.join('\n').trim();
+  if (combined) {
+    return combined;
+  }
+  throw new Error('OpenAI response missing text output.');
+}
+
 async function requestOpenAiRecommendations(input) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
@@ -202,6 +306,26 @@ async function requestOpenAiRecommendations(input) {
       model,
       temperature: 0.2,
       max_output_tokens: 400,
+      text: {
+        format: {
+          type: 'json_schema',
+          name: 'toram_recommendations',
+          strict: true,
+          schema: {
+            type: 'object',
+            required: ['recommendations'],
+            additionalProperties: false,
+            properties: {
+              recommendations: {
+                type: 'array',
+                minItems: 1,
+                maxItems: 6,
+                items: { type: 'string' },
+              },
+            },
+          },
+        },
+      },
       input: [
         {
           role: 'user',
@@ -217,20 +341,11 @@ async function requestOpenAiRecommendations(input) {
   }
 
   const json = await response.json();
-  const outputText =
-    typeof json.output_text === 'string' ? json.output_text : '';
-  if (!outputText.trim()) {
-    throw new Error('OpenAI response missing output_text.');
-  }
-
-  const parsed = extractJson(outputText);
+  const outputText = extractOpenAiText(json);
   return {
     provider: 'openai',
     model,
-    recommendations: normalizeRecommendations(
-      parsed.recommendations,
-      DEFAULT_FALLBACK,
-    ),
+    recommendations: parseModelRecommendations(outputText),
   };
 }
 
@@ -262,6 +377,8 @@ async function requestGeminiRecommendations(input) {
       generationConfig: {
         temperature: 0.2,
         maxOutputTokens: 400,
+        responseMimeType: 'application/json',
+        responseSchema: RECOMMENDATION_SCHEMA,
       },
     }),
   });
@@ -273,15 +390,10 @@ async function requestGeminiRecommendations(input) {
 
   const json = await response.json();
   const outputText = extractGeminiText(json);
-  const parsed = extractJson(outputText);
-
   return {
     provider: 'gemini',
     model,
-    recommendations: normalizeRecommendations(
-      parsed.recommendations,
-      DEFAULT_FALLBACK,
-    ),
+    recommendations: parseModelRecommendations(outputText),
   };
 }
 
