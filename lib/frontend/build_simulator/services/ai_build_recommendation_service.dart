@@ -6,10 +6,12 @@ class AiBuildRecommendationResult {
   const AiBuildRecommendationResult({
     required this.recommendations,
     required this.source,
+    required this.message,
   });
 
   final List<String> recommendations;
   final String source;
+  final String message;
 }
 
 class AiBuildRecommendationService {
@@ -48,9 +50,11 @@ class AiBuildRecommendationService {
 
     final String source =
         decoded['source']?.toString().trim().toLowerCase() ?? 'unknown';
+    final String message = decoded['message']?.toString().trim() ?? '';
     return AiBuildRecommendationResult(
       recommendations: recommendations.take(6).toList(growable: false),
       source: source.isEmpty ? 'unknown' : source,
+      message: message,
     );
   }
 

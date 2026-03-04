@@ -381,23 +381,61 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
         _recommendations = result.recommendations;
         _isAiRecommendationLoading = false;
         _aiRecommendationSource = result.source;
-        _aiRecommendationMessage = result.source == 'openai'
-            ? 'AI recommendations from OpenAI.'
-            : 'AI unavailable. Using fallback recommendations.';
+        _aiRecommendationMessage = _buildAiStatusMessage(
+          source: result.source,
+          details: result.message,
+        );
       });
       _syncCoordinatorSnapshot();
-    } catch (_) {
+    } catch (error) {
       if (!mounted || token != _aiRecommendationRequestToken) {
         return;
       }
       setState(() {
         _isAiRecommendationLoading = false;
         _aiRecommendationSource = 'fallback';
-        _aiRecommendationMessage =
-            'AI unavailable. Using local recommendation rules.';
+        _aiRecommendationMessage = _buildAiStatusMessage(
+          source: 'fallback',
+          details: error.toString(),
+        );
       });
       _syncCoordinatorSnapshot();
     }
+  }
+
+  String _buildAiStatusMessage({required String source, String? details}) {
+    if (source == 'openai') {
+      return 'AI recommendations from OpenAI.';
+    }
+
+    final String sanitized = _sanitizeAiStatusDetails(details);
+    if (sanitized.isEmpty) {
+      return 'AI unavailable. Using local recommendation rules.';
+    }
+    return 'AI unavailable: $sanitized';
+  }
+
+  String _sanitizeAiStatusDetails(String? details) {
+    if (details == null || details.trim().isEmpty) {
+      return '';
+    }
+    String text = details.trim();
+    const List<String> prefixes = <String>[
+      'Exception:',
+      'FormatException:',
+      'TimeoutException:',
+    ];
+    for (final String prefix in prefixes) {
+      if (text.startsWith(prefix)) {
+        text = text.substring(prefix.length).trim();
+        break;
+      }
+    }
+    text = text.replaceAll(RegExp(r'\s+'), ' ');
+    if (text.length > 170) {
+      return '${text.substring(0, 170)}...';
+    }
+    return text;
   }
 
   int _findBuildIndexById(String buildId) {

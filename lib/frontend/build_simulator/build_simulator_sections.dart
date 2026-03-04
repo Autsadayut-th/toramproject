@@ -244,7 +244,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
               Expanded(
                 child: Text(
                   _aiRecommendationMessage,
-                  maxLines: 2,
+                  maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 11,
