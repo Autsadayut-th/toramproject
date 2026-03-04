@@ -1,0 +1,685 @@
+﻿{
+    "Survival":  [
+                     {
+                         "name":  "Play Dead",
+                         "unlock_level":  1,
+                         "mp":  null,
+                         "type":  "Passive",
+                         "element":  null,
+                         "combo":  null,
+                         "combo_middle":  null,
+                         "range":  null,
+                         "description":  "The waiting time to revive is reduced."
+                     },
+                     {
+                         "name":  "EXP Gain Up",
+                         "unlock_level":  1,
+                         "mp":  null,
+                         "type":  "Passive",
+                         "element":  null,
+                         "combo":  null,
+                         "combo_middle":  null,
+                         "range":  null,
+                         "description":  "EXP gain from battles increases by 1% per skill level."
+                     },
+                     {
+                         "name":  "Drop Rate Up",
+                         "unlock_level":  1,
+                         "mp":  null,
+                         "type":  "Passive",
+                         "element":  null,
+                         "combo":  null,
+                         "combo_middle":  null,
+                         "range":  null,
+                         "description":  "Drop rate from battles increases by 1% per skill level."
+                     },
+                     {
+                         "name":  "Safe Rest",
+                         "unlock_level":  1,
+                         "mp":  null,
+                         "type":  "Passive",
+                         "element":  null,
+                         "combo":  null,
+                         "combo_middle":  null,
+                         "range":  null,
+                         "description":  "Natural HP Regen increases."
+                     },
+                     {
+                         "name":  "HP Boost",
+                         "unlock_level":  2,
+                         "mp":  null,
+                         "type":  "Passive",
+                         "element":  null,
+                         "combo":  null,
+                         "combo_middle":  null,
+                         "range":  null,
+                         "description":  "MaxHP increases a little."
+                     },
+                     {
+                         "name":  "Fighter\u0027s High",
+                         "unlock_level":  2,
+                         "mp":  null,
+                         "type":  "Passive",
+                         "element":  null,
+                         "combo":  null,
+                         "combo_middle":  null,
+                         "range":  null,
+                         "description":  "Regenerate HP during combat. The healing amount is small.\nRegeneration Tick occurs once every 3 seconds"
+                     },
+                     {
+                         "name":  "Short Rest",
+                         "unlock_level":  1,
+                         "mp":  null,
+                         "type":  "Passive",
+                         "element":  null,
+                         "combo":  null,
+                         "combo_middle":  null,
+                         "range":  null,
+                         "description":  "Natural MP Regen increases."
+                     },
+                     {
+                         "name":  "MP Boost",
+                         "unlock_level":  2,
+                         "mp":  null,
+                         "type":  "Passive",
+                         "element":  null,
+                         "combo":  null,
+                         "combo_middle":  null,
+                         "range":  null,
+                         "description":  "MaxMP increases a little."
+                     },
+                     {
+                         "name":  "Sober Analysis",
+                         "unlock_level":  2,
+                         "mp":  null,
+                         "type":  "Passive",
+                         "element":  null,
+                         "combo":  null,
+                         "combo_middle":  null,
+                         "range":  null,
+                         "description":  "Regenerate MP during combat. The healing amount is small.\nRegeneration Tick occurs once every 3 seconds"
+                     }
+                 ],
+    "Support":  [
+                    {
+                        "name":  "First Aid",
+                        "unlock_level":  1,
+                        "mp":  null,
+                        "type":  "Passive",
+                        "element":  null,
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  null,
+                        "description":  "\"First Aid\" effect in Support menu increases. The waiting time to revive is largey reduced."
+                    },
+                    {
+                        "name":  "Mini Heal",
+                        "unlock_level":  1,
+                        "mp":  "100",
+                        "type":  "Active",
+                        "element":  "Neutral",
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  "24",
+                        "description":  "Restore the target\u0027s HP a little. Reduce the target\u0027s waiting time to revive if the target is knocked out.\nMini Heal will target the Caster automatically if no target is specified"
+                    },
+                    {
+                        "name":  "Recovery",
+                        "unlock_level":  2,
+                        "mp":  "200",
+                        "type":  "Active",
+                        "element":  "Neutral",
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  "24",
+                        "description":  "Remove a target\u0027s one status ailment. If there is no ailment to remove, it becomes a buff to remove one ailment at once for a few seconds. Restore the user\u0027s MP a little when succeeding in removing an ailment.\nRecovery will target the Caster automatically if no target is specified"
+                    },
+                    {
+                        "name":  "Sanctuary",
+                        "unlock_level":  3,
+                        "mp":  "400",
+                        "type":  "Active",
+                        "element":  "Neutral",
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  "0",
+                        "description":  "Create a sanctuary and protect allies. Reduce damage taken while in the area. The amount depends on each player\u0027s MaxHP. Ineffective against fatal damage."
+                    },
+                    {
+                        "name":  "Heal",
+                        "unlock_level":  4,
+                        "mp":  "300",
+                        "type":  "Active",
+                        "element":  "Neutral",
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  "24",
+                        "description":  "Restore a target\u0027s HP. Greatly shorten the time to revive when using this skill to a defeated player.\nHeal will target the Caster automatically if no target is specified"
+                    },
+                    {
+                        "name":  "Life Recovery",
+                        "unlock_level":  1,
+                        "mp":  "300",
+                        "type":  "Active",
+                        "element":  "Neutral",
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  "0",
+                        "description":  "Create an area that regenerates HP. The player\u0027s DEF decreases. The effect ends when the player take damage."
+                    },
+                    {
+                        "name":  "Brave Aura",
+                        "unlock_level":  2,
+                        "mp":  "400",
+                        "type":  "Active",
+                        "element":  "Neutral",
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  "0",
+                        "description":  "Create an area that enhances ATK and weapon performance. The player\u0027s Accuracy Rate decreases. The effect ends when the player takes damage."
+                    },
+                    {
+                        "name":  "High Cycle",
+                        "unlock_level":  3,
+                        "mp":  "500",
+                        "type":  "Active",
+                        "element":  "Neutral",
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  "0",
+                        "description":  "Create the area to shorten charge and cast time. Your MP restoration will be weakened. The effects will end when taking damage."
+                    },
+                    {
+                        "name":  "Quick Motion",
+                        "unlock_level":  4,
+                        "mp":  "600",
+                        "type":  "Active",
+                        "element":  "Neutral",
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  "0",
+                        "description":  "Create an area that enhances Attack Speed. The user\u0027s Attack MP Recovery is lowered and the effect ends when you take damage."
+                    },
+                    {
+                        "name":  "Mana Recharge",
+                        "unlock_level":  1,
+                        "mp":  "300",
+                        "type":  "Active",
+                        "element":  "Neutral",
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  "0",
+                        "description":  "Create an area that regenerates MP. The player\u0027s ATK decreases. The effect ends when the player takes damage."
+                    },
+                    {
+                        "name":  "Magic Barrier",
+                        "unlock_level":  2,
+                        "mp":  "400",
+                        "type":  "Active",
+                        "element":  "Neutral",
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  "0",
+                        "description":  "Create an area that enhances DEF and armor performance. The player\u0027s Dodge Rate decreases. The effect ends when the player takes damage."
+                    },
+                    {
+                        "name":  "Immunity",
+                        "unlock_level":  3,
+                        "mp":  "500",
+                        "type":  "Active",
+                        "element":  "Neutral",
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  "0",
+                        "description":  "Create an area that has chance to protect allies from status ailments. Your Attack Speed will be lowered. The effects will end when taking damage."
+                    },
+                    {
+                        "name":  "Fast Reaction",
+                        "unlock_level":  4,
+                        "mp":  "600",
+                        "type":  "Active",
+                        "element":  "Neutral",
+                        "combo":  null,
+                        "combo_middle":  null,
+                        "range":  "0",
+                        "description":  "Creates an area that enhances Guard and Evasion Recharge. The user\u0027s Cast Speed decreases and the effect ends when taking damage."
+                    }
+                ],
+    "Minstrel":  [
+                     {
+                         "name":  "Healing Song",
+                         "unlock_level":  1,
+                         "mp":  "100",
+                         "type":  "Active",
+                         "element":  "Neutral",
+                         "combo":  null,
+                         "combo_middle":  null,
+                         "range":  "0",
+                         "description":  "A break for travelers. Natural Regen increases when not in combat. The effect increases when used continuously.\nCannot be sung at the same time with other songs."
+                     },
+                     {
+                         "name":  "Fairy Song",
+                         "unlock_level":  1,
+                         "mp":  "100",
+                         "type":  "Active",
+                         "element":  "Neutral",
+                         "combo":  null,
+                         "combo_middle":  null,
+                         "range":  "0",
+                         "description":  "A fairy\u0027s guidance. Increase accuracy and dodge rate. The effect increases when used continuously.\nCannot be sung at the same time with other songs."
+                     },
+                     {
+                         "name":  "Life Song",
+                         "unlock_level":  1,
+                         "mp":  "100",
+                         "type":  "Active",
+                         "element":  "Neutral",
+                         "combo":  null,
+                         "combo_middle":  null,
+                         "range":  "0",
+                         "description":  "The beat of life. MaxHP increases and HP is restored. The effect increases when used continuously.\nCannot be sung at the same time with other songs."
+                     },
+                     {
+                         "name":  "Fantasy Song",
+                         "unlock_level":  2,
+                         "mp":  "100",
+                         "type":  "Active",
+                         "element":  "Neutral",
+                         "combo":  null,
+                         "combo_middle":  null,
+                         "range":  "0",
+                         "description":  "Is it a dream or an illusion? The effect of the song is accumulated at fixed intervals. Restore MP with the effect after using a skill.\nCombo won\u0027t activate the effect. Cannot be sung at the same time with other songs."
+                     },
+                     {
+                         "name":  "Ad-lib",
+                         "unlock_level":  2,
+                         "mp":  "100",
+                         "type":  "Active",
+                         "element":  "Neutral",
+                         "combo":  null,
+                         "combo_middle":  null,
+                         "range":  "0",
+                         "description":  "Resumes an interrupted song before it completely loses its effect. Resuming a song restores MP.\nThe amount of MP restored decreases if used with combo."
+                     },
+                     {
+                         "name":  "Passion Song",
+                         "unlock_level":  3,
+                         "mp":  "300",
+                         "type":  "Active",
+                         "element":  "Neutral",
+                         "combo":  null,
+                         "combo_middle":  null,
+                         "range":  "0",
+                         "description":  "An incredibly strong and fierce determination. Increase elemental effect, but the effect will decrease when the combination is not right. The effect increases when used continuously.\nCannot be sung at the same time with other songs."
+                     },
+                     {
+                         "name":  "Wisdom Song",
+                         "unlock_level":  3,
+                         "mp":  "300",
+                         "type":  "Active",
+                         "element":  "Neutral",
+                         "combo":  null,
+                         "combo_middle":  null,
+                         "range":  "0",
+                         "description":  "Enlightenment through a great deal of knowledge. Reduce all kinds of damage. The effect increases when used continuously.\nCannot be sung at the same time with other songs."
+                     }
+                 ],
+    "Dancer":  [
+                   {
+                       "name":  "Fairy Dance",
+                       "unlock_level":  1,
+                       "mp":  "100",
+                       "type":  "Active",
+                       "element":  "Neutral",
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  "0",
+                       "description":  "A graceful dance like a fairy. Reduce monster\u0027s accuracy. You can increase the effect by using it again right before the effect ends.\nThe effect goes down if you reuse it too early or gain effect from another dance."
+                   },
+                   {
+                       "name":  "Frenzy Dance",
+                       "unlock_level":  1,
+                       "mp":  "200",
+                       "type":  "Active",
+                       "element":  "Neutral",
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  "0",
+                       "description":  "An extremely emotional dance that makes it easier to break monster\u0027s parts. You can increase the effect by using it again right before the first effect ends.\nThe effect goes down if you reuse it too early or gain effect from another dance."
+                   },
+                   {
+                       "name":  "Spirited Dance",
+                       "unlock_level":  1,
+                       "mp":  "300",
+                       "type":  "Active",
+                       "element":  "Neutral",
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  "0",
+                       "description":  "A dance to cheer allies up. Immediately restores MP. You can increase the effect by using it again right before the first effect ends.\nThe effect goes down if you reuse it too early or gain effect from another dance."
+                   },
+                   {
+                       "name":  "Astute Dance",
+                       "unlock_level":  2,
+                       "mp":  "500",
+                       "type":  "Active",
+                       "element":  "Neutral",
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  "0",
+                       "description":  "An agile yet supple dance. Reduces monster\u0027s dodge rate. You can increase the effect by using it again right before the first effect ends.\nThe effect goes down if you reuse it too early or gain effect from another dance."
+                   },
+                   {
+                       "name":  "Charming Dance",
+                       "unlock_level":  3,
+                       "mp":  "300",
+                       "type":  "Active",
+                       "element":  "Neutral",
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  "0",
+                       "description":  "A fascinating dance that reduces monster\u0027s stability. You can increase the effect by using it again right before the first effect ends.\nThe effect goes down if you reuse it too early or gain effect from another dance."
+                   },
+                   {
+                       "name":  "Elegant Poise",
+                       "unlock_level":  2,
+                       "mp":  "100",
+                       "type":  "Active",
+                       "element":  "Neutral",
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  "0",
+                       "description":  "Handle attacks easily with a fan. Reduce damage received and becomes invincible while holding the fan. Can\u0027t hold the fan gracefully when inflicted with a status ailment."
+                   },
+                   {
+                       "name":  "Nature\u0027s Wonders",
+                       "unlock_level":  3,
+                       "mp":  "400",
+                       "type":  "Active, Physical skill",
+                       "element":  "Weapon Dependent",
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  "3",
+                       "description":  "Attacks as if dancing beautifully. Deal damage to nearby enemies and recover nearby allies\u0027 HP when the skill ends. Depending on your level, you gain resisntance against Flinch or Tumble."
+                   }
+               ],
+    "Battle":  [
+                   {
+                       "name":  "Magic UP",
+                       "unlock_level":  1,
+                       "mp":  null,
+                       "type":  "Passive",
+                       "element":  null,
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  null,
+                       "description":  "Increase MATK a little. The amount depends on the player\u0027s level."
+                   },
+                   {
+                       "name":  "Concentrate",
+                       "unlock_level":  1,
+                       "mp":  null,
+                       "type":  "Passive",
+                       "element":  null,
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  null,
+                       "description":  "Extremely low chance to increase  the last magic damage dealt."
+                   },
+                   {
+                       "name":  "Attack UP",
+                       "unlock_level":  1,
+                       "mp":  null,
+                       "type":  "Passive",
+                       "element":  null,
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  null,
+                       "description":  "Increase ATK a little. The amount depends on the player\u0027s level."
+                   },
+                   {
+                       "name":  "Whack",
+                       "unlock_level":  1,
+                       "mp":  null,
+                       "type":  "Passive",
+                       "element":  null,
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  null,
+                       "description":  "Extremely low chance to increase the last physical damage dealt."
+                   },
+                   {
+                       "name":  "Defense UP",
+                       "unlock_level":  1,
+                       "mp":  null,
+                       "type":  "Passive",
+                       "element":  null,
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  null,
+                       "description":  "Increase DEF and MDEF a little. The amount depends on the player\u0027s level."
+                   },
+                   {
+                       "name":  "Dodge UP",
+                       "unlock_level":  1,
+                       "mp":  null,
+                       "type":  "Passive",
+                       "element":  null,
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  null,
+                       "description":  "Increase Dodge Rate a little."
+                   },
+                   {
+                       "name":  "Desperate Resist",
+                       "unlock_level":  2,
+                       "mp":  null,
+                       "type":  "Passive",
+                       "element":  null,
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  null,
+                       "description":  "Reduce the damage taken while you are immobilized by the status ailments such as Stun and Tumble."
+                   },
+                   {
+                       "name":  "Critical UP",
+                       "unlock_level":  2,
+                       "mp":  null,
+                       "type":  "Passive",
+                       "element":  null,
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  null,
+                       "description":  "Increase Critical Rate and damage dealt a little."
+                   },
+                   {
+                       "name":  "Accuracy UP",
+                       "unlock_level":  2,
+                       "mp":  null,
+                       "type":  "Passive",
+                       "element":  null,
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  null,
+                       "description":  "Increase Accuracy Rate a little."
+                   },
+                   {
+                       "name":  "Increased Energy",
+                       "unlock_level":  3,
+                       "mp":  null,
+                       "type":  "Passive",
+                       "element":  null,
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  null,
+                       "description":  "Increase MATK a little. The amount depends on the player\u0027s level."
+                   },
+                   {
+                       "name":  "Intimidating Power",
+                       "unlock_level":  3,
+                       "mp":  null,
+                       "type":  "Passive",
+                       "element":  null,
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  null,
+                       "description":  "Increase ATK a litlle. The amount depends on the player\u0027s level."
+                   },
+                   {
+                       "name":  "Defense Mastery",
+                       "unlock_level":  3,
+                       "mp":  null,
+                       "type":  "Passive",
+                       "element":  null,
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  null,
+                       "description":  "Increase DEF \u0026 MDEF a little. The amount depends on the player\u0027s level."
+                   },
+                   {
+                       "name":  "Spell Burst",
+                       "unlock_level":  4,
+                       "mp":  null,
+                       "type":  "Passive",
+                       "element":  null,
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  null,
+                       "description":  "Critical ability slightly affects magic attack."
+                   },
+                   {
+                       "name":  "Secret Chase Attack",
+                       "unlock_level":  4,
+                       "mp":  null,
+                       "type":  "Passive",
+                       "element":  null,
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  null,
+                       "description":  "Increases the activation rate of additional melee and additional magic.\nAdditional equipment required for this effect to apply."
+                   },
+                   {
+                       "name":  "Super Grip",
+                       "unlock_level":  4,
+                       "mp":  null,
+                       "type":  "Passive",
+                       "element":  null,
+                       "combo":  null,
+                       "combo_middle":  null,
+                       "range":  null,
+                       "description":  "Shortens the knockback distance when defeated."
+                   }
+               ],
+    "Golem":  [
+                  {
+                      "name":  "Golem Call",
+                      "unlock_level":  1,
+                      "mp":  "500",
+                      "type":  "Active",
+                      "element":  "Weapon Dependent",
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  "0",
+                      "description":  "Summons a golem to assist in battle.\nYour attacks won\u0027t restore MP. Instead, the golem\u0027s normal attacks will. From the EX skill, you can choose the golem type and adjust the magic lamp.\nNeo Lancer"
+                  },
+                  {
+                      "name":  "Neo Lancer",
+                      "unlock_level":  2,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Improves the abilities of the Lancer-type golem.\nThe golem\u0027s piercing power and Critical Rate increase, with a small boost also applied to the Shielder-type and Buster-type golem.\nAttack Boost"
+                  },
+                  {
+                      "name":  "Attack Boost",
+                      "unlock_level":  3,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Improves the magic lamp to increase attack efficiency.\nIncreases the boost received per lamp power distributed to Attack. Always increases Accuracy, no matter the distribution.\nNeo Shielder"
+                  },
+                  {
+                      "name":  "Neo Shielder",
+                      "unlock_level":  2,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Improves the abilities of the Shielder-type golem.\nThe golem\u0027s active time and damage reduction range increase, with a small boost also applied to the Lancer-type and Buster-type golem.\nShield Boost"
+                  },
+                  {
+                      "name":  "Shield Boost",
+                      "unlock_level":  3,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Improves the magic lamp to increase shield efficiency.\nIncreases the boost received per lamp power distributed to Shield. Always increases damage reduction range, no matter the distribution.\nNeo Buster"
+                  },
+                  {
+                      "name":  "Neo Buster",
+                      "unlock_level":  2,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Improves the abilities of the Buster-type golem.\nThe golem\u0027s piercing power and Critical Rate increase, with a small boost also applied to the Lancer-type and Shielder-type golem.\nSpeed Boost"
+                  },
+                  {
+                      "name":  "Speed Boost",
+                      "unlock_level":  3,
+                      "mp":  null,
+                      "type":  "Passive",
+                      "element":  null,
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  null,
+                      "description":  "Improves the magic lamp to increase speed.\nIncreases Action Speed per lamp power distributed to Speed.\nMagic Grenade"
+                  },
+                  {
+                      "name":  "Magic Grenade",
+                      "unlock_level":  1,
+                      "mp":  "100",
+                      "type":  "Active, Magic skill",
+                      "element":  "Weapon Dependent",
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  "8",
+                      "description":  "Destabilizes the magic lamp\u0027s power to use it like a bomb.\nIt\u0027s an AoE attack, but it won\u0027t reach targets that are too far away. INT and TEC will boost its power further.\nFrost Grenade"
+                  },
+                  {
+                      "name":  "Frost Grenade",
+                      "unlock_level":  2,
+                      "mp":  "200",
+                      "type":  "Active, Magic skill",
+                      "element":  "Weapon Dependent",
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  "8",
+                      "description":  "Fills the magic lamp with cold magic power.\nIts power depends on the Magic Grenade you\u0027ve learned. May inflict [Freeze] on the target.\nIf you get caught in the blast, there is a low chance of freezing yourself.\nFlash Grenade"
+                  },
+                  {
+                      "name":  "Flash Grenade",
+                      "unlock_level":  3,
+                      "mp":  "300",
+                      "type":  "Active, Magic skill",
+                      "element":  "Weapon Dependent",
+                      "combo":  null,
+                      "combo_middle":  null,
+                      "range":  "8",
+                      "description":  "Fills the magic lamp with shining magic power.\nIts power depends on the Magic Grenade you\u0027ve learned. May inflict [Dazzled] on the target.\nIf you get caught in the blast, there is a medium chance to be dazzled too."
+                  }
+              ]
+}

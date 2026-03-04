@@ -1,0 +1,2629 @@
+[
+  {
+    "id": 1,
+    "key": "top_star_potum",
+    "display": {
+      "name": "Top-Star Potum",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": -150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 900,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 900,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Sunlight Potum"
+    }
+  },
+  {
+    "id": 2,
+    "key": "shadow_devil_cavalier",
+    "display": {
+      "name": "Shadow Devil Cavalier",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stability",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "revive_time",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 3,
+    "key": "forbidden_shawle",
+    "display": {
+      "name": "Forbidden Shawle",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Prudent Blue Shadow"
+    }
+  },
+  {
+    "id": 4,
+    "key": "gula",
+    "display": {
+      "name": "Gula",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Junior Dragon Zyvio"
+    }
+  },
+  {
+    "id": 5,
+    "key": "royal_ox_king_ii",
+    "display": {
+      "name": "Royal Ox King II",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 12,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Royal Ox King"
+    }
+  },
+  {
+    "id": 6,
+    "key": "pillorocas",
+    "display": {
+      "name": "Pillorocas",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 50,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 8,
+    "key": "goblin_zucotto",
+    "display": {
+      "name": "Goblin Zucotto",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 24,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 1,
+        "value_type": "percent",
+        "condition": {
+          "sub_weapon": "SHIELD"
+        }
+      }
+    ],
+    "upgrade": {
+      "from": "Alfenix"
+    }
+  },
+  {
+    "id": 9,
+    "key": "erkuch",
+    "display": {
+      "name": "Erkuch",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 24,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 1,
+        "value_type": "percent",
+        "condition": {
+          "main_weapon": "STAFF"
+        }
+      }
+    ],
+    "upgrade": {
+      "from": "Garnache"
+    }
+  },
+  {
+    "id": 10,
+    "key": "castilia",
+    "display": {
+      "name": "Castilia",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -900,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 5,
+        "value_type": "percent",
+        "condition": {
+          "main_weapon": "MAGIC_DEVICE"
+        }
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 10,
+        "value_type": "percent",
+        "condition": {
+          "sub_weapon": "NINJUTSU_SCROLL"
+        }
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 11,
+    "key": "jibril_iii",
+    "display": {
+      "name": "Jibril III",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 16,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Jibril II"
+    }
+  },
+  {
+    "id": 12,
+    "key": "jibril_ii",
+    "display": {
+      "name": "Jibril II",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 12,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Jibril"
+    }
+  },
+  {
+    "id": 13,
+    "key": "jibril",
+    "display": {
+      "name": "Jibril",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 2,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 14,
+    "key": "jiva",
+    "display": {
+      "name": "Jiva",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 15,
+    "key": "giant_pelulu",
+    "display": {
+      "name": "Giant Pelulu",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": -100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": -10,
+        "value_type": "percent",
+        "condition": {
+          "armor_type": "LIGHT"
+        }
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 16,
+    "key": "eripmav",
+    "display": {
+      "name": "Eripmav",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 18,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Neewollah"
+    }
+  },
+  {
+    "id": 17,
+    "key": "fantica",
+    "display": {
+      "name": "Fantica",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 5000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "def",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_power",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Grylle"
+    }
+  },
+  {
+    "id": 18,
+    "key": "falburrows",
+    "display": {
+      "name": "Falburrows",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "absolute_dodge",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 9,
+        "value_type": "percent",
+        "condition": {
+          "main_weapon": "BOWGUN"
+        }
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 20,
+    "key": "amargon",
+    "display": {
+      "name": "Amargon",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": -300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 800,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Candela II"
+    }
+  },
+  {
+    "id": 21,
+    "key": "soldner",
+    "display": {
+      "name": "Soldner",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 800,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Chocolate Ooze II"
+    }
+  },
+  {
+    "id": 22,
+    "key": "mage_filecia",
+    "display": {
+      "name": "Mage Filecia",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stability",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_(bowling)",
+        "value": 20,
+        "value_type": "percent",
+        "condition": {
+          "main_weapon": "MAGIC_DEVICE"
+        }
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 10,
+        "value_type": "percent",
+        "condition": {
+          "main_weapon": "STAFF"
+        }
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 23,
+    "key": "lunadore",
+    "display": {
+      "name": "Lunadore",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "drop_rate",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 24,
+    "key": "exdocus",
+    "display": {
+      "name": "Exdocus",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mdef",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_barrier",
+        "value": 1500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_barrier",
+        "value": 1500,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Corroded Knight Captain"
+    }
+  },
+  {
+    "id": 25,
+    "key": "burning_dragon_igneus",
+    "display": {
+      "name": "Burning Dragon Igneus",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 8,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "King Piton"
+    }
+  },
+  {
+    "id": 26,
+    "key": "neo_wandering_wheel",
+    "display": {
+      "name": "Neo Wandering Wheel",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 75,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -16,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Wandering Wheel"
+    }
+  },
+  {
+    "id": 27,
+    "key": "goldigem",
+    "display": {
+      "name": "Goldigem",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 3000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "reduce_dmg_(player_epicenter)",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_(charge)",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_(straight_line)",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Felicitoad"
+    }
+  },
+  {
+    "id": 28,
+    "key": "evil_lefina",
+    "display": {
+      "name": "Evil Lefina",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": -4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 12,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 24,
+        "value_type": "percent",
+        "condition": {
+          "armor_type": "HEAVY"
+        }
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 29,
+    "key": "mieli",
+    "display": {
+      "name": "Mieli",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 30,
+    "key": "purro",
+    "display": {
+      "name": "Purro",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "drop_rate",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 32,
+    "key": "prudent_blue_shadow",
+    "display": {
+      "name": "Prudent Blue Shadow",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 8,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Baphomela"
+    }
+  },
+  {
+    "id": 33,
+    "key": "gordo",
+    "display": {
+      "name": "Gordo",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 80,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Wandering Wheel"
+    }
+  },
+  {
+    "id": 34,
+    "key": "neewollah",
+    "display": {
+      "name": "Neewollah",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 15,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Zarth"
+    }
+  },
+  {
+    "id": 35,
+    "key": "junior_dragon_zyvio",
+    "display": {
+      "name": "Junior Dragon Zyvio",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 36,
+    "key": "trocostida",
+    "display": {
+      "name": "Trocostida",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Dusk Machina"
+    }
+  },
+  {
+    "id": 37,
+    "key": "yashiro_azuki_s_mom_ii",
+    "display": {
+      "name": "Yashiro Azuki's Mom II",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Narumi Hina"
+    }
+  },
+  {
+    "id": 38,
+    "key": "dark_lord",
+    "display": {
+      "name": "†Dark Lord†",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Yashiro Azuki's Dad"
+    }
+  },
+  {
+    "id": 39,
+    "key": "royal_ox_king",
+    "display": {
+      "name": "Royal Ox King",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 40,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 8,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Ox King"
+    }
+  },
+  {
+    "id": 40,
+    "key": "pillow_kitagawa",
+    "display": {
+      "name": "Pillow Kitagawa",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 2000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "revive_time",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 8,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Ox King"
+    }
+  },
+  {
+    "id": 41,
+    "key": "ox_king",
+    "display": {
+      "name": "Ox King",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "aggro",
+        "value": -20,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 42,
+    "key": "lord_of_nezim",
+    "display": {
+      "name": "Lord of Nezim",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "hp",
+        "value": 3000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 3,
+        "value_type": "percent",
+        "condition": {
+          "main_weapon": "KNUCKLE"
+        }
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 44,
+    "key": "alfenix",
+    "display": {
+      "name": "Alfenix",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 18,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Handmade Cookie"
+    }
+  },
+  {
+    "id": 45,
+    "key": "garnache",
+    "display": {
+      "name": "Garnache",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 18,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Eidenliebe"
+    }
+  },
+  {
+    "id": 46,
+    "key": "stellar_ooze",
+    "display": {
+      "name": "Stellar Ooze",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 60,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Gespenst II"
+    }
+  },
+  {
+    "id": 47,
+    "key": "bovinio",
+    "display": {
+      "name": "Bovinio",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "drop_rate",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 48,
+    "key": "underwater_ruins_monster",
+    "display": {
+      "name": "Underwater Ruins Monster",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 20,
+        "value_type": "percent",
+        "condition": {
+          "armor_type": "HEAVY"
+        }
+      }
+    ],
+    "upgrade": {
+      "from": "Adaro"
+    }
+  },
+  {
+    "id": 49,
+    "key": "adaro",
+    "display": {
+      "name": "Adaro",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 10,
+        "value_type": "percent",
+        "condition": {
+          "armor_type": "HEAVY"
+        }
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 50,
+    "key": "tardigrademon",
+    "display": {
+      "name": "Tardigrademon",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 450,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Seltirios"
+    }
+  },
+  {
+    "id": 51,
+    "key": "felicitoad",
+    "display": {
+      "name": "Felicitoad",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 2000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "reduce_dmg_(charge)",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_(straight_line)",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "G. Iconos"
+    }
+  },
+  {
+    "id": 52,
+    "key": "mercy",
+    "display": {
+      "name": "Mercy",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 53,
+    "key": "mega_alpoca",
+    "display": {
+      "name": "Mega Alpoca",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 6,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Giant Boar"
+    }
+  },
+  {
+    "id": 54,
+    "key": "omochi",
+    "display": {
+      "name": "Omochi",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "drop_rate",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 56,
+    "key": "narumi_hina",
+    "display": {
+      "name": "Narumi Hina",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 57,
+    "key": "yashiro_azuki_s_dad",
+    "display": {
+      "name": "Yashiro Azuki's Dad",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 58,
+    "key": "zarth",
+    "display": {
+      "name": "Zarth",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 12,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Zoe"
+    }
+  },
+  {
+    "id": 59,
+    "key": "king_piton",
+    "display": {
+      "name": "King Piton",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Proto Leon"
+    }
+  },
+  {
+    "id": 60,
+    "key": "goldenia",
+    "display": {
+      "name": "Goldenia",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 2000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": -300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 61,
+    "key": "handmade_cookie",
+    "display": {
+      "name": "Handmade Cookie",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 62,
+    "key": "grand_pojo",
+    "display": {
+      "name": "Grand Pojo",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "drop_rate",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 63,
+    "key": "eidenliebe",
+    "display": {
+      "name": "Eidenliebe",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 64,
+    "key": "altoblepas",
+    "display": {
+      "name": "Altoblepas",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 65,
+    "key": "yashiro_azuki_s_mom",
+    "display": {
+      "name": "Yashiro Azuki's Mom",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "reduce_dmg_(bullet)",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 66,
+    "key": "zoe",
+    "display": {
+      "name": "Zoe",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 9,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Jeila"
+    }
+  },
+  {
+    "id": 68,
+    "key": "solopy",
+    "display": {
+      "name": "Solopy",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 450,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Golden Skeleton"
+    }
+  },
+  {
+    "id": 69,
+    "key": "wandering_wheel",
+    "display": {
+      "name": "Wandering Wheel",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 75,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -14,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Grass Dragon Yelb"
+    }
+  },
+  {
+    "id": 70,
+    "key": "gespenst_ii",
+    "display": {
+      "name": "Gespenst II",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 71,
+    "key": "g_iconos",
+    "display": {
+      "name": "G. Iconos",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "reduce_dmg_(charge)",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 72,
+    "key": "candela_ii",
+    "display": {
+      "name": "Candela II",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": -250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 600,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Candela"
+    }
+  },
+  {
+    "id": 73,
+    "key": "chocolate_ooze_ii",
+    "display": {
+      "name": "Chocolate Ooze II",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 600,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Chocolate Ooze"
+    }
+  },
+  {
+    "id": 74,
+    "key": "perro",
+    "display": {
+      "name": "Perro",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "drop_rate",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 75,
+    "key": "baphomela",
+    "display": {
+      "name": "Baphomela",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "short_range_damage",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 6,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Twilight Dragon"
+    }
+  },
+  {
+    "id": 76,
+    "key": "dusk_machina",
+    "display": {
+      "name": "Dusk Machina",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 77,
+    "key": "jeila",
+    "display": {
+      "name": "Jeila",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 2,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Pumpking"
+    }
+  },
+  {
+    "id": 78,
+    "key": "proto_leon",
+    "display": {
+      "name": "Proto Leon",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Warmonger"
+    }
+  },
+  {
+    "id": 80,
+    "key": "ancient_empress_ii",
+    "display": {
+      "name": "Ancient Empress II",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": -20,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Ancient Empress"
+    }
+  },
+  {
+    "id": 81,
+    "key": "corroded_knight_captain",
+    "display": {
+      "name": "Corroded Knight Captain",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mdef",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_barrier",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_barrier",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 82,
+    "key": "candela",
+    "display": {
+      "name": "Candela",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": -200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 83,
+    "key": "chocolate_ooze",
+    "display": {
+      "name": "Chocolate Ooze",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 84,
+    "key": "twilight_dragon",
+    "display": {
+      "name": "Twilight Dragon",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "short_range_damage",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 4,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 85,
+    "key": "grylle",
+    "display": {
+      "name": "Grylle",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "def",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_power",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 86,
+    "key": "pumpking",
+    "display": {
+      "name": "Pumpking",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 87,
+    "key": "sunlight_potum",
+    "display": {
+      "name": "Sunlight Potum",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": -75,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 88,
+    "key": "grass_dragon_yelb",
+    "display": {
+      "name": "Grass Dragon Yelb",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 89,
+    "key": "ancient_empress",
+    "display": {
+      "name": "Ancient Empress",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 90,
+    "key": "warmonger",
+    "display": {
+      "name": "Warmonger",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 92,
+    "key": "seltirios",
+    "display": {
+      "name": "Seltirios",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 93,
+    "key": "golden_skeleton",
+    "display": {
+      "name": "Golden Skeleton",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 94,
+    "key": "giant_boar",
+    "display": {
+      "name": "Giant Boar",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  }
+]

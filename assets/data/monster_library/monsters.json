@@ -1,0 +1,102 @@
+[
+  {
+    "id": "colon",
+    "name": "Colon",
+    "level": 1,
+    "hp": 120,
+    "element": "Neutral",
+    "family": "Normal",
+    "mapKey": "rakau_plains",
+    "drops": ["Animal Skin", "Beak"]
+  },
+  {
+    "id": "shell_mask",
+    "name": "Shell Mask",
+    "level": 5,
+    "hp": 310,
+    "element": "Earth",
+    "family": "Normal",
+    "mapKey": "ruined_temple_town",
+    "drops": ["Hard Shell", "Cracked Mask"]
+  },
+  {
+    "id": "forest_wolf",
+    "name": "Forest Wolf",
+    "level": 9,
+    "hp": 760,
+    "element": "Earth",
+    "family": "Beast",
+    "mapKey": "nisel_mountain",
+    "drops": ["Nisel Wood", "Wolf Claw"]
+  },
+  {
+    "id": "goblin",
+    "name": "Goblin",
+    "level": 13,
+    "hp": 1100,
+    "element": "Neutral",
+    "family": "Humanoid",
+    "mapKey": "yorl_highlands",
+    "drops": ["Goblin Medal", "Old Dagger"]
+  },
+  {
+    "id": "roar",
+    "name": "Roar",
+    "level": 24,
+    "hp": 5200,
+    "element": "Wind",
+    "family": "Beast",
+    "mapKey": "land_under_development",
+    "drops": ["Sharp Fang", "Roar Mane"]
+  },
+  {
+    "id": "flare_volg",
+    "name": "Flare Volg",
+    "level": 34,
+    "hp": 16000,
+    "element": "Fire",
+    "family": "Beast",
+    "mapKey": "fiery_volcano",
+    "drops": ["Volcanic Claw", "Flare Feather"]
+  },
+  {
+    "id": "bone_dragonewt",
+    "name": "Bone Dragonewt",
+    "level": 42,
+    "hp": 26500,
+    "element": "Dark",
+    "family": "Dragon",
+    "mapKey": "ruined_temple",
+    "drops": ["Dragon Bone", "Dark Wing"]
+  },
+  {
+    "id": "jade_raptor",
+    "name": "Jade Raptor",
+    "level": 61,
+    "hp": 58000,
+    "element": "Earth",
+    "family": "Beast",
+    "mapKey": "monster_forest",
+    "drops": ["Raptor Fang", "Jade Feather"]
+  },
+  {
+    "id": "venena_guard",
+    "name": "Venena Guard",
+    "level": 195,
+    "hp": 1900000,
+    "element": "Neutral",
+    "family": "Humanoid",
+    "mapKey": "ultimea_sewers",
+    "drops": ["Guard Insignia", "Broken Shield"]
+  },
+  {
+    "id": "ferzen_the_rock_dragon",
+    "name": "Ferzen The Rock Dragon",
+    "level": 280,
+    "hp": 8900000,
+    "element": "Earth",
+    "family": "Dragon",
+    "mapKey": "fugitive_lake_swamp",
+    "drops": ["Ancient Scale", "Dragon Core"]
+  }
+]

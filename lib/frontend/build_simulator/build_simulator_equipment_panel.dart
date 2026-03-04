@@ -1,0 +1,493 @@
+part of 'build_simulator_page.dart';
+
+extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
+  Widget _buildEquipmentPanel() {
+    return ToramCard(
+      title: 'Equipment Configuration',
+      titleColor: Colors.white,
+      icon: Icons.shield,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final isDesktop = constraints.maxWidth >= 980;
+          if (isDesktop) {
+            return _buildDesktopEquipmentMatrix();
+          }
+          return _buildEquipmentPanelMobile();
+        },
+      ),
+    );
+  }
+
+  Widget _buildDesktopEquipmentMatrix() {
+    const spacing = 16.0;
+    const slotHeight = 60.0;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 4,
+              child: Column(
+                children: [
+                  _buildCharacterStatsSection(
+                    compact: false,
+                    minHeight: slotHeight,
+                  ),
+                  const SizedBox(height: spacing),
+                  _buildSubWeaponSection(compact: false, minHeight: slotHeight),
+                  const SizedBox(height: spacing),
+                  _buildHelmetSection(compact: false, minHeight: slotHeight),
+                ],
+              ),
+            ),
+            const SizedBox(width: spacing),
+            Expanded(flex: 5, child: _buildModelColumn()),
+            const SizedBox(width: spacing),
+            Expanded(
+              flex: 4,
+              child: Column(
+                children: [
+                  _buildMainWeaponSection(
+                    compact: false,
+                    minHeight: slotHeight,
+                  ),
+                  const SizedBox(height: spacing),
+                  _buildArmorSection(compact: false, minHeight: slotHeight),
+                  const SizedBox(height: spacing),
+                  _buildRingSection(compact: false, minHeight: slotHeight),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: spacing),
+        _buildGachaSection(compact: false, minHeight: 120),
+      ],
+    );
+  }
+
+  Widget _buildModelColumn() {
+    return Container(
+      height: 700,
+      decoration: BoxDecoration(
+        color: const Color(0xFF040404),
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
+      ),
+      child: const Center(
+        child: Text(
+          'MODEL',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0.6,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEquipmentSlotBox({
+    required String title,
+    required IconData iconData,
+    required bool isExpanded,
+    required VoidCallback onToggle,
+    required Widget child,
+    required double minHeight,
+  }) {
+    final placeholderHeight = (minHeight - 48).isNegative
+        ? 0.0
+        : minHeight - 48;
+
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 180),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0A0A0A),
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          InkWell(
+            onTap: onToggle,
+            borderRadius: BorderRadius.circular(4),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: Row(
+                children: [
+                  Icon(iconData, color: Colors.white, size: 18),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    isExpanded ? Icons.expand_less : Icons.expand_more,
+                    color: Colors.white70,
+                    size: 18,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          if (isExpanded)
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(color: Colors.white.withValues(alpha: 0.12)),
+                ),
+              ),
+              padding: const EdgeInsets.all(12),
+              child: child,
+            )
+          else
+            SizedBox(height: placeholderHeight),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSectionFrame({
+    required bool compact,
+    required String title,
+    required IconData iconData,
+    required bool isExpanded,
+    required VoidCallback onToggle,
+    required Widget child,
+    required double minHeight,
+  }) {
+    if (compact) {
+      return _buildCollapsibleCard(
+        title: title,
+        iconData: iconData,
+        isExpanded: isExpanded,
+        onToggle: onToggle,
+        child: child,
+      );
+    }
+
+    return _buildEquipmentSlotBox(
+      title: title,
+      iconData: iconData,
+      isExpanded: isExpanded,
+      onToggle: onToggle,
+      child: child,
+      minHeight: minHeight,
+    );
+  }
+
+  Widget _buildCharacterStatsSection({
+    required bool compact,
+    required double minHeight,
+  }) {
+    return _buildSectionFrame(
+      compact: compact,
+      title: 'Character Stats',
+      iconData: Icons.person,
+      isExpanded: _isCharacterStatsExpanded,
+      onToggle: () {
+        _setUiState(() {
+          _isCharacterStatsExpanded = !_isCharacterStatsExpanded;
+        });
+      },
+      child: CharacterStatsSelector(
+        character: _character,
+        level: _level,
+        personalStatType: _personalStatType,
+        personalStatValue: _personalStatValue,
+        onStatChanged: (String key, int value) {
+          _setUiState(() {
+            _character[key] = value;
+            _recalculateAll();
+          });
+        },
+        onLevelChanged: (int level) {
+          _setUiState(() {
+            _level = level;
+            _recalculateAll();
+          });
+        },
+        onPersonalStatTypeChanged: (String type) {
+          _setUiState(() {
+            _personalStatType = type;
+            _recalculateAll();
+          });
+        },
+        onPersonalStatValueChanged: (int value) {
+          _setUiState(() {
+            _personalStatValue = value;
+            _recalculateAll();
+          });
+        },
+        onRecalculate: () {
+          _setUiState(() {
+            _recalculateAll();
+          });
+        },
+      ),
+      minHeight: minHeight,
+    );
+  }
+
+  Widget _buildMainWeaponSection({
+    required bool compact,
+    required double minHeight,
+  }) {
+    return _buildSectionFrame(
+      compact: compact,
+      title: 'Main Weapon',
+      iconData: Icons.sports_martial_arts,
+      isExpanded: _isMainWeaponExpanded,
+      onToggle: () {
+        _setUiState(() {
+          _isMainWeaponExpanded = !_isMainWeaponExpanded;
+        });
+      },
+      child: MainWeaponEquipmentSelector(
+        selectedId: _mainWeaponId,
+        statPreview: _equipmentStatPreview(_mainWeaponId),
+        onEquipChanged: (id) {
+          _setStateAndRecalculate(() => _mainWeaponId = id);
+        },
+        enhance: _enhMain,
+        onEnhChanged: (v) {
+          _setStateAndRecalculate(() => _enhMain = v);
+        },
+        crystal1: _mainCrystal1,
+        crystal2: _mainCrystal2,
+        onCrystal1Changed: (v) {
+          _setStateAndRecalculate(() => _mainCrystal1 = v);
+        },
+        onCrystal2Changed: (v) {
+          _setStateAndRecalculate(() => _mainCrystal2 = v);
+        },
+      ),
+      minHeight: minHeight,
+    );
+  }
+
+  Widget _buildSubWeaponSection({
+    required bool compact,
+    required double minHeight,
+  }) {
+    return _buildSectionFrame(
+      compact: compact,
+      title: 'Sub Weapon',
+      iconData: Icons.shield,
+      isExpanded: _isSubWeaponExpanded,
+      onToggle: () {
+        _setUiState(() {
+          _isSubWeaponExpanded = !_isSubWeaponExpanded;
+        });
+      },
+      child: SubWeaponEquipmentSelector(
+        selectedId: _subWeaponId,
+        statPreview: _equipmentStatPreview(_subWeaponId),
+        onEquipChanged: (id) {
+          _setStateAndRecalculate(() => _subWeaponId = id);
+        },
+        enhance: _enhSub,
+        onEnhChanged: (v) {
+          _setStateAndRecalculate(() => _enhSub = v);
+        },
+      ),
+      minHeight: minHeight,
+    );
+  }
+
+  Widget _buildArmorSection({
+    required bool compact,
+    required double minHeight,
+  }) {
+    return _buildSectionFrame(
+      compact: compact,
+      title: 'Armor',
+      iconData: Icons.shield_outlined,
+      isExpanded: _isArmorExpanded,
+      onToggle: () {
+        _setUiState(() {
+          _isArmorExpanded = !_isArmorExpanded;
+        });
+      },
+      child: ArmorEquipmentSelector(
+        selectedId: _armorId,
+        statPreview: _equipmentStatPreview(_armorId),
+        onEquipChanged: (id) {
+          _setStateAndRecalculate(() => _armorId = id);
+        },
+        enhance: _enhArmor,
+        onEnhChanged: (v) {
+          _setStateAndRecalculate(() => _enhArmor = v);
+        },
+        crystal1: _armorCrystal1,
+        crystal2: _armorCrystal2,
+        onCrystal1Changed: (v) {
+          _setStateAndRecalculate(() => _armorCrystal1 = v);
+        },
+        onCrystal2Changed: (v) {
+          _setStateAndRecalculate(() => _armorCrystal2 = v);
+        },
+      ),
+      minHeight: minHeight,
+    );
+  }
+
+  Widget _buildHelmetSection({
+    required bool compact,
+    required double minHeight,
+  }) {
+    return _buildSectionFrame(
+      compact: compact,
+      title: 'Helmet',
+      iconData: Icons.military_tech,
+      isExpanded: _isHelmetExpanded,
+      onToggle: () {
+        _setUiState(() {
+          _isHelmetExpanded = !_isHelmetExpanded;
+        });
+      },
+      child: HelmetEquipmentSelector(
+        selectedId: _helmetId,
+        statPreview: _equipmentStatPreview(_helmetId),
+        onEquipChanged: (id) {
+          _setStateAndRecalculate(() => _helmetId = id);
+        },
+        enhance: _enhHelmet,
+        onEnhChanged: (v) {
+          _setStateAndRecalculate(() => _enhHelmet = v);
+        },
+        crystal1: _helmetCrystal1,
+        crystal2: _helmetCrystal2,
+        onCrystal1Changed: (v) {
+          _setStateAndRecalculate(() => _helmetCrystal1 = v);
+        },
+        onCrystal2Changed: (v) {
+          _setStateAndRecalculate(() => _helmetCrystal2 = v);
+        },
+      ),
+      minHeight: minHeight,
+    );
+  }
+
+  Widget _buildRingSection({required bool compact, required double minHeight}) {
+    return _buildSectionFrame(
+      compact: compact,
+      title: 'Ring',
+      iconData: Icons.diamond_outlined,
+      isExpanded: _isRingExpanded,
+      onToggle: () {
+        _setUiState(() {
+          _isRingExpanded = !_isRingExpanded;
+        });
+      },
+      child: RingEquipmentSelector(
+        selectedId: _ringId,
+        statPreview: _equipmentStatPreview(_ringId),
+        onEquipChanged: (id) {
+          _setStateAndRecalculate(() => _ringId = id);
+        },
+        enhance: _enhRing,
+        onEnhChanged: (v) {
+          _setStateAndRecalculate(() => _enhRing = v);
+        },
+        crystal1: _ringCrystal1,
+        crystal2: _ringCrystal2,
+        onCrystal1Changed: (v) {
+          _setStateAndRecalculate(() => _ringCrystal1 = v);
+        },
+        onCrystal2Changed: (v) {
+          _setStateAndRecalculate(() => _ringCrystal2 = v);
+        },
+      ),
+      minHeight: minHeight,
+    );
+  }
+
+  Widget _buildGachaSection({
+    required bool compact,
+    required double minHeight,
+  }) {
+    return _buildSectionFrame(
+      compact: compact,
+      title: 'Gacha Equipment',
+      iconData: Icons.casino,
+      isExpanded: _isGachaExpanded,
+      onToggle: () {
+        _setUiState(() {
+          _isGachaExpanded = !_isGachaExpanded;
+        });
+      },
+      child: GachaCard(
+        gacha1Stat1: _gacha1Stat1,
+        gacha1Stat2: _gacha1Stat2,
+        gacha1Stat3: _gacha1Stat3,
+        gacha2Stat1: _gacha2Stat1,
+        gacha2Stat2: _gacha2Stat2,
+        gacha2Stat3: _gacha2Stat3,
+        gacha3Stat1: _gacha3Stat1,
+        gacha3Stat2: _gacha3Stat2,
+        gacha3Stat3: _gacha3Stat3,
+        onGacha1Stat1Changed: (v) {
+          _setStateAndRecalculate(() => _gacha1Stat1 = v);
+        },
+        onGacha1Stat2Changed: (v) {
+          _setStateAndRecalculate(() => _gacha1Stat2 = v);
+        },
+        onGacha1Stat3Changed: (v) {
+          _setStateAndRecalculate(() => _gacha1Stat3 = v);
+        },
+        onGacha2Stat1Changed: (v) {
+          _setStateAndRecalculate(() => _gacha2Stat1 = v);
+        },
+        onGacha2Stat2Changed: (v) {
+          _setStateAndRecalculate(() => _gacha2Stat2 = v);
+        },
+        onGacha2Stat3Changed: (v) {
+          _setStateAndRecalculate(() => _gacha2Stat3 = v);
+        },
+        onGacha3Stat1Changed: (v) {
+          _setStateAndRecalculate(() => _gacha3Stat1 = v);
+        },
+        onGacha3Stat2Changed: (v) {
+          _setStateAndRecalculate(() => _gacha3Stat2 = v);
+        },
+        onGacha3Stat3Changed: (v) {
+          _setStateAndRecalculate(() => _gacha3Stat3 = v);
+        },
+      ),
+      minHeight: minHeight,
+    );
+  }
+
+  Widget _buildEquipmentPanelMobile() {
+    return Column(
+      children: [
+        _buildCharacterStatsSection(compact: true, minHeight: 96),
+        const SizedBox(height: 16),
+        _buildMainWeaponSection(compact: true, minHeight: 96),
+        const SizedBox(height: 16),
+        _buildSubWeaponSection(compact: true, minHeight: 96),
+        const SizedBox(height: 16),
+        _buildArmorSection(compact: true, minHeight: 96),
+        const SizedBox(height: 16),
+        _buildHelmetSection(compact: true, minHeight: 96),
+        const SizedBox(height: 16),
+        _buildRingSection(compact: true, minHeight: 96),
+        const SizedBox(height: 16),
+        _buildGachaSection(compact: true, minHeight: 96),
+      ],
+    );
+  }
+}

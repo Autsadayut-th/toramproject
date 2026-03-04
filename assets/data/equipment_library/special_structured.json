@@ -1,0 +1,2067 @@
+[
+  {
+    "id": 1,
+    "key": "olobaid",
+    "display": {
+      "name": "Olobaid",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 2,
+    "key": "abyssal_crystal_monster",
+    "display": {
+      "name": "Abyssal Crystal Monster",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 5,
+        "value_type": "percent",
+        "condition": {
+          "sub_weapon": "SHIELD"
+        }
+      }
+    ],
+    "upgrade": {
+      "from": "Zeagrysta"
+    }
+  },
+  {
+    "id": 3,
+    "key": "zeagrysta",
+    "display": {
+      "name": "Zeagrysta",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 5,
+        "value_type": "percent",
+        "condition": {
+          "sub_weapon": "SHIELD"
+        }
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 4,
+    "key": "machine_god_maple",
+    "display": {
+      "name": "Machine God Maple",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 5,
+        "value_type": "percent",
+        "condition": {
+          "armor_type": "HEAVY"
+        }
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 5,
+    "key": "black_lixi",
+    "display": {
+      "name": "Black Lixi",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 40,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 10,
+        "value_type": "percent",
+        "condition": {
+          "armor_type": "HEAVY"
+        }
+      },
+      {
+        "stat_key": "barrier_cooldown",
+        "value": 10,
+        "value_type": "percent",
+        "condition": {
+          "armor_type": "LIGHT"
+        }
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 6,
+    "key": "breeta",
+    "display": {
+      "name": "Breeta",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 5000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 15,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Crysmort"
+    }
+  },
+  {
+    "id": 8,
+    "key": "scream_shadow",
+    "display": {
+      "name": "Scream Shadow",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "def",
+        "value": -40,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 9,
+    "key": "seele_zauga_ii",
+    "display": {
+      "name": "Seele Zauga II",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "item_cooldown",
+        "value": -1,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 10,
+    "key": "humida",
+    "display": {
+      "name": "Humida",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 700,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stability",
+        "value": 4,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Venena II"
+    }
+  },
+  {
+    "id": 11,
+    "key": "zodiac_s_blessing",
+    "display": {
+      "name": "Zodiac's Blessing",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "def",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mdef",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "exp_gain",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 12,
+    "key": "aubergine_dragon_auvio",
+    "display": {
+      "name": "Aubergine Dragon Auvio",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 5,
+        "value_type": "flat",
+        "condition": {
+          "sub_weapon": "NINJUTSU_SCROLL"
+        }
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 13,
+    "key": "vodre",
+    "display": {
+      "name": "Vodre",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": -150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 14,
+    "key": "etoise",
+    "display": {
+      "name": "Etoise",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 1100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": -70,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 40,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Volgagon"
+    }
+  },
+  {
+    "id": 15,
+    "key": "dominaredor",
+    "display": {
+      "name": "Dominaredor",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_(floor)",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Lalvada"
+    }
+  },
+  {
+    "id": 16,
+    "key": "broker_goblin",
+    "display": {
+      "name": "Broker Goblin",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 25,
+        "value_type": "percent",
+        "condition": {
+          "sub_weapon": "SHIELD"
+        }
+      },
+      {
+        "stat_key": "additional_melee",
+        "value": 50,
+        "value_type": "percent",
+        "condition": {
+          "sub_weapon": "DAGGER"
+        }
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 5,
+        "value_type": "percent",
+        "condition": {
+          "sub_weapon": "ARROW"
+        }
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 17,
+    "key": "trus",
+    "display": {
+      "name": "Trus",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "physical_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stun_unavailable",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "guard_power",
+        "value": 25,
+        "value_type": "percent",
+        "condition": {
+          "main_weapon": "2_HANDED_SWORD"
+        }
+      },
+      {
+        "stat_key": "guard_recharge",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 18,
+    "key": "sicanokami",
+    "display": {
+      "name": "Sicanokami",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 5,
+        "value_type": "percent",
+        "condition": {
+          "main_weapon": "HALBERD"
+        }
+      }
+    ],
+    "upgrade": {
+      "from": "Patissia"
+    }
+  },
+  {
+    "id": 20,
+    "key": "stellar_ooze_ii",
+    "display": {
+      "name": "Stellar Ooze II",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "revive_time",
+        "value": 60,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_(bowling)",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 21,
+    "key": "ghost_forest_dark_shaman",
+    "display": {
+      "name": "Ghost Forest Dark Shaman",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": -10,
+        "value_type": "percent",
+        "condition": {
+          "sub_weapon": "SHIELD"
+        }
+      },
+      {
+        "stat_key": "stability",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 22,
+    "key": "mysterious_crystal",
+    "display": {
+      "name": "Mysterious Crystal",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 5,
+        "value_type": "percent",
+        "condition": {
+          "armor_type": "HEAVY"
+        }
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 5,
+        "value_type": "percent",
+        "condition": {
+          "armor_type": "LIGHT"
+        }
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 5,
+        "value_type": "flat",
+        "condition": {
+          "main_weapon": "DUAL_SWORDS"
+        }
+      }
+    ],
+    "upgrade": {
+      "from": "Eerie Crystal"
+    }
+  },
+  {
+    "id": 23,
+    "key": "wolkissa",
+    "display": {
+      "name": "Wolkissa",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 15,
+        "value_type": "percent",
+        "condition": {
+          "sub_weapon": "SHIELD"
+        }
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 24,
+    "key": "crysmort",
+    "display": {
+      "name": "Crysmort",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 3000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 11,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Amalgam"
+    }
+  },
+  {
+    "id": 25,
+    "key": "ignitrus",
+    "display": {
+      "name": "Ignitrus",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stronger_against_fire",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 26,
+    "key": "war_dragon_turba",
+    "display": {
+      "name": "War Dragon Turba",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 17,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 11,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "weapon_atk",
+        "value": 14,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Zelbuse"
+    }
+  },
+  {
+    "id": 27,
+    "key": "teertocrit",
+    "display": {
+      "name": "Teertocrit",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Dark Mushroom"
+    }
+  },
+  {
+    "id": 28,
+    "key": "captain_amiya",
+    "display": {
+      "name": "Captain Amiya",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 29,
+    "key": "star_wizard",
+    "display": {
+      "name": "Star Wizard",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 9,
+        "value_type": "percent",
+        "condition": {
+          "sub_weapon": "SHIELD"
+        }
+      },
+      {
+        "stat_key": "aggro",
+        "value": -9,
+        "value_type": "percent",
+        "condition": {
+          "main_weapon": "STAFF"
+        }
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 30,
+    "key": "dark_captain_with_b",
+    "display": {
+      "name": "Dark Captain with B",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 3000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": -150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "earth_resistance",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 32,
+    "key": "espectro",
+    "display": {
+      "name": "Espectro",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Shining Gentleman"
+    }
+  },
+  {
+    "id": 33,
+    "key": "venena_ii",
+    "display": {
+      "name": "Venena II",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stability",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Venena"
+    }
+  },
+  {
+    "id": 34,
+    "key": "ruzart",
+    "display": {
+      "name": "Ruzart",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 35,
+    "key": "sand_bandits_leader",
+    "display": {
+      "name": "Sand Bandits Leader",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 16,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Violaccoon"
+    }
+  },
+  {
+    "id": 36,
+    "key": "patissia",
+    "display": {
+      "name": "Patissia",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 25,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 15,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Tapir"
+    }
+  },
+  {
+    "id": 37,
+    "key": "amalgam",
+    "display": {
+      "name": "Amalgam",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 2000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 9,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Deniala"
+    }
+  },
+  {
+    "id": 38,
+    "key": "potumotter",
+    "display": {
+      "name": "Potumotter",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 39,
+    "key": "volgagon",
+    "display": {
+      "name": "Volgagon",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": -80,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 40,
+    "key": "frenzy_viola",
+    "display": {
+      "name": "Frenzy Viola",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "additional_melee",
+        "value": 50,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 41,
+    "key": "grimuckus",
+    "display": {
+      "name": "Grimuckus",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "additional_magic",
+        "value": 50,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 42,
+    "key": "specter_of_death",
+    "display": {
+      "name": "Specter of Death",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 44,
+    "key": "seele_zauga",
+    "display": {
+      "name": "Seele Zauga",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "item_cooldown",
+        "value": -1,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 45,
+    "key": "zelbuse",
+    "display": {
+      "name": "Zelbuse",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 16,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "weapon_atk",
+        "value": 12,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Bexiz"
+    }
+  },
+  {
+    "id": 46,
+    "key": "felien",
+    "display": {
+      "name": "Felien",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "absolute_accuracy",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 47,
+    "key": "crystal_titan",
+    "display": {
+      "name": "Crystal Titan",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 48,
+    "key": "titeres",
+    "display": {
+      "name": "Titeres",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "absolute_dodge",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 49,
+    "key": "venena",
+    "display": {
+      "name": "Venena",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stability",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 50,
+    "key": "choiyaki_mentai",
+    "display": {
+      "name": "Choiyaki Mentai",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_(floor)",
+        "value": -20,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 51,
+    "key": "deniala",
+    "display": {
+      "name": "Deniala",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Viscum"
+    }
+  },
+  {
+    "id": 52,
+    "key": "lalvada",
+    "display": {
+      "name": "Lalvada",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "def",
+        "value": -4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mdef",
+        "value": -4,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Ooze"
+    }
+  },
+  {
+    "id": 53,
+    "key": "dragon_witch",
+    "display": {
+      "name": "Dragon Witch",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": -100,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 54,
+    "key": "tapir",
+    "display": {
+      "name": "Tapir",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": {
+      "from": "Eerie Crystal"
+    }
+  },
+  {
+    "id": 56,
+    "key": "memecoleous",
+    "display": {
+      "name": "Memecoleous",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": -4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_recharge",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 12,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": {
+      "from": "Stone Mercenary"
+    }
+  },
+  {
+    "id": 57,
+    "key": "bexiz",
+    "display": {
+      "name": "Bexiz",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": -100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "weapon_atk",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 58,
+    "key": "don_yeti",
+    "display": {
+      "name": "Don Yeti",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -1000,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 59,
+    "key": "granny",
+    "display": {
+      "name": "Granny",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": -1000,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 60,
+    "key": "goovua",
+    "display": {
+      "name": "Goovua",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 61,
+    "key": "viscum",
+    "display": {
+      "name": "Viscum",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 62,
+    "key": "shining_gentleman",
+    "display": {
+      "name": "Shining Gentleman",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 63,
+    "key": "golden_potum",
+    "display": {
+      "name": "Golden Potum",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "drop_rate",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 64,
+    "key": "violaccoon",
+    "display": {
+      "name": "Violaccoon",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": -6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 8,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 65,
+    "key": "stone_mercenary",
+    "display": {
+      "name": "Stone Mercenary",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": -6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_recharge",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 8,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 66,
+    "key": "ooze",
+    "display": {
+      "name": "Ooze",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "def",
+        "value": -2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mdef",
+        "value": -2,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 68,
+    "key": "eerie_crystal",
+    "display": {
+      "name": "Eerie Crystal",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "upgrade": null
+  },
+  {
+    "id": 69,
+    "key": "dark_mushroom",
+    "display": {
+      "name": "Dark Mushroom",
+      "color": "purple"
+    },
+    "type": "special",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "upgrade": null
+  }
+]

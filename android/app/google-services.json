@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "226367086845",
+    "project_id": "toramproject-212ee",
+    "storage_bucket": "toramproject-212ee.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226367086845:android:46a87382d9f0acc0625e94",
+        "android_client_info": {
+          "package_name": "com.example.toramonline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226367086845-60qacrse8omvgincjkkrk1ivmvk0uljb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxEyOuizY6t4ZuOapGoY0QJUO9ZEwaee4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "226367086845-60qacrse8omvgincjkkrk1ivmvk0uljb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226367086845:android:4ddb4af977dfc98d625e94",
+        "android_client_info": {
+          "package_name": "com.toramproject.fcmdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226367086845-60qacrse8omvgincjkkrk1ivmvk0uljb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxEyOuizY6t4ZuOapGoY0QJUO9ZEwaee4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "226367086845-60qacrse8omvgincjkkrk1ivmvk0uljb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

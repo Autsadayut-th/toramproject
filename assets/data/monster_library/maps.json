@@ -1,0 +1,82 @@
+[
+  {
+    "key": "rakau_plains",
+    "name": "Rakau Plains",
+    "region": "Sofya Outskirts",
+    "recommendedLevelMin": 1,
+    "recommendedLevelMax": 12,
+    "monsterIds": ["colon"]
+  },
+  {
+    "key": "ruined_temple_town",
+    "name": "Ruined Temple Town",
+    "region": "Sofya Outskirts",
+    "recommendedLevelMin": 4,
+    "recommendedLevelMax": 16,
+    "monsterIds": ["shell_mask"]
+  },
+  {
+    "key": "nisel_mountain",
+    "name": "Nisel Mountain",
+    "region": "Nisel Area",
+    "recommendedLevelMin": 8,
+    "recommendedLevelMax": 22,
+    "monsterIds": ["forest_wolf"]
+  },
+  {
+    "key": "yorl_highlands",
+    "name": "Yorl Highlands",
+    "region": "Saham Area",
+    "recommendedLevelMin": 12,
+    "recommendedLevelMax": 26,
+    "monsterIds": ["goblin"]
+  },
+  {
+    "key": "land_under_development",
+    "name": "Land Under Development",
+    "region": "Rinom Plains Route",
+    "recommendedLevelMin": 22,
+    "recommendedLevelMax": 36,
+    "monsterIds": ["roar"]
+  },
+  {
+    "key": "fiery_volcano",
+    "name": "Fiery Volcano",
+    "region": "Droma Square Route",
+    "recommendedLevelMin": 30,
+    "recommendedLevelMax": 45,
+    "monsterIds": ["flare_volg"]
+  },
+  {
+    "key": "ruined_temple",
+    "name": "Ruined Temple",
+    "region": "Ancient Empress Corridor",
+    "recommendedLevelMin": 38,
+    "recommendedLevelMax": 55,
+    "monsterIds": ["bone_dragonewt"]
+  },
+  {
+    "key": "monster_forest",
+    "name": "Monster Forest",
+    "region": "El Scaro Route",
+    "recommendedLevelMin": 56,
+    "recommendedLevelMax": 72,
+    "monsterIds": ["jade_raptor"]
+  },
+  {
+    "key": "ultimea_sewers",
+    "name": "Ultimea Sewers",
+    "region": "Ultimea",
+    "recommendedLevelMin": 180,
+    "recommendedLevelMax": 210,
+    "monsterIds": ["venena_guard"]
+  },
+  {
+    "key": "fugitive_lake_swamp",
+    "name": "Fugitive Lake Swamp",
+    "region": "Dark Realm",
+    "recommendedLevelMin": 260,
+    "recommendedLevelMax": 290,
+    "monsterIds": ["ferzen_the_rock_dragon"]
+  }
+]
