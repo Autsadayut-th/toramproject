@@ -64,7 +64,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '226367086845',
     projectId: 'toramproject-212ee',
     storageBucket: 'toramproject-212ee.firebasestorage.app',
-    iosClientId: '226367086845-adgsk9uf5rj0nt22mudvuc5qtml2efr2.apps.googleusercontent.com',
+    iosClientId:
+        '226367086845-adgsk9uf5rj0nt22mudvuc5qtml2efr2.apps.googleusercontent.com',
     iosBundleId: 'com.example.toramonline',
   );
 
@@ -74,7 +75,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '226367086845',
     projectId: 'toramproject-212ee',
     storageBucket: 'toramproject-212ee.firebasestorage.app',
-    iosClientId: '226367086845-adgsk9uf5rj0nt22mudvuc5qtml2efr2.apps.googleusercontent.com',
+    iosClientId:
+        '226367086845-adgsk9uf5rj0nt22mudvuc5qtml2efr2.apps.googleusercontent.com',
     iosBundleId: 'com.example.toramonline',
   );
 
@@ -87,5 +89,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'toramproject-212ee.firebasestorage.app',
     measurementId: 'G-TTZF2K0X9L',
   );
-
 }

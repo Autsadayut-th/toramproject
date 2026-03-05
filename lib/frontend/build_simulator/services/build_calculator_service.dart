@@ -86,12 +86,11 @@ class BuildCalculatorService {
     final Map<String, num> flatByKey = <String, num>{};
 
     final int normalizedLevel = level.clamp(1, 300).toInt();
-    final String normalizedPersonalType =
-        personalStatType.trim().toUpperCase();
+    final String normalizedPersonalType = personalStatType.trim().toUpperCase();
     final int normalizedPersonalValue = personalStatValue.clamp(0, 255).toInt();
     final num dexValue = _readNumericValue(character['DEX']);
-    final num baseCritRate = 25 +
-        (normalizedPersonalType == 'CRT' ? normalizedPersonalValue : 0);
+    final num baseCritRate =
+        25 + (normalizedPersonalType == 'CRT' ? normalizedPersonalValue : 0);
 
     baseByKey.addAll(<String, num>{
       'STR': _readNumericValue(character['STR']),

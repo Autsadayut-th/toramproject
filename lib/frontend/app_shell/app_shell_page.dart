@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../account_page/account_page.dart';
 import '../build_simulator/build_simulator_coordinator.dart';
 import '../build_simulator/build_simulator_page.dart';
 import '../compare_builds_page/compare_builds_page.dart';
@@ -69,6 +70,15 @@ class _AppShellScreenState extends State<AppShellScreen> {
     });
   }
 
+  Future<void> _openAccountPage() async {
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) =>
+            AccountPage(initialEmail: _currentUser?.email ?? ''),
+      ),
+    );
+  }
+
   int _indexOf(AppNavigationPage page) {
     switch (page) {
       case AppNavigationPage.build:
@@ -107,6 +117,11 @@ class _AppShellScreenState extends State<AppShellScreen> {
           ),
         ),
         actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.account_circle, color: Colors.white),
+            onPressed: _openAccountPage,
+            tooltip: 'Account',
+          ),
           if (_currentUser != null)
             IconButton(
               icon: const Icon(Icons.logout, color: Colors.white),
@@ -128,9 +143,7 @@ class _AppShellScreenState extends State<AppShellScreen> {
       body: IndexedStack(
         index: _indexOf(_currentPage),
         children: <Widget>[
-          BuildSimulatorScreen(
-            coordinator: _coordinator,
-          ),
+          BuildSimulatorScreen(coordinator: _coordinator),
           EquipmentLibraryScreen(onNavigate: _onNavigate),
           SkillMenuPage(onNavigate: _onNavigate),
           SavedBuildsPage(
@@ -207,7 +220,8 @@ class _BuildStatsSummaryDrawer extends StatefulWidget {
   final BuildSimulatorCoordinator coordinator;
 
   @override
-  State<_BuildStatsSummaryDrawer> createState() => _BuildStatsSummaryDrawerState();
+  State<_BuildStatsSummaryDrawer> createState() =>
+      _BuildStatsSummaryDrawerState();
 }
 
 class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
@@ -308,7 +322,8 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
           builder: (BuildContext context, _) {
             final BuildSimulatorCoordinator coordinator = widget.coordinator;
             final Map<String, num> summary = coordinator.summary;
-            final List<Map<String, dynamic>> savedBuilds = coordinator.savedBuilds;
+            final List<Map<String, dynamic>> savedBuilds =
+                coordinator.savedBuilds;
             return ListView(
               padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
               children: <Widget>[
@@ -371,7 +386,10 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                         title: 'Special Stats',
                         rows: <MapEntry<String, String>>[
                           const MapEntry<String, String>('ASPD', 'ASPD'),
-                          const MapEntry<String, String>('CritRate', 'Critical Rate'),
+                          const MapEntry<String, String>(
+                            'CritRate',
+                            'Critical Rate',
+                          ),
                           const MapEntry<String, String>(
                             'PhysicalPierce',
                             'Piercing (Physical)',
@@ -380,8 +398,14 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                             'ElementPierce',
                             'Piercing (Element)',
                           ),
-                          const MapEntry<String, String>('Accuracy', 'Accuracy'),
-                          const MapEntry<String, String>('Stability', 'Stability'),
+                          const MapEntry<String, String>(
+                            'Accuracy',
+                            'Accuracy',
+                          ),
+                          const MapEntry<String, String>(
+                            'Stability',
+                            'Stability',
+                          ),
                           const MapEntry<String, String>('HP', 'HP'),
                           const MapEntry<String, String>('MP', 'MP'),
                         ],
@@ -417,7 +441,10 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                       TextField(
                         controller: _buildNameController,
                         onSubmitted: (_) => _onSaveBuild(),
-                        style: const TextStyle(color: Colors.white, fontSize: 13),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
                         decoration: InputDecoration(
                           hintText: 'Enter build name...',
                           hintStyle: const TextStyle(color: Colors.white54),
@@ -429,11 +456,15 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                           fillColor: const Color(0xFF0A0A0A),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(color: Color(0x44FFFFFF)),
+                            borderSide: const BorderSide(
+                              color: Color(0x44FFFFFF),
+                            ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(color: Color(0x77FFFFFF)),
+                            borderSide: const BorderSide(
+                              color: Color(0x77FFFFFF),
+                            ),
                           ),
                         ),
                       ),
@@ -447,8 +478,12 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                               label: const Text('Save'),
                               style: OutlinedButton.styleFrom(
                                 foregroundColor: Colors.white,
-                                side: const BorderSide(color: Color(0x66FFFFFF)),
-                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                side: const BorderSide(
+                                  color: Color(0x66FFFFFF),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 10,
+                                ),
                               ),
                             ),
                           ),
@@ -456,12 +491,19 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                           Expanded(
                             child: OutlinedButton.icon(
                               onPressed: coordinator.clearAllData,
-                              icon: const Icon(Icons.cleaning_services, size: 16),
+                              icon: const Icon(
+                                Icons.cleaning_services,
+                                size: 16,
+                              ),
                               label: const Text('Clear'),
                               style: OutlinedButton.styleFrom(
                                 foregroundColor: Colors.white70,
-                                side: const BorderSide(color: Color(0x44FFFFFF)),
-                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                side: const BorderSide(
+                                  color: Color(0x44FFFFFF),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 10,
+                                ),
                               ),
                             ),
                           ),
@@ -480,7 +522,10 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                           ),
                           child: const Text(
                             'No saved builds yet.',
-                            style: TextStyle(color: Colors.white70, fontSize: 12),
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12,
+                            ),
                           ),
                         )
                       else
@@ -488,7 +533,8 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                           children: List<Widget>.generate(savedBuilds.length, (
                             int index,
                           ) {
-                            final Map<String, dynamic> build = savedBuilds[index];
+                            final Map<String, dynamic> build =
+                                savedBuilds[index];
                             final String buildId = _buildIdOf(build);
                             final bool canControl = buildId.isNotEmpty;
                             return _SavedBuildTile(
@@ -496,7 +542,9 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                               statsLine: _savedBuildStatsLine(build),
                               isFavorite: _toBool(build['isFavorite']),
                               onToggleFavorite: canControl
-                                  ? () => coordinator.toggleFavoriteBuildById(buildId)
+                                  ? () => coordinator.toggleFavoriteBuildById(
+                                      buildId,
+                                    )
                                   : null,
                               onLoad: canControl
                                   ? () {
@@ -751,7 +799,10 @@ class _StatsCategoryBlock extends StatelessWidget {
                   Expanded(
                     child: Text(
                       row.value,
-                      style: const TextStyle(color: Colors.white70, fontSize: 12),
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
                   Text(

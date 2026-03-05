@@ -286,7 +286,9 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
                       Text(
                         _displayName(
                           secondBuild ?? _builds[1],
-                          secondBuild == null ? 1 : _builds.indexOf(secondBuild),
+                          secondBuild == null
+                              ? 1
+                              : _builds.indexOf(secondBuild),
                         ),
                         style: const TextStyle(
                           color: Colors.white,
@@ -317,10 +319,7 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
                     ],
                     rows: _compareKeys
                         .map((String key) {
-                          final int leftValue = _summaryValue(
-                            firstBuild,
-                            key,
-                          );
+                          final int leftValue = _summaryValue(firstBuild, key);
                           final int rightValue = _summaryValue(
                             secondBuild,
                             key,
@@ -348,17 +347,13 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
                               DataCell(
                                 Text(
                                   _formatStatValue(key, leftValue),
-                                  style: const TextStyle(
-                                    color: Colors.white70,
-                                  ),
+                                  style: const TextStyle(color: Colors.white70),
                                 ),
                               ),
                               DataCell(
                                 Text(
                                   _formatStatValue(key, rightValue),
-                                  style: const TextStyle(
-                                    color: Colors.white70,
-                                  ),
+                                  style: const TextStyle(color: Colors.white70),
                                 ),
                               ),
                               DataCell(

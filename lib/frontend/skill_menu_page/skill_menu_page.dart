@@ -11,6 +11,8 @@ import 'widgets/skill_tree_widgets.dart';
 
 part 'skill_menu_page_ui.dart';
 part 'skill_menu_page_data.dart';
+part 'skill_image_asset_config.dart';
+part 'services/skill_menu_filter_service.dart';
 
 class SkillMenuPage extends StatefulWidget {
   const SkillMenuPage({super.key, this.onNavigate});
@@ -69,11 +71,17 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
       builder: (BuildContext dialogContext) {
         return Dialog(
           backgroundColor: const Color(0xFF101010),
-          insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 24,
+          ),
           child: StatefulBuilder(
             builder: (BuildContext context, StateSetter setDialogState) {
               return ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 760, maxHeight: 640),
+                constraints: const BoxConstraints(
+                  maxWidth: 760,
+                  maxHeight: 640,
+                ),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
                   child: SingleChildScrollView(
@@ -93,8 +101,12 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
                               ),
                             ),
                             IconButton(
-                              onPressed: () => Navigator.of(dialogContext).pop(),
-                              icon: const Icon(Icons.close, color: Colors.white70),
+                              onPressed: () =>
+                                  Navigator.of(dialogContext).pop(),
+                              icon: const Icon(
+                                Icons.close,
+                                color: Colors.white70,
+                              ),
                               tooltip: 'Close',
                             ),
                           ],
@@ -116,8 +128,11 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
                           (String category) {
                             _setUiState(() {
                               _selectedCategory = category;
-                              final List<String> nextTrees = _availableTrees(data);
-                              if (_selectedTree != _SkillMenuPageState._allTreeKey &&
+                              final List<String> nextTrees = _availableTrees(
+                                data,
+                              );
+                              if (_selectedTree !=
+                                      _SkillMenuPageState._allTreeKey &&
                                   !nextTrees.contains(_selectedTree)) {
                                 _selectedTree = _SkillMenuPageState._allTreeKey;
                               }
@@ -160,90 +175,34 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
   }
 
   List<String> _availableCategories(SkillLibraryData data) {
-    final List<String> categories =
-        data.treeCategoryByTree.values.toSet().toList(growable: false)
-          ..sort((String a, String b) {
-            final int orderA = _categoryOrder[a] ?? 999;
-            final int orderB = _categoryOrder[b] ?? 999;
-            if (orderA != orderB) {
-              return orderA.compareTo(orderB);
-            }
-            return a.compareTo(b);
-          });
-    return categories;
+    return SkillMenuFilterService.availableCategories(
+      data: data,
+      categoryOrder: _categoryOrder,
+    );
   }
 
   List<String> _availableTrees(SkillLibraryData data) {
-    final List<String> trees =
-        data.skillsByTree.keys
-            .where((String treeName) {
-              if (_selectedCategory == _allCategoryKey) {
-                return true;
-              }
-              return data.categoryForTree(treeName) == _selectedCategory;
-            })
-            .toList(growable: false)
-          ..sort((String a, String b) => a.compareTo(b));
-    return trees;
-  }
-
-  bool _matchesQuery({
-    required String query,
-    required SkillEntry skill,
-    required String treeName,
-    required String categoryName,
-  }) {
-    if (query.isEmpty) {
-      return true;
-    }
-    return skill.name.toLowerCase().contains(query) ||
-        skill.description.toLowerCase().contains(query) ||
-        skill.mp.toLowerCase().contains(query) ||
-        skill.type.toLowerCase().contains(query) ||
-        skill.element.toLowerCase().contains(query) ||
-        skill.combo.toLowerCase().contains(query) ||
-        skill.comboMiddle.toLowerCase().contains(query) ||
-        skill.range.toLowerCase().contains(query) ||
-        treeName.toLowerCase().contains(query) ||
-        categoryName.toLowerCase().contains(query) ||
-        (skill.unlockLevel?.toString() ?? '').contains(query);
+    return SkillMenuFilterService.availableTrees(
+      data: data,
+      selectedCategory: _selectedCategory,
+      allCategoryKey: _allCategoryKey,
+    );
   }
 
   String _activeTreeForTreeView(SkillLibraryData data) {
-    final List<String> trees = _availableTrees(data);
-    if (trees.isEmpty) {
-      return '';
-    }
-    if (_selectedTree != _allTreeKey && trees.contains(_selectedTree)) {
-      return _selectedTree;
-    }
-    return trees.first;
+    return SkillMenuFilterService.activeTreeForTreeView(
+      availableTrees: _availableTrees(data),
+      selectedTree: _selectedTree,
+      allTreeKey: _allTreeKey,
+    );
   }
 
   List<SkillEntry> _skillsForTreeView(SkillLibraryData data, String treeName) {
-    if (treeName.isEmpty) {
-      return const <SkillEntry>[];
-    }
-    final List<SkillEntry> source = List<SkillEntry>.from(
-      data.skillsByTree[treeName] ?? const <SkillEntry>[],
+    return SkillMenuFilterService.skillsForTreeView(
+      data: data,
+      treeName: treeName,
+      query: _query,
     );
-    source.sort((SkillEntry a, SkillEntry b) {
-      final int levelDiff = (a.unlockLevel ?? 99).compareTo(b.unlockLevel ?? 99);
-      if (levelDiff != 0) {
-        return levelDiff;
-      }
-      return a.name.compareTo(b.name);
-    });
-    return source
-        .where(
-          (SkillEntry skill) => _matchesQuery(
-            query: _query.trim().toLowerCase(),
-            skill: skill,
-            treeName: treeName,
-            categoryName: data.categoryForTree(treeName),
-          ),
-        )
-        .toList(growable: false);
   }
 
   String _present(String value) {
@@ -255,13 +214,12 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
   }
 
   String _activeFilterSummary() {
-    final String categoryLabel = _selectedCategory == _allCategoryKey
-        ? 'All Categories'
-        : _selectedCategory;
-    final String treeLabel = _selectedTree == _allTreeKey
-        ? 'All Trees'
-        : _selectedTree;
-    return '$categoryLabel / $treeLabel';
+    return SkillMenuFilterService.activeFilterSummary(
+      selectedCategory: _selectedCategory,
+      selectedTree: _selectedTree,
+      allCategoryKey: _allCategoryKey,
+      allTreeKey: _allTreeKey,
+    );
   }
 
   @override
@@ -276,112 +234,129 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
       widget.onNavigate?.call(page);
     }
 
+    void onSelectDrawerPage(AppNavigationPage page) {
+      Navigator.of(context).pop();
+      if (page != AppNavigationPage.skill) {
+        widget.onNavigate?.call(page);
+      }
+    }
+
     final Widget content = FutureBuilder<SkillLibraryData>(
       future: _libraryFuture,
-      builder: (BuildContext context, AsyncSnapshot<SkillLibraryData> snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (snapshot.hasError) {
-          return _buildErrorState(snapshot.error!);
-        }
+      builder:
+          (BuildContext context, AsyncSnapshot<SkillLibraryData> snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.hasError) {
+              return _buildErrorState(snapshot.error!);
+            }
 
-        final SkillLibraryData data = snapshot.data!;
-        final List<String> availableTrees = _availableTrees(data);
-        final String activeTree = _activeTreeForTreeView(data);
-        final List<SkillEntry> treeSkills = _skillsForTreeView(data, activeTree);
+            final SkillLibraryData data = snapshot.data!;
+            final List<String> availableTrees = _availableTrees(data);
+            final String activeTree = _activeTreeForTreeView(data);
+            final List<SkillEntry> treeSkills = _skillsForTreeView(
+              data,
+              activeTree,
+            );
 
-        return Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.fromLTRB(
-                16,
-                isEmbeddedInShell ? 12 : 0,
-                16,
-                10,
-              ),
-                child: LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) {
-                  const double filterButtonSize = 52;
-                  return Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextField(
-                          controller: _searchController,
-                          style: const TextStyle(color: Colors.white),
-                          cursorColor: Colors.white70,
-                          decoration: InputDecoration(
-                            hintText: 'Search in selected skill tree...',
-                            hintStyle: const TextStyle(color: Colors.white54),
-                            prefixIcon: const Icon(
-                              Icons.search,
-                              color: Colors.white70,
-                            ),
-                            filled: true,
-                            fillColor: const Color(0xFF0F0F0F),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                color: Color(0x33FFFFFF),
+            return Column(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                    16,
+                    isEmbeddedInShell ? 12 : 0,
+                    16,
+                    10,
+                  ),
+                  child: LayoutBuilder(
+                    builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                          const double filterButtonSize = 52;
+                          return Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: TextField(
+                                  controller: _searchController,
+                                  style: const TextStyle(color: Colors.white),
+                                  cursorColor: Colors.white70,
+                                  decoration: InputDecoration(
+                                    hintText:
+                                        'Search in selected skill tree...',
+                                    hintStyle: const TextStyle(
+                                      color: Colors.white54,
+                                    ),
+                                    prefixIcon: const Icon(
+                                      Icons.search,
+                                      color: Colors.white70,
+                                    ),
+                                    filled: true,
+                                    fillColor: const Color(0xFF0F0F0F),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: const BorderSide(
+                                        color: Color(0x33FFFFFF),
+                                      ),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: const BorderSide(
+                                        color: Color(0x33FFFFFF),
+                                      ),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: const BorderSide(
+                                        color: Color(0x66FFFFFF),
+                                      ),
+                                    ),
+                                  ),
+                                  onChanged: (String value) {
+                                    setState(() {
+                                      _query = value;
+                                    });
+                                  },
+                                ),
                               ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                color: Color(0x33FFFFFF),
+                              const SizedBox(width: 8),
+                              SizedBox(
+                                width: filterButtonSize,
+                                height: filterButtonSize,
+                                child: Tooltip(
+                                  message: _activeFilterSummary(),
+                                  child: OutlinedButton(
+                                    onPressed: () => _openFiltersDialog(data),
+                                    style: OutlinedButton.styleFrom(
+                                      foregroundColor: Colors.white70,
+                                      side: const BorderSide(
+                                        color: Color(0x33FFFFFF),
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      backgroundColor: const Color(0xFF0F0F0F),
+                                      padding: EdgeInsets.zero,
+                                    ),
+                                    child: const Icon(Icons.tune, size: 18),
+                                  ),
+                                ),
                               ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                color: Color(0x66FFFFFF),
-                              ),
-                            ),
-                          ),
-                          onChanged: (String value) {
-                            setState(() {
-                              _query = value;
-                            });
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      SizedBox(
-                        width: filterButtonSize,
-                        height: filterButtonSize,
-                        child: Tooltip(
-                          message: _activeFilterSummary(),
-                          child: OutlinedButton(
-                            onPressed: () => _openFiltersDialog(data),
-                            style: OutlinedButton.styleFrom(
-                              foregroundColor: Colors.white70,
-                              side: const BorderSide(color: Color(0x33FFFFFF)),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              backgroundColor: const Color(0xFF0F0F0F),
-                              padding: EdgeInsets.zero,
-                            ),
-                            child: const Icon(Icons.tune, size: 18),
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
-            ),
-            Expanded(
-              child: _buildSkillTreeView(
-                data: data,
-                availableTrees: availableTrees,
-                activeTree: activeTree,
-                visibleSkills: treeSkills,
-              ),
-            ),
-          ],
-        );
-      },
+                            ],
+                          );
+                        },
+                  ),
+                ),
+                Expanded(
+                  child: _buildSkillTreeView(
+                    data: data,
+                    availableTrees: availableTrees,
+                    activeTree: activeTree,
+                    visibleSkills: treeSkills,
+                  ),
+                ),
+              ],
+            );
+          },
     );
 
     if (isEmbeddedInShell) {
@@ -394,27 +369,15 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
           ? null
           : AppNavigationDrawer(
               currentPage: AppNavigationPage.skill,
-              onOpenBuild: () {
-                Navigator.of(context).pop();
-                widget.onNavigate?.call(AppNavigationPage.build);
-              },
-              onOpenEquipment: () {
-                Navigator.of(context).pop();
-                widget.onNavigate?.call(AppNavigationPage.equipment);
-              },
-              onOpenSkill: () => Navigator.of(context).pop(),
-              onOpenSaved: () {
-                Navigator.of(context).pop();
-                widget.onNavigate?.call(AppNavigationPage.saved);
-              },
-              onOpenCompare: () {
-                Navigator.of(context).pop();
-                widget.onNavigate?.call(AppNavigationPage.compare);
-              },
-              onOpenSettings: () {
-                Navigator.of(context).pop();
-                widget.onNavigate?.call(AppNavigationPage.settings);
-              },
+              onOpenBuild: () => onSelectDrawerPage(AppNavigationPage.build),
+              onOpenEquipment: () =>
+                  onSelectDrawerPage(AppNavigationPage.equipment),
+              onOpenSkill: () => onSelectDrawerPage(AppNavigationPage.skill),
+              onOpenSaved: () => onSelectDrawerPage(AppNavigationPage.saved),
+              onOpenCompare: () =>
+                  onSelectDrawerPage(AppNavigationPage.compare),
+              onOpenSettings: () =>
+                  onSelectDrawerPage(AppNavigationPage.settings),
             ),
       appBar: AppBar(
         automaticallyImplyLeading: false,

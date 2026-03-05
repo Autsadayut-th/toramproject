@@ -381,9 +381,7 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
                                 onPressed: () {
                                   widget.onLoadBuild(buildId);
                                   if (widget.onNavigate != null) {
-                                    widget.onNavigate!(
-                                      AppNavigationPage.build,
-                                    );
+                                    widget.onNavigate!(AppNavigationPage.build);
                                     return;
                                   }
                                   Navigator.of(context).pop();

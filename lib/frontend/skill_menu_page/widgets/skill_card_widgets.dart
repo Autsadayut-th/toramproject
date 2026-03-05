@@ -86,14 +86,12 @@ class SkillCardWidgets {
   }
 
   static void showSkillDetails(
-    BuildContext context,
-    {
+    BuildContext context, {
     required SkillEntry skill,
     required String categoryName,
     required String treeName,
     required String Function(String) present,
   }) {
-
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
@@ -210,8 +208,7 @@ class SkillCardWidgets {
     }
   }
 
-  static Widget buildSkillCard(
-    {
+  static Widget buildSkillCard({
     required SkillEntry skill,
     required String categoryName,
     required String treeName,

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../account_page/account_page.dart';
 import '../app_shell/app_shell_page.dart';
 import '../auth/firebase_auth_service.dart';
 import '../register_bulids_page/register_screen.dart';
+import 'services/login_form_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -39,12 +41,10 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    setState(() {
-      _isLoading = true;
-    });
+    _setLoading(true);
 
     final AuthResult result = await _authService.signInWithEmail(
-      email: _emailController.text,
+      email: _emailController.text.trim(),
       password: _passwordController.text,
     );
 
@@ -52,27 +52,15 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    setState(() {
-      _isLoading = false;
-    });
+    _setLoading(false);
 
     _showMessage(
       result.message,
-      backgroundColor: result.success
-          ? const Color(0xFF4A4A4A)
-          : const Color(0xFF8B1A1A),
+      backgroundColor: LoginFormService.messageColorFor(result),
     );
 
     if (result.success) {
-      if (!mounted) return;
-
-      final String? currentRouteName = ModalRoute.of(context)?.settings.name;
-      if (currentRouteName == '/login') {
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          '/',
-          (Route<dynamic> route) => false,
-        );
-      }
+      _goToHomeFromLoginRoute();
     }
   }
 
@@ -88,12 +76,52 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Future<void> _openAccountPage() async {
+    if (_isLoading) {
+      return;
+    }
+
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) =>
+            AccountPage(initialEmail: _emailController.text),
+      ),
+    );
+  }
+
   void _openWithoutLogin() {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute<void>(
         builder: (BuildContext context) => const AppShellScreen(),
       ),
     );
+  }
+
+  void _setLoading(bool value) {
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _isLoading = value;
+    });
+  }
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscurePassword = !_obscurePassword;
+    });
+  }
+
+  void _goToHomeFromLoginRoute() {
+    if (!mounted) {
+      return;
+    }
+    final String? currentRouteName = ModalRoute.of(context)?.settings.name;
+    if (currentRouteName == '/login') {
+      Navigator.of(
+        context,
+      ).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+    }
   }
 
   void _showMessage(
@@ -159,19 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       hint: 'name@example.com',
                       icon: Icons.email_outlined,
                     ),
-                    validator: (String? value) {
-                      final String text = value?.trim() ?? '';
-                      if (text.isEmpty) {
-                        return 'Please enter your email.';
-                      }
-                      final bool isEmail = RegExp(
-                        r'^[^\s@]+@[^\s@]+\.[^\s@]+$',
-                      ).hasMatch(text);
-                      if (!isEmail) {
-                        return 'Please enter a valid email.';
-                      }
-                      return null;
-                    },
+                    validator: LoginFormService.validateEmail,
                   ),
                   const SizedBox(height: 14),
                   TextFormField(
@@ -185,11 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       hint: 'At least 8 characters',
                       icon: Icons.lock_outline,
                       suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _obscurePassword = !_obscurePassword;
-                          });
-                        },
+                        onPressed: _togglePasswordVisibility,
                         icon: Icon(
                           _obscurePassword
                               ? Icons.visibility_outlined
@@ -198,16 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    validator: (String? value) {
-                      final String text = value ?? '';
-                      if (text.isEmpty) {
-                        return 'Please enter your password.';
-                      }
-                      if (text.length < 8) {
-                        return 'Password must contain at least 8 characters.';
-                      }
-                      return null;
-                    },
+                    validator: LoginFormService.validatePassword,
                     onFieldSubmitted: (_) => _submit(),
                   ),
                   const SizedBox(height: 20),
@@ -239,6 +242,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextButton(
                     onPressed: _isLoading ? null : _openRegister,
                     child: const Text('Create new account'),
+                  ),
+                  TextButton(
+                    onPressed: _isLoading ? null : _openAccountPage,
+                    child: const Text('Forgot password / Account'),
                   ),
                   const SizedBox(height: 6),
                   OutlinedButton(

@@ -128,17 +128,20 @@ class BuildRecommendationService {
         'Your main stat looks INT, but ATK is much higher than MATK. Check weapon/stat synergy.',
       );
     }
-    if ((highestStat == 'STR' || highestStat == 'DEX' || highestStat == 'AGI') &&
+    if ((highestStat == 'STR' ||
+            highestStat == 'DEX' ||
+            highestStat == 'AGI') &&
         matk > (atk * 1.2)) {
       recommendations.add(
         'Your main stat looks physical, but MATK is much higher than ATK. Recheck build direction.',
       );
     }
 
-    final bool hasCritOrPierce = _hasAnyStat(
-      equippedItems,
-      <String>{'critical_rate', 'physical_pierce', 'magic_pierce'},
-    );
+    final bool hasCritOrPierce = _hasAnyStat(equippedItems, <String>{
+      'critical_rate',
+      'physical_pierce',
+      'magic_pierce',
+    });
     if (!hasCritOrPierce && level >= 60) {
       recommendations.add(
         'Most equipment lacks Crit/Pierce stats. Add at least one offensive stat source.',

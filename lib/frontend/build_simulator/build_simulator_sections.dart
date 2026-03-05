@@ -177,9 +177,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
   }
 
   Widget _buildRecommendationsSection() {
-    final bool hasRemoteAi =
-        _aiRecommendationSource == 'openai' ||
-        _aiRecommendationSource == 'gemini';
+    final bool hasRemoteAi = _isRemoteAiSource(_aiRecommendationSource);
     final children = <Widget>[];
     for (int i = 0; i < _recommendations.length; i++) {
       children.add(

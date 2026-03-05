@@ -67,10 +67,7 @@ extension _MonsterLibraryDetailsSheet on _MonsterLibraryDataViewState {
                   ),
                   const SizedBox(height: 8),
                   if (item.drops.isEmpty)
-                    const Text(
-                      '-',
-                      style: TextStyle(color: Colors.white54),
-                    )
+                    const Text('-', style: TextStyle(color: Colors.white54))
                   else
                     Wrap(
                       spacing: 8,
@@ -96,10 +93,7 @@ extension _MonsterLibraryDetailsSheet on _MonsterLibraryDataViewState {
         children: <Widget>[
           SizedBox(
             width: 100,
-            child: Text(
-              label,
-              style: const TextStyle(color: Colors.white70),
-            ),
+            child: Text(label, style: const TextStyle(color: Colors.white70)),
           ),
           Expanded(
             child: Text(

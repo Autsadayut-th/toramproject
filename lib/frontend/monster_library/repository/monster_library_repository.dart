@@ -5,7 +5,8 @@ import 'package:flutter/services.dart';
 import '../models/monster_library_item.dart';
 
 class MonsterLibraryRepository {
-  static const String _monstersAssetPath = 'assets/data/monster_library/monsters.json';
+  static const String _monstersAssetPath =
+      'assets/data/monster_library/monsters.json';
   static const String _mapsAssetPath = 'assets/data/monster_library/maps.json';
 
   Future<List<MonsterLibraryItem>> loadAll() async {
@@ -13,28 +14,33 @@ class MonsterLibraryRepository {
     final List<dynamic> mapsRaw = await _loadListAsset(_mapsAssetPath);
 
     final Map<String, String> mapNameByKey = <String, String>{
-      for (final Map<String, dynamic> item
-          in mapsRaw.whereType<Map>().map((Map raw) => Map<String, dynamic>.from(raw)))
+      for (final Map<String, dynamic> item in mapsRaw.whereType<Map>().map(
+        (Map raw) => Map<String, dynamic>.from(raw),
+      ))
         _stringValue(item['key']): _stringValue(item['name']),
     };
 
-    final List<MonsterLibraryItem> monsters = monstersRaw
-        .whereType<Map>()
-        .map((Map raw) {
-          final Map<String, dynamic> item = Map<String, dynamic>.from(raw);
-          final String mapKey = _stringValue(item['mapKey']);
-          final String mapName = mapNameByKey[mapKey] ?? mapKey;
-          return MonsterLibraryItem.fromJson(item, mapName: mapName);
-        })
-        .where((MonsterLibraryItem item) => item.id.isNotEmpty && item.name.isNotEmpty)
-        .toList(growable: false)
-      ..sort((MonsterLibraryItem a, MonsterLibraryItem b) {
-        final int byLevel = a.level.compareTo(b.level);
-        if (byLevel != 0) {
-          return byLevel;
-        }
-        return a.name.compareTo(b.name);
-      });
+    final List<MonsterLibraryItem> monsters =
+        monstersRaw
+            .whereType<Map>()
+            .map((Map raw) {
+              final Map<String, dynamic> item = Map<String, dynamic>.from(raw);
+              final String mapKey = _stringValue(item['mapKey']);
+              final String mapName = mapNameByKey[mapKey] ?? mapKey;
+              return MonsterLibraryItem.fromJson(item, mapName: mapName);
+            })
+            .where(
+              (MonsterLibraryItem item) =>
+                  item.id.isNotEmpty && item.name.isNotEmpty,
+            )
+            .toList(growable: false)
+          ..sort((MonsterLibraryItem a, MonsterLibraryItem b) {
+            final int byLevel = a.level.compareTo(b.level);
+            if (byLevel != 0) {
+              return byLevel;
+            }
+            return a.name.compareTo(b.name);
+          });
 
     return monsters;
   }

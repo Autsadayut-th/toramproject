@@ -6,6 +6,7 @@ import 'build_simulator_coordinator.dart';
 import '../equipment_library/models/equipment_library_item.dart';
 import '../equipment_library/repository/equipment_library_repository.dart';
 import 'services/ai_build_recommendation_service.dart';
+import 'services/build_ai_status_service.dart';
 import 'services/build_calculator_service.dart';
 import 'services/build_persistence_service.dart';
 import 'services/build_recommendation_service.dart';
@@ -42,6 +43,15 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       BuildPersistenceService.characterStatKeys;
   static const List<String> _personalStatOptions =
       BuildPersistenceService.personalStatOptions;
+  static const Map<String, int> _defaultCharacterStats = <String, int>{
+    'STR': 1,
+    'DEX': 1,
+    'INT': 1,
+    'AGI': 1,
+    'VIT': 1,
+  };
+  static const String _ruleRecommendationMessage =
+      'Using local recommendation rules.';
 
   Map<String, EquipmentLibraryItem> _equipmentByKey =
       <String, EquipmentLibraryItem>{};
@@ -54,13 +64,9 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   bool _isRingExpanded = false;
   bool _isGachaExpanded = false;
 
-  final Map<String, dynamic> _character = <String, dynamic>{
-    'STR': 1,
-    'DEX': 1,
-    'INT': 1,
-    'AGI': 1,
-    'VIT': 1,
-  };
+  final Map<String, dynamic> _character = Map<String, dynamic>.from(
+    _defaultCharacterStats,
+  );
   int _level = 1;
   String _personalStatType = _personalStatOptions.first;
   int _personalStatValue = 0;
@@ -107,7 +113,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   int _aiRecommendationRequestToken = 0;
   bool _isAiRecommendationLoading = false;
   String _aiRecommendationSource = 'rule';
-  String _aiRecommendationMessage = 'Using local recommendation rules.';
+  String _aiRecommendationMessage = _ruleRecommendationMessage;
   bool _showRecommendationsPanel = true;
 
   final List<Map<String, dynamic>> _savedBuilds = <Map<String, dynamic>>[];
@@ -184,21 +190,20 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       if (!mounted) {
         return;
       }
-      setState(() {
-        _equipmentByKey = byKey;
-        _recalculateAll();
-      });
-      _syncCoordinatorSnapshot();
+      _applyEquipmentCache(byKey);
     } catch (_) {
       if (!mounted) {
         return;
       }
-      setState(() {
-        _equipmentByKey = <String, EquipmentLibraryItem>{};
-        _recalculateAll();
-      });
-      _syncCoordinatorSnapshot();
+      _applyEquipmentCache(const <String, EquipmentLibraryItem>{});
     }
+  }
+
+  void _applyEquipmentCache(Map<String, EquipmentLibraryItem> byKey) {
+    _setUiState(() {
+      _equipmentByKey = byKey;
+      _recalculateAll();
+    });
   }
 
   void _setUiState(VoidCallback action) {
@@ -207,11 +212,14 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   }
 
   void _setStateAndRecalculate(VoidCallback action) {
-    setState(() {
+    _setUiState(() {
       action();
       _recalculateAll();
     });
-    _syncCoordinatorSnapshot();
+  }
+
+  bool _isRemoteAiSource(String source) {
+    return BuildAiStatusService.isRemoteAiSource(source);
   }
 
   EquipmentLibraryItem? _findEquipmentByKey(String? equipmentKey) {
@@ -299,7 +307,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       equippedItems: equippedItems,
     );
     _aiRecommendationSource = 'rule';
-    _aiRecommendationMessage = 'Using local recommendation rules.';
+    _aiRecommendationMessage = _ruleRecommendationMessage;
     _scheduleAiRecommendations(equippedItems);
   }
 
@@ -365,11 +373,10 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       return;
     }
 
-    setState(() {
+    _setUiState(() {
       _isAiRecommendationLoading = true;
       _aiRecommendationMessage = 'AI analyzing your build...';
     });
-    _syncCoordinatorSnapshot();
 
     try {
       final AiBuildRecommendationResult result = await _aiRecommendationService
@@ -377,7 +384,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       if (!mounted || token != _aiRecommendationRequestToken) {
         return;
       }
-      setState(() {
+      _setUiState(() {
         _recommendations = result.recommendations;
         _isAiRecommendationLoading = false;
         _aiRecommendationSource = result.source;
@@ -386,12 +393,11 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
           details: result.message,
         );
       });
-      _syncCoordinatorSnapshot();
     } catch (error) {
       if (!mounted || token != _aiRecommendationRequestToken) {
         return;
       }
-      setState(() {
+      _setUiState(() {
         _isAiRecommendationLoading = false;
         _aiRecommendationSource = 'fallback';
         _aiRecommendationMessage = _buildAiStatusMessage(
@@ -399,46 +405,15 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
           details: error.toString(),
         );
       });
-      _syncCoordinatorSnapshot();
     }
   }
 
   String _buildAiStatusMessage({required String source, String? details}) {
-    if (source == 'openai') {
-      return 'AI recommendations from OpenAI.';
-    }
-    if (source == 'gemini') {
-      return 'AI recommendations from Google Gemini.';
-    }
-
-    final String sanitized = _sanitizeAiStatusDetails(details);
-    if (sanitized.isEmpty) {
-      return 'AI unavailable. Using local recommendation rules.';
-    }
-    return 'AI unavailable: $sanitized';
-  }
-
-  String _sanitizeAiStatusDetails(String? details) {
-    if (details == null || details.trim().isEmpty) {
-      return '';
-    }
-    String text = details.trim();
-    const List<String> prefixes = <String>[
-      'Exception:',
-      'FormatException:',
-      'TimeoutException:',
-    ];
-    for (final String prefix in prefixes) {
-      if (text.startsWith(prefix)) {
-        text = text.substring(prefix.length).trim();
-        break;
-      }
-    }
-    text = text.replaceAll(RegExp(r'\s+'), ' ');
-    if (text.length > 170) {
-      return '${text.substring(0, 170)}...';
-    }
-    return text;
+    return BuildAiStatusService.buildStatusMessage(
+      source: source,
+      ruleRecommendationMessage: _ruleRecommendationMessage,
+      details: details,
+    );
   }
 
   int _findBuildIndexById(String buildId) {
@@ -446,6 +421,13 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   }
 
   void _applyBuildSnapshot(Map<String, dynamic> build) {
+    _applyCharacterSnapshot(build);
+    _applyEquipmentSnapshot(build);
+    _applyGachaSnapshot(build);
+    _applyExpandedStateSnapshot(build);
+  }
+
+  void _applyCharacterSnapshot(Map<String, dynamic> build) {
     final dynamic rawCharacter = build['character'];
     final Map<dynamic, dynamic> characterMap = rawCharacter is Map
         ? rawCharacter
@@ -464,7 +446,9 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       build['personalStatValue'],
       fallback: _personalStatValue,
     ).clamp(0, 255).toInt();
+  }
 
+  void _applyEquipmentSnapshot(Map<String, dynamic> build) {
     _mainWeaponId = BuildPersistenceService.readOptionalStringValue(
       build['mainWeaponId'],
     );
@@ -521,7 +505,9 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     _ringCrystal2 = BuildPersistenceService.readOptionalStringValue(
       build['ringCrystal2'],
     );
+  }
 
+  void _applyGachaSnapshot(Map<String, dynamic> build) {
     _gacha1Stat1 = BuildPersistenceService.readStringValue(
       build['gacha1Stat1'],
     );
@@ -549,7 +535,9 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     _gacha3Stat3 = BuildPersistenceService.readStringValue(
       build['gacha3Stat3'],
     );
+  }
 
+  void _applyExpandedStateSnapshot(Map<String, dynamic> build) {
     _isCharacterStatsExpanded = BuildPersistenceService.readBoolValue(
       build['isCharacterStatsExpanded'],
       fallback: _isCharacterStatsExpanded,
@@ -580,6 +568,51 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     );
   }
 
+  Map<String, dynamic> _buildCurrentSnapshot(String normalizedName) {
+    return BuildPersistenceService.createBuildSnapshot(
+      name: normalizedName,
+      character: _character,
+      level: _level,
+      personalStatType: _personalStatType,
+      personalStatValue: _personalStatValue,
+      mainWeaponId: _mainWeaponId,
+      enhMain: _enhMain,
+      mainCrystal1: _mainCrystal1,
+      mainCrystal2: _mainCrystal2,
+      subWeaponId: _subWeaponId,
+      enhSub: _enhSub,
+      armorId: _armorId,
+      enhArmor: _enhArmor,
+      armorCrystal1: _armorCrystal1,
+      armorCrystal2: _armorCrystal2,
+      helmetId: _helmetId,
+      enhHelmet: _enhHelmet,
+      helmetCrystal1: _helmetCrystal1,
+      helmetCrystal2: _helmetCrystal2,
+      ringId: _ringId,
+      enhRing: _enhRing,
+      ringCrystal1: _ringCrystal1,
+      ringCrystal2: _ringCrystal2,
+      gacha1Stat1: _gacha1Stat1,
+      gacha1Stat2: _gacha1Stat2,
+      gacha1Stat3: _gacha1Stat3,
+      gacha2Stat1: _gacha2Stat1,
+      gacha2Stat2: _gacha2Stat2,
+      gacha2Stat3: _gacha2Stat3,
+      gacha3Stat1: _gacha3Stat1,
+      gacha3Stat2: _gacha3Stat2,
+      gacha3Stat3: _gacha3Stat3,
+      isCharacterStatsExpanded: _isCharacterStatsExpanded,
+      isMainWeaponExpanded: _isMainWeaponExpanded,
+      isSubWeaponExpanded: _isSubWeaponExpanded,
+      isArmorExpanded: _isArmorExpanded,
+      isHelmetExpanded: _isHelmetExpanded,
+      isRingExpanded: _isRingExpanded,
+      isGachaExpanded: _isGachaExpanded,
+      summary: _summary,
+    );
+  }
+
   void _onSaveBuildByName(String name) {
     final String normalizedName = name.trim();
     if (normalizedName.isEmpty) {
@@ -587,50 +620,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     }
 
     _setUiState(() {
-      _savedBuilds.add(
-        BuildPersistenceService.createBuildSnapshot(
-          name: normalizedName,
-          character: _character,
-          level: _level,
-          personalStatType: _personalStatType,
-          personalStatValue: _personalStatValue,
-          mainWeaponId: _mainWeaponId,
-          enhMain: _enhMain,
-          mainCrystal1: _mainCrystal1,
-          mainCrystal2: _mainCrystal2,
-          subWeaponId: _subWeaponId,
-          enhSub: _enhSub,
-          armorId: _armorId,
-          enhArmor: _enhArmor,
-          armorCrystal1: _armorCrystal1,
-          armorCrystal2: _armorCrystal2,
-          helmetId: _helmetId,
-          enhHelmet: _enhHelmet,
-          helmetCrystal1: _helmetCrystal1,
-          helmetCrystal2: _helmetCrystal2,
-          ringId: _ringId,
-          enhRing: _enhRing,
-          ringCrystal1: _ringCrystal1,
-          ringCrystal2: _ringCrystal2,
-          gacha1Stat1: _gacha1Stat1,
-          gacha1Stat2: _gacha1Stat2,
-          gacha1Stat3: _gacha1Stat3,
-          gacha2Stat1: _gacha2Stat1,
-          gacha2Stat2: _gacha2Stat2,
-          gacha2Stat3: _gacha2Stat3,
-          gacha3Stat1: _gacha3Stat1,
-          gacha3Stat2: _gacha3Stat2,
-          gacha3Stat3: _gacha3Stat3,
-          isCharacterStatsExpanded: _isCharacterStatsExpanded,
-          isMainWeaponExpanded: _isMainWeaponExpanded,
-          isSubWeaponExpanded: _isSubWeaponExpanded,
-          isArmorExpanded: _isArmorExpanded,
-          isHelmetExpanded: _isHelmetExpanded,
-          isRingExpanded: _isRingExpanded,
-          isGachaExpanded: _isGachaExpanded,
-          summary: _summary,
-        ),
-      );
+      _savedBuilds.add(_buildCurrentSnapshot(normalizedName));
     });
   }
 
@@ -737,58 +727,66 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     });
   }
 
+  void _resetCharacterDefaults() {
+    _character.addAll(_defaultCharacterStats);
+    _level = 1;
+    _personalStatType = _personalStatOptions.first;
+    _personalStatValue = 0;
+  }
+
+  void _resetEquipmentSelections() {
+    _mainWeaponId = null;
+    _enhMain = 0;
+    _mainCrystal1 = null;
+    _mainCrystal2 = null;
+
+    _subWeaponId = null;
+    _enhSub = 0;
+
+    _armorId = null;
+    _enhArmor = 0;
+    _armorCrystal1 = null;
+    _armorCrystal2 = null;
+
+    _helmetId = null;
+    _enhHelmet = 0;
+    _helmetCrystal1 = null;
+    _helmetCrystal2 = null;
+
+    _ringId = null;
+    _enhRing = 0;
+    _ringCrystal1 = null;
+    _ringCrystal2 = null;
+  }
+
+  void _resetGachaStats() {
+    _gacha1Stat1 = '';
+    _gacha1Stat2 = '';
+    _gacha1Stat3 = '';
+    _gacha2Stat1 = '';
+    _gacha2Stat2 = '';
+    _gacha2Stat3 = '';
+    _gacha3Stat1 = '';
+    _gacha3Stat2 = '';
+    _gacha3Stat3 = '';
+  }
+
+  void _resetExpandedStates() {
+    _isCharacterStatsExpanded = false;
+    _isMainWeaponExpanded = false;
+    _isSubWeaponExpanded = false;
+    _isArmorExpanded = false;
+    _isHelmetExpanded = false;
+    _isRingExpanded = false;
+    _isGachaExpanded = false;
+  }
+
   void _onClearAll() {
     _setStateAndRecalculate(() {
-      _character
-        ..['STR'] = 1
-        ..['DEX'] = 1
-        ..['INT'] = 1
-        ..['AGI'] = 1
-        ..['VIT'] = 1;
-      _level = 1;
-      _personalStatType = _personalStatOptions.first;
-      _personalStatValue = 0;
-
-      _mainWeaponId = null;
-      _enhMain = 0;
-      _mainCrystal1 = null;
-      _mainCrystal2 = null;
-
-      _subWeaponId = null;
-      _enhSub = 0;
-
-      _armorId = null;
-      _enhArmor = 0;
-      _armorCrystal1 = null;
-      _armorCrystal2 = null;
-
-      _helmetId = null;
-      _enhHelmet = 0;
-      _helmetCrystal1 = null;
-      _helmetCrystal2 = null;
-
-      _ringId = null;
-      _enhRing = 0;
-      _ringCrystal1 = null;
-      _ringCrystal2 = null;
-
-      _gacha1Stat1 = '';
-      _gacha1Stat2 = '';
-      _gacha1Stat3 = '';
-      _gacha2Stat1 = '';
-      _gacha2Stat2 = '';
-      _gacha2Stat3 = '';
-      _gacha3Stat1 = '';
-      _gacha3Stat2 = '';
-      _gacha3Stat3 = '';
-
-      _isCharacterStatsExpanded = false;
-      _isMainWeaponExpanded = false;
-      _isSubWeaponExpanded = false;
-      _isArmorExpanded = false;
-      _isHelmetExpanded = false;
-      _isRingExpanded = false;
-      _isGachaExpanded = false;
+      _resetCharacterDefaults();
+      _resetEquipmentSelections();
+      _resetGachaStats();
+      _resetExpandedStates();
 
       _showRecommendationsPanel = true;
       _savedBuilds.clear();

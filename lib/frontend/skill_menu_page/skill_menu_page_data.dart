@@ -191,41 +191,10 @@ String _defaultImageAssetPath({
   required String treeName,
   required String skillName,
 }) {
-  final String normalizedTree = treeName.trim().toLowerCase();
-  final String normalizedSkillName = skillName.trim().toLowerCase();
-  final String normalizedFileName = _normalizeSkillImageFileName(skillName);
-  if (normalizedFileName.isEmpty) {
-    return '';
-  }
-  if (normalizedTree == 'blade') {
-    const Map<String, String> bladeFileOverrides = <String, String>{
-      'trigger slash': 'tiggerslash.png',
-    };
-    final String fileName =
-        bladeFileOverrides[normalizedSkillName] ?? '$normalizedFileName.png';
-    return 'assets/data/skill_menu/images/blade/$fileName';
-  }
-  if (normalizedTree == 'shot') {
-    return 'assets/data/skill_menu/images/Shot/$normalizedFileName.png';
-  }
-  if (normalizedTree == 'crusher') {
-    const Map<String, String> crusherFileOverrides = <String, String>{
-      'forefist punch': 'forefist punch.png',
-      'goliath punch': 'goliath punch.png',
-      'god hand': 'god hand.png',
-      'divine rigid body': 'divine rigid body.png',
-      'floating kick': 'floating kick.png',
-      'geyser kick': 'geyser kick.png',
-    };
-    final String fileName =
-        crusherFileOverrides[normalizedSkillName] ?? '$normalizedFileName.png';
-    return 'assets/data/skill_menu/images/Crusher/$fileName';
-  }
-  return '';
-}
-
-String _normalizeSkillImageFileName(String skillName) {
-  return skillName.trim().toLowerCase().replaceAll(RegExp(r'[^a-z0-9]+'), '');
+  return SkillImageAssetConfig.resolveDefaultImageAssetPath(
+    treeName: treeName,
+    skillName: skillName,
+  );
 }
 
 String _stringValue(dynamic value) {

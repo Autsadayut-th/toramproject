@@ -55,7 +55,10 @@ class _MapLibraryDataViewState extends State<_MapLibraryDataView> {
       builder: (BuildContext dialogContext) {
         return Dialog(
           backgroundColor: const Color(0xFF101010),
-          insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 24,
+          ),
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 760, maxHeight: 600),
             child: SafeArea(
@@ -79,7 +82,10 @@ class _MapLibraryDataViewState extends State<_MapLibraryDataView> {
                           ),
                           IconButton(
                             onPressed: () => Navigator.of(dialogContext).pop(),
-                            icon: const Icon(Icons.close, color: Colors.white70),
+                            icon: const Icon(
+                              Icons.close,
+                              color: Colors.white70,
+                            ),
                             tooltip: 'Close',
                           ),
                         ],
@@ -88,30 +94,37 @@ class _MapLibraryDataViewState extends State<_MapLibraryDataView> {
                       Wrap(
                         spacing: 8,
                         runSpacing: 8,
-                        children: regions.map((String region) {
-                          final int count = region == 'All'
-                              ? allItems.length
-                              : allItems
-                                    .where(
-                                      (MapLibraryItem item) => item.region == region,
-                                    )
-                                    .length;
-                          return ChoiceChip(
-                            selectedColor: const Color(0xFF202020),
-                            backgroundColor: const Color(0xFF101010),
-                            side: const BorderSide(color: Color(0x44FFFFFF)),
-                            labelStyle: const TextStyle(color: Colors.white),
-                            label: Text('$region ($count)'),
-                            selected: activeRegion == region,
-                            onSelected: (_) {
-                              setState(() {
-                                _selectedRegion = region;
-                                _currentPage = 1;
-                              });
-                              Navigator.of(dialogContext).pop();
-                            },
-                          );
-                        }).toList(growable: false),
+                        children: regions
+                            .map((String region) {
+                              final int count = region == 'All'
+                                  ? allItems.length
+                                  : allItems
+                                        .where(
+                                          (MapLibraryItem item) =>
+                                              item.region == region,
+                                        )
+                                        .length;
+                              return ChoiceChip(
+                                selectedColor: const Color(0xFF202020),
+                                backgroundColor: const Color(0xFF101010),
+                                side: const BorderSide(
+                                  color: Color(0x44FFFFFF),
+                                ),
+                                labelStyle: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                                label: Text('$region ($count)'),
+                                selected: activeRegion == region,
+                                onSelected: (_) {
+                                  setState(() {
+                                    _selectedRegion = region;
+                                    _currentPage = 1;
+                                  });
+                                  Navigator.of(dialogContext).pop();
+                                },
+                              );
+                            })
+                            .toList(growable: false),
                       ),
                     ],
                   ),
@@ -128,10 +141,7 @@ class _MapLibraryDataViewState extends State<_MapLibraryDataView> {
   Widget build(BuildContext context) {
     return FutureBuilder<MapLibraryData>(
       future: _libraryFuture,
-      builder: (
-        BuildContext context,
-        AsyncSnapshot<MapLibraryData> snapshot,
-      ) {
+      builder: (BuildContext context, AsyncSnapshot<MapLibraryData> snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
           return const Center(child: CircularProgressIndicator());
         }
@@ -161,7 +171,10 @@ class _MapLibraryDataViewState extends State<_MapLibraryDataView> {
 
         final MapLibraryData data =
             snapshot.data ??
-            const MapLibraryData(maps: <MapLibraryItem>[], monsterById: <String, MapMonsterInfo>{});
+            const MapLibraryData(
+              maps: <MapLibraryItem>[],
+              monsterById: <String, MapMonsterInfo>{},
+            );
         final List<MapLibraryItem> allItems = data.maps;
         final List<String> regions = _repository.regionsFrom(allItems);
         final String activeRegion = regions.contains(_selectedRegion)
@@ -222,15 +235,21 @@ class _MapLibraryDataViewState extends State<_MapLibraryDataView> {
                         fillColor: const Color(0xFF0F0F0F),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(color: Color(0x33FFFFFF)),
+                          borderSide: const BorderSide(
+                            color: Color(0x33FFFFFF),
+                          ),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(color: Color(0x33FFFFFF)),
+                          borderSide: const BorderSide(
+                            color: Color(0x33FFFFFF),
+                          ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(color: Color(0x66FFFFFF)),
+                          borderSide: const BorderSide(
+                            color: Color(0x66FFFFFF),
+                          ),
                         ),
                       ),
                       onChanged: (String value) {
@@ -282,22 +301,20 @@ class _MapLibraryDataViewState extends State<_MapLibraryDataView> {
                       ),
                     )
                   : LayoutBuilder(
-                      builder: (
-                        BuildContext context,
-                        BoxConstraints constraints,
-                      ) {
-                        final double width = constraints.maxWidth;
-                        final int columnCount = width >= 960
-                            ? 3
-                            : width >= 620
-                            ? 2
-                            : 1;
-                        return _buildItemsGrid(
-                          pagedItems: pagedItems,
-                          columnCount: columnCount,
-                          data: data,
-                        );
-                      },
+                      builder:
+                          (BuildContext context, BoxConstraints constraints) {
+                            final double width = constraints.maxWidth;
+                            final int columnCount = width >= 960
+                                ? 3
+                                : width >= 620
+                                ? 2
+                                : 1;
+                            return _buildItemsGrid(
+                              pagedItems: pagedItems,
+                              columnCount: columnCount,
+                              data: data,
+                            );
+                          },
                     ),
             ),
             if (filteredItems.isNotEmpty)

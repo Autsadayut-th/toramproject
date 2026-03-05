@@ -172,7 +172,8 @@ class BuildPersistenceService {
 
       String id = readStringValue(build['id']).trim();
       if (id.isEmpty) {
-        id = 'imported_${DateTime.now().microsecondsSinceEpoch}_${normalized.length}';
+        id =
+            'imported_${DateTime.now().microsecondsSinceEpoch}_${normalized.length}';
       }
       while (usedIds.contains(id)) {
         id = '${id}_copy';
@@ -227,7 +228,8 @@ class BuildPersistenceService {
     required Map<String, num> summary,
   }) {
     final Map<String, int> normalizedCharacter = <String, int>{
-      for (final String key in characterStatKeys) key: readIntValue(character[key]),
+      for (final String key in characterStatKeys)
+        key: readIntValue(character[key]),
     };
 
     return <String, dynamic>{

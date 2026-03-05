@@ -41,7 +41,7 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
   }
 
   void _reload() {
-    setState(() {
+    _setLibraryState(() {
       _libraryFuture = _repository.loadAllCategories();
       _currentPage = 1;
     });
@@ -49,6 +49,26 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
 
   void _setLibraryState(VoidCallback action) {
     setState(action);
+  }
+
+  void _setCurrentPage(int page) {
+    _setLibraryState(() {
+      _currentPage = page;
+    });
+  }
+
+  void _onSearchChanged(String value) {
+    _setLibraryState(() {
+      _searchQuery = value;
+      _currentPage = 1;
+    });
+  }
+
+  void _selectCategory(String category) {
+    _setLibraryState(() {
+      _selectedCategory = category;
+      _currentPage = 1;
+    });
   }
 
   Future<void> _openCategoryDialog({
@@ -65,7 +85,10 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
       builder: (BuildContext dialogContext) {
         return Dialog(
           backgroundColor: const Color(0xFF101010),
-          insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 24,
+          ),
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 760, maxHeight: 600),
             child: SafeArea(
@@ -89,7 +112,10 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                           ),
                           IconButton(
                             onPressed: () => Navigator.of(dialogContext).pop(),
-                            icon: const Icon(Icons.close, color: Colors.white70),
+                            icon: const Icon(
+                              Icons.close,
+                              color: Colors.white70,
+                            ),
                             tooltip: 'Close',
                           ),
                         ],
@@ -103,17 +129,18 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                               return ChoiceChip(
                                 selectedColor: const Color(0xFF202020),
                                 backgroundColor: const Color(0xFF101010),
-                                side: const BorderSide(color: Color(0x44FFFFFF)),
-                                labelStyle: const TextStyle(color: Colors.white),
+                                side: const BorderSide(
+                                  color: Color(0x44FFFFFF),
+                                ),
+                                labelStyle: const TextStyle(
+                                  color: Colors.white,
+                                ),
                                 label: Text(
                                   '$category (${allCategories[category]?.length ?? 0})',
                                 ),
                                 selected: activeCategory == category,
                                 onSelected: (_) {
-                                  setState(() {
-                                    _selectedCategory = category;
-                                    _currentPage = 1;
-                                  });
+                                  _selectCategory(category);
                                   Navigator.of(dialogContext).pop();
                                 },
                               );
@@ -169,52 +196,30 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
 
             final Map<String, List<EquipmentLibraryItem>> allCategories =
                 snapshot.data ?? <String, List<EquipmentLibraryItem>>{};
-            final Set<String>? allowedCategorySet = widget.allowedCategories
-                ?.toSet();
-            final List<String> categories = _repository.categories
-                .where((String category) {
-                  if (!allCategories.containsKey(category)) {
-                    return false;
-                  }
-                  return allowedCategorySet == null ||
-                      allowedCategorySet.contains(category);
-                })
-                .toList(growable: false);
+            final List<String> categories =
+                EquipmentLibraryQueryService.availableCategories(
+                  repositoryCategories: _repository.categories,
+                  allCategories: allCategories,
+                  allowedCategories: widget.allowedCategories?.toSet(),
+                );
             final String activeCategory =
-                (categories.contains(_selectedCategory)
-                    ? _selectedCategory
-                    : null) ??
-                (categories.isNotEmpty ? categories.first : '');
+                EquipmentLibraryQueryService.resolveActiveCategory(
+                  selectedCategory: _selectedCategory,
+                  categories: categories,
+                );
             final List<EquipmentLibraryItem> allItems =
                 allCategories[activeCategory] ?? const <EquipmentLibraryItem>[];
-            final String query = _searchQuery.trim().toLowerCase();
-            final List<EquipmentLibraryItem> filteredItems = allItems
-                .where((EquipmentLibraryItem item) {
-                  if (query.isEmpty) {
-                    return true;
-                  }
-                  return item.name.toLowerCase().contains(query) ||
-                      item.key.toLowerCase().contains(query) ||
-                      item.type.toLowerCase().contains(query);
-                })
-                .toList(growable: false);
-
-            final int totalPages = filteredItems.isEmpty
-                ? 1
-                : ((filteredItems.length + _itemsPerPage - 1) / _itemsPerPage)
-                      .floor();
-            final int currentPage = _currentPage.clamp(1, totalPages);
-            final int startIndex = filteredItems.isEmpty
-                ? 0
-                : (currentPage - 1) * _itemsPerPage;
-            final int endIndex = filteredItems.isEmpty
-                ? 0
-                : (startIndex + _itemsPerPage > filteredItems.length
-                      ? filteredItems.length
-                      : startIndex + _itemsPerPage);
-            final List<EquipmentLibraryItem> pagedItems = filteredItems.isEmpty
-                ? const <EquipmentLibraryItem>[]
-                : filteredItems.sublist(startIndex, endIndex);
+            final List<EquipmentLibraryItem> filteredItems =
+                EquipmentLibraryQueryService.filterItems(
+                  items: allItems,
+                  query: _searchQuery,
+                );
+            final EquipmentLibraryPageSlice pagedResult =
+                EquipmentLibraryQueryService.paginateItems(
+                  filteredItems: filteredItems,
+                  currentPage: _currentPage,
+                  itemsPerPage: _itemsPerPage,
+                );
 
             return Column(
               children: <Widget>[
@@ -252,7 +257,9 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                               cursorColor: Colors.white70,
                               decoration: InputDecoration(
                                 hintText: 'Search by name, key, type...',
-                                hintStyle: const TextStyle(color: Colors.white54),
+                                hintStyle: const TextStyle(
+                                  color: Colors.white54,
+                                ),
                                 prefixIcon: const Icon(
                                   Icons.search,
                                   color: Colors.white70,
@@ -279,10 +286,7 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                                 ),
                               ),
                               onChanged: (String value) {
-                                setState(() {
-                                  _searchQuery = value;
-                                  _currentPage = 1;
-                                });
+                                _onSearchChanged(value);
                               },
                             ),
                           ),
@@ -348,7 +352,7 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                                     : 1;
 
                                 return _buildItemsGrid(
-                                  pagedItems: pagedItems,
+                                  pagedItems: pagedResult.items,
                                   columnCount: columnCount,
                                   previewLimit: previewLimit,
                                 );
@@ -357,8 +361,8 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                 ),
                 if (filteredItems.isNotEmpty)
                   _buildPaginationBar(
-                    currentPage: currentPage,
-                    totalPages: totalPages,
+                    currentPage: pagedResult.currentPage,
+                    totalPages: pagedResult.totalPages,
                   ),
               ],
             );

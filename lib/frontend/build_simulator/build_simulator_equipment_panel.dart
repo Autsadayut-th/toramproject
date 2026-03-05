@@ -208,33 +208,19 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         personalStatType: _personalStatType,
         personalStatValue: _personalStatValue,
         onStatChanged: (String key, int value) {
-          _setUiState(() {
-            _character[key] = value;
-            _recalculateAll();
-          });
+          _setStateAndRecalculate(() => _character[key] = value);
         },
         onLevelChanged: (int level) {
-          _setUiState(() {
-            _level = level;
-            _recalculateAll();
-          });
+          _setStateAndRecalculate(() => _level = level);
         },
         onPersonalStatTypeChanged: (String type) {
-          _setUiState(() {
-            _personalStatType = type;
-            _recalculateAll();
-          });
+          _setStateAndRecalculate(() => _personalStatType = type);
         },
         onPersonalStatValueChanged: (int value) {
-          _setUiState(() {
-            _personalStatValue = value;
-            _recalculateAll();
-          });
+          _setStateAndRecalculate(() => _personalStatValue = value);
         },
         onRecalculate: () {
-          _setUiState(() {
-            _recalculateAll();
-          });
+          _setUiState(_recalculateAll);
         },
       ),
       minHeight: minHeight,

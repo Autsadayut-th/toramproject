@@ -165,19 +165,15 @@ class _SettingsDataPageState extends State<SettingsDataPage> {
   }
 
   Future<void> _openMonsterLibrary() async {
-    await Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => const MonsterLibraryPage(),
-      ),
-    );
+    await Navigator.of(
+      context,
+    ).push(MaterialPageRoute<void>(builder: (_) => const MonsterLibraryPage()));
   }
 
   Future<void> _openMapLibrary() async {
-    await Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => const MapLibraryPage(),
-      ),
-    );
+    await Navigator.of(
+      context,
+    ).push(MaterialPageRoute<void>(builder: (_) => const MapLibraryPage()));
   }
 
   @override

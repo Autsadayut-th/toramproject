@@ -93,7 +93,10 @@ extension _MapLibraryGrid on _MapLibraryDataViewState {
                       'Targets: ${previewMonsters.map((MapMonsterInfo monster) => monster.name).join(', ')}',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(color: Colors.white70, fontSize: 12),
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                      ),
                     ),
                   if (monsters.length > previewMonsters.length)
                     Padding(

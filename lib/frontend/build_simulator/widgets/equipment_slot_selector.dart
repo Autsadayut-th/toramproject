@@ -265,7 +265,10 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
         isDense: true,
         hintText: hint,
         hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.45)),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 10,
+        ),
         filled: true,
         fillColor: const Color(0xFF111111),
         border: OutlineInputBorder(

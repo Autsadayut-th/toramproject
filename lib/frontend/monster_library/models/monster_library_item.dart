@@ -59,8 +59,11 @@ class MonsterLibraryItem {
     if (raw is! List) {
       return const <String>[];
     }
-    return raw.map((dynamic item) => _stringValue(item)).where((String item) {
-      return item.isNotEmpty;
-    }).toList(growable: false);
+    return raw
+        .map((dynamic item) => _stringValue(item))
+        .where((String item) {
+          return item.isNotEmpty;
+        })
+        .toList(growable: false);
   }
 }

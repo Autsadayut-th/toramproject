@@ -66,6 +66,11 @@ flutter:
     - assets/data/skill_menu/images/blade/
     - assets/data/skill_menu/images/Shot/
     - assets/data/skill_menu/images/Crusher/
+    - assets/data/skill_menu/images/Magic/
+    - assets/data/skill_menu/images/DualSword/
+    - assets/data/skill_menu/images/Halberd/
+    - assets/data/skill_menu/images/Mononofu/
+    - assets/data/skill_menu/images/Sprite/
     - assets/data/monster_library/
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -48,11 +48,7 @@ extension _EquipmentLibraryPagination on _EquipmentLibraryDataViewState {
                       _buildPaginationControl(
                         label: '<',
                         enabled: currentPage > 1,
-                        onTap: () {
-                          _setLibraryState(() {
-                            _currentPage = currentPage - 1;
-                          });
-                        },
+                        onTap: () => _setCurrentPage(currentPage - 1),
                       ),
                       const SizedBox(width: 6),
                       for (
@@ -64,22 +60,14 @@ extension _EquipmentLibraryPagination on _EquipmentLibraryDataViewState {
                           label: '$page',
                           enabled: page != currentPage,
                           isSelected: page == currentPage,
-                          onTap: () {
-                            _setLibraryState(() {
-                              _currentPage = page;
-                            });
-                          },
+                          onTap: () => _setCurrentPage(page),
                         ),
                         const SizedBox(width: 6),
                       ],
                       _buildPaginationControl(
                         label: '>',
                         enabled: currentPage < totalPages,
-                        onTap: () {
-                          _setLibraryState(() {
-                            _currentPage = currentPage + 1;
-                          });
-                        },
+                        onTap: () => _setCurrentPage(currentPage + 1),
                       ),
                     ],
                   ),

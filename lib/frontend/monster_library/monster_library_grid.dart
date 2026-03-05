@@ -16,7 +16,9 @@ extension _MonsterLibraryGrid on _MonsterLibraryDataViewState {
       ),
       itemBuilder: (BuildContext context, int index) {
         final MonsterLibraryItem item = pagedItems[index];
-        final List<String> previewDrops = item.drops.take(2).toList(growable: false);
+        final List<String> previewDrops = item.drops
+            .take(2)
+            .toList(growable: false);
         return InkWell(
           onTap: () => _openDetails(item),
           borderRadius: BorderRadius.circular(12),
@@ -83,7 +85,10 @@ extension _MonsterLibraryGrid on _MonsterLibraryDataViewState {
                       'Drops: ${previewDrops.join(', ')}',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(color: Colors.white70, fontSize: 12),
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                      ),
                     ),
                   if (item.drops.length > previewDrops.length)
                     Padding(

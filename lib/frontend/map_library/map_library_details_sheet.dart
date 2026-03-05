@@ -74,9 +74,13 @@ extension _MapLibraryDetailsSheet on _MapLibraryDataViewState {
                     Wrap(
                       spacing: 8,
                       runSpacing: 8,
-                      children: monsters.map((MapMonsterInfo monster) {
-                        return _pill(text: '${monster.name} (Lv ${monster.level})');
-                      }).toList(growable: false),
+                      children: monsters
+                          .map((MapMonsterInfo monster) {
+                            return _pill(
+                              text: '${monster.name} (Lv ${monster.level})',
+                            );
+                          })
+                          .toList(growable: false),
                     ),
                 ],
               ),
@@ -95,10 +99,7 @@ extension _MapLibraryDetailsSheet on _MapLibraryDataViewState {
         children: <Widget>[
           SizedBox(
             width: 130,
-            child: Text(
-              label,
-              style: const TextStyle(color: Colors.white70),
-            ),
+            child: Text(label, style: const TextStyle(color: Colors.white70)),
           ),
           Expanded(
             child: Text(

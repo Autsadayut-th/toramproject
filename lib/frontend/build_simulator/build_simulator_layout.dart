@@ -39,11 +39,7 @@ extension _BuildSimulatorScreenUI on BuildSimulatorScreenState {
         } else {
           body = SingleChildScrollView(
             padding: const EdgeInsets.all(16),
-            child: Column(
-              children: <Widget>[
-                _buildEquipmentPanel(),
-              ],
-            ),
+            child: Column(children: <Widget>[_buildEquipmentPanel()]),
           );
         }
 

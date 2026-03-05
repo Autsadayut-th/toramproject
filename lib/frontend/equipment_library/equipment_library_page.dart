@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../shared/app_mobile_bottom_navigation_bar.dart';
 import '../shared/app_navigation_drawer.dart';
 import 'models/equipment_library_item.dart';
+import 'models/equipment_library_page_slice.dart';
 import 'repository/equipment_library_repository.dart';
+import 'services/equipment_library_query_service.dart';
 
 part 'equipment_library_data_view.dart';
 part 'equipment_library_details_sheet.dart';
@@ -61,6 +63,13 @@ class EquipmentLibraryScreen extends StatelessWidget {
       onNavigate?.call(page);
     }
 
+    void onSelectDrawerPage(AppNavigationPage page) {
+      Navigator.of(context).pop();
+      if (page != AppNavigationPage.equipment) {
+        onNavigate?.call(page);
+      }
+    }
+
     final Widget content = _EquipmentLibraryDataView(
       pickMode: pickMode,
       initialCategory: initialCategory,
@@ -76,27 +85,15 @@ class EquipmentLibraryScreen extends StatelessWidget {
       drawer: showGlobalMenu
           ? AppNavigationDrawer(
               currentPage: AppNavigationPage.equipment,
-              onOpenBuild: () {
-                Navigator.of(context).pop();
-                onNavigate?.call(AppNavigationPage.build);
-              },
-              onOpenEquipment: () => Navigator.of(context).pop(),
-              onOpenSkill: () {
-                Navigator.of(context).pop();
-                onNavigate?.call(AppNavigationPage.skill);
-              },
-              onOpenSaved: () {
-                Navigator.of(context).pop();
-                onNavigate?.call(AppNavigationPage.saved);
-              },
-              onOpenCompare: () {
-                Navigator.of(context).pop();
-                onNavigate?.call(AppNavigationPage.compare);
-              },
-              onOpenSettings: () {
-                Navigator.of(context).pop();
-                onNavigate?.call(AppNavigationPage.settings);
-              },
+              onOpenBuild: () => onSelectDrawerPage(AppNavigationPage.build),
+              onOpenEquipment: () =>
+                  onSelectDrawerPage(AppNavigationPage.equipment),
+              onOpenSkill: () => onSelectDrawerPage(AppNavigationPage.skill),
+              onOpenSaved: () => onSelectDrawerPage(AppNavigationPage.saved),
+              onOpenCompare: () =>
+                  onSelectDrawerPage(AppNavigationPage.compare),
+              onOpenSettings: () =>
+                  onSelectDrawerPage(AppNavigationPage.settings),
             )
           : null,
       appBar: AppBar(

@@ -67,6 +67,24 @@ class FirebaseAuthService {
     await _firebaseAuth.signOut();
   }
 
+  Future<AuthResult> sendPasswordResetEmail({required String email}) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email.trim());
+      return const AuthResult(
+        success: true,
+        message: 'Password reset email has been sent. Please check your inbox.',
+      );
+    } on FirebaseAuthException catch (error) {
+      return AuthResult(success: false, message: _messageFromCode(error.code));
+    } catch (_) {
+      return const AuthResult(
+        success: false,
+        message:
+            'Unable to send password reset email right now. Please try again.',
+      );
+    }
+  }
+
   String _messageFromCode(String code) {
     switch (code) {
       case 'invalid-email':

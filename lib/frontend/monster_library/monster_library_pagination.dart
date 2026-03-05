@@ -101,7 +101,9 @@ extension _MonsterLibraryPagination on _MonsterLibraryDataViewState {
     final Color borderColor = isSelected
         ? const Color(0xFF888888)
         : const Color(0xFF666666);
-    final Color textColor = enabled || isSelected ? Colors.white : Colors.white54;
+    final Color textColor = enabled || isSelected
+        ? Colors.white
+        : Colors.white54;
 
     return InkWell(
       onTap: enabled ? onTap : null,
