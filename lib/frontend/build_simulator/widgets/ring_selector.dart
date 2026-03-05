@@ -40,6 +40,7 @@ class RingEquipmentSelector extends StatelessWidget {
       statPreview: statPreview,
       enhance: enhance,
       onEnhChanged: onEnhChanged,
+      crystalCategoryFilters: const <String>['special', 'normal'],
       crystal1: crystal1,
       crystal2: crystal2,
       onCrystal1Changed: onCrystal1Changed,
@@ -47,3 +48,4 @@ class RingEquipmentSelector extends StatelessWidget {
     );
   }
 }
+

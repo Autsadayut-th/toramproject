@@ -66,10 +66,10 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [
-                              const Color(0xFF4A4A4A),
-                              const Color(0xFF3A3A3A),
+                              Color(0xFF4A4A4A),
+                              Color(0xFF3A3A3A),
                             ],
                           ),
                           borderRadius: BorderRadius.circular(999),
@@ -113,51 +113,13 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
                     runSpacing: 6,
                     children: <Widget>[
                       ...previewStats.map((EquipmentStat stat) {
-                        return Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 5,
-                          ),
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              colors: [Color(0xFF3A3A3A), Color(0xFF2A2A2A)],
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: const Color(0xFF666666)),
-                          ),
-                          child: Text(
-                            '${_titleCase(stat.statKey)} ${_formatStatValue(stat)}',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                        return _buildStatChip(
+                          '${_titleCase(stat.statKey)} ${_formatStatValue(stat)}',
                         );
                       }),
                       if (item.stats.length > previewStats.length)
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 5,
-                          ),
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              colors: [Color(0xFF3A3A3A), Color(0xFF2A2A2A)],
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: const Color(0xFF666666)),
-                          ),
-                          child: Text(
-                            '+${item.stats.length - previewStats.length} more',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                        _buildStatChip(
+                          '+${item.stats.length - previewStats.length} more',
                         ),
                     ],
                   ),
@@ -180,6 +142,29 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildStatChip(String text) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFF3A3A3A), Color(0xFF2A2A2A)],
+        ),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: const Color(0xFF666666)),
+      ),
+      child: Text(
+        text,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 11,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
     );
   }
 }

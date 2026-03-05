@@ -5,11 +5,13 @@ class _EquipmentLibraryDataView extends StatefulWidget {
     required this.pickMode,
     required this.initialCategory,
     required this.allowedCategories,
+    required this.allowedTypes,
   });
 
   final bool pickMode;
   final String? initialCategory;
   final List<String>? allowedCategories;
+  final List<String>? allowedTypes;
 
   @override
   State<_EquipmentLibraryDataView> createState() =>
@@ -35,39 +37,59 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
   }
 
   @override
+  void didUpdateWidget(covariant _EquipmentLibraryDataView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final bool initialCategoryChanged =
+        oldWidget.initialCategory != widget.initialCategory;
+    final bool allowedCategoriesChanged =
+        !_isSameCategoryList(oldWidget.allowedCategories, widget.allowedCategories);
+    final bool allowedTypesChanged =
+        !_isSameCategoryList(oldWidget.allowedTypes, widget.allowedTypes);
+    if (!initialCategoryChanged &&
+        !allowedCategoriesChanged &&
+        !allowedTypesChanged) {
+      return;
+    }
+    setState(() {
+      _selectedCategory = widget.initialCategory;
+      _currentPage = 1;
+    });
+  }
+
+  @override
   void dispose() {
     _searchController.dispose();
     super.dispose();
   }
 
+  bool _isSameCategoryList(List<String>? a, List<String>? b) {
+    if (identical(a, b)) {
+      return true;
+    }
+    if (a == null || b == null) {
+      return a == b;
+    }
+    if (a.length != b.length) {
+      return false;
+    }
+    for (int index = 0; index < a.length; index++) {
+      if (a[index] != b[index]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   void _reload() {
-    _setLibraryState(() {
+    setState(() {
       _libraryFuture = _repository.loadAllCategories();
       _currentPage = 1;
     });
   }
 
-  void _setLibraryState(VoidCallback action) {
-    setState(action);
-  }
-
   void _setCurrentPage(int page) {
-    _setLibraryState(() {
+    setState(() {
       _currentPage = page;
-    });
-  }
-
-  void _onSearchChanged(String value) {
-    _setLibraryState(() {
-      _searchQuery = value;
-      _currentPage = 1;
-    });
-  }
-
-  void _selectCategory(String category) {
-    _setLibraryState(() {
-      _selectedCategory = category;
-      _currentPage = 1;
     });
   }
 
@@ -140,7 +162,10 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                                 ),
                                 selected: activeCategory == category,
                                 onSelected: (_) {
-                                  _selectCategory(category);
+                                  setState(() {
+                                    _selectedCategory = category;
+                                    _currentPage = 1;
+                                  });
                                   Navigator.of(dialogContext).pop();
                                 },
                               );
@@ -213,6 +238,7 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                 EquipmentLibraryQueryService.filterItems(
                   items: allItems,
                   query: _searchQuery,
+                  allowedTypes: widget.allowedTypes?.toSet(),
                 );
             final EquipmentLibraryPageSlice pagedResult =
                 EquipmentLibraryQueryService.paginateItems(
@@ -245,86 +271,84 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                     16,
                     12,
                   ),
-                  child: LayoutBuilder(
-                    builder: (BuildContext context, BoxConstraints constraints) {
-                      const double filterButtonSize = 52;
-                      return Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: TextField(
-                              controller: _searchController,
-                              style: const TextStyle(color: Colors.white),
-                              cursorColor: Colors.white70,
-                              decoration: InputDecoration(
-                                hintText: 'Search by name, key, type...',
-                                hintStyle: const TextStyle(
-                                  color: Colors.white54,
-                                ),
-                                prefixIcon: const Icon(
-                                  Icons.search,
-                                  color: Colors.white70,
-                                ),
-                                filled: true,
-                                fillColor: const Color(0xFF0F0F0F),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                  borderSide: const BorderSide(
-                                    color: Color(0x33FFFFFF),
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                  borderSide: const BorderSide(
-                                    color: Color(0x33FFFFFF),
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                  borderSide: const BorderSide(
-                                    color: Color(0x66FFFFFF),
-                                  ),
-                                ),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: TextField(
+                          controller: _searchController,
+                          style: const TextStyle(color: Colors.white),
+                          cursorColor: Colors.white70,
+                          decoration: InputDecoration(
+                            hintText: 'Search by name, key, type...',
+                            hintStyle: const TextStyle(
+                              color: Colors.white54,
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.search,
+                              color: Colors.white70,
+                            ),
+                            filled: true,
+                            fillColor: const Color(0xFF0F0F0F),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: Color(0x33FFFFFF),
                               ),
-                              onChanged: (String value) {
-                                _onSearchChanged(value);
-                              },
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: Color(0x33FFFFFF),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: Color(0x66FFFFFF),
+                              ),
                             ),
                           ),
-                          if (categories.isNotEmpty) ...<Widget>[
-                            const SizedBox(width: 8),
-                            SizedBox(
-                              width: filterButtonSize,
-                              height: filterButtonSize,
-                              child: Tooltip(
-                                message:
-                                    '$activeCategory (${allCategories[activeCategory]?.length ?? 0})',
-                                child: OutlinedButton(
-                                  onPressed: () {
-                                    _openCategoryDialog(
-                                      categories: categories,
-                                      allCategories: allCategories,
-                                      activeCategory: activeCategory,
-                                    );
-                                  },
-                                  style: OutlinedButton.styleFrom(
-                                    foregroundColor: Colors.white70,
-                                    side: const BorderSide(
-                                      color: Color(0x33FFFFFF),
-                                    ),
-                                    backgroundColor: const Color(0xFF0F0F0F),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    padding: EdgeInsets.zero,
-                                  ),
-                                  child: const Icon(Icons.tune, size: 18),
+                          onChanged: (String value) {
+                            setState(() {
+                              _searchQuery = value;
+                              _currentPage = 1;
+                            });
+                          },
+                        ),
+                      ),
+                      if (categories.isNotEmpty) ...<Widget>[
+                        const SizedBox(width: 8),
+                        SizedBox(
+                          width: 52,
+                          height: 52,
+                          child: Tooltip(
+                            message:
+                                '$activeCategory (${allCategories[activeCategory]?.length ?? 0})',
+                            child: OutlinedButton(
+                              onPressed: () {
+                                _openCategoryDialog(
+                                  categories: categories,
+                                  allCategories: allCategories,
+                                  activeCategory: activeCategory,
+                                );
+                              },
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: Colors.white70,
+                                side: const BorderSide(
+                                  color: Color(0x33FFFFFF),
                                 ),
+                                backgroundColor: const Color(0xFF0F0F0F),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                padding: EdgeInsets.zero,
                               ),
+                              child: const Icon(Icons.tune, size: 18),
                             ),
-                          ],
-                        ],
-                      );
-                    },
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
                 ),
                 Expanded(

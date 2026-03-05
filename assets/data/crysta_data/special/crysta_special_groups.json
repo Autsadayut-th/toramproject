@@ -1,0 +1,60 @@
+{
+  "zeagrysta": [
+    "abyssal_crystal_monster"
+  ],
+  "crysmort": [
+    "breeta"
+  ],
+  "venena_ii": [
+    "humida"
+  ],
+  "volgagon": [
+    "etoise"
+  ],
+  "lalvada": [
+    "dominaredor"
+  ],
+  "patissia": [
+    "sicanokami"
+  ],
+  "eerie_crystal": [
+    "mysterious_crystal",
+    "tapir"
+  ],
+  "amalgam": [
+    "crysmort"
+  ],
+  "zelbuse": [
+    "war_dragon_turba"
+  ],
+  "dark_mushroom": [
+    "teertocrit"
+  ],
+  "shining_gentleman": [
+    "espectro"
+  ],
+  "venena": [
+    "venena_ii"
+  ],
+  "violaccoon": [
+    "sand_bandits_leader"
+  ],
+  "tapir": [
+    "patissia"
+  ],
+  "deniala": [
+    "amalgam"
+  ],
+  "bexiz": [
+    "zelbuse"
+  ],
+  "viscum": [
+    "deniala"
+  ],
+  "ooze": [
+    "lalvada"
+  ],
+  "stone_mercenary": [
+    "memecoleous"
+  ]
+}

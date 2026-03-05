@@ -1,0 +1,2677 @@
+[
+  {
+    "id": 1,
+    "name": "Caravan Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 2,
+      "stability": 15
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 2
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 2,
+    "name": "Flash Volt [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 3,
+      "stability": 15
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 10
+      },
+      {
+        "key": "pct_stronger_against_light",
+        "value": -50
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "critical_rate",
+        "value": 10,
+        "condition": {
+          "weapon_required": "bowgun"
+        }
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 3,
+    "name": "Magic Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 3,
+      "stability": 30
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 100,
+        "condition": {
+          "weapon_required": "bow"
+        }
+      },
+      {
+        "key": "critical_damage",
+        "value": -10
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Cursed Clock (Lv 71)",
+        "dye": "",
+        "map": "Magic Waste Site: Area 2"
+      },
+      {
+        "monster": "Cursed Clock (Lv 71)",
+        "dye": "",
+        "map": "Magic Waste Site: Area 3"
+      },
+      {
+        "monster": "Dirty Antique",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Wooden Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 4,
+      "stability": 20
+    },
+    "stats": [],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Fire Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 5,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "element",
+        "value": "fire"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Hardwood Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 6,
+      "stability": 20
+    },
+    "stats": [],
+    "obtained_from": [
+      {
+        "monster": "Pomum (Lv 7)",
+        "dye": "",
+        "map": "Reug Salt Plains: Wanderers Camp"
+      },
+      {
+        "monster": "Pomum (Lv 7)",
+        "dye": "A 5 5",
+        "map": "Reug Salt Plains: Wanderers Camp"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Hardwood Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 6,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Wind Slash Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 10,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "dex",
+        "value": 1
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Thin Sharp Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 12,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 30
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Hunter's Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 13,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "long_range_damage_pct",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Beak (Lv 32)",
+        "dye": "",
+        "map": "Scaro Town: Area 1"
+      },
+      {
+        "monster": "Beak (Lv 33)",
+        "dye": "",
+        "map": "Scaro Town: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Hunter's Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 13,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "accuracy_pct",
+        "value": 1
+      },
+      {
+        "key": "long_range_damage_pct",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Tempest Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 15,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "accuracy_pct",
+        "value": 10
+      },
+      {
+        "key": "critical_damage_pct",
+        "value": 1
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Forestia (Lv 49)",
+        "dye": "",
+        "map": "Land Of Chaos"
+      },
+      {
+        "monster": "Forestia (Lv 39)",
+        "dye": "",
+        "map": "Land Of Chaos"
+      },
+      {
+        "monster": "Forestia (Lv 59)",
+        "dye": "",
+        "map": "Land Of Chaos"
+      },
+      {
+        "monster": "Forestia (Lv 69)",
+        "dye": "",
+        "map": "Land Of Chaos"
+      },
+      {
+        "monster": "Forestia (Lv 89)",
+        "dye": "",
+        "map": "Land Of Chaos"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Tempest Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 15,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "critical_damage_pct",
+        "value": 1
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Ice Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 17,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 2
+      },
+      {
+        "key": "element",
+        "value": "water"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "High-Quality Wood Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 18,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "dex",
+        "value": 2
+      },
+      {
+        "key": "maxmp",
+        "value": 50
+      },
+      {
+        "key": "accuracy_pct",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Arborgon (Lv 39)",
+        "dye": "",
+        "map": "Harde Hill"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Mushroom Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 20,
+      "stability": 1
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": -10
+      },
+      {
+        "key": "aggro_pct",
+        "value": 5
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Kinote (Lv 27)",
+        "dye": "",
+        "map": "Nehelo Swamp"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Blade Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 22,
+      "stability": 15
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 3
+      },
+      {
+        "key": "critical_damage",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Ceramic Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 22,
+      "stability": 10
+    },
+    "stats": [
+      {
+        "key": "element",
+        "value": "earth"
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 21,
+    "name": "Iron Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 24,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "weapon_atk_pct",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Artisan Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 30,
+      "stability": 24
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 100
+      },
+      {
+        "key": "motion_speed_pct",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Heavy Bolt [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 32,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 3
+      },
+      {
+        "key": "accuracy_pct",
+        "value": -25
+      },
+      {
+        "key": "weapon_atk",
+        "value": 10,
+        "condition": {
+          "weapon_required": "bowgun"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Mithril Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 32,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "critical_rate_pct",
+        "value": 1
+      },
+      {
+        "key": "long_range_damage_pct",
+        "value": 1
+      },
+      {
+        "key": "critical_damage",
+        "value": 3,
+        "condition": {
+          "weapon_required": "bow"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Flame Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 34,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 100
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Sunion (Lv 73)",
+        "dye": "",
+        "map": "Dark Mirror"
+      },
+      {
+        "monster": "Sunion (Lv 76)",
+        "dye": "",
+        "map": "Dark Mirror"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Aquamirror Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 37,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "cspd",
+        "value": 100
+      },
+      {
+        "key": "element",
+        "value": "water"
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 27,
+    "name": "Sharp Wood Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 40,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 6
+      },
+      {
+        "key": "critical_damage",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Maple Fox (Lv 91)",
+        "dye": "",
+        "map": "Navida City: Crossroad (80-100)"
+      },
+      {
+        "monster": "Maple Fox (Lv 91)",
+        "dye": "",
+        "map": "Navida City: East (80-100)"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Split Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 40,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "attack_mp_recovery",
+        "value": 1
+      },
+      {
+        "key": "additional_melee_pct",
+        "value": 100,
+        "condition": {
+          "weapon_required": "bow"
+        }
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 29,
+    "name": "Twilight Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 40,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": -10
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Twilight Dragon (Lv 100)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      },
+      {
+        "monster": "Twilight Dragon (Lv 90)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      },
+      {
+        "monster": "Twilight Dragon (Lv 110)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      },
+      {
+        "monster": "Twilight Dragon (Lv 120)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      },
+      {
+        "monster": "Twilight Dragon (Lv 140)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Pointed Ore Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 43,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "def",
+        "value": 50
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 3
+      },
+      {
+        "key": "accuracy_pct",
+        "value": -1
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Cavern Rat (Lv 99)",
+        "dye": "",
+        "map": "Singolare Ruins: 1st Floor"
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "name": "Anniv Festive Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 50,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 100
+      },
+      {
+        "key": "aggro_pct",
+        "value": -10
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Anniv Equipment Box I",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Cacao Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 50,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 3
+      },
+      {
+        "key": "aggro_pct",
+        "value": -6
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Candy Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 56,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "mdef_pct",
+        "value": 10
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "light"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "name": "Shooting Star Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 58,
+      "stability": 1
+    },
+    "stats": [
+      {
+        "key": "stability_pct",
+        "value": -50
+      },
+      {
+        "key": "critical_rate",
+        "value": 25
+      },
+      {
+        "key": "aspd",
+        "value": 250,
+        "condition": {
+          "weapon_required": "bowgun"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Nurethoth (Lv 76)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      },
+      {
+        "monster": "Nurethoth (Lv 66)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      },
+      {
+        "monster": "Nurethoth (Lv 86)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      },
+      {
+        "monster": "Nurethoth (Lv 96)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      },
+      {
+        "monster": "Nurethoth (Lv 116)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "name": "Arrow of Penetration [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 64,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 5
+      },
+      {
+        "key": "critical_damage",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pond Snake (Lv 115)",
+        "dye": "",
+        "map": "Copia Reservoir"
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Chimera Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 67,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": -9
+      },
+      {
+        "key": "maxmp",
+        "value": 300
+      },
+      {
+        "key": "critical_rate",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Mozto Machina (Lv 114)",
+        "dye": "",
+        "map": "Large Demi Machina Factory: Deepest Part"
+      },
+      {
+        "monster": "Mozto Machina (Lv 124)",
+        "dye": "",
+        "map": "Large Demi Machina Factory: Deepest Part"
+      },
+      {
+        "monster": "Mozto Machina (Lv 134)",
+        "dye": "",
+        "map": "Large Demi Machina Factory: Deepest Part"
+      },
+      {
+        "monster": "Mozto Machina (Lv 144)",
+        "dye": "",
+        "map": "Large Demi Machina Factory: Deepest Part"
+      },
+      {
+        "monster": "Mozto Machina (Lv 164)",
+        "dye": "",
+        "map": "Large Demi Machina Factory: Deepest Part"
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Crystal Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 70,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "aggro_pct",
+        "value": -20
+      },
+      {
+        "key": "weapon_atk",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Aeternus (Lv 130)",
+        "dye": "",
+        "map": "Barbaros Corridor"
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Love Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 71,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 5
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Treat Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 77,
+      "stability": 30
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 1
+      },
+      {
+        "key": "critical_rate_pct",
+        "value": 1
+      },
+      {
+        "key": "aggro_pct",
+        "value": -1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Zarth (Lv 175)",
+        "dye": "",
+        "map": "Zarth's Mansion: Back"
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Spiky Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 79,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "magic_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      },
+      {
+        "key": "reduce_dmg_(floor)_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ivy (Lv 150)",
+        "dye": "",
+        "map": "Dark Dragon Shrine: Lower"
+      },
+      {
+        "monster": "Ivy (Lv 151)",
+        "dye": "",
+        "map": "Dark Dragon Shrine: Middle"
+      },
+      {
+        "monster": "Ivy (Lv 152)",
+        "dye": "",
+        "map": "Dark Dragon Shrine: Upper"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Lil Empress Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 83,
+      "stability": 15
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 10
+      },
+      {
+        "key": "def_pct",
+        "value": -30
+      },
+      {
+        "key": "aspd_pct",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": -10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Venena Coenubia (Lv 140)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      },
+      {
+        "monster": "Venena Coenubia (YK Wifey) (Lv 150)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      },
+      {
+        "monster": "Venena Coenubia (YK Wifey) (Lv 160)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      },
+      {
+        "monster": "Venena Coenubia (YK Wifey) (Lv 170)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      },
+      {
+        "monster": "Venena Coenubia (YK Wifey) (Lv 190)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Serein Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 84,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "tumble_unavailable",
+        "value": true
+      },
+      {
+        "key": "absolute_accuracy_pct",
+        "value": 1
+      },
+      {
+        "key": "water_element",
+        "value": 1,
+        "condition": {
+          "weapon_required": "bowgun,bow"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Floragonet (Lv 159)",
+        "dye": "",
+        "map": "Fractum Sector: Area 1"
+      },
+      {
+        "monster": "Floragonet (Lv 160)",
+        "dye": "",
+        "map": "Fractum Sector: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Sakura Princess Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 88,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 1000
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Mimesia (Easy) (Lv 120)",
+        "dye": "",
+        "map": "Sakura Castle Donjon: Top"
+      },
+      {
+        "monster": "Mimesia (Normal) (Lv 140)",
+        "dye": "",
+        "map": "Sakura Castle Donjon: Top"
+      },
+      {
+        "monster": "Mimesia (Hard) (Lv 160)",
+        "dye": "",
+        "map": "Sakura Castle Donjon: Top"
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "name": "Apple Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 92,
+      "stability": 15
+    },
+    "stats": [
+      {
+        "key": "aggro_pct",
+        "value": -10
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Coryn (Lv 154)",
+        "dye": "",
+        "map": "Dikkit Sector"
+      },
+      {
+        "monster": "Coryn (Lv 156)",
+        "dye": "",
+        "map": "Dikkit Sector"
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Elven Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 96,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "accuracy_pct",
+        "value": 20
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Lazulligator (Lv 160)",
+        "dye": "",
+        "map": "Old Lufenas Mansion Ruins"
+      },
+      {
+        "monster": "Lazulligator (Lv 163)",
+        "dye": "",
+        "map": "Old Lufenas Mansion Ruins"
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "name": "Evil Beast Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 100,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "attack_mp_recovery",
+        "value": 3,
+        "condition": {
+          "weapon_required": "bow"
+        }
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": -10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Memecoleous (Lv 100)",
+        "dye": "",
+        "map": "Dark Castle: Area 2"
+      },
+      {
+        "monster": "Memecoleous (Lv 90)",
+        "dye": "",
+        "map": "Dark Castle: Area 2"
+      },
+      {
+        "monster": "Memecoleous (Lv 110)",
+        "dye": "",
+        "map": "Dark Castle: Area 2"
+      },
+      {
+        "monster": "Memecoleous (Lv 120)",
+        "dye": "",
+        "map": "Dark Castle: Area 2"
+      },
+      {
+        "monster": "Memecoleous (Lv 140)",
+        "dye": "",
+        "map": "Dark Castle: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Holy Tree Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 100,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "dark_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Santaby (Lv 159)",
+        "dye": "",
+        "map": "Tomte Pavillion (150-170)"
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "name": "Joyful Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 100,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 100
+      },
+      {
+        "key": "element",
+        "value": "light"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Crestollar (Lv 253)",
+        "dye": "",
+        "map": "Latum Wetlands"
+      },
+      {
+        "monster": "Crestollar (Lv 256)",
+        "dye": "",
+        "map": "Latum Wetlands"
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "name": "Twilight Sakura Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 100,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "light_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Amalgam (Lv 140)",
+        "dye": "",
+        "map": "Twilight Sakura Castle: Top"
+      },
+      {
+        "monster": "Amalgam (Lv 160)",
+        "dye": "",
+        "map": "Twilight Sakura Castle: Top"
+      },
+      {
+        "monster": "Amalgam (Lv 180)",
+        "dye": "",
+        "map": "Twilight Sakura Castle: Top"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "name": "Anniv Festive Arrow II [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 101,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 200
+      },
+      {
+        "key": "aggro_pct",
+        "value": -12
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Anniv Equipment Box III",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "name": "Kijimu's Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 106
+    },
+    "stats": [
+      {
+        "key": "magic_pierce_pct",
+        "value": 10
+      },
+      {
+        "key": "magic_barrier",
+        "value": 1000
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      },
+      {
+        "monster": "Kijimu (Lv 124)",
+        "dye": "",
+        "map": "Creme Cliff (Valentine's Day Event)"
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "name": "Poison Needle [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 106
+    },
+    "stats": [
+      {
+        "key": "ailment_resistance_pct",
+        "value": -3
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 1
+      },
+      {
+        "key": "critical_rate",
+        "value": 15,
+        "condition": {
+          "weapon_required": "1-handed_sword"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Weltacle (Lv 168)",
+        "dye": "",
+        "map": "Recetacula Sector: Area 1"
+      },
+      {
+        "monster": "Weltacle (Lv 170)",
+        "dye": "",
+        "map": "Recetacula Sector: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "name": "Ocean Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 110,
+      "stability": 10
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 200
+      },
+      {
+        "key": "wind_resistance_pct",
+        "value": -3
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "name": "Spiny Leaf Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 110,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ghilly (Lv 182)",
+        "dye": "",
+        "map": "Sable Plains"
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "name": "Quartz Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 115,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Rollitida (Lv 191)",
+        "dye": "",
+        "map": "Fugitive Lake Swamp: Area 2"
+      },
+      {
+        "monster": "Rollitida (Lv 193)",
+        "dye": "",
+        "map": "Fugitive Lake Swamp: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "name": "Demon Empress Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 120,
+      "stability": 10
+    },
+    "stats": [
+      {
+        "key": "accuracy_pct",
+        "value": 15
+      },
+      {
+        "key": "aggro_pct",
+        "value": -15
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Venena Metacoenubia (Lv 185)",
+        "dye": "",
+        "map": "Neo Plastida"
+      },
+      {
+        "monster": "Venena Metacoenubia (Lv 195)",
+        "dye": "",
+        "map": "Neo Plastida"
+      },
+      {
+        "monster": "Venena Metacoenubia (Lv 205)",
+        "dye": "",
+        "map": "Neo Plastida"
+      },
+      {
+        "monster": "Venena Metacoenubia (Lv 215)",
+        "dye": "",
+        "map": "Neo Plastida"
+      },
+      {
+        "monster": "Venena Metacoenubia (Lv 235)",
+        "dye": "",
+        "map": "Neo Plastida"
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "name": "Drill Bolt [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 120,
+      "stability": 10
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 10
+      },
+      {
+        "key": "critical_damage",
+        "value": 2
+      },
+      {
+        "key": "aggro_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Mine Digger (Lv 113)",
+        "dye": "",
+        "map": "Ultimea Sewer: South"
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "name": "Specter Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 120,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "element",
+        "value": "dark"
+      },
+      {
+        "key": "additional_magic_pct",
+        "value": 50
+      },
+      {
+        "key": "invincible_aid_(sec)",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Manomare (Lv 169)",
+        "dye": "",
+        "map": "Phasma Forest: Area 1"
+      },
+      {
+        "monster": "Manomare (Lv 170)",
+        "dye": "",
+        "map": "Phasma Forest: Area 2"
+      },
+      {
+        "monster": "Manomare (Lv 171)",
+        "dye": "",
+        "map": "Phasma Forest: Area 3"
+      },
+      {
+        "monster": "Manomare (Lv 172)",
+        "dye": "",
+        "map": "Phasma Forest: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "name": "Herb Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 125,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "dodge",
+        "value": 40
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 63,
+    "name": "Devil's Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 130,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 8
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 2
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Skullpion (Lv 198)",
+        "dye": "",
+        "map": "Vulcani Underground Passage"
+      },
+      {
+        "monster": "Skullpion (Lv 200)",
+        "dye": "",
+        "map": "Vulcani Underground Passage"
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "name": "Bat Fang Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 136,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 10
+      },
+      {
+        "key": "accuracy",
+        "value": -20
+      },
+      {
+        "key": "critical_rate",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Kuffa (Lv 181)",
+        "dye": "",
+        "map": "Risus Valley: Area 2"
+      },
+      {
+        "monster": "Kuffa (Lv 180)",
+        "dye": "",
+        "map": "Risus Valley: Area 1"
+      },
+      {
+        "monster": "Kuffa (Lv 182)",
+        "dye": "",
+        "map": "Risus Valley: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "name": "Dreamy Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 136,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "natural_hp_regen_pct",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": -20
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Dreamy Scarlet Sakura (Nightmare) (Lv 220)",
+        "dye": "",
+        "map": "Lush Falls : Upstream"
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "name": "Lovely Autumn Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 142,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 2000
+      },
+      {
+        "key": "weapon_atk_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "name": "Anniv Festive Arrow III [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 146,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 300
+      },
+      {
+        "key": "aggro_pct",
+        "value": -14
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Anniv Equipment Box V",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "name": "Queen Bee Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 150,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "water_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      },
+      {
+        "key": "tumble_unavailable",
+        "value": true
+      },
+      {
+        "key": "additional_melee_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "name": "Blazing Tail Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 152,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "fire_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Tailgon (Lv 213)",
+        "dye": "",
+        "map": "Tunnel of Trials"
+      },
+      {
+        "monster": "Tailgon (Lv 216)",
+        "dye": "",
+        "map": "Tunnel of Trials"
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "name": "Maple Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 158,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 1
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Honey Insector (Lv 221)",
+        "dye": "",
+        "map": "Anglaise Forest"
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "name": "Pearl Sakura Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 160,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 200
+      },
+      {
+        "key": "critical_rate",
+        "value": 10
+      },
+      {
+        "key": "long_range_damage_pct",
+        "value": 2,
+        "condition": {
+          "weapon_required": "bow"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "name": "Guardian Forest Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 163,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "accuracy_pct",
+        "value": 50
+      },
+      {
+        "key": "pct_stronger_against_fire",
+        "value": -10
+      },
+      {
+        "key": "pct_stronger_against_light",
+        "value": -20
+      },
+      {
+        "key": "aggro_pct",
+        "value": -25
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Arbogazella (Lv 236)",
+        "dye": "",
+        "map": "Guardian Forest: Lost Woods"
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "name": "Spiral Shell Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 163,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 10
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Spirulida (Lv 243)",
+        "dye": "",
+        "map": "Deep Sea: Zone 1"
+      },
+      {
+        "monster": "Spirulida (Lv 244)",
+        "dye": "",
+        "map": "Deep Sea: Zone 2"
+      },
+      {
+        "monster": "Spirulida (Lv 245)",
+        "dye": "",
+        "map": "Deep Sea: Zone 3"
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "name": "Moonlight Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 181
+    },
+    "stats": [
+      {
+        "key": "matk_pct",
+        "value": 1
+      },
+      {
+        "key": "magic_pierce_pct",
+        "value": 10
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 1
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 76,
+    "name": "Sunny Spring Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 181,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 5
+      },
+      {
+        "key": "magic_pierce_pct",
+        "value": 5
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "name": "Dragon Guard Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 187,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 10
+      },
+      {
+        "key": "earth_resistance_pct",
+        "value": -5
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Guard Golem (Megiston 2022) (Lv 250)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "name": "Starhammer Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 187,
+      "stability": 10
+    },
+    "stats": [
+      {
+        "key": "accuracy_pct",
+        "value": -10
+      },
+      {
+        "key": "critical_rate",
+        "value": 20
+      },
+      {
+        "key": "element",
+        "value": "light"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Spectern (Lv 226)",
+        "dye": "",
+        "map": "Deusania's Lab"
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "name": "Evil Gaze Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 190,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "accuracy_pct",
+        "value": 30
+      },
+      {
+        "key": "wind_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Corey (Lv 232)",
+        "dye": "",
+        "map": "Tower of Clamor: Area 1 (230-234)"
+      },
+      {
+        "monster": "Corey (Lv 233)",
+        "dye": "",
+        "map": "Tower of Clamor: Area 2 (230-234)"
+      },
+      {
+        "monster": "Corey (Lv 234)",
+        "dye": "",
+        "map": "Tower of Clamor: Area 3 (230-234)"
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "name": "Anniv Festive Arrow IV [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 194,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 400
+      },
+      {
+        "key": "aggro_pct",
+        "value": -16
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Anniv Equipment Box VII",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "name": "Dragon Palace Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 200,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 25
+      },
+      {
+        "key": "critical_rate_pct",
+        "value": 25
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": -25
+      },
+      {
+        "key": "stun_unavailable",
+        "value": true
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Sea Ghost Wooden Box",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "name": "Driver Bolt [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 200,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "accuracy_pct",
+        "value": -75
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 1
+      },
+      {
+        "key": "neutral_resistance_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Inspector Golem (Lv 122)",
+        "dye": "",
+        "map": "Joulu House: Depot (Lv 100)"
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "name": "Driver Bolt [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 200,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "accuracy_pct",
+        "value": -50
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 2
+      },
+      {
+        "key": "neutral_resistance_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Inspector Golem (Lv 143)",
+        "dye": "",
+        "map": "Joulu House: Depot (Lv 130)"
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "name": "Driver Bolt [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 200,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "accuracy_pct",
+        "value": -25
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 3
+      },
+      {
+        "key": "neutral_resistance_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Inspector Golem (Lv 164)",
+        "dye": "",
+        "map": "Joulu House: Depot (Lv 150)"
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "name": "Dry Water Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 206,
+      "stability": 10
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 15
+      },
+      {
+        "key": "aggro_pct",
+        "value": 30
+      },
+      {
+        "key": "element",
+        "value": "water"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Coofer (Lv 255)",
+        "dye": "",
+        "map": "Umidus Valley: Area 1"
+      },
+      {
+        "monster": "Coofer (Lv 256)",
+        "dye": "",
+        "map": "Umidus Valley: Area 2"
+      },
+      {
+        "monster": "Coofer (Lv 257)",
+        "dye": "",
+        "map": "Umidus Valley: Cliff Path"
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "name": "Reefy Coast Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 213,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "magic_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "accuracy_pct",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "water"
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 88,
+    "name": "Eumano Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 226,
+      "stability": 25
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 5
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "long_range_damage_pct",
+        "value": 1
+      },
+      {
+        "key": "motion_speed_pct",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Deformis (Lv 264)",
+        "dye": "",
+        "map": "Eumano Village Ruins: Central"
+      },
+      {
+        "monster": "Deformis (Lv 274)",
+        "dye": "",
+        "map": "Eumano Village Ruins: Central"
+      },
+      {
+        "monster": "Deformis (Lv 284)",
+        "dye": "",
+        "map": "Eumano Village Ruins: Central"
+      },
+      {
+        "monster": "Deformis (Lv 294)",
+        "dye": "",
+        "map": "Eumano Village Ruins: Central"
+      },
+      {
+        "monster": "Deformis (Lv 314)",
+        "dye": "",
+        "map": "Eumano Village Ruins: Central"
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "name": "Candle Arrow (Blue Flame) [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 247,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "int_pct",
+        "value": 1
+      },
+      {
+        "key": "stability_pct",
+        "value": 5
+      },
+      {
+        "key": "water_resistance_pct",
+        "value": -10
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 3
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 90,
+    "name": "Eerie Bird Piercing Arrow [Arrow]",
+    "type": "Arrow",
+    "base": {
+      "atk": 254,
+      "stability": 20
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 10
+      },
+      {
+        "key": "cspd_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": []
+  }
+]

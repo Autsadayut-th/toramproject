@@ -1,0 +1,99 @@
+{
+  "platinum_potum": [
+    "cake_potum"
+  ],
+  "boss_goblin": [
+    "colon_boss"
+  ],
+  "caspy": [
+    "vevela"
+  ],
+  "rhinosaur": [
+    "wild_beast_lixi"
+  ],
+  "guard_golem": [
+    "piscruva"
+  ],
+  "ageladanios": [
+    "wiltileaf"
+  ],
+  "seraph_machina": [
+    "limacina"
+  ],
+  "black_shadow": [
+    "torexesa"
+  ],
+  "gravicep": [
+    "red_ash_dragon_rudis"
+  ],
+  "mithurna_lynx": [
+    "kuffania"
+  ],
+  "tappler": [
+    "lilicarolla"
+  ],
+  "flare_volg": [
+    "charugon"
+  ],
+  "fanadon": [
+    "orictoceras"
+  ],
+  "volotur": [
+    "brassozard"
+  ],
+  "radibat": [
+    "melancia"
+  ],
+  "guignol": [
+    "guard_golem"
+  ],
+  "aranea": [
+    "blazingur"
+  ],
+  "shawle": [
+    "dutannen"
+  ],
+  "salamander": [
+    "bullamius"
+  ],
+  "minotaur": [
+    "rhinosaur"
+  ],
+  "tuscog": [
+    "black_shadow"
+  ],
+  "lyark_master_specialist": [
+    "ageladanios"
+  ],
+  "odelon_machina": [
+    "tappler"
+  ],
+  "nurethoth": [
+    "nuthoreth",
+    "guignol"
+  ],
+  "york": [
+    "tuscog"
+  ],
+  "big_coryn": [
+    "seraph_machina"
+  ],
+  "crimsosch": [
+    "amoeba_machina"
+  ],
+  "gigant_knight": [
+    "volotur"
+  ],
+  "metal_stinger": [
+    "lyark_master_specialist"
+  ],
+  "brutal_dragon_decel": [
+    "york"
+  ],
+  "king_potum": [
+    "platinum_potum"
+  ],
+  "gespenst": [
+    "salamander"
+  ]
+}

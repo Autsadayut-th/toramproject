@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,8 @@ import 'services/build_ai_status_service.dart';
 import 'services/build_calculator_service.dart';
 import 'services/build_persistence_service.dart';
 import 'services/build_recommendation_service.dart';
+import 'services/build_weapon_rule_service.dart';
+import 'services/crystal_library_service.dart';
 import 'widgets/armor_selector.dart';
 import 'widgets/character_stats_selector.dart';
 import 'widgets/gacha_card.dart';
@@ -22,6 +25,8 @@ import 'widgets/toram_card.dart';
 part 'build_simulator_layout.dart';
 part 'build_simulator_equipment_panel.dart';
 part 'build_simulator_sections.dart';
+
+enum _SummaryViewMode { metricList, tableGraph }
 
 class BuildSimulatorScreen extends StatefulWidget {
   const BuildSimulatorScreen({super.key, this.coordinator});
@@ -52,9 +57,22 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   };
   static const String _ruleRecommendationMessage =
       'Using local recommendation rules.';
+  static const List<String> _allCrystalCategories = <String>[
+    'weapon',
+    'armor',
+    'additional',
+    'special',
+    'normal',
+  ];
 
   Map<String, EquipmentLibraryItem> _equipmentByKey =
       <String, EquipmentLibraryItem>{};
+  Map<String, CrystalLibraryEntry> _crystalsByKey =
+      <String, CrystalLibraryEntry>{};
+  Map<String, String> _weaponTypeAlias = <String, String>{};
+  Map<String, String> _subWeaponTypeAlias = <String, String>{};
+  Map<String, List<String>> _mainToAllowedSubTypes =
+      <String, List<String>>{};
 
   bool _isCharacterStatsExpanded = false;
   bool _isMainWeaponExpanded = false;
@@ -63,6 +81,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   bool _isHelmetExpanded = false;
   bool _isRingExpanded = false;
   bool _isGachaExpanded = false;
+  _SummaryViewMode _summaryViewMode = _SummaryViewMode.metricList;
 
   final Map<String, dynamic> _character = Map<String, dynamic>.from(
     _defaultCharacterStats,
@@ -124,6 +143,8 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     _recalculateAll();
     _attachCoordinator();
     _loadEquipmentLibrary();
+    _loadCrystalLibrary();
+    _loadWeaponRuleConfig();
   }
 
   @override
@@ -169,6 +190,10 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       showRecommendations: _showRecommendationsPanel,
       equipmentCacheCount: _equipmentByKey.length,
       summary: _summary,
+      aiRecommendations: _recommendations,
+      isAiRecommendationLoading: _isAiRecommendationLoading,
+      aiRecommendationSource: _aiRecommendationSource,
+      aiRecommendationMessage: _aiRecommendationMessage,
     );
   }
 
@@ -199,9 +224,62 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     }
   }
 
+  Future<void> _loadCrystalLibrary() async {
+    try {
+      final List<CrystalLibraryEntry> entries =
+          await CrystalLibraryService.loadByCategories(_allCrystalCategories);
+      final Map<String, CrystalLibraryEntry> byKey =
+          <String, CrystalLibraryEntry>{};
+      for (final CrystalLibraryEntry entry in entries) {
+        final String normalizedKey = entry.normalizedKey;
+        if (normalizedKey.isEmpty) {
+          continue;
+        }
+        byKey[normalizedKey] = entry;
+      }
+      if (!mounted) {
+        return;
+      }
+      _applyCrystalCache(byKey);
+    } catch (_) {
+      if (!mounted) {
+        return;
+      }
+      _applyCrystalCache(const <String, CrystalLibraryEntry>{});
+    }
+  }
+
+  Future<void> _loadWeaponRuleConfig() async {
+    try {
+      final BuildWeaponRuleConfig config = await BuildWeaponRuleService.load();
+      if (!mounted) {
+        return;
+      }
+      _setStateAndRecalculate(() {
+        _weaponTypeAlias = Map<String, String>.from(config.weaponTypeAlias);
+        _subWeaponTypeAlias = Map<String, String>.from(config.subWeaponTypeAlias);
+        _mainToAllowedSubTypes = config.mainToAllowedSubTypes.map(
+          (String key, List<String> values) {
+            return MapEntry<String, List<String>>(
+              key,
+              values.toList(growable: false),
+            );
+          },
+        );
+      });
+    } catch (_) {}
+  }
+
   void _applyEquipmentCache(Map<String, EquipmentLibraryItem> byKey) {
     _setUiState(() {
       _equipmentByKey = byKey;
+      _recalculateAll();
+    });
+  }
+
+  void _applyCrystalCache(Map<String, CrystalLibraryEntry> byKey) {
+    _setUiState(() {
+      _crystalsByKey = byKey;
       _recalculateAll();
     });
   }
@@ -214,8 +292,118 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   void _setStateAndRecalculate(VoidCallback action) {
     _setUiState(() {
       action();
+      _enforceSubWeaponRule();
       _recalculateAll();
     });
+  }
+
+  String _normalizeMainWeaponType(String? rawType) {
+    final String type = rawType?.trim() ?? '';
+    if (type.isEmpty) {
+      return '';
+    }
+    final String aliasFromMain = _weaponTypeAlias[type]?.trim() ?? '';
+    if (aliasFromMain.isNotEmpty) {
+      return aliasFromMain;
+    }
+    final String aliasFromSub = _subWeaponTypeAlias[type]?.trim() ?? '';
+    if (aliasFromSub.isNotEmpty) {
+      return aliasFromSub;
+    }
+    return type;
+  }
+
+  String _normalizeSubWeaponType(String? rawType) {
+    final String type = rawType?.trim() ?? '';
+    if (type.isEmpty) {
+      return '';
+    }
+    final String aliasFromSub = _subWeaponTypeAlias[type]?.trim() ?? '';
+    if (aliasFromSub.isNotEmpty) {
+      return aliasFromSub;
+    }
+    final String aliasFromMain = _weaponTypeAlias[type]?.trim() ?? '';
+    if (aliasFromMain.isNotEmpty) {
+      return aliasFromMain;
+    }
+    return type;
+  }
+
+  List<String>? _allowedSubWeaponTypeNames() {
+    if (_mainToAllowedSubTypes.isEmpty) {
+      return null;
+    }
+    final EquipmentLibraryItem? mainItem = _findEquipmentByKey(_mainWeaponId);
+    if (mainItem == null) {
+      return null;
+    }
+    final String normalizedMainType = _normalizeMainWeaponType(mainItem.type);
+    if (normalizedMainType.isEmpty) {
+      return null;
+    }
+    final List<String>? allowedSubTypeKeys = _mainToAllowedSubTypes[normalizedMainType];
+    if (allowedSubTypeKeys == null) {
+      return null;
+    }
+
+    final Set<String> displayTypes = <String>{};
+    for (final String normalizedType in allowedSubTypeKeys) {
+      final String typeKey = normalizedType.trim();
+      if (typeKey.isEmpty) {
+        continue;
+      }
+      displayTypes.add(typeKey);
+      _subWeaponTypeAlias.forEach((String display, String alias) {
+        if (alias == typeKey) {
+          displayTypes.add(display);
+        }
+      });
+      _weaponTypeAlias.forEach((String display, String alias) {
+        if (alias == typeKey) {
+          displayTypes.add(display);
+        }
+      });
+    }
+
+    return displayTypes.isEmpty
+        ? const <String>[]
+        : displayTypes.toList(growable: false);
+  }
+
+  bool _isSubWeaponSelectionAllowed(String? subWeaponKey) {
+    final String key = subWeaponKey?.trim() ?? '';
+    if (key.isEmpty || _mainToAllowedSubTypes.isEmpty) {
+      return true;
+    }
+
+    final EquipmentLibraryItem? mainItem = _findEquipmentByKey(_mainWeaponId);
+    final EquipmentLibraryItem? subItem = _findEquipmentByKey(key);
+    if (mainItem == null || subItem == null) {
+      return true;
+    }
+
+    final String normalizedMainType = _normalizeMainWeaponType(mainItem.type);
+    if (normalizedMainType.isEmpty) {
+      return true;
+    }
+    final List<String>? allowedSubTypes = _mainToAllowedSubTypes[normalizedMainType];
+    if (allowedSubTypes == null) {
+      return true;
+    }
+
+    final String normalizedSubType = _normalizeSubWeaponType(subItem.type);
+    if (normalizedSubType.isEmpty) {
+      return true;
+    }
+    return allowedSubTypes.contains(normalizedSubType);
+  }
+
+  void _enforceSubWeaponRule() {
+    if (_isSubWeaponSelectionAllowed(_subWeaponId)) {
+      return;
+    }
+    _subWeaponId = null;
+    _enhSub = 0;
   }
 
   bool _isRemoteAiSource(String source) {
@@ -228,6 +416,18 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       return null;
     }
     return _equipmentByKey[normalizedKey];
+  }
+
+  String _equipmentName(String? equipmentKey) {
+    return _findEquipmentByKey(equipmentKey)?.name ?? '';
+  }
+
+  CrystalLibraryEntry? _findCrystalByKey(String? crystalKey) {
+    final String normalizedKey = (crystalKey ?? '').trim().toLowerCase();
+    if (normalizedKey.isEmpty) {
+      return null;
+    }
+    return _crystalsByKey[normalizedKey];
   }
 
   String _formatStatPreview(EquipmentStat stat) {
@@ -274,6 +474,29 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     }
   }
 
+  Iterable<String?> _equippedCrystalKeys() sync* {
+    yield _mainCrystal1;
+    yield _mainCrystal2;
+    yield _armorCrystal1;
+    yield _armorCrystal2;
+    yield _helmetCrystal1;
+    yield _helmetCrystal2;
+    yield _ringCrystal1;
+    yield _ringCrystal2;
+  }
+
+  Iterable<EquipmentStat> _equippedCrystalStats() sync* {
+    for (final String? crystalKey in _equippedCrystalKeys()) {
+      final CrystalLibraryEntry? entry = _findCrystalByKey(crystalKey);
+      if (entry == null) {
+        continue;
+      }
+      for (final EquipmentStat stat in entry.stats) {
+        yield stat;
+      }
+    }
+  }
+
   void _recalculateAll() {
     _summary = BuildCalculatorService.calculateSummary(
       character: _character,
@@ -281,10 +504,13 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       personalStatType: _personalStatType,
       personalStatValue: _personalStatValue,
       enhanceMain: _enhMain,
+      enhanceSub: _enhSub,
       enhanceArmor: _enhArmor,
       enhanceHelmet: _enhHelmet,
       enhanceRing: _enhRing,
+      subWeaponType: _findEquipmentByKey(_subWeaponId)?.type,
       equippedItems: _equippedItems(),
+      equippedCrystalStats: _equippedCrystalStats(),
     );
     final List<EquipmentLibraryItem> equippedItems = _equippedItems().toList(
       growable: false,
@@ -789,6 +1015,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       _resetExpandedStates();
 
       _showRecommendationsPanel = true;
+      _summaryViewMode = _SummaryViewMode.metricList;
       _savedBuilds.clear();
       _buildNameController.clear();
     });

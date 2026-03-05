@@ -61,7 +61,9 @@ class BuildCalculatorService {
     'accuracy': 'Accuracy',
     'stability': 'Stability',
     'hp': 'HP',
+    'maxhp': 'HP',
     'mp': 'MP',
+    'maxmp': 'MP',
   };
 
   static const Set<String> _pointBasedPercentSummaryKeys = <String>{
@@ -76,10 +78,13 @@ class BuildCalculatorService {
     required String personalStatType,
     required int personalStatValue,
     required int enhanceMain,
+    required int enhanceSub,
     required int enhanceArmor,
     required int enhanceHelmet,
     required int enhanceRing,
+    required String? subWeaponType,
     required Iterable<EquipmentLibraryItem> equippedItems,
+    required Iterable<EquipmentStat> equippedCrystalStats,
   }) {
     final Map<String, num> baseByKey = Map<String, num>.from(summaryTemplate);
     final Map<String, num> percentByKey = <String, num>{};
@@ -107,28 +112,45 @@ class BuildCalculatorService {
       'MP': enhanceRing * 10,
     });
 
+    final int normalizedEnhSub = enhanceSub.clamp(0, 15).toInt();
+    if (normalizedEnhSub > 0) {
+      final String normalizedSubType = (subWeaponType ?? '').trim().toLowerCase();
+      if (normalizedSubType.contains('shield')) {
+        baseByKey['DEF'] = (baseByKey['DEF'] ?? 0) + (normalizedEnhSub * 5);
+        baseByKey['MDEF'] = (baseByKey['MDEF'] ?? 0) + (normalizedEnhSub * 5);
+      } else {
+        baseByKey['ATK'] = (baseByKey['ATK'] ?? 0) + (normalizedEnhSub * 5);
+      }
+    }
+
+    void accumulateStat(EquipmentStat stat) {
+      final String? summaryKey = _summaryKeyByStatKey[stat.statKey.toLowerCase()];
+      if (summaryKey == null) {
+        return;
+      }
+
+      final bool isPercent = stat.valueType.toLowerCase() == 'percent';
+      if (isPercent && !_pointBasedPercentSummaryKeys.contains(summaryKey)) {
+        percentByKey[summaryKey] = (percentByKey[summaryKey] ?? 0) + stat.value;
+        return;
+      }
+
+      final String normalizedStatKey = stat.statKey.toLowerCase();
+      if (normalizedStatKey == 'weapon_atk') {
+        baseByKey[summaryKey] = (baseByKey[summaryKey] ?? 0) + stat.value;
+        return;
+      }
+      flatByKey[summaryKey] = (flatByKey[summaryKey] ?? 0) + stat.value;
+    }
+
     for (final EquipmentLibraryItem item in equippedItems) {
       for (final EquipmentStat stat in item.stats) {
-        final String? summaryKey =
-            _summaryKeyByStatKey[stat.statKey.toLowerCase()];
-        if (summaryKey == null) {
-          continue;
-        }
-
-        final bool isPercent = stat.valueType.toLowerCase() == 'percent';
-        if (isPercent && !_pointBasedPercentSummaryKeys.contains(summaryKey)) {
-          percentByKey[summaryKey] =
-              (percentByKey[summaryKey] ?? 0) + stat.value;
-          continue;
-        }
-
-        final String normalizedStatKey = stat.statKey.toLowerCase();
-        if (normalizedStatKey == 'weapon_atk') {
-          baseByKey[summaryKey] = (baseByKey[summaryKey] ?? 0) + stat.value;
-          continue;
-        }
-        flatByKey[summaryKey] = (flatByKey[summaryKey] ?? 0) + stat.value;
+        accumulateStat(stat);
       }
+    }
+
+    for (final EquipmentStat crystalStat in equippedCrystalStats) {
+      accumulateStat(crystalStat);
     }
 
     final Map<String, num> nextSummary = Map<String, num>.from(summaryTemplate);

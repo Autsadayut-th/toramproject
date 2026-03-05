@@ -25,6 +25,10 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
   bool _showRecommendations = true;
   int _equipmentCacheCount = 0;
   Map<String, num> _summary = Map<String, num>.from(_summaryTemplate);
+  List<String> _aiRecommendations = const <String>[];
+  bool _isAiRecommendationLoading = false;
+  String _aiRecommendationSource = 'rule';
+  String _aiRecommendationMessage = 'Using local recommendation rules.';
 
   void Function(String buildId)? _loadBuildById;
   void Function(String name)? _saveBuildByName;
@@ -45,6 +49,10 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
   bool get showRecommendations => _showRecommendations;
   int get equipmentCacheCount => _equipmentCacheCount;
   Map<String, num> get summary => Map<String, num>.from(_summary);
+  List<String> get aiRecommendations => List<String>.from(_aiRecommendations);
+  bool get isAiRecommendationLoading => _isAiRecommendationLoading;
+  String get aiRecommendationSource => _aiRecommendationSource;
+  String get aiRecommendationMessage => _aiRecommendationMessage;
 
   void attachHandlers({
     required void Function(String buildId) onLoadBuildById,
@@ -87,6 +95,10 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     required bool showRecommendations,
     required int equipmentCacheCount,
     required Map<String, num> summary,
+    required List<String> aiRecommendations,
+    required bool isAiRecommendationLoading,
+    required String aiRecommendationSource,
+    required String aiRecommendationMessage,
   }) {
     _savedBuilds = savedBuilds
         .map((Map<String, dynamic> item) {
@@ -96,6 +108,10 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     _showRecommendations = showRecommendations;
     _equipmentCacheCount = equipmentCacheCount;
     _summary = Map<String, num>.from(_summaryTemplate)..addAll(summary);
+    _aiRecommendations = List<String>.from(aiRecommendations);
+    _isAiRecommendationLoading = isAiRecommendationLoading;
+    _aiRecommendationSource = aiRecommendationSource;
+    _aiRecommendationMessage = aiRecommendationMessage;
     notifyListeners();
   }
 

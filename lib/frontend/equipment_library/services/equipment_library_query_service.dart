@@ -33,14 +33,27 @@ class EquipmentLibraryQueryService {
   static List<EquipmentLibraryItem> filterItems({
     required List<EquipmentLibraryItem> items,
     required String query,
+    Set<String>? allowedTypes,
   }) {
+    final Set<String>? normalizedAllowedTypes = allowedTypes
+        ?.map((String value) => value.trim().toLowerCase())
+        .where((String value) => value.isNotEmpty)
+        .toSet();
+
     final String normalizedQuery = query.trim().toLowerCase();
-    if (normalizedQuery.isEmpty) {
+    if (normalizedQuery.isEmpty && normalizedAllowedTypes == null) {
       return items;
     }
 
     return items
         .where((EquipmentLibraryItem item) {
+          final String normalizedItemType = item.type.trim().toLowerCase();
+          if (normalizedAllowedTypes?.contains(normalizedItemType) == false) {
+            return false;
+          }
+          if (normalizedQuery.isEmpty) {
+            return true;
+          }
           return item.name.toLowerCase().contains(normalizedQuery) ||
               item.key.toLowerCase().contains(normalizedQuery) ||
               item.type.toLowerCase().contains(normalizedQuery);

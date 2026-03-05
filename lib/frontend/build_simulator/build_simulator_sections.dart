@@ -56,44 +56,297 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _sectionTitle(Icons.assessment, 'Stats Summary'),
-          const SizedBox(height: 20),
-          _statsCategory(Icons.gavel, 'Attack', <MapEntry<String, String>>[
-            MapEntry('ATK', 'ATK'),
-            MapEntry('MATK', 'MATK'),
-          ]),
-          _statsCategory(Icons.shield, 'Defense', <MapEntry<String, String>>[
-            MapEntry('DEF', 'DEF'),
-            MapEntry('MDEF', 'MDEF'),
-          ]),
-          _statsCategory(
-            Icons.fitness_center,
-            'Main Stats',
-            <MapEntry<String, String>>[
-              MapEntry('STR', 'STR'),
-              MapEntry('DEX', 'DEX'),
-              MapEntry('INT', 'INT'),
-              MapEntry('AGI', 'AGI'),
-              MapEntry('VIT', 'VIT'),
-            ],
+          _buildStatsSummaryHeader(),
+          const SizedBox(height: 14),
+          _buildSummaryModeSwitch(),
+          const SizedBox(height: 14),
+          if (_summaryViewMode == _SummaryViewMode.metricList)
+            _buildStatsValueView()
+          else
+            _buildStatsTableGraphView(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatsSummaryHeader() {
+    return Row(
+      children: [
+        Container(
+          width: 30,
+          height: 30,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: const Color(0xFF1A1A1A).withValues(alpha: 0.9),
           ),
-          _statsCategory(
-            Icons.bolt,
-            'Special Stats',
-            <MapEntry<String, String>>[
-              MapEntry('ASPD', 'ASPD'),
-              MapEntry('CritRate', 'Critical Rate'),
-              MapEntry('PhysicalPierce', 'Piercing (Physical)'),
-              MapEntry('ElementPierce', 'Piercing (Element)'),
-              MapEntry('Accuracy', 'Accuracy'),
-              MapEntry('Stability', 'Stability'),
-              MapEntry('HP', 'HP'),
-              MapEntry('MP', 'MP'),
-            ],
+          child: const Icon(Icons.assessment, color: Colors.white, size: 17),
+        ),
+        const SizedBox(width: 10),
+        const Expanded(
+          child: Text(
+            'Stats Summary',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontFamily: 'Orbitron',
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+              letterSpacing: 0.3,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSummaryModeSwitch() {
+    return Container(
+      padding: const EdgeInsets.all(3),
+      decoration: BoxDecoration(
+        color: const Color(0xFF111111),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: const Color(0x44FFFFFF)),
+      ),
+      child: Row(
+        children: [
+          _buildSummaryModeButton(
+            label: 'Values',
+            mode: _SummaryViewMode.metricList,
+          ),
+          const SizedBox(width: 6),
+          _buildSummaryModeButton(
+            label: 'Radar Graph',
+            mode: _SummaryViewMode.tableGraph,
           ),
         ],
       ),
     );
+  }
+
+  Widget _buildSummaryModeButton({
+    required String label,
+    required _SummaryViewMode mode,
+  }) {
+    final bool isActive = _summaryViewMode == mode;
+    return Expanded(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(8),
+        onTap: () {
+          if (isActive) {
+            return;
+          }
+          _setUiState(() {
+            _summaryViewMode = mode;
+          });
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: isActive ? const Color(0xFF2B2B2B) : Colors.transparent,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: isActive ? const Color(0x66FFFFFF) : const Color(0x22FFFFFF),
+            ),
+          ),
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+              color: isActive ? Colors.white : Colors.white70,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatsValueView() {
+    return Column(
+      children: [
+        _statsCategory(Icons.gavel, 'Attack', <MapEntry<String, String>>[
+          MapEntry('ATK', 'ATK'),
+          MapEntry('MATK', 'MATK'),
+        ]),
+        _statsCategory(Icons.shield, 'Defense', <MapEntry<String, String>>[
+          MapEntry('DEF', 'DEF'),
+          MapEntry('MDEF', 'MDEF'),
+        ]),
+        _statsCategory(
+          Icons.fitness_center,
+          'Main Stats',
+          <MapEntry<String, String>>[
+            MapEntry('STR', 'STR'),
+            MapEntry('DEX', 'DEX'),
+            MapEntry('INT', 'INT'),
+            MapEntry('AGI', 'AGI'),
+            MapEntry('VIT', 'VIT'),
+          ],
+        ),
+        _statsCategory(
+          Icons.bolt,
+          'Special Stats',
+          <MapEntry<String, String>>[
+            MapEntry('ASPD', 'ASPD'),
+            MapEntry('CritRate', 'Critical Rate'),
+            MapEntry('PhysicalPierce', 'Piercing (Physical)'),
+            MapEntry('ElementPierce', 'Piercing (Element)'),
+            MapEntry('Accuracy', 'Accuracy'),
+            MapEntry('Stability', 'Stability'),
+            MapEntry('HP', 'HP'),
+            MapEntry('MP', 'MP'),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStatsTableGraphView() {
+    final List<_RadarMetric> metrics = <_RadarMetric>[
+      _RadarMetric(label: 'HP', value: (_summary['HP'] ?? 0).toDouble(), cap: 20000),
+      _RadarMetric(
+        label: 'Attack',
+        value: (_summary['ATK'] ?? 0).toDouble(),
+        cap: 4000,
+      ),
+      _RadarMetric(
+        label: 'Defense',
+        value: (_summary['DEF'] ?? 0).toDouble(),
+        cap: 4000,
+      ),
+      _RadarMetric(
+        label: 'Speed',
+        value: (_summary['ASPD'] ?? 0).toDouble(),
+        cap: 8000,
+      ),
+      _RadarMetric(
+        label: 'Sp. Def',
+        value: (_summary['MDEF'] ?? 0).toDouble(),
+        cap: 4000,
+      ),
+      _RadarMetric(
+        label: 'Sp. Atk',
+        value: (_summary['MATK'] ?? 0).toDouble(),
+        cap: 4000,
+      ),
+    ];
+
+    final List<double> normalizedValues = metrics
+        .map((metric) {
+          final double safeValue = metric.value < 0 ? 0 : metric.value;
+          return (safeValue / metric.cap).clamp(0.0, 1.0);
+        })
+        .toList(growable: false);
+
+    return SizedBox(
+      height: 300,
+      child: Stack(
+        children: <Widget>[
+          Align(
+            alignment: Alignment.center,
+            child: SizedBox(
+              width: 210,
+              height: 210,
+              child: CustomPaint(
+                painter: _SummaryRadarPainter(
+                  normalizedValues: normalizedValues,
+                  gridColor: const Color(0x66FFFFFF),
+                  axisColor: const Color(0x33FFFFFF),
+                  fillColor: const Color(0xAA8FC7FF),
+                  strokeColor: const Color(0xFFD6ECFF),
+                ),
+              ),
+            ),
+          ),
+          _buildRadarMetricLabel(
+            alignment: const Alignment(0, -0.94),
+            label: metrics[0].label,
+            value: metrics[0].value,
+          ),
+          _buildRadarMetricLabel(
+            alignment: const Alignment(0.88, -0.48),
+            label: metrics[1].label,
+            value: metrics[1].value,
+            textAlign: TextAlign.left,
+          ),
+          _buildRadarMetricLabel(
+            alignment: const Alignment(0.88, 0.48),
+            label: metrics[2].label,
+            value: metrics[2].value,
+            textAlign: TextAlign.left,
+          ),
+          _buildRadarMetricLabel(
+            alignment: const Alignment(0, 0.94),
+            label: metrics[3].label,
+            value: metrics[3].value,
+          ),
+          _buildRadarMetricLabel(
+            alignment: const Alignment(-0.88, 0.48),
+            label: metrics[4].label,
+            value: metrics[4].value,
+            textAlign: TextAlign.right,
+          ),
+          _buildRadarMetricLabel(
+            alignment: const Alignment(-0.88, -0.48),
+            label: metrics[5].label,
+            value: metrics[5].value,
+            textAlign: TextAlign.right,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRadarMetricLabel({
+    required Alignment alignment,
+    required String label,
+    required double value,
+    TextAlign textAlign = TextAlign.center,
+  }) {
+    return Align(
+      alignment: alignment,
+      child: SizedBox(
+        width: 100,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: textAlign == TextAlign.left
+              ? CrossAxisAlignment.start
+              : textAlign == TextAlign.right
+              ? CrossAxisAlignment.end
+              : CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              label,
+              style: const TextStyle(
+                color: Color(0xFFFFE082),
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+              ),
+              textAlign: textAlign,
+            ),
+            Text(
+              _formatRadarValue(value),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 28,
+                fontWeight: FontWeight.w700,
+                height: 1,
+              ),
+              textAlign: textAlign,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String _formatRadarValue(double value) {
+    if (value == value.roundToDouble()) {
+      return value.toInt().toString();
+    }
+    return value.toStringAsFixed(1);
   }
 
   Widget _statsCategory(
@@ -481,5 +734,134 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
         ),
       ),
     );
+  }
+}
+
+class _RadarMetric {
+  const _RadarMetric({
+    required this.label,
+    required this.value,
+    required this.cap,
+  });
+
+  final String label;
+  final double value;
+  final double cap;
+}
+
+class _SummaryRadarPainter extends CustomPainter {
+  const _SummaryRadarPainter({
+    required this.normalizedValues,
+    required this.gridColor,
+    required this.axisColor,
+    required this.fillColor,
+    required this.strokeColor,
+  });
+
+  final List<double> normalizedValues;
+  final Color gridColor;
+  final Color axisColor;
+  final Color fillColor;
+  final Color strokeColor;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (normalizedValues.length < 3) {
+      return;
+    }
+
+    final Offset center = size.center(Offset.zero);
+    final double radius = math.min(size.width, size.height) / 2 - 10;
+    final int axisCount = normalizedValues.length;
+
+    final List<Offset> outerPoints = List<Offset>.generate(axisCount, (int i) {
+      final double angle = -math.pi / 2 + (2 * math.pi * i / axisCount);
+      return Offset(
+        center.dx + radius * math.cos(angle),
+        center.dy + radius * math.sin(angle),
+      );
+    });
+
+    final Paint gridPaint = Paint()
+      ..color = gridColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.2;
+    final Paint axisPaint = Paint()
+      ..color = axisColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
+
+    for (int level = 1; level <= 4; level++) {
+      final double t = level / 4;
+      final Path path = Path();
+      for (int i = 0; i < axisCount; i++) {
+        final Offset p = Offset.lerp(center, outerPoints[i], t)!;
+        if (i == 0) {
+          path.moveTo(p.dx, p.dy);
+        } else {
+          path.lineTo(p.dx, p.dy);
+        }
+      }
+      path.close();
+      canvas.drawPath(path, gridPaint);
+    }
+
+    for (final Offset p in outerPoints) {
+      canvas.drawLine(center, p, axisPaint);
+    }
+
+    final List<double> values = normalizedValues
+        .map((double v) => v.clamp(0.0, 1.0))
+        .toList(growable: false);
+    final List<Offset> dataPoints = List<Offset>.generate(axisCount, (int i) {
+      return Offset.lerp(center, outerPoints[i], values[i])!;
+    });
+
+    final Path areaPath = Path();
+    for (int i = 0; i < dataPoints.length; i++) {
+      final Offset p = dataPoints[i];
+      if (i == 0) {
+        areaPath.moveTo(p.dx, p.dy);
+      } else {
+        areaPath.lineTo(p.dx, p.dy);
+      }
+    }
+    areaPath.close();
+
+    canvas.drawPath(
+      areaPath,
+      Paint()
+        ..color = fillColor
+        ..style = PaintingStyle.fill,
+    );
+    canvas.drawPath(
+      areaPath,
+      Paint()
+        ..color = strokeColor
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2,
+    );
+
+    final Paint pointPaint = Paint()..color = strokeColor;
+    for (final Offset p in dataPoints) {
+      canvas.drawCircle(p, 3.2, pointPaint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _SummaryRadarPainter oldDelegate) {
+    if (oldDelegate.gridColor != gridColor ||
+        oldDelegate.axisColor != axisColor ||
+        oldDelegate.fillColor != fillColor ||
+        oldDelegate.strokeColor != strokeColor ||
+        oldDelegate.normalizedValues.length != normalizedValues.length) {
+      return true;
+    }
+    for (int i = 0; i < normalizedValues.length; i++) {
+      if (oldDelegate.normalizedValues[i] != normalizedValues[i]) {
+        return true;
+      }
+    }
+    return false;
   }
 }

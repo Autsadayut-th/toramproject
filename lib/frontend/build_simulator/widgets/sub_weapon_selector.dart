@@ -7,6 +7,7 @@ class SubWeaponEquipmentSelector extends StatelessWidget {
     super.key,
     required this.selectedId,
     required this.statPreview,
+    required this.allowedItemTypes,
     required this.onEquipChanged,
     required this.enhance,
     required this.onEnhChanged,
@@ -14,6 +15,7 @@ class SubWeaponEquipmentSelector extends StatelessWidget {
 
   final String? selectedId;
   final List<String> statPreview;
+  final List<String>? allowedItemTypes;
   final ValueChanged<String?> onEquipChanged;
   final int enhance;
   final ValueChanged<int> onEnhChanged;
@@ -27,6 +29,7 @@ class SubWeaponEquipmentSelector extends StatelessWidget {
       onEquipChanged: onEquipChanged,
       pickInitialCategory: 'Weapon',
       allowedCategories: const <String>['Weapon'],
+      allowedItemTypes: allowedItemTypes,
       pickTitle: 'Select Sub Weapon',
       statsLabel: 'Weapon Stats',
       statPreview: statPreview,

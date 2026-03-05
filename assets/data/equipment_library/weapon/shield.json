@@ -1,0 +1,7535 @@
+[
+  {
+    "id": 1,
+    "name": "1st Anniv Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 0
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 1
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 24
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 8
+      },
+      {
+        "key": "aggro_pct",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      },
+      {
+        "monster": "Anniv Equipment Box I",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "2nd Anniv Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 0
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 1
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 24
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 8
+      },
+      {
+        "key": "aggro_pct",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      },
+      {
+        "monster": "Anniv Equipment Box II",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "3rd Anniv Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 0
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 1
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 24
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 8
+      },
+      {
+        "key": "aggro_pct",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      },
+      {
+        "monster": "Anniv Equipment Box III",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "4th Anniv Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 0
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 1
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 24
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 8
+      },
+      {
+        "key": "aggro_pct",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      },
+      {
+        "monster": "Anniv Equipment Box IV",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Buckler [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 0
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Shell Mask (Lv 4)",
+        "dye": "",
+        "map": "Land Under Development"
+      },
+      {
+        "monster": "Shell Mask (Lv 5)",
+        "dye": "",
+        "map": "Land Under Development"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Buckler [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 0
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 30
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Cake Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 0
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 250
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 10
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 1
+      },
+      {
+        "key": "neutral_resistance_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Huge Heavy Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 0
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 32
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Excavated Golem (Lv 16)",
+        "dye": "",
+        "map": "Underground Ruins: Deepest Part"
+      },
+      {
+        "monster": "Excavated Golem (Lv 6)",
+        "dye": "",
+        "map": "Underground Ruins: Deepest Part"
+      },
+      {
+        "monster": "Excavated Golem (Lv 26)",
+        "dye": "",
+        "map": "Underground Ruins: Deepest Part"
+      },
+      {
+        "monster": "Excavated Golem (Lv 36)",
+        "dye": "",
+        "map": "Underground Ruins: Deepest Part"
+      },
+      {
+        "monster": "Excavated Golem (Lv 56)",
+        "dye": "",
+        "map": "Underground Ruins: Deepest Part"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Light Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 0
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 26
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Helm Colon (Lv 11)",
+        "dye": "",
+        "map": "Strum Road"
+      },
+      {
+        "monster": "Helm Colon (Lv 13)",
+        "dye": "",
+        "map": "Strum Road"
+      },
+      {
+        "monster": "Helm Colon (Lv 16)",
+        "dye": "",
+        "map": "Marbaro Forest"
+      },
+      {
+        "monster": "Helm Colon (Lv 18)",
+        "dye": "",
+        "map": "Marbaro Forest"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Light Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 0
+    },
+    "stats": [
+      {
+        "key": "agi",
+        "value": 2
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 26
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Maton Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 0
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 1000
+      },
+      {
+        "key": "physical_barrier",
+        "value": 1000
+      },
+      {
+        "key": "magic_barrier",
+        "value": 1000
+      },
+      {
+        "key": "additional_melee_pct",
+        "value": 50
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Maton Sword (Lv 133)",
+        "dye": "",
+        "map": "Buried Tower: Entrance"
+      },
+      {
+        "monster": "Maton Sword (Lv 143)",
+        "dye": "",
+        "map": "Buried Tower: Entrance"
+      },
+      {
+        "monster": "Maton Sword (Lv 153)",
+        "dye": "",
+        "map": "Buried Tower: Entrance"
+      },
+      {
+        "monster": "Maton Sword (Lv 163)",
+        "dye": "",
+        "map": "Buried Tower: Entrance"
+      },
+      {
+        "monster": "Maton Sword (Lv 183)",
+        "dye": "",
+        "map": "Buried Tower: Entrance"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Mirror Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 0
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 5
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Stone Mercenary (Lv 60)",
+        "dye": "",
+        "map": "Zoktzda Ruins : Abnormal Space"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Shampy Doll [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 0
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 1500
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 10
+      },
+      {
+        "key": "barrier_cooldown_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Shampy (Lv 135)",
+        "dye": "",
+        "map": "Turnus Mine: Hall"
+      },
+      {
+        "monster": "Shampy (Lv 145)",
+        "dye": "",
+        "map": "Turnus Mine: Hall"
+      },
+      {
+        "monster": "Shampy (Lv 155)",
+        "dye": "",
+        "map": "Turnus Mine: Hall"
+      },
+      {
+        "monster": "Shampy (Lv 165)",
+        "dye": "",
+        "map": "Turnus Mine: Hall"
+      },
+      {
+        "monster": "Shampy (Lv 185)",
+        "dye": "",
+        "map": "Turnus Mine: Hall"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Shampy Doll [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 0
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 1000
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      },
+      {
+        "key": "barrier_cooldown_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Spirit Shield Navida [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 0
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 25
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 25
+      },
+      {
+        "key": "maxhp_pct",
+        "value": 15,
+        "condition": {
+          "weapon_required": "event"
+        }
+      },
+      {
+        "key": "aspd",
+        "value": 1000
+      },
+      {
+        "key": "critical_rate",
+        "value": 10
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Zoe's Magic Book [Shield]",
+    "type": "Shield",
+    "base": {},
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": -20
+      },
+      {
+        "key": "maxmp",
+        "value": 100
+      },
+      {
+        "key": "matk_pct",
+        "value": 1
+      },
+      {
+        "key": "cspd",
+        "value": 100
+      },
+      {
+        "key": "additional_magic_pct",
+        "value": 100
+      },
+      {
+        "key": "matk_down_(str_pct)",
+        "value": 40
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Zoe (Lv 100)",
+        "dye": "",
+        "map": "Halloween Mansion Basement"
+      },
+      {
+        "monster": "Zoe (Lv 125)",
+        "dye": "",
+        "map": "Halloween Mansion Basement"
+      },
+      {
+        "monster": "Zoe (Lv 150)",
+        "dye": "",
+        "map": "Halloween Mansion Basement"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Coryn Memorial Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 1
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 30
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      },
+      {
+        "key": "aggro_pct",
+        "value": 30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Hagoita [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 1
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 2000
+      },
+      {
+        "key": "cspd_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Hero Shield (Pom) [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 1
+    },
+    "stats": [
+      {
+        "key": "ailment_resistance_pct",
+        "value": -10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      },
+      {
+        "key": "aggro_pct",
+        "value": 25
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Hero Potum (10M DL) (Lv 150)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Hero Potum Party (12M DL) (Lv 180)",
+        "dye": "",
+        "map": "Archfiend's Throne"
+      },
+      {
+        "monster": "Hero Potum Party (12M DL) (Lv 190)",
+        "dye": "",
+        "map": "Archfiend's Throne"
+      },
+      {
+        "monster": "Hero Potum Party (12M DL) (Lv 200)",
+        "dye": "",
+        "map": "Archfiend's Throne"
+      },
+      {
+        "monster": "Hero Potum Party (12M DL) (Lv 220)",
+        "dye": "",
+        "map": "Archfiend's Throne"
+      },
+      {
+        "monster": "Hero Potum Party (13M DL) (Lv 190)",
+        "dye": "",
+        "map": "Archfiend's Throne"
+      },
+      {
+        "monster": "Hero Potum Party (13M DL) (Lv 200)",
+        "dye": "",
+        "map": "Archfiend's Throne"
+      },
+      {
+        "monster": "Hero Potum Party (13M DL) (Lv 210)",
+        "dye": "",
+        "map": "Archfiend's Throne"
+      },
+      {
+        "monster": "Hero Potum Party (13M DL) (Lv 220)",
+        "dye": "",
+        "map": "Archfiend's Throne"
+      },
+      {
+        "monster": "Hero Potum Party (12M DL) (Lv 170)",
+        "dye": "",
+        "map": "Archfiend's Throne"
+      },
+      {
+        "monster": "Hero Potum (11M DL) (Lv 220)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Hero Potum (10M DL) (Lv 160)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Hero Potum (10M DL) (Lv 170)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Hero Potum (10M DL) (Lv 180)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Hero Potum (10M DL) (Lv 200)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Hero Potum (11M DL) (Lv 160)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Hero Potum (11M DL) (Lv 170)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Hero Potum (11M DL) (Lv 180)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Hero Potum (11M DL) (Lv 190)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Hero Potum Party (13M DL) (Lv 240)",
+        "dye": "",
+        "map": "Archfiend's Throne"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Iron Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 1
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 13
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Water Ghost (Lv 31)",
+        "dye": "",
+        "map": "Nehelo Swamp"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Iron Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 1
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 13
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Juno Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 1
+    },
+    "stats": [
+      {
+        "key": "wind_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 10
+      },
+      {
+        "key": "motion_speed_pct",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Kite Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 1
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 30
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 22
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Guardian Statue (Lv 22)",
+        "dye": "",
+        "map": "Ruined Temple: Area 2"
+      },
+      {
+        "monster": "Guardian Statue (Lv 22)",
+        "dye": "",
+        "map": "Ruined Temple: Area 3"
+      },
+      {
+        "monster": "Guardian Statue (Lv 23)",
+        "dye": "",
+        "map": "Ruined Temple: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Kite Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 1
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 90
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 22
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Shell Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 2
+    },
+    "stats": [
+      {
+        "key": "physical_resistance_pct",
+        "value": 2
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 12
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 24
+      },
+      {
+        "key": "aggro_pct",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Tortuga (Lv 40)",
+        "dye": "",
+        "map": "Icule Lake"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Hard Buckler [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 3
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 2
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 17
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 17
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ratia (Lv 42)",
+        "dye": "",
+        "map": "Korda Basin"
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Hard Buckler [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 3
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 4
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 17
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 17
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Relic Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 3
+    },
+    "stats": [
+      {
+        "key": "physical_resistance_pct",
+        "value": 1
+      },
+      {
+        "key": "accuracy",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 22
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ruin Golem (Lv 45)",
+        "dye": "",
+        "map": "Zoktzda ruins : Reversed Hall"
+      },
+      {
+        "monster": "Ruin Golem (Lv 35)",
+        "dye": "",
+        "map": "Zoktzda ruins : Reversed Hall"
+      },
+      {
+        "monster": "Ruin Golem (Lv 55)",
+        "dye": "",
+        "map": "Zoktzda ruins : Reversed Hall"
+      },
+      {
+        "monster": "Ruin Golem (Lv 65)",
+        "dye": "",
+        "map": "Zoktzda ruins : Reversed Hall"
+      },
+      {
+        "monster": "Ruin Golem (Lv 85)",
+        "dye": "",
+        "map": "Zoktzda ruins : Reversed Hall"
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "name": "Ooze Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 4
+    },
+    "stats": [
+      {
+        "key": "natural_hp_regen_pct",
+        "value": 10
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 2
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 23
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ooze (Lv 52)",
+        "dye": "",
+        "map": "Lutaros Cavern: Deepest Part"
+      },
+      {
+        "monster": "Ooze (Lv 42)",
+        "dye": "",
+        "map": "Lutaros Cavern: Deepest Part"
+      },
+      {
+        "monster": "Ooze (Lv 62)",
+        "dye": "",
+        "map": "Lutaros Cavern: Deepest Part"
+      },
+      {
+        "monster": "Ooze (Lv 72)",
+        "dye": "",
+        "map": "Lutaros Cavern: Deepest Part"
+      },
+      {
+        "monster": "Ooze (Lv 92)",
+        "dye": "",
+        "map": "Lutaros Cavern: Deepest Part"
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Ooze Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 4
+    },
+    "stats": [
+      {
+        "key": "natural_hp_regen_pct",
+        "value": 2
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 1
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 23
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Ooze Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 4
+    },
+    "stats": [
+      {
+        "key": "natural_hp_regen_pct",
+        "value": 2
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 4
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 23
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ooze (Megiston 2016) (Lv 100)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "name": "1st Anniv Shield II [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 5
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 2
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 27
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 9
+      },
+      {
+        "key": "aggro_pct",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "name": "2nd Anniv Shield II [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 5
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 2
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 27
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 9
+      },
+      {
+        "key": "aggro_pct",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "name": "3rd Anniv Shield II [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 5
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 2
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 27
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 9
+      },
+      {
+        "key": "aggro_pct",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "name": "4th Anniv Shield II [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 5
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 2
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 27
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 9
+      },
+      {
+        "key": "aggro_pct",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Porcupine Quills Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 5
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 1
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 3
+      },
+      {
+        "key": "critical_damage",
+        "value": 2
+      },
+      {
+        "key": "fire_resistance_pct",
+        "value": -25
+      },
+      {
+        "key": "earth_resistance_pct",
+        "value": 25
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 40
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Tuscog (Lv 159)",
+        "dye": "",
+        "map": "Eryldan Street: Near the Forest of Ein"
+      },
+      {
+        "monster": "Tuscog (Lv 169)",
+        "dye": "",
+        "map": "Eryldan Street: Near the Forest of Ein"
+      },
+      {
+        "monster": "Tuscog (Lv 179)",
+        "dye": "",
+        "map": "Eryldan Street: Near the Forest of Ein"
+      },
+      {
+        "monster": "Tuscog (Lv 189)",
+        "dye": "",
+        "map": "Eryldan Street: Near the Forest of Ein"
+      },
+      {
+        "monster": "Tuscog (Lv 209)",
+        "dye": "",
+        "map": "Eryldan Street: Near the Forest of Ein"
+      },
+      {
+        "monster": "Tuscog (Megiston 2021) (Lv 200)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Porcupine Quills Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 5
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 1
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 1
+      },
+      {
+        "key": "critical_damage",
+        "value": 1
+      },
+      {
+        "key": "fire_resistance_pct",
+        "value": -25
+      },
+      {
+        "key": "earth_resistance_pct",
+        "value": 25
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 40
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Red Steel Buckler [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 5
+    },
+    "stats": [
+      {
+        "key": "dodge",
+        "value": 50
+      },
+      {
+        "key": "aspd",
+        "value": 300
+      },
+      {
+        "key": "critical_rate",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Red Steel Box",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Scale Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 5
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 25
+      },
+      {
+        "key": "aggro_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Scale Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 5
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 25
+      },
+      {
+        "key": "aggro_pct",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Planet Head (Green) (Lv 62)",
+        "dye": "",
+        "map": "Gate to Another World: Area 1"
+      },
+      {
+        "monster": "Planet Head (Green) (Lv 64)",
+        "dye": "",
+        "map": "Gate to Another World: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Sugar Cookie [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 5
+    },
+    "stats": [
+      {
+        "key": "light_resistance_pct",
+        "value": 25
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 45
+      },
+      {
+        "key": "reduce_dmg_(floor)_pct",
+        "value": 25
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "name": "Relief Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 6
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 300
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 9
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Demon's Gate (Lv 60)",
+        "dye": "",
+        "map": "Saham Crater"
+      },
+      {
+        "monster": "Demon's Gate (Lv 50)",
+        "dye": "",
+        "map": "Saham Crater"
+      },
+      {
+        "monster": "Demon's Gate (Lv 70)",
+        "dye": "",
+        "map": "Saham Crater"
+      },
+      {
+        "monster": "Demon's Gate (Lv 80)",
+        "dye": "",
+        "map": "Saham Crater"
+      },
+      {
+        "monster": "Demon's Gate (Lv 100)",
+        "dye": "",
+        "map": "Saham Crater"
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Relief Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 6
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 100
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 1
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 9
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "name": "Albero Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 7
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 2
+      },
+      {
+        "key": "maxhp",
+        "value": 200
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 18
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 18
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Jelfy (Lv 69)",
+        "dye": "",
+        "map": "Teaus Hill"
+      },
+      {
+        "monster": "Jelfy (Lv 67)",
+        "dye": "",
+        "map": "Teaus Hill"
+      },
+      {
+        "monster": "Jelfy (Lv 70)",
+        "dye": "",
+        "map": "Teaus Hill: Marshland"
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Albero Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 7
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 3
+      },
+      {
+        "key": "maxhp",
+        "value": 300
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 18
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 18
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "name": "Marble Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 9
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "aggro_pct",
+        "value": 12
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pillar Golem (Lv 70)",
+        "dye": "",
+        "map": "Lost Town: Magic Barrier"
+      },
+      {
+        "monster": "Pillar Golem (Lv 60)",
+        "dye": "",
+        "map": "Lost Town: Magic Barrier"
+      },
+      {
+        "monster": "Pillar Golem (Lv 80)",
+        "dye": "",
+        "map": "Lost Town: Magic Barrier"
+      },
+      {
+        "monster": "Pillar Golem (Lv 90)",
+        "dye": "",
+        "map": "Lost Town: Magic Barrier"
+      },
+      {
+        "monster": "Pillar Golem (Lv 110)",
+        "dye": "",
+        "map": "Lost Town: Magic Barrier"
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "name": "Marble Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 9
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "aggro_pct",
+        "value": 6
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "name": "Marble Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 9
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "aggro_pct",
+        "value": 24
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pillar Golem (Megiston 2018) (Lv 140)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "name": "Shell Buckler [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 9
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 3
+      },
+      {
+        "key": "accuracy_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 7
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "name": "Shell Buckler [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 9
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 1
+      },
+      {
+        "key": "accuracy_pct",
+        "value": 8
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 7
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Chandler (Lv 67)",
+        "dye": "",
+        "map": "Calle mort"
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "name": "1st Anniv Shield III [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 10
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 3
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": 9
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "name": "2nd Anniv Shield III [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 10
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 3
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": 9
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "name": "3rd Anniv Shield III [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 10
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 3
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": 9
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "name": "4th Anniv Shield III [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 10
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 3
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": 9
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "name": "5th Anniv Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 10
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 3
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 3
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 3
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 10
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      },
+      {
+        "monster": "Anniv Equipment Box V",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "name": "Coffin Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 10
+    },
+    "stats": [
+      {
+        "key": "matk",
+        "value": 30
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "name": "Cross Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 10
+    },
+    "stats": [
+      {
+        "key": "physical_resistance_pct",
+        "value": 3
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 1
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 19
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 19
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Corroded Knight (Lv 72)",
+        "dye": "",
+        "map": "Dark Wasteland"
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "name": "Cross Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 10
+    },
+    "stats": [
+      {
+        "key": "physical_resistance_pct",
+        "value": 6
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 2
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 19
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 19
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "name": "Black Shield of Delusion [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 11
+    },
+    "stats": [
+      {
+        "key": "critical_damage",
+        "value": 4
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 32
+      },
+      {
+        "key": "neutral_resistance_pct",
+        "value": 25
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Black Knight of Delusion (Lv 88)",
+        "dye": "",
+        "map": "Abyss of No Return: Deepest Area"
+      },
+      {
+        "monster": "Black Knight of Delusion (Lv 78)",
+        "dye": "",
+        "map": "Abyss of No Return: Deepest Area"
+      },
+      {
+        "monster": "Black Knight of Delusion (Lv 98)",
+        "dye": "",
+        "map": "Abyss of No Return: Deepest Area"
+      },
+      {
+        "monster": "Black Knight of Delusion (Lv 108)",
+        "dye": "",
+        "map": "Abyss of No Return: Deepest Area"
+      },
+      {
+        "monster": "Black Knight of Delusion (Lv 128)",
+        "dye": "",
+        "map": "Abyss of No Return: Deepest Area"
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "name": "Black Shield Of Delusion [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 11
+    },
+    "stats": [
+      {
+        "key": "critical_damage",
+        "value": 2
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 32
+      },
+      {
+        "key": "neutral_resistance_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "name": "Vulcan Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 11
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 6
+      },
+      {
+        "key": "aspd",
+        "value": 250
+      },
+      {
+        "key": "critical_rate",
+        "value": 12
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 35
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ifrid (Lv 112)",
+        "dye": "",
+        "map": "Blazing Graben: Deepest Part"
+      },
+      {
+        "monster": "Ifrid (Lv 102)",
+        "dye": "",
+        "map": "Blazing Graben: Deepest Part"
+      },
+      {
+        "monster": "Ifrid (Lv 122)",
+        "dye": "",
+        "map": "Blazing Graben: Deepest Part"
+      },
+      {
+        "monster": "Ifrid (Lv 132)",
+        "dye": "",
+        "map": "Blazing Graben: Deepest Part"
+      },
+      {
+        "monster": "Ifrid (Lv 152)",
+        "dye": "",
+        "map": "Blazing Graben: Deepest Part"
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "name": "Vulcan Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 11
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 16
+      },
+      {
+        "key": "aspd",
+        "value": 250
+      },
+      {
+        "key": "critical_rate",
+        "value": 8
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 35
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "name": "6th Anniv Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 12
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 4
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 7
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 7
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 10
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      },
+      {
+        "monster": "Anniv Equipment Box VI",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "name": "Indigo Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 14
+    },
+    "stats": [
+      {
+        "key": "critical_damage",
+        "value": 1
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 24
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Corroded Shielder (Lv 91)",
+        "dye": "",
+        "map": "Dark Manor: Area 1"
+      },
+      {
+        "monster": "Corroded Shielder (Lv 91)",
+        "dye": "",
+        "map": "Dark Manor: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "name": "Indigo Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 14
+    },
+    "stats": [
+      {
+        "key": "critical_damage",
+        "value": 2
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 24
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "name": "2nd Anniv Shield IV [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 16
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 4
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 33
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 11
+      },
+      {
+        "key": "aggro_pct",
+        "value": 12
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "name": "3rd Anniv Shield IV [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 16
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 4
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 33
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 11
+      },
+      {
+        "key": "aggro_pct",
+        "value": 12
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "name": "4th Anniv Shield IV [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 16
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 4
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 33
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 11
+      },
+      {
+        "key": "aggro_pct",
+        "value": 12
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "name": "Spike Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 18
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 35
+      },
+      {
+        "key": "aggro_pct",
+        "value": 10
+      },
+      {
+        "key": "weapon_atk_pct",
+        "value": 10
+      },
+      {
+        "key": "reflect_pct",
+        "value": 10
+      },
+      {
+        "key": "additional_melee_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "name": "Spike Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 18
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 35
+      },
+      {
+        "key": "aggro_pct",
+        "value": 10
+      },
+      {
+        "key": "weapon_atk_pct",
+        "value": 10
+      },
+      {
+        "key": "reflect_pct",
+        "value": 10
+      },
+      {
+        "key": "additional_melee_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Demi Ork (Lv 98)",
+        "dye": "",
+        "map": "Sykea Deep Valley"
+      },
+      {
+        "monster": "Demi Ork (Lv 100)",
+        "dye": "",
+        "map": "Sykea Deep Valley"
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "name": "Dark General's Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 20
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 2
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 14
+      },
+      {
+        "key": "aggro_pct",
+        "value": 30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Imitator (Lv 106)",
+        "dye": "",
+        "map": "Plastida: Deepest Part"
+      },
+      {
+        "monster": "Imitator (Lv 96)",
+        "dye": "",
+        "map": "Plastida: Deepest Part"
+      },
+      {
+        "monster": "Imitator (Lv 116)",
+        "dye": "",
+        "map": "Plastida: Deepest Part"
+      },
+      {
+        "monster": "Imitator (Lv 126)",
+        "dye": "",
+        "map": "Plastida: Deepest Part"
+      },
+      {
+        "monster": "Imitator (Lv 146)",
+        "dye": "",
+        "map": "Plastida: Deepest Part"
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "name": "Dark General's Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 20
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 3
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 14
+      },
+      {
+        "key": "aggro_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "name": "Phalanx (Shield) [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 20
+    },
+    "stats": [
+      {
+        "key": "aggro_pct",
+        "value": 20
+      },
+      {
+        "key": "physical_barrier",
+        "value": 1500
+      },
+      {
+        "key": "magic_barrier",
+        "value": 1500
+      },
+      {
+        "key": "barrier_cooldown_pct",
+        "value": 25
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 81,
+    "name": "2nd Anniv Shield V [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 22
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 36
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 12
+      },
+      {
+        "key": "aggro_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "name": "3rd Anniv Shield V [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 22
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 36
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 12
+      },
+      {
+        "key": "aggro_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "name": "4th Anniv Shield V [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 22
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 36
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 12
+      },
+      {
+        "key": "aggro_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "name": "5th Anniv Shield II [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 22
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 5
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 36
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 12
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "name": "Imperial Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 22
+    },
+    "stats": [
+      {
+        "key": "physical_resistance_pct",
+        "value": -5
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 25
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 16
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "name": "Moonlight Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 22
+    },
+    "stats": [
+      {
+        "key": "magic_resistance_pct",
+        "value": 25
+      },
+      {
+        "key": "fire_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "magic_barrier",
+        "value": 1000
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "name": "Bullet Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 25
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 19
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      },
+      {
+        "key": "reduce_dmg_(bullet)_pct",
+        "value": 10
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Death Media (Lv 112)",
+        "dye": "",
+        "map": "Ultimea City: Roof"
+      },
+      {
+        "monster": "Death Media (Lv 114)",
+        "dye": "",
+        "map": "Ultimea City: Roof"
+      },
+      {
+        "monster": "Death Media (Lv 125)",
+        "dye": "",
+        "map": "Suburb of Droma Square: Area 1"
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "name": "Bullet Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 25
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 19
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      },
+      {
+        "key": "reduce_dmg_(bullet)_pct",
+        "value": 12
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 12
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "name": "6th Anniv Shield II [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 26
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 5
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 8
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 8
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 36
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 12
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "name": "7th Anniv Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 26
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 4
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 8
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 8
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 39
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 13
+      },
+      {
+        "key": "aggro_pct",
+        "value": 16
+      },
+      {
+        "key": "aggro_pct",
+        "value": 16,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      },
+      {
+        "monster": "Anniv Equipment Box VII",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "name": "Imperial Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 26
+    },
+    "stats": [
+      {
+        "key": "physical_resistance_pct",
+        "value": -2
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 25
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 16
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Underground Nemico (Lv 109)",
+        "dye": "",
+        "map": "Ultimea Sewer: Southeast"
+      },
+      {
+        "monster": "Underground Nemico (Lv 111)",
+        "dye": "",
+        "map": "Ultimea Sewer: Southeast"
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "name": "Sapphire Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 28
+    },
+    "stats": [
+      {
+        "key": "physical_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 10
+      },
+      {
+        "key": "physical_barrier",
+        "value": 1000
+      },
+      {
+        "key": "tumble_unavailable",
+        "value": true
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Sapphire Roga (Lv 171)",
+        "dye": "",
+        "map": "Avant Plastida: Deepest Area"
+      },
+      {
+        "monster": "Sapphire Roga (Lv 181)",
+        "dye": "",
+        "map": "Avant Plastida: Deepest Area"
+      },
+      {
+        "monster": "Sapphire Roga (Lv 191)",
+        "dye": "",
+        "map": "Avant Plastida: Deepest Area"
+      },
+      {
+        "monster": "Sapphire Roga (Lv 201)",
+        "dye": "",
+        "map": "Avant Plastida: Deepest Area"
+      },
+      {
+        "monster": "Sapphire Roga (Lv 221)",
+        "dye": "",
+        "map": "Avant Plastida: Deepest Area"
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "name": "Sapphire Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 28
+    },
+    "stats": [
+      {
+        "key": "physical_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 25
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 1
+      },
+      {
+        "key": "physical_barrier",
+        "value": 100
+      },
+      {
+        "key": "tumble_unavailable",
+        "value": true
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "name": "3rd Anniv Shield VI [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 30
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 38
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 13
+      },
+      {
+        "key": "aggro_pct",
+        "value": 18
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "name": "4th Anniv Shield VI [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 30
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 38
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 13
+      },
+      {
+        "key": "aggro_pct",
+        "value": 18
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "name": "Elfin Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 30
+    },
+    "stats": [
+      {
+        "key": "dodge_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "neutral_resistance_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Molemet (Lv 117)",
+        "dye": "",
+        "map": "Tolbas GrassLand"
+      },
+      {
+        "monster": "Molemet (Lv 129)",
+        "dye": "",
+        "map": "Turnus Mine: Area 1"
+      },
+      {
+        "monster": "Molemet (Lv 131)",
+        "dye": "",
+        "map": "Turnus Mine: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "name": "Elfin Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 30
+    },
+    "stats": [
+      {
+        "key": "dodge_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "neutral_resistance_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "name": "Zahhak Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 30
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 5
+      },
+      {
+        "key": "critical_damage",
+        "value": 6
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 24
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 24
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 6
+      },
+      {
+        "key": "magic_barrier",
+        "value": 1000
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Zahhak Machina (Lv 120)",
+        "dye": "",
+        "map": "Lufenas Mansion: Hall"
+      },
+      {
+        "monster": "Zahhak Machina (Lv 130)",
+        "dye": "",
+        "map": "Lufenas Mansion: Hall"
+      },
+      {
+        "monster": "Zahhak Machina (Lv 140)",
+        "dye": "",
+        "map": "Lufenas Mansion: Hall"
+      },
+      {
+        "monster": "Zahhak Machina (Lv 150)",
+        "dye": "",
+        "map": "Lufenas Mansion: Hall"
+      },
+      {
+        "monster": "Zahhak Machina (Lv 170)",
+        "dye": "",
+        "map": "Lufenas Mansion: Hall"
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "name": "Zahhak Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 30
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 10
+      },
+      {
+        "key": "critical_damage",
+        "value": 3
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 24
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 24
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 2
+      },
+      {
+        "key": "magic_barrier",
+        "value": 1000
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "name": "Zahhak Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 30
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 10
+      },
+      {
+        "key": "critical_damage",
+        "value": 3
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 26
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 26
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 9
+      },
+      {
+        "key": "magic_barrier",
+        "value": 500
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Zahhak Machina (Megiston 2019) (Lv 165)",
+        "dye": "A 83 C",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "name": "Esca Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 34
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 31
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "aggro_pct",
+        "value": 30
+      },
+      {
+        "key": "reduce_dmg_(straight_line)_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Hermit Doll (Lv 133)",
+        "dye": "",
+        "map": "Heresy Corridor"
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "name": "Esca Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 34
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 31
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "aggro_pct",
+        "value": 30
+      },
+      {
+        "key": "reduce_dmg_(straight_line)_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "name": "Windgrace Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 35
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 1
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 1
+      },
+      {
+        "key": "reduce_dmg_(player_epicenter)_pct",
+        "value": -10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception (2nd Part)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "name": "3rd Anniv Shield VII [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 36
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 38
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 13
+      },
+      {
+        "key": "aggro_pct",
+        "value": 21
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "name": "4th Anniv Shield VII [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 36
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 38
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 13
+      },
+      {
+        "key": "aggro_pct",
+        "value": 21
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "name": "5th Anniv Shield III [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 36
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 7
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 7
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 38
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 13
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "name": "6th Anniv Shield III [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 39
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 6
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 9
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 9
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 39
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 13
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "name": "7th Anniv Shield II [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 39
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 6
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 9
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 9
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 39
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 14
+      },
+      {
+        "key": "aggro_pct",
+        "value": 18
+      },
+      {
+        "key": "aggro_pct",
+        "value": 18,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "name": "8th Anniv Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 39
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 6
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 9
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 9
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 39
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 14
+      },
+      {
+        "key": "aggro_pct",
+        "value": 18
+      },
+      {
+        "key": "aggro_pct",
+        "value": 18,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 112,
+    "name": "Harmony Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 39
+    },
+    "stats": [
+      {
+        "key": "physical_resistance_pct",
+        "value": 13
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 13
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 26
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 26
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 113,
+    "name": "Lil Empress Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 40
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 30
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 25
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 25
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Venena Coenubia (Lv 140)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      },
+      {
+        "monster": "Venena Coenubia (YK Wifey) (Lv 150)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      },
+      {
+        "monster": "Venena Coenubia (YK Wifey) (Lv 160)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      },
+      {
+        "monster": "Venena Coenubia (YK Wifey) (Lv 170)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      },
+      {
+        "monster": "Venena Coenubia (YK Wifey) (Lv 190)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      }
+    ]
+  },
+  {
+    "id": 114,
+    "name": "Snow Bear Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 40
+    },
+    "stats": [
+      {
+        "key": "water_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "aggro_pct",
+        "value": 40
+      },
+      {
+        "key": "reduce_dmg_(charge)_pct",
+        "value": 20
+      },
+      {
+        "key": "aggro_pct",
+        "value": -50,
+        "condition": {
+          "weapon_required": "staff"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Snow Bear Box",
+        "dye": "",
+        "map": "Snowball Mini Game Venue"
+      }
+    ]
+  },
+  {
+    "id": 116,
+    "name": "Harmony Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 41
+    },
+    "stats": [
+      {
+        "key": "physical_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 26
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 26
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Roca (Lv 155)",
+        "dye": "",
+        "map": "Eryldan Street: Area 1"
+      },
+      {
+        "monster": "Roca (Lv 156)",
+        "dye": "",
+        "map": "Eryldan Street: Area 2"
+      },
+      {
+        "monster": "Roca (Lv 156)",
+        "dye": "",
+        "map": "Eryldan Street: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 117,
+    "name": "4th Anniv Shield VIII [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 45
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 38
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 13
+      },
+      {
+        "key": "aggro_pct",
+        "value": 24
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 118,
+    "name": "5th Anniv Shield IV [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 45
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 8
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 8
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 8
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 38
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 13
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 119,
+    "name": "Holy Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 45
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 15
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 13
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 40
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 120,
+    "name": "Holy Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 45
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 20
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 8
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 7
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 13
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 40
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Sandsaur (Lv 165)",
+        "dye": "",
+        "map": "Inanis Wilderness"
+      },
+      {
+        "monster": "Sandsaur (Lv 163)",
+        "dye": "",
+        "map": "Inanis Wilderness"
+      }
+    ]
+  },
+  {
+    "id": 121,
+    "name": "Juno Shield II [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 50
+    },
+    "stats": [
+      {
+        "key": "wind_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 25
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "motion_speed_pct",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Eidenliebe (Dark) (Lv 180)",
+        "dye": "",
+        "map": "Maia Diela"
+      }
+    ]
+  },
+  {
+    "id": 122,
+    "name": "Swirly Whirly Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 50
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "aggro_pct",
+        "value": -30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Liqueur Potum (Lv 123)",
+        "dye": "",
+        "map": "Creme Cliff (Valentine's Day Event)"
+      }
+    ]
+  },
+  {
+    "id": 123,
+    "name": "Catafnia Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 51
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 200
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 34
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Guard Colon (Lv 173)",
+        "dye": "",
+        "map": "Rokoko City Ruins"
+      }
+    ]
+  },
+  {
+    "id": 124,
+    "name": "Catafnia Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 51
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 100
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 34
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 125,
+    "name": "4th Anniv Shield IX [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 54
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 39
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 14
+      },
+      {
+        "key": "aggro_pct",
+        "value": 27
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 8
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 126,
+    "name": "5th Anniv Shield V [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 54
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 9
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 9
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 9
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 39
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 14
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 128,
+    "name": "6th Anniv Shield IV [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 54
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 40
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 14
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 129,
+    "name": "7th Anniv Shield III [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 54
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 40
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 14
+      },
+      {
+        "key": "aggro_pct",
+        "value": 20
+      },
+      {
+        "key": "aggro_pct",
+        "value": 20,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 130,
+    "name": "8th Anniv Shield II [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 54
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 40
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 14
+      },
+      {
+        "key": "aggro_pct",
+        "value": 20
+      },
+      {
+        "key": "aggro_pct",
+        "value": 20,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 131,
+    "name": "9th Anniv Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 54
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 6
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 40
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 14
+      },
+      {
+        "key": "aggro_pct",
+        "value": 20
+      },
+      {
+        "key": "aggro_pct",
+        "value": 20,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 132,
+    "name": "Seadevil Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 54
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 25
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 25
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 25
+      },
+      {
+        "key": "aggro_pct",
+        "value": 25
+      },
+      {
+        "key": "additional_melee_pct",
+        "value": 25
+      },
+      {
+        "key": "reduce_dmg_(meteor)_pct",
+        "value": 30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Adaro (Lv 160)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (Lv 170)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (Lv 180)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (Lv 190)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (Lv 210)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      }
+    ]
+  },
+  {
+    "id": 133,
+    "name": "Seadevil Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 54
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 50
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 25
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 25
+      },
+      {
+        "key": "aggro_pct",
+        "value": 50
+      },
+      {
+        "key": "additional_melee_pct",
+        "value": 50
+      },
+      {
+        "key": "reduce_dmg_(meteor)_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Adaro (High Difficulty) (Lv 200)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (High Difficulty) (Lv 210)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (High Difficulty) (Lv 220)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (High Difficulty) (Lv 230)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (High Difficulty) (Lv 250)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      }
+    ]
+  },
+  {
+    "id": 134,
+    "name": "Windgrace Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 54
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 2
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 1
+      },
+      {
+        "key": "reduce_dmg_(player_epicenter)_pct",
+        "value": -10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception: 2nd Part (2023)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 135,
+    "name": "Heart Cookie Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 57
+    },
+    "stats": [
+      {
+        "key": "water_resistance_pct",
+        "value": -10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 40
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 136,
+    "name": "Reptilian Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 57
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 25
+      },
+      {
+        "key": "magic_barrier",
+        "value": 2000
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Obsidian Lizard (Lv 177)",
+        "dye": "",
+        "map": "Noisy Woodland"
+      },
+      {
+        "monster": "Obsidian Lizard (Lv 180)",
+        "dye": "",
+        "map": "Noisy Woodland"
+      }
+    ]
+  },
+  {
+    "id": 137,
+    "name": "Reptilian Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 57
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 25
+      },
+      {
+        "key": "magic_barrier",
+        "value": 1500
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 138,
+    "name": "5th Anniv Shield VI [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 60
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 10
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 39
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 14
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 140,
+    "name": "Laguna Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 63
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 12
+      },
+      {
+        "key": "water_resistance_pct",
+        "value": 12
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 16
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 40
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Mogkey (Lv 187)",
+        "dye": "",
+        "map": "Eumano Glade"
+      },
+      {
+        "monster": "Mogkey (Lv 189)",
+        "dye": "",
+        "map": "Eumano Glade"
+      }
+    ]
+  },
+  {
+    "id": 141,
+    "name": "Laguna Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 63
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 14
+      },
+      {
+        "key": "water_resistance_pct",
+        "value": 14
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 16
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 40
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 142,
+    "name": "5th Anniv Shield VII [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 66
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 11
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 11
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 11
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 39
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 14
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 143,
+    "name": "6th Anniv Shield V [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 66
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 11
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 11
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 40
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 15
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 144,
+    "name": "7th Anniv Shield IV [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 66
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 11
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 11
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 40
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 15
+      },
+      {
+        "key": "aggro_pct",
+        "value": 22
+      },
+      {
+        "key": "aggro_pct",
+        "value": 22,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 145,
+    "name": "8th Anniv Shield III [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 66
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 11
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 11
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 40
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 15
+      },
+      {
+        "key": "aggro_pct",
+        "value": 22
+      },
+      {
+        "key": "aggro_pct",
+        "value": 22,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 146,
+    "name": "9th Anniv Shield II [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 66
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 11
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 11
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 40
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 15
+      },
+      {
+        "key": "aggro_pct",
+        "value": 22
+      },
+      {
+        "key": "aggro_pct",
+        "value": 22,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 147,
+    "name": "Demon Empress Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 66
+    },
+    "stats": [
+      {
+        "key": "mdef_pct",
+        "value": 10
+      },
+      {
+        "key": "critical_rate",
+        "value": 15
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 28
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 28
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Venena Metacoenubia (Lv 185)",
+        "dye": "",
+        "map": "Neo Plastida"
+      },
+      {
+        "monster": "Venena Metacoenubia (Lv 195)",
+        "dye": "",
+        "map": "Neo Plastida"
+      },
+      {
+        "monster": "Venena Metacoenubia (Lv 205)",
+        "dye": "",
+        "map": "Neo Plastida"
+      },
+      {
+        "monster": "Venena Metacoenubia (Lv 215)",
+        "dye": "",
+        "map": "Neo Plastida"
+      },
+      {
+        "monster": "Venena Metacoenubia (Lv 235)",
+        "dye": "",
+        "map": "Neo Plastida"
+      }
+    ]
+  },
+  {
+    "id": 148,
+    "name": "Luster Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 300
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 28
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 29
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 149,
+    "name": "Luster Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 200
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 28
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 29
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Eyeloon (Lv 208)",
+        "dye": "",
+        "map": "Freight Corridor"
+      },
+      {
+        "monster": "Eyeloon (Lv 210)",
+        "dye": "",
+        "map": "Freight Corridor"
+      }
+    ]
+  },
+  {
+    "id": 150,
+    "name": "Windgrace Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 2000
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 25
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      },
+      {
+        "key": "reduce_dmg_(player_epicenter)_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception (2nd Part)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 152,
+    "name": "Windgrace Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 2000
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 25
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      },
+      {
+        "key": "reduce_dmg_(player_epicenter)_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception (2nd Part)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 153,
+    "name": "Windgrace Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 70
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 25
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      },
+      {
+        "key": "aggro_pct",
+        "value": 40
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      },
+      {
+        "key": "reduce_dmg_(player_epicenter)_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception (2nd Part)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 154,
+    "name": "Windgrace Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 4000
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 25
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      },
+      {
+        "key": "reduce_dmg_(player_epicenter)_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception (2nd Part)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 155,
+    "name": "Gingerbread Man Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 72
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 200
+      },
+      {
+        "key": "aggro_pct",
+        "value": -20
+      },
+      {
+        "key": "revive_time_pct",
+        "value": -20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 156,
+    "name": "6th Anniv Shield VI [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 76
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 8
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 12
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 12
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 41
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 15
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 157,
+    "name": "7th Anniv Shield V [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 76
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 8
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 12
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 12
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 41
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 15
+      },
+      {
+        "key": "aggro_pct",
+        "value": 24
+      },
+      {
+        "key": "aggro_pct",
+        "value": 24,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 158,
+    "name": "8th Anniv Shield IV [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 76
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 8
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 12
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 12
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 41
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 15
+      },
+      {
+        "key": "aggro_pct",
+        "value": 24
+      },
+      {
+        "key": "aggro_pct",
+        "value": 24,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 159,
+    "name": "9th Anniv Shield III [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 76
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 8
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 12
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 12
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 41
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 15
+      },
+      {
+        "key": "aggro_pct",
+        "value": 24
+      },
+      {
+        "key": "aggro_pct",
+        "value": 24,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 160,
+    "name": "Aeria Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 76
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 3
+      },
+      {
+        "key": "aspd_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 29
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 29
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Boma Owl (Lv 219)",
+        "dye": "",
+        "map": "Boma Konda: Entrance"
+      }
+    ]
+  },
+  {
+    "id": 161,
+    "name": "Aeria Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 76
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 4
+      },
+      {
+        "key": "aspd_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 29
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 29
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 162,
+    "name": "Beastlord Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 76
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 8
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 41
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 15
+      },
+      {
+        "key": "aggro_pct",
+        "value": 30
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Zega (Megiston 2021) (Lv 240)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Zega (Megiston 2022) (Lv 260)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 164,
+    "name": "Eradicator Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 84
+    },
+    "stats": [
+      {
+        "key": "physical_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "critical_rate",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 40
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 17
+      },
+      {
+        "key": "reduce_dmg_(bullet)_pct",
+        "value": 25
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Velum (Lv 213)",
+        "dye": "",
+        "map": "Arstida: Depth"
+      },
+      {
+        "monster": "Velum (Lv 223)",
+        "dye": "",
+        "map": "Arstida: Depth"
+      },
+      {
+        "monster": "Velum (Lv 233)",
+        "dye": "",
+        "map": "Arstida: Depth"
+      },
+      {
+        "monster": "Velum (Lv 243)",
+        "dye": "",
+        "map": "Arstida: Depth"
+      },
+      {
+        "monster": "Velum (Lv 263)",
+        "dye": "",
+        "map": "Arstida: Depth"
+      }
+    ]
+  },
+  {
+    "id": 165,
+    "name": "Eradicator Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 84
+    },
+    "stats": [
+      {
+        "key": "physical_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "critical_rate",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 40
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 17
+      },
+      {
+        "key": "reduce_dmg_(bullet)_pct",
+        "value": 15
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 166,
+    "name": "Luxurie Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 84
+    },
+    "stats": [
+      {
+        "key": "magic_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 50
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 9
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Forbigosta (Lv 229)",
+        "dye": "",
+        "map": "Subma Cave"
+      },
+      {
+        "monster": "Forbigosta (Lv 231)",
+        "dye": "",
+        "map": "Subma Cave"
+      }
+    ]
+  },
+  {
+    "id": 167,
+    "name": "Luxurie Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 84
+    },
+    "stats": [
+      {
+        "key": "magic_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 50
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 9
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 168,
+    "name": "Moonlight Shield II [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 88
+    },
+    "stats": [
+      {
+        "key": "magic_resistance_pct",
+        "value": 25
+      },
+      {
+        "key": "magic_barrier",
+        "value": 1500
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 10
+      },
+      {
+        "key": "magic_pierce_pct",
+        "value": 5,
+        "condition": {
+          "weapon_required": "staff"
+        }
+      },
+      {
+        "key": "aggro_pct",
+        "value": 10
+      },
+      {
+        "key": "fire_resistance_pct",
+        "value": 20,
+        "condition": {
+          "weapon_required": "1-handed_sword"
+        }
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      },
+      {
+        "monster": "Bubble Angel (Lv 184)",
+        "dye": "",
+        "map": "Celesa's Tree Garden"
+      },
+      {
+        "monster": "Bubble Angel (Lv 180)",
+        "dye": "",
+        "map": "Celesa's Tree Garden"
+      },
+      {
+        "monster": "Roar (Lv 181)",
+        "dye": "",
+        "map": "Celesa's Tree Garden"
+      },
+      {
+        "monster": "Roar (Lv 183)",
+        "dye": "",
+        "map": "Celesa's Tree Garden"
+      },
+      {
+        "monster": "Sumari (Lv 182)",
+        "dye": "",
+        "map": "Celesa's Tree Garden"
+      }
+    ]
+  },
+  {
+    "id": 169,
+    "name": "Peismataris [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 90
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 15
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Mysterious Exchange (P. Avatar 2022)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 170,
+    "name": "Watermelon Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 90
+    },
+    "stats": [
+      {
+        "key": "light_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 50
+      },
+      {
+        "key": "aggro_pct",
+        "value": 40
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 20
+      },
+      {
+        "key": "magic_barrier",
+        "value": 3000
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 171,
+    "name": "7th Anniv Shield VI [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 92
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 9
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 13
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 13
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 41
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 16
+      },
+      {
+        "key": "aggro_pct",
+        "value": 26
+      },
+      {
+        "key": "aggro_pct",
+        "value": 26,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 172,
+    "name": "8th Anniv Shield V [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 92
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 9
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 13
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 13
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 41
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 16
+      },
+      {
+        "key": "aggro_pct",
+        "value": 26
+      },
+      {
+        "key": "aggro_pct",
+        "value": 26,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 173,
+    "name": "9th Anniv Shield IV [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 92
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 9
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 13
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 13
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 41
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 16
+      },
+      {
+        "key": "aggro_pct",
+        "value": 26
+      },
+      {
+        "key": "aggro_pct",
+        "value": 26,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 174,
+    "name": "Profound Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 92
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 14
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 18
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Trast (Lv 238)",
+        "dye": "",
+        "map": "Pipeline Corridor"
+      },
+      {
+        "monster": "Trast (Lv 240)",
+        "dye": "",
+        "map": "Pipeline Corridor"
+      }
+    ]
+  },
+  {
+    "id": 176,
+    "name": "Profound Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 92
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 15
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 177,
+    "name": "Lolliodd Magic Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 99
+    },
+    "stats": [
+      {
+        "key": "critical_rate_pct",
+        "value": 100
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": -75
+      },
+      {
+        "key": "weapon_atk_pct",
+        "value": 25
+      },
+      {
+        "key": "additional_melee_pct",
+        "value": 50
+      },
+      {
+        "key": "reduce_dmg_(floor)_pct",
+        "value": 25
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 178,
+    "name": "Erde Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 100
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 100
+      },
+      {
+        "key": "critical_rate_pct",
+        "value": 40
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 40
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 21
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Romyzon (Lv 252)",
+        "dye": "",
+        "map": "Latum Wetlands"
+      },
+      {
+        "monster": "Romyzon (Lv 255)",
+        "dye": "",
+        "map": "Latum Wetlands"
+      }
+    ]
+  },
+  {
+    "id": 179,
+    "name": "Evil Aristo Defense Shackles [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 100
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 5
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "cspd",
+        "value": 500
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 50
+      },
+      {
+        "key": "aggro_pct",
+        "value": 50,
+        "condition": {
+          "weapon_required": "staff"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Wicked Dragon Fazzino (Lv 234)",
+        "dye": "",
+        "map": "Propulsion System Room"
+      },
+      {
+        "monster": "Wicked Dragon Fazzino (Lv 244)",
+        "dye": "",
+        "map": "Propulsion System Room"
+      },
+      {
+        "monster": "Wicked Dragon Fazzino (Lv 254)",
+        "dye": "",
+        "map": "Propulsion System Room"
+      },
+      {
+        "monster": "Wicked Dragon Fazzino (Lv 264)",
+        "dye": "",
+        "map": "Propulsion System Room"
+      },
+      {
+        "monster": "Wicked Dragon Fazzino (Lv 284)",
+        "dye": "",
+        "map": "Propulsion System Room"
+      }
+    ]
+  },
+  {
+    "id": 180,
+    "name": "Evil Aristo Defense Shackles [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 100
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 10
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "cspd",
+        "value": 750
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 50
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 181,
+    "name": "Mischievous Buckler [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 104
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 400
+      },
+      {
+        "key": "cspd_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 66
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 6
+      },
+      {
+        "key": "aggro_pct",
+        "value": -10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Sibylares (Very Hard) (Lv 250)",
+        "dye": "",
+        "map": "Phasma Forest: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 182,
+    "name": "8th Anniv Shield VI [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 108
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 10
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 14
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 14
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 42
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 16
+      },
+      {
+        "key": "aggro_pct",
+        "value": 28
+      },
+      {
+        "key": "aggro_pct",
+        "value": 28,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 183,
+    "name": "9th Anniv Shield V [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 108
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 10
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 14
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 14
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 42
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 16
+      },
+      {
+        "key": "aggro_pct",
+        "value": 28
+      },
+      {
+        "key": "aggro_pct",
+        "value": 28,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 184,
+    "name": "Peismataris [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 108
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 15
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Mysterious Exchange (P. Avatar 2023)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 185,
+    "name": "Seashell Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 108
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 3000
+      },
+      {
+        "key": "accuracy_pct",
+        "value": 20
+      },
+      {
+        "key": "cspd_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 25
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 25
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Paguro (Lv 172)",
+        "dye": "",
+        "map": "Underwater Canyon: Area 1"
+      },
+      {
+        "monster": "Paguro (Lv 173)",
+        "dye": "",
+        "map": "Underwater Canyon: Area 2"
+      },
+      {
+        "monster": "Paguro (Lv 174)",
+        "dye": "",
+        "map": "Underwater Canyon: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 186,
+    "name": "Windgrace Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 108
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 2500
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      },
+      {
+        "key": "reduce_dmg_(player_epicenter)_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception: 2nd Part (2023)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 188,
+    "name": "Windgrace Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 108
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 2500
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      },
+      {
+        "key": "reduce_dmg_(player_epicenter)_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception: 2nd Part (2023)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 189,
+    "name": "Windgrace Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 108
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      },
+      {
+        "key": "aggro_pct",
+        "value": 60
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 20
+      },
+      {
+        "key": "reduce_dmg_(player_epicenter)_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception: 2nd Part (2023)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 190,
+    "name": "Windgrace Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 108
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 5000
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 30
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 30
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 20
+      },
+      {
+        "key": "reduce_dmg_(player_epicenter)_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception: 2nd Part (2023)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 191,
+    "name": "Don Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 112
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 10000
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 36
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 25
+      },
+      {
+        "key": "critical_rate",
+        "value": 5,
+        "condition": {
+          "weapon_required": "light_armor"
+        }
+      },
+      {
+        "key": "aggro_pct",
+        "value": 50
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Don Profundo (Lv 252)",
+        "dye": "",
+        "map": "Abandoned District: Ruins Summit"
+      },
+      {
+        "monster": "Don Profundo (Lv 262)",
+        "dye": "",
+        "map": "Abandoned District: Ruins Summit"
+      },
+      {
+        "monster": "Don Profundo (Lv 272)",
+        "dye": "",
+        "map": "Abandoned District: Ruins Summit"
+      },
+      {
+        "monster": "Don Profundo (Lv 282)",
+        "dye": "",
+        "map": "Abandoned District: Ruins Summit"
+      },
+      {
+        "monster": "Don Profundo (Lv 302)",
+        "dye": "",
+        "map": "Abandoned District: Ruins Summit"
+      }
+    ]
+  },
+  {
+    "id": 192,
+    "name": "Don Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 112
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 5000
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 36
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 25
+      },
+      {
+        "key": "critical_rate",
+        "value": 10,
+        "condition": {
+          "weapon_required": "light_armor"
+        }
+      },
+      {
+        "key": "aggro_pct",
+        "value": 25
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 193,
+    "name": "Ghoulfish Buckler [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 120
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 3
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 6
+      },
+      {
+        "key": "aspd",
+        "value": 600
+      },
+      {
+        "key": "water_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 20,
+        "condition": {
+          "weapon_required": "staff"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pisteus (Lv 183)",
+        "dye": "",
+        "map": "Ducia Coast: Depths"
+      },
+      {
+        "monster": "Pisteus (Lv 193)",
+        "dye": "",
+        "map": "Ducia Coast: Depths"
+      },
+      {
+        "monster": "Pisteus (Lv 203)",
+        "dye": "",
+        "map": "Ducia Coast: Depths"
+      },
+      {
+        "monster": "Pisteus (Lv 213)",
+        "dye": "",
+        "map": "Ducia Coast: Depths"
+      },
+      {
+        "monster": "Pisteus (Lv 233)",
+        "dye": "",
+        "map": "Ducia Coast: Depths"
+      }
+    ]
+  },
+  {
+    "id": 194,
+    "name": "Ghoulfish Buckler [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 120
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 3
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 6
+      },
+      {
+        "key": "aspd",
+        "value": 300
+      },
+      {
+        "key": "water_resistance_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 195,
+    "name": "9th Anniv Shield VI [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 130
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 10
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 42
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 17
+      },
+      {
+        "key": "aggro_pct",
+        "value": 30
+      },
+      {
+        "key": "aggro_pct",
+        "value": 30,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 196,
+    "name": "Gloomy Tree Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 130
+    },
+    "stats": [
+      {
+        "key": "physical_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "aspd_pct",
+        "value": 31
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 31
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 31
+      },
+      {
+        "key": "additional_magic_pct",
+        "value": 40
+      },
+      {
+        "key": "cspd_pct",
+        "value": -75,
+        "condition": {
+          "weapon_required": "knuckle"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Deformis (Lv 264)",
+        "dye": "",
+        "map": "Eumano Village Ruins: Central"
+      },
+      {
+        "monster": "Deformis (Lv 274)",
+        "dye": "",
+        "map": "Eumano Village Ruins: Central"
+      },
+      {
+        "monster": "Deformis (Lv 284)",
+        "dye": "",
+        "map": "Eumano Village Ruins: Central"
+      },
+      {
+        "monster": "Deformis (Lv 294)",
+        "dye": "",
+        "map": "Eumano Village Ruins: Central"
+      },
+      {
+        "monster": "Deformis (Lv 314)",
+        "dye": "",
+        "map": "Eumano Village Ruins: Central"
+      }
+    ]
+  },
+  {
+    "id": 197,
+    "name": "Cuddle Shark Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 140
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 10
+      },
+      {
+        "key": "water_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 15
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 15
+      },
+      {
+        "key": "aggro_pct",
+        "value": -10
+      },
+      {
+        "key": "weapon_atk_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 198,
+    "name": "Eerie Bird Feather Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 150
+    },
+    "stats": [
+      {
+        "key": "stability_pct",
+        "value": 10
+      },
+      {
+        "key": "accuracy",
+        "value": 50
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 33
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 33
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 30
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 200,
+    "name": "Rock Dragon Heavy Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 152
+    },
+    "stats": [
+      {
+        "key": "aspd_pct",
+        "value": 30
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 3
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 24
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 32
+      },
+      {
+        "key": "aggro_pct",
+        "value": 30
+      },
+      {
+        "key": "neutral_resistance_pct",
+        "value": 30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ferzen the Rock Dragon (Lv 211)",
+        "dye": "",
+        "map": "Guardian Forest: Giant Tree"
+      },
+      {
+        "monster": "Ferzen the Rock Dragon (Lv 221)",
+        "dye": "",
+        "map": "Guardian Forest: Giant Tree"
+      },
+      {
+        "monster": "Ferzen the Rock Dragon (Lv 231)",
+        "dye": "",
+        "map": "Guardian Forest: Giant Tree"
+      },
+      {
+        "monster": "Ferzen the Rock Dragon (Lv 251)",
+        "dye": "",
+        "map": "Guardian Forest: Giant Tree"
+      }
+    ]
+  },
+  {
+    "id": 201,
+    "name": "Rock Dragon Heavy Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 152
+    },
+    "stats": [
+      {
+        "key": "aspd_pct",
+        "value": 20
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 4
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 24
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 32
+      },
+      {
+        "key": "aggro_pct",
+        "value": 40
+      },
+      {
+        "key": "neutral_resistance_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 202,
+    "name": "Maple\\'s Shield [Shield]",
+    "type": "Shield",
+    "base": {
+      "def": 300
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 10
+      },
+      {
+        "key": "maxmp",
+        "value": -100
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "dodge_pct",
+        "value": -100
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 40
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 40
+      },
+      {
+        "key": "reduce_explosion_pct",
+        "value": 50
+      }
+    ],
+    "obtained_from": []
+  }
+]

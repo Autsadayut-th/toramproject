@@ -6,6 +6,7 @@ class MainWeaponEquipmentSelector extends StatelessWidget {
   const MainWeaponEquipmentSelector({
     super.key,
     required this.selectedId,
+    required this.selectedDisplayName,
     required this.statPreview,
     required this.onEquipChanged,
     required this.enhance,
@@ -17,6 +18,7 @@ class MainWeaponEquipmentSelector extends StatelessWidget {
   });
 
   final String? selectedId;
+  final String? selectedDisplayName;
   final List<String> statPreview;
   final ValueChanged<String?> onEquipChanged;
   final int enhance;
@@ -29,9 +31,11 @@ class MainWeaponEquipmentSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EquipmentSlotSelector(
-      idLabel: 'Main Weapon ID',
-      idHint: 'e.g. katana_001',
+      idLabel: 'Main Weapon',
+      idHint: 'Select main weapon',
       selectedId: selectedId,
+      selectedDisplayText: selectedDisplayName,
+      idFieldReadOnly: true,
       onEquipChanged: onEquipChanged,
       pickInitialCategory: 'Weapon',
       allowedCategories: const <String>['Weapon'],
@@ -40,6 +44,7 @@ class MainWeaponEquipmentSelector extends StatelessWidget {
       statPreview: statPreview,
       enhance: enhance,
       onEnhChanged: onEnhChanged,
+      crystalCategoryFilters: const <String>['weapon', 'normal'],
       crystal1: crystal1,
       crystal2: crystal2,
       onCrystal1Changed: onCrystal1Changed,
@@ -47,3 +52,4 @@ class MainWeaponEquipmentSelector extends StatelessWidget {
     );
   }
 }
+

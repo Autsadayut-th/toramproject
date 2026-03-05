@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "name": "Metal Ninjutsu Scroll [Ninjutsu Scroll]",
+    "type": "Ninjutsu Scroll",
+    "base": {},
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 5
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 2,
+    "name": "Fire Ninjutsu Scroll [Ninjutsu Scroll]",
+    "type": "Ninjutsu Scroll",
+    "base": {},
+    "stats": [
+      {
+        "key": "matk_pct",
+        "value": 1
+      },
+      {
+        "key": "magic_pierce_pct",
+        "value": 5,
+        "condition": {
+          "weapon_required": "staff"
+        }
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 3,
+    "name": "Lightning Ninjutsu Scroll [Ninjutsu Scroll]",
+    "type": "Ninjutsu Scroll",
+    "base": {},
+    "stats": [
+      {
+        "key": "stability_pct",
+        "value": 5
+      },
+      {
+        "key": "accuracy_pct",
+        "value": 10,
+        "condition": {
+          "weapon_required": "katana"
+        }
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 4,
+    "name": "Water Ninjutsu Scroll [Ninjutsu Scroll]",
+    "type": "Ninjutsu Scroll",
+    "base": {},
+    "stats": [
+      {
+        "key": "ailment_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "aggro_pct",
+        "value": -10,
+        "condition": {
+          "weapon_required": "magic_device"
+        }
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 5,
+    "name": "Earth Ninjutsu Scroll [Ninjutsu Scroll]",
+    "type": "Ninjutsu Scroll",
+    "base": {},
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 10
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 10,
+        "condition": {
+          "weapon_required": "1-handed_sword"
+        }
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 6,
+    "name": "Wind Ninjutsu Scroll [Ninjutsu Scroll]",
+    "type": "Ninjutsu Scroll",
+    "base": {},
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 250
+      },
+      {
+        "key": "critical_rate",
+        "value": 5,
+        "condition": {
+          "weapon_required": "katana"
+        }
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 8,
+    "name": "Dark Ninjutsu Scroll [Ninjutsu Scroll]",
+    "type": "Ninjutsu Scroll",
+    "base": {},
+    "stats": [
+      {
+        "key": "aggro_pct",
+        "value": -10
+      }
+    ],
+    "obtained_from": []
+  }
+]

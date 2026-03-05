@@ -35,6 +35,13 @@ function parseBody(req) {
 }
 
 function normalizeRecommendations(value, fallback) {
+  if (typeof value === 'string') {
+    const nested = extractNestedRecommendations(value);
+    if (nested.length > 0) {
+      return normalizeRecommendations(nested, fallback);
+    }
+  }
+
   if (!Array.isArray(value)) {
     return [...fallback];
   }
@@ -44,7 +51,19 @@ function normalizeRecommendations(value, fallback) {
       continue;
     }
     const trimmed = item.trim();
-    if (!trimmed || unique.includes(trimmed)) {
+    if (!trimmed) {
+      continue;
+    }
+    const nested = extractNestedRecommendations(trimmed);
+    if (nested.length > 0) {
+      for (const nestedItem of nested) {
+        if (!unique.includes(nestedItem)) {
+          unique.push(nestedItem);
+        }
+      }
+      continue;
+    }
+    if (looksLikeRecommendationJson(trimmed) || unique.includes(trimmed)) {
       continue;
     }
     unique.push(trimmed);
@@ -53,6 +72,59 @@ function normalizeRecommendations(value, fallback) {
     return [...fallback];
   }
   return unique.slice(0, 6);
+}
+
+function looksLikeRecommendationJson(text) {
+  const normalized = String(text || '').trim().toLowerCase();
+  if (!normalized) {
+    return false;
+  }
+  return (
+    normalized.startsWith('{') ||
+    normalized.startsWith('[') ||
+    normalized.includes('"recommendations"')
+  );
+}
+
+function parseRecommendationArrayLoose(text) {
+  const match = String(text || '').match(/"recommendations"\s*:\s*\[([\s\S]*?)\]/i);
+  if (!match) {
+    return [];
+  }
+  const arrayBody = match[1];
+  const values = [];
+  const tokenRegex = /"((?:\\.|[^"\\])*)"/g;
+  let token;
+  while ((token = tokenRegex.exec(arrayBody)) !== null) {
+    const rawValue = token[1];
+    try {
+      values.push(JSON.parse(`"${rawValue}"`));
+    } catch (_) {
+      values.push(rawValue);
+    }
+  }
+  return normalizeRecommendations(values, []);
+}
+
+function extractNestedRecommendations(text) {
+  const cleaned = stripCodeFence(String(text || ''));
+  if (!cleaned) {
+    return [];
+  }
+
+  try {
+    const parsed = JSON.parse(cleaned);
+    if (Array.isArray(parsed)) {
+      return normalizeRecommendations(parsed, []);
+    }
+    if (parsed && typeof parsed === 'object') {
+      return normalizeRecommendations(parsed.recommendations, []);
+    }
+  } catch (_) {
+    // Continue with relaxed parser.
+  }
+
+  return parseRecommendationArrayLoose(cleaned);
 }
 
 function pickFields(input) {
@@ -152,7 +224,7 @@ function extractTextRecommendations(text) {
         .replace(/^[-*•]\s*/, '')
         .trim(),
     )
-    .filter((line) => line.length > 0);
+    .filter((line) => line.length > 0 && !looksLikeRecommendationJson(line));
   return normalizeRecommendations(lines, DEFAULT_FALLBACK);
 }
 
@@ -192,6 +264,11 @@ function parseModelRecommendations(text) {
     } catch (_) {
       // Continue with text fallback.
     }
+  }
+
+  const looseRecommendations = parseRecommendationArrayLoose(cleaned);
+  if (looseRecommendations.length > 0) {
+    return looseRecommendations;
   }
 
   const textRecommendations = extractTextRecommendations(cleaned);

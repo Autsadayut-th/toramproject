@@ -243,6 +243,7 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
       },
       child: MainWeaponEquipmentSelector(
         selectedId: _mainWeaponId,
+        selectedDisplayName: _equipmentName(_mainWeaponId),
         statPreview: _equipmentStatPreview(_mainWeaponId),
         onEquipChanged: (id) {
           _setStateAndRecalculate(() => _mainWeaponId = id);
@@ -281,7 +282,17 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
       child: SubWeaponEquipmentSelector(
         selectedId: _subWeaponId,
         statPreview: _equipmentStatPreview(_subWeaponId),
+        allowedItemTypes: _allowedSubWeaponTypeNames(),
         onEquipChanged: (id) {
+          if (!_isSubWeaponSelectionAllowed(id)) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Sub weapon type is not allowed for this main weapon.'),
+                duration: Duration(seconds: 2),
+              ),
+            );
+            return;
+          }
           _setStateAndRecalculate(() => _subWeaponId = id);
         },
         enhance: _enhSub,

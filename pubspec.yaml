@@ -62,6 +62,16 @@ flutter:
 
   assets:
     - assets/data/equipment_library/
+    - assets/data/equipment_library/weapon/
+    - assets/data/equipment_library/armor/
+    - assets/data/equipment_library/additional/
+    - assets/data/equipment_library/special/
+    - assets/data/crysta_data/
+    - assets/data/crysta_data/weapon/
+    - assets/data/crysta_data/armor/
+    - assets/data/crysta_data/additional/
+    - assets/data/crysta_data/special/
+    - assets/data/crysta_data/normal/
     - assets/data/skill_menu/
     - assets/data/skill_menu/images/blade/
     - assets/data/skill_menu/images/Shot/
@@ -72,6 +82,8 @@ flutter:
     - assets/data/skill_menu/images/Mononofu/
     - assets/data/skill_menu/images/Sprite/
     - assets/data/monster_library/
+    - assets/data/system/
+    - assets/data/rules/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

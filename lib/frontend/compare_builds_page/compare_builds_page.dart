@@ -1,7 +1,12 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../shared/app_mobile_bottom_navigation_bar.dart';
 import '../shared/app_navigation_drawer.dart';
+
+part 'widgets/compare_build_radar_section.dart';
+part 'widgets/compare_build_stats_table_section.dart';
 
 class CompareBuildsPage extends StatefulWidget {
   const CompareBuildsPage({
@@ -46,6 +51,25 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
     'ElementPierce',
     'Accuracy',
     'Stability',
+  };
+
+  static const List<MapEntry<String, String>> _radarMetrics =
+      <MapEntry<String, String>>[
+        MapEntry('HP', 'HP'),
+        MapEntry('ATK', 'Attack'),
+        MapEntry('DEF', 'Defense'),
+        MapEntry('ASPD', 'Speed'),
+        MapEntry('MDEF', 'Sp. Def'),
+        MapEntry('MATK', 'Sp. Atk'),
+      ];
+
+  static const Map<String, double> _radarCaps = <String, double>{
+    'HP': 20000,
+    'ATK': 4000,
+    'DEF': 4000,
+    'ASPD': 8000,
+    'MDEF': 4000,
+    'MATK': 4000,
   };
 
   late List<Map<String, dynamic>> _builds;
@@ -184,9 +208,12 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
           )
         : SingleChildScrollView(
             padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 1160),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                 Row(
                   children: [
                     Expanded(
@@ -308,70 +335,15 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
                   ),
                 ),
                 const SizedBox(height: 14),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    columns: const [
-                      DataColumn(label: Text('Stat')),
-                      DataColumn(label: Text('Build A')),
-                      DataColumn(label: Text('Build B')),
-                      DataColumn(label: Text('Delta')),
-                    ],
-                    rows: _compareKeys
-                        .map((String key) {
-                          final int leftValue = _summaryValue(firstBuild, key);
-                          final int rightValue = _summaryValue(
-                            secondBuild,
-                            key,
-                          );
-                          final int delta = rightValue - leftValue;
-
-                          final String deltaText = delta > 0
-                              ? '+${_formatStatValue(key, delta)}'
-                              : _formatStatValue(key, delta);
-
-                          final Color deltaColor = delta > 0
-                              ? const Color(0xFF888888)
-                              : delta < 0
-                              ? const Color(0xFF666666)
-                              : Colors.white70;
-
-                          return DataRow(
-                            cells: [
-                              DataCell(
-                                Text(
-                                  key,
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              DataCell(
-                                Text(
-                                  _formatStatValue(key, leftValue),
-                                  style: const TextStyle(color: Colors.white70),
-                                ),
-                              ),
-                              DataCell(
-                                Text(
-                                  _formatStatValue(key, rightValue),
-                                  style: const TextStyle(color: Colors.white70),
-                                ),
-                              ),
-                              DataCell(
-                                Text(
-                                  deltaText,
-                                  style: TextStyle(
-                                    color: deltaColor,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        })
-                        .toList(growable: false),
-                  ),
+                _buildCompareRadarCard(firstBuild: firstBuild, secondBuild: secondBuild),
+                const SizedBox(height: 14),
+                _buildCenteredCompareTable(
+                  firstBuild: firstBuild,
+                  secondBuild: secondBuild,
                 ),
-              ],
+                  ],
+                ),
+              ),
             ),
           );
 

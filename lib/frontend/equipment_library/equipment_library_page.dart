@@ -19,6 +19,7 @@ class EquipmentLibraryScreen extends StatelessWidget {
     this.pickMode = false,
     this.initialCategory,
     this.allowedCategories,
+    this.allowedTypes,
     this.title = 'Equipment Library',
     this.onNavigate,
   });
@@ -26,6 +27,7 @@ class EquipmentLibraryScreen extends StatelessWidget {
   final bool pickMode;
   final String? initialCategory;
   final List<String>? allowedCategories;
+  final List<String>? allowedTypes;
   final String title;
   final ValueChanged<AppNavigationPage>? onNavigate;
 
@@ -34,6 +36,7 @@ class EquipmentLibraryScreen extends StatelessWidget {
     required String initialCategory,
     required String title,
     List<String>? allowedCategories,
+    List<String>? allowedTypes,
   }) async {
     final EquipmentLibraryItem? selected = await Navigator.of(context)
         .push<EquipmentLibraryItem>(
@@ -42,6 +45,7 @@ class EquipmentLibraryScreen extends StatelessWidget {
               pickMode: true,
               initialCategory: initialCategory,
               allowedCategories: allowedCategories,
+              allowedTypes: allowedTypes,
               title: title,
             ),
           ),
@@ -74,6 +78,7 @@ class EquipmentLibraryScreen extends StatelessWidget {
       pickMode: pickMode,
       initialCategory: initialCategory,
       allowedCategories: allowedCategories,
+      allowedTypes: allowedTypes,
     );
 
     if (isEmbeddedInShell) {
