@@ -3,6 +3,7 @@ const DEFAULT_FALLBACK = [
   'Refine main weapon and armor before chasing niche min-max stats.',
   'Balance damage stats with survivability so your combo can run consistently.',
 ];
+const DEFAULT_GEMINI_MODEL = 'gemini-2.5-flash';
 
 const RECOMMENDATION_SCHEMA = {
   type: 'OBJECT',
@@ -318,6 +319,25 @@ function providerLabel(provider) {
   return 'AI';
 }
 
+function normalizeGeminiModel(rawModel) {
+  const normalized = String(rawModel || '')
+    .trim()
+    .replace(/^models\//i, '')
+    .replace(/:generateContent$/i, '')
+    .trim();
+  if (!normalized) {
+    return DEFAULT_GEMINI_MODEL;
+  }
+  return normalized;
+}
+
+function isGeminiModelFormatError(status, bodyText) {
+  if (status !== 400) {
+    return false;
+  }
+  return /GenerateContentRequest\.model/i.test(String(bodyText || ''));
+}
+
 function extractGeminiText(json) {
   const candidates = Array.isArray(json?.candidates) ? json.candidates : [];
   const parts = candidates[0]?.content?.parts;
@@ -432,46 +452,70 @@ async function requestGeminiRecommendations(input) {
     throw new Error('GEMINI_API_KEY is not configured.');
   }
 
-  const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
   const promptText = buildPromptText(input);
-  const endpoint =
-    `https://generativelanguage.googleapis.com/v1beta/models/` +
-    `${model}:generateContent`;
+  const configuredModel = normalizeGeminiModel(process.env.GEMINI_MODEL);
+  const candidateModels = configuredModel === DEFAULT_GEMINI_MODEL
+    ? [configuredModel]
+    : [configuredModel, DEFAULT_GEMINI_MODEL];
+  let lastError;
 
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'x-goog-api-key': apiKey,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      contents: [
-        {
-          role: 'user',
-          parts: [{ text: promptText }],
-        },
-      ],
-      generationConfig: {
-        temperature: 0.2,
-        maxOutputTokens: 400,
-        responseMimeType: 'application/json',
-        responseSchema: RECOMMENDATION_SCHEMA,
+  for (const model of candidateModels) {
+    const endpoint =
+      `https://generativelanguage.googleapis.com/v1beta/models/` +
+      `${encodeURIComponent(model)}:generateContent`;
+
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'x-goog-api-key': apiKey,
+        'Content-Type': 'application/json',
       },
-    }),
-  });
+      body: JSON.stringify({
+        contents: [
+          {
+            role: 'user',
+            parts: [{ text: promptText }],
+          },
+        ],
+        generationConfig: {
+          temperature: 0.2,
+          maxOutputTokens: 400,
+          responseMimeType: 'application/json',
+          responseSchema: RECOMMENDATION_SCHEMA,
+        },
+      }),
+    });
 
-  if (!response.ok) {
+    if (response.ok) {
+      const json = await response.json();
+      const outputText = extractGeminiText(json);
+      return {
+        provider: 'gemini',
+        model,
+        recommendations: parseModelRecommendations(outputText),
+      };
+    }
+
     const bodyText = await response.text();
+    const isModelError = isGeminiModelFormatError(response.status, bodyText);
+    const hasMoreCandidates = model !== candidateModels[candidateModels.length - 1];
+    if (isModelError && hasMoreCandidates) {
+      lastError = new Error(
+        `Gemini model "${model}" is invalid; retrying with ` +
+          `"${candidateModels[candidateModels.length - 1]}".`,
+      );
+      continue;
+    }
+    if (isModelError) {
+      throw new Error(
+        `Gemini model "${model}" is invalid. ` +
+          `Set GEMINI_MODEL like "${DEFAULT_GEMINI_MODEL}". Raw error: ${bodyText}`,
+      );
+    }
     throw new Error(`Gemini request failed (${response.status}): ${bodyText}`);
   }
 
-  const json = await response.json();
-  const outputText = extractGeminiText(json);
-  return {
-    provider: 'gemini',
-    model,
-    recommendations: parseModelRecommendations(outputText),
-  };
+  throw lastError || new Error('Gemini request failed.');
 }
 
 async function requestAiRecommendations(input) {
