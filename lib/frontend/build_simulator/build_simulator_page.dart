@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -56,7 +55,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     'VIT': 1,
   };
   static const String _ruleRecommendationMessage =
-      'Using local recommendation rules.';
+      'Using local recommendation rules. Press Generate for AI.';
   static const List<String> _allCrystalCategories = <String>[
     'weapon',
     'armor',
@@ -128,7 +127,6 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   );
 
   List<String> _recommendations = const <String>[];
-  Timer? _aiRecommendationDebounce;
   int _aiRecommendationRequestToken = 0;
   bool _isAiRecommendationLoading = false;
   String _aiRecommendationSource = 'rule';
@@ -158,7 +156,6 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
 
   @override
   void dispose() {
-    _aiRecommendationDebounce?.cancel();
     widget.coordinator?.detachHandlers();
     _buildNameController.dispose();
     super.dispose();
@@ -534,26 +531,12 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     );
     _aiRecommendationSource = 'rule';
     _aiRecommendationMessage = _ruleRecommendationMessage;
-    _scheduleAiRecommendations(equippedItems);
-  }
-
-  void _scheduleAiRecommendations(List<EquipmentLibraryItem> equippedItems) {
-    _aiRecommendationDebounce?.cancel();
-    final Map<String, dynamic> payload = _buildAiRequestPayload(
-      equippedItems: equippedItems,
-      fallbackRecommendations: _recommendations,
-    );
-    _aiRecommendationDebounce = Timer(const Duration(milliseconds: 650), () {
-      final int token = ++_aiRecommendationRequestToken;
-      _refreshAiRecommendations(token: token, payload: payload);
-    });
   }
 
   void _generateAiRecommendationsNow() {
     final List<EquipmentLibraryItem> equippedItems = _equippedItems().toList(
       growable: false,
     );
-    _aiRecommendationDebounce?.cancel();
     final Map<String, dynamic> payload = _buildAiRequestPayload(
       equippedItems: equippedItems,
       fallbackRecommendations: _recommendations,

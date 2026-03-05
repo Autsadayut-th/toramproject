@@ -309,6 +309,11 @@ function resolveProvider() {
   return 'gemini';
 }
 
+function isAutoProviderMode() {
+  const configured = (process.env.AI_PROVIDER || '').trim().toLowerCase();
+  return configured === '' || configured === 'auto';
+}
+
 function providerLabel(provider) {
   if (provider === 'gemini') {
     return 'Google Gemini';
@@ -317,6 +322,40 @@ function providerLabel(provider) {
     return 'OpenAI';
   }
   return 'AI';
+}
+
+function errorMessage(error) {
+  if (error instanceof Error) {
+    return error.message;
+  }
+  return String(error || 'Unknown AI error');
+}
+
+function isQuotaError(error) {
+  const message = errorMessage(error);
+  return (
+    /request failed \(429\)/i.test(message) ||
+    /resource_exhausted/i.test(message) ||
+    /exceeded your current quota/i.test(message) ||
+    /\bquota\b/i.test(message)
+  );
+}
+
+function buildClientSafeAiError(error) {
+  const message = errorMessage(error);
+  if (isQuotaError(error)) {
+    return 'AI quota exceeded (429). Check provider billing/quota or switch provider.';
+  }
+  if (/timed out|timeout/i.test(message)) {
+    return 'AI request timed out. Please try again.';
+  }
+  if (/api key|not configured/i.test(message)) {
+    return 'AI key is missing or invalid in environment variables.';
+  }
+  if (/model .* invalid/i.test(message)) {
+    return message;
+  }
+  return message;
 }
 
 function normalizeGeminiModel(rawModel) {
@@ -520,11 +559,28 @@ async function requestGeminiRecommendations(input) {
 
 async function requestAiRecommendations(input) {
   const provider = resolveProvider();
+  const autoMode = isAutoProviderMode();
   if (provider === 'openai') {
-    return requestOpenAiRecommendations(input);
+    try {
+      return await requestOpenAiRecommendations(input);
+    } catch (openAiError) {
+      const canFallbackToGemini = autoMode && !!process.env.GEMINI_API_KEY;
+      if (!canFallbackToGemini || !isQuotaError(openAiError)) {
+        throw openAiError;
+      }
+      return requestGeminiRecommendations(input);
+    }
   }
   if (provider === 'gemini') {
-    return requestGeminiRecommendations(input);
+    try {
+      return await requestGeminiRecommendations(input);
+    } catch (geminiError) {
+      const canFallbackToOpenAi = autoMode && !!process.env.OPENAI_API_KEY;
+      if (!canFallbackToOpenAi || !isQuotaError(geminiError)) {
+        throw geminiError;
+      }
+      return requestOpenAiRecommendations(input);
+    }
   }
   throw new Error(`Unsupported provider: ${provider}`);
 }
@@ -552,7 +608,7 @@ module.exports = async function handler(req, res) {
   } catch (error) {
     return res.status(200).json({
       source: 'fallback',
-      message: error instanceof Error ? error.message : 'AI unavailable',
+      message: buildClientSafeAiError(error),
       recommendations: fallbackRecommendations,
     });
   }
