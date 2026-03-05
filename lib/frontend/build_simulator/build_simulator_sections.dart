@@ -511,6 +511,28 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
             ],
           ),
           const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.center,
+            child: OutlinedButton.icon(
+              onPressed: _isAiRecommendationLoading
+                  ? null
+                  : _generateAiRecommendationsNow,
+              icon: Icon(
+                _isAiRecommendationLoading ? Icons.sync : Icons.auto_awesome,
+                size: 14,
+              ),
+              label: Text(_isAiRecommendationLoading ? 'Generating...' : 'Generate'),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.white,
+                side: const BorderSide(color: Color(0x66FFFFFF)),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 18,
+                  vertical: 8,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
           Column(children: children),
         ],
       ),

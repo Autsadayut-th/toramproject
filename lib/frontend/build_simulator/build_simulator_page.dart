@@ -549,6 +549,19 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     });
   }
 
+  void _generateAiRecommendationsNow() {
+    final List<EquipmentLibraryItem> equippedItems = _equippedItems().toList(
+      growable: false,
+    );
+    _aiRecommendationDebounce?.cancel();
+    final Map<String, dynamic> payload = _buildAiRequestPayload(
+      equippedItems: equippedItems,
+      fallbackRecommendations: _recommendations,
+    );
+    final int token = ++_aiRecommendationRequestToken;
+    _refreshAiRecommendations(token: token, payload: payload);
+  }
+
   Map<String, dynamic> _buildAiRequestPayload({
     required List<EquipmentLibraryItem> equippedItems,
     required List<String> fallbackRecommendations,
