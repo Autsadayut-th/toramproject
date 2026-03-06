@@ -1,0 +1,25 @@
+{
+  "element_system": {
+
+    "damage_bonus": 0.25,
+
+    "description": "เมื่อใช้อาวุธธาตุที่ชนะ จะเพิ่มดาเมจ 25%",
+
+    "element_advantage": {
+
+      "fire": "earth",
+
+      "earth": "wind",
+
+      "wind": "water",
+
+      "water": "fire",
+
+      "light": "dark",
+
+      "dark": "light"
+
+    }
+
+  }
+}

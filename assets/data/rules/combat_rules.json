@@ -1,0 +1,119 @@
+{
+  "critical_system": {
+    "base_critical_rate": 25,
+
+    "physical_target": 100,
+
+    "magic_staff_target": {
+      "min": 150,
+      "recommended": 200
+    },
+
+    "magic_device_uses_crit": false
+  },
+
+  "critical_damage": {
+    "base": 150,
+    "soft_cap": 300,
+    "overcap_penalty": 0.5
+  },
+
+  "build_stat_priority": {
+
+    "1H_SWORD": {
+
+  "default": [
+    ["DEX","STR"],
+    ["STR","DEX"]
+  ],
+
+  "magic_device": {
+
+    "magic_warrior": [
+      ["INT","STR"]
+    ],
+
+    "magic_warrior_crit": [
+      ["INT","CRITICAL_RATE"]
+    ]
+
+  },
+
+  "dagger_or_arrow": [
+    ["STR","DEX"]
+  ],
+
+  "shield": [
+    ["DEX","STR"],
+    ["DEX","VIT"]
+  ],
+
+  "dual_sword": [
+    ["STR","AGI"],
+    ["AGI","STR"],
+    ["AGI","DEX"],
+    ["STR","DEX"]
+  ]
+},
+
+    "2H_SWORD": [
+      ["STR","DEX"],
+      ["STR","VIT"]
+    ],
+
+    "KATANA": [
+      ["DEX","STR"],
+      ["STR","DEX"],
+      ["AGI","STR"]
+    ],
+
+    "HALBERD": {
+
+      "physical": [
+        ["STR","AGI"]
+      ],
+
+      "magic": [
+        ["INT","STR"]
+      ]
+    },
+
+    "BOW": [
+      ["DEX","STR"]
+    ],
+
+    "BOWGUN": [
+      ["DEX","STR"]
+    ],
+
+    "MAGIC_DEVICE": [
+      ["AGI","DEX"]
+    ],
+
+    "STAFF": {
+
+      "normal_magic": [
+        ["INT","STR"]
+      ],
+
+      "magic_crit": [
+        ["INT","CRITICAL_RATE"]
+      ]
+
+    },
+
+    "STAFF_SHIELD": [
+      ["INT","VIT"]
+    ],
+
+    "KNUCKLES": [
+      ["AGI","DEX"],
+      ["AGI","STR"]
+    ],
+
+    "BARE_HAND": [
+      ["STR","AGI"]
+    ]
+
+  }
+}
