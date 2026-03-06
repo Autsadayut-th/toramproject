@@ -12,11 +12,14 @@ class BuildAiStatusService {
     String? details,
   }) {
     final String normalizedSource = source.trim().toLowerCase();
+    final String sanitized = _sanitizeStatusDetails(details);
     if (normalizedSource == 'gemini') {
-      return 'AI recommendations from Google Gemini.';
+      if (sanitized.isEmpty) {
+        return 'Local recommendations explained by Google Gemini.';
+      }
+      return 'Gemini explanation: $sanitized';
     }
 
-    final String sanitized = _sanitizeStatusDetails(details);
     if (sanitized.isEmpty) {
       return 'AI unavailable. $ruleRecommendationMessage';
     }

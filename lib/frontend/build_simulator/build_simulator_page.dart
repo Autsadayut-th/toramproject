@@ -718,7 +718,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
 
     _setUiState(() {
       _isAiRecommendationLoading = true;
-      _aiRecommendationMessage = 'AI analyzing your build...';
+      _aiRecommendationMessage = 'AI explaining local recommendations...';
     });
 
     try {
@@ -733,7 +733,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
         _aiRecommendationSource = result.source;
         _aiRecommendationMessage = _buildAiStatusMessage(
           source: result.source,
-          details: result.message,
+          details: result.summary.isNotEmpty ? result.summary : result.message,
         );
       });
     } catch (error) {

@@ -7,11 +7,17 @@ class AiBuildRecommendationResult {
     required this.recommendations,
     required this.source,
     required this.message,
+    required this.providerMessage,
+    required this.summary,
+    required this.explanations,
   });
 
   final List<String> recommendations;
   final String source;
   final String message;
+  final String providerMessage;
+  final String summary;
+  final List<String> explanations;
 }
 
 class AiBuildRecommendationService {
@@ -51,10 +57,17 @@ class AiBuildRecommendationService {
     final String source =
         decoded['source']?.toString().trim().toLowerCase() ?? 'unknown';
     final String message = decoded['message']?.toString().trim() ?? '';
+    final String providerMessage =
+        decoded['providerMessage']?.toString().trim() ?? '';
+    final String summary = decoded['summary']?.toString().trim() ?? '';
+    final List<String> explanations = _readStringList(decoded['explanations']);
     return AiBuildRecommendationResult(
       recommendations: recommendations.take(6).toList(growable: false),
       source: source.isEmpty ? 'unknown' : source,
       message: message,
+      providerMessage: providerMessage,
+      summary: summary,
+      explanations: explanations.take(6).toList(growable: false),
     );
   }
 
