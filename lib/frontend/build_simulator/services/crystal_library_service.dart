@@ -1,8 +1,5 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
-
 import '../../equipment_library/models/equipment_library_item.dart';
+import '../../shared/toram_data_github_service.dart';
 
 class CrystalLibraryEntry {
   const CrystalLibraryEntry({
@@ -10,12 +7,14 @@ class CrystalLibraryEntry {
     required this.name,
     required this.category,
     required this.stats,
+    required this.upgradeFrom,
   });
 
   final String key;
   final String name;
   final String category;
   final List<EquipmentStat> stats;
+  final String? upgradeFrom;
 
   String get normalizedKey => key.trim().toLowerCase();
 }
@@ -23,15 +22,15 @@ class CrystalLibraryEntry {
 class CrystalLibraryService {
   const CrystalLibraryService._();
 
-  static const Map<String, List<String>> _categoryAssetCandidates =
+  static const Map<String, List<String>> _categoryRemoteCandidates =
       <String, List<String>>{
-        'weapon': <String>['assets/data/crysta_data/weapon/crysta_weapon.json'],
-        'armor': <String>['assets/data/crysta_data/armor/crysta_armor.json'],
+        'weapon': <String>['items/crysta/weapon/crysta_weapon.json'],
+        'armor': <String>['items/crysta/armor/crysta_armor.json'],
         'additional': <String>[
-          'assets/data/crysta_data/additional/crysta_additional.json',
+          'items/crysta/additional/crysta_additional.json',
         ],
-        'special': <String>['assets/data/crysta_data/special/crysta_special.json'],
-        'normal': <String>['assets/data/crysta_data/normal/crysta_normal.json'],
+        'special': <String>['items/crysta/special/crysta_special.json'],
+        'normal': <String>['items/crysta/normal/crysta_normal.json'],
       };
 
   static final Map<String, List<CrystalLibraryEntry>> _categoryCache =
@@ -46,7 +45,7 @@ class CrystalLibraryService {
         .toSet();
 
     final List<String> validCategories = normalizedCategories
-        .where(_categoryAssetCandidates.containsKey)
+        .where(_categoryRemoteCandidates.containsKey)
         .toList(growable: false);
 
     if (validCategories.isEmpty) {
@@ -86,17 +85,17 @@ class CrystalLibraryService {
       return cached;
     }
 
-    final List<String> candidates = _categoryAssetCandidates[category]!;
+    final List<String> candidates = _categoryRemoteCandidates[category]!;
     final List<CrystalLibraryEntry> merged = <CrystalLibraryEntry>[];
-    bool hasLoadedAsset = false;
+    bool hasLoadedRemote = false;
 
-    for (final String assetPath in candidates) {
+    for (final String remotePath in candidates) {
       try {
-        final List<CrystalLibraryEntry> parsed = await _loadFromAsset(
-          assetPath: assetPath,
+        final List<CrystalLibraryEntry> parsed = await _loadFromRemote(
+          remotePath: remotePath,
           fallbackCategory: category,
         );
-        hasLoadedAsset = true;
+        hasLoadedRemote = true;
         if (parsed.isNotEmpty) {
           merged.addAll(parsed);
         }
@@ -105,8 +104,8 @@ class CrystalLibraryService {
       }
     }
 
-    if (!hasLoadedAsset) {
-      throw StateError('Failed to load crystal category: $category');
+    if (!hasLoadedRemote) {
+      throw StateError('Failed to load remote crystal category: $category');
     }
 
     final List<CrystalLibraryEntry> result = merged.toList(growable: false);
@@ -114,12 +113,11 @@ class CrystalLibraryService {
     return result;
   }
 
-  static Future<List<CrystalLibraryEntry>> _loadFromAsset({
-    required String assetPath,
+  static Future<List<CrystalLibraryEntry>> _loadFromRemote({
+    required String remotePath,
     required String fallbackCategory,
   }) async {
-    final String raw = await rootBundle.loadString(assetPath);
-    final dynamic decoded = jsonDecode(raw);
+    final dynamic decoded = await ToramDataGithubService.loadJson(remotePath);
     final List<Map<String, dynamic>> rows = _normalizeRows(decoded);
     if (rows.isEmpty) {
       return const <CrystalLibraryEntry>[];
@@ -137,6 +135,8 @@ class CrystalLibraryService {
       final String directName = row['name']?.toString().trim() ?? '';
       final String category = row['type']?.toString().trim().toLowerCase() ??
           fallbackCategory;
+      final Map<String, dynamic>? upgrade =
+          row['upgrade'] is Map ? Map<String, dynamic>.from(row['upgrade'] as Map) : null;
       final List<dynamic> statsJson =
           (row['stats'] as List<dynamic>?) ?? const <dynamic>[];
       final List<EquipmentStat> stats = <EquipmentStat>[];
@@ -154,6 +154,9 @@ class CrystalLibraryService {
               : (directName.isNotEmpty ? directName : key),
           category: category.isEmpty ? fallbackCategory : category,
           stats: stats.toList(growable: false),
+          upgradeFrom: upgrade == null
+              ? null
+              : upgrade['from']?.toString().trim(),
         ),
       );
     }

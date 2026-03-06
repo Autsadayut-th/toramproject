@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../shared/app_mobile_bottom_navigation_bar.dart';
 import '../shared/app_navigation_drawer.dart';
+import '../shared/toram_radar_profile.dart';
 
 part 'widgets/compare_build_radar_section.dart';
 part 'widgets/compare_build_stats_table_section.dart';
@@ -36,9 +37,11 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
     'AGI',
     'VIT',
     'ASPD',
+    'CSPD',
+    'FLEE',
     'CritRate',
     'PhysicalPierce',
-    'ElementPierce',
+    'MagicPierce',
     'Accuracy',
     'Stability',
     'HP',
@@ -48,28 +51,9 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
   static const Set<String> _percentKeys = <String>{
     'CritRate',
     'PhysicalPierce',
-    'ElementPierce',
+    'MagicPierce',
     'Accuracy',
     'Stability',
-  };
-
-  static const List<MapEntry<String, String>> _radarMetrics =
-      <MapEntry<String, String>>[
-        MapEntry('HP', 'HP'),
-        MapEntry('ATK', 'Attack'),
-        MapEntry('DEF', 'Defense'),
-        MapEntry('ASPD', 'Speed'),
-        MapEntry('MDEF', 'Sp. Def'),
-        MapEntry('MATK', 'Sp. Atk'),
-      ];
-
-  static const Map<String, double> _radarCaps = <String, double>{
-    'HP': 20000,
-    'ATK': 4000,
-    'DEF': 4000,
-    'ASPD': 8000,
-    'MDEF': 4000,
-    'MATK': 4000,
   };
 
   late List<Map<String, dynamic>> _builds;
@@ -158,6 +142,14 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
       return int.tryParse(raw.trim()) ?? 0;
     }
     return 0;
+  }
+
+  Map<String, num> _summaryMap(Map<String, dynamic>? build) {
+    final Map<String, num> summary = <String, num>{};
+    for (final String key in _compareKeys) {
+      summary[key] = _summaryValue(build, key);
+    }
+    return summary;
   }
 
   String _slotLabel(Map<String, dynamic>? build, String key) {

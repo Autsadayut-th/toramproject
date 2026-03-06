@@ -14,6 +14,7 @@ import '../saved_builds_page/saved_builds_page.dart';
 import '../settings_data_page/settings_data_page.dart';
 import '../shared/app_navigation_drawer.dart';
 import '../shared/app_mobile_bottom_navigation_bar.dart';
+import '../shared/toram_radar_profile.dart';
 import '../skill_menu_page/skill_menu_page.dart';
 
 part 'widgets/build_mobile_drawer.dart';

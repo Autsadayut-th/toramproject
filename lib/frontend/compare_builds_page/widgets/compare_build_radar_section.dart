@@ -5,23 +5,26 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
     required Map<String, dynamic>? firstBuild,
     required Map<String, dynamic>? secondBuild,
   }) {
-    final List<double> firstValues = _CompareBuildsPageState._radarMetrics
+    final Map<String, num> firstSummary = _summaryMap(firstBuild);
+    final Map<String, num> secondSummary = _summaryMap(secondBuild);
+    final List<ToramRadarMetricSpec> metrics = ToramRadarProfile.metrics;
+    final List<double> firstValues = metrics
         .map(
-          (MapEntry<String, String> metric) =>
-              _summaryValue(firstBuild, metric.key).toDouble(),
+          (ToramRadarMetricSpec metric) =>
+              ToramRadarProfile.metricValue(firstSummary, metric.id),
         )
         .toList(growable: false);
-    final List<double> secondValues = _CompareBuildsPageState._radarMetrics
+    final List<double> secondValues = metrics
         .map(
-          (MapEntry<String, String> metric) =>
-              _summaryValue(secondBuild, metric.key).toDouble(),
+          (ToramRadarMetricSpec metric) =>
+              ToramRadarProfile.metricValue(secondSummary, metric.id),
         )
         .toList(growable: false);
 
     final List<double> firstNormalized = List<double>.generate(
-      _CompareBuildsPageState._radarMetrics.length,
+      metrics.length,
       (int index) => _normalizeRadar(
-        key: _CompareBuildsPageState._radarMetrics[index].key,
+        metric: metrics[index],
         left: firstValues[index],
         right: secondValues[index],
         current: firstValues[index],
@@ -29,14 +32,19 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
       growable: false,
     );
     final List<double> secondNormalized = List<double>.generate(
-      _CompareBuildsPageState._radarMetrics.length,
+      metrics.length,
       (int index) => _normalizeRadar(
-        key: _CompareBuildsPageState._radarMetrics[index].key,
+        metric: metrics[index],
         left: firstValues[index],
         right: secondValues[index],
         current: secondValues[index],
       ),
       growable: false,
+    );
+    final List<ToramRadarLabelAnchor> anchors = ToramRadarProfile.buildLabelAnchors(
+      axisCount: metrics.length,
+      radius: 1,
+      minVerticalGap: 0.24,
     );
 
     return Container(
@@ -62,11 +70,11 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
           ),
           const SizedBox(height: 12),
           SizedBox(
-            height: 320,
+            height: 380,
             child: Stack(
               children: [
                 Align(
-                  alignment: Alignment.center,
+                  alignment: const Alignment(0, -0.04),
                   child: SizedBox(
                     width: 220,
                     height: 220,
@@ -84,46 +92,21 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
                     ),
                   ),
                 ),
-                _buildRadarLabel(
-                  alignment: const Alignment(0, -0.96),
-                  label: _CompareBuildsPageState._radarMetrics[0].value,
-                  left: firstValues[0],
-                  right: secondValues[0],
-                ),
-                _buildRadarLabel(
-                  alignment: const Alignment(0.9, -0.5),
-                  label: _CompareBuildsPageState._radarMetrics[1].value,
-                  left: firstValues[1],
-                  right: secondValues[1],
-                  textAlign: TextAlign.left,
-                ),
-                _buildRadarLabel(
-                  alignment: const Alignment(0.9, 0.5),
-                  label: _CompareBuildsPageState._radarMetrics[2].value,
-                  left: firstValues[2],
-                  right: secondValues[2],
-                  textAlign: TextAlign.left,
-                ),
-                _buildRadarLabel(
-                  alignment: const Alignment(0, 0.96),
-                  label: _CompareBuildsPageState._radarMetrics[3].value,
-                  left: firstValues[3],
-                  right: secondValues[3],
-                ),
-                _buildRadarLabel(
-                  alignment: const Alignment(-0.9, 0.5),
-                  label: _CompareBuildsPageState._radarMetrics[4].value,
-                  left: firstValues[4],
-                  right: secondValues[4],
-                  textAlign: TextAlign.right,
-                ),
-                _buildRadarLabel(
-                  alignment: const Alignment(-0.9, -0.5),
-                  label: _CompareBuildsPageState._radarMetrics[5].value,
-                  left: firstValues[5],
-                  right: secondValues[5],
-                  textAlign: TextAlign.right,
-                ),
+                ...List<Widget>.generate(metrics.length, (int index) {
+                  final ToramRadarMetricSpec metric = metrics[index];
+                  final ToramRadarLabelAnchor anchor = anchors[index];
+                  final double width = anchor.textAlign == TextAlign.center
+                      ? 80
+                      : 96;
+                  return _buildRadarLabel(
+                    alignment: anchor.alignment,
+                    label: metric.label,
+                    left: firstValues[index],
+                    right: secondValues[index],
+                    textAlign: anchor.textAlign,
+                    maxWidth: width,
+                  );
+                }),
               ],
             ),
           ),
@@ -171,6 +154,7 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
     required double left,
     required double right,
     TextAlign textAlign = TextAlign.center,
+    double maxWidth = 124,
   }) {
     final CrossAxisAlignment axisAlignment = textAlign == TextAlign.left
         ? CrossAxisAlignment.start
@@ -181,7 +165,7 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
     return Align(
       alignment: alignment,
       child: SizedBox(
-        width: 124,
+        width: maxWidth,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: axisAlignment,
@@ -190,7 +174,7 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
               label,
               style: const TextStyle(
                 color: Color(0xFFFFE082),
-                fontSize: 12,
+                fontSize: 10,
                 fontWeight: FontWeight.w700,
               ),
               textAlign: textAlign,
@@ -199,7 +183,7 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
               '${_numberText(left)} / ${_numberText(right)}',
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 12,
+                fontSize: 10,
                 fontWeight: FontWeight.w700,
               ),
               textAlign: textAlign,
@@ -211,24 +195,24 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
   }
 
   String _numberText(double value) {
-    if (value == value.roundToDouble()) {
-      return value.toInt().toString();
-    }
-    return value.toStringAsFixed(1);
+    return ToramRadarProfile.formatValue(value);
   }
 
   double _normalizeRadar({
-    required String key,
+    required ToramRadarMetricSpec metric,
     required double left,
     required double right,
     required double current,
   }) {
-    final double cap = _CompareBuildsPageState._radarCaps[key] ?? 1;
-    final double maxRef = math.max(cap, math.max(left.abs(), right.abs()));
+    final double maxRef = math.max(metric.cap, math.max(left.abs(), right.abs()));
     if (maxRef <= 0) {
       return 0;
     }
-    return (current / maxRef).clamp(0.0, 1.0);
+    final double ratio = ((current < 0 ? 0 : current) / maxRef).clamp(0.0, 1.0);
+    return ToramRadarProfile.normalizeRatio(
+      ratio: ratio,
+      curve: metric.curve,
+    );
   }
 }
 

@@ -1,47 +1,44 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
-
 import '../models/equipment_library_item.dart';
+import '../../shared/toram_data_github_service.dart';
 
 class EquipmentLibraryRepository {
-  static const Map<String, List<String>> _categoryAssetCandidates =
+  static const Map<String, List<String>> _categoryRemoteCandidates =
       <String, List<String>>{
         'Weapon': <String>[
-          'assets/data/equipment_library/weapon/1h_sword.json',
-          'assets/data/equipment_library/weapon/2h_sword.json',
-          'assets/data/equipment_library/weapon/bow.json',
-          'assets/data/equipment_library/weapon/bowgun.json',
-          'assets/data/equipment_library/weapon/halberd.json',
-          'assets/data/equipment_library/weapon/katana.json',
-          'assets/data/equipment_library/weapon/knuckles.json',
-          'assets/data/equipment_library/weapon/staff.json',
-          'assets/data/equipment_library/weapon/magic_device.json',
-          'assets/data/equipment_library/weapon/dagger.json',
-          'assets/data/equipment_library/weapon/arrow.json',
-          'assets/data/equipment_library/weapon/shield.json',
-          'assets/data/equipment_library/weapon/ninjutsu_scroll.json',
+          'items/equipment/weapon/1h_sword.json',
+          'items/equipment/weapon/2h_sword.json',
+          'items/equipment/weapon/bow.json',
+          'items/equipment/weapon/bowgun.json',
+          'items/equipment/weapon/halberd.json',
+          'items/equipment/weapon/katana.json',
+          'items/equipment/weapon/knuckles.json',
+          'items/equipment/weapon/staff.json',
+          'items/equipment/weapon/magic_device.json',
+          'items/equipment/weapon/dagger.json',
+          'items/equipment/weapon/arrow.json',
+          'items/equipment/weapon/shield.json',
+          'items/equipment/weapon/ninjutsu_scroll.json',
         ],
         'Armor': <String>[
-          'assets/data/equipment_library/armor/armor.json',
+          'items/equipment/armor/armor.json',
         ],
         'Additional': <String>[
-          'assets/data/equipment_library/additional/additional.json',
+          'items/equipment/additional/additional.json',
         ],
         'Special': <String>[
-          'assets/data/equipment_library/special/special.json',
+          'items/equipment/special/special.json',
         ],
       };
 
   List<String> get categories =>
-      _categoryAssetCandidates.keys.toList(growable: false);
+      _categoryRemoteCandidates.keys.toList(growable: false);
 
   Future<Map<String, List<EquipmentLibraryItem>>> loadAllCategories() async {
     final Map<String, List<EquipmentLibraryItem>> allCategories =
         <String, List<EquipmentLibraryItem>>{};
 
     for (final MapEntry<String, List<String>> entry
-        in _categoryAssetCandidates.entries) {
+        in _categoryRemoteCandidates.entries) {
       final List<EquipmentLibraryItem> items = await _loadFromAssets(
         entry.value,
       );
@@ -54,36 +51,37 @@ class EquipmentLibraryRepository {
   }
 
   Future<List<EquipmentLibraryItem>> _loadFromAssets(
-    List<String> assetPaths,
+    List<String> remotePaths,
   ) async {
     final List<EquipmentLibraryItem> mergedItems = <EquipmentLibraryItem>[];
     final List<String> errors = <String>[];
-    bool hasLoadedAnyAsset = false;
+    bool hasLoadedAnyRemote = false;
 
-    for (final String assetPath in assetPaths) {
+    for (final String remotePath in remotePaths) {
       try {
-        final List<EquipmentLibraryItem> items = await _loadFromAsset(assetPath);
-        hasLoadedAnyAsset = true;
+        final List<EquipmentLibraryItem> items = await _loadFromRemote(
+          remotePath,
+        );
+        hasLoadedAnyRemote = true;
         if (items.isNotEmpty) {
           mergedItems.addAll(items);
         }
       } catch (error) {
-        errors.add('$assetPath -> $error');
+        errors.add('$remotePath -> $error');
       }
     }
 
-    if (!hasLoadedAnyAsset) {
+    if (!hasLoadedAnyRemote) {
       throw StateError(
-        'Failed to load equipment assets.\n${errors.join('\n')}',
+        'Failed to load remote equipment data.\n${errors.join('\n')}',
       );
     }
 
     return _sanitizeItems(mergedItems);
   }
 
-  Future<List<EquipmentLibraryItem>> _loadFromAsset(String assetPath) async {
-    final String rawJson = await rootBundle.loadString(assetPath);
-    final dynamic decoded = jsonDecode(rawJson);
+  Future<List<EquipmentLibraryItem>> _loadFromRemote(String remotePath) async {
+    final dynamic decoded = await ToramDataGithubService.loadJson(remotePath);
     final List<Map<String, dynamic>> normalizedItems = _normalizeItems(decoded);
     if (normalizedItems.isEmpty) {
       return const <EquipmentLibraryItem>[];

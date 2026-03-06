@@ -111,6 +111,53 @@ class EquipmentLibraryItem {
     final List<dynamic> statsJson =
         (json['stats'] as List<dynamic>?) ?? <dynamic>[];
     final List<EquipmentStat> stats = <EquipmentStat>[];
+    final Map<String, dynamic> base =
+        (json['base'] as Map<String, dynamic>?) ?? <String, dynamic>{};
+
+    final num? baseAtk = _readNumValue(base['atk']);
+    if (baseAtk != null) {
+      stats.add(
+        EquipmentStat(
+          statKey: 'weapon_atk',
+          value: baseAtk,
+          valueType: 'base',
+        ),
+      );
+    }
+
+    final num? baseDef = _readNumValue(base['def']);
+    if (baseDef != null) {
+      stats.add(
+        EquipmentStat(
+          statKey: 'def',
+          value: baseDef,
+          valueType: 'base',
+        ),
+      );
+    }
+
+    final num? baseMdef = _readNumValue(base['mdef']);
+    if (baseMdef != null) {
+      stats.add(
+        EquipmentStat(
+          statKey: 'mdef',
+          value: baseMdef,
+          valueType: 'base',
+        ),
+      );
+    }
+
+    final num? baseStability = _readNumValue(base['stability']);
+    if (baseStability != null) {
+      stats.add(
+        EquipmentStat(
+          statKey: 'stability',
+          value: baseStability,
+          valueType: 'base',
+        ),
+      );
+    }
+
     for (final Map<String, dynamic> statJson
         in statsJson.whereType<Map<String, dynamic>>()) {
       if (!_hasSupportedStatValueType(statJson['value'])) {
@@ -119,29 +166,26 @@ class EquipmentLibraryItem {
       stats.add(EquipmentStat.fromJson(statJson));
     }
 
-    final Map<String, dynamic> base =
-        (json['base'] as Map<String, dynamic>?) ?? <String, dynamic>{};
-    final bool hasWeaponAtk = stats.any(
-      (EquipmentStat stat) => stat.statKey == 'weapon_atk',
-    );
-    final bool hasStability = stats.any(
-      (EquipmentStat stat) => stat.statKey == 'stability',
-    );
-
-    final num? baseAtk = _readNumValue(base['atk']);
-    if (baseAtk != null && !hasWeaponAtk) {
+    final List<dynamic> conditionalStatsJson =
+        (json['conditional_stats'] as List<dynamic>?) ?? <dynamic>[];
+    for (final Map<String, dynamic> row
+        in conditionalStatsJson.whereType<Map<String, dynamic>>()) {
+      final Map<String, dynamic>? condition =
+          row['condition'] as Map<String, dynamic>?;
+      final Map<String, dynamic>? stat =
+          row['stat'] as Map<String, dynamic>?;
+      if (condition == null || stat == null) {
+        continue;
+      }
+      if (!_hasSupportedStatValueType(stat['value'])) {
+        continue;
+      }
       stats.add(
-        EquipmentStat(statKey: 'weapon_atk', value: baseAtk, valueType: 'flat'),
-      );
-    }
-
-    final num? baseStability = _readNumValue(base['stability']);
-    if (baseStability != null && !hasStability) {
-      stats.add(
-        EquipmentStat(
-          statKey: 'stability',
-          value: baseStability,
-          valueType: 'flat',
+        EquipmentStat.fromJson(
+          <String, dynamic>{
+            ...stat,
+            'condition': condition,
+          },
         ),
       );
     }
@@ -182,11 +226,13 @@ class EquipmentStat {
     required this.statKey,
     required this.value,
     required this.valueType,
+    this.condition,
   });
 
   final String statKey;
   final num value;
   final String valueType;
+  final EquipmentStatCondition? condition;
 
   factory EquipmentStat.fromJson(Map<String, dynamic> json) {
     final String legacyKey = json['key']?.toString().trim() ?? '';
@@ -204,6 +250,7 @@ class EquipmentStat {
       statKey: normalizedKey,
       value: _readNumericValue(json['value']),
       valueType: valueType,
+      condition: EquipmentStatCondition.fromDynamic(json['condition']),
     );
   }
 
@@ -231,4 +278,29 @@ class EquipmentStat {
     }
     return 0;
   }
+}
+
+class EquipmentStatCondition {
+  const EquipmentStatCondition({
+    this.armorState,
+    this.weaponRequired,
+  });
+
+  final String? armorState;
+  final String? weaponRequired;
+
+  factory EquipmentStatCondition.fromDynamic(dynamic raw) {
+    if (raw is! Map) {
+      return const EquipmentStatCondition();
+    }
+    final Map<String, dynamic> json = Map<String, dynamic>.from(raw);
+    final String armor = json['armor']?.toString().trim().toLowerCase() ?? '';
+    final String weapon = json['weapon_required']?.toString().trim().toLowerCase() ?? '';
+    return EquipmentStatCondition(
+      armorState: armor.isEmpty ? null : armor,
+      weaponRequired: weapon.isEmpty ? null : weapon,
+    );
+  }
+
+  bool get isEmpty => armorState == null && weaponRequired == null;
 }

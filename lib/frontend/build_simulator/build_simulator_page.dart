@@ -1,15 +1,16 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 
 import 'build_simulator_coordinator.dart';
 import '../equipment_library/models/equipment_library_item.dart';
 import '../equipment_library/repository/equipment_library_repository.dart';
+import '../shared/toram_radar_profile.dart';
 import 'services/ai_build_recommendation_service.dart';
+import 'services/avatar_gacha_data_service.dart';
 import 'services/build_ai_status_service.dart';
 import 'services/build_calculator_service.dart';
 import 'services/build_persistence_service.dart';
 import 'services/build_recommendation_service.dart';
+import 'services/build_rule_set_service.dart';
 import 'services/build_weapon_rule_service.dart';
 import 'services/crystal_library_service.dart';
 import 'widgets/armor_selector.dart';
@@ -55,7 +56,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     'VIT': 1,
   };
   static const String _ruleRecommendationMessage =
-      'Using local recommendation rules. Press Generate for AI.';
+      'Using GitHub toram-data rules. Press Generate for AI.';
   static const List<String> _allCrystalCategories = <String>[
     'weapon',
     'armor',
@@ -70,8 +71,8 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       <String, CrystalLibraryEntry>{};
   Map<String, String> _weaponTypeAlias = <String, String>{};
   Map<String, String> _subWeaponTypeAlias = <String, String>{};
-  Map<String, List<String>> _mainToAllowedSubTypes =
-      <String, List<String>>{};
+  Map<String, List<String>> _mainToAllowedSubTypes = <String, List<String>>{};
+  BuildRuleSet? _ruleSet;
 
   bool _isCharacterStatsExpanded = false;
   bool _isMainWeaponExpanded = false;
@@ -98,6 +99,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   int _enhSub = 0;
 
   String? _armorId;
+  String _armorMode = 'normal';
   int _enhArmor = 0;
   String? _armorCrystal1;
   String? _armorCrystal2;
@@ -143,6 +145,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     _loadEquipmentLibrary();
     _loadCrystalLibrary();
     _loadWeaponRuleConfig();
+    _loadRuleSetConfig();
   }
 
   @override
@@ -254,15 +257,30 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       }
       _setStateAndRecalculate(() {
         _weaponTypeAlias = Map<String, String>.from(config.weaponTypeAlias);
-        _subWeaponTypeAlias = Map<String, String>.from(config.subWeaponTypeAlias);
-        _mainToAllowedSubTypes = config.mainToAllowedSubTypes.map(
-          (String key, List<String> values) {
-            return MapEntry<String, List<String>>(
-              key,
-              values.toList(growable: false),
-            );
-          },
+        _subWeaponTypeAlias = Map<String, String>.from(
+          config.subWeaponTypeAlias,
         );
+        _mainToAllowedSubTypes = config.mainToAllowedSubTypes.map((
+          String key,
+          List<String> values,
+        ) {
+          return MapEntry<String, List<String>>(
+            key,
+            values.toList(growable: false),
+          );
+        });
+      });
+    } catch (_) {}
+  }
+
+  Future<void> _loadRuleSetConfig() async {
+    try {
+      final BuildRuleSet loaded = await BuildRuleSetService.load();
+      if (!mounted) {
+        return;
+      }
+      _setStateAndRecalculate(() {
+        _ruleSet = loaded;
       });
     } catch (_) {}
   }
@@ -338,7 +356,8 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     if (normalizedMainType.isEmpty) {
       return null;
     }
-    final List<String>? allowedSubTypeKeys = _mainToAllowedSubTypes[normalizedMainType];
+    final List<String>? allowedSubTypeKeys =
+        _mainToAllowedSubTypes[normalizedMainType];
     if (allowedSubTypeKeys == null) {
       return null;
     }
@@ -383,7 +402,8 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     if (normalizedMainType.isEmpty) {
       return true;
     }
-    final List<String>? allowedSubTypes = _mainToAllowedSubTypes[normalizedMainType];
+    final List<String>? allowedSubTypes =
+        _mainToAllowedSubTypes[normalizedMainType];
     if (allowedSubTypes == null) {
       return true;
     }
@@ -494,7 +514,92 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     }
   }
 
+  List<EquipmentStat> _equippedCrystalStatsList() {
+    return _equippedCrystalStats().toList(growable: false);
+  }
+
+  Iterable<String> _selectedGachaValues() sync* {
+    final List<String> values = <String>[
+      _gacha1Stat1,
+      _gacha1Stat2,
+      _gacha1Stat3,
+      _gacha2Stat1,
+      _gacha2Stat2,
+      _gacha2Stat3,
+      _gacha3Stat1,
+      _gacha3Stat2,
+      _gacha3Stat3,
+    ];
+    for (final String raw in values) {
+      final String normalized = raw.trim();
+      if (normalized.isEmpty) {
+        continue;
+      }
+      yield normalized;
+    }
+  }
+
+  List<EquipmentStat> _selectedGachaStatsList() {
+    return _selectedGachaValues()
+        .map(AvatarGachaDataService.decodeSelectionAsEquipmentStat)
+        .whereType<EquipmentStat>()
+        .toList(growable: false);
+  }
+
+  Map<String, List<String>> _crystalKeysByEquipment() {
+    return <String, List<String>>{
+      'Main Weapon': _normalizedCrystalKeys(<String?>[
+        _mainCrystal1,
+        _mainCrystal2,
+      ]),
+      'Armor': _normalizedCrystalKeys(<String?>[
+        _armorCrystal1,
+        _armorCrystal2,
+      ]),
+      'Helmet': _normalizedCrystalKeys(<String?>[
+        _helmetCrystal1,
+        _helmetCrystal2,
+      ]),
+      'Ring': _normalizedCrystalKeys(<String?>[_ringCrystal1, _ringCrystal2]),
+    };
+  }
+
+  Map<String, String?> _crystalUpgradeFromByKey() {
+    return _crystalsByKey.map((String key, CrystalLibraryEntry entry) {
+      final String normalizedParent = (entry.upgradeFrom ?? '')
+          .trim()
+          .toLowerCase();
+      return MapEntry<String, String?>(
+        key,
+        normalizedParent.isEmpty ? null : normalizedParent,
+      );
+    });
+  }
+
+  List<String> _normalizedCrystalKeys(Iterable<String?> values) {
+    final List<String> keys = <String>[];
+    for (final String? raw in values) {
+      final String key = raw?.trim().toLowerCase() ?? '';
+      if (key.isEmpty) {
+        continue;
+      }
+      keys.add(key);
+    }
+    return keys.toList(growable: false);
+  }
+
   void _recalculateAll() {
+    final EquipmentLibraryItem? mainWeapon = _findEquipmentByKey(_mainWeaponId);
+    final EquipmentLibraryItem? subWeapon = _findEquipmentByKey(_subWeaponId);
+    final EquipmentLibraryItem? armor = _findEquipmentByKey(_armorId);
+    final EquipmentLibraryItem? helmet = _findEquipmentByKey(_helmetId);
+    final EquipmentLibraryItem? ring = _findEquipmentByKey(_ringId);
+    final List<EquipmentLibraryItem> equippedItems = _equippedItems().toList(
+      growable: false,
+    );
+    final List<EquipmentStat> equippedCrystalStats =
+        _equippedCrystalStatsList();
+    final List<EquipmentStat> avatarStats = _selectedGachaStatsList();
     _summary = BuildCalculatorService.calculateSummary(
       character: _character,
       level: _level,
@@ -502,15 +607,14 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       personalStatValue: _personalStatValue,
       enhanceMain: _enhMain,
       enhanceSub: _enhSub,
-      enhanceArmor: _enhArmor,
-      enhanceHelmet: _enhHelmet,
-      enhanceRing: _enhRing,
-      subWeaponType: _findEquipmentByKey(_subWeaponId)?.type,
-      equippedItems: _equippedItems(),
-      equippedCrystalStats: _equippedCrystalStats(),
-    );
-    final List<EquipmentLibraryItem> equippedItems = _equippedItems().toList(
-      growable: false,
+      armorState: _armorMode,
+      mainWeapon: mainWeapon,
+      subWeapon: subWeapon,
+      armor: armor,
+      helmet: helmet,
+      ring: ring,
+      equippedCrystalStats: equippedCrystalStats,
+      avatarStats: avatarStats,
     );
     _recommendations = BuildRecommendationService.generate(
       summary: _summary,
@@ -528,6 +632,13 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       enhanceHelmet: _enhHelmet,
       enhanceRing: _enhRing,
       equippedItems: equippedItems,
+      equippedCrystalStats: equippedCrystalStats,
+      crystalKeysByEquipment: _crystalKeysByEquipment(),
+      crystalUpgradeFromByKey: _crystalUpgradeFromByKey(),
+      normalizedMainWeaponType: _normalizeMainWeaponType(
+        _findEquipmentByKey(_mainWeaponId)?.type,
+      ),
+      ruleSet: _ruleSet,
     );
     _aiRecommendationSource = 'rule';
     _aiRecommendationMessage = _ruleRecommendationMessage;
@@ -559,6 +670,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
         'mainWeaponId': _mainWeaponId,
         'subWeaponId': _subWeaponId,
         'armorId': _armorId,
+        'armorMode': _armorMode,
         'helmetId': _helmetId,
         'ringId': _ringId,
         'enhanceMain': _enhMain,
@@ -566,6 +678,15 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
         'enhanceHelmet': _enhHelmet,
         'enhanceRing': _enhRing,
       },
+      'avatarGachaStats': _selectedGachaStatsList()
+          .map(
+            (EquipmentStat stat) => <String, dynamic>{
+              'statKey': stat.statKey,
+              'value': stat.value,
+              'valueType': stat.valueType,
+            },
+          )
+          .toList(growable: false),
       'equippedItems': equippedItems
           .map(
             (EquipmentLibraryItem item) => <String, dynamic>{
@@ -694,6 +815,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     _armorId = BuildPersistenceService.readOptionalStringValue(
       build['armorId'],
     );
+    _armorMode = BuildPersistenceService.normalizeArmorMode(build['armorMode']);
     _enhArmor = BuildPersistenceService.readIntValue(
       build['enhArmor'],
     ).clamp(0, 15).toInt();
@@ -804,6 +926,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       subWeaponId: _subWeaponId,
       enhSub: _enhSub,
       armorId: _armorId,
+      armorMode: _armorMode,
       enhArmor: _enhArmor,
       armorCrystal1: _armorCrystal1,
       armorCrystal2: _armorCrystal2,
@@ -966,6 +1089,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     _enhSub = 0;
 
     _armorId = null;
+    _armorMode = 'normal';
     _enhArmor = 0;
     _armorCrystal1 = null;
     _armorCrystal2 = null;

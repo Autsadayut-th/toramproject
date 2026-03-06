@@ -318,26 +318,97 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
           _isArmorExpanded = !_isArmorExpanded;
         });
       },
-      child: ArmorEquipmentSelector(
-        selectedId: _armorId,
-        statPreview: _equipmentStatPreview(_armorId),
-        onEquipChanged: (id) {
-          _setStateAndRecalculate(() => _armorId = id);
-        },
-        enhance: _enhArmor,
-        onEnhChanged: (v) {
-          _setStateAndRecalculate(() => _enhArmor = v);
-        },
-        crystal1: _armorCrystal1,
-        crystal2: _armorCrystal2,
-        onCrystal1Changed: (v) {
-          _setStateAndRecalculate(() => _armorCrystal1 = v);
-        },
-        onCrystal2Changed: (v) {
-          _setStateAndRecalculate(() => _armorCrystal2 = v);
-        },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _buildArmorModeSelector(),
+          const SizedBox(height: 12),
+          ArmorEquipmentSelector(
+            selectedId: _armorId,
+            statPreview: _equipmentStatPreview(_armorId),
+            onEquipChanged: (id) {
+              _setStateAndRecalculate(() => _armorId = id);
+            },
+            enhance: _enhArmor,
+            onEnhChanged: (v) {
+              _setStateAndRecalculate(() => _enhArmor = v);
+            },
+            crystal1: _armorCrystal1,
+            crystal2: _armorCrystal2,
+            onCrystal1Changed: (v) {
+              _setStateAndRecalculate(() => _armorCrystal1 = v);
+            },
+            onCrystal2Changed: (v) {
+              _setStateAndRecalculate(() => _armorCrystal2 = v);
+            },
+          ),
+        ],
       ),
       minHeight: minHeight,
+    );
+  }
+
+  Widget _buildArmorModeSelector() {
+    const List<MapEntry<String, String>> options = <MapEntry<String, String>>[
+      MapEntry<String, String>('normal', 'Normal'),
+      MapEntry<String, String>('heavy', 'Heavy'),
+      MapEntry<String, String>('light', 'Light'),
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text(
+          'Armor Mode',
+          style: TextStyle(
+            color: Colors.white70,
+            fontSize: 11,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0.2,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: options.map((MapEntry<String, String> option) {
+            final bool selected = _armorMode == option.key;
+            return ChoiceChip(
+              label: Text(option.value),
+              selected: selected,
+              onSelected: (_) {
+                if (selected) {
+                  return;
+                }
+                _setStateAndRecalculate(() => _armorMode = option.key);
+              },
+              labelStyle: TextStyle(
+                color: selected ? Colors.black : Colors.white,
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+              ),
+              backgroundColor: const Color(0xFF111111),
+              selectedColor: const Color(0xFFFFE082),
+              side: BorderSide(
+                color: selected
+                    ? const Color(0xFFFFE082)
+                    : const Color(0x44FFFFFF),
+              ),
+            );
+          }).toList(growable: false),
+        ),
+        const SizedBox(height: 6),
+        Text(
+          _armorId == null
+              ? 'Empty armor slot uses the in-game no-armor formula automatically.'
+              : 'Heavy and Light mode also activate matching conditional equipment stats.',
+          style: const TextStyle(
+            color: Colors.white54,
+            fontSize: 10,
+            height: 1.3,
+          ),
+        ),
+      ],
     );
   }
 

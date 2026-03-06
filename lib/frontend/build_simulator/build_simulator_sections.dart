@@ -63,7 +63,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
           if (_summaryViewMode == _SummaryViewMode.metricList)
             _buildStatsValueView()
           else
-            _buildStatsTableGraphView(),
+            _buildStatsBarGraphView(),
         ],
       ),
     );
@@ -116,7 +116,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
           ),
           const SizedBox(width: 6),
           _buildSummaryModeButton(
-            label: 'Radar Graph',
+            label: 'Combat Bars',
             mode: _SummaryViewMode.tableGraph,
           ),
         ],
@@ -189,164 +189,171 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
           Icons.bolt,
           'Special Stats',
           <MapEntry<String, String>>[
-            MapEntry('ASPD', 'ASPD'),
-            MapEntry('CritRate', 'Critical Rate'),
-            MapEntry('PhysicalPierce', 'Piercing (Physical)'),
-            MapEntry('ElementPierce', 'Piercing (Element)'),
-            MapEntry('Accuracy', 'Accuracy'),
-            MapEntry('Stability', 'Stability'),
-            MapEntry('HP', 'HP'),
-            MapEntry('MP', 'MP'),
+                MapEntry('ASPD', 'ASPD'),
+                MapEntry('CSPD', 'CSPD'),
+                MapEntry('FLEE', 'FLEE'),
+                MapEntry('CritRate', 'Critical Rate'),
+                MapEntry('PhysicalPierce', 'Piercing (Physical)'),
+                MapEntry('MagicPierce', 'Piercing (Magic)'),
+                MapEntry('Accuracy', 'HIT'),
+                MapEntry('Stability', 'Stability'),
+                MapEntry('HP', 'HP'),
+                MapEntry('MP', 'MP'),
           ],
         ),
       ],
     );
   }
 
-  Widget _buildStatsTableGraphView() {
-    final List<_RadarMetric> metrics = <_RadarMetric>[
-      _RadarMetric(label: 'HP', value: (_summary['HP'] ?? 0).toDouble(), cap: 20000),
-      _RadarMetric(
-        label: 'Attack',
-        value: (_summary['ATK'] ?? 0).toDouble(),
-        cap: 4000,
-      ),
-      _RadarMetric(
-        label: 'Defense',
-        value: (_summary['DEF'] ?? 0).toDouble(),
-        cap: 4000,
-      ),
-      _RadarMetric(
-        label: 'Speed',
-        value: (_summary['ASPD'] ?? 0).toDouble(),
-        cap: 8000,
-      ),
-      _RadarMetric(
-        label: 'Sp. Def',
-        value: (_summary['MDEF'] ?? 0).toDouble(),
-        cap: 4000,
-      ),
-      _RadarMetric(
-        label: 'Sp. Atk',
-        value: (_summary['MATK'] ?? 0).toDouble(),
-        cap: 4000,
-      ),
-    ];
+  Widget _buildStatsBarGraphView() {
+    final List<ToramRadarMetricSpec> metrics = ToramRadarProfile.metrics;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text(
+          'Bars are benchmark-scaled for quick comparison while the numbers stay raw.',
+          style: TextStyle(
+            fontSize: 11,
+            color: Colors.white70,
+            height: 1.35,
+          ),
+        ),
+        const SizedBox(height: 12),
+        ...List<Widget>.generate(metrics.length, (int index) {
+          final ToramRadarMetricSpec metric = metrics[index];
+          return Padding(
+            padding: EdgeInsets.only(bottom: index == metrics.length - 1 ? 0 : 10),
+            child: _buildSummaryMetricBar(metric: metric),
+          );
+        }),
+      ],
+    );
+  }
 
-    final List<double> normalizedValues = metrics
-        .map((metric) {
-          final double safeValue = metric.value < 0 ? 0 : metric.value;
-          return (safeValue / metric.cap).clamp(0.0, 1.0);
-        })
-        .toList(growable: false);
+  Widget _buildSummaryMetricBar({required ToramRadarMetricSpec metric}) {
+    final double rawValue = ToramRadarProfile.metricValue(_summary, metric.id);
+    final double normalizedValue = ToramRadarProfile.normalizedValue(
+      summary: _summary,
+      metric: metric,
+    ).clamp(0.0, 1.0);
+    final List<Color> barColors = _summaryMetricBarColors(metric.label);
 
-    return SizedBox(
-      height: 300,
-      child: Stack(
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF121212).withValues(alpha: 0.92),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: const Color(0xFFFFFFFF).withValues(alpha: 0.12),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Align(
-            alignment: Alignment.center,
-            child: SizedBox(
-              width: 210,
-              height: 210,
-              child: CustomPaint(
-                painter: _SummaryRadarPainter(
-                  normalizedValues: normalizedValues,
-                  gridColor: const Color(0x66FFFFFF),
-                  axisColor: const Color(0x33FFFFFF),
-                  fillColor: const Color(0xAA8FC7FF),
-                  strokeColor: const Color(0xFFD6ECFF),
+          Row(
+            children: <Widget>[
+              Text(
+                metric.label,
+                style: const TextStyle(
+                  color: Color(0xFFFFE082),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 0.3,
                 ),
+              ),
+              const Spacer(),
+              Text(
+                _formatMetricValue(rawValue),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(999),
+            child: SizedBox(
+              height: 12,
+              child: Stack(
+                children: <Widget>[
+                  Positioned.fill(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: const Color(0x33FFFFFF),
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: FractionallySizedBox(
+                        widthFactor: normalizedValue,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: barColors),
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                          child: const SizedBox.expand(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-          _buildRadarMetricLabel(
-            alignment: const Alignment(0, -0.94),
-            label: metrics[0].label,
-            value: metrics[0].value,
-          ),
-          _buildRadarMetricLabel(
-            alignment: const Alignment(0.88, -0.48),
-            label: metrics[1].label,
-            value: metrics[1].value,
-            textAlign: TextAlign.left,
-          ),
-          _buildRadarMetricLabel(
-            alignment: const Alignment(0.88, 0.48),
-            label: metrics[2].label,
-            value: metrics[2].value,
-            textAlign: TextAlign.left,
-          ),
-          _buildRadarMetricLabel(
-            alignment: const Alignment(0, 0.94),
-            label: metrics[3].label,
-            value: metrics[3].value,
-          ),
-          _buildRadarMetricLabel(
-            alignment: const Alignment(-0.88, 0.48),
-            label: metrics[4].label,
-            value: metrics[4].value,
-            textAlign: TextAlign.right,
-          ),
-          _buildRadarMetricLabel(
-            alignment: const Alignment(-0.88, -0.48),
-            label: metrics[5].label,
-            value: metrics[5].value,
-            textAlign: TextAlign.right,
+          const SizedBox(height: 8),
+          Row(
+            children: <Widget>[
+              Text(
+                'Profile ${(normalizedValue * 100).round()}%',
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                'Benchmark ${_formatMetricValue(metric.cap)}',
+                style: const TextStyle(
+                  color: Colors.white54,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
           ),
         ],
       ),
     );
   }
 
-  Widget _buildRadarMetricLabel({
-    required Alignment alignment,
-    required String label,
-    required double value,
-    TextAlign textAlign = TextAlign.center,
-  }) {
-    return Align(
-      alignment: alignment,
-      child: SizedBox(
-        width: 100,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: textAlign == TextAlign.left
-              ? CrossAxisAlignment.start
-              : textAlign == TextAlign.right
-              ? CrossAxisAlignment.end
-              : CrossAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              label,
-              style: const TextStyle(
-                color: Color(0xFFFFE082),
-                fontSize: 12,
-                fontWeight: FontWeight.w700,
-              ),
-              textAlign: textAlign,
-            ),
-            Text(
-              _formatRadarValue(value),
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 28,
-                fontWeight: FontWeight.w700,
-                height: 1,
-              ),
-              textAlign: textAlign,
-            ),
-          ],
-        ),
-      ),
-    );
+  String _formatMetricValue(double value) {
+    return ToramRadarProfile.formatValue(value);
   }
 
-  String _formatRadarValue(double value) {
-    if (value == value.roundToDouble()) {
-      return value.toInt().toString();
+  List<Color> _summaryMetricBarColors(String label) {
+    switch (label) {
+      case 'ATK':
+      case 'MATK':
+        return const <Color>[Color(0xFF77D3FF), Color(0xFF4D8DFF)];
+      case 'DEF':
+      case 'MDEF':
+        return const <Color>[Color(0xFF86F7C8), Color(0xFF3CCB8E)];
+      case 'HIT':
+      case 'FLEE':
+        return const <Color>[Color(0xFFFFD27A), Color(0xFFFFA347)];
+      case 'ASPD':
+      case 'CSPD':
+        return const <Color>[Color(0xFFFFA7D1), Color(0xFFFF6F91)];
+      default:
+        return const <Color>[Color(0xFFB8D2FF), Color(0xFF6C9BFF)];
     }
-    return value.toStringAsFixed(1);
   }
 
   Widget _statsCategory(
@@ -756,134 +763,5 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
         ),
       ),
     );
-  }
-}
-
-class _RadarMetric {
-  const _RadarMetric({
-    required this.label,
-    required this.value,
-    required this.cap,
-  });
-
-  final String label;
-  final double value;
-  final double cap;
-}
-
-class _SummaryRadarPainter extends CustomPainter {
-  const _SummaryRadarPainter({
-    required this.normalizedValues,
-    required this.gridColor,
-    required this.axisColor,
-    required this.fillColor,
-    required this.strokeColor,
-  });
-
-  final List<double> normalizedValues;
-  final Color gridColor;
-  final Color axisColor;
-  final Color fillColor;
-  final Color strokeColor;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    if (normalizedValues.length < 3) {
-      return;
-    }
-
-    final Offset center = size.center(Offset.zero);
-    final double radius = math.min(size.width, size.height) / 2 - 10;
-    final int axisCount = normalizedValues.length;
-
-    final List<Offset> outerPoints = List<Offset>.generate(axisCount, (int i) {
-      final double angle = -math.pi / 2 + (2 * math.pi * i / axisCount);
-      return Offset(
-        center.dx + radius * math.cos(angle),
-        center.dy + radius * math.sin(angle),
-      );
-    });
-
-    final Paint gridPaint = Paint()
-      ..color = gridColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.2;
-    final Paint axisPaint = Paint()
-      ..color = axisColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1;
-
-    for (int level = 1; level <= 4; level++) {
-      final double t = level / 4;
-      final Path path = Path();
-      for (int i = 0; i < axisCount; i++) {
-        final Offset p = Offset.lerp(center, outerPoints[i], t)!;
-        if (i == 0) {
-          path.moveTo(p.dx, p.dy);
-        } else {
-          path.lineTo(p.dx, p.dy);
-        }
-      }
-      path.close();
-      canvas.drawPath(path, gridPaint);
-    }
-
-    for (final Offset p in outerPoints) {
-      canvas.drawLine(center, p, axisPaint);
-    }
-
-    final List<double> values = normalizedValues
-        .map((double v) => v.clamp(0.0, 1.0))
-        .toList(growable: false);
-    final List<Offset> dataPoints = List<Offset>.generate(axisCount, (int i) {
-      return Offset.lerp(center, outerPoints[i], values[i])!;
-    });
-
-    final Path areaPath = Path();
-    for (int i = 0; i < dataPoints.length; i++) {
-      final Offset p = dataPoints[i];
-      if (i == 0) {
-        areaPath.moveTo(p.dx, p.dy);
-      } else {
-        areaPath.lineTo(p.dx, p.dy);
-      }
-    }
-    areaPath.close();
-
-    canvas.drawPath(
-      areaPath,
-      Paint()
-        ..color = fillColor
-        ..style = PaintingStyle.fill,
-    );
-    canvas.drawPath(
-      areaPath,
-      Paint()
-        ..color = strokeColor
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 2,
-    );
-
-    final Paint pointPaint = Paint()..color = strokeColor;
-    for (final Offset p in dataPoints) {
-      canvas.drawCircle(p, 3.2, pointPaint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant _SummaryRadarPainter oldDelegate) {
-    if (oldDelegate.gridColor != gridColor ||
-        oldDelegate.axisColor != axisColor ||
-        oldDelegate.fillColor != fillColor ||
-        oldDelegate.strokeColor != strokeColor ||
-        oldDelegate.normalizedValues.length != normalizedValues.length) {
-      return true;
-    }
-    for (int i = 0; i < normalizedValues.length; i++) {
-      if (oldDelegate.normalizedValues[i] != normalizedValues[i]) {
-        return true;
-      }
-    }
-    return false;
   }
 }

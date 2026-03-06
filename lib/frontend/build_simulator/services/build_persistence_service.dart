@@ -69,6 +69,17 @@ class BuildPersistenceService {
     return personalStatOptions.first;
   }
 
+  static String normalizeArmorMode(dynamic value) {
+    final String normalized = readStringValue(value).trim().toLowerCase();
+    switch (normalized) {
+      case 'heavy':
+      case 'light':
+        return normalized;
+      default:
+        return 'normal';
+    }
+  }
+
   static String buildIdFor(Map<String, dynamic> build, int index) {
     final String existingId = readStringValue(build['id']).trim();
     if (existingId.isNotEmpty) {
@@ -122,6 +133,7 @@ class BuildPersistenceService {
     build['personalStatType'] = normalizePersonalStatType(
       build['personalStatType'],
     );
+    build['armorMode'] = normalizeArmorMode(build['armorMode']);
     build['personalStatValue'] = readIntValue(
       build['personalStatValue'],
       fallback: 0,
@@ -146,6 +158,14 @@ class BuildPersistenceService {
               num.tryParse(value.trim()) ?? normalizedSummary[summaryKey]!;
         }
       });
+      if ((normalizedSummary['MagicPierce'] ?? 0) == 0 &&
+          rawSummary['ElementPierce'] is num) {
+        normalizedSummary['MagicPierce'] = rawSummary['ElementPierce'] as num;
+      }
+      if ((normalizedSummary['ElementPierce'] ?? 0) == 0 &&
+          rawSummary['MagicPierce'] is num) {
+        normalizedSummary['ElementPierce'] = rawSummary['MagicPierce'] as num;
+      }
     }
     build['summary'] = normalizedSummary;
     return build;
@@ -198,6 +218,7 @@ class BuildPersistenceService {
     required String? subWeaponId,
     required int enhSub,
     required String? armorId,
+    required String armorMode,
     required int enhArmor,
     required String? armorCrystal1,
     required String? armorCrystal2,
@@ -248,6 +269,7 @@ class BuildPersistenceService {
       'subWeaponId': subWeaponId,
       'enhSub': enhSub.clamp(0, 15).toInt(),
       'armorId': armorId,
+      'armorMode': normalizeArmorMode(armorMode),
       'enhArmor': enhArmor.clamp(0, 15).toInt(),
       'armorCrystal1': armorCrystal1,
       'armorCrystal2': armorCrystal2,

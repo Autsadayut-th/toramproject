@@ -72,6 +72,7 @@ flutter:
     - assets/data/crysta_data/additional/
     - assets/data/crysta_data/special/
     - assets/data/crysta_data/normal/
+    - assets/data/gacha/
     - assets/data/skill_menu/
     - assets/data/skill_menu/images/blade/
     - assets/data/skill_menu/images/Shot/

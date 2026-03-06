@@ -17,7 +17,7 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
   static const Set<String> _percentKeys = <String>{
     'CritRate',
     'PhysicalPierce',
-    'ElementPierce',
+    'MagicPierce',
     'Accuracy',
     'Stability',
   };
@@ -94,10 +94,7 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
   }
 
   String _formatRadarValue(double value) {
-    if (value == value.roundToDouble()) {
-      return value.toInt().toString();
-    }
-    return value.toStringAsFixed(1);
+    return ToramRadarProfile.formatValue(value);
   }
 
   Widget _buildSummaryModeSwitch() {
@@ -207,16 +204,18 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                 title: 'Special Stats',
                 rows: const <MapEntry<String, String>>[
                   MapEntry<String, String>('ASPD', 'ASPD'),
+                  MapEntry<String, String>('CSPD', 'CSPD'),
+                  MapEntry<String, String>('FLEE', 'FLEE'),
                   MapEntry<String, String>('CritRate', 'Critical Rate'),
                   MapEntry<String, String>(
                     'PhysicalPierce',
                     'Piercing (Physical)',
                   ),
                   MapEntry<String, String>(
-                    'ElementPierce',
-                    'Piercing (Element)',
+                    'MagicPierce',
+                    'Piercing (Magic)',
                   ),
-                  MapEntry<String, String>('Accuracy', 'Accuracy'),
+                  MapEntry<String, String>('Accuracy', 'HIT'),
                   MapEntry<String, String>('Stability', 'Stability'),
                   MapEntry<String, String>('HP', 'HP'),
                   MapEntry<String, String>('MP', 'MP'),
@@ -233,54 +232,30 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
   }
 
   Widget _buildSummaryRadarView(Map<String, num> summary) {
-    final List<_DrawerRadarMetric> metrics = <_DrawerRadarMetric>[
-      _DrawerRadarMetric(
-        label: 'HP',
-        value: (summary['HP'] ?? 0).toDouble(),
-        cap: 20000,
-      ),
-      _DrawerRadarMetric(
-        label: 'Attack',
-        value: (summary['ATK'] ?? 0).toDouble(),
-        cap: 4000,
-      ),
-      _DrawerRadarMetric(
-        label: 'Defense',
-        value: (summary['DEF'] ?? 0).toDouble(),
-        cap: 4000,
-      ),
-      _DrawerRadarMetric(
-        label: 'Speed',
-        value: (summary['ASPD'] ?? 0).toDouble(),
-        cap: 8000,
-      ),
-      _DrawerRadarMetric(
-        label: 'Sp. Def',
-        value: (summary['MDEF'] ?? 0).toDouble(),
-        cap: 4000,
-      ),
-      _DrawerRadarMetric(
-        label: 'Sp. Atk',
-        value: (summary['MATK'] ?? 0).toDouble(),
-        cap: 4000,
-      ),
-    ];
+    final List<ToramRadarMetricSpec> metrics = ToramRadarProfile.metrics;
+    final List<ToramRadarLabelAnchor> anchors = ToramRadarProfile.buildLabelAnchors(
+      axisCount: metrics.length,
+      radius: 0.97,
+      minVerticalGap: 0.24,
+    );
     final List<double> normalizedValues = metrics
-        .map((_DrawerRadarMetric metric) {
-          final double safeValue = metric.value < 0 ? 0 : metric.value;
-          return (safeValue / metric.cap).clamp(0.0, 1.0);
-        })
+        .map(
+          (ToramRadarMetricSpec metric) => ToramRadarProfile.normalizedValue(
+            summary: summary,
+            metric: metric,
+          ),
+        )
         .toList(growable: false);
 
     return SizedBox(
-      height: 280,
+      height: 340,
       child: Stack(
         children: <Widget>[
           Align(
             alignment: Alignment.center,
             child: SizedBox(
-              width: 200,
-              height: 200,
+              width: 190,
+              height: 190,
               child: CustomPaint(
                 painter: _DrawerSummaryRadarPainter(
                   normalizedValues: normalizedValues,
@@ -292,40 +267,19 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
               ),
             ),
           ),
-          _buildDrawerRadarLabel(
-            alignment: const Alignment(0, -0.94),
-            label: metrics[0].label,
-            value: metrics[0].value,
-          ),
-          _buildDrawerRadarLabel(
-            alignment: const Alignment(0.9, -0.48),
-            label: metrics[1].label,
-            value: metrics[1].value,
-            textAlign: TextAlign.left,
-          ),
-          _buildDrawerRadarLabel(
-            alignment: const Alignment(0.9, 0.48),
-            label: metrics[2].label,
-            value: metrics[2].value,
-            textAlign: TextAlign.left,
-          ),
-          _buildDrawerRadarLabel(
-            alignment: const Alignment(0, 0.94),
-            label: metrics[3].label,
-            value: metrics[3].value,
-          ),
-          _buildDrawerRadarLabel(
-            alignment: const Alignment(-0.9, 0.48),
-            label: metrics[4].label,
-            value: metrics[4].value,
-            textAlign: TextAlign.right,
-          ),
-          _buildDrawerRadarLabel(
-            alignment: const Alignment(-0.9, -0.48),
-            label: metrics[5].label,
-            value: metrics[5].value,
-            textAlign: TextAlign.right,
-          ),
+          ...List<Widget>.generate(metrics.length, (int index) {
+            final ToramRadarMetricSpec metric = metrics[index];
+            final ToramRadarLabelAnchor anchor = anchors[index];
+            final double width = anchor.textAlign == TextAlign.center ? 72 : 82;
+            return _buildDrawerRadarLabel(
+              alignment: anchor.alignment,
+              label: metric.label,
+              value: ToramRadarProfile.metricValue(summary, metric.id),
+              textAlign: anchor.textAlign,
+              maxWidth: width,
+              valueFontSize: 12,
+            );
+          }),
         ],
       ),
     );
@@ -336,11 +290,13 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
     required String label,
     required double value,
     TextAlign textAlign = TextAlign.center,
+    double maxWidth = 98,
+    double valueFontSize = 13,
   }) {
     return Align(
       alignment: alignment,
       child: SizedBox(
-        width: 98,
+        width: maxWidth,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: textAlign == TextAlign.left
@@ -353,16 +309,16 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
               label,
               style: const TextStyle(
                 color: Color(0xFFFFE082),
-                fontSize: 11,
+                fontSize: 9.5,
                 fontWeight: FontWeight.w700,
               ),
               textAlign: textAlign,
             ),
             Text(
               _formatRadarValue(value),
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
-                fontSize: 20,
+                fontSize: valueFontSize,
                 fontWeight: FontWeight.w700,
                 height: 1,
               ),

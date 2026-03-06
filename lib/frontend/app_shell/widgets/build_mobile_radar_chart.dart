@@ -2,18 +2,6 @@ part of '../app_shell_page.dart';
 
 enum _DrawerSummaryViewMode { metricList, radarGraph }
 
-class _DrawerRadarMetric {
-  const _DrawerRadarMetric({
-    required this.label,
-    required this.value,
-    required this.cap,
-  });
-
-  final String label;
-  final double value;
-  final double cap;
-}
-
 class _DrawerSummaryRadarPainter extends CustomPainter {
   const _DrawerSummaryRadarPainter({
     required this.normalizedValues,

@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
+import '../../shared/toram_data_github_service.dart';
 
 class BuildWeaponRuleConfig {
   const BuildWeaponRuleConfig({
@@ -17,12 +15,12 @@ class BuildWeaponRuleConfig {
 class BuildWeaponRuleService {
   const BuildWeaponRuleService._();
 
-  static const List<String> _typeAliasAssetCandidates = <String>[
-    'assets/data/system/type_alias.json',
+  static const List<String> _typeAliasRemoteCandidates = <String>[
+    'system/type_alias.json',
   ];
 
-  static const List<String> _weaponSubRuleAssetCandidates = <String>[
-    'assets/data/rules/weapon_sub_rules.json',
+  static const List<String> _weaponSubRuleRemoteCandidates = <String>[
+    'rules/weapon_sub_rules.json',
   ];
 
   static BuildWeaponRuleConfig? _cache;
@@ -33,11 +31,11 @@ class BuildWeaponRuleService {
       return cached;
     }
 
-    final Map<String, dynamic> aliasRoot = await _loadFirstMapAsset(
-      _typeAliasAssetCandidates,
+    final Map<String, dynamic> aliasRoot = await _loadFirstMapRemote(
+      _typeAliasRemoteCandidates,
     );
-    final Map<String, dynamic> ruleRoot = await _loadFirstMapAsset(
-      _weaponSubRuleAssetCandidates,
+    final Map<String, dynamic> ruleRoot = await _loadFirstMapRemote(
+      _weaponSubRuleRemoteCandidates,
     );
 
     final BuildWeaponRuleConfig config = BuildWeaponRuleConfig(
@@ -50,21 +48,25 @@ class BuildWeaponRuleService {
     return config;
   }
 
-  static Future<Map<String, dynamic>> _loadFirstMapAsset(
+  static Future<Map<String, dynamic>> _loadFirstMapRemote(
     List<String> candidates,
   ) async {
-    for (final String assetPath in candidates) {
+    for (final String remotePath in candidates) {
       try {
-        final String raw = await rootBundle.loadString(assetPath);
-        final dynamic decoded = jsonDecode(raw);
+        final dynamic decoded = await ToramDataGithubService.loadJson(
+          remotePath,
+        );
         if (decoded is Map<String, dynamic>) {
           return decoded;
+        }
+        if (decoded is Map) {
+          return Map<String, dynamic>.from(decoded);
         }
       } catch (_) {
         continue;
       }
     }
-    throw StateError('Failed to load assets: ${candidates.join(', ')}');
+    throw StateError('Failed to load remote data: ${candidates.join(', ')}');
   }
 
   static Map<String, String> _toStringMap(dynamic source) {
