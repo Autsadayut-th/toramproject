@@ -3,7 +3,7 @@ class BuildAiStatusService {
 
   static bool isRemoteAiSource(String source) {
     final String normalizedSource = source.trim().toLowerCase();
-    return normalizedSource == 'openai' || normalizedSource == 'gemini';
+    return normalizedSource == 'gemini';
   }
 
   static String buildStatusMessage({
@@ -12,9 +12,6 @@ class BuildAiStatusService {
     String? details,
   }) {
     final String normalizedSource = source.trim().toLowerCase();
-    if (normalizedSource == 'openai') {
-      return 'AI recommendations from OpenAI.';
-    }
     if (normalizedSource == 'gemini') {
       return 'AI recommendations from Google Gemini.';
     }

@@ -291,35 +291,17 @@ function buildPromptText(input) {
 
 function resolveProvider() {
   const configured = (process.env.AI_PROVIDER || '').trim().toLowerCase();
-  if (configured === 'gemini' || configured === 'openai') {
-    return configured;
-  }
-  if (configured && configured !== 'auto') {
+  if (configured && configured !== 'auto' && configured !== 'gemini') {
     throw new Error(
-      'Invalid AI_PROVIDER. Use "gemini", "openai", or leave empty.',
+      'Invalid AI_PROVIDER. Use "gemini" or leave empty.',
     );
   }
-
-  if (process.env.GEMINI_API_KEY) {
-    return 'gemini';
-  }
-  if (process.env.OPENAI_API_KEY) {
-    return 'openai';
-  }
   return 'gemini';
-}
-
-function isAutoProviderMode() {
-  const configured = (process.env.AI_PROVIDER || '').trim().toLowerCase();
-  return configured === '' || configured === 'auto';
 }
 
 function providerLabel(provider) {
   if (provider === 'gemini') {
     return 'Google Gemini';
-  }
-  if (provider === 'openai') {
-    return 'OpenAI';
   }
   return 'AI';
 }
@@ -344,7 +326,7 @@ function isQuotaError(error) {
 function buildClientSafeAiError(error) {
   const message = errorMessage(error);
   if (isQuotaError(error)) {
-    return 'AI quota exceeded (429). Check provider billing/quota or switch provider.';
+    return 'AI quota exceeded (429). Check Gemini billing/quota settings.';
   }
   if (/timed out|timeout/i.test(message)) {
     return 'AI request timed out. Please try again.';
@@ -396,93 +378,6 @@ function extractGeminiText(json) {
     throw new Error('Gemini response has empty text.');
   }
   return combined;
-}
-
-function extractOpenAiText(json) {
-  const outputText =
-    typeof json?.output_text === 'string' ? json.output_text.trim() : '';
-  if (outputText) {
-    return outputText;
-  }
-
-  const outputs = Array.isArray(json?.output) ? json.output : [];
-  const chunks = [];
-  for (const output of outputs) {
-    const content = Array.isArray(output?.content) ? output.content : [];
-    for (const part of content) {
-      if (typeof part?.text === 'string' && part.text.trim()) {
-        chunks.push(part.text.trim());
-      }
-    }
-  }
-
-  const combined = chunks.join('\n').trim();
-  if (combined) {
-    return combined;
-  }
-  throw new Error('OpenAI response missing text output.');
-}
-
-async function requestOpenAiRecommendations(input) {
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) {
-    throw new Error('OPENAI_API_KEY is not configured.');
-  }
-
-  const model = process.env.OPENAI_MODEL || 'gpt-4o-mini';
-  const promptText = buildPromptText(input);
-
-  const response = await fetch('https://api.openai.com/v1/responses', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model,
-      temperature: 0.2,
-      max_output_tokens: 400,
-      text: {
-        format: {
-          type: 'json_schema',
-          name: 'toram_recommendations',
-          strict: true,
-          schema: {
-            type: 'object',
-            required: ['recommendations'],
-            additionalProperties: false,
-            properties: {
-              recommendations: {
-                type: 'array',
-                minItems: 1,
-                maxItems: 6,
-                items: { type: 'string' },
-              },
-            },
-          },
-        },
-      },
-      input: [
-        {
-          role: 'user',
-          content: promptText,
-        },
-      ],
-    }),
-  });
-
-  if (!response.ok) {
-    const bodyText = await response.text();
-    throw new Error(`OpenAI request failed (${response.status}): ${bodyText}`);
-  }
-
-  const json = await response.json();
-  const outputText = extractOpenAiText(json);
-  return {
-    provider: 'openai',
-    model,
-    recommendations: parseModelRecommendations(outputText),
-  };
 }
 
 async function requestGeminiRecommendations(input) {
@@ -558,31 +453,8 @@ async function requestGeminiRecommendations(input) {
 }
 
 async function requestAiRecommendations(input) {
-  const provider = resolveProvider();
-  const autoMode = isAutoProviderMode();
-  if (provider === 'openai') {
-    try {
-      return await requestOpenAiRecommendations(input);
-    } catch (openAiError) {
-      const canFallbackToGemini = autoMode && !!process.env.GEMINI_API_KEY;
-      if (!canFallbackToGemini || !isQuotaError(openAiError)) {
-        throw openAiError;
-      }
-      return requestGeminiRecommendations(input);
-    }
-  }
-  if (provider === 'gemini') {
-    try {
-      return await requestGeminiRecommendations(input);
-    } catch (geminiError) {
-      const canFallbackToOpenAi = autoMode && !!process.env.OPENAI_API_KEY;
-      if (!canFallbackToOpenAi || !isQuotaError(geminiError)) {
-        throw geminiError;
-      }
-      return requestOpenAiRecommendations(input);
-    }
-  }
-  throw new Error(`Unsupported provider: ${provider}`);
+  resolveProvider();
+  return requestGeminiRecommendations(input);
 }
 
 module.exports = async function handler(req, res) {
