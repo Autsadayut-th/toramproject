@@ -13,6 +13,9 @@ part 'equipment_library_grid.dart';
 part 'equipment_library_pagination.dart';
 part 'equipment_library_formatters.dart';
 
+const Color _libraryWarmAccent = Color(0xFFD8B36A);
+const Color _libraryCoolAccent = Color(0xFF5D7283);
+
 class EquipmentLibraryScreen extends StatelessWidget {
   const EquipmentLibraryScreen({
     super.key,
@@ -106,9 +109,15 @@ class EquipmentLibraryScreen extends StatelessWidget {
         automaticallyImplyLeading: !showGlobalMenu && !showMobileNav,
         leading: showGlobalMenu
             ? Builder(
-                builder: (BuildContext context) => IconButton(
-                  icon: const Icon(Icons.menu),
+                builder: (BuildContext context) => TextButton(
                   onPressed: () => Scaffold.of(context).openDrawer(),
+                  child: const Text(
+                    'Menu',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
               )
             : null,

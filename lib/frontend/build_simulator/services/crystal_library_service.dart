@@ -6,6 +6,7 @@ class CrystalLibraryEntry {
     required this.key,
     required this.name,
     required this.category,
+    required this.displayColor,
     required this.stats,
     required this.upgradeFrom,
   });
@@ -13,10 +14,41 @@ class CrystalLibraryEntry {
   final String key;
   final String name;
   final String category;
+  final String displayColor;
   final List<EquipmentStat> stats;
   final String? upgradeFrom;
 
   String get normalizedKey => key.trim().toLowerCase();
+
+  String get colorKey {
+    const Set<String> knownColors = <String>{
+      'red',
+      'green',
+      'blue',
+      'yellow',
+      'purple',
+    };
+    final String explicit = displayColor.trim().toLowerCase();
+    if (knownColors.contains(explicit)) {
+      return explicit;
+    }
+    switch (category.trim().toLowerCase()) {
+      case 'weapon':
+        return 'red';
+      case 'armor':
+        return 'green';
+      case 'additional':
+        return 'yellow';
+      case 'special':
+        return 'purple';
+      case 'normal':
+        return 'blue';
+      default:
+        return 'blue';
+    }
+  }
+
+  String get iconAssetPath => 'assets/data/icon/${colorKey}_crysta.png';
 }
 
 class CrystalLibraryService {
@@ -70,16 +102,17 @@ class CrystalLibraryService {
       uniqueByKey.putIfAbsent(normalizedKey, () => entry);
     }
 
-    final List<CrystalLibraryEntry> items = uniqueByKey.values.toList(
-      growable: false,
-    )..sort(
-        (CrystalLibraryEntry a, CrystalLibraryEntry b) =>
-            a.name.compareTo(b.name),
-      );
+    final List<CrystalLibraryEntry> items =
+        uniqueByKey.values.toList(growable: false)..sort(
+          (CrystalLibraryEntry a, CrystalLibraryEntry b) =>
+              a.name.compareTo(b.name),
+        );
     return items;
   }
 
-  static Future<List<CrystalLibraryEntry>> _loadCategory(String category) async {
+  static Future<List<CrystalLibraryEntry>> _loadCategory(
+    String category,
+  ) async {
     final List<CrystalLibraryEntry>? cached = _categoryCache[category];
     if (cached != null) {
       return cached;
@@ -133,10 +166,12 @@ class CrystalLibraryService {
           (row['display'] as Map<String, dynamic>?) ?? <String, dynamic>{};
       final String displayName = display['name']?.toString().trim() ?? '';
       final String directName = row['name']?.toString().trim() ?? '';
-      final String category = row['type']?.toString().trim().toLowerCase() ??
-          fallbackCategory;
-      final Map<String, dynamic>? upgrade =
-          row['upgrade'] is Map ? Map<String, dynamic>.from(row['upgrade'] as Map) : null;
+      final String category =
+          row['type']?.toString().trim().toLowerCase() ?? fallbackCategory;
+      final String displayColor = display['color']?.toString().trim() ?? '';
+      final Map<String, dynamic>? upgrade = row['upgrade'] is Map
+          ? Map<String, dynamic>.from(row['upgrade'] as Map)
+          : null;
       final List<dynamic> statsJson =
           (row['stats'] as List<dynamic>?) ?? const <dynamic>[];
       final List<EquipmentStat> stats = <EquipmentStat>[];
@@ -153,6 +188,7 @@ class CrystalLibraryService {
               ? displayName
               : (directName.isNotEmpty ? directName : key),
           category: category.isEmpty ? fallbackCategory : category,
+          displayColor: displayColor,
           stats: stats.toList(growable: false),
           upgradeFrom: upgrade == null
               ? null

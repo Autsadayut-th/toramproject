@@ -1,7 +1,26 @@
 import 'package:flutter/material.dart';
 
 import '../../equipment_library/equipment_library_page.dart';
+import '../../equipment_library/models/equipment_library_item.dart';
+import '../../equipment_library/services/equipment_library_query_service.dart';
 import '../services/crystal_library_service.dart';
+
+const Map<String, Color> _crystalAccentColors = <String, Color>{
+  'red': Color(0xFFE57373),
+  'green': Color(0xFF81C784),
+  'blue': Color(0xFF64B5F6),
+  'yellow': Color(0xFFFFD54F),
+  'purple': Color(0xFFBA68C8),
+};
+
+Color _crystalAccentColor(CrystalLibraryEntry? entry) {
+  final String colorKey = entry?.colorKey ?? 'blue';
+  return _crystalAccentColors[colorKey] ?? const Color(0xFF64B5F6);
+}
+
+String _crystalIconPath(CrystalLibraryEntry? entry) {
+  return entry?.iconAssetPath ?? 'assets/data/icon/blue_crysta.png';
+}
 
 class EquipmentSlotSelector extends StatefulWidget {
   const EquipmentSlotSelector({
@@ -19,6 +38,7 @@ class EquipmentSlotSelector extends StatefulWidget {
     required this.onEnhChanged,
     this.allowedItemTypes,
     this.selectedDisplayText,
+    this.selectedEquipmentItem,
     this.idFieldReadOnly = false,
     this.crystalCategoryFilters = const <String>[],
     this.crystal1,
@@ -40,6 +60,7 @@ class EquipmentSlotSelector extends StatefulWidget {
   final ValueChanged<int> onEnhChanged;
   final List<String>? allowedItemTypes;
   final String? selectedDisplayText;
+  final EquipmentLibraryItem? selectedEquipmentItem;
   final bool idFieldReadOnly;
   final List<String> crystalCategoryFilters;
   final String? crystal1;
@@ -79,6 +100,8 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.selectedId != widget.selectedId ||
         oldWidget.selectedDisplayText != widget.selectedDisplayText ||
+        oldWidget.selectedEquipmentItem?.key !=
+            widget.selectedEquipmentItem?.key ||
         oldWidget.idFieldReadOnly != widget.idFieldReadOnly) {
       _idController.text = _idFieldText();
     }
@@ -260,13 +283,15 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
         Row(
           children: <Widget>[
             Expanded(
-              child: _inputField(
-                controller: _idController,
-                hint: widget.idHint,
-                onSubmitted: _commitId,
-                onTapOutside: _commitId,
-                readOnly: widget.idFieldReadOnly,
-              ),
+              child: widget.selectedEquipmentItem != null
+                  ? _selectedEquipmentField(item: widget.selectedEquipmentItem!)
+                  : _inputField(
+                      controller: _idController,
+                      hint: widget.idHint,
+                      onSubmitted: _commitId,
+                      onTapOutside: _commitId,
+                      readOnly: widget.idFieldReadOnly,
+                    ),
             ),
             const SizedBox(width: 8),
             _libraryButton(
@@ -354,25 +379,275 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
         ),
         if (_showCrystalSlots) ...<Widget>[
           const SizedBox(height: 10),
-          _label('Crystal Slot 1'),
-          _crystalSelectionField(
-            selectedKey: widget.crystal1,
-            onBrowse: _pickCrystalSlot1,
-            onClear: widget.onCrystal1Changed == null
-                ? null
-                : () => widget.onCrystal1Changed!(null),
-          ),
-          const SizedBox(height: 10),
-          _label('Crystal Slot 2'),
-          _crystalSelectionField(
-            selectedKey: widget.crystal2,
-            onBrowse: _pickCrystalSlot2,
-            onClear: widget.onCrystal2Changed == null
-                ? null
-                : () => widget.onCrystal2Changed!(null),
+          LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              // Keep both crystal slots on one row for most layouts.
+              // Fall back to vertical only on very narrow widths.
+              final bool stackVertically = constraints.maxWidth < 560;
+              final Widget slot1 = _crystalSlotField(
+                label: 'Crystal Slot 1',
+                selectedKey: widget.crystal1,
+                onBrowse: _pickCrystalSlot1,
+                onClear: widget.onCrystal1Changed == null
+                    ? null
+                    : () => widget.onCrystal1Changed!(null),
+              );
+              final Widget slot2 = _crystalSlotField(
+                label: 'Crystal Slot 2',
+                selectedKey: widget.crystal2,
+                onBrowse: _pickCrystalSlot2,
+                onClear: widget.onCrystal2Changed == null
+                    ? null
+                    : () => widget.onCrystal2Changed!(null),
+              );
+
+              if (stackVertically) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[slot1, const SizedBox(height: 10), slot2],
+                );
+              }
+
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(child: slot1),
+                  const SizedBox(width: 12),
+                  Expanded(child: slot2),
+                ],
+              );
+            },
           ),
         ],
       ],
+    );
+  }
+
+  Widget _crystalSlotField({
+    required String label,
+    required String? selectedKey,
+    required VoidCallback onBrowse,
+    required VoidCallback? onClear,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        _label(label),
+        _crystalSelectionField(
+          selectedKey: selectedKey,
+          onBrowse: onBrowse,
+          onClear: onClear,
+        ),
+      ],
+    );
+  }
+
+  String _normalizeEquipmentTypeKey(String type) {
+    return EquipmentLibraryQueryService.normalizeTypeKey(type);
+  }
+
+  String _resolveEquipmentDisplayTypeKey(EquipmentLibraryItem item) {
+    String normalized = _normalizeEquipmentTypeKey(item.type);
+    if (normalized != 'armor') {
+      return normalized;
+    }
+
+    final String slotCategory = widget.pickInitialCategory.trim().toLowerCase();
+    if (slotCategory == 'additional') {
+      return 'additional';
+    }
+    if (slotCategory == 'special') {
+      return 'special';
+    }
+
+    final String key = item.key.trim().toLowerCase();
+    if (key.contains('_special_')) {
+      return 'special';
+    }
+    if (key.contains('_additional_')) {
+      return 'additional';
+    }
+    return normalized;
+  }
+
+  Color _equipmentTypeAccentColorForTypeKey(String typeKey) {
+    switch (typeKey) {
+      case '1h_sword':
+      case '2h_sword':
+      case 'katana':
+      case 'dagger':
+      case 'halberd':
+        return const Color(0xFFFFCC80);
+      case 'bow':
+      case 'bowgun':
+      case 'arrow':
+        return const Color(0xFF90CAF9);
+      case 'staff':
+      case 'magic_device':
+      case 'ninjutsu_scroll':
+        return const Color(0xFFB39DDB);
+      case 'shield':
+      case 'armor':
+        return const Color(0xFFA5D6A7);
+      case 'additional':
+        return const Color(0xFFFFAB91);
+      case 'special':
+        return const Color(0xFFFFE082);
+      default:
+        return const Color(0xFFB0BEC5);
+    }
+  }
+
+  String _equipmentTypeAssetPathForTypeKey(String typeKey) {
+    switch (typeKey) {
+      case '1h_sword':
+        return 'assets/data/icon/1h_sword_icon.png';
+      case '2h_sword':
+        return 'assets/data/icon/2h_sword_icon.png';
+      case 'katana':
+        return 'assets/data/icon/katana_icon.png';
+      case 'dagger':
+        return 'assets/data/icon/dagger_icon.png';
+      case 'bow':
+        return 'assets/data/icon/bow_icon.png';
+      case 'bowgun':
+        return 'assets/data/icon/bowgun_icon.png';
+      case 'halberd':
+        return 'assets/data/icon/halberd_icon.png';
+      case 'knuckles':
+        return 'assets/data/icon/knuckles_icon.png';
+      case 'staff':
+        return 'assets/data/icon/staff_icon.png';
+      case 'magic_device':
+        return 'assets/data/icon/magic_device_icon.png';
+      case 'arrow':
+        return 'assets/data/icon/arrow_icon.png';
+      case 'shield':
+        return 'assets/data/icon/shield_icon.png';
+      case 'ninjutsu_scroll':
+        return 'assets/data/icon/ninjut_suscroll_icon.png';
+      case 'armor':
+        return 'assets/data/icon/armor_icon.png';
+      case 'additional':
+        return 'assets/data/icon/add_icon.png';
+      case 'special':
+        return 'assets/data/icon/special_ring_icon.png';
+      default:
+        return '';
+    }
+  }
+
+  String _normalizeAssetPath(String raw) {
+    String path = raw.trim().replaceAll('\\', '/');
+    if (path.startsWith('./')) {
+      path = path.substring(2);
+    }
+    if (path.startsWith('/assets/')) {
+      path = path.substring(1);
+    }
+    if (path.startsWith('assets/assets/')) {
+      path = path.replaceFirst('assets/', '');
+    }
+    if (path.startsWith('data/')) {
+      return 'assets/$path';
+    }
+    return path;
+  }
+
+  String _resolveEquipmentIconAssetPath(
+    EquipmentLibraryItem item, {
+    required String typeKey,
+  }) {
+    final String imagePath = _normalizeAssetPath(item.imageAssetPath);
+    if (imagePath.isNotEmpty) {
+      if (imagePath.startsWith('assets/')) {
+        return imagePath;
+      }
+      if (imagePath.startsWith('data/')) {
+        return 'assets/$imagePath';
+      }
+      return imagePath;
+    }
+    return _equipmentTypeAssetPathForTypeKey(typeKey);
+  }
+
+  Widget _selectedEquipmentField({required EquipmentLibraryItem item}) {
+    final String typeKey = _resolveEquipmentDisplayTypeKey(item);
+    final Color accentColor = _equipmentTypeAccentColorForTypeKey(typeKey);
+    final String assetPath = _resolveEquipmentIconAssetPath(
+      item,
+      typeKey: typeKey,
+    );
+
+    return Container(
+      constraints: const BoxConstraints(minHeight: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      decoration: BoxDecoration(
+        color: const Color(0xFF111111),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: accentColor.withValues(alpha: 0.48)),
+      ),
+      child: Row(
+        children: <Widget>[
+          Container(
+            width: 28,
+            height: 28,
+            decoration: BoxDecoration(
+              color: accentColor.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: accentColor.withValues(alpha: 0.45)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(4),
+              child: assetPath.isEmpty
+                  ? Icon(
+                      Icons.sports_martial_arts,
+                      size: 14,
+                      color: accentColor,
+                    )
+                  : Image.asset(
+                      assetPath,
+                      fit: BoxFit.contain,
+                      errorBuilder: (_, __, ___) {
+                        return Icon(
+                          Icons.sports_martial_arts,
+                          size: 14,
+                          color: accentColor,
+                        );
+                      },
+                    ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  item.name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Text(
+                  item.key,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: Colors.white.withValues(alpha: 0.55),
+                    fontSize: 11,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -439,6 +714,10 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
     final String displayName = _displayCrystalName(selectedKey);
     final String rawKey = selectedKey?.trim() ?? '';
     final bool hasValue = rawKey.isNotEmpty;
+    final CrystalLibraryEntry? selectedEntry = hasValue
+        ? _crystalByKey[rawKey.toLowerCase()]
+        : null;
+    final Color accentColor = _crystalAccentColor(selectedEntry);
     final bool canBrowse = _canBrowseCrystals && !_isCrystalLoading;
 
     return Row(
@@ -450,37 +729,76 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
             decoration: BoxDecoration(
               color: const Color(0xFF111111),
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
+              border: Border.all(
+                color: hasValue
+                    ? accentColor.withValues(alpha: 0.48)
+                    : Colors.white.withValues(alpha: 0.18),
+              ),
             ),
             child: hasValue
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
+                ? Row(
                     children: <Widget>[
-                      Text(
-                        displayName,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      if (displayName.toLowerCase() != rawKey.toLowerCase())
-                        Text(
-                          rawKey,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.55),
-                            fontSize: 11,
+                      Container(
+                        width: 28,
+                        height: 28,
+                        decoration: BoxDecoration(
+                          color: accentColor.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: accentColor.withValues(alpha: 0.45),
                           ),
                         ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4),
+                          child: Image.asset(
+                            _crystalIconPath(selectedEntry),
+                            fit: BoxFit.contain,
+                            errorBuilder: (_, __, ___) {
+                              return Icon(
+                                Icons.diamond_outlined,
+                                size: 14,
+                                color: accentColor,
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Text(
+                              displayName,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            if (displayName.toLowerCase() !=
+                                rawKey.toLowerCase())
+                              Text(
+                                rawKey,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: Colors.white.withValues(alpha: 0.55),
+                                  fontSize: 11,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
                     ],
                   )
                 : Text(
-                    _isCrystalLoading ? 'Loading crystal data...' : 'Select crystal',
+                    _isCrystalLoading
+                        ? 'Loading crystal data...'
+                        : 'Select crystal',
                     style: TextStyle(
                       color: Colors.white.withValues(alpha: 0.45),
                       fontSize: 12,
@@ -492,7 +810,9 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
         _libraryButton(
           onTap: onBrowse,
           enabled: canBrowse,
-          tooltip: _isCrystalLoading ? 'Loading crystals...' : 'Browse crystals',
+          tooltip: _isCrystalLoading
+              ? 'Loading crystals...'
+              : 'Browse crystals',
         ),
         if (hasValue) ...<Widget>[
           const SizedBox(width: 8),
@@ -548,11 +868,7 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: Colors.white.withValues(alpha: 0.22)),
           ),
-          child: const Icon(
-            Icons.close,
-            size: 16,
-            color: Colors.white70,
-          ),
+          child: const Icon(Icons.close, size: 16, color: Colors.white70),
         ),
       ),
     );
@@ -589,16 +905,18 @@ class _CrystalPickerDialogState extends State<_CrystalPickerDialog> {
 
   List<CrystalLibraryEntry> get _filteredEntries {
     final String normalizedQuery = _query.trim().toLowerCase();
-    return widget.entries.where((CrystalLibraryEntry entry) {
-      if (_categoryFilter != null && entry.category != _categoryFilter) {
-        return false;
-      }
-      if (normalizedQuery.isEmpty) {
-        return true;
-      }
-      return entry.name.toLowerCase().contains(normalizedQuery) ||
-          entry.key.toLowerCase().contains(normalizedQuery);
-    }).toList(growable: false);
+    return widget.entries
+        .where((CrystalLibraryEntry entry) {
+          if (_categoryFilter != null && entry.category != _categoryFilter) {
+            return false;
+          }
+          if (normalizedQuery.isEmpty) {
+            return true;
+          }
+          return entry.name.toLowerCase().contains(normalizedQuery) ||
+              entry.key.toLowerCase().contains(normalizedQuery);
+        })
+        .toList(growable: false);
   }
 
   String _categoryLabel(String category) {
@@ -606,6 +924,23 @@ class _CrystalPickerDialogState extends State<_CrystalPickerDialog> {
       return '-';
     }
     return category[0].toUpperCase() + category.substring(1).toLowerCase();
+  }
+
+  Color _categoryAccentColor(String category) {
+    switch (category.trim().toLowerCase()) {
+      case 'weapon':
+        return _crystalAccentColors['red']!;
+      case 'armor':
+        return _crystalAccentColors['green']!;
+      case 'additional':
+        return _crystalAccentColors['yellow']!;
+      case 'special':
+        return _crystalAccentColors['purple']!;
+      case 'normal':
+        return _crystalAccentColors['blue']!;
+      default:
+        return const Color(0xFF64B5F6);
+    }
   }
 
   @override
@@ -690,9 +1025,20 @@ class _CrystalPickerDialogState extends State<_CrystalPickerDialog> {
                         },
                       ),
                       ...categories.map((String category) {
+                        final Color accentColor = _categoryAccentColor(
+                          category,
+                        );
                         return ChoiceChip(
                           label: Text(_categoryLabel(category)),
                           selected: _categoryFilter == category,
+                          selectedColor: accentColor.withValues(alpha: 0.28),
+                          backgroundColor: const Color(0xFF161A1D),
+                          side: BorderSide(
+                            color: _categoryFilter == category
+                                ? accentColor.withValues(alpha: 0.72)
+                                : accentColor.withValues(alpha: 0.36),
+                          ),
+                          labelStyle: const TextStyle(color: Colors.white),
                           onSelected: (_) {
                             setState(() {
                               _categoryFilter = category;
@@ -714,19 +1060,56 @@ class _CrystalPickerDialogState extends State<_CrystalPickerDialog> {
                         )
                       : ListView.separated(
                           itemCount: filtered.length,
-                          separatorBuilder: (_, __) =>
-                              const Divider(height: 1, color: Color(0x22FFFFFF)),
+                          separatorBuilder: (_, __) => const Divider(
+                            height: 1,
+                            color: Color(0x22FFFFFF),
+                          ),
                           itemBuilder: (BuildContext context, int index) {
                             final CrystalLibraryEntry entry = filtered[index];
                             final bool isSelected =
                                 entry.normalizedKey == selectedKey;
+                            final Color accentColor = _crystalAccentColor(
+                              entry,
+                            );
                             return ListTile(
                               dense: true,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
+                                side: BorderSide(
+                                  color: isSelected
+                                      ? accentColor.withValues(alpha: 0.75)
+                                      : accentColor.withValues(alpha: 0.28),
+                                ),
                               ),
                               selected: isSelected,
-                              selectedTileColor: const Color(0x2221A366),
+                              selectedTileColor: accentColor.withValues(
+                                alpha: 0.18,
+                              ),
+                              leading: Container(
+                                width: 28,
+                                height: 28,
+                                decoration: BoxDecoration(
+                                  color: accentColor.withValues(alpha: 0.12),
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: accentColor.withValues(alpha: 0.42),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4),
+                                  child: Image.asset(
+                                    _crystalIconPath(entry),
+                                    fit: BoxFit.contain,
+                                    errorBuilder: (_, __, ___) {
+                                      return Icon(
+                                        Icons.diamond_outlined,
+                                        size: 14,
+                                        color: accentColor,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
                               title: Text(
                                 entry.name,
                                 maxLines: 1,
@@ -743,9 +1126,9 @@ class _CrystalPickerDialogState extends State<_CrystalPickerDialog> {
                                 ),
                               ),
                               trailing: isSelected
-                                  ? const Icon(
+                                  ? Icon(
                                       Icons.check_circle,
-                                      color: Colors.greenAccent,
+                                      color: accentColor,
                                       size: 18,
                                     )
                                   : null,

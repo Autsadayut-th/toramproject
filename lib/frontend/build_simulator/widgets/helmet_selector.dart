@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../equipment_library/models/equipment_library_item.dart';
 import 'equipment_slot_selector.dart';
 
 class HelmetEquipmentSelector extends StatelessWidget {
   const HelmetEquipmentSelector({
     super.key,
     required this.selectedId,
+    required this.selectedEquipmentItem,
     required this.statPreview,
     required this.onEquipChanged,
     required this.enhance,
@@ -17,6 +19,7 @@ class HelmetEquipmentSelector extends StatelessWidget {
   });
 
   final String? selectedId;
+  final EquipmentLibraryItem? selectedEquipmentItem;
   final List<String> statPreview;
   final ValueChanged<String?> onEquipChanged;
   final int enhance;
@@ -32,6 +35,7 @@ class HelmetEquipmentSelector extends StatelessWidget {
       idLabel: 'Helmet ID',
       idHint: 'e.g. helmet_001',
       selectedId: selectedId,
+      selectedEquipmentItem: selectedEquipmentItem,
       onEquipChanged: onEquipChanged,
       pickInitialCategory: 'Additional',
       allowedCategories: const <String>['Additional'],
@@ -48,4 +52,3 @@ class HelmetEquipmentSelector extends StatelessWidget {
     );
   }
 }
-

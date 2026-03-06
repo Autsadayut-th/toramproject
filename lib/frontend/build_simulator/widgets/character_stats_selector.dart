@@ -8,6 +8,8 @@ class CharacterStatsSelector extends StatelessWidget {
     required this.level,
     required this.personalStatType,
     required this.personalStatValue,
+    required this.usedStatPoints,
+    required this.totalStatPoints,
     required this.onStatChanged,
     required this.onLevelChanged,
     required this.onPersonalStatTypeChanged,
@@ -19,6 +21,8 @@ class CharacterStatsSelector extends StatelessWidget {
   final int level;
   final String personalStatType;
   final int personalStatValue;
+  final int usedStatPoints;
+  final int totalStatPoints;
   final void Function(String key, int value) onStatChanged;
   final ValueChanged<int> onLevelChanged;
   final ValueChanged<String> onPersonalStatTypeChanged;
@@ -57,10 +61,44 @@ class CharacterStatsSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String selectedPersonalType = _normalizedPersonalStatType();
+    final int safeUsed = usedStatPoints < 0 ? 0 : usedStatPoints;
+    final int safeTotal = totalStatPoints <= 0 ? 1 : totalStatPoints;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          decoration: BoxDecoration(
+            color: const Color(0xFF101010),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Character Properties ($safeUsed / $safeTotal stat points used)',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 2),
+              const Text(
+                "Maximum stat value can be changed from your profile's setting",
+                style: TextStyle(
+                  color: Colors.white54,
+                  fontSize: 10,
+                  height: 1.3,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 8),
         _StatRow(
           label: 'Lv',
           value: level.clamp(_minLevel, _maxLevel).toInt(),

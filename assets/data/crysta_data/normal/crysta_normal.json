@@ -4,7 +4,7 @@
     "key": "cake_potum",
     "display": {
       "name": "Cake Potum",
-      "color": null
+      "color": "blue"
     },
     "type": "normal",
     "stats": [

@@ -1,5 +1,7 @@
 part of '../app_shell_page.dart';
 
+enum _DrawerSummaryViewMode { metricList, tableGraph }
+
 class _BuildStatsSummaryDrawer extends StatefulWidget {
   const _BuildStatsSummaryDrawer({required this.coordinator});
 
@@ -93,10 +95,6 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
     return normalized != 'rule' && normalized != 'fallback';
   }
 
-  String _formatRadarValue(double value) {
-    return ToramRadarProfile.formatValue(value);
-  }
-
   Widget _buildSummaryModeSwitch() {
     return Container(
       padding: const EdgeInsets.all(3),
@@ -113,8 +111,8 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
           ),
           const SizedBox(width: 6),
           _buildSummaryModeButton(
-            label: 'Radar Graph',
-            mode: _DrawerSummaryViewMode.radarGraph,
+            label: 'Combat Bars',
+            mode: _DrawerSummaryViewMode.tableGraph,
           ),
         ],
       ),
@@ -211,10 +209,7 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                     'PhysicalPierce',
                     'Piercing (Physical)',
                   ),
-                  MapEntry<String, String>(
-                    'MagicPierce',
-                    'Piercing (Magic)',
-                  ),
+                  MapEntry<String, String>('MagicPierce', 'Piercing (Magic)'),
                   MapEntry<String, String>('Accuracy', 'HIT'),
                   MapEntry<String, String>('Stability', 'Stability'),
                   MapEntry<String, String>('HP', 'HP'),
@@ -226,108 +221,161 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
             ],
           )
         else
-          _buildSummaryRadarView(summary),
+          _buildSummaryBarGraphView(summary),
       ],
     );
   }
 
-  Widget _buildSummaryRadarView(Map<String, num> summary) {
+  Widget _buildSummaryBarGraphView(Map<String, num> summary) {
     final List<ToramRadarMetricSpec> metrics = ToramRadarProfile.metrics;
-    final List<ToramRadarLabelAnchor> anchors = ToramRadarProfile.buildLabelAnchors(
-      axisCount: metrics.length,
-      radius: 0.97,
-      minVerticalGap: 0.24,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text(
+          'Bars are benchmark-scaled for quick comparison while the numbers stay raw.',
+          style: TextStyle(fontSize: 11, color: Colors.white70, height: 1.35),
+        ),
+        const SizedBox(height: 12),
+        ...List<Widget>.generate(metrics.length, (int index) {
+          final ToramRadarMetricSpec metric = metrics[index];
+          return Padding(
+            padding: EdgeInsets.only(
+              bottom: index == metrics.length - 1 ? 0 : 10,
+            ),
+            child: _buildSummaryMetricBar(summary: summary, metric: metric),
+          );
+        }),
+      ],
     );
-    final List<double> normalizedValues = metrics
-        .map(
-          (ToramRadarMetricSpec metric) => ToramRadarProfile.normalizedValue(
-            summary: summary,
-            metric: metric,
-          ),
-        )
-        .toList(growable: false);
+  }
 
-    return SizedBox(
-      height: 340,
-      child: Stack(
+  Widget _buildSummaryMetricBar({
+    required Map<String, num> summary,
+    required ToramRadarMetricSpec metric,
+  }) {
+    final double rawValue = ToramRadarProfile.metricValue(summary, metric.id);
+    final double normalizedValue = ToramRadarProfile.normalizedValue(
+      summary: summary,
+      metric: metric,
+    ).clamp(0.0, 1.0);
+    final List<Color> barColors = _summaryMetricBarColors(metric.label);
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF121212).withValues(alpha: 0.92),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: const Color(0xFFFFFFFF).withValues(alpha: 0.12),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Align(
-            alignment: Alignment.center,
-            child: SizedBox(
-              width: 190,
-              height: 190,
-              child: CustomPaint(
-                painter: _DrawerSummaryRadarPainter(
-                  normalizedValues: normalizedValues,
-                  gridColor: const Color(0x66FFFFFF),
-                  axisColor: const Color(0x33FFFFFF),
-                  fillColor: const Color(0xAA8FC7FF),
-                  strokeColor: const Color(0xFFD6ECFF),
+          Row(
+            children: <Widget>[
+              Text(
+                metric.label,
+                style: const TextStyle(
+                  color: Color(0xFFFFE082),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 0.3,
                 ),
+              ),
+              const Spacer(),
+              Text(
+                _formatMetricValue(rawValue),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(999),
+            child: SizedBox(
+              height: 12,
+              child: Stack(
+                children: <Widget>[
+                  Positioned.fill(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: const Color(0x33FFFFFF),
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: FractionallySizedBox(
+                        widthFactor: normalizedValue,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: barColors),
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                          child: const SizedBox.expand(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-          ...List<Widget>.generate(metrics.length, (int index) {
-            final ToramRadarMetricSpec metric = metrics[index];
-            final ToramRadarLabelAnchor anchor = anchors[index];
-            final double width = anchor.textAlign == TextAlign.center ? 72 : 82;
-            return _buildDrawerRadarLabel(
-              alignment: anchor.alignment,
-              label: metric.label,
-              value: ToramRadarProfile.metricValue(summary, metric.id),
-              textAlign: anchor.textAlign,
-              maxWidth: width,
-              valueFontSize: 12,
-            );
-          }),
+          const SizedBox(height: 8),
+          Row(
+            children: <Widget>[
+              Text(
+                'Profile ${(normalizedValue * 100).round()}%',
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                'Benchmark ${_formatMetricValue(metric.cap)}',
+                style: const TextStyle(
+                  color: Colors.white54,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildDrawerRadarLabel({
-    required Alignment alignment,
-    required String label,
-    required double value,
-    TextAlign textAlign = TextAlign.center,
-    double maxWidth = 98,
-    double valueFontSize = 13,
-  }) {
-    return Align(
-      alignment: alignment,
-      child: SizedBox(
-        width: maxWidth,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: textAlign == TextAlign.left
-              ? CrossAxisAlignment.start
-              : textAlign == TextAlign.right
-                  ? CrossAxisAlignment.end
-                  : CrossAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              label,
-              style: const TextStyle(
-                color: Color(0xFFFFE082),
-                fontSize: 9.5,
-                fontWeight: FontWeight.w700,
-              ),
-              textAlign: textAlign,
-            ),
-            Text(
-              _formatRadarValue(value),
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: valueFontSize,
-                fontWeight: FontWeight.w700,
-                height: 1,
-              ),
-              textAlign: textAlign,
-            ),
-          ],
-        ),
-      ),
-    );
+  String _formatMetricValue(double value) {
+    return ToramRadarProfile.formatValue(value);
+  }
+
+  List<Color> _summaryMetricBarColors(String label) {
+    switch (label) {
+      case 'ATK':
+      case 'MATK':
+        return const <Color>[Color(0xFF77D3FF), Color(0xFF4D8DFF)];
+      case 'DEF':
+      case 'MDEF':
+        return const <Color>[Color(0xFF86F7C8), Color(0xFF3CCB8E)];
+      case 'HIT':
+      case 'FLEE':
+        return const <Color>[Color(0xFFFFD27A), Color(0xFFFFA347)];
+      case 'ASPD':
+      case 'CSPD':
+        return const <Color>[Color(0xFFFFA7D1), Color(0xFFFF6F91)];
+      default:
+        return const <Color>[Color(0xFFB8D2FF), Color(0xFF6C9BFF)];
+    }
   }
 
   void _onSaveBuild() {
@@ -351,7 +399,8 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
             final Map<String, num> summary = coordinator.summary;
             final List<Map<String, dynamic>> savedBuilds =
                 coordinator.savedBuilds;
-            final List<String> aiRecommendations = coordinator.aiRecommendations;
+            final List<String> aiRecommendations =
+                coordinator.aiRecommendations;
             final bool isAiLoading = coordinator.isAiRecommendationLoading;
             final String aiSource = coordinator.aiRecommendationSource;
             final String aiMessage = coordinator.aiRecommendationMessage;
@@ -398,14 +447,14 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                               isAiLoading
                                   ? Icons.sync
                                   : hasRemoteAi
-                                      ? Icons.psychology
-                                      : Icons.rule,
+                                  ? Icons.psychology
+                                  : Icons.rule,
                               size: 14,
                               color: isAiLoading
                                   ? const Color(0xFFFFE082)
                                   : hasRemoteAi
-                                      ? const Color(0xFFB7FFC6)
-                                      : const Color(0xFFFFCCBC),
+                                  ? const Color(0xFFB7FFC6)
+                                  : const Color(0xFFFFCCBC),
                             ),
                             const SizedBox(width: 6),
                             Expanded(
@@ -556,8 +605,8 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                               isFavorite: _toBool(build['isFavorite']),
                               onToggleFavorite: canControl
                                   ? () => coordinator.toggleFavoriteBuildById(
-                                        buildId,
-                                      )
+                                      buildId,
+                                    )
                                   : null,
                               onLoad: canControl
                                   ? () {

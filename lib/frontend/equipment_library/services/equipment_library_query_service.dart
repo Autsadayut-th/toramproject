@@ -4,6 +4,32 @@ import '../models/equipment_library_page_slice.dart';
 class EquipmentLibraryQueryService {
   const EquipmentLibraryQueryService._();
 
+  static String normalizeTypeKey(String value) {
+    String normalized = value
+        .trim()
+        .toLowerCase()
+        .replaceAll('&', ' and ')
+        .replaceAll(RegExp(r'[^a-z0-9]+'), '_')
+        .replaceAll(RegExp(r'_+'), '_')
+        .replaceAll(RegExp(r'^_|_$'), '');
+
+    switch (normalized) {
+      case 'one_handed_sword':
+      case '1h':
+        return '1h_sword';
+      case 'two_handed_sword':
+      case '2h':
+        return '2h_sword';
+      case 'magicdevice':
+        return 'magic_device';
+      case 'ninjut_suscroll':
+      case 'ninjutsu_suscroll':
+        return 'ninjutsu_scroll';
+      default:
+        return normalized;
+    }
+  }
+
   static List<String> availableCategories({
     required List<String> repositoryCategories,
     required Map<String, List<EquipmentLibraryItem>> allCategories,
@@ -36,19 +62,22 @@ class EquipmentLibraryQueryService {
     Set<String>? allowedTypes,
   }) {
     final Set<String>? normalizedAllowedTypes = allowedTypes
-        ?.map((String value) => value.trim().toLowerCase())
+        ?.map(normalizeTypeKey)
         .where((String value) => value.isNotEmpty)
         .toSet();
 
     final String normalizedQuery = query.trim().toLowerCase();
-    if (normalizedQuery.isEmpty && normalizedAllowedTypes == null) {
+    if (normalizedQuery.isEmpty &&
+        (normalizedAllowedTypes == null || normalizedAllowedTypes.isEmpty)) {
       return items;
     }
 
     return items
         .where((EquipmentLibraryItem item) {
-          final String normalizedItemType = item.type.trim().toLowerCase();
-          if (normalizedAllowedTypes?.contains(normalizedItemType) == false) {
+          final String normalizedItemType = normalizeTypeKey(item.type);
+          if (normalizedAllowedTypes != null &&
+              normalizedAllowedTypes.isNotEmpty &&
+              !normalizedAllowedTypes.contains(normalizedItemType)) {
             return false;
           }
           if (normalizedQuery.isEmpty) {

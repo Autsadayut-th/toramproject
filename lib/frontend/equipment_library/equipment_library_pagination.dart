@@ -22,11 +22,20 @@ extension _EquipmentLibraryPagination on _EquipmentLibraryDataViewState {
 
     return SafeArea(
       top: false,
-      child: Align(
-        alignment: Alignment.bottomCenter,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
         child: Container(
           width: double.infinity,
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF171311), Color(0xFF0D1115)],
+            ),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: const Color(0x22FFFFFF)),
+          ),
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               return SingleChildScrollView(
@@ -36,15 +45,6 @@ extension _EquipmentLibraryPagination on _EquipmentLibraryDataViewState {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      const Text(
-                        '\u0E2B\u0E19\u0E49\u0E32',
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
                       _buildPaginationControl(
                         label: '<',
                         enabled: currentPage > 1,
@@ -87,25 +87,28 @@ extension _EquipmentLibraryPagination on _EquipmentLibraryDataViewState {
     bool isSelected = false,
   }) {
     final Color borderColor = isSelected
-        ? const Color(0xFF888888)
-        : const Color(0xFF666666);
+        ? _libraryWarmAccent
+        : _libraryCoolAccent.withValues(alpha: 0.32);
     final Color textColor = enabled || isSelected
         ? Colors.white
-        : Colors.white54;
+        : Colors.white38;
 
     return InkWell(
       onTap: enabled ? onTap : null,
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(12),
       child: Container(
-        constraints: const BoxConstraints(minWidth: 34),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        constraints: const BoxConstraints(minWidth: 38),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: isSelected
-                ? [const Color(0xFF4A4A4A), const Color(0xFF3A3A3A)]
-                : [const Color(0xFF2A2A2A), const Color(0xFF1A1A1A)],
+                ? <Color>[
+                    _libraryWarmAccent.withValues(alpha: 0.28),
+                    _libraryCoolAccent.withValues(alpha: 0.2),
+                  ]
+                : <Color>[const Color(0xFF10161A), const Color(0xFF0D1115)],
           ),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
           border: Border.all(color: borderColor, width: isSelected ? 2 : 1),
         ),
         alignment: Alignment.center,

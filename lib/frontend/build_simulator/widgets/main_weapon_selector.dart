@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../equipment_library/models/equipment_library_item.dart';
 import 'equipment_slot_selector.dart';
 
 class MainWeaponEquipmentSelector extends StatelessWidget {
@@ -7,6 +8,7 @@ class MainWeaponEquipmentSelector extends StatelessWidget {
     super.key,
     required this.selectedId,
     required this.selectedDisplayName,
+    required this.selectedEquipmentItem,
     required this.statPreview,
     required this.onEquipChanged,
     required this.enhance,
@@ -19,6 +21,7 @@ class MainWeaponEquipmentSelector extends StatelessWidget {
 
   final String? selectedId;
   final String? selectedDisplayName;
+  final EquipmentLibraryItem? selectedEquipmentItem;
   final List<String> statPreview;
   final ValueChanged<String?> onEquipChanged;
   final int enhance;
@@ -35,6 +38,7 @@ class MainWeaponEquipmentSelector extends StatelessWidget {
       idHint: 'Select main weapon',
       selectedId: selectedId,
       selectedDisplayText: selectedDisplayName,
+      selectedEquipmentItem: selectedEquipmentItem,
       idFieldReadOnly: true,
       onEquipChanged: onEquipChanged,
       pickInitialCategory: 'Weapon',
@@ -52,4 +56,3 @@ class MainWeaponEquipmentSelector extends StatelessWidget {
     );
   }
 }
-

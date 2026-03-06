@@ -7,6 +7,7 @@ class EquipmentLibraryItem {
     required this.type,
     required this.stats,
     required this.imageAssetPath,
+    required this.obtainedFrom,
     this.upgradeFrom,
   });
 
@@ -17,6 +18,7 @@ class EquipmentLibraryItem {
   final String type;
   final List<EquipmentStat> stats;
   final String imageAssetPath;
+  final List<EquipmentObtainedSource> obtainedFrom;
   final String? upgradeFrom;
 
   factory EquipmentLibraryItem.fromJson(Map<String, dynamic> json) {
@@ -33,6 +35,7 @@ class EquipmentLibraryItem {
       type: json['type']?.toString().trim() ?? 'unknown',
       stats: _buildStats(json),
       imageAssetPath: _readImageAssetPath(json, display),
+      obtainedFrom: _buildObtainedFrom(json),
       upgradeFrom: upgrade == null ? null : upgrade['from']?.toString().trim(),
     );
   }
@@ -117,33 +120,21 @@ class EquipmentLibraryItem {
     final num? baseAtk = _readNumValue(base['atk']);
     if (baseAtk != null) {
       stats.add(
-        EquipmentStat(
-          statKey: 'weapon_atk',
-          value: baseAtk,
-          valueType: 'base',
-        ),
+        EquipmentStat(statKey: 'weapon_atk', value: baseAtk, valueType: 'base'),
       );
     }
 
     final num? baseDef = _readNumValue(base['def']);
     if (baseDef != null) {
       stats.add(
-        EquipmentStat(
-          statKey: 'def',
-          value: baseDef,
-          valueType: 'base',
-        ),
+        EquipmentStat(statKey: 'def', value: baseDef, valueType: 'base'),
       );
     }
 
     final num? baseMdef = _readNumValue(base['mdef']);
     if (baseMdef != null) {
       stats.add(
-        EquipmentStat(
-          statKey: 'mdef',
-          value: baseMdef,
-          valueType: 'base',
-        ),
+        EquipmentStat(statKey: 'mdef', value: baseMdef, valueType: 'base'),
       );
     }
 
@@ -172,8 +163,7 @@ class EquipmentLibraryItem {
         in conditionalStatsJson.whereType<Map<String, dynamic>>()) {
       final Map<String, dynamic>? condition =
           row['condition'] as Map<String, dynamic>?;
-      final Map<String, dynamic>? stat =
-          row['stat'] as Map<String, dynamic>?;
+      final Map<String, dynamic>? stat = row['stat'] as Map<String, dynamic>?;
       if (condition == null || stat == null) {
         continue;
       }
@@ -181,16 +171,42 @@ class EquipmentLibraryItem {
         continue;
       }
       stats.add(
-        EquipmentStat.fromJson(
-          <String, dynamic>{
-            ...stat,
-            'condition': condition,
-          },
-        ),
+        EquipmentStat.fromJson(<String, dynamic>{
+          ...stat,
+          'condition': condition,
+        }),
       );
     }
 
     return stats.toList(growable: false);
+  }
+
+  static List<EquipmentObtainedSource> _buildObtainedFrom(
+    Map<String, dynamic> json,
+  ) {
+    final List<dynamic> rows =
+        (json['obtained_from'] as List<dynamic>?) ?? <dynamic>[];
+    final List<EquipmentObtainedSource> result = <EquipmentObtainedSource>[];
+    final Set<String> seen = <String>{};
+
+    for (final dynamic row in rows) {
+      if (row is! Map) {
+        continue;
+      }
+      final EquipmentObtainedSource source = EquipmentObtainedSource.fromJson(
+        Map<String, dynamic>.from(row),
+      );
+      if (source.isEmpty) {
+        continue;
+      }
+      final String identity =
+          '${source.source.toLowerCase()}|${source.map.toLowerCase()}';
+      if (seen.add(identity)) {
+        result.add(source);
+      }
+    }
+
+    return result.toList(growable: false);
   }
 
   static bool _hasSupportedStatValueType(dynamic value) {
@@ -218,6 +234,53 @@ class EquipmentLibraryItem {
       return num.tryParse(value.trim());
     }
     return null;
+  }
+}
+
+class EquipmentObtainedSource {
+  const EquipmentObtainedSource({
+    required this.source,
+    required this.map,
+    this.sourceType,
+  });
+
+  final String source;
+  final String map;
+  final String? sourceType;
+
+  factory EquipmentObtainedSource.fromJson(Map<String, dynamic> json) {
+    final String source = _readFirstNonEmpty(<String?>[
+      json['monster']?.toString(),
+      json['name']?.toString(),
+      json['source']?.toString(),
+      json['npc']?.toString(),
+      json['boss']?.toString(),
+      json['drop_from']?.toString(),
+    ]);
+    final String map = _readFirstNonEmpty(<String?>[
+      json['map']?.toString(),
+      json['location']?.toString(),
+      json['area']?.toString(),
+    ]);
+    final String sourceType = json['source_type']?.toString().trim() ?? '';
+
+    return EquipmentObtainedSource(
+      source: source,
+      map: map,
+      sourceType: sourceType.isEmpty ? null : sourceType,
+    );
+  }
+
+  bool get isEmpty => source.isEmpty && map.isEmpty;
+
+  static String _readFirstNonEmpty(List<String?> values) {
+    for (final String? value in values) {
+      final String trimmed = value?.trim() ?? '';
+      if (trimmed.isNotEmpty && trimmed != '-') {
+        return trimmed;
+      }
+    }
+    return '';
   }
 }
 
@@ -281,10 +344,7 @@ class EquipmentStat {
 }
 
 class EquipmentStatCondition {
-  const EquipmentStatCondition({
-    this.armorState,
-    this.weaponRequired,
-  });
+  const EquipmentStatCondition({this.armorState, this.weaponRequired});
 
   final String? armorState;
   final String? weaponRequired;
@@ -295,7 +355,8 @@ class EquipmentStatCondition {
     }
     final Map<String, dynamic> json = Map<String, dynamic>.from(raw);
     final String armor = json['armor']?.toString().trim().toLowerCase() ?? '';
-    final String weapon = json['weapon_required']?.toString().trim().toLowerCase() ?? '';
+    final String weapon =
+        json['weapon_required']?.toString().trim().toLowerCase() ?? '';
     return EquipmentStatCondition(
       armorState: armor.isEmpty ? null : armor,
       weaponRequired: weapon.isEmpty ? null : weapon,

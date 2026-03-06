@@ -1,6 +1,4 @@
-﻿import 'dart:async';
-
-import 'dart:math' as math;
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,7 +17,6 @@ import '../skill_menu_page/skill_menu_page.dart';
 
 part 'widgets/build_mobile_drawer.dart';
 part 'widgets/build_mobile_drawer_widgets.dart';
-part 'widgets/build_mobile_radar_chart.dart';
 
 class AppShellScreen extends StatefulWidget {
   const AppShellScreen({super.key});
@@ -106,6 +103,8 @@ class _AppShellScreenState extends State<AppShellScreen> {
   @override
   Widget build(BuildContext context) {
     final bool isMobile = MediaQuery.sizeOf(context).width < 1024;
+    final bool showMobileBuildSummaryLeading =
+        isMobile && _currentPage == AppNavigationPage.build;
 
     void onNavigateFromDrawer(AppNavigationPage page) {
       Navigator.of(context).pop();
@@ -123,6 +122,18 @@ class _AppShellScreenState extends State<AppShellScreen> {
             fontWeight: FontWeight.w600,
           ),
         ),
+        automaticallyImplyLeading: !showMobileBuildSummaryLeading,
+        leading: showMobileBuildSummaryLeading
+            ? Builder(
+                builder: (BuildContext context) {
+                  return IconButton(
+                    icon: const Icon(Icons.menu, color: Colors.white),
+                    onPressed: () => Scaffold.of(context).openDrawer(),
+                    tooltip: 'Build Summary',
+                  );
+                },
+              )
+            : null,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.account_circle, color: Colors.white),
@@ -184,8 +195,9 @@ class _AppShellScreenState extends State<AppShellScreen> {
               onSelect: _onNavigate,
             )
           : null,
-      drawer: !isMobile
-          ? AppNavigationDrawer(
+      drawer: showMobileBuildSummaryLeading
+          ? _BuildStatsSummaryDrawer(coordinator: _coordinator)
+          : AppNavigationDrawer(
               currentPage: _currentPage,
               onOpenBuild: () => onNavigateFromDrawer(AppNavigationPage.build),
               onOpenEquipment: () =>
@@ -196,10 +208,7 @@ class _AppShellScreenState extends State<AppShellScreen> {
                   onNavigateFromDrawer(AppNavigationPage.compare),
               onOpenSettings: () =>
                   onNavigateFromDrawer(AppNavigationPage.settings),
-            )
-          : _currentPage == AppNavigationPage.build
-          ? _BuildStatsSummaryDrawer(coordinator: _coordinator)
-          : null,
+            ),
     );
   }
 
@@ -220,5 +229,3 @@ class _AppShellScreenState extends State<AppShellScreen> {
     }
   }
 }
-
-

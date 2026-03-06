@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../equipment_library/models/equipment_library_item.dart';
 import 'equipment_slot_selector.dart';
 
 class SubWeaponEquipmentSelector extends StatelessWidget {
   const SubWeaponEquipmentSelector({
     super.key,
     required this.selectedId,
+    required this.selectedEquipmentItem,
     required this.statPreview,
     required this.allowedItemTypes,
     required this.onEquipChanged,
@@ -14,6 +16,7 @@ class SubWeaponEquipmentSelector extends StatelessWidget {
   });
 
   final String? selectedId;
+  final EquipmentLibraryItem? selectedEquipmentItem;
   final List<String> statPreview;
   final List<String>? allowedItemTypes;
   final ValueChanged<String?> onEquipChanged;
@@ -26,6 +29,7 @@ class SubWeaponEquipmentSelector extends StatelessWidget {
       idLabel: 'Sub Weapon ID',
       idHint: 'e.g. sub_weapon_001',
       selectedId: selectedId,
+      selectedEquipmentItem: selectedEquipmentItem,
       onEquipChanged: onEquipChanged,
       pickInitialCategory: 'Weapon',
       allowedCategories: const <String>['Weapon'],

@@ -20,6 +20,21 @@ class _EquipmentLibraryDataView extends StatefulWidget {
 
 class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
   static const int _itemsPerPage = 27;
+  static const List<String> _weaponTypeFilterOrder = <String>[
+    '1h_sword',
+    '2h_sword',
+    'bow',
+    'bowgun',
+    'staff',
+    'magic_device',
+    'katana',
+    'halberd',
+    'knuckles',
+    'dagger',
+    'arrow',
+    'shield',
+    'ninjutsu_scroll',
+  ];
 
   final EquipmentLibraryRepository _repository = EquipmentLibraryRepository();
   final TextEditingController _searchController = TextEditingController();
@@ -28,6 +43,7 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
   String? _selectedCategory;
   String _searchQuery = '';
   int _currentPage = 1;
+  String? _selectedTypeFilterKey;
 
   @override
   void initState() {
@@ -41,10 +57,14 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
     super.didUpdateWidget(oldWidget);
     final bool initialCategoryChanged =
         oldWidget.initialCategory != widget.initialCategory;
-    final bool allowedCategoriesChanged =
-        !_isSameCategoryList(oldWidget.allowedCategories, widget.allowedCategories);
-    final bool allowedTypesChanged =
-        !_isSameCategoryList(oldWidget.allowedTypes, widget.allowedTypes);
+    final bool allowedCategoriesChanged = !_isSameCategoryList(
+      oldWidget.allowedCategories,
+      widget.allowedCategories,
+    );
+    final bool allowedTypesChanged = !_isSameCategoryList(
+      oldWidget.allowedTypes,
+      widget.allowedTypes,
+    );
     if (!initialCategoryChanged &&
         !allowedCategoriesChanged &&
         !allowedTypesChanged) {
@@ -52,6 +72,12 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
     }
     setState(() {
       _selectedCategory = widget.initialCategory;
+      final Set<String>? allowedTypes = _normalizeTypeSet(widget.allowedTypes);
+      if (_selectedTypeFilterKey != null &&
+          allowedTypes != null &&
+          !allowedTypes.contains(_selectedTypeFilterKey)) {
+        _selectedTypeFilterKey = null;
+      }
       _currentPage = 1;
     });
   }
@@ -93,93 +119,332 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
     });
   }
 
-  Future<void> _openCategoryDialog({
+  void _updateSearchQuery(String value) {
+    setState(() {
+      _searchQuery = value;
+      _currentPage = 1;
+    });
+  }
+
+  void _clearSearch() {
+    setState(() {
+      _searchController.clear();
+      _searchQuery = '';
+      _currentPage = 1;
+    });
+  }
+
+  Set<String>? _normalizeTypeSet(Iterable<String>? values) {
+    final Set<String> normalized =
+        values
+            ?.map(EquipmentLibraryQueryService.normalizeTypeKey)
+            .where((String value) => value.isNotEmpty)
+            .toSet() ??
+        <String>{};
+    if (normalized.isEmpty) {
+      return null;
+    }
+    return normalized;
+  }
+
+  List<String> _buildTypeFilterKeys({
+    required List<EquipmentLibraryItem> items,
+    required String activeCategory,
+    required Set<String>? widgetAllowedTypes,
+  }) {
+    final Set<String> available = items
+        .map((EquipmentLibraryItem item) {
+          return EquipmentLibraryQueryService.normalizeTypeKey(item.type);
+        })
+        .where((String value) => value.isNotEmpty)
+        .toSet();
+    if (widgetAllowedTypes != null && widgetAllowedTypes.isNotEmpty) {
+      available.removeWhere(
+        (String type) => !widgetAllowedTypes.contains(type),
+      );
+    }
+    if (available.isEmpty) {
+      return const <String>[];
+    }
+
+    if (activeCategory.trim().toLowerCase() != 'weapon') {
+      final List<String> generic = available.toList(growable: false)..sort();
+      return generic;
+    }
+
+    final Set<String> pending = available.toSet();
+    final List<String> ordered = <String>[];
+    for (final String type in _weaponTypeFilterOrder) {
+      if (pending.remove(type)) {
+        ordered.add(type);
+      }
+    }
+    final List<String> extras = pending.toList(growable: false)..sort();
+    ordered.addAll(extras);
+    return ordered;
+  }
+
+  Set<String>? _resolveEffectiveAllowedTypes({
+    required Set<String>? widgetAllowedTypes,
+    required String? selectedTypeFilterKey,
+  }) {
+    final bool hasWidgetTypes =
+        widgetAllowedTypes != null && widgetAllowedTypes.isNotEmpty;
+    if (!hasWidgetTypes && selectedTypeFilterKey == null) {
+      return null;
+    }
+    if (selectedTypeFilterKey == null) {
+      return widgetAllowedTypes;
+    }
+    if (!hasWidgetTypes) {
+      return <String>{selectedTypeFilterKey};
+    }
+    if (widgetAllowedTypes.contains(selectedTypeFilterKey)) {
+      return <String>{selectedTypeFilterKey};
+    }
+    return <String>{};
+  }
+
+  void _applyFilterSelection({
+    required String category,
+    required String? typeKey,
+  }) {
+    setState(() {
+      _selectedCategory = category;
+      _selectedTypeFilterKey = typeKey;
+      _currentPage = 1;
+    });
+  }
+
+  String _formatTypeFilterLabel(String typeKey) {
+    return typeKey
+        .split('_')
+        .where((String part) => part.isNotEmpty)
+        .map((String part) {
+          return part[0].toUpperCase() + part.substring(1).toLowerCase();
+        })
+        .join(' ');
+  }
+
+  Future<void> _openFilterDialog({
     required List<String> categories,
     required Map<String, List<EquipmentLibraryItem>> allCategories,
     required String activeCategory,
+    required List<String> typeFilterKeys,
+    required String? activeTypeFilterKey,
   }) async {
-    if (categories.isEmpty) {
+    if (categories.length <= 1 && typeFilterKeys.length <= 1) {
       return;
     }
 
-    await showDialog<void>(
+    final Set<String>? widgetAllowedTypes = _normalizeTypeSet(
+      widget.allowedTypes,
+    );
+    String selectedCategory = activeCategory;
+    String? selectedTypeKey = activeTypeFilterKey;
+
+    final bool hasCategoryChoices = categories.length > 1;
+
+    final ({String category, String? typeKey})?
+    selection = await showDialog<({String category, String? typeKey})>(
       context: context,
       builder: (BuildContext dialogContext) {
         return Dialog(
           backgroundColor: const Color(0xFF101010),
           insetPadding: const EdgeInsets.symmetric(
-            horizontal: 20,
+            horizontal: 24,
             vertical: 24,
           ),
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 760, maxHeight: 600),
-            child: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          const Expanded(
-                            child: Text(
-                              'Select Category',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
+            constraints: const BoxConstraints(maxWidth: 540),
+            child: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setDialogState) {
+                final List<EquipmentLibraryItem> selectedCategoryItems =
+                    allCategories[selectedCategory] ??
+                    const <EquipmentLibraryItem>[];
+                final List<String> availableTypeKeys = _buildTypeFilterKeys(
+                  items: selectedCategoryItems,
+                  activeCategory: selectedCategory,
+                  widgetAllowedTypes: widgetAllowedTypes,
+                );
+                if (selectedTypeKey != null &&
+                    !availableTypeKeys.contains(selectedTypeKey)) {
+                  selectedTypeKey = null;
+                }
+                final bool hasTypeChoices = availableTypeKeys.length > 1;
+
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            const Expanded(
+                              child: Text(
+                                'Filter Equipment',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
                             ),
-                          ),
-                          IconButton(
-                            onPressed: () => Navigator.of(dialogContext).pop(),
-                            icon: const Icon(
-                              Icons.close,
-                              color: Colors.white70,
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.of(dialogContext).pop(),
+                              child: const Text(
+                                'Close',
+                                style: TextStyle(color: Colors.white70),
+                              ),
                             ),
-                            tooltip: 'Close',
+                          ],
+                        ),
+                        if (hasCategoryChoices) ...<Widget>[
+                          const SizedBox(height: 4),
+                          const Text(
+                            'Category',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
+                          const SizedBox(height: 8),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: categories
+                                .map((String category) {
+                                  return ChoiceChip(
+                                    selectedColor: const Color(0xFF2E74FF),
+                                    backgroundColor: const Color(0xFF161B22),
+                                    side: const BorderSide(
+                                      color: Color(0x44FFFFFF),
+                                    ),
+                                    labelStyle: const TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                    selected: selectedCategory == category,
+                                    label: Text(category),
+                                    onSelected: (_) {
+                                      setDialogState(() {
+                                        selectedCategory = category;
+                                      });
+                                    },
+                                  );
+                                })
+                                .toList(growable: false),
+                          ),
+                          const SizedBox(height: 14),
                         ],
-                      ),
-                      const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: categories
-                            .map((String category) {
-                              return ChoiceChip(
-                                selectedColor: const Color(0xFF202020),
-                                backgroundColor: const Color(0xFF101010),
+                        if (hasTypeChoices) ...<Widget>[
+                          const Text(
+                            'Type',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: <Widget>[
+                              ChoiceChip(
+                                selectedColor: const Color(0xFF2E74FF),
+                                backgroundColor: const Color(0xFF161B22),
                                 side: const BorderSide(
                                   color: Color(0x44FFFFFF),
                                 ),
                                 labelStyle: const TextStyle(
                                   color: Colors.white,
                                 ),
-                                label: Text(
-                                  '$category (${allCategories[category]?.length ?? 0})',
-                                ),
-                                selected: activeCategory == category,
+                                selected: selectedTypeKey == null,
+                                label: const Text('All'),
                                 onSelected: (_) {
-                                  setState(() {
-                                    _selectedCategory = category;
-                                    _currentPage = 1;
+                                  setDialogState(() {
+                                    selectedTypeKey = null;
                                   });
-                                  Navigator.of(dialogContext).pop();
                                 },
-                              );
-                            })
-                            .toList(growable: false),
-                      ),
-                    ],
+                              ),
+                              ...availableTypeKeys.map((String typeKey) {
+                                final bool selected =
+                                    selectedTypeKey == typeKey;
+                                return ChoiceChip(
+                                  selectedColor: const Color(0xFF2E74FF),
+                                  backgroundColor: const Color(0xFF161B22),
+                                  side: const BorderSide(
+                                    color: Color(0x44FFFFFF),
+                                  ),
+                                  labelStyle: const TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  selected: selected,
+                                  label: Text(_formatTypeFilterLabel(typeKey)),
+                                  onSelected: (_) {
+                                    setDialogState(() {
+                                      selectedTypeKey = typeKey;
+                                    });
+                                  },
+                                );
+                              }),
+                            ],
+                          ),
+                        ],
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                setDialogState(() {
+                                  selectedCategory = categories.isEmpty
+                                      ? activeCategory
+                                      : categories.first;
+                                  selectedTypeKey = null;
+                                });
+                              },
+                              child: const Text(
+                                'Reset',
+                                style: TextStyle(color: Colors.white70),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            FilledButton(
+                              onPressed: () {
+                                Navigator.of(dialogContext).pop((
+                                  category: selectedCategory,
+                                  typeKey: selectedTypeKey,
+                                ));
+                              },
+                              style: FilledButton.styleFrom(
+                                backgroundColor: const Color(0xFF2E74FF),
+                              ),
+                              child: const Text('Apply'),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
         );
       },
+    );
+
+    if (!mounted || selection == null) {
+      return;
+    }
+    _applyFilterSelection(
+      category: selection.category,
+      typeKey: selection.typeKey,
     );
   }
 
@@ -208,10 +473,9 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                         style: TextStyle(color: Colors.white),
                       ),
                       const SizedBox(height: 10),
-                      TextButton.icon(
+                      TextButton(
                         onPressed: _reload,
-                        icon: const Icon(Icons.refresh),
-                        label: const Text('Retry'),
+                        child: const Text('Retry'),
                       ),
                     ],
                   ),
@@ -234,11 +498,28 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                 );
             final List<EquipmentLibraryItem> allItems =
                 allCategories[activeCategory] ?? const <EquipmentLibraryItem>[];
+            final Set<String>? widgetAllowedTypes = _normalizeTypeSet(
+              widget.allowedTypes,
+            );
+            final List<String> typeFilterKeys = _buildTypeFilterKeys(
+              items: allItems,
+              activeCategory: activeCategory,
+              widgetAllowedTypes: widgetAllowedTypes,
+            );
+            final String? activeTypeFilterKey =
+                typeFilterKeys.contains(_selectedTypeFilterKey)
+                ? _selectedTypeFilterKey
+                : null;
+            final Set<String>? effectiveAllowedTypes =
+                _resolveEffectiveAllowedTypes(
+                  widgetAllowedTypes: widgetAllowedTypes,
+                  selectedTypeFilterKey: activeTypeFilterKey,
+                );
             final List<EquipmentLibraryItem> filteredItems =
                 EquipmentLibraryQueryService.filterItems(
                   items: allItems,
                   query: _searchQuery,
-                  allowedTypes: widget.allowedTypes?.toSet(),
+                  allowedTypes: effectiveAllowedTypes,
                 );
             final EquipmentLibraryPageSlice pagedResult =
                 EquipmentLibraryQueryService.paginateItems(
@@ -249,114 +530,27 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
 
             return Column(
               children: <Widget>[
-                if (widget.pickMode)
-                  Container(
-                    width: double.infinity,
-                    margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF101010),
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: const Color(0x33FFFFFF)),
-                    ),
-                    child: const Text(
-                      'Tap an item to apply it to the selected equipment slot.',
-                      style: TextStyle(color: Colors.white70, fontSize: 12),
-                    ),
-                  ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(
                     16,
-                    widget.pickMode ? 12 : 16,
+                    widget.pickMode ? 16 : 20,
                     16,
-                    12,
+                    14,
                   ),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextField(
-                          controller: _searchController,
-                          style: const TextStyle(color: Colors.white),
-                          cursorColor: Colors.white70,
-                          decoration: InputDecoration(
-                            hintText: 'Search by name, key, type...',
-                            hintStyle: const TextStyle(
-                              color: Colors.white54,
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.search,
-                              color: Colors.white70,
-                            ),
-                            filled: true,
-                            fillColor: const Color(0xFF0F0F0F),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                color: Color(0x33FFFFFF),
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                color: Color(0x33FFFFFF),
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                color: Color(0x66FFFFFF),
-                              ),
-                            ),
-                          ),
-                          onChanged: (String value) {
-                            setState(() {
-                              _searchQuery = value;
-                              _currentPage = 1;
-                            });
-                          },
-                        ),
-                      ),
-                      if (categories.isNotEmpty) ...<Widget>[
-                        const SizedBox(width: 8),
-                        SizedBox(
-                          width: 52,
-                          height: 52,
-                          child: Tooltip(
-                            message:
-                                '$activeCategory (${allCategories[activeCategory]?.length ?? 0})',
-                            child: OutlinedButton(
-                              onPressed: () {
-                                _openCategoryDialog(
-                                  categories: categories,
-                                  allCategories: allCategories,
-                                  activeCategory: activeCategory,
-                                );
-                              },
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.white70,
-                                side: const BorderSide(
-                                  color: Color(0x33FFFFFF),
-                                ),
-                                backgroundColor: const Color(0xFF0F0F0F),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                padding: EdgeInsets.zero,
-                              ),
-                              child: const Icon(Icons.tune, size: 18),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ],
+                  child: _buildSearchToolbar(
+                    categories: categories,
+                    allCategories: allCategories,
+                    activeCategory: activeCategory,
+                    typeFilterKeys: typeFilterKeys,
+                    activeTypeFilterKey: activeTypeFilterKey,
                   ),
                 ),
                 Expanded(
                   child: filteredItems.isEmpty
-                      ? const Center(
-                          child: Text(
-                            'No items found.',
-                            style: TextStyle(color: Colors.white70),
+                      ? Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                          child: _buildEmptyState(
+                            activeCategory: activeCategory,
                           ),
                         )
                       : LayoutBuilder(
@@ -366,12 +560,20 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                                 BoxConstraints constraints,
                               ) {
                                 final double width = constraints.maxWidth;
-                                final int columnCount = width >= 960
+                                final int columnCount = width >= 1500
+                                    ? 5
+                                    : width >= 1240
+                                    ? 4
+                                    : width >= 960
                                     ? 3
                                     : width >= 620
                                     ? 2
                                     : 1;
-                                final int previewLimit = columnCount >= 3
+                                final int previewLimit = columnCount >= 5
+                                    ? 0
+                                    : columnCount >= 4
+                                    ? 1
+                                    : columnCount >= 3
                                     ? 2
                                     : 1;
 
@@ -391,6 +593,274 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
               ],
             );
           },
+    );
+  }
+}
+
+extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
+  Widget _buildSearchToolbar({
+    required List<String> categories,
+    required Map<String, List<EquipmentLibraryItem>> allCategories,
+    required String activeCategory,
+    required List<String> typeFilterKeys,
+    required String? activeTypeFilterKey,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFF15110E), Color(0xFF0B0D10)],
+        ),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: const Color(0x22FFFFFF)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            final bool compact = constraints.maxWidth < 720;
+            final bool canOpenFilter =
+                categories.length > 1 || typeFilterKeys.length > 1;
+            final bool hasTypeFilter = activeTypeFilterKey != null;
+            final String activeTypeFilterLabel = activeTypeFilterKey == null
+                ? ''
+                : _formatTypeFilterLabel(activeTypeFilterKey);
+            final bool hasCategoryFilter =
+                categories.isNotEmpty && activeCategory != categories.first;
+            final int activeFilterCount =
+                (hasCategoryFilter ? 1 : 0) + (hasTypeFilter ? 1 : 0);
+            final Widget filterButton = Tooltip(
+              message: activeFilterCount == 0
+                  ? 'Filter category and type'
+                  : hasCategoryFilter && hasTypeFilter
+                  ? 'Category: $activeCategory, Type: $activeTypeFilterLabel'
+                  : hasCategoryFilter
+                  ? 'Category: $activeCategory'
+                  : 'Type: $activeTypeFilterLabel',
+              child: SizedBox(
+                width: 52,
+                height: 52,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: <Widget>[
+                    Positioned.fill(
+                      child: OutlinedButton(
+                        onPressed: canOpenFilter
+                            ? () {
+                                _openFilterDialog(
+                                  categories: categories,
+                                  allCategories: allCategories,
+                                  activeCategory: activeCategory,
+                                  typeFilterKeys: typeFilterKeys,
+                                  activeTypeFilterKey: activeTypeFilterKey,
+                                );
+                              }
+                            : null,
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: const Color(0xFF10161A),
+                          disabledForegroundColor: Colors.white38,
+                          disabledBackgroundColor: const Color(0xFF10161A),
+                          side: BorderSide(
+                            color: activeFilterCount > 0
+                                ? const Color(0xFFD8B36A)
+                                : const Color(0xFF5D7283),
+                          ),
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
+                        child: const Icon(Icons.tune, size: 18),
+                      ),
+                    ),
+                    if (activeFilterCount > 0)
+                      Positioned(
+                        top: -2,
+                        right: -2,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF2E74FF),
+                            borderRadius: BorderRadius.circular(999),
+                            border: Border.all(color: const Color(0xFF8FB4FF)),
+                          ),
+                          child: Text(
+                            '$activeFilterCount',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            );
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                if (widget.pickMode) ...<Widget>[
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 10,
+                    ),
+                    decoration: BoxDecoration(
+                      color: _libraryWarmAccent.withValues(alpha: 0.08),
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                        color: _libraryWarmAccent.withValues(alpha: 0.2),
+                      ),
+                    ),
+                    child: const Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Text(
+                            'Tap any card to select it for the active equipment slot.',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                ],
+                if (compact) ...<Widget>[
+                  _buildSearchField(),
+                  const SizedBox(height: 12),
+                  Align(alignment: Alignment.centerRight, child: filterButton),
+                ] else
+                  Row(
+                    children: <Widget>[
+                      Expanded(child: _buildSearchField()),
+                      const SizedBox(width: 12),
+                      filterButton,
+                    ],
+                  ),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSearchField() {
+    return TextField(
+      controller: _searchController,
+      style: const TextStyle(color: Colors.white),
+      cursorColor: _libraryWarmAccent,
+      decoration: InputDecoration(
+        hintText: 'Search by name, key, type...',
+        hintStyle: const TextStyle(color: Colors.white54),
+        suffixIcon: _searchQuery.isEmpty
+            ? null
+            : TextButton(
+                onPressed: _clearSearch,
+                child: const Text(
+                  'Clear',
+                  style: TextStyle(
+                    color: Colors.white54,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+        filled: true,
+        fillColor: const Color(0xFF10161A),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 18,
+          vertical: 18,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(
+            color: _libraryCoolAccent.withValues(alpha: 0.18),
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(
+            color: _libraryCoolAccent.withValues(alpha: 0.18),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(
+            color: _libraryWarmAccent.withValues(alpha: 0.7),
+            width: 1.4,
+          ),
+        ),
+      ),
+      onChanged: _updateSearchQuery,
+    );
+  }
+
+  Widget _buildEmptyState({required String activeCategory}) {
+    final bool hasSearchQuery = _searchQuery.trim().isNotEmpty;
+
+    return Center(
+      child: Container(
+        width: double.infinity,
+        constraints: const BoxConstraints(maxWidth: 520),
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xFF171311), Color(0xFF0D1115)],
+          ),
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: const Color(0x22FFFFFF)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const Text(
+              'No equipment found',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              hasSearchQuery
+                  ? 'No results in $activeCategory match "${_searchQuery.trim()}".'
+                  : 'There are no items available in $activeCategory for the current filters.',
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 13,
+                height: 1.4,
+              ),
+            ),
+            if (hasSearchQuery) ...<Widget>[
+              const SizedBox(height: 14),
+              TextButton(
+                onPressed: _clearSearch,
+                style: TextButton.styleFrom(
+                  foregroundColor: const Color.fromARGB(255, 31, 155, 14),
+                ),
+                child: const Text('Clear search'),
+              ),
+            ],
+          ],
+        ),
+      ),
     );
   }
 }

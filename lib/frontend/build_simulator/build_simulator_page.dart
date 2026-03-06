@@ -815,7 +815,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     _armorId = BuildPersistenceService.readOptionalStringValue(
       build['armorId'],
     );
-    _armorMode = BuildPersistenceService.normalizeArmorMode(build['armorMode']);
+    _armorMode = 'normal';
     _enhArmor = BuildPersistenceService.readIntValue(
       build['enhArmor'],
     ).clamp(0, 15).toInt();

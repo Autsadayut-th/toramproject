@@ -1,6 +1,18 @@
 part of 'build_simulator_page.dart';
 
 extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
+  static const int _defaultTotalStatPoints = 776;
+
+  int _usedStatPoints() {
+    int used = 5;
+    for (final String key in BuildSimulatorScreenState._characterStatKeys) {
+      final dynamic raw = _character[key];
+      final int value = raw is num ? raw.toInt() : 0;
+      used += (value - 1).clamp(0, 512).toInt();
+    }
+    return used + _personalStatValue.clamp(0, 255).toInt();
+  }
+
   Widget _buildEquipmentPanel() {
     return ToramCard(
       title: 'Equipment Configuration',
@@ -29,7 +41,6 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              flex: 4,
               child: Column(
                 children: [
                   _buildCharacterStatsSection(
@@ -44,10 +55,7 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
               ),
             ),
             const SizedBox(width: spacing),
-            Expanded(flex: 5, child: _buildModelColumn()),
-            const SizedBox(width: spacing),
             Expanded(
-              flex: 4,
               child: Column(
                 children: [
                   _buildMainWeaponSection(
@@ -66,28 +74,6 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         const SizedBox(height: spacing),
         _buildGachaSection(compact: false, minHeight: 120),
       ],
-    );
-  }
-
-  Widget _buildModelColumn() {
-    return Container(
-      height: 700,
-      decoration: BoxDecoration(
-        color: const Color(0xFF040404),
-        borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
-      ),
-      child: const Center(
-        child: Text(
-          'MODEL',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 14,
-            fontWeight: FontWeight.w700,
-            letterSpacing: 0.6,
-          ),
-        ),
-      ),
     );
   }
 
@@ -207,6 +193,8 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         level: _level,
         personalStatType: _personalStatType,
         personalStatValue: _personalStatValue,
+        usedStatPoints: _usedStatPoints(),
+        totalStatPoints: _defaultTotalStatPoints,
         onStatChanged: (String key, int value) {
           _setStateAndRecalculate(() => _character[key] = value);
         },
@@ -244,6 +232,7 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
       child: MainWeaponEquipmentSelector(
         selectedId: _mainWeaponId,
         selectedDisplayName: _equipmentName(_mainWeaponId),
+        selectedEquipmentItem: _findEquipmentByKey(_mainWeaponId),
         statPreview: _equipmentStatPreview(_mainWeaponId),
         onEquipChanged: (id) {
           _setStateAndRecalculate(() => _mainWeaponId = id);
@@ -281,13 +270,16 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
       },
       child: SubWeaponEquipmentSelector(
         selectedId: _subWeaponId,
+        selectedEquipmentItem: _findEquipmentByKey(_subWeaponId),
         statPreview: _equipmentStatPreview(_subWeaponId),
         allowedItemTypes: _allowedSubWeaponTypeNames(),
         onEquipChanged: (id) {
           if (!_isSubWeaponSelectionAllowed(id)) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('Sub weapon type is not allowed for this main weapon.'),
+                content: Text(
+                  'Sub weapon type is not allowed for this main weapon.',
+                ),
                 duration: Duration(seconds: 2),
               ),
             );
@@ -318,97 +310,27 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
           _isArmorExpanded = !_isArmorExpanded;
         });
       },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _buildArmorModeSelector(),
-          const SizedBox(height: 12),
-          ArmorEquipmentSelector(
-            selectedId: _armorId,
-            statPreview: _equipmentStatPreview(_armorId),
-            onEquipChanged: (id) {
-              _setStateAndRecalculate(() => _armorId = id);
-            },
-            enhance: _enhArmor,
-            onEnhChanged: (v) {
-              _setStateAndRecalculate(() => _enhArmor = v);
-            },
-            crystal1: _armorCrystal1,
-            crystal2: _armorCrystal2,
-            onCrystal1Changed: (v) {
-              _setStateAndRecalculate(() => _armorCrystal1 = v);
-            },
-            onCrystal2Changed: (v) {
-              _setStateAndRecalculate(() => _armorCrystal2 = v);
-            },
-          ),
-        ],
+      child: ArmorEquipmentSelector(
+        selectedId: _armorId,
+        selectedEquipmentItem: _findEquipmentByKey(_armorId),
+        statPreview: _equipmentStatPreview(_armorId),
+        onEquipChanged: (id) {
+          _setStateAndRecalculate(() => _armorId = id);
+        },
+        enhance: _enhArmor,
+        onEnhChanged: (v) {
+          _setStateAndRecalculate(() => _enhArmor = v);
+        },
+        crystal1: _armorCrystal1,
+        crystal2: _armorCrystal2,
+        onCrystal1Changed: (v) {
+          _setStateAndRecalculate(() => _armorCrystal1 = v);
+        },
+        onCrystal2Changed: (v) {
+          _setStateAndRecalculate(() => _armorCrystal2 = v);
+        },
       ),
       minHeight: minHeight,
-    );
-  }
-
-  Widget _buildArmorModeSelector() {
-    const List<MapEntry<String, String>> options = <MapEntry<String, String>>[
-      MapEntry<String, String>('normal', 'Normal'),
-      MapEntry<String, String>('heavy', 'Heavy'),
-      MapEntry<String, String>('light', 'Light'),
-    ];
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const Text(
-          'Armor Mode',
-          style: TextStyle(
-            color: Colors.white70,
-            fontSize: 11,
-            fontWeight: FontWeight.w700,
-            letterSpacing: 0.2,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: options.map((MapEntry<String, String> option) {
-            final bool selected = _armorMode == option.key;
-            return ChoiceChip(
-              label: Text(option.value),
-              selected: selected,
-              onSelected: (_) {
-                if (selected) {
-                  return;
-                }
-                _setStateAndRecalculate(() => _armorMode = option.key);
-              },
-              labelStyle: TextStyle(
-                color: selected ? Colors.black : Colors.white,
-                fontSize: 11,
-                fontWeight: FontWeight.w700,
-              ),
-              backgroundColor: const Color(0xFF111111),
-              selectedColor: const Color(0xFFFFE082),
-              side: BorderSide(
-                color: selected
-                    ? const Color(0xFFFFE082)
-                    : const Color(0x44FFFFFF),
-              ),
-            );
-          }).toList(growable: false),
-        ),
-        const SizedBox(height: 6),
-        Text(
-          _armorId == null
-              ? 'Empty armor slot uses the in-game no-armor formula automatically.'
-              : 'Heavy and Light mode also activate matching conditional equipment stats.',
-          style: const TextStyle(
-            color: Colors.white54,
-            fontSize: 10,
-            height: 1.3,
-          ),
-        ),
-      ],
     );
   }
 
@@ -428,6 +350,7 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
       },
       child: HelmetEquipmentSelector(
         selectedId: _helmetId,
+        selectedEquipmentItem: _findEquipmentByKey(_helmetId),
         statPreview: _equipmentStatPreview(_helmetId),
         onEquipChanged: (id) {
           _setStateAndRecalculate(() => _helmetId = id);
@@ -462,6 +385,7 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
       },
       child: RingEquipmentSelector(
         selectedId: _ringId,
+        selectedEquipmentItem: _findEquipmentByKey(_ringId),
         statPreview: _equipmentStatPreview(_ringId),
         onEquipChanged: (id) {
           _setStateAndRecalculate(() => _ringId = id);

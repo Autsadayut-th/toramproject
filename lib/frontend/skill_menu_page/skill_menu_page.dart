@@ -65,113 +65,171 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
     setState(action);
   }
 
+  int _activeFilterCount() {
+    int count = 0;
+    if (_selectedCategory != _allCategoryKey) {
+      count++;
+    }
+    if (_selectedTree != _allTreeKey) {
+      count++;
+    }
+    return count;
+  }
+
   Future<void> _openFiltersDialog(SkillLibraryData data) async {
-    await showDialog<void>(
-      context: context,
-      builder: (BuildContext dialogContext) {
-        return Dialog(
-          backgroundColor: const Color(0xFF101010),
-          insetPadding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 24,
-          ),
-          child: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setDialogState) {
-              return ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: 760,
-                  maxHeight: 640,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
+    String dialogCategory = _selectedCategory;
+    String dialogTree = _selectedTree;
+
+    final ({String category, String tree})? selection =
+        await showDialog<({String category, String tree})>(
+          context: context,
+          builder: (BuildContext dialogContext) {
+            return Dialog(
+              backgroundColor: const Color(0xFF101010),
+              insetPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 24,
+              ),
+              child: StatefulBuilder(
+                builder: (BuildContext context, StateSetter setDialogState) {
+                  List<String> dialogTrees() {
+                    return SkillMenuFilterService.availableTrees(
+                      data: data,
+                      selectedCategory: dialogCategory,
+                      allCategoryKey: _allCategoryKey,
+                    );
+                  }
+
+                  return ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      maxWidth: 760,
+                      maxHeight: 640,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            const Expanded(
-                              child: Text(
-                                'Filter Skills',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
+                            Row(
+                              children: <Widget>[
+                                const Expanded(
+                                  child: Text(
+                                    'Filter Skills',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
                                 ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.of(dialogContext).pop(),
+                                  child: const Text(
+                                    'Close',
+                                    style: TextStyle(color: Colors.white70),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            const Text(
+                              'Category',
+                              style: TextStyle(
+                                color: Colors.white70,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
-                            IconButton(
-                              onPressed: () =>
-                                  Navigator.of(dialogContext).pop(),
-                              icon: const Icon(
-                                Icons.close,
+                            const SizedBox(height: 8),
+                            SkillFilterWidgets.buildCategoryFilter(
+                              data,
+                              dialogCategory,
+                              _availableCategories(data),
+                              (String category) {
+                                setDialogState(() {
+                                  dialogCategory = category;
+                                  final List<String> nextTrees = dialogTrees();
+                                  if (dialogTree != _allTreeKey &&
+                                      !nextTrees.contains(dialogTree)) {
+                                    dialogTree = _allTreeKey;
+                                  }
+                                });
+                              },
+                            ),
+                            const SizedBox(height: 14),
+                            const Text(
+                              'Tree',
+                              style: TextStyle(
                                 color: Colors.white70,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
                               ),
-                              tooltip: 'Close',
+                            ),
+                            const SizedBox(height: 8),
+                            SkillFilterWidgets.buildTreeFilter(
+                              data,
+                              dialogCategory,
+                              dialogTree,
+                              dialogTrees(),
+                              (String tree) {
+                                setDialogState(() {
+                                  dialogTree = tree;
+                                });
+                              },
+                            ),
+                            const SizedBox(height: 16),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    setDialogState(() {
+                                      dialogCategory = _allCategoryKey;
+                                      dialogTree = _allTreeKey;
+                                    });
+                                  },
+                                  child: const Text(
+                                    'Reset',
+                                    style: TextStyle(color: Colors.white70),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                FilledButton(
+                                  onPressed: () {
+                                    Navigator.of(dialogContext).pop((
+                                      category: dialogCategory,
+                                      tree: dialogTree,
+                                    ));
+                                  },
+                                  style: FilledButton.styleFrom(
+                                    backgroundColor: const Color(0xFF2E74FF),
+                                    foregroundColor: Colors.white,
+                                  ),
+                                  child: const Text('Apply'),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                        const SizedBox(height: 8),
-                        const Text(
-                          'Category',
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        SkillFilterWidgets.buildCategoryFilter(
-                          data,
-                          _selectedCategory,
-                          _availableCategories(data),
-                          (String category) {
-                            _setUiState(() {
-                              _selectedCategory = category;
-                              final List<String> nextTrees = _availableTrees(
-                                data,
-                              );
-                              if (_selectedTree !=
-                                      _SkillMenuPageState._allTreeKey &&
-                                  !nextTrees.contains(_selectedTree)) {
-                                _selectedTree = _SkillMenuPageState._allTreeKey;
-                              }
-                            });
-                            setDialogState(() {});
-                          },
-                        ),
-                        const SizedBox(height: 14),
-                        const Text(
-                          'Tree',
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        SkillFilterWidgets.buildTreeFilter(
-                          data,
-                          _selectedCategory,
-                          _selectedTree,
-                          _availableTrees(data),
-                          (String tree) {
-                            _setUiState(() {
-                              _selectedTree = tree;
-                            });
-                            setDialogState(() {});
-                          },
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              );
-            },
-          ),
+                  );
+                },
+              ),
+            );
+          },
         );
-      },
-    );
+
+    if (!mounted || selection == null) {
+      return;
+    }
+
+    _setUiState(() {
+      _selectedCategory = selection.category;
+      _selectedTree = selection.tree;
+    });
   }
 
   List<String> _availableCategories(SkillLibraryData data) {
@@ -222,6 +280,151 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
     );
   }
 
+  Widget _buildSearchToolbar(SkillLibraryData data) {
+    final List<String> categories = _availableCategories(data);
+    final bool canOpenFilter =
+        categories.length > 1 || _availableTrees(data).length > 1;
+    final int activeFilterCount = _activeFilterCount();
+
+    return Container(
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: <Color>[Color(0xFF15110E), Color(0xFF0B0D10)],
+        ),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: const Color(0x22FFFFFF)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            final Widget filterButton = Tooltip(
+              message: _activeFilterSummary(),
+              child: SizedBox(
+                width: 52,
+                height: 52,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: <Widget>[
+                    Positioned.fill(
+                      child: OutlinedButton(
+                        onPressed: canOpenFilter
+                            ? () => _openFiltersDialog(data)
+                            : null,
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: const Color(0xFF10161A),
+                          disabledForegroundColor: Colors.white38,
+                          disabledBackgroundColor: const Color(0xFF10161A),
+                          side: BorderSide(
+                            color: activeFilterCount > 0
+                                ? const Color(0xFFD8B36A)
+                                : const Color(0xFF5D7283),
+                          ),
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
+                        child: const Icon(Icons.tune, size: 18),
+                      ),
+                    ),
+                    if (activeFilterCount > 0)
+                      Positioned(
+                        top: -2,
+                        right: -2,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF2E74FF),
+                            borderRadius: BorderRadius.circular(999),
+                            border: Border.all(color: const Color(0xFF8FB4FF)),
+                          ),
+                          child: Text(
+                            '$activeFilterCount',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            );
+
+            return Row(
+              children: <Widget>[
+                Expanded(child: _buildSkillSearchField()),
+                const SizedBox(width: 12),
+                filterButton,
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSkillSearchField() {
+    return TextField(
+      controller: _searchController,
+      style: const TextStyle(color: Colors.white),
+      cursorColor: const Color(0xFFD8B36A),
+      decoration: InputDecoration(
+        hintText: 'Search in selected skill tree...',
+        hintStyle: const TextStyle(color: Colors.white54),
+        suffixIcon: _query.isEmpty
+            ? null
+            : TextButton(
+                onPressed: () {
+                  _setUiState(() {
+                    _searchController.clear();
+                    _query = '';
+                  });
+                },
+                child: const Text(
+                  'Clear',
+                  style: TextStyle(
+                    color: Colors.white54,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+        filled: true,
+        fillColor: const Color(0xFF10161A),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 18,
+          vertical: 18,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(color: Color(0x335D7283)),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(color: Color(0x335D7283)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(color: Color(0x99D8B36A), width: 1.4),
+        ),
+      ),
+      onChanged: (String value) {
+        _setUiState(() {
+          _query = value;
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final bool isMobile = MediaQuery.sizeOf(context).width < 1024;
@@ -269,82 +472,7 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
                     16,
                     10,
                   ),
-                  child: LayoutBuilder(
-                    builder:
-                        (BuildContext context, BoxConstraints constraints) {
-                          const double filterButtonSize = 52;
-                          return Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: TextField(
-                                  controller: _searchController,
-                                  style: const TextStyle(color: Colors.white),
-                                  cursorColor: Colors.white70,
-                                  decoration: InputDecoration(
-                                    hintText:
-                                        'Search in selected skill tree...',
-                                    hintStyle: const TextStyle(
-                                      color: Colors.white54,
-                                    ),
-                                    prefixIcon: const Icon(
-                                      Icons.search,
-                                      color: Colors.white70,
-                                    ),
-                                    filled: true,
-                                    fillColor: const Color(0xFF0F0F0F),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: const BorderSide(
-                                        color: Color(0x33FFFFFF),
-                                      ),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: const BorderSide(
-                                        color: Color(0x33FFFFFF),
-                                      ),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: const BorderSide(
-                                        color: Color(0x66FFFFFF),
-                                      ),
-                                    ),
-                                  ),
-                                  onChanged: (String value) {
-                                    setState(() {
-                                      _query = value;
-                                    });
-                                  },
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              SizedBox(
-                                width: filterButtonSize,
-                                height: filterButtonSize,
-                                child: Tooltip(
-                                  message: _activeFilterSummary(),
-                                  child: OutlinedButton(
-                                    onPressed: () => _openFiltersDialog(data),
-                                    style: OutlinedButton.styleFrom(
-                                      foregroundColor: Colors.white70,
-                                      side: const BorderSide(
-                                        color: Color(0x33FFFFFF),
-                                      ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      backgroundColor: const Color(0xFF0F0F0F),
-                                      padding: EdgeInsets.zero,
-                                    ),
-                                    child: const Icon(Icons.tune, size: 18),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                  ),
+                  child: _buildSearchToolbar(data),
                 ),
                 Expanded(
                   child: _buildSkillTreeView(

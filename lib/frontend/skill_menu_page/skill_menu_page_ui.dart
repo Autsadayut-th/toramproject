@@ -50,19 +50,7 @@ extension _SkillMenuPageUI on _SkillMenuPageState {
     return Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-          child: SkillTreeWidgets.buildTreeSelector(
-            trees: availableTrees,
-            activeTree: activeTree,
-            onSelected: (String treeName) {
-              _setUiState(() {
-                _selectedTree = treeName;
-              });
-            },
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+          padding: const EdgeInsets.fromLTRB(16, 2, 16, 0),
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
