@@ -2,6 +2,10 @@
 
 Toram build simulator project.
 
+## AI Architecture
+
+See `docs/ai_system_architecture.md` for the intended AI pipeline, module boundaries, and mapping to the current implementation.
+
 ## AI Recommendations Setup
 
 This project includes an API endpoint at `/api/recommend` for AI-driven build recommendations.
