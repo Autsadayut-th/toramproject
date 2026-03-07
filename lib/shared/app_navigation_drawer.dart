@@ -121,12 +121,6 @@ class AppNavigationDrawer extends StatelessWidget {
                       onTap: onOpenCritical!,
                     ),
                   _tile(
-                    icon: Icons.auto_awesome_mosaic_outlined,
-                    label: 'Skill Menu',
-                    selected: currentPage == AppNavigationPage.skill,
-                    onTap: onOpenSkill,
-                  ),
-                  _tile(
                     icon: Icons.bookmark_border,
                     label: 'Saved Builds',
                     selected: currentPage == AppNavigationPage.saved,
@@ -137,12 +131,6 @@ class AppNavigationDrawer extends StatelessWidget {
                     label: 'Compare Builds',
                     selected: currentPage == AppNavigationPage.compare,
                     onTap: onOpenCompare,
-                  ),
-                  _tile(
-                    icon: Icons.settings_suggest,
-                    label: 'Settings & Data',
-                    selected: currentPage == AppNavigationPage.settings,
-                    onTap: onOpenSettings,
                   ),
                 ],
               ),

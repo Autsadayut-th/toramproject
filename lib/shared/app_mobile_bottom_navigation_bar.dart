@@ -20,14 +20,13 @@ class AppMobileBottomNavigationBar extends StatelessWidget {
         return 1;
       case AppNavigationPage.critical:
         return 2;
-      case AppNavigationPage.skill:
-        return 3;
       case AppNavigationPage.saved:
-        return 4;
+        return 3;
       case AppNavigationPage.compare:
-        return 5;
+        return 4;
+      case AppNavigationPage.skill:
       case AppNavigationPage.settings:
-        return 6;
+        return 0;
     }
   }
 
@@ -53,16 +52,10 @@ class AppMobileBottomNavigationBar extends StatelessWidget {
             onSelect(AppNavigationPage.critical);
             return;
           case 3:
-            onSelect(AppNavigationPage.skill);
-            return;
-          case 4:
             onSelect(AppNavigationPage.saved);
             return;
-          case 5:
+          case 4:
             onSelect(AppNavigationPage.compare);
-            return;
-          case 6:
-            onSelect(AppNavigationPage.settings);
             return;
         }
       },
@@ -77,20 +70,12 @@ class AppMobileBottomNavigationBar extends StatelessWidget {
           label: 'Critical',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.auto_awesome_mosaic_outlined),
-          label: 'Skill',
-        ),
-        BottomNavigationBarItem(
           icon: Icon(Icons.bookmark_border),
           label: 'Saved',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.compare_arrows),
           label: 'Compare',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.settings_suggest),
-          label: 'Settings',
         ),
       ],
     );

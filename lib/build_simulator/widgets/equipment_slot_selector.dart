@@ -22,70 +22,144 @@ String _crystalIconPath(CrystalLibraryEntry? entry) {
   return entry?.iconAssetPath ?? 'assets/data/icon/blue_crysta.png';
 }
 
-String _humanizeCrystalStatKeyForSearch(String key) {
-  if (key.isEmpty) {
-    return '-';
-  }
-  const Set<String> uppercaseTokens = <String>{
-    'atk',
-    'matk',
-    'def',
-    'mdef',
-    'str',
-    'dex',
-    'int',
-    'agi',
-    'vit',
-    'aspd',
-    'cspd',
-    'hp',
-    'mp',
-    'ampr',
-    'exp',
-  };
-
-  return key
-      .replaceAll('_', ' ')
-      .split(' ')
-      .where((String part) => part.isNotEmpty)
-      .map((String part) {
-        final String token = part.toLowerCase();
-        if (token == 'pct') {
-          return '%';
-        }
-        if (uppercaseTokens.contains(token)) {
-          return token.toUpperCase();
-        }
-        if (token.length == 1) {
-          return token.toUpperCase();
-        }
-        return '${token[0].toUpperCase()}${token.substring(1)}';
-      })
-      .join(' ');
-}
-
 bool _crystalEntryMatchesQuery(CrystalLibraryEntry entry, String query) {
-  final String normalized = query.trim().toLowerCase();
+  final ({String mode, String term}) parsed = _parseCrystalSearchQuery(query);
+  final String normalized = parsed.term;
   if (normalized.isEmpty) {
     return true;
   }
-  if (entry.name.toLowerCase().contains(normalized) ||
-      entry.key.toLowerCase().contains(normalized)) {
-    return true;
+
+  switch (parsed.mode) {
+    case 'name':
+      return entry.name.toLowerCase().contains(normalized);
+    case 'key':
+      return entry.key.toLowerCase().contains(normalized);
+    case 'type':
+      return entry.category.toLowerCase().contains(normalized);
+    case 'color':
+      return entry.colorKey.contains(normalized) ||
+          entry.displayColor.toLowerCase().contains(normalized);
+    case 'stat':
+      return _crystalStatKeyMatches(entry: entry, query: normalized);
+    default:
+      if (_crystalTextFieldsMatch(
+        query: normalized,
+        fields: <String>[
+          entry.name,
+          entry.key,
+          entry.category,
+          entry.colorKey,
+          entry.displayColor,
+        ],
+      )) {
+        return true;
+      }
+      return _crystalStatKeyMatches(entry: entry, query: normalized);
   }
+}
+
+({String mode, String term}) _parseCrystalSearchQuery(String raw) {
+  final String normalized = raw.trim().toLowerCase();
+  if (normalized.isEmpty || !normalized.startsWith('@')) {
+    return (mode: 'all', term: normalized);
+  }
+  final RegExpMatch? match = RegExp(r'^@([a-z_]+)\s*(.*)$').firstMatch(
+    normalized,
+  );
+  if (match == null) {
+    return (mode: 'all', term: normalized.substring(1).trim());
+  }
+
+  final String token = (match.group(1) ?? '').trim();
+  final String term = (match.group(2) ?? '').trim();
+  switch (token) {
+    case 'name':
+    case 'n':
+      return (mode: 'name', term: term);
+    case 'key':
+    case 'k':
+      return (mode: 'key', term: term);
+    case 'type':
+    case 't':
+      return (mode: 'type', term: term);
+    case 'color':
+    case 'c':
+      return (mode: 'color', term: term);
+    case 'stat':
+    case 'stats':
+    case 'stat_key':
+    case 'statkey':
+    case 's':
+      return (mode: 'stat', term: term);
+    default:
+      return (mode: 'all', term: term);
+  }
+}
+
+bool _crystalStatKeyMatches({
+  required CrystalLibraryEntry entry,
+  required String query,
+}) {
+  final List<String> queryTokens = _normalizeCrystalStatTokens(query);
+  if (queryTokens.isEmpty) {
+    return false;
+  }
+
   for (final EquipmentStat stat in entry.stats) {
-    final String statKey = stat.statKey.trim().toLowerCase();
-    if (statKey.isEmpty) {
+    final List<String> statTokens = _normalizeCrystalStatTokens(stat.statKey);
+    if (statTokens.isEmpty) {
       continue;
     }
-    if (statKey.contains(normalized) ||
-        _humanizeCrystalStatKeyForSearch(
-          statKey,
-        ).toLowerCase().contains(normalized)) {
+    final bool tokenMatch = queryTokens.every((String queryToken) {
+      return statTokens.any(
+        (String statToken) =>
+            statToken == queryToken || statToken.startsWith(queryToken),
+      );
+    });
+    if (tokenMatch) {
       return true;
     }
   }
   return false;
+}
+
+bool _crystalTextFieldsMatch({
+  required String query,
+  required Iterable<String> fields,
+}) {
+  final List<String> queryTokens = _normalizeCrystalStatTokens(query);
+  if (queryTokens.isEmpty) {
+    return false;
+  }
+  final List<String> fieldTokens = <String>[];
+  for (final String field in fields) {
+    fieldTokens.addAll(_normalizeCrystalStatTokens(field));
+  }
+  if (fieldTokens.isEmpty) {
+    return false;
+  }
+  return queryTokens.every((String queryToken) {
+    return fieldTokens.any(
+      (String fieldToken) =>
+          fieldToken == queryToken || fieldToken.startsWith(queryToken),
+    );
+  });
+}
+
+List<String> _normalizeCrystalStatTokens(String value) {
+  final String normalized = value
+      .trim()
+      .toLowerCase()
+      .replaceAll(RegExp(r'[^a-z0-9]+'), '_')
+      .replaceAll(RegExp(r'_+'), '_')
+      .replaceAll(RegExp(r'^_|_$'), '');
+  if (normalized.isEmpty) {
+    return const <String>[];
+  }
+  return normalized
+      .split('_')
+      .where((String token) => token.isNotEmpty)
+      .toList(growable: false);
 }
 
 class EquipmentSlotSelector extends StatefulWidget {
@@ -149,6 +223,12 @@ class EquipmentSlotSelector extends StatefulWidget {
 class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
   static const int _minEnhance = 0;
   static const int _maxEnhance = 15;
+  static const List<_InlineSearchModeOption> _inlineSearchModeOptions =
+      <_InlineSearchModeOption>[
+        _InlineSearchModeOption(token: 'all', label: 'All'),
+        _InlineSearchModeOption(token: 'name', label: 'Name'),
+        _InlineSearchModeOption(token: 'stat', label: 'Stat'),
+      ];
 
   late final TextEditingController _idController;
   late final FocusNode _idFocusNode;
@@ -277,23 +357,23 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
   }
 
   EquipmentLibraryItem? _matchInlineCandidate(String raw) {
-    final String normalized = raw.trim().toLowerCase();
-    if (normalized.isEmpty || !_canInlineNameSearch) {
+    if (!_canInlineNameSearch) {
       return null;
     }
+    final ({String mode, String term}) parsed = _parseInlineSearchQuery(raw);
+    if (parsed.term.isEmpty) {
+      return null;
+    }
+
     EquipmentLibraryItem? fuzzyMatch;
     for (final EquipmentLibraryItem item in widget.inlineSearchCandidates) {
-      final String name = item.name.trim().toLowerCase();
-      final String key = item.key.trim().toLowerCase();
-      if (name == normalized ||
-          (!widget.inlineSearchByNameOnly && key == normalized)) {
+      if (!_itemMatchesInlineSearch(item: item, parsed: parsed)) {
+        continue;
+      }
+      if (_itemExactInlineMatch(item: item, parsed: parsed)) {
         return item;
       }
-      if (fuzzyMatch == null &&
-          (name.contains(normalized) ||
-              (!widget.inlineSearchByNameOnly && key.contains(normalized)))) {
-        fuzzyMatch = item;
-      }
+      fuzzyMatch ??= item;
     }
     return fuzzyMatch;
   }
@@ -302,17 +382,16 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
     if (!_canInlineNameSearch || !_idFocusNode.hasFocus) {
       return const <EquipmentLibraryItem>[];
     }
-    final String query = _idController.text.trim().toLowerCase();
-    if (query.isEmpty) {
+    final ({String mode, String term}) parsed = _parseInlineSearchQuery(
+      _idController.text,
+    );
+    if (parsed.term.isEmpty) {
       return const <EquipmentLibraryItem>[];
     }
 
     final List<EquipmentLibraryItem> matches = <EquipmentLibraryItem>[];
     for (final EquipmentLibraryItem item in widget.inlineSearchCandidates) {
-      final String name = item.name.trim().toLowerCase();
-      final String key = item.key.trim().toLowerCase();
-      if (!name.contains(query) &&
-          (!key.contains(query) || widget.inlineSearchByNameOnly)) {
+      if (!_itemMatchesInlineSearch(item: item, parsed: parsed)) {
         continue;
       }
       matches.add(item);
@@ -321,6 +400,238 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
       }
     }
     return matches;
+  }
+
+  List<_InlineSearchModeOption> _matchingInlineSearchModes(String raw) {
+    final String trimmed = raw.trimLeft().toLowerCase();
+    if (!trimmed.startsWith('@')) {
+      return const <_InlineSearchModeOption>[];
+    }
+    final String keyword = trimmed.substring(1);
+    if (keyword.contains(' ')) {
+      return const <_InlineSearchModeOption>[];
+    }
+    if (keyword.isEmpty) {
+      return _inlineSearchModeOptions;
+    }
+    return _inlineSearchModeOptions
+        .where(
+          (_InlineSearchModeOption option) => option.token.startsWith(keyword),
+        )
+        .toList(growable: false);
+  }
+
+  List<_InlineSearchModeOption> _matchingCrystalInlineSearchModes(
+    bool isSlot1,
+  ) {
+    final String raw = _crystalController(isSlot1).text;
+    final String trimmed = raw.trimLeft().toLowerCase();
+    if (!trimmed.startsWith('@')) {
+      return const <_InlineSearchModeOption>[];
+    }
+    final String keyword = trimmed.substring(1);
+    if (keyword.contains(' ')) {
+      return const <_InlineSearchModeOption>[];
+    }
+    if (keyword.isEmpty) {
+      return _inlineSearchModeOptions;
+    }
+    return _inlineSearchModeOptions
+        .where(
+          (_InlineSearchModeOption option) => option.token.startsWith(keyword),
+        )
+        .toList(growable: false);
+  }
+
+  void _applyInlineSearchMode(_InlineSearchModeOption option) {
+    final String nextValue = '@${option.token} ';
+    _idController.value = TextEditingValue(
+      text: nextValue,
+      selection: TextSelection.collapsed(offset: nextValue.length),
+    );
+    setState(() {});
+  }
+
+  void _applyCrystalInlineSearchMode({
+    required bool isSlot1,
+    required _InlineSearchModeOption option,
+  }) {
+    final String nextValue = '@${option.token} ';
+    final TextEditingController controller = _crystalController(isSlot1);
+    controller.value = TextEditingValue(
+      text: nextValue,
+      selection: TextSelection.collapsed(offset: nextValue.length),
+    );
+    setState(() {});
+  }
+
+  ({String mode, String term}) _parseInlineSearchQuery(String raw) {
+    final String normalized = raw.trim().toLowerCase();
+    if (normalized.isEmpty || !normalized.startsWith('@')) {
+      return (mode: 'all', term: normalized);
+    }
+    final RegExpMatch? match = RegExp(r'^@([a-z_]+)\s*(.*)$').firstMatch(
+      normalized,
+    );
+    if (match == null) {
+      return (mode: 'all', term: normalized.substring(1).trim());
+    }
+    final String token = (match.group(1) ?? '').trim();
+    final String term = (match.group(2) ?? '').trim();
+    switch (token) {
+      case 'name':
+      case 'n':
+        return (mode: 'name', term: term);
+      case 'key':
+      case 'k':
+        return (mode: 'key', term: term);
+      case 'type':
+      case 't':
+        return (mode: 'type', term: term);
+      case 'color':
+      case 'c':
+        return (mode: 'color', term: term);
+      case 'stat':
+      case 'stats':
+      case 'stat_key':
+      case 'statkey':
+      case 's':
+        return (mode: 'stat', term: term);
+      default:
+        return (mode: 'all', term: term);
+    }
+  }
+
+  bool _itemExactInlineMatch({
+    required EquipmentLibraryItem item,
+    required ({String mode, String term}) parsed,
+  }) {
+    final String name = item.name.trim().toLowerCase();
+    final String key = item.key.trim().toLowerCase();
+    final String type = item.type.trim().toLowerCase();
+    final String color = item.color.trim().toLowerCase();
+    switch (parsed.mode) {
+      case 'name':
+        return name == parsed.term;
+      case 'key':
+        return key == parsed.term;
+      case 'type':
+        return type == parsed.term;
+      case 'color':
+        return color == parsed.term;
+      case 'stat':
+        return _itemStatKeyMatches(item: item, query: parsed.term, exact: true);
+      default:
+        return name == parsed.term ||
+            (!widget.inlineSearchByNameOnly && key == parsed.term);
+    }
+  }
+
+  bool _itemMatchesInlineSearch({
+    required EquipmentLibraryItem item,
+    required ({String mode, String term}) parsed,
+  }) {
+    final String name = item.name.trim().toLowerCase();
+    final String key = item.key.trim().toLowerCase();
+    final String type = item.type.trim().toLowerCase();
+    final String color = item.color.trim().toLowerCase();
+    switch (parsed.mode) {
+      case 'name':
+        return name.contains(parsed.term);
+      case 'key':
+        return key.contains(parsed.term);
+      case 'type':
+        return type.contains(parsed.term);
+      case 'color':
+        return color.contains(parsed.term);
+      case 'stat':
+        return _itemStatKeyMatches(item: item, query: parsed.term);
+      default:
+        final List<String> searchableFields = <String>[name, type, color];
+        if (!widget.inlineSearchByNameOnly) {
+          searchableFields.add(key);
+        }
+        if (_itemTextFieldsMatch(
+          query: parsed.term,
+          fields: searchableFields,
+        )) {
+          return true;
+        }
+        return _itemStatKeyMatches(item: item, query: parsed.term);
+    }
+  }
+
+  bool _itemStatKeyMatches({
+    required EquipmentLibraryItem item,
+    required String query,
+    bool exact = false,
+  }) {
+    final String normalizedQuery = query.trim().toLowerCase();
+    if (normalizedQuery.isEmpty) {
+      return false;
+    }
+    final List<String> queryTokens = _normalizeStatTokens(normalizedQuery);
+    if (queryTokens.isEmpty) {
+      return false;
+    }
+
+    return item.stats.any((EquipmentStat stat) {
+      final List<String> statTokens = _normalizeStatTokens(stat.statKey);
+      if (statTokens.isEmpty) {
+        return false;
+      }
+      if (exact) {
+        if (queryTokens.length == 1 && statTokens.contains(queryTokens.first)) {
+          return true;
+        }
+        return statTokens.join('_') == queryTokens.join('_');
+      }
+      return queryTokens.every((String queryToken) {
+        return statTokens.any(
+          (String statToken) =>
+              statToken == queryToken || statToken.startsWith(queryToken),
+        );
+      });
+    });
+  }
+
+  List<String> _normalizeStatTokens(String value) {
+    final String normalized = value
+        .trim()
+        .toLowerCase()
+        .replaceAll(RegExp(r'[^a-z0-9]+'), '_')
+        .replaceAll(RegExp(r'_+'), '_')
+        .replaceAll(RegExp(r'^_|_$'), '');
+    if (normalized.isEmpty) {
+      return const <String>[];
+    }
+    return normalized
+        .split('_')
+        .where((String token) => token.isNotEmpty)
+        .toList(growable: false);
+  }
+
+  bool _itemTextFieldsMatch({
+    required String query,
+    required Iterable<String> fields,
+  }) {
+    final List<String> queryTokens = _normalizeStatTokens(query);
+    if (queryTokens.isEmpty) {
+      return false;
+    }
+    final List<String> fieldTokens = <String>[];
+    for (final String field in fields) {
+      fieldTokens.addAll(_normalizeStatTokens(field));
+    }
+    if (fieldTokens.isEmpty) {
+      return false;
+    }
+    return queryTokens.every((String queryToken) {
+      return fieldTokens.any(
+        (String fieldToken) =>
+            fieldToken == queryToken || fieldToken.startsWith(queryToken),
+      );
+    });
   }
 
   void _selectInlineCandidate(EquipmentLibraryItem item) {
@@ -486,19 +797,39 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
     if (normalized.isEmpty || _availableCrystals.isEmpty) {
       return null;
     }
+    final ({String mode, String term}) parsed = _parseCrystalSearchQuery(raw);
+    if (parsed.term.isEmpty) {
+      return null;
+    }
 
-    CrystalLibraryEntry? fuzzyMatch;
+    final String exactTerm = parsed.term;
     for (final CrystalLibraryEntry entry in _availableCrystals) {
       final String name = entry.name.trim().toLowerCase();
       final String key = entry.key.trim().toLowerCase();
-      if (name == normalized || key == normalized) {
-        return entry;
-      }
-      if (fuzzyMatch == null && _crystalEntryMatchesQuery(entry, normalized)) {
-        fuzzyMatch = entry;
+      switch (parsed.mode) {
+        case 'name':
+          if (name == exactTerm) {
+            return entry;
+          }
+          break;
+        case 'key':
+          if (key == exactTerm) {
+            return entry;
+          }
+          break;
+        case 'all':
+          if (name == normalized ||
+              key == normalized ||
+              name == exactTerm ||
+              key == exactTerm) {
+            return entry;
+          }
+          break;
+        default:
+          break;
       }
     }
-    return fuzzyMatch;
+    return null;
   }
 
   List<CrystalLibraryEntry> _crystalInlineCandidates({required bool isSlot1}) {
@@ -509,6 +840,10 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
 
     final String query = _crystalController(isSlot1).text.trim().toLowerCase();
     if (query.isEmpty) {
+      return const <CrystalLibraryEntry>[];
+    }
+    final ({String mode, String term}) parsed = _parseCrystalSearchQuery(query);
+    if (parsed.term.isEmpty) {
       return const <CrystalLibraryEntry>[];
     }
 
@@ -634,10 +969,16 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
         !widget.forceTextInput &&
         !(_canInlineNameSearch && _isInlineEditing);
     final List<EquipmentLibraryItem> inlineCandidates = _inlineCandidates();
+    final List<_InlineSearchModeOption> inlineSearchModes =
+        _matchingInlineSearchModes(_idController.text);
     final bool showInlineSuggestions =
         _canInlineNameSearch &&
         !showSelectedCard &&
         inlineCandidates.isNotEmpty;
+    final bool showInlineSearchModes =
+        _canInlineNameSearch &&
+        !showSelectedCard &&
+        inlineSearchModes.isNotEmpty;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -661,7 +1002,7 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
                   : _inputField(
                       controller: _idController,
                       focusNode: _idFocusNode,
-                      hint: widget.idHint,
+                      hint: '${widget.idHint}  (type @ for modes)',
                       onSubmitted: _commitId,
                       onTapOutside: _onIdTapOutside,
                       onChanged: _canInlineNameSearch
@@ -683,6 +1024,13 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
         if (showInlineSuggestions) ...<Widget>[
           const SizedBox(height: 8),
           _buildInlineSuggestions(inlineCandidates),
+        ],
+        if (showInlineSearchModes) ...<Widget>[
+          const SizedBox(height: 8),
+          _buildInlineSearchModeSuggestions(
+            options: inlineSearchModes,
+            onSelect: _applyInlineSearchMode,
+          ),
         ],
         const SizedBox(height: 10),
         if ((widget.selectedId ?? '').trim().isNotEmpty) ...<Widget>[
@@ -809,47 +1157,83 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
   }
 
   Widget _buildInlineSuggestions(List<EquipmentLibraryItem> candidates) {
-    return Container(
-      width: double.infinity,
-      constraints: const BoxConstraints(maxHeight: 240),
-      decoration: BoxDecoration(
-        color: const Color(0xFF0F0F0F),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.16)),
+    return TextFieldTapRegion(
+      child: Container(
+        width: double.infinity,
+        constraints: const BoxConstraints(maxHeight: 240),
+        decoration: BoxDecoration(
+          color: const Color(0xFF0F0F0F),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.16)),
+        ),
+        child: ListView.separated(
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          shrinkWrap: true,
+          itemCount: candidates.length,
+          separatorBuilder: (_, __) =>
+              Divider(height: 1, color: Colors.white.withValues(alpha: 0.10)),
+          itemBuilder: (BuildContext context, int index) {
+            final EquipmentLibraryItem item = candidates[index];
+            return ListTile(
+              dense: true,
+              visualDensity: const VisualDensity(vertical: -1.2),
+              title: Text(
+                item.name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              subtitle: Text(
+                item.key,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: Colors.white.withValues(alpha: 0.6),
+                  fontSize: 11,
+                ),
+              ),
+              onTap: () => _selectInlineCandidate(item),
+            );
+          },
+        ),
       ),
-      child: ListView.separated(
-        padding: const EdgeInsets.symmetric(vertical: 6),
-        shrinkWrap: true,
-        itemCount: candidates.length,
-        separatorBuilder: (_, __) =>
-            Divider(height: 1, color: Colors.white.withValues(alpha: 0.10)),
-        itemBuilder: (BuildContext context, int index) {
-          final EquipmentLibraryItem item = candidates[index];
-          return ListTile(
-            dense: true,
-            visualDensity: const VisualDensity(vertical: -1.2),
-            title: Text(
-              item.name,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
+    );
+  }
+
+  Widget _buildInlineSearchModeSuggestions({
+    required List<_InlineSearchModeOption> options,
+    required ValueChanged<_InlineSearchModeOption> onSelect,
+  }) {
+    return TextFieldTapRegion(
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: const Color(0xFF0F0F0F),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.16)),
+        ),
+        child: Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: options.map((_InlineSearchModeOption option) {
+            return ActionChip(
+              label: Text('@${option.token}  ${option.label}'),
+              onPressed: () => onSelect(option),
+              backgroundColor: const Color(0xFF1A1A1A),
+              side: BorderSide(color: Colors.white.withValues(alpha: 0.24)),
+              labelStyle: const TextStyle(
                 color: Colors.white,
-                fontSize: 12,
+                fontSize: 11,
                 fontWeight: FontWeight.w600,
               ),
-            ),
-            subtitle: Text(
-              item.key,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: Colors.white.withValues(alpha: 0.6),
-                fontSize: 11,
-              ),
-            ),
-            onTap: () => _selectInlineCandidate(item),
-          );
-        },
+            );
+          }).toList(growable: false),
+        ),
       ),
     );
   }
@@ -1333,71 +1717,75 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
     required bool isSlot1,
     required List<CrystalLibraryEntry> candidates,
   }) {
-    return Container(
-      width: double.infinity,
-      constraints: const BoxConstraints(maxHeight: 240),
-      decoration: BoxDecoration(
-        color: const Color(0xFF0F0F0F),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.16)),
-      ),
-      child: ListView.separated(
-        padding: const EdgeInsets.symmetric(vertical: 6),
-        shrinkWrap: true,
-        itemCount: candidates.length,
-        separatorBuilder: (_, __) =>
-            Divider(height: 1, color: Colors.white.withValues(alpha: 0.10)),
-        itemBuilder: (BuildContext context, int index) {
-          final CrystalLibraryEntry entry = candidates[index];
-          final Color accentColor = _crystalAccentColor(entry);
-          return ListTile(
-            dense: true,
-            visualDensity: const VisualDensity(vertical: -1.2),
-            leading: Container(
-              width: 28,
-              height: 28,
-              decoration: BoxDecoration(
-                color: accentColor.withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: accentColor.withValues(alpha: 0.45)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(4),
-                child: Image.asset(
-                  _crystalIconPath(entry),
-                  fit: BoxFit.contain,
-                  errorBuilder: (_, __, ___) {
-                    return Icon(
-                      Icons.diamond_outlined,
-                      size: 14,
-                      color: accentColor,
-                    );
-                  },
+    return TextFieldTapRegion(
+      child: Container(
+        width: double.infinity,
+        constraints: const BoxConstraints(maxHeight: 240),
+        decoration: BoxDecoration(
+          color: const Color(0xFF0F0F0F),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.16)),
+        ),
+        child: ListView.separated(
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          shrinkWrap: true,
+          itemCount: candidates.length,
+          separatorBuilder: (_, __) =>
+              Divider(height: 1, color: Colors.white.withValues(alpha: 0.10)),
+          itemBuilder: (BuildContext context, int index) {
+            final CrystalLibraryEntry entry = candidates[index];
+            final Color accentColor = _crystalAccentColor(entry);
+            return ListTile(
+              dense: true,
+              visualDensity: const VisualDensity(vertical: -1.2),
+              leading: Container(
+                width: 28,
+                height: 28,
+                decoration: BoxDecoration(
+                  color: accentColor.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: accentColor.withValues(alpha: 0.45),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(4),
+                  child: Image.asset(
+                    _crystalIconPath(entry),
+                    fit: BoxFit.contain,
+                    errorBuilder: (_, __, ___) {
+                      return Icon(
+                        Icons.diamond_outlined,
+                        size: 14,
+                        color: accentColor,
+                      );
+                    },
+                  ),
                 ),
               ),
-            ),
-            title: Text(
-              entry.name,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
+              title: Text(
+                entry.name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            subtitle: Text(
-              '${entry.key} - ${_crystalCategoryLabel(entry.category)}',
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: Colors.white.withValues(alpha: 0.6),
-                fontSize: 11,
+              subtitle: Text(
+                '${entry.key} - ${_crystalCategoryLabel(entry.category)}',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: Colors.white.withValues(alpha: 0.6),
+                  fontSize: 11,
+                ),
               ),
-            ),
-            onTap: () => _selectCrystalInline(isSlot1, entry),
-          );
-        },
+              onTap: () => _selectCrystalInline(isSlot1, entry),
+            );
+          },
+        ),
       ),
     );
   }
@@ -1454,7 +1842,10 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
     final List<CrystalLibraryEntry> inlineCandidates = _crystalInlineCandidates(
       isSlot1: isSlot1,
     );
+    final List<_InlineSearchModeOption> inlineSearchModes =
+        _matchingCrystalInlineSearchModes(isSlot1);
     final bool showInlineSuggestions = isEditing && inlineCandidates.isNotEmpty;
+    final bool showInlineSearchModes = isEditing && inlineSearchModes.isNotEmpty;
     final VoidCallback? onClearSelection = onClear == null
         ? null
         : () => _clearCrystalSelection(isSlot1, onClear);
@@ -1471,7 +1862,7 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
                       focusNode: _crystalFocusNode(isSlot1),
                       hint: _isCrystalLoading
                           ? 'Loading crystal data...'
-                          : 'Search crystal name, stat...',
+                          : 'Search crystal name, stat... (type @ for modes)',
                       onSubmitted: () => _commitCrystalInput(isSlot1),
                       onTapOutside: () => _onCrystalTapOutside(isSlot1),
                       onChanged: (_) {
@@ -1503,6 +1894,18 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
           _buildCrystalInlineSuggestions(
             isSlot1: isSlot1,
             candidates: inlineCandidates,
+          ),
+        ],
+        if (showInlineSearchModes) ...<Widget>[
+          const SizedBox(height: 8),
+          _buildInlineSearchModeSuggestions(
+            options: inlineSearchModes,
+            onSelect: (_InlineSearchModeOption option) {
+              _applyCrystalInlineSearchMode(
+                isSlot1: isSlot1,
+                option: option,
+              );
+            },
           ),
         ],
         if (hasValue && selectedEntry != null) ...<Widget>[
@@ -1564,6 +1967,13 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
       ),
     );
   }
+}
+
+class _InlineSearchModeOption {
+  const _InlineSearchModeOption({required this.token, required this.label});
+
+  final String token;
+  final String label;
 }
 
 class _CrystalPickerDialog extends StatefulWidget {

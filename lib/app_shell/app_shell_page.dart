@@ -50,6 +50,11 @@ class _AppShellScreenState extends State<AppShellScreen> {
     });
   }
 
+  bool _isHiddenPage(AppNavigationPage page) {
+    return page == AppNavigationPage.skill ||
+        page == AppNavigationPage.settings;
+  }
+
   @override
   void dispose() {
     _authStateSubscription?.cancel();
@@ -70,6 +75,9 @@ class _AppShellScreenState extends State<AppShellScreen> {
   }
 
   void _onNavigate(AppNavigationPage page) {
+    if (_isHiddenPage(page)) {
+      page = AppNavigationPage.build;
+    }
     if (_currentPage == page) {
       return;
     }

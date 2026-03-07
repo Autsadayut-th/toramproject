@@ -59,6 +59,8 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
   late List<Map<String, dynamic>> _builds;
   String? _firstBuildId;
   String? _secondBuildId;
+  bool _showOnlyDifferences = true;
+  bool _sortByDifference = true;
 
   @override
   void initState() {
@@ -173,12 +175,82 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
     return text;
   }
 
+  int _deltaValue({
+    required Map<String, dynamic>? firstBuild,
+    required Map<String, dynamic>? secondBuild,
+    required String key,
+  }) {
+    return _summaryValue(secondBuild, key) - _summaryValue(firstBuild, key);
+  }
+
+  int _differenceCount({
+    required Map<String, dynamic>? firstBuild,
+    required Map<String, dynamic>? secondBuild,
+  }) {
+    int count = 0;
+    for (final String key in _compareKeys) {
+      if (_deltaValue(firstBuild: firstBuild, secondBuild: secondBuild, key: key) !=
+          0) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  int _buildALeadCount({
+    required Map<String, dynamic>? firstBuild,
+    required Map<String, dynamic>? secondBuild,
+  }) {
+    int count = 0;
+    for (final String key in _compareKeys) {
+      if (_deltaValue(firstBuild: firstBuild, secondBuild: secondBuild, key: key) <
+          0) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  int _buildBLeadCount({
+    required Map<String, dynamic>? firstBuild,
+    required Map<String, dynamic>? secondBuild,
+  }) {
+    int count = 0;
+    for (final String key in _compareKeys) {
+      if (_deltaValue(firstBuild: firstBuild, secondBuild: secondBuild, key: key) >
+          0) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  void _swapBuildSelection() {
+    setState(() {
+      final String? cached = _firstBuildId;
+      _firstBuildId = _secondBuildId;
+      _secondBuildId = cached;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic>? firstBuild = _buildById(_firstBuildId);
     final Map<String, dynamic>? secondBuild = _buildById(_secondBuildId);
     final bool isMobile = MediaQuery.sizeOf(context).width < 1024;
     final bool isEmbeddedInShell = widget.onNavigate != null;
+    final int differenceCount = _differenceCount(
+      firstBuild: firstBuild,
+      secondBuild: secondBuild,
+    );
+    final int buildALeadCount = _buildALeadCount(
+      firstBuild: firstBuild,
+      secondBuild: secondBuild,
+    );
+    final int buildBLeadCount = _buildBLeadCount(
+      firstBuild: firstBuild,
+      secondBuild: secondBuild,
+    );
 
     void onSelectMobileNav(AppNavigationPage page) {
       if (page == AppNavigationPage.compare) {
@@ -206,38 +278,55 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: _buildSelector(
-                        label: 'Build A',
-                        selectedId: _firstBuildId,
-                        onChanged: (String? value) {
-                          setState(() {
-                            _firstBuildId = value;
-                          });
-                        },
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: _buildSelector(
-                        label: 'Build B',
-                        selectedId: _secondBuildId,
-                        onChanged: (String? value) {
-                          setState(() {
-                            _secondBuildId = value;
-                          });
-                        },
-                      ),
-                    ),
-                  ],
+                LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    final bool stackSelectors = constraints.maxWidth < 860;
+                    final Widget selectorA = _buildSelector(
+                      label: 'Build A',
+                      selectedId: _firstBuildId,
+                      onChanged: (String? value) {
+                        setState(() {
+                          _firstBuildId = value;
+                        });
+                      },
+                    );
+                    final Widget selectorB = _buildSelector(
+                      label: 'Build B',
+                      selectedId: _secondBuildId,
+                      onChanged: (String? value) {
+                        setState(() {
+                          _secondBuildId = value;
+                        });
+                      },
+                    );
+                    if (stackSelectors) {
+                      return Column(
+                        children: <Widget>[
+                          selectorA,
+                          const SizedBox(height: 10),
+                          selectorB,
+                        ],
+                      );
+                    }
+                    return Row(
+                      children: <Widget>[
+                        Expanded(child: selectorA),
+                        const SizedBox(width: 12),
+                        Expanded(child: selectorB),
+                      ],
+                    );
+                  },
                 ),
                 const SizedBox(height: 14),
                 Wrap(
                   spacing: 10,
                   runSpacing: 10,
                   children: [
+                    OutlinedButton.icon(
+                      onPressed: _swapBuildSelection,
+                      icon: const Icon(Icons.swap_horiz),
+                      label: const Text('Swap A/B'),
+                    ),
                     FilledButton.tonalIcon(
                       onPressed: firstBuild == null
                           ? null
@@ -295,6 +384,7 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
                       const SizedBox(height: 4),
                       Text(
                         'Main: ${_slotLabel(firstBuild, 'mainWeaponId')}  '
+                        'Sub: ${_slotLabel(firstBuild, 'subWeaponId')}  '
                         'Armor: ${_slotLabel(firstBuild, 'armorId')}',
                         style: const TextStyle(
                           color: Colors.white70,
@@ -317,6 +407,7 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
                       const SizedBox(height: 4),
                       Text(
                         'Main: ${_slotLabel(secondBuild, 'mainWeaponId')}  '
+                        'Sub: ${_slotLabel(secondBuild, 'subWeaponId')}  '
                         'Armor: ${_slotLabel(secondBuild, 'armorId')}',
                         style: const TextStyle(
                           color: Colors.white70,
@@ -326,12 +417,61 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
                     ],
                   ),
                 ),
+                const SizedBox(height: 10),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: <Widget>[
+                    _summaryChip(
+                      icon: Icons.compare_arrows,
+                      label: 'Different Stats',
+                      value: '$differenceCount/${_compareKeys.length}',
+                    ),
+                    _summaryChip(
+                      icon: Icons.arrow_back,
+                      label: 'Build A Leads',
+                      value: '$buildALeadCount',
+                    ),
+                    _summaryChip(
+                      icon: Icons.arrow_forward,
+                      label: 'Build B Leads',
+                      value: '$buildBLeadCount',
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 14),
                 _buildCompareRadarCard(firstBuild: firstBuild, secondBuild: secondBuild),
                 const SizedBox(height: 14),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: <Widget>[
+                    FilterChip(
+                      label: const Text('Only Differences'),
+                      selected: _showOnlyDifferences,
+                      onSelected: (bool selected) {
+                        setState(() {
+                          _showOnlyDifferences = selected;
+                        });
+                      },
+                    ),
+                    FilterChip(
+                      label: const Text('Sort By Delta'),
+                      selected: _sortByDifference,
+                      onSelected: (bool selected) {
+                        setState(() {
+                          _sortByDifference = selected;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
                 _buildCenteredCompareTable(
                   firstBuild: firstBuild,
                   secondBuild: secondBuild,
+                  showOnlyDifferences: _showOnlyDifferences,
+                  sortByDifference: _sortByDifference,
                 ),
                   ],
                 ),
@@ -424,6 +564,44 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
           }),
           onChanged: onChanged,
         ),
+      ),
+    );
+  }
+
+  Widget _summaryChip({
+    required IconData icon,
+    required String label,
+    required String value,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      decoration: BoxDecoration(
+        color: const Color(0xFF141414),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Icon(icon, size: 14, color: Colors.white70),
+          const SizedBox(width: 6),
+          Text(
+            '$label: ',
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
       ),
     );
   }

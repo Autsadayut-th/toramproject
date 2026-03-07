@@ -20,6 +20,39 @@ class _EquipmentLibraryDataView extends StatefulWidget {
 
 class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
   static const int _itemsPerPage = 27;
+  static const List<_SearchModeOption> _searchModeOptions =
+      <_SearchModeOption>[
+        _SearchModeOption(
+          token: 'all',
+          label: 'All',
+          description: 'Search all fields',
+        ),
+        _SearchModeOption(
+          token: 'name',
+          label: 'Name',
+          description: 'Search item name',
+        ),
+        _SearchModeOption(
+          token: 'key',
+          label: 'Key',
+          description: 'Search item key',
+        ),
+        _SearchModeOption(
+          token: 'type',
+          label: 'Type',
+          description: 'Search equipment type',
+        ),
+        _SearchModeOption(
+          token: 'color',
+          label: 'Color',
+          description: 'Search crystal color',
+        ),
+        _SearchModeOption(
+          token: 'stat',
+          label: 'Stat',
+          description: 'Search stat_key',
+        ),
+      ];
   static const List<String> _weaponTypeFilterOrder = <String>[
     '1h_sword',
     '2h_sword',
@@ -139,6 +172,35 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
       _searchQuery = '';
       _currentPage = 1;
     });
+  }
+
+  List<_SearchModeOption> _matchingSearchModes(String query) {
+    final String trimmed = query.trimLeft();
+    if (!trimmed.startsWith('@')) {
+      return const <_SearchModeOption>[];
+    }
+    final String rawKeyword = trimmed.substring(1);
+    if (rawKeyword.contains(' ')) {
+      return const <_SearchModeOption>[];
+    }
+
+    final String keyword = rawKeyword.trim().toLowerCase();
+    if (keyword.isEmpty) {
+      return _searchModeOptions;
+    }
+    return _searchModeOptions.where((_SearchModeOption option) {
+      return option.token.startsWith(keyword) ||
+          option.label.toLowerCase().startsWith(keyword);
+    }).toList(growable: false);
+  }
+
+  void _applySearchMode(_SearchModeOption option) {
+    final String nextQuery = '@${option.token} ';
+    _searchController.value = TextEditingValue(
+      text: nextQuery,
+      selection: TextSelection.collapsed(offset: nextQuery.length),
+    );
+    _updateSearchQuery(nextQuery);
   }
 
   Set<String>? _normalizeTypeSet(Iterable<String>? values) {
@@ -822,52 +884,96 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
   }
 
   Widget _buildSearchField() {
-    return TextField(
-      controller: _searchController,
-      style: const TextStyle(color: Colors.white),
-      cursorColor: _libraryWarmAccent,
-      decoration: InputDecoration(
-        hintText: 'Search by name, key, type, color, stat...',
-        hintStyle: const TextStyle(color: Colors.white54),
-        suffixIcon: _searchQuery.isEmpty
-            ? null
-            : TextButton(
-                onPressed: _clearSearch,
-                child: const Text(
-                  'Clear',
-                  style: TextStyle(
-                    color: Colors.white54,
-                    fontWeight: FontWeight.w700,
+    final List<_SearchModeOption> matchingModes = _matchingSearchModes(
+      _searchQuery,
+    );
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        TextField(
+          controller: _searchController,
+          style: const TextStyle(color: Colors.white),
+          cursorColor: _libraryWarmAccent,
+          decoration: InputDecoration(
+            hintText:
+                'Search by name, key, type, color, stat... (type @ to choose)',
+            hintStyle: const TextStyle(color: Colors.white54),
+            suffixIcon: _searchQuery.isEmpty
+                ? null
+                : TextButton(
+                    onPressed: _clearSearch,
+                    child: const Text(
+                      'Clear',
+                      style: TextStyle(
+                        color: Colors.white54,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                   ),
-                ),
+            filled: true,
+            fillColor: const Color(0xFF10161A),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 18,
+              vertical: 18,
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(
+                color: _libraryCoolAccent.withValues(alpha: 0.18),
               ),
-        filled: true,
-        fillColor: const Color(0xFF10161A),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 18,
-          vertical: 18,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(
-            color: _libraryCoolAccent.withValues(alpha: 0.18),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(
+                color: _libraryCoolAccent.withValues(alpha: 0.18),
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(
+                color: _libraryWarmAccent.withValues(alpha: 0.7),
+                width: 1.4,
+              ),
+            ),
           ),
+          onChanged: _updateSearchQuery,
         ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(
-            color: _libraryCoolAccent.withValues(alpha: 0.18),
+        if (matchingModes.isNotEmpty) ...<Widget>[
+          const SizedBox(height: 8),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: const Color(0xFF0E1317),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: _libraryCoolAccent.withValues(alpha: 0.28),
+              ),
+            ),
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: matchingModes.map((_SearchModeOption option) {
+                return ActionChip(
+                  label: Text('@${option.token}  ${option.label}'),
+                  onPressed: () => _applySearchMode(option),
+                  backgroundColor: const Color(0xFF1A2128),
+                  side: BorderSide(
+                    color: _libraryCoolAccent.withValues(alpha: 0.34),
+                  ),
+                  labelStyle: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  tooltip: option.description,
+                );
+              }).toList(growable: false),
+            ),
           ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(
-            color: _libraryWarmAccent.withValues(alpha: 0.7),
-            width: 1.4,
-          ),
-        ),
-      ),
-      onChanged: _updateSearchQuery,
+        ],
+      ],
     );
   }
 
@@ -926,4 +1032,16 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
       ),
     );
   }
+}
+
+class _SearchModeOption {
+  const _SearchModeOption({
+    required this.token,
+    required this.label,
+    required this.description,
+  });
+
+  final String token;
+  final String label;
+  final String description;
 }
