@@ -5,6 +5,7 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
     required List<EquipmentLibraryItem> pagedItems,
     required int columnCount,
     required int previewLimit,
+    required String activeCategory,
   }) {
     if (columnCount == 1) {
       return ListView.separated(
@@ -16,6 +17,7 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
             context: context,
             item: pagedItems[index],
             previewLimit: previewLimit,
+            activeCategory: activeCategory,
           );
         },
       );
@@ -57,6 +59,7 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
                           context: context,
                           item: rowItems[itemIndex]!,
                           previewLimit: previewLimit,
+                          activeCategory: activeCategory,
                         ),
                 ),
                 if (itemIndex < rowItems.length - 1) const SizedBox(width: 10),
@@ -72,11 +75,15 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
     required BuildContext context,
     required EquipmentLibraryItem item,
     required int previewLimit,
+    required String activeCategory,
   }) {
     final List<EquipmentStat> previewStats = item.stats
         .take(previewLimit)
         .toList(growable: false);
-    final Color accentColor = _equipmentTypeAccentColor(item.type);
+    final Color accentColor = _itemAccentColor(
+      item: item,
+      activeCategory: activeCategory,
+    );
     final String actionLabel = widget.pickMode
         ? 'Tap to equip'
         : 'Open details';
@@ -87,9 +94,11 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
           Navigator.of(context).pop(item);
           return;
         }
-        _openDetails(item);
+        _openDetails(item, activeCategory: activeCategory);
       },
-      onLongPress: widget.pickMode ? () => _openDetails(item) : null,
+      onLongPress: widget.pickMode
+          ? () => _openDetails(item, activeCategory: activeCategory)
+          : null,
       borderRadius: BorderRadius.circular(20),
       child: Container(
         decoration: BoxDecoration(
@@ -133,6 +142,11 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
                           item,
                           iconSize: 22,
                           imagePadding: 8,
+                          overrideAssetPath: _itemVisualAssetPath(
+                            item: item,
+                            activeCategory: activeCategory,
+                          ),
+                          accentColorOverride: accentColor,
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -153,7 +167,10 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              _titleCase(item.type),
+                              _itemTypeDisplayLabel(
+                                item: item,
+                                activeCategory: activeCategory,
+                              ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(

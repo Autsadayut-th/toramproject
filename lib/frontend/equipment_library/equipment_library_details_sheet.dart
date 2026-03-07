@@ -1,7 +1,14 @@
 part of 'equipment_library_page.dart';
 
 extension _EquipmentLibraryDetailsSheet on _EquipmentLibraryDataViewState {
-  void _openDetails(EquipmentLibraryItem item) {
+  void _openDetails(
+    EquipmentLibraryItem item, {
+    required String activeCategory,
+  }) {
+    final Color accentColor = _itemAccentColor(
+      item: item,
+      activeCategory: activeCategory,
+    );
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
@@ -48,33 +55,38 @@ extension _EquipmentLibraryDetailsSheet on _EquipmentLibraryDataViewState {
                         width: 28,
                         height: 28,
                         decoration: BoxDecoration(
-                          color: _equipmentTypeAccentColor(
-                            item.type,
-                          ).withValues(alpha: 0.12),
+                          color: accentColor.withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
-                            color: _equipmentTypeAccentColor(
-                              item.type,
-                            ).withValues(alpha: 0.28),
+                            color: accentColor.withValues(alpha: 0.28),
                           ),
                         ),
                         child: _buildEquipmentVisual(
                           item,
                           iconSize: 16,
                           imagePadding: 4,
+                          overrideAssetPath: _itemVisualAssetPath(
+                            item: item,
+                            activeCategory: activeCategory,
+                          ),
+                          accentColorOverride: accentColor,
                         ),
                       ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          '${_titleCase(item.type)} - ${item.key}',
+                          '${_itemTypeDisplayLabel(item: item, activeCategory: activeCategory)} - ${item.key}',
                           style: const TextStyle(color: Colors.white70),
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 12),
-                  _buildEquipmentImageBox(item, height: 160),
+                  _buildEquipmentImageBox(
+                    item,
+                    height: 160,
+                    activeCategory: activeCategory,
+                  ),
                   if (item.upgradeFrom != null && item.upgradeFrom!.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(top: 12),

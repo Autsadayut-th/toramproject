@@ -24,7 +24,7 @@ extension _BuildSimulatorScreenUI on BuildSimulatorScreenState {
                   child: Column(
                     children: [
                       _buildStatsSummary(),
-                      if (_showRecommendationsPanel) ...<Widget>[
+                      if (_shouldShowRecommendationsPanel) ...<Widget>[
                         const SizedBox(height: 24),
                         _buildRecommendationsSection(),
                       ],

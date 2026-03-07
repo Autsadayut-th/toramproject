@@ -1,4 +1,8 @@
 class BuildPersistenceService {
+  static const int defaultTotalStatPoints = 776;
+  static const int minTotalStatPoints = 1;
+  static const int maxTotalStatPoints = 9999;
+
   static const List<String> characterStatKeys = <String>[
     'STR',
     'DEX',
@@ -129,7 +133,11 @@ class BuildPersistenceService {
         ? DateTime.now().toIso8601String()
         : savedAt;
 
-    build['level'] = readIntValue(build['level'], fallback: 1).clamp(1, 300);
+    build['level'] = readIntValue(build['level'], fallback: 1).clamp(1, 999);
+    build['totalStatPoints'] = readIntValue(
+      build['totalStatPoints'],
+      fallback: defaultTotalStatPoints,
+    ).clamp(minTotalStatPoints, maxTotalStatPoints);
     build['personalStatType'] = normalizePersonalStatType(
       build['personalStatType'],
     );
@@ -209,6 +217,7 @@ class BuildPersistenceService {
     required String name,
     required Map<String, dynamic> character,
     required int level,
+    required int totalStatPoints,
     required String personalStatType,
     required int personalStatValue,
     required String? mainWeaponId,
@@ -259,7 +268,10 @@ class BuildPersistenceService {
       'isFavorite': false,
       'savedAt': DateTime.now().toIso8601String(),
       'character': normalizedCharacter,
-      'level': level.clamp(1, 300).toInt(),
+      'level': level.clamp(1, 999).toInt(),
+      'totalStatPoints': totalStatPoints
+          .clamp(minTotalStatPoints, maxTotalStatPoints)
+          .toInt(),
       'personalStatType': normalizePersonalStatType(personalStatType),
       'personalStatValue': personalStatValue.clamp(0, 255).toInt(),
       'mainWeaponId': mainWeaponId,

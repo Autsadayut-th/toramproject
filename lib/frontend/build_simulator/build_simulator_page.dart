@@ -28,9 +28,16 @@ part 'build_simulator_sections.dart';
 enum _SummaryViewMode { metricList, itemDetails }
 
 class BuildSimulatorScreen extends StatefulWidget {
-  const BuildSimulatorScreen({super.key, this.coordinator});
+  const BuildSimulatorScreen({
+    super.key,
+    this.coordinator,
+    this.isAuthenticated = false,
+    this.hasAdvancedAccess = false,
+  });
 
   final BuildSimulatorCoordinator? coordinator;
+  final bool isAuthenticated;
+  final bool hasAdvancedAccess;
 
   @override
   State<BuildSimulatorScreen> createState() => BuildSimulatorScreenState();
@@ -54,8 +61,13 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     'AGI': 1,
     'VIT': 1,
   };
+  static const int _defaultTotalStatPoints = 776;
   static const String _ruleRecommendationMessage =
       'Using GitHub toram-data rules. Press Generate for AI.';
+  static const String _guestAiLockedMessage =
+      'Guest mode: Login required to generate AI recommendations.';
+  static const int _guestSavedBuildLimit = 2;
+  static const String _guestSaveLimitMessage = 'Limit 2 builds only.';
   static const List<String> _allCrystalCategories = <String>[
     'weapon',
     'armor',
@@ -87,6 +99,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     _defaultCharacterStats,
   );
   int _level = 1;
+  int _totalStatPoints = _defaultTotalStatPoints;
   String _personalStatType = _personalStatOptions.first;
   int _personalStatValue = 0;
 
@@ -137,6 +150,16 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
 
   final List<Map<String, dynamic>> _savedBuilds = <Map<String, dynamic>>[];
 
+  bool get _canUseAiGeneration => widget.hasAdvancedAccess;
+  bool get _shouldShowRecommendationsPanel =>
+      _canUseAiGeneration && _showRecommendationsPanel;
+  int? get _maxSavedBuilds =>
+      widget.hasAdvancedAccess ? null : _guestSavedBuildLimit;
+  bool get _isSavedBuildLimitReached {
+    final int? maxSavedBuilds = _maxSavedBuilds;
+    return maxSavedBuilds != null && _savedBuilds.length >= maxSavedBuilds;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -154,6 +177,17 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     if (oldWidget.coordinator != widget.coordinator) {
       oldWidget.coordinator?.detachHandlers();
       _attachCoordinator();
+    }
+    if (oldWidget.hasAdvancedAccess != widget.hasAdvancedAccess) {
+      _setUiState(() {
+        if (!_canUseAiGeneration) {
+          _isAiRecommendationLoading = false;
+        }
+        _aiRecommendationSource = 'rule';
+        _aiRecommendationMessage = _canUseAiGeneration
+            ? _ruleRecommendationMessage
+            : _guestAiLockedMessage;
+      });
     }
   }
 
@@ -190,11 +224,205 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       showRecommendations: _showRecommendationsPanel,
       equipmentCacheCount: _equipmentByKey.length,
       summary: _summary,
+      selectedItemDetails: _selectedItemDetailsSnapshot(),
       aiRecommendations: _recommendations,
       isAiRecommendationLoading: _isAiRecommendationLoading,
       aiRecommendationSource: _aiRecommendationSource,
       aiRecommendationMessage: _aiRecommendationMessage,
     );
+  }
+
+  List<Map<String, dynamic>> _selectedItemDetailsSnapshot() {
+    return <Map<String, dynamic>>[
+      _slotDetailSnapshot(
+        slotLabel: 'Main Weapon',
+        item: _findEquipmentByKey(_mainWeaponId),
+      ),
+      _slotDetailSnapshot(
+        slotLabel: 'Sub Weapon',
+        item: _findEquipmentByKey(_subWeaponId),
+      ),
+      _slotDetailSnapshot(
+        slotLabel: 'Armor',
+        item: _findEquipmentByKey(_armorId),
+      ),
+      _slotDetailSnapshot(
+        slotLabel: 'Additional',
+        item: _findEquipmentByKey(_helmetId),
+      ),
+      _slotDetailSnapshot(
+        slotLabel: 'Special',
+        item: _findEquipmentByKey(_ringId),
+      ),
+    ];
+  }
+
+  Map<String, dynamic> _slotDetailSnapshot({
+    required String slotLabel,
+    required EquipmentLibraryItem? item,
+  }) {
+    final String itemName = item?.name.trim() ?? '';
+    final List<Map<String, String>> stats = <Map<String, String>>[];
+    if (item != null) {
+      final List<EquipmentStat> baseStats = item.stats
+          .where((EquipmentStat stat) {
+            return stat.valueType.trim().toLowerCase() == 'base';
+          })
+          .toList(growable: false);
+      final List<EquipmentStat> regularStats = item.stats
+          .where((EquipmentStat stat) {
+            return stat.valueType.trim().toLowerCase() != 'base';
+          })
+          .toList(growable: false);
+      final List<EquipmentStat> orderedStats = <EquipmentStat>[
+        ...baseStats,
+        ...regularStats,
+      ];
+      for (final EquipmentStat stat in orderedStats) {
+        stats.add(<String, String>{
+          'label': _snapshotEquipmentStatLabel(stat),
+          'value': _snapshotEquipmentStatValue(stat),
+        });
+      }
+    }
+    return <String, dynamic>{
+      'slotLabel': slotLabel,
+      'itemName': itemName,
+      'stats': stats,
+    };
+  }
+
+  String _snapshotEquipmentStatLabel(EquipmentStat stat) {
+    final String normalizedKey = stat.statKey.trim().toLowerCase();
+    final bool isBase = stat.valueType.trim().toLowerCase() == 'base';
+    if (isBase) {
+      switch (normalizedKey) {
+        case 'weapon_atk':
+          return 'Base ATK';
+        case 'def':
+          return 'Base DEF';
+        case 'mdef':
+          return 'Base MDEF';
+        case 'stability':
+          return 'Base Stability %';
+        default:
+          return 'Base ${_snapshotHumanizeStatKey(normalizedKey)}';
+      }
+    }
+
+    switch (normalizedKey) {
+      case 'weapon_atk':
+        return 'Weapon ATK';
+      case 'maxhp':
+        return 'MaxHP';
+      case 'maxmp':
+        return 'MaxMP';
+      case 'critical_rate':
+        return 'Critical Rate';
+      case 'critical_damage':
+        return 'Critical Damage';
+      case 'physical_pierce':
+        return 'Physical Pierce';
+      case 'magic_pierce':
+        return 'Magic Pierce';
+      case 'attack_mp_recovery':
+        return 'Attack MP Recovery';
+      case 'guard_power':
+        return 'Guard Power';
+      case 'guard_recharge':
+        return 'Guard Recharge';
+      case 'aggro':
+        return 'Aggro';
+      case 'aspd':
+        return 'ASPD';
+      case 'cspd':
+        return 'CSPD';
+      case 'atk':
+        return 'ATK';
+      case 'matk':
+        return 'MATK';
+      case 'def':
+        return 'DEF';
+      case 'mdef':
+        return 'MDEF';
+      case 'str':
+        return 'STR';
+      case 'dex':
+        return 'DEX';
+      case 'int':
+        return 'INT';
+      case 'agi':
+        return 'AGI';
+      case 'vit':
+        return 'VIT';
+      case 'stability':
+        return 'Stability';
+      case 'accuracy':
+        return 'Accuracy';
+      default:
+        return _snapshotHumanizeStatKey(normalizedKey);
+    }
+  }
+
+  String _snapshotEquipmentStatValue(EquipmentStat stat) {
+    final String valueText = _snapshotFormatCompactNumber(stat.value);
+    final bool isPercent = stat.valueType.trim().toLowerCase() == 'percent';
+    final String sign = stat.value >= 0 ? '+' : '';
+    return '$sign$valueText${isPercent ? '%' : ''}';
+  }
+
+  String _snapshotFormatCompactNumber(num value) {
+    if (value == value.toInt()) {
+      return value.toInt().toString();
+    }
+    final String fixed = value.toStringAsFixed(2);
+    return fixed.replaceFirst(RegExp(r'\.?0+$'), '');
+  }
+
+  String _snapshotHumanizeStatKey(String key) {
+    if (key.isEmpty) {
+      return '-';
+    }
+
+    String mapped = key.toLowerCase().replaceAllMapped(RegExp(r'[a-z0-9]+'), (
+      Match match,
+    ) {
+      final String token = match.group(0)!;
+      if (token == 'pct') {
+        return '%';
+      }
+      const Set<String> uppercaseTokens = <String>{
+        'atk',
+        'matk',
+        'def',
+        'mdef',
+        'str',
+        'dex',
+        'int',
+        'agi',
+        'vit',
+        'aspd',
+        'cspd',
+        'hp',
+        'mp',
+        'ampr',
+        'dmg',
+        'exp',
+        'm',
+      };
+      if (uppercaseTokens.contains(token)) {
+        return token.toUpperCase();
+      }
+      if (token.length == 1) {
+        return token.toUpperCase();
+      }
+      return '${token[0].toUpperCase()}${token.substring(1)}';
+    });
+
+    mapped = mapped.replaceAll('_', ' ');
+    mapped = mapped.replaceAll(RegExp(r'\s+'), ' ');
+    mapped = mapped.replaceAll(' )', ')');
+    return mapped.trim();
   }
 
   Future<void> _loadEquipmentLibrary() async {
@@ -314,6 +542,19 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   void _setUiState(VoidCallback action) {
     setState(action);
     _syncCoordinatorSnapshot();
+  }
+
+  void _showRestrictionMessage(String message) {
+    if (!mounted) {
+      return;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: const Color(0xFF1A1A1A),
+      ),
+    );
   }
 
   void _setStateAndRecalculate(VoidCallback action) {
@@ -653,10 +894,20 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       ruleSet: _ruleSet,
     );
     _aiRecommendationSource = 'rule';
-    _aiRecommendationMessage = _ruleRecommendationMessage;
+    _aiRecommendationMessage = _canUseAiGeneration
+        ? _ruleRecommendationMessage
+        : _guestAiLockedMessage;
   }
 
   void _generateAiRecommendationsNow() {
+    if (!_canUseAiGeneration) {
+      _setUiState(() {
+        _aiRecommendationSource = 'rule';
+        _aiRecommendationMessage = _guestAiLockedMessage;
+      });
+      _showRestrictionMessage('Login required to use AI Generate.');
+      return;
+    }
     final List<EquipmentLibraryItem> equippedItems = _equippedItems().toList(
       growable: false,
     );
@@ -793,7 +1044,11 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     _level = BuildPersistenceService.readIntValue(
       build['level'],
       fallback: _level,
-    ).clamp(1, 300).toInt();
+    ).clamp(1, 999).toInt();
+    _totalStatPoints = BuildPersistenceService.readIntValue(
+      build['totalStatPoints'],
+      fallback: BuildPersistenceService.defaultTotalStatPoints,
+    ).clamp(1, 9999).toInt();
     _personalStatType = BuildPersistenceService.normalizePersonalStatType(
       build['personalStatType'],
     );
@@ -929,6 +1184,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       name: normalizedName,
       character: _character,
       level: _level,
+      totalStatPoints: _totalStatPoints,
       personalStatType: _personalStatType,
       personalStatValue: _personalStatValue,
       mainWeaponId: _mainWeaponId,
@@ -973,6 +1229,11 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   void _onSaveBuildByName(String name) {
     final String normalizedName = name.trim();
     if (normalizedName.isEmpty) {
+      return;
+    }
+    final int? maxSavedBuilds = _maxSavedBuilds;
+    if (maxSavedBuilds != null && _savedBuilds.length >= maxSavedBuilds) {
+      _showRestrictionMessage(_guestSaveLimitMessage);
       return;
     }
 
@@ -1052,16 +1313,25 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   }
 
   void _onReplaceSavedBuilds(List<Map<String, dynamic>> rawBuilds) {
-    final List<Map<String, dynamic>> normalized =
+    List<Map<String, dynamic>> normalized =
         BuildPersistenceService.normalizeBuildList(
           rawBuilds,
           summaryTemplate: BuildCalculatorService.summaryTemplate,
         );
+    final int? maxSavedBuilds = _maxSavedBuilds;
+    bool truncated = false;
+    if (maxSavedBuilds != null && normalized.length > maxSavedBuilds) {
+      normalized = normalized.take(maxSavedBuilds).toList(growable: false);
+      truncated = true;
+    }
     _setUiState(() {
       _savedBuilds
         ..clear()
         ..addAll(normalized);
     });
+    if (truncated) {
+      _showRestrictionMessage(_guestSaveLimitMessage);
+    }
   }
 
   void _onMergeSavedBuilds(List<Map<String, dynamic>> rawBuilds) {
@@ -1070,7 +1340,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       reservedIds.add(BuildPersistenceService.buildIdFor(_savedBuilds[i], i));
     }
 
-    final List<Map<String, dynamic>> normalized =
+    List<Map<String, dynamic>> normalized =
         BuildPersistenceService.normalizeBuildList(
           rawBuilds,
           reservedIds: reservedIds,
@@ -1079,14 +1349,31 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     if (normalized.isEmpty) {
       return;
     }
+    final int? maxSavedBuilds = _maxSavedBuilds;
+    bool truncated = false;
+    if (maxSavedBuilds != null) {
+      final int remainingSlots = maxSavedBuilds - _savedBuilds.length;
+      if (remainingSlots <= 0) {
+        _showRestrictionMessage(_guestSaveLimitMessage);
+        return;
+      }
+      if (normalized.length > remainingSlots) {
+        normalized = normalized.take(remainingSlots).toList(growable: false);
+        truncated = true;
+      }
+    }
     _setUiState(() {
       _savedBuilds.addAll(normalized);
     });
+    if (truncated) {
+      _showRestrictionMessage(_guestSaveLimitMessage);
+    }
   }
 
   void _resetCharacterDefaults() {
     _character.addAll(_defaultCharacterStats);
     _level = 1;
+    _totalStatPoints = _defaultTotalStatPoints;
     _personalStatType = _personalStatOptions.first;
     _personalStatValue = 0;
   }

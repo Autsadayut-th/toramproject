@@ -12,7 +12,6 @@ import '../saved_builds_page/saved_builds_page.dart';
 import '../settings_data_page/settings_data_page.dart';
 import '../shared/app_navigation_drawer.dart';
 import '../shared/app_mobile_bottom_navigation_bar.dart';
-import '../shared/toram_radar_profile.dart';
 import '../skill_menu_page/skill_menu_page.dart';
 
 part 'widgets/build_mobile_drawer.dart';
@@ -161,7 +160,11 @@ class _AppShellScreenState extends State<AppShellScreen> {
       body: IndexedStack(
         index: _indexOf(_currentPage),
         children: <Widget>[
-          BuildSimulatorScreen(coordinator: _coordinator),
+          BuildSimulatorScreen(
+            coordinator: _coordinator,
+            isAuthenticated: _currentUser != null,
+            hasAdvancedAccess: _currentUser != null,
+          ),
           EquipmentLibraryScreen(onNavigate: _onNavigate),
           SkillMenuPage(onNavigate: _onNavigate),
           SavedBuildsPage(
@@ -196,7 +199,10 @@ class _AppShellScreenState extends State<AppShellScreen> {
             )
           : null,
       drawer: showMobileBuildSummaryLeading
-          ? _BuildStatsSummaryDrawer(coordinator: _coordinator)
+          ? _BuildStatsSummaryDrawer(
+              coordinator: _coordinator,
+              hasAdvancedAccess: _currentUser != null,
+            )
           : AppNavigationDrawer(
               currentPage: _currentPage,
               onOpenBuild: () => onNavigateFromDrawer(AppNavigationPage.build),

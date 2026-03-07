@@ -112,25 +112,65 @@ class GachaCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            ...List<Widget>.generate(sections.length, (int sectionIndex) {
-              final _GachaSectionData section = sections[sectionIndex];
-              return Padding(
-                padding: EdgeInsets.only(
-                  bottom: sectionIndex == sections.length - 1 ? 0 : 12,
-                ),
-                child: _buildSection(
-                  config: config,
-                  section: section,
-                ),
-              );
-            }),
+            _buildSectionsLayout(
+              context: context,
+              config: config,
+              sections: sections,
+            ),
           ],
         );
       },
     );
   }
 
+  Widget _buildSectionsLayout({
+    required BuildContext context,
+    required AvatarGachaConfig config,
+    required List<_GachaSectionData> sections,
+  }) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final bool useThreeColumns = constraints.maxWidth >= 1080;
+        if (useThreeColumns) {
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: List<Widget>.generate(sections.length, (int index) {
+              return Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    right: index == sections.length - 1 ? 0 : 10,
+                  ),
+                  child: _buildSection(
+                    context: context,
+                    config: config,
+                    section: sections[index],
+                  ),
+                ),
+              );
+            }),
+          );
+        }
+
+        return Column(
+          children: List<Widget>.generate(sections.length, (int sectionIndex) {
+            return Padding(
+              padding: EdgeInsets.only(
+                bottom: sectionIndex == sections.length - 1 ? 0 : 12,
+              ),
+              child: _buildSection(
+                context: context,
+                config: config,
+                section: sections[sectionIndex],
+              ),
+            );
+          }),
+        );
+      },
+    );
+  }
+
   Widget _buildSection({
+    required BuildContext context,
     required AvatarGachaConfig config,
     required _GachaSectionData section,
   }) {
@@ -160,6 +200,7 @@ class GachaCard extends StatelessWidget {
                 bottom: slotIndex == section.values.length - 1 ? 0 : 10,
               ),
               child: _buildSlotField(
+                context: context,
                 config: config,
                 section: section,
                 slotIndex: slotIndex,
@@ -172,6 +213,7 @@ class GachaCard extends StatelessWidget {
   }
 
   Widget _buildSlotField({
+    required BuildContext context,
     required AvatarGachaConfig config,
     required _GachaSectionData section,
     required int slotIndex,
@@ -203,70 +245,332 @@ class GachaCard extends StatelessWidget {
     final List<AvatarStatOption> filteredOptions = config.options
         .where(
           (AvatarStatOption option) =>
-              option.id == currentValue || !blockedStatKeys.contains(option.statKey),
+              option.id == currentValue ||
+              !blockedStatKeys.contains(option.statKey),
         )
         .toList(growable: false);
+    String selectedLabel = 'None';
+    if (currentValue.isNotEmpty) {
+      for (final AvatarStatOption option in config.options) {
+        if (option.id == currentValue) {
+          selectedLabel = option.label;
+          break;
+        }
+      }
+      if (selectedLabel == 'None') {
+        selectedLabel = currentValue;
+      }
+    }
 
-    return DropdownButtonFormField<String>(
-      initialValue: currentValue.isEmpty ? '' : currentValue,
-      isExpanded: true,
-      decoration: InputDecoration(
-        labelText: 'Slot ${slotIndex + 1}',
-        labelStyle: const TextStyle(color: Colors.white70, fontSize: 12),
-        helperText: requiresSecondSlot && !isEnabled
-            ? 'Unlock by choosing Slot 2 first.'
-            : null,
-        helperStyle: const TextStyle(color: Colors.white54, fontSize: 10),
-        filled: true,
-        fillColor: const Color(0xFF0A0A0A),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 10,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Slot ${slotIndex + 1}',
+          style: const TextStyle(color: Colors.white70, fontSize: 12),
         ),
-        enabledBorder: OutlineInputBorder(
+        const SizedBox(height: 4),
+        InkWell(
+          onTap: !isEnabled
+              ? null
+              : () async {
+                  final String? nextValue = await _openOptionPicker(
+                    context: context,
+                    title: '${section.title} - Slot ${slotIndex + 1}',
+                    currentValue: currentValue,
+                    options: filteredOptions,
+                  );
+                  if (nextValue == null || !context.mounted) {
+                    return;
+                  }
+                  section.callbacks[slotIndex](nextValue);
+                  if (slotIndex == 1 &&
+                      nextValue.isEmpty &&
+                      section.values[2].isNotEmpty) {
+                    section.callbacks[2]('');
+                  }
+                },
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: Color(0x33FFFFFF)),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: Color(0x66FFE082)),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: Color(0x22FFFFFF)),
-        ),
-      ),
-      dropdownColor: const Color(0xFF111111),
-      style: const TextStyle(color: Colors.white, fontSize: 12),
-      items: <DropdownMenuItem<String>>[
-        const DropdownMenuItem<String>(
-          value: '',
-          child: Text(
-            'None',
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Colors.white70),
-          ),
-        ),
-        ...filteredOptions.map(
-          (AvatarStatOption option) => DropdownMenuItem<String>(
-            value: option.id,
-            child: Text(
-              option.label,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(color: Colors.white),
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
+            decoration: BoxDecoration(
+              color: isEnabled
+                  ? const Color(0xFF0A0A0A)
+                  : const Color(0xFF0A0A0A).withValues(alpha: 0.55),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: isEnabled
+                    ? const Color(0x33FFFFFF)
+                    : const Color(0x22FFFFFF),
+              ),
+            ),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Text(
+                    selectedLabel,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: currentValue.isEmpty
+                          ? Colors.white70
+                          : Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Icon(
+                  Icons.arrow_drop_down,
+                  color: isEnabled ? Colors.white70 : Colors.white24,
+                  size: 20,
+                ),
+              ],
             ),
           ),
         ),
+        if (requiresSecondSlot && !isEnabled)
+          const Padding(
+            padding: EdgeInsets.only(top: 4, left: 2),
+            child: Text(
+              'Unlock by choosing Slot 2 first.',
+              style: TextStyle(color: Colors.white54, fontSize: 10),
+            ),
+          ),
       ],
-      onChanged: isEnabled
-          ? (String? value) {
-              final String nextValue = value ?? '';
-              section.callbacks[slotIndex](nextValue);
-              if (slotIndex == 1 && nextValue.isEmpty && section.values[2].isNotEmpty) {
-                section.callbacks[2]('');
-              }
-            }
-          : null,
+    );
+  }
+
+  Future<String?> _openOptionPicker({
+    required BuildContext context,
+    required String title,
+    required String currentValue,
+    required List<AvatarStatOption> options,
+  }) {
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        String query = '';
+        return StatefulBuilder(
+          builder:
+              (BuildContext context, void Function(VoidCallback fn) setState) {
+                final String normalizedQuery = query.trim().toLowerCase();
+                final bool showNone =
+                    normalizedQuery.isEmpty ||
+                    'none'.contains(normalizedQuery) ||
+                    'clear'.contains(normalizedQuery);
+                final List<AvatarStatOption> visibleOptions = options
+                    .where((AvatarStatOption option) {
+                      return _optionMatchesQuery(option, normalizedQuery);
+                    })
+                    .toList(growable: false);
+
+                return Dialog(
+                  backgroundColor: const Color(0xFF0D0D0D),
+                  insetPadding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 20,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                    side: const BorderSide(color: Color(0x33FFFFFF)),
+                  ),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      maxWidth: 560,
+                      maxHeight: 560,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(14, 12, 8, 6),
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Text(
+                                  title,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () => Navigator.of(context).pop(),
+                                icon: const Icon(
+                                  Icons.close,
+                                  color: Colors.white70,
+                                ),
+                                tooltip: 'Close',
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(14, 0, 14, 10),
+                          child: TextField(
+                            autofocus: true,
+                            onChanged: (String value) {
+                              setState(() {
+                                query = value;
+                              });
+                            },
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 13,
+                            ),
+                            decoration: InputDecoration(
+                              hintText: 'Search gacha stat...',
+                              hintStyle: const TextStyle(color: Colors.white54),
+                              prefixIcon: const Icon(
+                                Icons.search,
+                                color: Colors.white70,
+                              ),
+                              filled: true,
+                              fillColor: const Color(0xFF131313),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 10,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: const BorderSide(
+                                  color: Color(0x33FFFFFF),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: const BorderSide(
+                                  color: Color(0x33FFFFFF),
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: const BorderSide(
+                                  color: Color(0x66FFE082),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: ListView(
+                            padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+                            children: <Widget>[
+                              if (showNone)
+                                _buildOptionTile(
+                                  title: 'None',
+                                  subtitle: 'Clear this slot',
+                                  selected: currentValue.isEmpty,
+                                  onTap: () => Navigator.of(context).pop(''),
+                                ),
+                              ...visibleOptions.map((AvatarStatOption option) {
+                                return _buildOptionTile(
+                                  title: option.label,
+                                  subtitle: option.statKey,
+                                  selected: option.id == currentValue,
+                                  onTap: () =>
+                                      Navigator.of(context).pop(option.id),
+                                );
+                              }),
+                              if (!showNone && visibleOptions.isEmpty)
+                                Container(
+                                  margin: const EdgeInsets.only(top: 4),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 14,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF151515),
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                      color: const Color(0x33FFFFFF),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    'No results found.',
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+        );
+      },
+    );
+  }
+
+  bool _optionMatchesQuery(AvatarStatOption option, String query) {
+    if (query.isEmpty) {
+      return true;
+    }
+    final String label = option.label.toLowerCase();
+    final String statKey = option.statKey.toLowerCase();
+    final String displayStat = option.displayStat.toLowerCase();
+    final String id = option.id.toLowerCase();
+    return label.contains(query) ||
+        displayStat.contains(query) ||
+        statKey.contains(query) ||
+        id.contains(query);
+  }
+
+  Widget _buildOptionTile({
+    required String title,
+    required String subtitle,
+    required bool selected,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(
+          color: selected ? const Color(0xFF1F1F1F) : const Color(0xFF151515),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: selected ? const Color(0x66FFE082) : const Color(0x33FFFFFF),
+          ),
+        ),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    title,
+                    style: TextStyle(
+                      color: selected ? const Color(0xFFFFE082) : Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    subtitle,
+                    style: const TextStyle(color: Colors.white54, fontSize: 10),
+                  ),
+                ],
+              ),
+            ),
+            if (selected)
+              const Icon(Icons.check, color: Color(0xFFFFE082), size: 16),
+          ],
+        ),
+      ),
     );
   }
 

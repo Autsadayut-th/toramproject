@@ -1,11 +1,15 @@
 part of '../app_shell_page.dart';
 
-enum _DrawerSummaryViewMode { metricList, tableGraph }
+enum _DrawerSummaryViewMode { metricList, itemDetails }
 
 class _BuildStatsSummaryDrawer extends StatefulWidget {
-  const _BuildStatsSummaryDrawer({required this.coordinator});
+  const _BuildStatsSummaryDrawer({
+    required this.coordinator,
+    required this.hasAdvancedAccess,
+  });
 
   final BuildSimulatorCoordinator coordinator;
+  final bool hasAdvancedAccess;
 
   @override
   State<_BuildStatsSummaryDrawer> createState() =>
@@ -15,6 +19,8 @@ class _BuildStatsSummaryDrawer extends StatefulWidget {
 class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
   final TextEditingController _buildNameController = TextEditingController();
   _DrawerSummaryViewMode _summaryViewMode = _DrawerSummaryViewMode.metricList;
+  static const int _guestSavedBuildLimit = 2;
+  static const String _guestSaveLimitMessage = 'Limit 2 builds only.';
 
   static const Set<String> _percentKeys = <String>{
     'CritRate',
@@ -111,8 +117,8 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
           ),
           const SizedBox(width: 6),
           _buildSummaryModeButton(
-            label: 'Combat Bars',
-            mode: _DrawerSummaryViewMode.tableGraph,
+            label: 'Item Details',
+            mode: _DrawerSummaryViewMode.itemDetails,
           ),
         ],
       ),
@@ -160,7 +166,10 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
     );
   }
 
-  Widget _buildStatsSummaryCard(Map<String, num> summary) {
+  Widget _buildStatsSummaryCard({
+    required Map<String, num> summary,
+    required List<Map<String, dynamic>> itemDetails,
+  }) {
     return Column(
       children: <Widget>[
         _buildSummaryModeSwitch(),
@@ -221,164 +230,151 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
             ],
           )
         else
-          _buildSummaryBarGraphView(summary),
+          _buildItemDetailsView(itemDetails),
       ],
     );
   }
 
-  Widget _buildSummaryBarGraphView(Map<String, num> summary) {
-    final List<ToramRadarMetricSpec> metrics = ToramRadarProfile.metrics;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const Text(
-          'Bars are benchmark-scaled for quick comparison while the numbers stay raw.',
-          style: TextStyle(fontSize: 11, color: Colors.white70, height: 1.35),
-        ),
-        const SizedBox(height: 12),
-        ...List<Widget>.generate(metrics.length, (int index) {
-          final ToramRadarMetricSpec metric = metrics[index];
-          return Padding(
-            padding: EdgeInsets.only(
-              bottom: index == metrics.length - 1 ? 0 : 10,
-            ),
-            child: _buildSummaryMetricBar(summary: summary, metric: metric),
-          );
-        }),
-      ],
-    );
-  }
-
-  Widget _buildSummaryMetricBar({
-    required Map<String, num> summary,
-    required ToramRadarMetricSpec metric,
-  }) {
-    final double rawValue = ToramRadarProfile.metricValue(summary, metric.id);
-    final double normalizedValue = ToramRadarProfile.normalizedValue(
-      summary: summary,
-      metric: metric,
-    ).clamp(0.0, 1.0);
-    final List<Color> barColors = _summaryMetricBarColors(metric.label);
-
+  Widget _buildItemDetailsView(List<Map<String, dynamic>> itemDetails) {
+    if (itemDetails.isEmpty) {
+      return const Text(
+        'No item selected.',
+        style: TextStyle(fontSize: 12, color: Colors.white70),
+      );
+    }
     return Container(
-      padding: const EdgeInsets.all(12),
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: const Color(0xFF121212).withValues(alpha: 0.92),
+        color: const Color(0xFF121212).withValues(alpha: 0.94),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: const Color(0xFFFFFFFF).withValues(alpha: 0.12),
-        ),
+        border: Border.all(color: const Color(0x33FFFFFF)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              Text(
-                metric.label,
-                style: const TextStyle(
-                  color: Color(0xFFFFE082),
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 0.3,
-                ),
-              ),
-              const Spacer(),
-              Text(
-                _formatMetricValue(rawValue),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(999),
-            child: SizedBox(
-              height: 12,
-              child: Stack(
-                children: <Widget>[
-                  Positioned.fill(
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: const Color(0x33FFFFFF),
-                        borderRadius: BorderRadius.circular(999),
-                      ),
-                    ),
-                  ),
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: FractionallySizedBox(
-                        widthFactor: normalizedValue,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: barColors),
-                            borderRadius: BorderRadius.circular(999),
-                          ),
-                          child: const SizedBox.expand(),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: <Widget>[
-              Text(
-                'Profile ${(normalizedValue * 100).round()}%',
-                style: const TextStyle(
-                  color: Colors.white70,
-                  fontSize: 10,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const Spacer(),
-              Text(
-                'Benchmark ${_formatMetricValue(metric.cap)}',
-                style: const TextStyle(
-                  color: Colors.white54,
-                  fontSize: 10,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-        ],
+        children: List<Widget>.generate(itemDetails.length, (int index) {
+          final bool isLast = index == itemDetails.length - 1;
+          return Padding(
+            padding: EdgeInsets.only(bottom: isLast ? 0 : 12),
+            child: _buildItemDetailsSection(itemDetails[index]),
+          );
+        }),
       ),
     );
   }
 
-  String _formatMetricValue(double value) {
-    return ToramRadarProfile.formatValue(value);
+  Widget _buildItemDetailsSection(Map<String, dynamic> detail) {
+    final String slotLabel = detail['slotLabel']?.toString().trim() ?? '-';
+    final String itemName = detail['itemName']?.toString().trim() ?? '';
+    final List<Map<String, dynamic>> stats = _readDetailStats(detail['stats']);
+    final bool hasItem = itemName.isNotEmpty;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          '$slotLabel:',
+          style: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w700,
+            color: Color(0xFFE0E0E0),
+          ),
+        ),
+        const SizedBox(height: 2),
+        Padding(
+          padding: const EdgeInsets.only(left: 14),
+          child: Text(
+            hasItem ? itemName : '-',
+            style: TextStyle(
+              fontSize: 13,
+              color: hasItem ? const Color(0xFF9BC9FF) : Colors.white54,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        if (!hasItem) ...<Widget>[
+          const SizedBox(height: 4),
+          const Padding(
+            padding: EdgeInsets.only(left: 14),
+            child: Text(
+              'No item selected',
+              style: TextStyle(fontSize: 12, color: Colors.white54),
+            ),
+          ),
+        ] else ...<Widget>[
+          const SizedBox(height: 5),
+          if (stats.isEmpty)
+            const Padding(
+              padding: EdgeInsets.only(left: 14),
+              child: Text(
+                'No stat data',
+                style: TextStyle(fontSize: 12, color: Colors.white54),
+              ),
+            )
+          else
+            ...List<Widget>.generate(stats.length, (int index) {
+              final Map<String, dynamic> stat = stats[index];
+              final String label = stat['label']?.toString().trim() ?? '-';
+              final String value = stat['value']?.toString().trim() ?? '0';
+              final bool isNegative = value.startsWith('-');
+              return Padding(
+                padding: EdgeInsets.only(
+                  left: 14,
+                  bottom: index == stats.length - 1 ? 0 : 3,
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        label,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.white70,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      value,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: isNegative
+                            ? const Color(0xFFA84B4B)
+                            : Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }),
+        ],
+      ],
+    );
   }
 
-  List<Color> _summaryMetricBarColors(String label) {
-    switch (label) {
-      case 'ATK':
-      case 'MATK':
-        return const <Color>[Color(0xFF77D3FF), Color(0xFF4D8DFF)];
-      case 'DEF':
-      case 'MDEF':
-        return const <Color>[Color(0xFF86F7C8), Color(0xFF3CCB8E)];
-      case 'HIT':
-      case 'FLEE':
-        return const <Color>[Color(0xFFFFD27A), Color(0xFFFFA347)];
-      case 'ASPD':
-      case 'CSPD':
-        return const <Color>[Color(0xFFFFA7D1), Color(0xFFFF6F91)];
-      default:
-        return const <Color>[Color(0xFFB8D2FF), Color(0xFF6C9BFF)];
+  List<Map<String, dynamic>> _readDetailStats(dynamic rawStats) {
+    if (rawStats is! List) {
+      return const <Map<String, dynamic>>[];
     }
+    return rawStats
+        .whereType<Map>()
+        .map((Map<dynamic, dynamic> stat) {
+          return Map<String, dynamic>.from(stat);
+        })
+        .toList(growable: false);
   }
 
   void _onSaveBuild() {
+    if (_hasSaveLimit && !_canSaveBuild) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(_guestSaveLimitMessage),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Color(0xFF1A1A1A),
+        ),
+      );
+      return;
+    }
     final String name = _buildNameController.text.trim();
     if (name.isEmpty) {
       return;
@@ -386,6 +382,11 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
     widget.coordinator.saveBuildByName(name);
     _buildNameController.clear();
   }
+
+  bool get _hasSaveLimit => !widget.hasAdvancedAccess;
+  bool get _canSaveBuild =>
+      !_hasSaveLimit ||
+      widget.coordinator.savedBuilds.length < _guestSavedBuildLimit;
 
   @override
   Widget build(BuildContext context) {
@@ -397,6 +398,8 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
           builder: (BuildContext context, _) {
             final BuildSimulatorCoordinator coordinator = widget.coordinator;
             final Map<String, num> summary = coordinator.summary;
+            final List<Map<String, dynamic>> itemDetails =
+                coordinator.selectedItemDetails;
             final List<Map<String, dynamic>> savedBuilds =
                 coordinator.savedBuilds;
             final List<String> aiRecommendations =
@@ -405,6 +408,11 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
             final String aiSource = coordinator.aiRecommendationSource;
             final String aiMessage = coordinator.aiRecommendationMessage;
             final bool hasRemoteAi = _isRemoteAiSource(aiSource);
+            final bool canUseAiGeneration = widget.hasAdvancedAccess;
+            final bool shouldShowRecommendations =
+                coordinator.showRecommendations && canUseAiGeneration;
+            final bool hasSaveLimit = _hasSaveLimit;
+            final bool canSaveBuild = _canSaveBuild;
             return ListView(
               padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
               children: <Widget>[
@@ -431,9 +439,12 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                 _DrawerSectionCard(
                   title: 'Stats Summary',
                   icon: Icons.assessment,
-                  child: _buildStatsSummaryCard(summary),
+                  child: _buildStatsSummaryCard(
+                    summary: summary,
+                    itemDetails: itemDetails,
+                  ),
                 ),
-                if (coordinator.showRecommendations) ...<Widget>[
+                if (shouldShowRecommendations) ...<Widget>[
                   const SizedBox(height: 12),
                   _DrawerSectionCard(
                     title: 'AI Recommendations',
@@ -500,6 +511,19 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                   icon: Icons.save_outlined,
                   child: Column(
                     children: <Widget>[
+                      if (hasSaveLimit) ...<Widget>[
+                        const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            _guestSaveLimitMessage,
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 11,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                      ],
                       TextField(
                         controller: _buildNameController,
                         onSubmitted: (_) => _onSaveBuild(),
@@ -535,7 +559,7 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                         children: <Widget>[
                           Expanded(
                             child: OutlinedButton.icon(
-                              onPressed: _onSaveBuild,
+                              onPressed: canSaveBuild ? _onSaveBuild : null,
                               icon: const Icon(Icons.save, size: 16),
                               label: const Text('Save'),
                               style: OutlinedButton.styleFrom(

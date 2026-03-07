@@ -3,7 +3,18 @@ import 'package:flutter/material.dart';
 import '../auth/firebase_auth_service.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+  const RegisterScreen({
+    super.key,
+    this.initialEmail,
+    this.lockEmail = false,
+    this.title = 'Create Account',
+    this.subtitle,
+  });
+
+  final String? initialEmail;
+  final bool lockEmail;
+  final String title;
+  final String? subtitle;
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -21,6 +32,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool _obscureConfirmPassword = true;
   bool _acceptedTerms = false;
   bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final String initialEmail = widget.initialEmail?.trim() ?? '';
+    if (initialEmail.isNotEmpty) {
+      _emailController.text = initialEmail;
+    }
+  }
 
   @override
   void dispose() {
@@ -98,7 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       backgroundColor: const Color(0xFF000000),
       appBar: AppBar(
         backgroundColor: const Color(0xFF000000),
-        title: const Text('Create Account'),
+        title: Text(widget.title),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -128,7 +148,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Your account will be created in Firebase Authentication.',
+                    widget.subtitle ??
+                        'Your account will be created in Firebase Authentication.',
                     style: TextStyle(
                       color: Colors.white.withValues(alpha: 0.72),
                     ),
@@ -136,6 +157,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const SizedBox(height: 24),
                   TextFormField(
                     controller: _emailController,
+                    readOnly: widget.lockEmail,
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     autofillHints: const <String>[AutofillHints.email],

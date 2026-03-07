@@ -567,6 +567,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
 
   Widget _buildRecommendationsSection() {
     final bool hasRemoteAi = _isRemoteAiSource(_aiRecommendationSource);
+    final bool canGenerateAi = _canUseAiGeneration;
     final children = <Widget>[];
     for (int i = 0; i < _recommendations.length; i++) {
       children.add(
@@ -650,15 +651,23 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
           Align(
             alignment: Alignment.center,
             child: OutlinedButton.icon(
-              onPressed: _isAiRecommendationLoading
+              onPressed: !canGenerateAi || _isAiRecommendationLoading
                   ? null
                   : _generateAiRecommendationsNow,
               icon: Icon(
-                _isAiRecommendationLoading ? Icons.sync : Icons.auto_awesome,
+                !canGenerateAi
+                    ? Icons.lock_outline
+                    : _isAiRecommendationLoading
+                    ? Icons.sync
+                    : Icons.auto_awesome,
                 size: 14,
               ),
               label: Text(
-                _isAiRecommendationLoading ? 'Generating...' : 'Generate',
+                !canGenerateAi
+                    ? 'Login for AI'
+                    : _isAiRecommendationLoading
+                    ? 'Generating...'
+                    : 'Generate',
               ),
               style: OutlinedButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -670,6 +679,15 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
               ),
             ),
           ),
+          if (!canGenerateAi) ...<Widget>[
+            const SizedBox(height: 6),
+            const Center(
+              child: Text(
+                'Login is required for AI Generate.',
+                style: TextStyle(fontSize: 11, color: Colors.white54),
+              ),
+            ),
+          ],
           const SizedBox(height: 12),
           Column(children: children),
         ],
@@ -722,6 +740,9 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
   }
 
   Widget _buildSaveLoadSection() {
+    final int? maxSavedBuilds = _maxSavedBuilds;
+    final bool hasSaveLimit = maxSavedBuilds != null;
+    final bool canSaveBuild = !hasSaveLimit || !_isSavedBuildLimitReached;
     final savedWidgets = <Widget>[];
     for (int i = 0; i < _savedBuilds.length; i++) {
       final Map<String, dynamic> build = _savedBuilds[i];
@@ -804,6 +825,16 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _sectionTitle(Icons.save, 'Save / Load Build'),
+          if (hasSaveLimit) ...<Widget>[
+            const SizedBox(height: 6),
+            Text(
+              BuildSimulatorScreenState._guestSaveLimitMessage,
+              style: TextStyle(
+                fontSize: 11,
+                color: canSaveBuild ? Colors.white60 : const Color(0xFFFFB3B3),
+              ),
+            ),
+          ],
           const SizedBox(height: 16),
           TextField(
             controller: _buildNameController,
@@ -838,7 +869,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
               Expanded(
                 child: _gradientButton(
                   label: 'Save Build',
-                  onTap: _onSaveBuild,
+                  onTap: canSaveBuild ? _onSaveBuild : null,
                 ),
               ),
               const SizedBox(width: 10),
@@ -863,7 +894,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
 
   Widget _gradientButton({
     required String label,
-    required VoidCallback onTap,
+    required VoidCallback? onTap,
     bool isSecondary = false,
   }) {
     return InkWell(
@@ -873,7 +904,11 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          gradient: isSecondary
+          gradient: onTap == null
+              ? const LinearGradient(
+                  colors: [Color(0xFF191919), Color(0xFF101010)],
+                )
+              : isSecondary
               ? const LinearGradient(
                   colors: [Color(0xFF222222), Color(0xFF111111)],
                 )
@@ -887,7 +922,11 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
             style: TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w700,
-              color: isSecondary ? Colors.white : const Color(0xFFFFFFFF),
+              color: onTap == null
+                  ? Colors.white54
+                  : isSecondary
+                  ? Colors.white
+                  : const Color(0xFFFFFFFF),
               letterSpacing: 0.8,
             ),
           ),

@@ -60,6 +60,7 @@ class EquipmentLibraryQueryService {
     required List<EquipmentLibraryItem> items,
     required String query,
     Set<String>? allowedTypes,
+    String Function(EquipmentLibraryItem item)? typeKeyResolver,
   }) {
     final Set<String>? normalizedAllowedTypes = allowedTypes
         ?.map(normalizeTypeKey)
@@ -74,7 +75,8 @@ class EquipmentLibraryQueryService {
 
     return items
         .where((EquipmentLibraryItem item) {
-          final String normalizedItemType = normalizeTypeKey(item.type);
+          final String typeKey = typeKeyResolver?.call(item) ?? item.type;
+          final String normalizedItemType = normalizeTypeKey(typeKey);
           if (normalizedAllowedTypes != null &&
               normalizedAllowedTypes.isNotEmpty &&
               !normalizedAllowedTypes.contains(normalizedItemType)) {
@@ -85,7 +87,8 @@ class EquipmentLibraryQueryService {
           }
           return item.name.toLowerCase().contains(normalizedQuery) ||
               item.key.toLowerCase().contains(normalizedQuery) ||
-              item.type.toLowerCase().contains(normalizedQuery);
+              item.type.toLowerCase().contains(normalizedQuery) ||
+              item.color.toLowerCase().contains(normalizedQuery);
         })
         .toList(growable: false);
   }

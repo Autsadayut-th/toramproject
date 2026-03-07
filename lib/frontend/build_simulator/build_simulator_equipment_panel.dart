@@ -1,14 +1,12 @@
 part of 'build_simulator_page.dart';
 
 extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
-  static const int _defaultTotalStatPoints = 776;
-
   int _usedStatPoints() {
     int used = 5;
     for (final String key in BuildSimulatorScreenState._characterStatKeys) {
       final dynamic raw = _character[key];
       final int value = raw is num ? raw.toInt() : 0;
-      used += (value - 1).clamp(0, 512).toInt();
+      used += (value - 1).clamp(0, 510).toInt();
     }
     return used + _personalStatValue.clamp(0, 255).toInt();
   }
@@ -72,7 +70,7 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
           ],
         ),
         const SizedBox(height: spacing),
-        _buildGachaSection(compact: false, minHeight: 120),
+        _buildGachaSection(compact: false, minHeight: slotHeight),
       ],
     );
   }
@@ -194,7 +192,10 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         personalStatType: _personalStatType,
         personalStatValue: _personalStatValue,
         usedStatPoints: _usedStatPoints(),
-        totalStatPoints: _defaultTotalStatPoints,
+        totalStatPoints: _totalStatPoints,
+        onTotalStatPointsChanged: (int value) {
+          _setStateAndRecalculate(() => _totalStatPoints = value);
+        },
         onStatChanged: (String key, int value) {
           _setStateAndRecalculate(() => _character[key] = value);
         },

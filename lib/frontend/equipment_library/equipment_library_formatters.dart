@@ -30,6 +30,71 @@ extension _EquipmentLibraryFormatters on _EquipmentLibraryDataViewState {
     }
   }
 
+  Color _crystalAccentColor(String colorKey) {
+    switch (colorKey) {
+      case 'red':
+        return const Color(0xFFE57373);
+      case 'green':
+        return const Color(0xFF81C784);
+      case 'yellow':
+        return const Color(0xFFFFD54F);
+      case 'purple':
+        return const Color(0xFFBA68C8);
+      case 'blue':
+      default:
+        return const Color(0xFF64B5F6);
+    }
+  }
+
+  String _crystalColorKey(EquipmentLibraryItem item) {
+    final String normalized = item.color.trim().toLowerCase();
+    switch (normalized) {
+      case 'red':
+      case 'green':
+      case 'blue':
+      case 'yellow':
+      case 'purple':
+        return normalized;
+      default:
+        return 'blue';
+    }
+  }
+
+  Color _itemAccentColor({
+    required EquipmentLibraryItem item,
+    required String activeCategory,
+  }) {
+    if (activeCategory.trim().toLowerCase() == 'crystal') {
+      return _crystalAccentColor(_crystalColorKey(item));
+    }
+    return _equipmentTypeAccentColor(item.type);
+  }
+
+  String _itemVisualAssetPath({
+    required EquipmentLibraryItem item,
+    required String activeCategory,
+  }) {
+    if (activeCategory.trim().toLowerCase() == 'crystal') {
+      return 'assets/data/icon/${_crystalColorKey(item)}_crysta.png';
+    }
+    return _resolveEquipmentImageAssetPath(item);
+  }
+
+  String _itemTypeDisplayLabel({
+    required EquipmentLibraryItem item,
+    required String activeCategory,
+  }) {
+    if (activeCategory.trim().toLowerCase() != 'crystal') {
+      return _titleCase(item.type);
+    }
+    final String colorLabel = _titleCase(_crystalColorKey(item));
+    final String slotLabel = _titleCase(item.type);
+    if (slotLabel.isEmpty) {
+      return '$colorLabel Crystal';
+    }
+    return '$colorLabel Crystal - $slotLabel';
+  }
+
   String _equipmentTypeAssetPath(EquipmentLibraryItem item) {
     String normalized = _normalizeEquipmentTypeKey(item.type);
     if (normalized == 'armor') {
@@ -122,9 +187,13 @@ extension _EquipmentLibraryFormatters on _EquipmentLibraryDataViewState {
     EquipmentLibraryItem item, {
     required double iconSize,
     double imagePadding = 6,
+    String? overrideAssetPath,
+    Color? accentColorOverride,
   }) {
-    final String assetPath = _resolveEquipmentImageAssetPath(item);
-    final Color accentColor = _equipmentTypeAccentColor(item.type);
+    final String assetPath =
+        overrideAssetPath ?? _resolveEquipmentImageAssetPath(item);
+    final Color accentColor =
+        accentColorOverride ?? _equipmentTypeAccentColor(item.type);
 
     if (assetPath.isEmpty) {
       return _buildEquipmentTextFallback(
@@ -198,9 +267,16 @@ extension _EquipmentLibraryFormatters on _EquipmentLibraryDataViewState {
   Widget _buildEquipmentImageBox(
     EquipmentLibraryItem item, {
     required double height,
+    required String activeCategory,
   }) {
-    final Color accentColor = _equipmentTypeAccentColor(item.type);
-    final String typeLabel = _titleCase(item.type);
+    final Color accentColor = _itemAccentColor(
+      item: item,
+      activeCategory: activeCategory,
+    );
+    final String typeLabel = _itemTypeDisplayLabel(
+      item: item,
+      activeCategory: activeCategory,
+    );
 
     return Container(
       width: double.infinity,
@@ -232,6 +308,11 @@ extension _EquipmentLibraryFormatters on _EquipmentLibraryDataViewState {
                 item,
                 iconSize: height >= 120 ? 28 : 22,
                 imagePadding: height >= 120 ? 10 : 8,
+                overrideAssetPath: _itemVisualAssetPath(
+                  item: item,
+                  activeCategory: activeCategory,
+                ),
+                accentColorOverride: accentColor,
               ),
             ),
             const SizedBox(height: 8),

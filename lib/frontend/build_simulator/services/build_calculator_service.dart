@@ -152,7 +152,12 @@ class BuildCalculatorService {
           'STR': <String, double>{'atk': 1, 'stability': 0.05},
           'INT': <String, double>{'matk': 3},
           'AGI': <String, double>{'aspd': 3.1},
-          'DEX': <String, double>{'atk': 3, 'matk': 1, 'stability': 0.05, 'aspd': 0.2},
+          'DEX': <String, double>{
+            'atk': 3,
+            'matk': 1,
+            'stability': 0.05,
+            'aspd': 0.2,
+          },
         },
         'BOWGUN': <String, Map<String, double>>{
           'STR': <String, double>{'stability': 0.05},
@@ -175,7 +180,12 @@ class BuildCalculatorService {
           'STR': <String, double>{'aspd': 0.1},
           'INT': <String, double>{'matk': 4},
           'AGI': <String, double>{'atk': 2, 'aspd': 4.6},
-          'DEX': <String, double>{'atk': 0.5, 'matk': 1, 'stability': 0.025, 'aspd': 0.1},
+          'DEX': <String, double>{
+            'atk': 0.5,
+            'matk': 1,
+            'stability': 0.025,
+            'aspd': 0.1,
+          },
         },
         'HALBERD': <String, Map<String, double>>{
           'STR': <String, double>{'atk': 2.5, 'stability': 0.05, 'aspd': 0.2},
@@ -214,12 +224,16 @@ class BuildCalculatorService {
     required Iterable<EquipmentStat> avatarStats,
   }) {
     final _CalculationBuckets buckets = _CalculationBuckets();
-    final int normalizedLevel = level.clamp(1, 300).toInt();
+    final int normalizedLevel = level.clamp(1, 999).toInt();
     final String normalizedPersonalType = personalStatType.trim().toUpperCase();
     final int normalizedPersonalValue = personalStatValue.clamp(0, 255).toInt();
 
-    final String normalizedMainWeaponType = _normalizeWeaponType(mainWeapon?.type);
-    final String normalizedSubWeaponType = _normalizeWeaponType(subWeapon?.type);
+    final String normalizedMainWeaponType = _normalizeWeaponType(
+      mainWeapon?.type,
+    );
+    final String normalizedSubWeaponType = _normalizeWeaponType(
+      subWeapon?.type,
+    );
     final String combatWeaponType = _resolveCombatWeaponType(
       mainWeaponType: normalizedMainWeaponType,
       subWeaponType: normalizedSubWeaponType,
@@ -329,7 +343,8 @@ class BuildCalculatorService {
     );
 
     final Map<String, double> derivedBaseByKey = <String, double>{
-      'ATK': normalizedLevel +
+      'ATK':
+          normalizedLevel +
           effectiveWeaponAtk +
           _weaponScaleValue(
             combatWeaponType: combatWeaponType,
@@ -340,7 +355,8 @@ class BuildCalculatorService {
             agiValue: agiValue,
             vitValue: vitValue,
           ),
-      'MATK': normalizedLevel +
+      'MATK':
+          normalizedLevel +
           effectiveWeaponAtk +
           _weaponScaleValue(
             combatWeaponType: combatWeaponType,
@@ -351,13 +367,16 @@ class BuildCalculatorService {
             agiValue: agiValue,
             vitValue: vitValue,
           ),
-      'DEF': normalizedLevel +
+      'DEF':
+          normalizedLevel +
           (vitValue * _defArmorModifier[effectiveArmorState]!) +
           buckets.equipmentDefBase,
-      'MDEF': normalizedLevel +
+      'MDEF':
+          normalizedLevel +
           (intValue * _mdefArmorModifier[effectiveArmorState]!) +
           buckets.equipmentMdefBase,
-      'ASPD': normalizedLevel +
+      'ASPD':
+          normalizedLevel +
           (_aspdBaseByWeapon[combatWeaponType] ?? 0) +
           _weaponScaleValue(
             combatWeaponType: combatWeaponType,
@@ -369,8 +388,12 @@ class BuildCalculatorService {
             vitValue: vitValue,
           ),
       'CSPD': normalizedLevel + (dexValue * 2.94) + (agiValue * 1.16),
-      'FLEE': normalizedLevel + (agiValue * _fleeArmorModifier[effectiveArmorState]!),
-      'CritRate': 25 + (normalizedPersonalType == 'CRT' ? normalizedPersonalValue / 3.4 : 0),
+      'FLEE':
+          normalizedLevel +
+          (agiValue * _fleeArmorModifier[effectiveArmorState]!),
+      'CritRate':
+          25 +
+          (normalizedPersonalType == 'CRT' ? normalizedPersonalValue / 3.4 : 0),
       'PhysicalPierce': 0,
       'MagicPierce': 0,
       'Accuracy': normalizedLevel + dexValue,
@@ -400,8 +423,8 @@ class BuildCalculatorService {
       }
       final double baseValue = derivedBaseByKey[key] ?? 0;
       final double flatValue = (buckets.derivedFlatByKey[key] ?? 0).toDouble();
-      final double percentValue =
-          (buckets.derivedPercentByKey[key] ?? 0).toDouble();
+      final double percentValue = (buckets.derivedPercentByKey[key] ?? 0)
+          .toDouble();
       if (_pointBasedPercentSummaryKeys.contains(key)) {
         nextSummary[key] = _panelValue(baseValue + flatValue + percentValue);
         continue;
@@ -539,8 +562,9 @@ class BuildCalculatorService {
       final double baseValue = _readNumericValue(character[key]).toDouble();
       final double percentValue = percentByKey[key] ?? 0;
       final double flatValue = flatByKey[key] ?? 0;
-      next[key] = _panelValue((baseValue * (1 + (percentValue / 100))) + flatValue)
-          .toDouble();
+      next[key] = _panelValue(
+        (baseValue * (1 + (percentValue / 100))) + flatValue,
+      ).toDouble();
     }
     return next;
   }
@@ -559,10 +583,11 @@ class BuildCalculatorService {
       baseWeaponAtk: mainWeaponAtkBase,
       refineLevel: enhanceMain,
     );
-    final double refinedSubWeaponAtk = _subWeaponAddsWeaponAtk(
-      combatWeaponType: combatWeaponType,
-      subWeaponType: subWeaponType,
-    )
+    final double refinedSubWeaponAtk =
+        _subWeaponAddsWeaponAtk(
+          combatWeaponType: combatWeaponType,
+          subWeaponType: subWeaponType,
+        )
         ? _refinedWeaponAtk(
             baseWeaponAtk: supplementalWeaponAtkBase,
             refineLevel: _subWeaponUsesWeaponRefine(subWeaponType)
@@ -614,8 +639,9 @@ class BuildCalculatorService {
     required double vitValue,
     required String armorState,
   }) {
-    final double adjustedVit =
-        armorState == 'no_armor' ? vitValue * 1.1 : vitValue;
+    final double adjustedVit = armorState == 'no_armor'
+        ? vitValue * 1.1
+        : vitValue;
     return 93 + ((adjustedVit + 22.41) * level / 3);
   }
 
@@ -625,8 +651,9 @@ class BuildCalculatorService {
     required String personalStatType,
     required int personalStatValue,
   }) {
-    final double tecBonus =
-        personalStatType == 'TEC' ? personalStatValue.toDouble() : 0;
+    final double tecBonus = personalStatType == 'TEC'
+        ? personalStatValue.toDouble()
+        : 0;
     return 99 + level + (intValue / 10) + tecBonus;
   }
 
@@ -641,7 +668,7 @@ class BuildCalculatorService {
   }) {
     final Map<String, Map<String, double>> scaling =
         _weaponScaling[combatWeaponType] ??
-            const <String, Map<String, double>>{};
+        const <String, Map<String, double>>{};
     double total = 0;
     total += _readScaleContribution(
       scaling: scaling,
@@ -697,13 +724,13 @@ class BuildCalculatorService {
     if (condition == null || condition.isEmpty) {
       return true;
     }
-    final String expectedArmor = condition.armorState?.trim().toLowerCase() ?? '';
+    final String expectedArmor =
+        condition.armorState?.trim().toLowerCase() ?? '';
     if (expectedArmor.isNotEmpty && expectedArmor != armorState) {
       return false;
     }
 
-    final String rawWeaponRequirement =
-        condition.weaponRequired?.trim() ?? '';
+    final String rawWeaponRequirement = condition.weaponRequired?.trim() ?? '';
     if (rawWeaponRequirement.isEmpty) {
       return true;
     }
@@ -729,8 +756,9 @@ class BuildCalculatorService {
       return false;
     }
 
-    final String weaponRequirement =
-        _normalizeWeaponCondition(rawWeaponRequirement);
+    final String weaponRequirement = _normalizeWeaponCondition(
+      rawWeaponRequirement,
+    );
     switch (weaponRequirement) {
       case 'HEAVY_ARMOR':
         return armorState == 'heavy';

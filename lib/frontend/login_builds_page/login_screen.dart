@@ -260,7 +260,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text('Open simulator without login'),
+                    child: const Text('Open simulator without guest'),
                   ),
                 ],
               ),

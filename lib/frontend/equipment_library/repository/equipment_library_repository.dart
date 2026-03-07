@@ -19,14 +19,15 @@ class EquipmentLibraryRepository {
           'items/equipment/weapon/shield.json',
           'items/equipment/weapon/ninjutsu_scroll.json',
         ],
-        'Armor': <String>[
-          'items/equipment/armor/armor.json',
-        ],
-        'Additional': <String>[
-          'items/equipment/additional/additional.json',
-        ],
-        'Special': <String>[
-          'items/equipment/special/special.json',
+        'Armor': <String>['items/equipment/armor/armor.json'],
+        'Additional': <String>['items/equipment/additional/additional.json'],
+        'Special': <String>['items/equipment/special/special.json'],
+        'Crystal': <String>[
+          'items/crysta/weapon/crysta_weapon.json',
+          'items/crysta/armor/crysta_armor.json',
+          'items/crysta/additional/crysta_additional.json',
+          'items/crysta/special/crysta_special.json',
+          'items/crysta/normal/crysta_normal.json',
         ],
       };
 

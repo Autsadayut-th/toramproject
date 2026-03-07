@@ -28,6 +28,7 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
   bool _showRecommendations = true;
   int _equipmentCacheCount = 0;
   Map<String, num> _summary = Map<String, num>.from(_summaryTemplate);
+  List<Map<String, dynamic>> _selectedItemDetails = <Map<String, dynamic>>[];
   List<String> _aiRecommendations = const <String>[];
   bool _isAiRecommendationLoading = false;
   String _aiRecommendationSource = 'rule';
@@ -52,6 +53,21 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
   bool get showRecommendations => _showRecommendations;
   int get equipmentCacheCount => _equipmentCacheCount;
   Map<String, num> get summary => Map<String, num>.from(_summary);
+  List<Map<String, dynamic>> get selectedItemDetails => _selectedItemDetails
+      .map((Map<String, dynamic> item) {
+        final Map<String, dynamic> copy = Map<String, dynamic>.from(item);
+        final dynamic rawStats = item['stats'];
+        if (rawStats is List) {
+          copy['stats'] = rawStats
+              .whereType<Map>()
+              .map((Map<dynamic, dynamic> stat) {
+                return Map<String, dynamic>.from(stat);
+              })
+              .toList(growable: false);
+        }
+        return copy;
+      })
+      .toList(growable: false);
   List<String> get aiRecommendations => List<String>.from(_aiRecommendations);
   bool get isAiRecommendationLoading => _isAiRecommendationLoading;
   String get aiRecommendationSource => _aiRecommendationSource;
@@ -98,6 +114,7 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     required bool showRecommendations,
     required int equipmentCacheCount,
     required Map<String, num> summary,
+    required List<Map<String, dynamic>> selectedItemDetails,
     required List<String> aiRecommendations,
     required bool isAiRecommendationLoading,
     required String aiRecommendationSource,
@@ -111,6 +128,21 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     _showRecommendations = showRecommendations;
     _equipmentCacheCount = equipmentCacheCount;
     _summary = Map<String, num>.from(_summaryTemplate)..addAll(summary);
+    _selectedItemDetails = selectedItemDetails
+        .map((Map<String, dynamic> item) {
+          final Map<String, dynamic> copy = Map<String, dynamic>.from(item);
+          final dynamic rawStats = item['stats'];
+          if (rawStats is List) {
+            copy['stats'] = rawStats
+                .whereType<Map>()
+                .map((Map<dynamic, dynamic> stat) {
+                  return Map<String, dynamic>.from(stat);
+                })
+                .toList(growable: false);
+          }
+          return copy;
+        })
+        .toList(growable: false);
     _aiRecommendations = List<String>.from(aiRecommendations);
     _isAiRecommendationLoading = isAiRecommendationLoading;
     _aiRecommendationSource = aiRecommendationSource;
