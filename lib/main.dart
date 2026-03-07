@@ -1,16 +1,32 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:toramonline/firebase_options.dart';
 
-import 'frontend/app_shell/app_shell_page.dart';
-import 'frontend/login_builds_page/login_screen.dart';
+import 'app_shell/app_shell_page.dart';
+import 'critical_simulator_page/critical_simulator_page.dart';
+import 'login_builds_page/login_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await _ensureIconFontsLoaded();
 
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
+}
+
+Future<void> _ensureIconFontsLoaded() async {
+  try {
+    final ByteData materialIcons = await rootBundle.load(
+      'assets/fonts/MaterialIcons-Regular.otf',
+    );
+    final FontLoader materialLoader = FontLoader('MaterialIcons')
+      ..addFont(Future<ByteData>.value(materialIcons));
+    await materialLoader.load();
+  } catch (_) {
+    // Keep running with default font loading path.
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -18,15 +34,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData baseTheme = ThemeData.dark();
+    final TextTheme thaiTextTheme = GoogleFonts.notoSansThaiTextTheme(
+      baseTheme.textTheme,
+    );
+    final TextTheme thaiPrimaryTextTheme = GoogleFonts.notoSansThaiTextTheme(
+      baseTheme.primaryTextTheme,
+    );
+
     return MaterialApp(
       title: 'Toram Build Simulator',
+
       debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
         '/login': (_) => const LoginScreen(),
         '/app': (_) => const AppShellScreen(),
+        '/critical-simulator': (_) => const CriticalSimulatorPage(),
       },
-      theme: ThemeData.dark().copyWith(
+      theme: baseTheme.copyWith(
         scaffoldBackgroundColor: const Color(0xFF000000),
+        textTheme: thaiTextTheme,
+        primaryTextTheme: thaiPrimaryTextTheme,
         appBarTheme: const AppBarTheme(
           backgroundColor: Color(0xFF000000),
           foregroundColor: Colors.white,
@@ -62,7 +90,11 @@ class _FirebaseBootstrapGateState extends State<FirebaseBootstrapGate> {
 
   Future<bool> _initializeFirebase() async {
     try {
-      await Firebase.initializeApp();
+      if (Firebase.apps.isEmpty) {
+        await Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform,
+        );
+      }
       return true;
     } catch (_) {
       return false;

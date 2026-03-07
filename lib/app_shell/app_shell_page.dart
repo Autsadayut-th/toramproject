@@ -1,12 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../account_page/account_page.dart';
 import '../build_simulator/build_simulator_coordinator.dart';
 import '../build_simulator/build_simulator_page.dart';
+import '../build_simulator/services/build_calculator_service.dart';
+import '../build_simulator/services/build_persistence_service.dart';
 import '../compare_builds_page/compare_builds_page.dart';
+import '../critical_simulator_page/critical_simulator_page.dart';
 import '../equipment_library/equipment_library_page.dart';
 import '../saved_builds_page/saved_builds_page.dart';
 import '../settings_data_page/settings_data_page.dart';
@@ -25,6 +29,7 @@ class AppShellScreen extends StatefulWidget {
 }
 
 class _AppShellScreenState extends State<AppShellScreen> {
+  static const String _appLogoAssetPath = 'assets/logo/logo.png';
   final BuildSimulatorCoordinator _coordinator = BuildSimulatorCoordinator();
   AppNavigationPage _currentPage = AppNavigationPage.build;
   User? _currentUser;
@@ -88,14 +93,16 @@ class _AppShellScreenState extends State<AppShellScreen> {
         return 0;
       case AppNavigationPage.equipment:
         return 1;
-      case AppNavigationPage.skill:
+      case AppNavigationPage.critical:
         return 2;
-      case AppNavigationPage.saved:
+      case AppNavigationPage.skill:
         return 3;
-      case AppNavigationPage.compare:
+      case AppNavigationPage.saved:
         return 4;
-      case AppNavigationPage.settings:
+      case AppNavigationPage.compare:
         return 5;
+      case AppNavigationPage.settings:
+        return 6;
     }
   }
 
@@ -114,6 +121,8 @@ class _AppShellScreenState extends State<AppShellScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF000000),
         foregroundColor: Colors.white,
+        leadingWidth: 84,
+        titleSpacing: 6,
         title: Text(
           _getPageTitle(_currentPage),
           style: const TextStyle(
@@ -121,18 +130,46 @@ class _AppShellScreenState extends State<AppShellScreen> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        automaticallyImplyLeading: !showMobileBuildSummaryLeading,
-        leading: showMobileBuildSummaryLeading
-            ? Builder(
-                builder: (BuildContext context) {
-                  return IconButton(
-                    icon: const Icon(Icons.menu, color: Colors.white),
-                    onPressed: () => Scaffold.of(context).openDrawer(),
-                    tooltip: 'Build Summary',
-                  );
-                },
-              )
-            : null,
+        automaticallyImplyLeading: false,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return Row(
+              children: <Widget>[
+                IconButton(
+                  icon: const Icon(Icons.menu, color: Colors.white),
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                  tooltip: showMobileBuildSummaryLeading
+                      ? 'Build Summary'
+                      : 'Navigation menu',
+                ),
+                Container(
+                  width: 28,
+                  height: 28,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0E0E0E),
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                      color: const Color(0xFFFFFFFF).withValues(alpha: 0.36),
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(3),
+                  child: Image.asset(
+                    _appLogoAssetPath,
+                    fit: BoxFit.contain,
+                    gaplessPlayback: true,
+                    errorBuilder:
+                        (BuildContext context, Object _, StackTrace? __) =>
+                            const Icon(
+                              Icons.auto_awesome,
+                              size: 15,
+                              color: Colors.white,
+                            ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.account_circle, color: Colors.white),
@@ -162,10 +199,12 @@ class _AppShellScreenState extends State<AppShellScreen> {
         children: <Widget>[
           BuildSimulatorScreen(
             coordinator: _coordinator,
+            currentUserId: _currentUser?.uid,
             isAuthenticated: _currentUser != null,
             hasAdvancedAccess: _currentUser != null,
           ),
           EquipmentLibraryScreen(onNavigate: _onNavigate),
+          const CriticalSimulatorPage(),
           SkillMenuPage(onNavigate: _onNavigate),
           SavedBuildsPage(
             savedBuilds: _coordinator.savedBuilds,
@@ -208,6 +247,8 @@ class _AppShellScreenState extends State<AppShellScreen> {
               onOpenBuild: () => onNavigateFromDrawer(AppNavigationPage.build),
               onOpenEquipment: () =>
                   onNavigateFromDrawer(AppNavigationPage.equipment),
+              onOpenCritical: () =>
+                  onNavigateFromDrawer(AppNavigationPage.critical),
               onOpenSkill: () => onNavigateFromDrawer(AppNavigationPage.skill),
               onOpenSaved: () => onNavigateFromDrawer(AppNavigationPage.saved),
               onOpenCompare: () =>
@@ -224,6 +265,8 @@ class _AppShellScreenState extends State<AppShellScreen> {
         return 'Toram Item Build Simulation';
       case AppNavigationPage.equipment:
         return 'Equipment Library';
+      case AppNavigationPage.critical:
+        return 'Critical Simulator';
       case AppNavigationPage.skill:
         return 'Skill Menu';
       case AppNavigationPage.saved:

@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'build_simulator_coordinator.dart';
 import '../equipment_library/models/equipment_library_item.dart';
@@ -12,6 +15,7 @@ import 'services/build_recommendation_service.dart';
 import 'services/build_rule_set_service.dart';
 import 'services/build_weapon_rule_service.dart';
 import 'services/crystal_library_service.dart';
+import 'services/firebase_saved_builds_service.dart';
 import 'widgets/armor_selector.dart';
 import 'widgets/character_stats_selector.dart';
 import 'widgets/gacha_card.dart';
@@ -31,11 +35,13 @@ class BuildSimulatorScreen extends StatefulWidget {
   const BuildSimulatorScreen({
     super.key,
     this.coordinator,
+    this.currentUserId,
     this.isAuthenticated = false,
     this.hasAdvancedAccess = false,
   });
 
   final BuildSimulatorCoordinator? coordinator;
+  final String? currentUserId;
   final bool isAuthenticated;
   final bool hasAdvancedAccess;
 
@@ -49,6 +55,8 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       EquipmentLibraryRepository();
   final AiBuildRecommendationService _aiRecommendationService =
       const AiBuildRecommendationService();
+  final FirebaseSavedBuildsService _savedBuildsService =
+      FirebaseSavedBuildsService();
 
   static const List<String> _characterStatKeys =
       BuildPersistenceService.characterStatKeys;
@@ -149,6 +157,10 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   bool _showRecommendationsPanel = true;
 
   final List<Map<String, dynamic>> _savedBuilds = <Map<String, dynamic>>[];
+  bool _isLoadingCloudSavedBuilds = false;
+  bool _isSavingCloudSavedBuilds = false;
+  bool _hasPendingCloudSync = false;
+  String? _loadedCloudUserId;
 
   bool get _canUseAiGeneration => widget.hasAdvancedAccess;
   bool get _shouldShowRecommendationsPanel =>
@@ -169,6 +181,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     _loadCrystalLibrary();
     _loadWeaponRuleConfig();
     _loadRuleSetConfig();
+    unawaited(_refreshCloudSavedBuilds(force: true));
   }
 
   @override
@@ -188,6 +201,12 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
             ? _ruleRecommendationMessage
             : _guestAiLockedMessage;
       });
+    }
+    final bool authStateChanged =
+        oldWidget.isAuthenticated != widget.isAuthenticated;
+    final bool userChanged = oldWidget.currentUserId != widget.currentUserId;
+    if (authStateChanged || userChanged) {
+      unawaited(_refreshCloudSavedBuilds(force: true));
     }
   }
 
@@ -232,6 +251,129 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     );
   }
 
+  String? get _activeUserId {
+    if (!widget.isAuthenticated) {
+      return null;
+    }
+    final String? widgetUserId = widget.currentUserId?.trim();
+    if (widgetUserId == null || widgetUserId.isEmpty) {
+      return _savedBuildsService.currentUserId;
+    }
+    return widgetUserId;
+  }
+
+  Future<void> _refreshCloudSavedBuilds({bool force = false}) async {
+    final String? activeUserId = _activeUserId;
+    if (activeUserId == null) {
+      _loadedCloudUserId = null;
+      _hasPendingCloudSync = false;
+      if (_savedBuilds.isEmpty) {
+        return;
+      }
+      _setUiState(() {
+        _savedBuilds.clear();
+      });
+      return;
+    }
+
+    if (!force && _loadedCloudUserId == activeUserId) {
+      return;
+    }
+    if (_isLoadingCloudSavedBuilds) {
+      return;
+    }
+
+    _isLoadingCloudSavedBuilds = true;
+    try {
+      final List<Map<String, dynamic>> cloudBuilds = await _savedBuildsService
+          .fetchSavedBuilds();
+      if (!mounted || _activeUserId != activeUserId) {
+        return;
+      }
+
+      List<Map<String, dynamic>> normalized =
+          BuildPersistenceService.normalizeBuildList(
+            cloudBuilds,
+            summaryTemplate: BuildCalculatorService.summaryTemplate,
+          );
+      final int? maxSavedBuilds = _maxSavedBuilds;
+      bool truncated = false;
+      if (maxSavedBuilds != null && normalized.length > maxSavedBuilds) {
+        normalized = normalized.take(maxSavedBuilds).toList(growable: false);
+        truncated = true;
+      }
+
+      _setUiState(() {
+        _savedBuilds
+          ..clear()
+          ..addAll(normalized);
+      });
+      _loadedCloudUserId = activeUserId;
+      if (truncated) {
+        _showRestrictionMessage(_guestSaveLimitMessage);
+      }
+    } catch (error, stackTrace) {
+      _reportBackgroundLoadFailure(
+        label: 'Cloud saved builds fetch',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      if (mounted) {
+        _showRestrictionMessage('Unable to load cloud saved builds.');
+      }
+    } finally {
+      _isLoadingCloudSavedBuilds = false;
+    }
+  }
+
+  void _scheduleCloudSync() {
+    if (_isLoadingCloudSavedBuilds) {
+      return;
+    }
+    if (_activeUserId == null) {
+      return;
+    }
+    _hasPendingCloudSync = true;
+    if (_isSavingCloudSavedBuilds) {
+      return;
+    }
+    unawaited(_flushCloudSync());
+  }
+
+  Future<void> _flushCloudSync() async {
+    if (_isSavingCloudSavedBuilds) {
+      return;
+    }
+    _isSavingCloudSavedBuilds = true;
+    try {
+      while (_hasPendingCloudSync && mounted) {
+        _hasPendingCloudSync = false;
+        final String? activeUserId = _activeUserId;
+        if (activeUserId == null) {
+          return;
+        }
+        final List<Map<String, dynamic>> payload = _savedBuilds
+            .map(
+              (Map<String, dynamic> build) => Map<String, dynamic>.from(build),
+            )
+            .toList(growable: false);
+        await _savedBuildsService.saveSavedBuilds(payload);
+        _loadedCloudUserId = activeUserId;
+      }
+    } catch (error, stackTrace) {
+      _reportBackgroundLoadFailure(
+        label: 'Cloud saved builds sync',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      if (mounted) {
+        _showRestrictionMessage('Unable to sync saved builds to cloud.');
+      }
+    } finally {
+      _isSavingCloudSavedBuilds = false;
+    }
+  }
+
   List<Map<String, dynamic>> _selectedItemDetailsSnapshot() {
     return <Map<String, dynamic>>[
       _slotDetailSnapshot(
@@ -254,7 +396,99 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
         slotLabel: 'Special',
         item: _findEquipmentByKey(_ringId),
       ),
+      _gachaDetailSnapshot(),
     ];
+  }
+
+  Map<String, dynamic> _gachaDetailSnapshot() {
+    final List<Map<String, String>> stats = <Map<String, String>>[];
+    _appendGachaStatDetail(
+      stats: stats,
+      sectionLabel: 'Top',
+      slotIndex: 1,
+      rawSelection: _gacha1Stat1,
+    );
+    _appendGachaStatDetail(
+      stats: stats,
+      sectionLabel: 'Top',
+      slotIndex: 2,
+      rawSelection: _gacha1Stat2,
+    );
+    _appendGachaStatDetail(
+      stats: stats,
+      sectionLabel: 'Top',
+      slotIndex: 3,
+      rawSelection: _gacha1Stat3,
+    );
+    _appendGachaStatDetail(
+      stats: stats,
+      sectionLabel: 'Bottom',
+      slotIndex: 1,
+      rawSelection: _gacha2Stat1,
+    );
+    _appendGachaStatDetail(
+      stats: stats,
+      sectionLabel: 'Bottom',
+      slotIndex: 2,
+      rawSelection: _gacha2Stat2,
+    );
+    _appendGachaStatDetail(
+      stats: stats,
+      sectionLabel: 'Bottom',
+      slotIndex: 3,
+      rawSelection: _gacha2Stat3,
+    );
+    _appendGachaStatDetail(
+      stats: stats,
+      sectionLabel: 'Accessory',
+      slotIndex: 1,
+      rawSelection: _gacha3Stat1,
+    );
+    _appendGachaStatDetail(
+      stats: stats,
+      sectionLabel: 'Accessory',
+      slotIndex: 2,
+      rawSelection: _gacha3Stat2,
+    );
+    _appendGachaStatDetail(
+      stats: stats,
+      sectionLabel: 'Accessory',
+      slotIndex: 3,
+      rawSelection: _gacha3Stat3,
+    );
+
+    return <String, dynamic>{
+      'slotLabel': 'Avatar Gacha',
+      'itemName': stats.isEmpty ? '' : 'Top / Bottom / Accessory',
+      'stats': stats,
+    };
+  }
+
+  void _appendGachaStatDetail({
+    required List<Map<String, String>> stats,
+    required String sectionLabel,
+    required int slotIndex,
+    required String rawSelection,
+  }) {
+    final String selection = rawSelection.trim();
+    if (selection.isEmpty) {
+      return;
+    }
+    final EquipmentStat? decoded =
+        AvatarGachaDataService.decodeSelectionAsEquipmentStat(selection);
+    if (decoded == null) {
+      stats.add(<String, String>{
+        'label': '$sectionLabel Slot $slotIndex',
+        'value': selection,
+      });
+      return;
+    }
+
+    stats.add(<String, String>{
+      'label':
+          '$sectionLabel Slot $slotIndex - ${_snapshotEquipmentStatLabel(decoded)}',
+      'value': _snapshotEquipmentStatValue(decoded),
+    });
   }
 
   Map<String, dynamic> _slotDetailSnapshot({
@@ -449,7 +683,14 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
         return;
       }
       _applyEquipmentCache(byKey, categoryByKey);
-    } catch (_) {
+    } catch (error, stackTrace) {
+      _reportBackgroundLoadFailure(
+        label: 'Equipment library load',
+        error: error,
+        stackTrace: stackTrace,
+        userMessage:
+            'Unable to load equipment data from GitHub. Please check your network.',
+      );
       if (!mounted) {
         return;
       }
@@ -477,7 +718,14 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
         return;
       }
       _applyCrystalCache(byKey);
-    } catch (_) {
+    } catch (error, stackTrace) {
+      _reportBackgroundLoadFailure(
+        label: 'Crystal library load',
+        error: error,
+        stackTrace: stackTrace,
+        userMessage:
+            'Unable to load crystal data from GitHub. Please check your network.',
+      );
       if (!mounted) {
         return;
       }
@@ -506,7 +754,13 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
           );
         });
       });
-    } catch (_) {}
+    } catch (error, stackTrace) {
+      _reportBackgroundLoadFailure(
+        label: 'Weapon rule config load',
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
   }
 
   Future<void> _loadRuleSetConfig() async {
@@ -518,7 +772,15 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       _setStateAndRecalculate(() {
         _ruleSet = loaded;
       });
-    } catch (_) {}
+    } catch (error, stackTrace) {
+      _reportBackgroundLoadFailure(
+        label: 'Build rule set load',
+        error: error,
+        stackTrace: stackTrace,
+        userMessage:
+            'Unable to load build rules from GitHub. Using fallback behavior.',
+      );
+    }
   }
 
   void _applyEquipmentCache(
@@ -542,6 +804,22 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   void _setUiState(VoidCallback action) {
     setState(action);
     _syncCoordinatorSnapshot();
+  }
+
+  void _reportBackgroundLoadFailure({
+    required String label,
+    required Object error,
+    required StackTrace stackTrace,
+    String? userMessage,
+  }) {
+    debugPrint('[BuildSimulator] $label failed: $error');
+    debugPrintStack(
+      label: '[BuildSimulator] $label stack',
+      stackTrace: stackTrace,
+    );
+    if (userMessage != null && userMessage.trim().isNotEmpty) {
+      _showRestrictionMessage(userMessage);
+    }
   }
 
   void _showRestrictionMessage(String message) {
@@ -1240,11 +1518,112 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     _setUiState(() {
       _savedBuilds.add(_buildCurrentSnapshot(normalizedName));
     });
+    _scheduleCloudSync();
   }
 
   void _onSaveBuild() {
     _onSaveBuildByName(_buildNameController.text);
     _buildNameController.clear();
+  }
+
+  Future<void> _onCopyBuildShareCode(int index) async {
+    if (index < 0 || index >= _savedBuilds.length) {
+      return;
+    }
+    final String code = BuildPersistenceService.encodeBuildShareCode(
+      _savedBuilds[index],
+    );
+    await Clipboard.setData(ClipboardData(text: code));
+    _showRestrictionMessage('Build code copied.');
+  }
+
+  void _onImportBuildShareCode(String rawCode) {
+    final String raw = rawCode.trim();
+    if (raw.isEmpty) {
+      _showRestrictionMessage('Paste build code first.');
+      return;
+    }
+
+    final Map<String, dynamic>? decoded =
+        BuildPersistenceService.decodeBuildShareCode(
+          raw,
+          summaryTemplate: BuildCalculatorService.summaryTemplate,
+          fallbackIndex: _savedBuilds.length,
+        );
+    if (decoded == null) {
+      _showRestrictionMessage('Invalid build code.');
+      return;
+    }
+
+    final int before = _savedBuilds.length;
+    _onMergeSavedBuilds(<Map<String, dynamic>>[decoded]);
+    final int after = _savedBuilds.length;
+    if (after > before) {
+      _showRestrictionMessage('Build code imported.');
+    }
+  }
+
+  Future<void> _onRequestImportBuildShareCode() async {
+    final TextEditingController codeController = TextEditingController();
+    final String? code = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFF1A1A1A),
+          title: const Text(
+            'Import Build Code',
+            style: TextStyle(color: Colors.white),
+          ),
+          content: TextField(
+            controller: codeController,
+            autofocus: true,
+            minLines: 2,
+            maxLines: 4,
+            style: const TextStyle(color: Colors.white, fontSize: 12),
+            decoration: InputDecoration(
+              hintText: 'Paste shared build code (TB...)',
+              hintStyle: const TextStyle(color: Colors.white54),
+              filled: true,
+              fillColor: const Color(0xFF0F0F0F),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 10,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(
+                  color: const Color(0xFFFFFFFF).withValues(alpha: 0.22),
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: Color(0x66FFFFFF)),
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancel'),
+            ),
+            FilledButton(
+              onPressed: () {
+                Navigator.of(context).pop(codeController.text);
+              },
+              style: FilledButton.styleFrom(
+                backgroundColor: const Color(0xFF4A4A4A),
+              ),
+              child: const Text('Import'),
+            ),
+          ],
+        );
+      },
+    );
+    codeController.dispose();
+    if (code == null) {
+      return;
+    }
+    _onImportBuildShareCode(code);
   }
 
   void _onLoadBuildById(String buildId) {
@@ -1279,6 +1658,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       _savedBuilds[index]['name'] = normalizedName;
       _savedBuilds[index]['savedAt'] = DateTime.now().toIso8601String();
     });
+    _scheduleCloudSync();
   }
 
   void _onToggleFavoriteBuildById(String buildId) {
@@ -1293,6 +1673,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       _savedBuilds[index]['isFavorite'] = !currentFavorite;
       _savedBuilds[index]['savedAt'] = DateTime.now().toIso8601String();
     });
+    _scheduleCloudSync();
   }
 
   void _onDeleteBuildById(String buildId) {
@@ -1310,6 +1691,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     _setUiState(() {
       _savedBuilds.removeAt(index);
     });
+    _scheduleCloudSync();
   }
 
   void _onReplaceSavedBuilds(List<Map<String, dynamic>> rawBuilds) {
@@ -1329,6 +1711,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
         ..clear()
         ..addAll(normalized);
     });
+    _scheduleCloudSync();
     if (truncated) {
       _showRestrictionMessage(_guestSaveLimitMessage);
     }
@@ -1365,6 +1748,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     _setUiState(() {
       _savedBuilds.addAll(normalized);
     });
+    _scheduleCloudSync();
     if (truncated) {
       _showRestrictionMessage(_guestSaveLimitMessage);
     }
@@ -1438,6 +1822,45 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       _savedBuilds.clear();
       _buildNameController.clear();
     });
+    _scheduleCloudSync();
+  }
+
+  Future<void> _onRequestClearAll() async {
+    final bool confirmed =
+        await showDialog<bool>(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              backgroundColor: const Color(0xFF1A1A1A),
+              title: const Text(
+                'Clear All Data',
+                style: TextStyle(color: Colors.white),
+              ),
+              content: const Text(
+                'Delete all current values and saved builds?',
+                style: TextStyle(color: Colors.white70),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: const Text('Cancel'),
+                ),
+                FilledButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  style: FilledButton.styleFrom(
+                    backgroundColor: const Color(0xFF4A4A4A),
+                  ),
+                  child: const Text('Delete'),
+                ),
+              ],
+            );
+          },
+        ) ??
+        false;
+    if (!confirmed) {
+      return;
+    }
+    _onClearAll();
   }
 
   void _setShowRecommendationsPanel(bool value) {

@@ -18,14 +18,16 @@ class AppMobileBottomNavigationBar extends StatelessWidget {
         return 0;
       case AppNavigationPage.equipment:
         return 1;
-      case AppNavigationPage.skill:
+      case AppNavigationPage.critical:
         return 2;
-      case AppNavigationPage.saved:
+      case AppNavigationPage.skill:
         return 3;
-      case AppNavigationPage.compare:
+      case AppNavigationPage.saved:
         return 4;
-      case AppNavigationPage.settings:
+      case AppNavigationPage.compare:
         return 5;
+      case AppNavigationPage.settings:
+        return 6;
     }
   }
 
@@ -48,15 +50,18 @@ class AppMobileBottomNavigationBar extends StatelessWidget {
             onSelect(AppNavigationPage.equipment);
             return;
           case 2:
-            onSelect(AppNavigationPage.skill);
+            onSelect(AppNavigationPage.critical);
             return;
           case 3:
-            onSelect(AppNavigationPage.saved);
+            onSelect(AppNavigationPage.skill);
             return;
           case 4:
-            onSelect(AppNavigationPage.compare);
+            onSelect(AppNavigationPage.saved);
             return;
           case 5:
+            onSelect(AppNavigationPage.compare);
+            return;
+          case 6:
             onSelect(AppNavigationPage.settings);
             return;
         }
@@ -66,6 +71,10 @@ class AppMobileBottomNavigationBar extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Icon(Icons.menu_book_outlined),
           label: 'Equip',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.track_changes),
+          label: 'Critical',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.auto_awesome_mosaic_outlined),

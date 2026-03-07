@@ -22,6 +22,72 @@ String _crystalIconPath(CrystalLibraryEntry? entry) {
   return entry?.iconAssetPath ?? 'assets/data/icon/blue_crysta.png';
 }
 
+String _humanizeCrystalStatKeyForSearch(String key) {
+  if (key.isEmpty) {
+    return '-';
+  }
+  const Set<String> uppercaseTokens = <String>{
+    'atk',
+    'matk',
+    'def',
+    'mdef',
+    'str',
+    'dex',
+    'int',
+    'agi',
+    'vit',
+    'aspd',
+    'cspd',
+    'hp',
+    'mp',
+    'ampr',
+    'exp',
+  };
+
+  return key
+      .replaceAll('_', ' ')
+      .split(' ')
+      .where((String part) => part.isNotEmpty)
+      .map((String part) {
+        final String token = part.toLowerCase();
+        if (token == 'pct') {
+          return '%';
+        }
+        if (uppercaseTokens.contains(token)) {
+          return token.toUpperCase();
+        }
+        if (token.length == 1) {
+          return token.toUpperCase();
+        }
+        return '${token[0].toUpperCase()}${token.substring(1)}';
+      })
+      .join(' ');
+}
+
+bool _crystalEntryMatchesQuery(CrystalLibraryEntry entry, String query) {
+  final String normalized = query.trim().toLowerCase();
+  if (normalized.isEmpty) {
+    return true;
+  }
+  if (entry.name.toLowerCase().contains(normalized) ||
+      entry.key.toLowerCase().contains(normalized)) {
+    return true;
+  }
+  for (final EquipmentStat stat in entry.stats) {
+    final String statKey = stat.statKey.trim().toLowerCase();
+    if (statKey.isEmpty) {
+      continue;
+    }
+    if (statKey.contains(normalized) ||
+        _humanizeCrystalStatKeyForSearch(
+          statKey,
+        ).toLowerCase().contains(normalized)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 class EquipmentSlotSelector extends StatefulWidget {
   const EquipmentSlotSelector({
     super.key,
@@ -424,10 +490,11 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
     CrystalLibraryEntry? fuzzyMatch;
     for (final CrystalLibraryEntry entry in _availableCrystals) {
       final String name = entry.name.trim().toLowerCase();
-      if (name == normalized) {
+      final String key = entry.key.trim().toLowerCase();
+      if (name == normalized || key == normalized) {
         return entry;
       }
-      if (fuzzyMatch == null && name.contains(normalized)) {
+      if (fuzzyMatch == null && _crystalEntryMatchesQuery(entry, normalized)) {
         fuzzyMatch = entry;
       }
     }
@@ -447,8 +514,7 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
 
     final List<CrystalLibraryEntry> matches = <CrystalLibraryEntry>[];
     for (final CrystalLibraryEntry entry in _availableCrystals) {
-      final String name = entry.name.trim().toLowerCase();
-      if (!name.contains(query)) {
+      if (!_crystalEntryMatchesQuery(entry, query)) {
         continue;
       }
       matches.add(entry);
@@ -1405,7 +1471,7 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
                       focusNode: _crystalFocusNode(isSlot1),
                       hint: _isCrystalLoading
                           ? 'Loading crystal data...'
-                          : 'Search crystal name...',
+                          : 'Search crystal name, stat...',
                       onSubmitted: () => _commitCrystalInput(isSlot1),
                       onTapOutside: () => _onCrystalTapOutside(isSlot1),
                       onChanged: (_) {
@@ -1535,11 +1601,7 @@ class _CrystalPickerDialogState extends State<_CrystalPickerDialog> {
           if (_categoryFilter != null && entry.category != _categoryFilter) {
             return false;
           }
-          if (normalizedQuery.isEmpty) {
-            return true;
-          }
-          return entry.name.toLowerCase().contains(normalizedQuery) ||
-              entry.key.toLowerCase().contains(normalizedQuery);
+          return _crystalEntryMatchesQuery(entry, normalizedQuery);
         })
         .toList(growable: false);
   }
@@ -1615,7 +1677,7 @@ class _CrystalPickerDialogState extends State<_CrystalPickerDialog> {
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white70,
                 decoration: InputDecoration(
-                  hintText: 'Search crystal name or key...',
+                  hintText: 'Search crystal name, stat...',
                   hintStyle: const TextStyle(color: Colors.white54),
                   prefixIcon: const Icon(Icons.search, color: Colors.white70),
                   isDense: true,

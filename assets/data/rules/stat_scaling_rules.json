@@ -26,22 +26,22 @@
     "MDEF": {
       "heavy": 0.25,
       "light": 1,
-      "normal": 1,
-      "no_armor": 0.1
+      "normal": 0.1,
+      "no_armor": 2
     },
 
     "DEF": {
-      "heavy": 1,
-      "light": 0.25,
-      "normal": 1,
-      "no_armor": 0.1
+      "heavy": 0.25,
+      "light": 1,
+      "normal": 0.1,
+      "no_armor": 2
     },
 
     "FLEE": {
-      "heavy": 0.75,
-      "light": 2,
-      "normal": 1,
-      "no_armor": 2
+      "heavy": 1.75,
+      "light": 1,
+      "normal": 2,
+      "no_armor": 0.75
     }
   },
 

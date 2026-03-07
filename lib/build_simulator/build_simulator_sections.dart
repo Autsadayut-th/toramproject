@@ -239,9 +239,176 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
             slotLabel: 'Special',
             item: _findEquipmentByKey(_ringId),
           ),
+          const SizedBox(height: 12),
+          _buildGachaStatsSection(),
         ],
       ),
     );
+  }
+
+  Widget _buildGachaStatsSection() {
+    final List<Map<String, String>> gachaStats = _buildGachaStatsRows();
+    final bool hasStats = gachaStats.isNotEmpty;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text(
+          'Avatar Gacha:',
+          style: TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w700,
+            color: Color(0xFFE0E0E0),
+          ),
+        ),
+        const SizedBox(height: 2),
+        Padding(
+          padding: const EdgeInsets.only(left: 14),
+          child: Text(
+            hasStats ? 'Top / Bottom / Accessory' : '-',
+            style: TextStyle(
+              fontSize: 13,
+              color: hasStats ? const Color(0xFF9BC9FF) : Colors.white54,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        if (!hasStats) ...<Widget>[
+          const SizedBox(height: 4),
+          const Padding(
+            padding: EdgeInsets.only(left: 14),
+            child: Text(
+              'No gacha selected',
+              style: TextStyle(fontSize: 12, color: Colors.white54),
+            ),
+          ),
+        ] else ...<Widget>[
+          const SizedBox(height: 5),
+          ...List<Widget>.generate(gachaStats.length, (int index) {
+            final Map<String, String> row = gachaStats[index];
+            final String label = row['label'] ?? '-';
+            final String value = row['value'] ?? '0';
+            final bool isNegative = value.startsWith('-');
+            return Padding(
+              padding: EdgeInsets.only(
+                left: 14,
+                bottom: index == gachaStats.length - 1 ? 0 : 3,
+              ),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      label,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.white70,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    value,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: isNegative
+                          ? const Color(0xFFA84B4B)
+                          : Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+        ],
+      ],
+    );
+  }
+
+  List<Map<String, String>> _buildGachaStatsRows() {
+    final List<Map<String, String>> rows = <Map<String, String>>[];
+    _appendGachaStatsRow(
+      rows: rows,
+      sectionLabel: 'Top',
+      slotIndex: 1,
+      rawSelection: _gacha1Stat1,
+    );
+    _appendGachaStatsRow(
+      rows: rows,
+      sectionLabel: 'Top',
+      slotIndex: 2,
+      rawSelection: _gacha1Stat2,
+    );
+    _appendGachaStatsRow(
+      rows: rows,
+      sectionLabel: 'Top',
+      slotIndex: 3,
+      rawSelection: _gacha1Stat3,
+    );
+    _appendGachaStatsRow(
+      rows: rows,
+      sectionLabel: 'Bottom',
+      slotIndex: 1,
+      rawSelection: _gacha2Stat1,
+    );
+    _appendGachaStatsRow(
+      rows: rows,
+      sectionLabel: 'Bottom',
+      slotIndex: 2,
+      rawSelection: _gacha2Stat2,
+    );
+    _appendGachaStatsRow(
+      rows: rows,
+      sectionLabel: 'Bottom',
+      slotIndex: 3,
+      rawSelection: _gacha2Stat3,
+    );
+    _appendGachaStatsRow(
+      rows: rows,
+      sectionLabel: 'Accessory',
+      slotIndex: 1,
+      rawSelection: _gacha3Stat1,
+    );
+    _appendGachaStatsRow(
+      rows: rows,
+      sectionLabel: 'Accessory',
+      slotIndex: 2,
+      rawSelection: _gacha3Stat2,
+    );
+    _appendGachaStatsRow(
+      rows: rows,
+      sectionLabel: 'Accessory',
+      slotIndex: 3,
+      rawSelection: _gacha3Stat3,
+    );
+    return rows;
+  }
+
+  void _appendGachaStatsRow({
+    required List<Map<String, String>> rows,
+    required String sectionLabel,
+    required int slotIndex,
+    required String rawSelection,
+  }) {
+    final String selection = rawSelection.trim();
+    if (selection.isEmpty) {
+      return;
+    }
+
+    final EquipmentStat? decoded =
+        AvatarGachaDataService.decodeSelectionAsEquipmentStat(selection);
+    if (decoded == null) {
+      rows.add(<String, String>{
+        'label': '$sectionLabel Slot $slotIndex',
+        'value': selection,
+      });
+      return;
+    }
+
+    rows.add(<String, String>{
+      'label':
+          '$sectionLabel Slot $slotIndex - ${_equipmentStatLabel(decoded)}',
+      'value': _equipmentStatValue(decoded),
+    });
   }
 
   Widget _buildEquipmentSlotStatsSection({
@@ -703,60 +870,60 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
     return rawName;
   }
 
-  String _savedSlotLabel(dynamic rawKey) {
-    final String key = rawKey?.toString().trim() ?? '';
-    if (key.isEmpty) {
-      return '-';
+  String _savedBuildCodePreview(Map<String, dynamic> build) {
+    final String code = BuildPersistenceService.encodeBuildShareCode(build);
+    if (code.isEmpty) {
+      return 'TB...';
     }
-    final EquipmentLibraryItem? item = _findEquipmentByKey(key);
-    if (item == null) {
-      return key;
+    const int maxVisibleChars = 28;
+    if (code.length <= maxVisibleChars) {
+      return code;
     }
-    return item.name;
+    return '${code.substring(0, maxVisibleChars)}...';
   }
 
-  int _savedSummaryValue(Map<String, dynamic> build, String key) {
-    final dynamic rawSummary = build['summary'];
-    if (rawSummary is! Map) {
-      return 0;
+  String _savedBuildSavedAtPreview(Map<String, dynamic> build) {
+    final String savedAtRaw = BuildPersistenceService.readStringValue(
+      build['savedAt'],
+    ).trim();
+    final DateTime? savedAt = savedAtRaw.isEmpty
+        ? null
+        : DateTime.tryParse(savedAtRaw);
+    if (savedAt == null) {
+      return 'Saved: -';
     }
-    return BuildPersistenceService.readIntValue(rawSummary[key]);
-  }
-
-  String _savedBuildEquipmentPreview(Map<String, dynamic> build) {
-    return 'Main: ${_savedSlotLabel(build['mainWeaponId'])} | '
-        'Sub: ${_savedSlotLabel(build['subWeaponId'])} | '
-        'Armor: ${_savedSlotLabel(build['armorId'])} | '
-        'Helmet: ${_savedSlotLabel(build['helmetId'])} | '
-        'Ring: ${_savedSlotLabel(build['ringId'])}';
-  }
-
-  String _savedBuildStatsPreview(Map<String, dynamic> build) {
-    return 'ATK ${_savedSummaryValue(build, 'ATK')}  '
-        'DEF ${_savedSummaryValue(build, 'DEF')}  '
-        'MDEF ${_savedSummaryValue(build, 'MDEF')}  '
-        'HP ${_savedSummaryValue(build, 'HP')}  '
-        'MP ${_savedSummaryValue(build, 'MP')}';
+    final DateTime localSavedAt = savedAt.toLocal();
+    final String day = localSavedAt.day.toString().padLeft(2, '0');
+    final String month = localSavedAt.month.toString().padLeft(2, '0');
+    final String year = localSavedAt.year.toString();
+    final String hour = localSavedAt.hour.toString().padLeft(2, '0');
+    final String minute = localSavedAt.minute.toString().padLeft(2, '0');
+    return 'Saved: $day/$month/$year $hour:$minute';
   }
 
   Widget _buildSaveLoadSection() {
     final int? maxSavedBuilds = _maxSavedBuilds;
     final bool hasSaveLimit = maxSavedBuilds != null;
     final bool canSaveBuild = !hasSaveLimit || !_isSavedBuildLimitReached;
+    const int maxVisibleSavedBuilds = 5;
+    final int visibleSavedBuildCount =
+        _savedBuilds.length > maxVisibleSavedBuilds
+        ? maxVisibleSavedBuilds
+        : _savedBuilds.length;
     final savedWidgets = <Widget>[];
-    for (int i = 0; i < _savedBuilds.length; i++) {
+    for (int i = 0; i < visibleSavedBuildCount; i++) {
       final Map<String, dynamic> build = _savedBuilds[i];
       final String name = _savedBuildDisplayName(build, i);
       savedWidgets.add(
         InkWell(
           onTap: () => _onLoadBuild(i),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
           child: Container(
-            margin: const EdgeInsets.only(bottom: 8),
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            margin: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: const Color(0xFF121212).withValues(alpha: 0.9),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: const Color(0xFFFFFFFF).withValues(alpha: 0.18),
               ),
@@ -764,51 +931,76 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        name,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Color(0xFFFFFFFF),
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () => _onLoadBuild(i),
-                      child: const Text('Load', style: TextStyle(fontSize: 11)),
-                    ),
-                    TextButton(
-                      onPressed: () => _onDeleteBuild(i),
-                      child: const Text(
-                        'X',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFFFFFFFF),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
                 Text(
-                  _savedBuildEquipmentPreview(build),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 11, color: Colors.white70),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  _savedBuildStatsPreview(build),
+                  name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                    fontSize: 11,
-                    color: Color(0xFFB7FFC6),
-                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                    color: Color(0xFFFFFFFF),
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  alignment: WrapAlignment.center,
+                  runAlignment: WrapAlignment.center,
+                  children: <Widget>[
+                    _buildDesktopSavedBuildActionChip(
+                      label: 'Load',
+                      color: Colors.white,
+                      onTap: () => _onLoadBuild(i),
+                    ),
+                    _buildDesktopSavedBuildActionChip(
+                      label: 'Export Code',
+                      color: Colors.white70,
+                      onTap: () => _onCopyBuildShareCode(i),
+                    ),
+                    _buildDesktopSavedBuildActionChip(
+                      label: 'X',
+                      color: Colors.white70,
+                      onTap: () => _onDeleteBuild(i),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 8,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0B0B0B),
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: const Color(0x22FFFFFF)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        _savedBuildCodePreview(build),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Colors.white60,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        _savedBuildSavedAtPreview(build),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Colors.white54,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -819,115 +1011,186 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
     }
 
     return Container(
-      decoration: _panelDecoration(),
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0F0F0F),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0x33FFFFFF)),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _sectionTitle(Icons.save, 'Save / Load Build'),
-          if (hasSaveLimit) ...<Widget>[
-            const SizedBox(height: 6),
-            Text(
-              BuildSimulatorScreenState._guestSaveLimitMessage,
-              style: TextStyle(
-                fontSize: 11,
-                color: canSaveBuild ? Colors.white60 : const Color(0xFFFFB3B3),
-              ),
-            ),
-          ],
-          const SizedBox(height: 16),
-          TextField(
-            controller: _buildNameController,
-            style: const TextStyle(fontSize: 13, color: Color(0xFFFFFFFF)),
-            decoration: InputDecoration(
-              hintText: 'Enter build name...',
-              hintStyle: const TextStyle(
-                fontSize: 12,
-                color: Color(0x88FFFFFF),
-              ),
-              filled: true,
-              fillColor: const Color(0xFF000000).withValues(alpha: 0.95),
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 12,
-                vertical: 10,
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(
-                  color: const Color(0xFFFFFFFF).withValues(alpha: 0.28),
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(color: Color(0xFFFFFFFF)),
-              ),
-            ),
-          ),
-          const SizedBox(height: 12),
           Row(
-            children: [
-              Expanded(
-                child: _gradientButton(
-                  label: 'Save Build',
-                  onTap: canSaveBuild ? _onSaveBuild : null,
+            children: <Widget>[
+              const Icon(Icons.save_outlined, color: Colors.white70, size: 18),
+              const SizedBox(width: 8),
+              const Expanded(
+                child: Text(
+                  'Save / Load Build',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: _gradientButton(
-                  label: 'Clear All',
-                  isSecondary: true,
-                  onTap: _onClearAll,
+              const SizedBox(width: 8),
+              InkWell(
+                onTap: _onRequestClearAll,
+                borderRadius: BorderRadius.circular(8),
+                child: Ink(
+                  width: 28,
+                  height: 28,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1A1A1A),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: const Color(0xFFFFFFFF).withValues(alpha: 0.24),
+                    ),
+                  ),
+                  child: const Icon(
+                    Icons.cleaning_services,
+                    size: 15,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 16),
-          SizedBox(
-            height: 180,
-            child: SingleChildScrollView(child: Column(children: savedWidgets)),
+          const SizedBox(height: 10),
+          if (hasSaveLimit) ...<Widget>[
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                BuildSimulatorScreenState._guestSaveLimitMessage,
+                style: TextStyle(
+                  color: canSaveBuild
+                      ? Colors.white70
+                      : const Color(0xFFFFB3B3),
+                  fontSize: 11,
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+          ],
+          TextField(
+            controller: _buildNameController,
+            onSubmitted: (_) => _onSaveBuild(),
+            style: const TextStyle(color: Colors.white, fontSize: 13),
+            decoration: InputDecoration(
+              hintText: 'Enter build name...',
+              hintStyle: const TextStyle(color: Colors.white54),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 14,
+              ),
+              filled: true,
+              fillColor: const Color(0xFF0A0A0A),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: Color(0x44FFFFFF)),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: Color(0x77FFFFFF)),
+              ),
+            ),
           ),
+          const SizedBox(height: 10),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: canSaveBuild ? _onSaveBuild : null,
+                  icon: const Icon(Icons.save, size: 16),
+                  label: const Text('Save Build'),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    side: const BorderSide(color: Color(0x66FFFFFF)),
+                    shape: const StadiumBorder(),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: _onRequestImportBuildShareCode,
+                  icon: const Icon(Icons.download_for_offline, size: 16),
+                  label: const Text('Import Code'),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.white70,
+                    side: const BorderSide(color: Color(0x44FFFFFF)),
+                    shape: const StadiumBorder(),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          if (_savedBuilds.isEmpty)
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: const Color(0xFF101010),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: const Color(0x33FFFFFF)),
+              ),
+              child: const Text(
+                'No saved builds yet.',
+                style: TextStyle(color: Colors.white70, fontSize: 12),
+              ),
+            )
+          else
+            Column(children: savedWidgets),
+          if (_savedBuilds.length > visibleSavedBuildCount)
+            const Padding(
+              padding: EdgeInsets.only(top: 2),
+              child: Text(
+                'Showing first 5 builds.',
+                style: TextStyle(color: Colors.white54, fontSize: 11),
+              ),
+            ),
         ],
       ),
     );
   }
 
-  Widget _gradientButton({
+  Widget _buildDesktopSavedBuildActionChip({
     required String label,
+    required Color color,
     required VoidCallback? onTap,
-    bool isSecondary = false,
   }) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(10),
-      child: Ink(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          gradient: onTap == null
-              ? const LinearGradient(
-                  colors: [Color(0xFF191919), Color(0xFF101010)],
-                )
-              : isSecondary
-              ? const LinearGradient(
-                  colors: [Color(0xFF222222), Color(0xFF111111)],
-                )
-              : const LinearGradient(
-                  colors: [Color(0xFF2A2A2A), Color(0xFF111111)],
-                ),
-        ),
-        child: Center(
+    final bool isEnabled = onTap != null;
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(9),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+          constraints: const BoxConstraints(minHeight: 36),
+          decoration: BoxDecoration(
+            color: isEnabled
+                ? const Color(0xFF141414)
+                : const Color(0xFF111111),
+            borderRadius: BorderRadius.circular(9),
+            border: Border.all(
+              color: isEnabled
+                  ? const Color(0x66FFFFFF)
+                  : const Color(0x22FFFFFF),
+            ),
+          ),
           child: Text(
-            label.toUpperCase(),
+            label,
+            textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 11,
+              color: isEnabled ? color : Colors.white24,
+              fontSize: 12,
               fontWeight: FontWeight.w700,
-              color: onTap == null
-                  ? Colors.white54
-                  : isSecondary
-                  ? Colors.white
-                  : const Color(0xFFFFFFFF),
-              letterSpacing: 0.8,
             ),
           ),
         ),

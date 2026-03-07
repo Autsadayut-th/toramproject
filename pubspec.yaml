@@ -36,7 +36,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   firebase_core: ^4.4.0
   firebase_auth: ^6.1.4
+  cloud_firestore: ^6.0.3
   http: ^1.5.0
+  google_fonts: ^6.3.2
 
 dev_dependencies:
   flutter_test:
@@ -86,6 +88,8 @@ flutter:
     - assets/data/monster_library/
     - assets/data/system/
     - assets/data/rules/
+    - assets/logo/logo.png
+    - assets/fonts/MaterialIcons-Regular.otf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

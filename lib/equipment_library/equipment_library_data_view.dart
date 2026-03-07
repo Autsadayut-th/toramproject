@@ -280,16 +280,15 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
     required List<String> typeFilterKeys,
     required String? activeTypeFilterKey,
   }) async {
+    final Set<String>? widgetAllowedTypes = _normalizeTypeSet(
+      widget.allowedTypes,
+    );
     if (categories.length <= 1 && typeFilterKeys.length <= 1) {
       return;
     }
 
-    final Set<String>? widgetAllowedTypes = _normalizeTypeSet(
-      widget.allowedTypes,
-    );
     String selectedCategory = activeCategory;
     String? selectedTypeKey = activeTypeFilterKey;
-
     final bool hasCategoryChoices = categories.length > 1;
 
     final ({String category, String? typeKey})? selection =
@@ -828,7 +827,7 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
       style: const TextStyle(color: Colors.white),
       cursorColor: _libraryWarmAccent,
       decoration: InputDecoration(
-        hintText: 'Search by name, key, type, color...',
+        hintText: 'Search by name, key, type, color, stat...',
         hintStyle: const TextStyle(color: Colors.white54),
         suffixIcon: _searchQuery.isEmpty
             ? null

@@ -1,0 +1,46 @@
+{
+  "personal_stat_system": {
+
+    "unlock_level": 40,
+
+    "max_selectable": 1,
+
+    "allow_none": true,
+
+    "starting_value": 1,
+
+    "max_value": 255,
+
+    "description": "เมื่อถึงเลเวล 40 ผู้เล่นสามารถเลือก Personal Stat ได้ 1 สาย หรือไม่เลือกเลยก็ได้ หากเลือกแล้วค่าสเตตัสจะเริ่มที่ 1 และสามารถอัปได้สูงสุดที่ 255"
+
+  },
+
+  "personal_stats": {
+
+    "LUK": {
+      "name": "Luck",
+      "effect": "increase_drop_rate",
+      "description": "เพิ่มโอกาสดรอปไอเทมจากมอนสเตอร์"
+    },
+
+    "CRT": {
+      "name": "Critical",
+      "effect": "increase_critical_rate",
+      "description": "เพิ่มโอกาสติด Critical ของสกิลกายภาพ"
+    },
+
+    "MTL": {
+      "name": "Mental",
+      "effect": "increase_ailment_resistance",
+      "description": "เพิ่มความต้านทานสถานะผิดปกติ"
+    },
+
+    "TEC": {
+      "name": "Technique",
+      "effect": "increase_production_success_rate",
+      "description": "เพิ่มอัตราสำเร็จของการผลิตไอเทม"
+    }
+
+  }
+
+}

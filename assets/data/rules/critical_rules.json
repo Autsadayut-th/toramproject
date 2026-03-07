@@ -1,0 +1,59 @@
+{
+  "critical_rules": {
+
+    "critical_rate": {
+
+      "base": 25,
+
+      "crt_scaling": {
+        "stat": "CRT",
+        "ratio": 0.25,
+        "description": "CRT 4 = Critical Rate 1"
+      },
+
+      "formula": "base + (CRT * 0.25) + flat_critical_rate + percent_critical_rate",
+
+      "notes": [
+        "Critical Rate พื้นฐานของตัวละครคือ 25",
+        "CRT 4 = Critical Rate 1",
+        "Flat Critical Rate คือค่าหน่วย เช่น +20",
+        "Percent Critical Rate คือค่า % เช่น +10%"
+      ]
+    },
+
+
+
+    "critical_damage": {
+
+      "base": 150,
+
+      "str_scaling": {
+        "stat": "STR",
+        "ratio": 0.2,
+        "description": "STR 1 เพิ่ม Critical Damage 0.2"
+      },
+
+      "formula": "150 + (STR * 0.2) + flat_critical_damage + percent_critical_damage",
+
+      "damage_formula": "final_damage = base_damage * (critical_damage / 100)",
+
+      "notes": [
+        "Critical Damage พื้นฐานคือ 150",
+        "STR เพิ่ม Critical Damage 0.2 ต่อ 1 STR",
+        "เมื่อรวม Critical Damage แล้วต้องหาร 100 เพื่อใช้เป็นตัวคูณดาเมจ"
+      ]
+    },
+
+
+
+    "critical_soft_cap": {
+
+      "threshold": 300,
+
+      "formula": "if critical_damage > 300 then final_cd = 300 + ((critical_damage - 300) / 2)",
+
+      "description": "Critical Damage ที่เกิน 300 จะเพิ่มจริงเพียงครึ่งเดียว"
+    }
+
+  }
+}

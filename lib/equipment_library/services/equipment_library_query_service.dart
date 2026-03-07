@@ -85,10 +85,22 @@ class EquipmentLibraryQueryService {
           if (normalizedQuery.isEmpty) {
             return true;
           }
-          return item.name.toLowerCase().contains(normalizedQuery) ||
+          if (item.name.toLowerCase().contains(normalizedQuery) ||
               item.key.toLowerCase().contains(normalizedQuery) ||
               item.type.toLowerCase().contains(normalizedQuery) ||
-              item.color.toLowerCase().contains(normalizedQuery);
+              item.color.toLowerCase().contains(normalizedQuery)) {
+            return true;
+          }
+
+          // Let the main search match stat_key too (ex: "atk", "critical_rate").
+          return item.stats.any((EquipmentStat stat) {
+            final String statKey = stat.statKey.trim().toLowerCase();
+            if (statKey.isEmpty) {
+              return false;
+            }
+            return statKey.contains(normalizedQuery) ||
+                statKey.replaceAll('_', ' ').contains(normalizedQuery);
+          });
         })
         .toList(growable: false);
   }

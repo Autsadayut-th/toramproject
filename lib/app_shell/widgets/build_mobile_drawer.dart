@@ -36,35 +36,6 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
     super.dispose();
   }
 
-  bool _toBool(dynamic value) {
-    if (value is bool) {
-      return value;
-    }
-    if (value is num) {
-      return value != 0;
-    }
-    if (value is String) {
-      final String normalized = value.trim().toLowerCase();
-      if (normalized == 'true' || normalized == '1') {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  int _toInt(dynamic value) {
-    if (value is int) {
-      return value;
-    }
-    if (value is num) {
-      return value.toInt();
-    }
-    if (value is String) {
-      return int.tryParse(value.trim()) ?? 0;
-    }
-    return 0;
-  }
-
   String _buildIdOf(Map<String, dynamic> build) {
     return build['id']?.toString().trim() ?? '';
   }
@@ -77,20 +48,35 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
     return rawName;
   }
 
-  int _summaryOf(Map<String, dynamic> build, String key) {
-    final dynamic rawSummary = build['summary'];
-    if (rawSummary is! Map) {
-      return 0;
+  String _savedBuildCodeLine(Map<String, dynamic> build) {
+    final String code = BuildPersistenceService.encodeBuildShareCode(build);
+    if (code.isEmpty) {
+      return 'TB...';
     }
-    return _toInt(rawSummary[key]);
+    const int maxVisibleChars = 28;
+    if (code.length <= maxVisibleChars) {
+      return code;
+    }
+    return '${code.substring(0, maxVisibleChars)}...';
   }
 
-  String _savedBuildStatsLine(Map<String, dynamic> build) {
-    return 'ATK ${_summaryOf(build, 'ATK')}  '
-        'DEF ${_summaryOf(build, 'DEF')}  '
-        'MDEF ${_summaryOf(build, 'MDEF')}  '
-        'HP ${_summaryOf(build, 'HP')}  '
-        'MP ${_summaryOf(build, 'MP')}';
+  String _savedBuildSavedAtLine(Map<String, dynamic> build) {
+    final String savedAtRaw = BuildPersistenceService.readStringValue(
+      build['savedAt'],
+    ).trim();
+    final DateTime? savedAt = savedAtRaw.isEmpty
+        ? null
+        : DateTime.tryParse(savedAtRaw);
+    if (savedAt == null) {
+      return 'Saved: -';
+    }
+    final DateTime localSavedAt = savedAt.toLocal();
+    final String day = localSavedAt.day.toString().padLeft(2, '0');
+    final String month = localSavedAt.month.toString().padLeft(2, '0');
+    final String year = localSavedAt.year.toString();
+    final String hour = localSavedAt.hour.toString().padLeft(2, '0');
+    final String minute = localSavedAt.minute.toString().padLeft(2, '0');
+    return 'Saved: $day/$month/$year $hour:$minute';
   }
 
   bool _isRemoteAiSource(String source) {
@@ -383,6 +369,151 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
     _buildNameController.clear();
   }
 
+  void _showMessage(String message) {
+    if (!mounted) {
+      return;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: const Color(0xFF1A1A1A),
+      ),
+    );
+  }
+
+  Future<void> _onCopyBuildShareCode(Map<String, dynamic> build) async {
+    final String code = BuildPersistenceService.encodeBuildShareCode(build);
+    await Clipboard.setData(ClipboardData(text: code));
+    _showMessage('Export code copied to clipboard.');
+  }
+
+  void _onImportBuildShareCode(String rawCode) {
+    final String raw = rawCode.trim();
+    if (raw.isEmpty) {
+      _showMessage('Paste build code first.');
+      return;
+    }
+    final Map<String, dynamic>? decoded =
+        BuildPersistenceService.decodeBuildShareCode(
+          raw,
+          summaryTemplate: BuildCalculatorService.summaryTemplate,
+          fallbackIndex: widget.coordinator.savedBuilds.length,
+        );
+    if (decoded == null) {
+      _showMessage('Invalid build code.');
+      return;
+    }
+
+    final int before = widget.coordinator.savedBuilds.length;
+    widget.coordinator.mergeSavedBuilds(<Map<String, dynamic>>[decoded]);
+    final int after = widget.coordinator.savedBuilds.length;
+    if (after > before) {
+      _showMessage('Build code imported.');
+    }
+  }
+
+  Future<void> _onRequestImportBuildShareCode() async {
+    final TextEditingController codeController = TextEditingController();
+    final String? code = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFF1A1A1A),
+          title: const Text(
+            'Import Build Code',
+            style: TextStyle(color: Colors.white),
+          ),
+          content: TextField(
+            controller: codeController,
+            autofocus: true,
+            minLines: 2,
+            maxLines: 4,
+            style: const TextStyle(color: Colors.white, fontSize: 12),
+            decoration: InputDecoration(
+              hintText: 'Paste shared build code (TB...)',
+              hintStyle: const TextStyle(color: Colors.white54),
+              filled: true,
+              fillColor: const Color(0xFF0F0F0F),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 10,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(
+                  color: const Color(0xFFFFFFFF).withValues(alpha: 0.22),
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: Color(0x66FFFFFF)),
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancel'),
+            ),
+            FilledButton(
+              onPressed: () {
+                Navigator.of(context).pop(codeController.text);
+              },
+              style: FilledButton.styleFrom(
+                backgroundColor: const Color(0xFF4A4A4A),
+              ),
+              child: const Text('Import'),
+            ),
+          ],
+        );
+      },
+    );
+    codeController.dispose();
+    if (code == null) {
+      return;
+    }
+    _onImportBuildShareCode(code);
+  }
+
+  Future<void> _onRequestClearAll() async {
+    final bool confirmed =
+        await showDialog<bool>(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              backgroundColor: const Color(0xFF1A1A1A),
+              title: const Text(
+                'Clear All Data',
+                style: TextStyle(color: Colors.white),
+              ),
+              content: const Text(
+                'Delete all current values and saved builds?',
+                style: TextStyle(color: Colors.white70),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: const Text('Cancel'),
+                ),
+                FilledButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  style: FilledButton.styleFrom(
+                    backgroundColor: const Color(0xFF4A4A4A),
+                  ),
+                  child: const Text('Delete'),
+                ),
+              ],
+            );
+          },
+        ) ??
+        false;
+    if (!confirmed) {
+      return;
+    }
+    widget.coordinator.clearAllData();
+  }
+
   bool get _hasSaveLimit => !widget.hasAdvancedAccess;
   bool get _canSaveBuild =>
       !_hasSaveLimit ||
@@ -402,6 +533,9 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                 coordinator.selectedItemDetails;
             final List<Map<String, dynamic>> savedBuilds =
                 coordinator.savedBuilds;
+            final List<Map<String, dynamic>> visibleSavedBuilds = savedBuilds
+                .take(5)
+                .toList(growable: false);
             final List<String> aiRecommendations =
                 coordinator.aiRecommendations;
             final bool isAiLoading = coordinator.isAiRecommendationLoading;
@@ -509,15 +643,39 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                 _DrawerSectionCard(
                   title: 'Save / Load Build',
                   icon: Icons.save_outlined,
+                  trailing: InkWell(
+                    onTap: _onRequestClearAll,
+                    borderRadius: BorderRadius.circular(8),
+                    child: Ink(
+                      width: 28,
+                      height: 28,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1A1A1A),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: const Color(
+                            0xFFFFFFFF,
+                          ).withValues(alpha: 0.24),
+                        ),
+                      ),
+                      child: const Icon(
+                        Icons.cleaning_services,
+                        size: 15,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                   child: Column(
                     children: <Widget>[
                       if (hasSaveLimit) ...<Widget>[
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             _guestSaveLimitMessage,
                             style: TextStyle(
-                              color: Colors.white70,
+                              color: canSaveBuild
+                                  ? Colors.white70
+                                  : const Color(0xFFFFB3B3),
                               fontSize: 11,
                             ),
                           ),
@@ -536,18 +694,18 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                           hintStyle: const TextStyle(color: Colors.white54),
                           contentPadding: const EdgeInsets.symmetric(
                             horizontal: 12,
-                            vertical: 10,
+                            vertical: 14,
                           ),
                           filled: true,
                           fillColor: const Color(0xFF0A0A0A),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(12),
                             borderSide: const BorderSide(
                               color: Color(0x44FFFFFF),
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(12),
                             borderSide: const BorderSide(
                               color: Color(0x77FFFFFF),
                             ),
@@ -561,14 +719,15 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                             child: OutlinedButton.icon(
                               onPressed: canSaveBuild ? _onSaveBuild : null,
                               icon: const Icon(Icons.save, size: 16),
-                              label: const Text('Save'),
+                              label: const Text('Save Build'),
                               style: OutlinedButton.styleFrom(
                                 foregroundColor: Colors.white,
                                 side: const BorderSide(
                                   color: Color(0x66FFFFFF),
                                 ),
+                                shape: const StadiumBorder(),
                                 padding: const EdgeInsets.symmetric(
-                                  vertical: 10,
+                                  vertical: 12,
                                 ),
                               ),
                             ),
@@ -576,19 +735,20 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                           const SizedBox(width: 8),
                           Expanded(
                             child: OutlinedButton.icon(
-                              onPressed: coordinator.clearAllData,
+                              onPressed: _onRequestImportBuildShareCode,
                               icon: const Icon(
-                                Icons.cleaning_services,
+                                Icons.download_for_offline,
                                 size: 16,
                               ),
-                              label: const Text('Clear'),
+                              label: const Text('Import Code'),
                               style: OutlinedButton.styleFrom(
                                 foregroundColor: Colors.white70,
                                 side: const BorderSide(
                                   color: Color(0x44FFFFFF),
                                 ),
+                                shape: const StadiumBorder(),
                                 padding: const EdgeInsets.symmetric(
-                                  vertical: 10,
+                                  vertical: 12,
                                 ),
                               ),
                             ),
@@ -616,33 +776,47 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                         )
                       else
                         Column(
-                          children: List<Widget>.generate(savedBuilds.length, (
-                            int index,
-                          ) {
-                            final Map<String, dynamic> build =
-                                savedBuilds[index];
-                            final String buildId = _buildIdOf(build);
-                            final bool canControl = buildId.isNotEmpty;
-                            return _SavedBuildTile(
-                              name: _buildNameOf(build, index),
-                              statsLine: _savedBuildStatsLine(build),
-                              isFavorite: _toBool(build['isFavorite']),
-                              onToggleFavorite: canControl
-                                  ? () => coordinator.toggleFavoriteBuildById(
-                                      buildId,
-                                    )
-                                  : null,
-                              onLoad: canControl
-                                  ? () {
-                                      coordinator.loadBuildById(buildId);
-                                      Navigator.of(context).pop();
-                                    }
-                                  : null,
-                              onDelete: canControl
-                                  ? () => coordinator.deleteBuildById(buildId)
-                                  : null,
-                            );
-                          }),
+                          children: List<Widget>.generate(
+                            visibleSavedBuilds.length,
+                            (int index) {
+                              final Map<String, dynamic> build =
+                                  visibleSavedBuilds[index];
+                              final String buildId = _buildIdOf(build);
+                              final bool canControl = buildId.isNotEmpty;
+                              return _SavedBuildTile(
+                                name: _buildNameOf(build, index),
+                                codeLine: _savedBuildCodeLine(build),
+                                savedAtLine: _savedBuildSavedAtLine(build),
+                                onTap: canControl
+                                    ? () {
+                                        coordinator.loadBuildById(buildId);
+                                        Navigator.of(context).pop();
+                                      }
+                                    : null,
+                                onLoad: canControl
+                                    ? () {
+                                        coordinator.loadBuildById(buildId);
+                                        Navigator.of(context).pop();
+                                      }
+                                    : null,
+                                onDelete: canControl
+                                    ? () => coordinator.deleteBuildById(buildId)
+                                    : null,
+                                onShare: () => _onCopyBuildShareCode(build),
+                              );
+                            },
+                          ),
+                        ),
+                      if (savedBuilds.length > visibleSavedBuilds.length)
+                        const Padding(
+                          padding: EdgeInsets.only(top: 2),
+                          child: Text(
+                            'Showing first 5 builds.',
+                            style: TextStyle(
+                              color: Colors.white54,
+                              fontSize: 11,
+                            ),
+                          ),
                         ),
                     ],
                   ),

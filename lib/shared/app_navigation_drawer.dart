@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-enum AppNavigationPage { build, equipment, skill, saved, compare, settings }
+const String _appLogoAssetPath = 'assets/logo/logo.png';
+
+enum AppNavigationPage {
+  build,
+  equipment,
+  critical,
+  skill,
+  saved,
+  compare,
+  settings,
+}
 
 class AppNavigationDrawer extends StatelessWidget {
   const AppNavigationDrawer({
@@ -9,6 +19,7 @@ class AppNavigationDrawer extends StatelessWidget {
     required this.currentPage,
     required this.onOpenBuild,
     required this.onOpenEquipment,
+    this.onOpenCritical,
     required this.onOpenSkill,
     required this.onOpenSaved,
     required this.onOpenCompare,
@@ -18,6 +29,7 @@ class AppNavigationDrawer extends StatelessWidget {
   final AppNavigationPage currentPage;
   final VoidCallback onOpenBuild;
   final VoidCallback onOpenEquipment;
+  final VoidCallback? onOpenCritical;
   final VoidCallback onOpenSkill;
   final VoidCallback onOpenSaved;
   final VoidCallback onOpenCompare;
@@ -45,15 +57,38 @@ class AppNavigationDrawer extends StatelessWidget {
                         ),
                       ),
                     ),
-                    child: const Row(
+                    child: Row(
                       children: <Widget>[
-                        CircleAvatar(
-                          radius: 18,
-                          backgroundColor: Color(0xFF111111),
-                          child: Icon(Icons.auto_awesome, color: Colors.white),
+                        Container(
+                          width: 36,
+                          height: 36,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF0E0E0E),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: const Color(
+                                0xFFFFFFFF,
+                              ).withValues(alpha: 0.28),
+                            ),
+                          ),
+                          padding: const EdgeInsets.all(4),
+                          child: Image.asset(
+                            _appLogoAssetPath,
+                            fit: BoxFit.contain,
+                            gaplessPlayback: true,
+                            errorBuilder:
+                                (
+                                  BuildContext context,
+                                  Object _,
+                                  StackTrace? __,
+                                ) => const Icon(
+                                  Icons.auto_awesome,
+                                  color: Colors.white,
+                                ),
+                          ),
                         ),
-                        SizedBox(width: 12),
-                        Expanded(
+                        const SizedBox(width: 12),
+                        const Expanded(
                           child: Text(
                             'Build Tools',
                             style: TextStyle(
@@ -78,6 +113,13 @@ class AppNavigationDrawer extends StatelessWidget {
                     selected: currentPage == AppNavigationPage.equipment,
                     onTap: onOpenEquipment,
                   ),
+                  if (onOpenCritical != null)
+                    _tile(
+                      icon: Icons.track_changes,
+                      label: 'Critical Simulator',
+                      selected: currentPage == AppNavigationPage.critical,
+                      onTap: onOpenCritical!,
+                    ),
                   _tile(
                     icon: Icons.auto_awesome_mosaic_outlined,
                     label: 'Skill Menu',

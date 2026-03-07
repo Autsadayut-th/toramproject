@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:toramonline/frontend/app_shell/app_shell_page.dart';
+import 'package:toramonline/app_shell/app_shell_page.dart';
 
 void main() {
   testWidgets('MyApp uses mobile bottom navigation to switch pages', (
