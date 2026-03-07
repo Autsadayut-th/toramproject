@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'build_simulator_coordinator.dart';
 import '../equipment_library/models/equipment_library_item.dart';
 import '../equipment_library/repository/equipment_library_repository.dart';
-import '../shared/toram_radar_profile.dart';
 import 'services/ai_build_recommendation_service.dart';
 import 'services/avatar_gacha_data_service.dart';
 import 'services/build_ai_status_service.dart';
@@ -26,7 +25,7 @@ part 'build_simulator_layout.dart';
 part 'build_simulator_equipment_panel.dart';
 part 'build_simulator_sections.dart';
 
-enum _SummaryViewMode { metricList, tableGraph }
+enum _SummaryViewMode { metricList, itemDetails }
 
 class BuildSimulatorScreen extends StatefulWidget {
   const BuildSimulatorScreen({super.key, this.coordinator});
@@ -67,6 +66,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
 
   Map<String, EquipmentLibraryItem> _equipmentByKey =
       <String, EquipmentLibraryItem>{};
+  Map<String, String> _equipmentCategoryByKey = <String, String>{};
   Map<String, CrystalLibraryEntry> _crystalsByKey =
       <String, CrystalLibraryEntry>{};
   Map<String, String> _weaponTypeAlias = <String, String>{};
@@ -203,24 +203,32 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
           await _equipmentRepository.loadAllCategories();
       final Map<String, EquipmentLibraryItem> byKey =
           <String, EquipmentLibraryItem>{};
-      for (final List<EquipmentLibraryItem> items in allCategories.values) {
+      final Map<String, String> categoryByKey = <String, String>{};
+      for (final MapEntry<String, List<EquipmentLibraryItem>> entry
+          in allCategories.entries) {
+        final String normalizedCategory = entry.key.trim().toLowerCase();
+        final List<EquipmentLibraryItem> items = entry.value;
         for (final EquipmentLibraryItem item in items) {
           final String normalizedKey = item.key.trim().toLowerCase();
           if (normalizedKey.isEmpty) {
             continue;
           }
           byKey[normalizedKey] = item;
+          categoryByKey[normalizedKey] = normalizedCategory;
         }
       }
       if (!mounted) {
         return;
       }
-      _applyEquipmentCache(byKey);
+      _applyEquipmentCache(byKey, categoryByKey);
     } catch (_) {
       if (!mounted) {
         return;
       }
-      _applyEquipmentCache(const <String, EquipmentLibraryItem>{});
+      _applyEquipmentCache(
+        const <String, EquipmentLibraryItem>{},
+        const <String, String>{},
+      );
     }
   }
 
@@ -285,9 +293,13 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     } catch (_) {}
   }
 
-  void _applyEquipmentCache(Map<String, EquipmentLibraryItem> byKey) {
+  void _applyEquipmentCache(
+    Map<String, EquipmentLibraryItem> byKey,
+    Map<String, String> categoryByKey,
+  ) {
     _setUiState(() {
       _equipmentByKey = byKey;
+      _equipmentCategoryByKey = categoryByKey;
       _recalculateAll();
     });
   }

@@ -233,6 +233,7 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         selectedId: _mainWeaponId,
         selectedDisplayName: _equipmentName(_mainWeaponId),
         selectedEquipmentItem: _findEquipmentByKey(_mainWeaponId),
+        searchCandidates: _mainWeaponSearchCandidates(),
         statPreview: _equipmentStatPreview(_mainWeaponId),
         onEquipChanged: (id) {
           _setStateAndRecalculate(() => _mainWeaponId = id);
@@ -254,6 +255,51 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
     );
   }
 
+  List<EquipmentLibraryItem> _mainWeaponSearchCandidates() {
+    return _equipmentSearchCandidatesByCategory('weapon');
+  }
+
+  List<EquipmentLibraryItem> _subWeaponSearchCandidates() {
+    final List<EquipmentLibraryItem> candidates =
+        _equipmentSearchCandidatesByCategory('weapon');
+    return candidates
+        .where((EquipmentLibraryItem item) {
+          return _isSubWeaponSelectionAllowed(item.key);
+        })
+        .toList(growable: false);
+  }
+
+  List<EquipmentLibraryItem> _armorSearchCandidates() {
+    return _equipmentSearchCandidatesByCategory('armor');
+  }
+
+  List<EquipmentLibraryItem> _helmetSearchCandidates() {
+    return _equipmentSearchCandidatesByCategory('additional');
+  }
+
+  List<EquipmentLibraryItem> _ringSearchCandidates() {
+    return _equipmentSearchCandidatesByCategory('special');
+  }
+
+  List<EquipmentLibraryItem> _equipmentSearchCandidatesByCategory(
+    String category,
+  ) {
+    final String normalizedCategory = category.trim().toLowerCase();
+    final List<EquipmentLibraryItem> candidates = <EquipmentLibraryItem>[];
+    for (final MapEntry<String, EquipmentLibraryItem> entry
+        in _equipmentByKey.entries) {
+      final String itemCategory = _equipmentCategoryByKey[entry.key] ?? '';
+      if (itemCategory != normalizedCategory) {
+        continue;
+      }
+      candidates.add(entry.value);
+    }
+    candidates.sort((EquipmentLibraryItem a, EquipmentLibraryItem b) {
+      return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+    });
+    return candidates;
+  }
+
   Widget _buildSubWeaponSection({
     required bool compact,
     required double minHeight,
@@ -271,6 +317,7 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
       child: SubWeaponEquipmentSelector(
         selectedId: _subWeaponId,
         selectedEquipmentItem: _findEquipmentByKey(_subWeaponId),
+        searchCandidates: _subWeaponSearchCandidates(),
         statPreview: _equipmentStatPreview(_subWeaponId),
         allowedItemTypes: _allowedSubWeaponTypeNames(),
         onEquipChanged: (id) {
@@ -311,8 +358,13 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         });
       },
       child: ArmorEquipmentSelector(
+        armorMode: _armorMode,
+        onArmorModeChanged: (String mode) {
+          _setStateAndRecalculate(() => _armorMode = mode);
+        },
         selectedId: _armorId,
         selectedEquipmentItem: _findEquipmentByKey(_armorId),
+        searchCandidates: _armorSearchCandidates(),
         statPreview: _equipmentStatPreview(_armorId),
         onEquipChanged: (id) {
           _setStateAndRecalculate(() => _armorId = id);
@@ -351,6 +403,7 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
       child: HelmetEquipmentSelector(
         selectedId: _helmetId,
         selectedEquipmentItem: _findEquipmentByKey(_helmetId),
+        searchCandidates: _helmetSearchCandidates(),
         statPreview: _equipmentStatPreview(_helmetId),
         onEquipChanged: (id) {
           _setStateAndRecalculate(() => _helmetId = id);
@@ -386,6 +439,7 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
       child: RingEquipmentSelector(
         selectedId: _ringId,
         selectedEquipmentItem: _findEquipmentByKey(_ringId),
+        searchCandidates: _ringSearchCandidates(),
         statPreview: _equipmentStatPreview(_ringId),
         onEquipChanged: (id) {
           _setStateAndRecalculate(() => _ringId = id);

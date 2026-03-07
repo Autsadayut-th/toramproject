@@ -6,8 +6,11 @@ import 'equipment_slot_selector.dart';
 class ArmorEquipmentSelector extends StatelessWidget {
   const ArmorEquipmentSelector({
     super.key,
+    required this.armorMode,
+    required this.onArmorModeChanged,
     required this.selectedId,
     required this.selectedEquipmentItem,
+    required this.searchCandidates,
     required this.statPreview,
     required this.onEquipChanged,
     required this.enhance,
@@ -18,8 +21,11 @@ class ArmorEquipmentSelector extends StatelessWidget {
     required this.onCrystal2Changed,
   });
 
+  final String armorMode;
+  final ValueChanged<String> onArmorModeChanged;
   final String? selectedId;
   final EquipmentLibraryItem? selectedEquipmentItem;
+  final List<EquipmentLibraryItem> searchCandidates;
   final List<String> statPreview;
   final ValueChanged<String?> onEquipChanged;
   final int enhance;
@@ -31,24 +37,114 @@ class ArmorEquipmentSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EquipmentSlotSelector(
-      idLabel: 'Armor ID',
-      idHint: 'e.g. armor_001',
-      selectedId: selectedId,
-      selectedEquipmentItem: selectedEquipmentItem,
-      onEquipChanged: onEquipChanged,
-      pickInitialCategory: 'Armor',
-      allowedCategories: const <String>['Armor'],
-      pickTitle: 'Select Armor',
-      statsLabel: 'Item Stats',
-      statPreview: statPreview,
-      enhance: enhance,
-      onEnhChanged: onEnhChanged,
-      crystalCategoryFilters: const <String>['armor', 'normal'],
-      crystal1: crystal1,
-      crystal2: crystal2,
-      onCrystal1Changed: onCrystal1Changed,
-      onCrystal2Changed: onCrystal2Changed,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        _ArmorModeSelector(value: armorMode, onChanged: onArmorModeChanged),
+        const SizedBox(height: 10),
+        EquipmentSlotSelector(
+          idLabel: 'Armor',
+          idHint: 'Search armor name...',
+          selectedId: selectedId,
+          selectedEquipmentItem: selectedEquipmentItem,
+          enableInlineNameSearch: true,
+          inlineSearchByNameOnly: true,
+          inlineSearchCandidates: searchCandidates,
+          onEquipChanged: onEquipChanged,
+          pickInitialCategory: 'Armor',
+          allowedCategories: const <String>['Armor'],
+          pickTitle: 'Select Armor',
+          statsLabel: 'Item Stats',
+          statPreview: statPreview,
+          enhance: enhance,
+          onEnhChanged: onEnhChanged,
+          crystalCategoryFilters: const <String>['armor', 'normal'],
+          crystal1: crystal1,
+          crystal2: crystal2,
+          onCrystal1Changed: onCrystal1Changed,
+          onCrystal2Changed: onCrystal2Changed,
+        ),
+      ],
+    );
+  }
+}
+
+class _ArmorModeSelector extends StatelessWidget {
+  const _ArmorModeSelector({required this.value, required this.onChanged});
+
+  static const List<MapEntry<String, String>> _modeOptions =
+      <MapEntry<String, String>>[
+        MapEntry<String, String>('normal', 'Normal'),
+        MapEntry<String, String>('heavy', 'Heavy'),
+        MapEntry<String, String>('light', 'Light'),
+      ];
+
+  final String value;
+  final ValueChanged<String> onChanged;
+
+  String _normalize(String mode) {
+    final String normalized = mode.trim().toLowerCase();
+    switch (normalized) {
+      case 'heavy':
+      case 'light':
+      case 'normal':
+        return normalized;
+      default:
+        return 'normal';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final String active = _normalize(value);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text(
+          'Armor Mode',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        const SizedBox(height: 6),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: _modeOptions
+              .map((MapEntry<String, String> option) {
+                final bool isSelected = active == option.key;
+                return ChoiceChip(
+                  label: Text(option.value),
+                  selected: isSelected,
+                  showCheckmark: true,
+                  selectedColor: const Color(0xFFE1C86D),
+                  backgroundColor: const Color(0xFF151515),
+                  side: BorderSide(
+                    color: isSelected
+                        ? const Color(0xFFEED98D)
+                        : const Color(0x55FFFFFF),
+                  ),
+                  labelStyle: TextStyle(
+                    color: isSelected ? const Color(0xFF141414) : Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 12,
+                  ),
+                  onSelected: (_) => onChanged(option.key),
+                );
+              })
+              .toList(growable: false),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          'Empty armor slot uses the in-game no-armor formula automatically.',
+          style: TextStyle(
+            color: Colors.white.withValues(alpha: 0.58),
+            fontSize: 11,
+          ),
+        ),
+      ],
     );
   }
 }

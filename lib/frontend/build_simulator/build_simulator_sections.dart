@@ -63,7 +63,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
           if (_summaryViewMode == _SummaryViewMode.metricList)
             _buildStatsValueView()
           else
-            _buildStatsBarGraphView(),
+            _buildSelectedItemDetailsView(),
         ],
       ),
     );
@@ -116,8 +116,8 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
           ),
           const SizedBox(width: 6),
           _buildSummaryModeButton(
-            label: 'Combat Bars',
-            mode: _SummaryViewMode.tableGraph,
+            label: 'Item Details',
+            mode: _SummaryViewMode.itemDetails,
           ),
         ],
       ),
@@ -146,7 +146,9 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
             color: isActive ? const Color(0xFF2B2B2B) : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: isActive ? const Color(0x66FFFFFF) : const Color(0x22FFFFFF),
+              color: isActive
+                  ? const Color(0x66FFFFFF)
+                  : const Color(0x22FFFFFF),
             ),
           ),
           child: Text(
@@ -185,175 +187,302 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
             MapEntry('VIT', 'VIT'),
           ],
         ),
-        _statsCategory(
-          Icons.bolt,
-          'Special Stats',
-          <MapEntry<String, String>>[
-                MapEntry('ASPD', 'ASPD'),
-                MapEntry('CSPD', 'CSPD'),
-                MapEntry('FLEE', 'FLEE'),
-                MapEntry('CritRate', 'Critical Rate'),
-                MapEntry('PhysicalPierce', 'Piercing (Physical)'),
-                MapEntry('MagicPierce', 'Piercing (Magic)'),
-                MapEntry('Accuracy', 'HIT'),
-                MapEntry('Stability', 'Stability'),
-                MapEntry('HP', 'HP'),
-                MapEntry('MP', 'MP'),
-          ],
-        ),
+        _statsCategory(Icons.bolt, 'Special Stats', <MapEntry<String, String>>[
+          MapEntry('ASPD', 'ASPD'),
+          MapEntry('CSPD', 'CSPD'),
+          MapEntry('FLEE', 'FLEE'),
+          MapEntry('CritRate', 'Critical Rate'),
+          MapEntry('PhysicalPierce', 'Piercing (Physical)'),
+          MapEntry('MagicPierce', 'Piercing (Magic)'),
+          MapEntry('Accuracy', 'HIT'),
+          MapEntry('Stability', 'Stability'),
+          MapEntry('HP', 'HP'),
+          MapEntry('MP', 'MP'),
+        ]),
       ],
     );
   }
 
-  Widget _buildStatsBarGraphView() {
-    final List<ToramRadarMetricSpec> metrics = ToramRadarProfile.metrics;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const Text(
-          'Bars are benchmark-scaled for quick comparison while the numbers stay raw.',
-          style: TextStyle(
-            fontSize: 11,
-            color: Colors.white70,
-            height: 1.35,
-          ),
-        ),
-        const SizedBox(height: 12),
-        ...List<Widget>.generate(metrics.length, (int index) {
-          final ToramRadarMetricSpec metric = metrics[index];
-          return Padding(
-            padding: EdgeInsets.only(bottom: index == metrics.length - 1 ? 0 : 10),
-            child: _buildSummaryMetricBar(metric: metric),
-          );
-        }),
-      ],
-    );
-  }
-
-  Widget _buildSummaryMetricBar({required ToramRadarMetricSpec metric}) {
-    final double rawValue = ToramRadarProfile.metricValue(_summary, metric.id);
-    final double normalizedValue = ToramRadarProfile.normalizedValue(
-      summary: _summary,
-      metric: metric,
-    ).clamp(0.0, 1.0);
-    final List<Color> barColors = _summaryMetricBarColors(metric.label);
-
+  Widget _buildSelectedItemDetailsView() {
     return Container(
-      padding: const EdgeInsets.all(12),
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: const Color(0xFF121212).withValues(alpha: 0.92),
+        color: const Color(0xFF121212).withValues(alpha: 0.94),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: const Color(0xFFFFFFFF).withValues(alpha: 0.12),
-        ),
+        border: Border.all(color: const Color(0x33FFFFFF)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Text(
-                metric.label,
-                style: const TextStyle(
-                  color: Color(0xFFFFE082),
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 0.3,
-                ),
-              ),
-              const Spacer(),
-              Text(
-                _formatMetricValue(rawValue),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ],
+          _buildEquipmentSlotStatsSection(
+            slotLabel: 'Main Weapon',
+            item: _findEquipmentByKey(_mainWeaponId),
           ),
-          const SizedBox(height: 8),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(999),
-            child: SizedBox(
-              height: 12,
-              child: Stack(
-                children: <Widget>[
-                  Positioned.fill(
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: const Color(0x33FFFFFF),
-                        borderRadius: BorderRadius.circular(999),
-                      ),
-                    ),
-                  ),
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: FractionallySizedBox(
-                        widthFactor: normalizedValue,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: barColors),
-                            borderRadius: BorderRadius.circular(999),
-                          ),
-                          child: const SizedBox.expand(),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          const SizedBox(height: 12),
+          _buildEquipmentSlotStatsSection(
+            slotLabel: 'Sub Weapon',
+            item: _findEquipmentByKey(_subWeaponId),
           ),
-          const SizedBox(height: 8),
-          Row(
-            children: <Widget>[
-              Text(
-                'Profile ${(normalizedValue * 100).round()}%',
-                style: const TextStyle(
-                  color: Colors.white70,
-                  fontSize: 10,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const Spacer(),
-              Text(
-                'Benchmark ${_formatMetricValue(metric.cap)}',
-                style: const TextStyle(
-                  color: Colors.white54,
-                  fontSize: 10,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
+          const SizedBox(height: 12),
+          _buildEquipmentSlotStatsSection(
+            slotLabel: 'Armor',
+            item: _findEquipmentByKey(_armorId),
+          ),
+          const SizedBox(height: 12),
+          _buildEquipmentSlotStatsSection(
+            slotLabel: 'Additional',
+            item: _findEquipmentByKey(_helmetId),
+          ),
+          const SizedBox(height: 12),
+          _buildEquipmentSlotStatsSection(
+            slotLabel: 'Special',
+            item: _findEquipmentByKey(_ringId),
           ),
         ],
       ),
     );
   }
 
-  String _formatMetricValue(double value) {
-    return ToramRadarProfile.formatValue(value);
+  Widget _buildEquipmentSlotStatsSection({
+    required String slotLabel,
+    required EquipmentLibraryItem? item,
+  }) {
+    final String itemName = item?.name.trim() ?? '';
+    final List<EquipmentStat> baseStats = item == null
+        ? const <EquipmentStat>[]
+        : item.stats
+              .where((EquipmentStat stat) {
+                return stat.valueType.trim().toLowerCase() == 'base';
+              })
+              .toList(growable: false);
+    final List<EquipmentStat> regularStats = item == null
+        ? const <EquipmentStat>[]
+        : item.stats
+              .where((EquipmentStat stat) {
+                return stat.valueType.trim().toLowerCase() != 'base';
+              })
+              .toList(growable: false);
+    final List<EquipmentStat> orderedStats = <EquipmentStat>[
+      ...baseStats,
+      ...regularStats,
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          '$slotLabel:',
+          style: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w700,
+            color: Color(0xFFE0E0E0),
+          ),
+        ),
+        const SizedBox(height: 2),
+        Padding(
+          padding: const EdgeInsets.only(left: 14),
+          child: Text(
+            itemName.isEmpty ? '-' : itemName,
+            style: TextStyle(
+              fontSize: 13,
+              color: itemName.isEmpty
+                  ? Colors.white54
+                  : const Color(0xFF9BC9FF),
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        if (item == null) ...<Widget>[
+          const SizedBox(height: 4),
+          const Padding(
+            padding: EdgeInsets.only(left: 14),
+            child: Text(
+              'No item selected',
+              style: TextStyle(fontSize: 12, color: Colors.white54),
+            ),
+          ),
+        ] else ...<Widget>[
+          const SizedBox(height: 5),
+          if (orderedStats.isEmpty)
+            const Padding(
+              padding: EdgeInsets.only(left: 14),
+              child: Text(
+                'No stat data',
+                style: TextStyle(fontSize: 12, color: Colors.white54),
+              ),
+            )
+          else
+            ...List<Widget>.generate(orderedStats.length, (int index) {
+              return Padding(
+                padding: EdgeInsets.only(
+                  left: 14,
+                  bottom: index == orderedStats.length - 1 ? 0 : 3,
+                ),
+                child: _buildEquipmentStatLine(orderedStats[index]),
+              );
+            }),
+        ],
+      ],
+    );
   }
 
-  List<Color> _summaryMetricBarColors(String label) {
-    switch (label) {
-      case 'ATK':
-      case 'MATK':
-        return const <Color>[Color(0xFF77D3FF), Color(0xFF4D8DFF)];
-      case 'DEF':
-      case 'MDEF':
-        return const <Color>[Color(0xFF86F7C8), Color(0xFF3CCB8E)];
-      case 'HIT':
-      case 'FLEE':
-        return const <Color>[Color(0xFFFFD27A), Color(0xFFFFA347)];
-      case 'ASPD':
-      case 'CSPD':
-        return const <Color>[Color(0xFFFFA7D1), Color(0xFFFF6F91)];
-      default:
-        return const <Color>[Color(0xFFB8D2FF), Color(0xFF6C9BFF)];
+  Widget _buildEquipmentStatLine(EquipmentStat stat) {
+    final String label = _equipmentStatLabel(stat);
+    final String value = _equipmentStatValue(stat);
+    final bool isPositive = stat.value >= 0;
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: Text(
+            label,
+            style: const TextStyle(fontSize: 12, color: Colors.white70),
+          ),
+        ),
+        const SizedBox(width: 8),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 12,
+            color: isPositive ? Colors.white : const Color(0xFFA84B4B),
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
+    );
+  }
+
+  String _equipmentStatLabel(EquipmentStat stat) {
+    final String normalizedKey = stat.statKey.trim().toLowerCase();
+    final bool isBase = stat.valueType.trim().toLowerCase() == 'base';
+    if (isBase) {
+      switch (normalizedKey) {
+        case 'weapon_atk':
+          return 'Base ATK';
+        case 'def':
+          return 'Base DEF';
+        case 'mdef':
+          return 'Base MDEF';
+        case 'stability':
+          return 'Base Stability %';
+        default:
+          return 'Base ${_humanizeStatKey(normalizedKey)}';
+      }
     }
+
+    switch (normalizedKey) {
+      case 'weapon_atk':
+        return 'Weapon ATK';
+      case 'maxhp':
+        return 'MaxHP';
+      case 'maxmp':
+        return 'MaxMP';
+      case 'critical_rate':
+        return 'Critical Rate';
+      case 'critical_damage':
+        return 'Critical Damage';
+      case 'physical_pierce':
+        return 'Physical Pierce';
+      case 'magic_pierce':
+        return 'Magic Pierce';
+      case 'attack_mp_recovery':
+        return 'Attack MP Recovery';
+      case 'guard_power':
+        return 'Guard Power';
+      case 'guard_recharge':
+        return 'Guard Recharge';
+      case 'aggro':
+        return 'Aggro';
+      case 'aspd':
+        return 'ASPD';
+      case 'cspd':
+        return 'CSPD';
+      case 'atk':
+        return 'ATK';
+      case 'matk':
+        return 'MATK';
+      case 'def':
+        return 'DEF';
+      case 'mdef':
+        return 'MDEF';
+      case 'str':
+        return 'STR';
+      case 'dex':
+        return 'DEX';
+      case 'int':
+        return 'INT';
+      case 'agi':
+        return 'AGI';
+      case 'vit':
+        return 'VIT';
+      case 'stability':
+        return 'Stability';
+      case 'accuracy':
+        return 'Accuracy';
+      default:
+        return _humanizeStatKey(normalizedKey);
+    }
+  }
+
+  String _humanizeStatKey(String key) {
+    if (key.isEmpty) {
+      return '-';
+    }
+
+    String mapped = key.toLowerCase().replaceAllMapped(RegExp(r'[a-z0-9]+'), (
+      Match match,
+    ) {
+      final String token = match.group(0)!;
+      if (token == 'pct') {
+        return '%';
+      }
+      const Set<String> uppercaseTokens = <String>{
+        'atk',
+        'matk',
+        'def',
+        'mdef',
+        'str',
+        'dex',
+        'int',
+        'agi',
+        'vit',
+        'aspd',
+        'cspd',
+        'hp',
+        'mp',
+        'ampr',
+        'dmg',
+        'exp',
+        'm',
+      };
+      if (uppercaseTokens.contains(token)) {
+        return token.toUpperCase();
+      }
+      if (token.length == 1) {
+        return token.toUpperCase();
+      }
+      return '${token[0].toUpperCase()}${token.substring(1)}';
+    });
+
+    mapped = mapped.replaceAll('_', ' ');
+    mapped = mapped.replaceAll(RegExp(r'\s+'), ' ');
+    mapped = mapped.replaceAll(' )', ')');
+    return mapped.trim();
+  }
+
+  String _equipmentStatValue(EquipmentStat stat) {
+    final String valueText = _formatCompactNumber(stat.value);
+    final bool isPercent = stat.valueType.trim().toLowerCase() == 'percent';
+    final String sign = stat.value >= 0 ? '+' : '';
+    return '$sign$valueText${isPercent ? '%' : ''}';
+  }
+
+  String _formatCompactNumber(num value) {
+    if (value == value.toInt()) {
+      return value.toInt().toString();
+    }
+    final String fixed = value.toStringAsFixed(2);
+    return fixed.replaceFirst(RegExp(r'\.?0+$'), '');
   }
 
   Widget _statsCategory(
@@ -528,7 +657,9 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
                 _isAiRecommendationLoading ? Icons.sync : Icons.auto_awesome,
                 size: 14,
               ),
-              label: Text(_isAiRecommendationLoading ? 'Generating...' : 'Generate'),
+              label: Text(
+                _isAiRecommendationLoading ? 'Generating...' : 'Generate',
+              ),
               style: OutlinedButton.styleFrom(
                 foregroundColor: Colors.white,
                 side: const BorderSide(color: Color(0x66FFFFFF)),

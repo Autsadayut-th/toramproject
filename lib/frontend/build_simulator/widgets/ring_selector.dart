@@ -8,6 +8,7 @@ class RingEquipmentSelector extends StatelessWidget {
     super.key,
     required this.selectedId,
     required this.selectedEquipmentItem,
+    required this.searchCandidates,
     required this.statPreview,
     required this.onEquipChanged,
     required this.enhance,
@@ -20,6 +21,7 @@ class RingEquipmentSelector extends StatelessWidget {
 
   final String? selectedId;
   final EquipmentLibraryItem? selectedEquipmentItem;
+  final List<EquipmentLibraryItem> searchCandidates;
   final List<String> statPreview;
   final ValueChanged<String?> onEquipChanged;
   final int enhance;
@@ -32,10 +34,13 @@ class RingEquipmentSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EquipmentSlotSelector(
-      idLabel: 'Ring ID',
-      idHint: 'e.g. ring_001',
+      idLabel: 'Ring',
+      idHint: 'Search special name...',
       selectedId: selectedId,
       selectedEquipmentItem: selectedEquipmentItem,
+      enableInlineNameSearch: true,
+      inlineSearchByNameOnly: true,
+      inlineSearchCandidates: searchCandidates,
       onEquipChanged: onEquipChanged,
       pickInitialCategory: 'Special',
       allowedCategories: const <String>['Special'],

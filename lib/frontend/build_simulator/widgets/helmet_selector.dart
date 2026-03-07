@@ -8,6 +8,7 @@ class HelmetEquipmentSelector extends StatelessWidget {
     super.key,
     required this.selectedId,
     required this.selectedEquipmentItem,
+    required this.searchCandidates,
     required this.statPreview,
     required this.onEquipChanged,
     required this.enhance,
@@ -20,6 +21,7 @@ class HelmetEquipmentSelector extends StatelessWidget {
 
   final String? selectedId;
   final EquipmentLibraryItem? selectedEquipmentItem;
+  final List<EquipmentLibraryItem> searchCandidates;
   final List<String> statPreview;
   final ValueChanged<String?> onEquipChanged;
   final int enhance;
@@ -32,10 +34,13 @@ class HelmetEquipmentSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EquipmentSlotSelector(
-      idLabel: 'Helmet ID',
-      idHint: 'e.g. helmet_001',
+      idLabel: 'Helmet',
+      idHint: 'Search additional name...',
       selectedId: selectedId,
       selectedEquipmentItem: selectedEquipmentItem,
+      enableInlineNameSearch: true,
+      inlineSearchByNameOnly: true,
+      inlineSearchCandidates: searchCandidates,
       onEquipChanged: onEquipChanged,
       pickInitialCategory: 'Additional',
       allowedCategories: const <String>['Additional'],

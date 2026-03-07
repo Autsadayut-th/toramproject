@@ -40,6 +40,10 @@ class EquipmentSlotSelector extends StatefulWidget {
     this.selectedDisplayText,
     this.selectedEquipmentItem,
     this.idFieldReadOnly = false,
+    this.forceTextInput = false,
+    this.enableInlineNameSearch = false,
+    this.inlineSearchByNameOnly = false,
+    this.inlineSearchCandidates = const <EquipmentLibraryItem>[],
     this.crystalCategoryFilters = const <String>[],
     this.crystal1,
     this.crystal2,
@@ -62,6 +66,10 @@ class EquipmentSlotSelector extends StatefulWidget {
   final String? selectedDisplayText;
   final EquipmentLibraryItem? selectedEquipmentItem;
   final bool idFieldReadOnly;
+  final bool forceTextInput;
+  final bool enableInlineNameSearch;
+  final bool inlineSearchByNameOnly;
+  final List<EquipmentLibraryItem> inlineSearchCandidates;
   final List<String> crystalCategoryFilters;
   final String? crystal1;
   final String? crystal2;
@@ -77,21 +85,41 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
   static const int _maxEnhance = 15;
 
   late final TextEditingController _idController;
+  late final FocusNode _idFocusNode;
+  late final TextEditingController _crystal1Controller;
+  late final TextEditingController _crystal2Controller;
+  late final FocusNode _crystal1FocusNode;
+  late final FocusNode _crystal2FocusNode;
   List<CrystalLibraryEntry> _availableCrystals = const <CrystalLibraryEntry>[];
   Map<String, CrystalLibraryEntry> _crystalByKey =
       const <String, CrystalLibraryEntry>{};
   bool _isCrystalLoading = false;
   int _crystalLoadToken = 0;
+  bool _isInlineEditing = false;
+  bool _isCrystal1InlineEditing = false;
+  bool _isCrystal2InlineEditing = false;
 
   bool get _showCrystalSlots =>
       widget.onCrystal1Changed != null && widget.onCrystal2Changed != null;
   bool get _canBrowseCrystals =>
       _showCrystalSlots && widget.crystalCategoryFilters.isNotEmpty;
+  bool get _canInlineNameSearch =>
+      widget.enableInlineNameSearch &&
+      widget.inlineSearchCandidates.isNotEmpty &&
+      !widget.idFieldReadOnly;
 
   @override
   void initState() {
     super.initState();
     _idController = TextEditingController(text: _idFieldText());
+    _idFocusNode = FocusNode();
+    _crystal1Controller = TextEditingController();
+    _crystal2Controller = TextEditingController();
+    _crystal1FocusNode = FocusNode();
+    _crystal2FocusNode = FocusNode();
+    _crystal1FocusNode.addListener(_onCrystalFocusChanged);
+    _crystal2FocusNode.addListener(_onCrystalFocusChanged);
+    _syncCrystalInputText();
     _refreshCrystalLibrary(force: true);
   }
 
@@ -102,8 +130,14 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
         oldWidget.selectedDisplayText != widget.selectedDisplayText ||
         oldWidget.selectedEquipmentItem?.key !=
             widget.selectedEquipmentItem?.key ||
-        oldWidget.idFieldReadOnly != widget.idFieldReadOnly) {
+        oldWidget.idFieldReadOnly != widget.idFieldReadOnly ||
+        oldWidget.forceTextInput != widget.forceTextInput ||
+        oldWidget.enableInlineNameSearch != widget.enableInlineNameSearch ||
+        oldWidget.inlineSearchByNameOnly != widget.inlineSearchByNameOnly) {
       _idController.text = _idFieldText();
+      if (oldWidget.selectedId != widget.selectedId) {
+        _isInlineEditing = false;
+      }
     }
     if (!_isSameStringList(
       oldWidget.crystalCategoryFilters,
@@ -111,12 +145,33 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
     )) {
       _refreshCrystalLibrary(force: true);
     }
+    if (oldWidget.crystal1 != widget.crystal1) {
+      _isCrystal1InlineEditing = false;
+    }
+    if (oldWidget.crystal2 != widget.crystal2) {
+      _isCrystal2InlineEditing = false;
+    }
+    _syncCrystalInputText();
   }
 
   @override
   void dispose() {
     _idController.dispose();
+    _idFocusNode.dispose();
+    _crystal1FocusNode.removeListener(_onCrystalFocusChanged);
+    _crystal2FocusNode.removeListener(_onCrystalFocusChanged);
+    _crystal1Controller.dispose();
+    _crystal2Controller.dispose();
+    _crystal1FocusNode.dispose();
+    _crystal2FocusNode.dispose();
     super.dispose();
+  }
+
+  void _onCrystalFocusChanged() {
+    if (!mounted) {
+      return;
+    }
+    setState(() {});
   }
 
   void _commitId() {
@@ -124,7 +179,100 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
       return;
     }
     final String value = _idController.text.trim();
+    final EquipmentLibraryItem? matched = _matchInlineCandidate(value);
+    if (matched != null) {
+      widget.onEquipChanged(matched.key);
+      _idFocusNode.unfocus();
+      if (_isInlineEditing) {
+        setState(() {
+          _isInlineEditing = false;
+        });
+      }
+      return;
+    }
+    if (_canInlineNameSearch && widget.inlineSearchByNameOnly) {
+      return;
+    }
     widget.onEquipChanged(value.isEmpty ? null : value);
+  }
+
+  void _startInlineEditing() {
+    if (!_canInlineNameSearch || widget.selectedEquipmentItem == null) {
+      return;
+    }
+    setState(() {
+      _isInlineEditing = true;
+      _idController.text = widget.selectedEquipmentItem!.name;
+      _idController.selection = TextSelection.fromPosition(
+        TextPosition(offset: _idController.text.length),
+      );
+    });
+    _idFocusNode.requestFocus();
+  }
+
+  EquipmentLibraryItem? _matchInlineCandidate(String raw) {
+    final String normalized = raw.trim().toLowerCase();
+    if (normalized.isEmpty || !_canInlineNameSearch) {
+      return null;
+    }
+    EquipmentLibraryItem? fuzzyMatch;
+    for (final EquipmentLibraryItem item in widget.inlineSearchCandidates) {
+      final String name = item.name.trim().toLowerCase();
+      final String key = item.key.trim().toLowerCase();
+      if (name == normalized ||
+          (!widget.inlineSearchByNameOnly && key == normalized)) {
+        return item;
+      }
+      if (fuzzyMatch == null &&
+          (name.contains(normalized) ||
+              (!widget.inlineSearchByNameOnly && key.contains(normalized)))) {
+        fuzzyMatch = item;
+      }
+    }
+    return fuzzyMatch;
+  }
+
+  List<EquipmentLibraryItem> _inlineCandidates() {
+    if (!_canInlineNameSearch || !_idFocusNode.hasFocus) {
+      return const <EquipmentLibraryItem>[];
+    }
+    final String query = _idController.text.trim().toLowerCase();
+    if (query.isEmpty) {
+      return const <EquipmentLibraryItem>[];
+    }
+
+    final List<EquipmentLibraryItem> matches = <EquipmentLibraryItem>[];
+    for (final EquipmentLibraryItem item in widget.inlineSearchCandidates) {
+      final String name = item.name.trim().toLowerCase();
+      final String key = item.key.trim().toLowerCase();
+      if (!name.contains(query) &&
+          (!key.contains(query) || widget.inlineSearchByNameOnly)) {
+        continue;
+      }
+      matches.add(item);
+      if (matches.length >= 8) {
+        break;
+      }
+    }
+    return matches;
+  }
+
+  void _selectInlineCandidate(EquipmentLibraryItem item) {
+    widget.onEquipChanged(item.key);
+    _idFocusNode.unfocus();
+    if (_isInlineEditing) {
+      setState(() {
+        _isInlineEditing = false;
+      });
+    }
+  }
+
+  void _onIdTapOutside() {
+    if (_canInlineNameSearch) {
+      _idFocusNode.unfocus();
+      return;
+    }
+    _commitId();
   }
 
   Future<void> _pickFromLibrary() async {
@@ -189,6 +337,7 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
             entry.normalizedKey: entry,
         };
         _isCrystalLoading = false;
+        _syncCrystalInputText();
       });
     } catch (_) {
       if (!mounted || token != _crystalLoadToken) {
@@ -198,6 +347,7 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
         _availableCrystals = const <CrystalLibraryEntry>[];
         _crystalByKey = const <String, CrystalLibraryEntry>{};
         _isCrystalLoading = false;
+        _syncCrystalInputText();
       });
     }
   }
@@ -224,6 +374,142 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
     }
     final String normalized = rawKey.toLowerCase();
     return _crystalByKey[normalized]?.name ?? rawKey;
+  }
+
+  TextEditingController _crystalController(bool isSlot1) {
+    return isSlot1 ? _crystal1Controller : _crystal2Controller;
+  }
+
+  FocusNode _crystalFocusNode(bool isSlot1) {
+    return isSlot1 ? _crystal1FocusNode : _crystal2FocusNode;
+  }
+
+  bool _isCrystalInlineEditing(bool isSlot1) {
+    return isSlot1 ? _isCrystal1InlineEditing : _isCrystal2InlineEditing;
+  }
+
+  String? _selectedCrystalKey(bool isSlot1) {
+    return isSlot1 ? widget.crystal1 : widget.crystal2;
+  }
+
+  void _setCrystalInlineEditing(bool isSlot1, bool value) {
+    if (isSlot1) {
+      _isCrystal1InlineEditing = value;
+      return;
+    }
+    _isCrystal2InlineEditing = value;
+  }
+
+  void _syncCrystalInputText() {
+    if (!_isCrystal1InlineEditing) {
+      final String next = _displayCrystalName(widget.crystal1);
+      if (_crystal1Controller.text != next) {
+        _crystal1Controller.text = next;
+      }
+    }
+    if (!_isCrystal2InlineEditing) {
+      final String next = _displayCrystalName(widget.crystal2);
+      if (_crystal2Controller.text != next) {
+        _crystal2Controller.text = next;
+      }
+    }
+  }
+
+  CrystalLibraryEntry? _matchCrystalByName(String raw) {
+    final String normalized = raw.trim().toLowerCase();
+    if (normalized.isEmpty || _availableCrystals.isEmpty) {
+      return null;
+    }
+
+    CrystalLibraryEntry? fuzzyMatch;
+    for (final CrystalLibraryEntry entry in _availableCrystals) {
+      final String name = entry.name.trim().toLowerCase();
+      if (name == normalized) {
+        return entry;
+      }
+      if (fuzzyMatch == null && name.contains(normalized)) {
+        fuzzyMatch = entry;
+      }
+    }
+    return fuzzyMatch;
+  }
+
+  List<CrystalLibraryEntry> _crystalInlineCandidates({required bool isSlot1}) {
+    final FocusNode focusNode = _crystalFocusNode(isSlot1);
+    if (!focusNode.hasFocus || _availableCrystals.isEmpty) {
+      return const <CrystalLibraryEntry>[];
+    }
+
+    final String query = _crystalController(isSlot1).text.trim().toLowerCase();
+    if (query.isEmpty) {
+      return const <CrystalLibraryEntry>[];
+    }
+
+    final List<CrystalLibraryEntry> matches = <CrystalLibraryEntry>[];
+    for (final CrystalLibraryEntry entry in _availableCrystals) {
+      final String name = entry.name.trim().toLowerCase();
+      if (!name.contains(query)) {
+        continue;
+      }
+      matches.add(entry);
+      if (matches.length >= 8) {
+        break;
+      }
+    }
+    return matches;
+  }
+
+  void _startCrystalInlineEditing(bool isSlot1) {
+    final String? key = _selectedCrystalKey(isSlot1);
+    if (key == null || key.trim().isEmpty) {
+      return;
+    }
+    final TextEditingController controller = _crystalController(isSlot1);
+    final FocusNode focusNode = _crystalFocusNode(isSlot1);
+    setState(() {
+      _setCrystalInlineEditing(isSlot1, true);
+      controller.text = _displayCrystalName(key);
+      controller.selection = TextSelection.fromPosition(
+        TextPosition(offset: controller.text.length),
+      );
+    });
+    focusNode.requestFocus();
+  }
+
+  void _selectCrystalInline(bool isSlot1, CrystalLibraryEntry entry) {
+    if (isSlot1) {
+      widget.onCrystal1Changed?.call(entry.key);
+    } else {
+      widget.onCrystal2Changed?.call(entry.key);
+    }
+    _crystalFocusNode(isSlot1).unfocus();
+    setState(() {
+      _setCrystalInlineEditing(isSlot1, false);
+    });
+  }
+
+  void _commitCrystalInput(bool isSlot1) {
+    final CrystalLibraryEntry? matched = _matchCrystalByName(
+      _crystalController(isSlot1).text,
+    );
+    if (matched == null) {
+      return;
+    }
+    _selectCrystalInline(isSlot1, matched);
+  }
+
+  void _onCrystalTapOutside(bool isSlot1) {
+    _commitCrystalInput(isSlot1);
+    _crystalFocusNode(isSlot1).unfocus();
+  }
+
+  void _clearCrystalSelection(bool isSlot1, VoidCallback? onClear) {
+    onClear?.call();
+    _crystalFocusNode(isSlot1).unfocus();
+    setState(() {
+      _setCrystalInlineEditing(isSlot1, false);
+      _crystalController(isSlot1).clear();
+    });
   }
 
   Future<void> _pickCrystalSlot1() async {
@@ -276,6 +562,17 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
 
   @override
   Widget build(BuildContext context) {
+    final bool hasSelectedItem = widget.selectedEquipmentItem != null;
+    final bool showSelectedCard =
+        hasSelectedItem &&
+        !widget.forceTextInput &&
+        !(_canInlineNameSearch && _isInlineEditing);
+    final List<EquipmentLibraryItem> inlineCandidates = _inlineCandidates();
+    final bool showInlineSuggestions =
+        _canInlineNameSearch &&
+        !showSelectedCard &&
+        inlineCandidates.isNotEmpty;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -283,13 +580,29 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
         Row(
           children: <Widget>[
             Expanded(
-              child: widget.selectedEquipmentItem != null
-                  ? _selectedEquipmentField(item: widget.selectedEquipmentItem!)
+              child: showSelectedCard
+                  ? (_canInlineNameSearch
+                        ? InkWell(
+                            onTap: _startInlineEditing,
+                            borderRadius: BorderRadius.circular(8),
+                            child: _selectedEquipmentField(
+                              item: widget.selectedEquipmentItem!,
+                            ),
+                          )
+                        : _selectedEquipmentField(
+                            item: widget.selectedEquipmentItem!,
+                          ))
                   : _inputField(
                       controller: _idController,
+                      focusNode: _idFocusNode,
                       hint: widget.idHint,
                       onSubmitted: _commitId,
-                      onTapOutside: _commitId,
+                      onTapOutside: _onIdTapOutside,
+                      onChanged: _canInlineNameSearch
+                          ? (_) {
+                              setState(() {});
+                            }
+                          : null,
                       readOnly: widget.idFieldReadOnly,
                     ),
             ),
@@ -301,6 +614,10 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
             ),
           ],
         ),
+        if (showInlineSuggestions) ...<Widget>[
+          const SizedBox(height: 8),
+          _buildInlineSuggestions(inlineCandidates),
+        ],
         const SizedBox(height: 10),
         if ((widget.selectedId ?? '').trim().isNotEmpty) ...<Widget>[
           _label(widget.statsLabel),
@@ -385,6 +702,7 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
               // Fall back to vertical only on very narrow widths.
               final bool stackVertically = constraints.maxWidth < 560;
               final Widget slot1 = _crystalSlotField(
+                isSlot1: true,
                 label: 'Crystal Slot 1',
                 selectedKey: widget.crystal1,
                 onBrowse: _pickCrystalSlot1,
@@ -393,6 +711,7 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
                     : () => widget.onCrystal1Changed!(null),
               );
               final Widget slot2 = _crystalSlotField(
+                isSlot1: false,
                 label: 'Crystal Slot 2',
                 selectedKey: widget.crystal2,
                 onBrowse: _pickCrystalSlot2,
@@ -423,7 +742,54 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
     );
   }
 
+  Widget _buildInlineSuggestions(List<EquipmentLibraryItem> candidates) {
+    return Container(
+      width: double.infinity,
+      constraints: const BoxConstraints(maxHeight: 240),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0F0F0F),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.16)),
+      ),
+      child: ListView.separated(
+        padding: const EdgeInsets.symmetric(vertical: 6),
+        shrinkWrap: true,
+        itemCount: candidates.length,
+        separatorBuilder: (_, __) =>
+            Divider(height: 1, color: Colors.white.withValues(alpha: 0.10)),
+        itemBuilder: (BuildContext context, int index) {
+          final EquipmentLibraryItem item = candidates[index];
+          return ListTile(
+            dense: true,
+            visualDensity: const VisualDensity(vertical: -1.2),
+            title: Text(
+              item.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            subtitle: Text(
+              item.key,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.white.withValues(alpha: 0.6),
+                fontSize: 11,
+              ),
+            ),
+            onTap: () => _selectInlineCandidate(item),
+          );
+        },
+      ),
+    );
+  }
+
   Widget _crystalSlotField({
+    required bool isSlot1,
     required String label,
     required String? selectedKey,
     required VoidCallback onBrowse,
@@ -434,6 +800,7 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
       children: <Widget>[
         _label(label),
         _crystalSelectionField(
+          isSlot1: isSlot1,
           selectedKey: selectedKey,
           onBrowse: onBrowse,
           onClear: onClear,
@@ -667,14 +1034,17 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
 
   Widget _inputField({
     required TextEditingController controller,
+    FocusNode? focusNode,
     required String hint,
     required VoidCallback onSubmitted,
     required VoidCallback onTapOutside,
+    ValueChanged<String>? onChanged,
     bool readOnly = false,
     TextAlign textAlign = TextAlign.left,
   }) {
     return TextField(
       controller: controller,
+      focusNode: focusNode,
       readOnly: readOnly,
       textAlign: textAlign,
       style: const TextStyle(color: Colors.white, fontSize: 12),
@@ -701,122 +1071,377 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
           borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.32)),
         ),
       ),
+      onChanged: onChanged,
       onSubmitted: (_) => onSubmitted(),
       onTapOutside: (_) => onTapOutside(),
     );
   }
 
+  String _crystalCategoryLabel(String category) {
+    final String normalized = category.trim().toLowerCase();
+    if (normalized.isEmpty) {
+      return '-';
+    }
+    return normalized[0].toUpperCase() + normalized.substring(1);
+  }
+
+  String _crystalStatLabel(EquipmentStat stat) {
+    final String normalizedKey = stat.statKey.trim().toLowerCase();
+    final bool isBase = stat.valueType.trim().toLowerCase() == 'base';
+    if (isBase) {
+      switch (normalizedKey) {
+        case 'weapon_atk':
+          return 'Base ATK';
+        case 'def':
+          return 'Base DEF';
+        case 'mdef':
+          return 'Base MDEF';
+        case 'stability':
+          return 'Base Stability %';
+      }
+      return 'Base ${_humanizeCrystalStatKey(normalizedKey)}';
+    }
+
+    switch (normalizedKey) {
+      case 'weapon_atk':
+        return 'Weapon ATK';
+      case 'attack_mp_recovery':
+        return 'Attack MP Recovery';
+      case 'critical_rate':
+        return 'Critical Rate';
+      case 'critical_damage':
+        return 'Critical Damage';
+      case 'physical_pierce':
+        return 'Physical Pierce';
+      case 'magic_pierce':
+        return 'Magic Pierce';
+      case 'guard_power':
+        return 'Guard Power';
+      case 'guard_recharge':
+        return 'Guard Recharge';
+      case 'maxhp':
+        return 'MaxHP';
+      case 'maxmp':
+        return 'MaxMP';
+    }
+    return _humanizeCrystalStatKey(normalizedKey);
+  }
+
+  String _humanizeCrystalStatKey(String key) {
+    if (key.isEmpty) {
+      return '-';
+    }
+    const Set<String> uppercaseTokens = <String>{
+      'atk',
+      'matk',
+      'def',
+      'mdef',
+      'str',
+      'dex',
+      'int',
+      'agi',
+      'vit',
+      'aspd',
+      'cspd',
+      'hp',
+      'mp',
+      'ampr',
+      'exp',
+    };
+
+    return key
+        .replaceAll('_', ' ')
+        .split(' ')
+        .where((String part) => part.isNotEmpty)
+        .map((String part) {
+          final String token = part.toLowerCase();
+          if (token == 'pct') {
+            return '%';
+          }
+          if (uppercaseTokens.contains(token)) {
+            return token.toUpperCase();
+          }
+          if (token.length == 1) {
+            return token.toUpperCase();
+          }
+          return '${token[0].toUpperCase()}${token.substring(1)}';
+        })
+        .join(' ');
+  }
+
+  String _formatCrystalNumber(num value) {
+    if (value == value.toInt()) {
+      return value.toInt().toString();
+    }
+    final String fixed = value.toStringAsFixed(2);
+    return fixed.replaceFirst(RegExp(r'\.?0+$'), '');
+  }
+
+  String _crystalStatValue(EquipmentStat stat) {
+    final String sign = stat.value >= 0 ? '+' : '';
+    final String suffix = stat.valueType.trim().toLowerCase() == 'percent'
+        ? '%'
+        : '';
+    return '$sign${_formatCrystalNumber(stat.value)}$suffix';
+  }
+
+  Widget _selectedCrystalField({
+    required CrystalLibraryEntry? entry,
+    required String rawKey,
+    required VoidCallback onTap,
+  }) {
+    final String displayName = _displayCrystalName(rawKey);
+    final Color accentColor = _crystalAccentColor(entry);
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        constraints: const BoxConstraints(minHeight: 40),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        decoration: BoxDecoration(
+          color: const Color(0xFF111111),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: accentColor.withValues(alpha: 0.48)),
+        ),
+        child: Row(
+          children: <Widget>[
+            Container(
+              width: 28,
+              height: 28,
+              decoration: BoxDecoration(
+                color: accentColor.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: accentColor.withValues(alpha: 0.45)),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: Image.asset(
+                  _crystalIconPath(entry),
+                  fit: BoxFit.contain,
+                  errorBuilder: (_, __, ___) {
+                    return Icon(
+                      Icons.diamond_outlined,
+                      size: 14,
+                      color: accentColor,
+                    );
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    displayName,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  if (displayName.toLowerCase() != rawKey.toLowerCase())
+                    Text(
+                      rawKey,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Colors.white.withValues(alpha: 0.55),
+                        fontSize: 11,
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCrystalInlineSuggestions({
+    required bool isSlot1,
+    required List<CrystalLibraryEntry> candidates,
+  }) {
+    return Container(
+      width: double.infinity,
+      constraints: const BoxConstraints(maxHeight: 240),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0F0F0F),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.16)),
+      ),
+      child: ListView.separated(
+        padding: const EdgeInsets.symmetric(vertical: 6),
+        shrinkWrap: true,
+        itemCount: candidates.length,
+        separatorBuilder: (_, __) =>
+            Divider(height: 1, color: Colors.white.withValues(alpha: 0.10)),
+        itemBuilder: (BuildContext context, int index) {
+          final CrystalLibraryEntry entry = candidates[index];
+          final Color accentColor = _crystalAccentColor(entry);
+          return ListTile(
+            dense: true,
+            visualDensity: const VisualDensity(vertical: -1.2),
+            leading: Container(
+              width: 28,
+              height: 28,
+              decoration: BoxDecoration(
+                color: accentColor.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: accentColor.withValues(alpha: 0.45)),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: Image.asset(
+                  _crystalIconPath(entry),
+                  fit: BoxFit.contain,
+                  errorBuilder: (_, __, ___) {
+                    return Icon(
+                      Icons.diamond_outlined,
+                      size: 14,
+                      color: accentColor,
+                    );
+                  },
+                ),
+              ),
+            ),
+            title: Text(
+              entry.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            subtitle: Text(
+              '${entry.key} - ${_crystalCategoryLabel(entry.category)}',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.white.withValues(alpha: 0.6),
+                fontSize: 11,
+              ),
+            ),
+            onTap: () => _selectCrystalInline(isSlot1, entry),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildCrystalStatPreview(CrystalLibraryEntry entry) {
+    if (entry.stats.isEmpty) {
+      return Text(
+        'No crystal stats data',
+        style: TextStyle(
+          color: Colors.white.withValues(alpha: 0.6),
+          fontSize: 11,
+        ),
+      );
+    }
+    return Wrap(
+      spacing: 6,
+      runSpacing: 6,
+      children: entry.stats
+          .map(
+            (EquipmentStat stat) => Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+              decoration: BoxDecoration(
+                color: const Color(0xFF151515),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
+              ),
+              child: Text(
+                '${_crystalStatLabel(stat)} ${_crystalStatValue(stat)}',
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          )
+          .toList(growable: false),
+    );
+  }
+
   Widget _crystalSelectionField({
+    required bool isSlot1,
     required String? selectedKey,
     required VoidCallback onBrowse,
     required VoidCallback? onClear,
   }) {
-    final String displayName = _displayCrystalName(selectedKey);
     final String rawKey = selectedKey?.trim() ?? '';
     final bool hasValue = rawKey.isNotEmpty;
     final CrystalLibraryEntry? selectedEntry = hasValue
         ? _crystalByKey[rawKey.toLowerCase()]
         : null;
-    final Color accentColor = _crystalAccentColor(selectedEntry);
+    final bool isEditing = _isCrystalInlineEditing(isSlot1) || !hasValue;
     final bool canBrowse = _canBrowseCrystals && !_isCrystalLoading;
+    final List<CrystalLibraryEntry> inlineCandidates = _crystalInlineCandidates(
+      isSlot1: isSlot1,
+    );
+    final bool showInlineSuggestions = isEditing && inlineCandidates.isNotEmpty;
+    final VoidCallback? onClearSelection = onClear == null
+        ? null
+        : () => _clearCrystalSelection(isSlot1, onClear);
 
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Expanded(
-          child: Container(
-            constraints: const BoxConstraints(minHeight: 40),
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            decoration: BoxDecoration(
-              color: const Color(0xFF111111),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: hasValue
-                    ? accentColor.withValues(alpha: 0.48)
-                    : Colors.white.withValues(alpha: 0.18),
-              ),
-            ),
-            child: hasValue
-                ? Row(
-                    children: <Widget>[
-                      Container(
-                        width: 28,
-                        height: 28,
-                        decoration: BoxDecoration(
-                          color: accentColor.withValues(alpha: 0.12),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: accentColor.withValues(alpha: 0.45),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4),
-                          child: Image.asset(
-                            _crystalIconPath(selectedEntry),
-                            fit: BoxFit.contain,
-                            errorBuilder: (_, __, ___) {
-                              return Icon(
-                                Icons.diamond_outlined,
-                                size: 14,
-                                color: accentColor,
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Text(
-                              displayName,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            if (displayName.toLowerCase() !=
-                                rawKey.toLowerCase())
-                              Text(
-                                rawKey,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: Colors.white.withValues(alpha: 0.55),
-                                  fontSize: 11,
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  )
-                : Text(
-                    _isCrystalLoading
-                        ? 'Loading crystal data...'
-                        : 'Select crystal',
-                    style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.45),
-                      fontSize: 12,
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: isEditing
+                  ? _inputField(
+                      controller: _crystalController(isSlot1),
+                      focusNode: _crystalFocusNode(isSlot1),
+                      hint: _isCrystalLoading
+                          ? 'Loading crystal data...'
+                          : 'Search crystal name...',
+                      onSubmitted: () => _commitCrystalInput(isSlot1),
+                      onTapOutside: () => _onCrystalTapOutside(isSlot1),
+                      onChanged: (_) {
+                        setState(() {});
+                      },
+                    )
+                  : _selectedCrystalField(
+                      entry: selectedEntry,
+                      rawKey: rawKey,
+                      onTap: () => _startCrystalInlineEditing(isSlot1),
                     ),
-                  ),
+            ),
+            const SizedBox(width: 8),
+            _libraryButton(
+              onTap: onBrowse,
+              enabled: canBrowse,
+              tooltip: _isCrystalLoading
+                  ? 'Loading crystals...'
+                  : 'Browse crystals',
+            ),
+            if (hasValue) ...<Widget>[
+              const SizedBox(width: 8),
+              _clearButton(onTap: onClearSelection),
+            ],
+          ],
+        ),
+        if (showInlineSuggestions) ...<Widget>[
+          const SizedBox(height: 8),
+          _buildCrystalInlineSuggestions(
+            isSlot1: isSlot1,
+            candidates: inlineCandidates,
           ),
-        ),
-        const SizedBox(width: 8),
-        _libraryButton(
-          onTap: onBrowse,
-          enabled: canBrowse,
-          tooltip: _isCrystalLoading
-              ? 'Loading crystals...'
-              : 'Browse crystals',
-        ),
-        if (hasValue) ...<Widget>[
-          const SizedBox(width: 8),
-          _clearButton(onTap: onClear),
+        ],
+        if (hasValue && selectedEntry != null) ...<Widget>[
+          const SizedBox(height: 8),
+          _buildCrystalStatPreview(selectedEntry),
         ],
       ],
     );
@@ -948,197 +1573,196 @@ class _CrystalPickerDialogState extends State<_CrystalPickerDialog> {
     final String selectedKey = widget.selectedKey?.trim().toLowerCase() ?? '';
     final List<String> categories = _categories;
     final List<CrystalLibraryEntry> filtered = _filteredEntries;
+    final MediaQueryData media = MediaQuery.of(context);
+    final double topInset = (media.padding.top + 12).toDouble();
+    final double availableHeight = media.size.height - topInset - 20;
+    final double maxDialogHeight = availableHeight
+        .clamp(360.0, 760.0)
+        .toDouble();
 
     return Dialog(
       backgroundColor: const Color(0xFF101010),
-      insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+      clipBehavior: Clip.antiAlias,
+      insetPadding: EdgeInsets.fromLTRB(20, topInset, 20, 20),
       child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 760, maxHeight: 620),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        widget.title,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                        ),
+        constraints: BoxConstraints(maxWidth: 760, maxHeight: maxDialogHeight),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      widget.title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
                       ),
-                    ),
-                    IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.close, color: Colors.white70),
-                      tooltip: 'Close',
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 6),
-                TextField(
-                  style: const TextStyle(color: Colors.white),
-                  cursorColor: Colors.white70,
-                  decoration: InputDecoration(
-                    hintText: 'Search crystal name or key...',
-                    hintStyle: const TextStyle(color: Colors.white54),
-                    prefixIcon: const Icon(Icons.search, color: Colors.white70),
-                    isDense: true,
-                    filled: true,
-                    fillColor: const Color(0xFF0F0F0F),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: Color(0x33FFFFFF)),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: Color(0x33FFFFFF)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: Color(0x66FFFFFF)),
                     ),
                   ),
-                  onChanged: (String value) {
-                    setState(() {
-                      _query = value;
-                    });
-                  },
-                ),
-                if (categories.length > 1) ...<Widget>[
-                  const SizedBox(height: 10),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: <Widget>[
-                      ChoiceChip(
-                        label: const Text('All'),
-                        selected: _categoryFilter == null,
-                        onSelected: (_) {
-                          setState(() {
-                            _categoryFilter = null;
-                          });
-                        },
-                      ),
-                      ...categories.map((String category) {
-                        final Color accentColor = _categoryAccentColor(
-                          category,
-                        );
-                        return ChoiceChip(
-                          label: Text(_categoryLabel(category)),
-                          selected: _categoryFilter == category,
-                          selectedColor: accentColor.withValues(alpha: 0.28),
-                          backgroundColor: const Color(0xFF161A1D),
-                          side: BorderSide(
-                            color: _categoryFilter == category
-                                ? accentColor.withValues(alpha: 0.72)
-                                : accentColor.withValues(alpha: 0.36),
-                          ),
-                          labelStyle: const TextStyle(color: Colors.white),
-                          onSelected: (_) {
-                            setState(() {
-                              _categoryFilter = category;
-                            });
-                          },
-                        );
-                      }),
-                    ],
+                  IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: const Icon(Icons.close, color: Colors.white70),
+                    tooltip: 'Close',
                   ),
                 ],
-                const SizedBox(height: 12),
-                Expanded(
-                  child: filtered.isEmpty
-                      ? const Center(
-                          child: Text(
-                            'No crystal found.',
-                            style: TextStyle(color: Colors.white70),
-                          ),
-                        )
-                      : ListView.separated(
-                          itemCount: filtered.length,
-                          separatorBuilder: (_, __) => const Divider(
-                            height: 1,
-                            color: Color(0x22FFFFFF),
-                          ),
-                          itemBuilder: (BuildContext context, int index) {
-                            final CrystalLibraryEntry entry = filtered[index];
-                            final bool isSelected =
-                                entry.normalizedKey == selectedKey;
-                            final Color accentColor = _crystalAccentColor(
-                              entry,
-                            );
-                            return ListTile(
-                              dense: true,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                side: BorderSide(
-                                  color: isSelected
-                                      ? accentColor.withValues(alpha: 0.75)
-                                      : accentColor.withValues(alpha: 0.28),
-                                ),
-                              ),
-                              selected: isSelected,
-                              selectedTileColor: accentColor.withValues(
-                                alpha: 0.18,
-                              ),
-                              leading: Container(
-                                width: 28,
-                                height: 28,
-                                decoration: BoxDecoration(
-                                  color: accentColor.withValues(alpha: 0.12),
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(
-                                    color: accentColor.withValues(alpha: 0.42),
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(4),
-                                  child: Image.asset(
-                                    _crystalIconPath(entry),
-                                    fit: BoxFit.contain,
-                                    errorBuilder: (_, __, ___) {
-                                      return Icon(
-                                        Icons.diamond_outlined,
-                                        size: 14,
-                                        color: accentColor,
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                              title: Text(
-                                entry.name,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                              subtitle: Text(
-                                '${entry.key} - ${_categoryLabel(entry.category)}',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              trailing: isSelected
-                                  ? Icon(
-                                      Icons.check_circle,
-                                      color: accentColor,
-                                      size: 18,
-                                    )
-                                  : null,
-                              onTap: () => Navigator.of(context).pop(entry),
-                            );
-                          },
+              ),
+              const SizedBox(height: 6),
+              TextField(
+                style: const TextStyle(color: Colors.white),
+                cursorColor: Colors.white70,
+                decoration: InputDecoration(
+                  hintText: 'Search crystal name or key...',
+                  hintStyle: const TextStyle(color: Colors.white54),
+                  prefixIcon: const Icon(Icons.search, color: Colors.white70),
+                  isDense: true,
+                  filled: true,
+                  fillColor: const Color(0xFF0F0F0F),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0x33FFFFFF)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0x33FFFFFF)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0x66FFFFFF)),
+                  ),
+                ),
+                onChanged: (String value) {
+                  setState(() {
+                    _query = value;
+                  });
+                },
+              ),
+              if (categories.length > 1) ...<Widget>[
+                const SizedBox(height: 10),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: <Widget>[
+                    ChoiceChip(
+                      label: const Text('All'),
+                      selected: _categoryFilter == null,
+                      onSelected: (_) {
+                        setState(() {
+                          _categoryFilter = null;
+                        });
+                      },
+                    ),
+                    ...categories.map((String category) {
+                      final Color accentColor = _categoryAccentColor(category);
+                      return ChoiceChip(
+                        label: Text(_categoryLabel(category)),
+                        selected: _categoryFilter == category,
+                        selectedColor: accentColor.withValues(alpha: 0.28),
+                        backgroundColor: const Color(0xFF161A1D),
+                        side: BorderSide(
+                          color: _categoryFilter == category
+                              ? accentColor.withValues(alpha: 0.72)
+                              : accentColor.withValues(alpha: 0.36),
                         ),
+                        labelStyle: const TextStyle(color: Colors.white),
+                        onSelected: (_) {
+                          setState(() {
+                            _categoryFilter = category;
+                          });
+                        },
+                      );
+                    }),
+                  ],
                 ),
               ],
-            ),
+              const SizedBox(height: 12),
+              Expanded(
+                child: filtered.isEmpty
+                    ? const Center(
+                        child: Text(
+                          'No crystal found.',
+                          style: TextStyle(color: Colors.white70),
+                        ),
+                      )
+                    : ListView.separated(
+                        itemCount: filtered.length,
+                        separatorBuilder: (_, __) =>
+                            const Divider(height: 1, color: Color(0x22FFFFFF)),
+                        itemBuilder: (BuildContext context, int index) {
+                          final CrystalLibraryEntry entry = filtered[index];
+                          final bool isSelected =
+                              entry.normalizedKey == selectedKey;
+                          final Color accentColor = _crystalAccentColor(entry);
+                          return ListTile(
+                            dense: true,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              side: BorderSide(
+                                color: isSelected
+                                    ? accentColor.withValues(alpha: 0.75)
+                                    : accentColor.withValues(alpha: 0.28),
+                              ),
+                            ),
+                            selected: isSelected,
+                            selectedTileColor: accentColor.withValues(
+                              alpha: 0.18,
+                            ),
+                            leading: Container(
+                              width: 28,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                color: accentColor.withValues(alpha: 0.12),
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: accentColor.withValues(alpha: 0.42),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4),
+                                child: Image.asset(
+                                  _crystalIconPath(entry),
+                                  fit: BoxFit.contain,
+                                  errorBuilder: (_, __, ___) {
+                                    return Icon(
+                                      Icons.diamond_outlined,
+                                      size: 14,
+                                      color: accentColor,
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            title: Text(
+                              entry.name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            subtitle: Text(
+                              '${entry.key} - ${_categoryLabel(entry.category)}',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: Colors.white70,
+                                fontSize: 12,
+                              ),
+                            ),
+                            trailing: isSelected
+                                ? Icon(
+                                    Icons.check_circle,
+                                    color: accentColor,
+                                    size: 18,
+                                  )
+                                : null,
+                            onTap: () => Navigator.of(context).pop(entry),
+                          );
+                        },
+                      ),
+              ),
+            ],
           ),
         ),
       ),

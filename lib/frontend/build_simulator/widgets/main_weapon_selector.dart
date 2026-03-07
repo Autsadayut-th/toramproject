@@ -9,6 +9,7 @@ class MainWeaponEquipmentSelector extends StatelessWidget {
     required this.selectedId,
     required this.selectedDisplayName,
     required this.selectedEquipmentItem,
+    required this.searchCandidates,
     required this.statPreview,
     required this.onEquipChanged,
     required this.enhance,
@@ -22,6 +23,7 @@ class MainWeaponEquipmentSelector extends StatelessWidget {
   final String? selectedId;
   final String? selectedDisplayName;
   final EquipmentLibraryItem? selectedEquipmentItem;
+  final List<EquipmentLibraryItem> searchCandidates;
   final List<String> statPreview;
   final ValueChanged<String?> onEquipChanged;
   final int enhance;
@@ -35,11 +37,13 @@ class MainWeaponEquipmentSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return EquipmentSlotSelector(
       idLabel: 'Main Weapon',
-      idHint: 'Select main weapon',
+      idHint: 'Search main weapon name...',
       selectedId: selectedId,
       selectedDisplayText: selectedDisplayName,
       selectedEquipmentItem: selectedEquipmentItem,
-      idFieldReadOnly: true,
+      enableInlineNameSearch: true,
+      inlineSearchByNameOnly: true,
+      inlineSearchCandidates: searchCandidates,
       onEquipChanged: onEquipChanged,
       pickInitialCategory: 'Weapon',
       allowedCategories: const <String>['Weapon'],
