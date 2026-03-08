@@ -5,6 +5,9 @@ const DEFAULT_FALLBACK = [
 ];
 const DEFAULT_GEMINI_MODEL = 'gemini-3.1-flash-lite-preview';
 const DEFAULT_EXPLANATION_MAX_OUTPUT_TOKENS = 220;
+const GEMINI_MODEL_ALIASES = {
+  'gemini-3.1-flash-lite': 'gemini-3.1-flash-lite-preview',
+};
 
 const RECOMMENDATION_SCHEMA = {
   type: 'OBJECT',
@@ -515,7 +518,8 @@ function normalizeGeminiModel(rawModel) {
   if (!normalized) {
     return DEFAULT_GEMINI_MODEL;
   }
-  return normalized;
+  const canonical = normalized.toLowerCase();
+  return GEMINI_MODEL_ALIASES[canonical] || canonical;
 }
 
 function isGeminiModelFormatError(status, bodyText) {
