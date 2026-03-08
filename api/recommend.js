@@ -3,7 +3,8 @@ const DEFAULT_FALLBACK = [
   'Refine main weapon and armor before chasing niche min-max stats.',
   'Balance damage stats with survivability so your combo can run consistently.',
 ];
-const DEFAULT_GEMINI_MODEL = 'gemini-2.5-flash';
+const DEFAULT_GEMINI_MODEL = 'gemini-3.1-flash-lite-preview';
+const DEFAULT_EXPLANATION_MAX_OUTPUT_TOKENS = 220;
 
 const RECOMMENDATION_SCHEMA = {
   type: 'OBJECT',
@@ -157,58 +158,114 @@ function pickFields(input) {
     typeof input.equipmentSlots === 'object' && input.equipmentSlots != null
       ? input.equipmentSlots
       : {};
-  const equippedItems = Array.isArray(input.equippedItems)
-    ? input.equippedItems.slice(0, 10).map((item) => ({
-        name: typeof item?.name === 'string' ? item.name : '',
-        type: typeof item?.type === 'string' ? item.type : '',
-        stats: Array.isArray(item?.stats)
-          ? item.stats.slice(0, 6).map((stat) => ({
-              statKey: typeof stat?.statKey === 'string' ? stat.statKey : '',
-              value: Number(stat?.value ?? 0),
-              valueType:
-                typeof stat?.valueType === 'string' ? stat.valueType : 'flat',
-            }))
-          : [],
-      }))
-    : [];
 
-  return {
-    level: Number(input.level ?? 1),
-    personalStatType: String(input.personalStatType ?? ''),
-    personalStatValue: Number(input.personalStatValue ?? 0),
-    summary: {
-      ATK: Number(summary.ATK ?? 0),
-      MATK: Number(summary.MATK ?? 0),
-      DEF: Number(summary.DEF ?? 0),
-      MDEF: Number(summary.MDEF ?? 0),
-      CritRate: Number(summary.CritRate ?? 0),
-      PhysicalPierce: Number(summary.PhysicalPierce ?? 0),
-      ElementPierce: Number(summary.ElementPierce ?? 0),
-      Accuracy: Number(summary.Accuracy ?? 0),
-      Stability: Number(summary.Stability ?? 0),
-      HP: Number(summary.HP ?? 0),
-      MP: Number(summary.MP ?? 0),
-    },
-    character: {
-      STR: Number(character.STR ?? 0),
-      DEX: Number(character.DEX ?? 0),
-      INT: Number(character.INT ?? 0),
-      AGI: Number(character.AGI ?? 0),
-      VIT: Number(character.VIT ?? 0),
-    },
-    equipmentSlots: {
-      mainWeaponId: equipmentSlots.mainWeaponId ?? null,
-      subWeaponId: equipmentSlots.subWeaponId ?? null,
-      armorId: equipmentSlots.armorId ?? null,
-      helmetId: equipmentSlots.helmetId ?? null,
-      ringId: equipmentSlots.ringId ?? null,
-      enhanceMain: Number(equipmentSlots.enhanceMain ?? 0),
-      enhanceArmor: Number(equipmentSlots.enhanceArmor ?? 0),
-      enhanceHelmet: Number(equipmentSlots.enhanceHelmet ?? 0),
-      enhanceRing: Number(equipmentSlots.enhanceRing ?? 0),
-    },
-    equippedItems,
-  };
+  const levelValue = Number(input.level ?? 1);
+  const level = Number.isFinite(levelValue) && levelValue > 0
+    ? levelValue
+    : 1;
+
+  const payload = { level };
+  const personalStatType = String(input.personalStatType ?? '').trim();
+  const personalStatValue = Number(input.personalStatValue ?? 0);
+  if (personalStatType) {
+    payload.personalStatType = personalStatType;
+  }
+  if (Number.isFinite(personalStatValue) && personalStatValue !== 0) {
+    payload.personalStatValue = personalStatValue;
+  }
+
+  const compactSummary = pickNonZeroMap(summary, [
+    'ATK',
+    'MATK',
+    'DEF',
+    'MDEF',
+    'CritRate',
+    'PhysicalPierce',
+    'ElementPierce',
+    'Accuracy',
+    'Stability',
+    'HP',
+    'MP',
+  ]);
+  if (Object.keys(compactSummary).length > 0) {
+    payload.summary = compactSummary;
+  }
+
+  const compactCharacter = pickNonZeroMap(character, [
+    'STR',
+    'DEX',
+    'INT',
+    'AGI',
+    'VIT',
+  ]);
+  if (Object.keys(compactCharacter).length > 0) {
+    payload.character = compactCharacter;
+  }
+
+  const compactEquipment = pickEquipmentSnapshot(equipmentSlots);
+  if (Object.keys(compactEquipment).length > 0) {
+    payload.equipment = compactEquipment;
+  }
+
+  return payload;
+}
+
+function pickNonZeroMap(source, keys) {
+  const cleaned = {};
+  for (const key of keys) {
+    const value = Number(source[key] ?? 0);
+    if (!Number.isFinite(value) || value === 0) {
+      continue;
+    }
+    cleaned[key] = value;
+  }
+  return cleaned;
+}
+
+function pickEquipmentSnapshot(equipmentSlots) {
+  const missingSlots = [];
+  if (!equipmentSlots.mainWeaponId) {
+    missingSlots.push('mainWeapon');
+  }
+  if (!equipmentSlots.subWeaponId) {
+    missingSlots.push('subWeapon');
+  }
+  if (!equipmentSlots.armorId) {
+    missingSlots.push('armor');
+  }
+  if (!equipmentSlots.helmetId) {
+    missingSlots.push('helmet');
+  }
+  if (!equipmentSlots.ringId) {
+    missingSlots.push('ring');
+  }
+
+  const refine = {};
+  const enhanceMain = Number(equipmentSlots.enhanceMain ?? 0);
+  const enhanceArmor = Number(equipmentSlots.enhanceArmor ?? 0);
+  const enhanceHelmet = Number(equipmentSlots.enhanceHelmet ?? 0);
+  const enhanceRing = Number(equipmentSlots.enhanceRing ?? 0);
+  if (Number.isFinite(enhanceMain) && enhanceMain > 0) {
+    refine.mainWeapon = enhanceMain;
+  }
+  if (Number.isFinite(enhanceArmor) && enhanceArmor > 0) {
+    refine.armor = enhanceArmor;
+  }
+  if (Number.isFinite(enhanceHelmet) && enhanceHelmet > 0) {
+    refine.helmet = enhanceHelmet;
+  }
+  if (Number.isFinite(enhanceRing) && enhanceRing > 0) {
+    refine.ring = enhanceRing;
+  }
+
+  const snapshot = {};
+  if (missingSlots.length > 0) {
+    snapshot.missingSlots = missingSlots;
+  }
+  if (Object.keys(refine).length > 0) {
+    snapshot.refine = refine;
+  }
+  return snapshot;
 }
 
 function extractJson(text) {
@@ -352,20 +409,47 @@ function parseModelExplanationPayload(text, recommendations) {
   };
 }
 
+function buildCompactExplanationPayload(input, recommendations) {
+  const payload = {
+    rec: recommendations,
+    b: { lv: input.level },
+  };
+
+  if (input.personalStatType) {
+    const personal = [input.personalStatType];
+    if (Number.isFinite(input.personalStatValue) && input.personalStatValue !== 0) {
+      personal.push(input.personalStatValue);
+    }
+    payload.b.ps = personal;
+  } else if (
+    Number.isFinite(input.personalStatValue) &&
+    input.personalStatValue !== 0
+  ) {
+    payload.b.ps = [input.personalStatValue];
+  }
+  if (input.summary && Object.keys(input.summary).length > 0) {
+    payload.b.sum = input.summary;
+  }
+  if (input.character && Object.keys(input.character).length > 0) {
+    payload.b.char = input.character;
+  }
+  if (input.equipment && Object.keys(input.equipment).length > 0) {
+    payload.b.eq = input.equipment;
+  }
+
+  return payload;
+}
+
 function buildExplanationPrompt({ input, recommendations }) {
-  const promptData = JSON.stringify({
-    build: input,
-    recommendations,
-  });
+  const promptData = JSON.stringify(
+    buildCompactExplanationPayload(input, recommendations),
+  );
   return (
-    'You are a Toram Online build assistant. ' +
-    'The recommendations were already generated by a deterministic local rules engine. ' +
-    'Do not add, remove, reorder, merge, weaken, or replace any recommendation. ' +
-    'Explain the provided recommendations only. ' +
-    'Return only valid JSON with keys "summary" and "explanations". ' +
-    '"summary" must be 1-2 concise sentences. ' +
-    '"explanations" must be an array with the same number of items as the provided recommendations, in the same order. ' +
-    'Each explanation must be one concise beginner-friendly sentence. ' +
+    'Explain the Toram recommendations using the build snapshot. ' +
+    'Do not change recommendation order or wording. ' +
+    'Return JSON only with keys "summary" and "explanations". ' +
+    '"summary": 1-2 short sentences. ' +
+    '"explanations": same length as rec; each one short beginner-friendly sentence. ' +
     'No markdown, no extra keys.\n' +
     promptData
   );
@@ -435,10 +519,25 @@ function normalizeGeminiModel(rawModel) {
 }
 
 function isGeminiModelFormatError(status, bodyText) {
-  if (status !== 400) {
-    return false;
+  const text = String(bodyText || '');
+  if (status === 400) {
+    return /GenerateContentRequest\.model/i.test(text);
   }
-  return /GenerateContentRequest\.model/i.test(String(bodyText || ''));
+  if (status === 404) {
+    return (
+      /models\/.+\s+is not found for API version/i.test(text) ||
+      /not found/i.test(text)
+    );
+  }
+  return false;
+}
+
+function resolveGeminiMaxOutputTokens() {
+  const configured = Number(process.env.GEMINI_MAX_OUTPUT_TOKENS ?? '');
+  if (Number.isFinite(configured) && configured >= 96 && configured <= 1024) {
+    return Math.floor(configured);
+  }
+  return DEFAULT_EXPLANATION_MAX_OUTPUT_TOKENS;
 }
 
 function extractGeminiText(json) {
@@ -469,6 +568,7 @@ async function requestGeminiExplanation(input, recommendations) {
   }
 
   const promptText = buildExplanationPrompt({ input, recommendations });
+  const maxOutputTokens = resolveGeminiMaxOutputTokens();
   const configuredModel = normalizeGeminiModel(process.env.GEMINI_MODEL);
   const candidateModels = configuredModel === DEFAULT_GEMINI_MODEL
     ? [configuredModel]
@@ -495,7 +595,7 @@ async function requestGeminiExplanation(input, recommendations) {
         ],
         generationConfig: {
           temperature: 0.2,
-          maxOutputTokens: 400,
+          maxOutputTokens,
           responseMimeType: 'application/json',
           responseSchema: EXPLANATION_SCHEMA,
         },

@@ -189,7 +189,11 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
   }) {
     int count = 0;
     for (final String key in _compareKeys) {
-      if (_deltaValue(firstBuild: firstBuild, secondBuild: secondBuild, key: key) !=
+      if (_deltaValue(
+            firstBuild: firstBuild,
+            secondBuild: secondBuild,
+            key: key,
+          ) !=
           0) {
         count++;
       }
@@ -203,7 +207,11 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
   }) {
     int count = 0;
     for (final String key in _compareKeys) {
-      if (_deltaValue(firstBuild: firstBuild, secondBuild: secondBuild, key: key) <
+      if (_deltaValue(
+            firstBuild: firstBuild,
+            secondBuild: secondBuild,
+            key: key,
+          ) <
           0) {
         count++;
       }
@@ -217,7 +225,11 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
   }) {
     int count = 0;
     for (final String key in _compareKeys) {
-      if (_deltaValue(firstBuild: firstBuild, secondBuild: secondBuild, key: key) >
+      if (_deltaValue(
+            firstBuild: firstBuild,
+            secondBuild: secondBuild,
+            key: key,
+          ) >
           0) {
         count++;
       }
@@ -278,201 +290,210 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) {
-                    final bool stackSelectors = constraints.maxWidth < 860;
-                    final Widget selectorA = _buildSelector(
-                      label: 'Build A',
-                      selectedId: _firstBuildId,
-                      onChanged: (String? value) {
-                        setState(() {
-                          _firstBuildId = value;
-                        });
-                      },
-                    );
-                    final Widget selectorB = _buildSelector(
-                      label: 'Build B',
-                      selectedId: _secondBuildId,
-                      onChanged: (String? value) {
-                        setState(() {
-                          _secondBuildId = value;
-                        });
-                      },
-                    );
-                    if (stackSelectors) {
-                      return Column(
-                        children: <Widget>[
-                          selectorA,
-                          const SizedBox(height: 10),
-                          selectorB,
-                        ],
-                      );
-                    }
-                    return Row(
-                      children: <Widget>[
-                        Expanded(child: selectorA),
-                        const SizedBox(width: 12),
-                        Expanded(child: selectorB),
+                    LayoutBuilder(
+                      builder:
+                          (BuildContext context, BoxConstraints constraints) {
+                            final bool stackSelectors =
+                                constraints.maxWidth < 860;
+                            final Widget selectorA = _buildSelector(
+                              label: 'Build A',
+                              selectedId: _firstBuildId,
+                              onChanged: (String? value) {
+                                setState(() {
+                                  _firstBuildId = value;
+                                });
+                              },
+                            );
+                            final Widget selectorB = _buildSelector(
+                              label: 'Build B',
+                              selectedId: _secondBuildId,
+                              onChanged: (String? value) {
+                                setState(() {
+                                  _secondBuildId = value;
+                                });
+                              },
+                            );
+                            if (stackSelectors) {
+                              return Column(
+                                children: <Widget>[
+                                  selectorA,
+                                  const SizedBox(height: 10),
+                                  selectorB,
+                                ],
+                              );
+                            }
+                            return Row(
+                              children: <Widget>[
+                                Expanded(child: selectorA),
+                                const SizedBox(width: 12),
+                                Expanded(child: selectorB),
+                              ],
+                            );
+                          },
+                    ),
+                    const SizedBox(height: 14),
+                    Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      children: [
+                        OutlinedButton.icon(
+                          onPressed: _swapBuildSelection,
+                          icon: const Icon(Icons.swap_horiz),
+                          label: const Text('Swap A/B'),
+                        ),
+                        FilledButton.tonalIcon(
+                          onPressed: firstBuild == null
+                              ? null
+                              : () {
+                                  widget.onLoadBuild(_firstBuildId!);
+                                  if (widget.onNavigate != null) {
+                                    widget.onNavigate!(AppNavigationPage.build);
+                                    return;
+                                  }
+                                  Navigator.of(context).pop();
+                                },
+                          icon: const Icon(Icons.play_arrow),
+                          label: const Text('Load Build A'),
+                        ),
+                        FilledButton.tonalIcon(
+                          onPressed: secondBuild == null
+                              ? null
+                              : () {
+                                  widget.onLoadBuild(_secondBuildId!);
+                                  if (widget.onNavigate != null) {
+                                    widget.onNavigate!(AppNavigationPage.build);
+                                    return;
+                                  }
+                                  Navigator.of(context).pop();
+                                },
+                          icon: const Icon(Icons.play_arrow),
+                          label: const Text('Load Build B'),
+                        ),
                       ],
-                    );
-                  },
-                ),
-                const SizedBox(height: 14),
-                Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
-                  children: [
-                    OutlinedButton.icon(
-                      onPressed: _swapBuildSelection,
-                      icon: const Icon(Icons.swap_horiz),
-                      label: const Text('Swap A/B'),
                     ),
-                    FilledButton.tonalIcon(
-                      onPressed: firstBuild == null
-                          ? null
-                          : () {
-                              widget.onLoadBuild(_firstBuildId!);
-                              if (widget.onNavigate != null) {
-                                widget.onNavigate!(AppNavigationPage.build);
-                                return;
-                              }
-                              Navigator.of(context).pop();
-                            },
-                      icon: const Icon(Icons.play_arrow),
-                      label: const Text('Load Build A'),
-                    ),
-                    FilledButton.tonalIcon(
-                      onPressed: secondBuild == null
-                          ? null
-                          : () {
-                              widget.onLoadBuild(_secondBuildId!);
-                              if (widget.onNavigate != null) {
-                                widget.onNavigate!(AppNavigationPage.build);
-                                return;
-                              }
-                              Navigator.of(context).pop();
-                            },
-                      icon: const Icon(Icons.play_arrow),
-                      label: const Text('Load Build B'),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 14),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF2A2A2A),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: const Color(0xFFFFFFFF).withValues(alpha: 0.16),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        _displayName(
-                          firstBuild ?? _builds.first,
-                          firstBuild == null ? 0 : _builds.indexOf(firstBuild),
-                        ),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
+                    const SizedBox(height: 14),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF2A2A2A),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: const Color(
+                            0xFFFFFFFF,
+                          ).withValues(alpha: 0.16),
                         ),
                       ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Main: ${_slotLabel(firstBuild, 'mainWeaponId')}  '
-                        'Sub: ${_slotLabel(firstBuild, 'subWeaponId')}  '
-                        'Armor: ${_slotLabel(firstBuild, 'armorId')}',
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 12,
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _displayName(
+                              firstBuild ?? _builds.first,
+                              firstBuild == null
+                                  ? 0
+                                  : _builds.indexOf(firstBuild),
+                            ),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Main: ${_slotLabel(firstBuild, 'mainWeaponId')}  '
+                            'Sub: ${_slotLabel(firstBuild, 'subWeaponId')}  '
+                            'Armor: ${_slotLabel(firstBuild, 'armorId')}',
+                            style: const TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            _displayName(
+                              secondBuild ?? _builds[1],
+                              secondBuild == null
+                                  ? 1
+                                  : _builds.indexOf(secondBuild),
+                            ),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Main: ${_slotLabel(secondBuild, 'mainWeaponId')}  '
+                            'Sub: ${_slotLabel(secondBuild, 'subWeaponId')}  '
+                            'Armor: ${_slotLabel(secondBuild, 'armorId')}',
+                            style: const TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 10),
-                      Text(
-                        _displayName(
-                          secondBuild ?? _builds[1],
-                          secondBuild == null
-                              ? 1
-                              : _builds.indexOf(secondBuild),
+                    ),
+                    const SizedBox(height: 10),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: <Widget>[
+                        _summaryChip(
+                          icon: Icons.compare_arrows,
+                          label: 'Different Stats',
+                          value: '$differenceCount/${_compareKeys.length}',
                         ),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
+                        _summaryChip(
+                          icon: Icons.arrow_back,
+                          label: 'Build A Leads',
+                          value: '$buildALeadCount',
                         ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Main: ${_slotLabel(secondBuild, 'mainWeaponId')}  '
-                        'Sub: ${_slotLabel(secondBuild, 'subWeaponId')}  '
-                        'Armor: ${_slotLabel(secondBuild, 'armorId')}',
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 12,
+                        _summaryChip(
+                          icon: Icons.arrow_forward,
+                          label: 'Build B Leads',
+                          value: '$buildBLeadCount',
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: <Widget>[
-                    _summaryChip(
-                      icon: Icons.compare_arrows,
-                      label: 'Different Stats',
-                      value: '$differenceCount/${_compareKeys.length}',
+                      ],
                     ),
-                    _summaryChip(
-                      icon: Icons.arrow_back,
-                      label: 'Build A Leads',
-                      value: '$buildALeadCount',
+                    const SizedBox(height: 14),
+                    _buildCompareRadarCard(
+                      firstBuild: firstBuild,
+                      secondBuild: secondBuild,
                     ),
-                    _summaryChip(
-                      icon: Icons.arrow_forward,
-                      label: 'Build B Leads',
-                      value: '$buildBLeadCount',
+                    const SizedBox(height: 14),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: <Widget>[
+                        FilterChip(
+                          label: const Text('Only Differences'),
+                          selected: _showOnlyDifferences,
+                          onSelected: (bool selected) {
+                            setState(() {
+                              _showOnlyDifferences = selected;
+                            });
+                          },
+                        ),
+                        FilterChip(
+                          label: const Text('Sort By Delta'),
+                          selected: _sortByDifference,
+                          onSelected: (bool selected) {
+                            setState(() {
+                              _sortByDifference = selected;
+                            });
+                          },
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                const SizedBox(height: 14),
-                _buildCompareRadarCard(firstBuild: firstBuild, secondBuild: secondBuild),
-                const SizedBox(height: 14),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: <Widget>[
-                    FilterChip(
-                      label: const Text('Only Differences'),
-                      selected: _showOnlyDifferences,
-                      onSelected: (bool selected) {
-                        setState(() {
-                          _showOnlyDifferences = selected;
-                        });
-                      },
+                    const SizedBox(height: 10),
+                    _buildCenteredCompareTable(
+                      firstBuild: firstBuild,
+                      secondBuild: secondBuild,
+                      showOnlyDifferences: _showOnlyDifferences,
+                      sortByDifference: _sortByDifference,
                     ),
-                    FilterChip(
-                      label: const Text('Sort By Delta'),
-                      selected: _sortByDifference,
-                      onSelected: (bool selected) {
-                        setState(() {
-                          _sortByDifference = selected;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                _buildCenteredCompareTable(
-                  firstBuild: firstBuild,
-                  secondBuild: secondBuild,
-                  showOnlyDifferences: _showOnlyDifferences,
-                  sortByDifference: _sortByDifference,
-                ),
                   ],
                 ),
               ),
