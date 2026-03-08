@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import '../account_page/account_page.dart';
 import '../build_simulator/build_simulator_coordinator.dart';
@@ -32,6 +33,7 @@ class _AppShellScreenState extends State<AppShellScreen> {
   static const String _appLogoAssetPath = 'assets/logo/logo.png';
   final BuildSimulatorCoordinator _coordinator = BuildSimulatorCoordinator();
   AppNavigationPage _currentPage = AppNavigationPage.build;
+  late final bool _firebaseAvailable;
   User? _currentUser;
   StreamSubscription<User?>? _authStateSubscription;
 
@@ -39,15 +41,46 @@ class _AppShellScreenState extends State<AppShellScreen> {
   void initState() {
     super.initState();
     _coordinator.addListener(_onCoordinatorChanged);
-    _currentUser = FirebaseAuth.instance.currentUser;
-    _authStateSubscription = FirebaseAuth.instance.authStateChanges().listen((
-      User? user,
-    ) {
-      if (!mounted) return;
-      setState(() {
-        _currentUser = user;
+    _firebaseAvailable = _isFirebaseAvailable();
+    _currentUser = _readCurrentUser();
+    _authStateSubscription = _listenAuthState();
+  }
+
+  bool _isFirebaseAvailable() {
+    try {
+      return Firebase.apps.isNotEmpty;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  User? _readCurrentUser() {
+    if (!_firebaseAvailable) {
+      return null;
+    }
+    try {
+      return FirebaseAuth.instance.currentUser;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  StreamSubscription<User?>? _listenAuthState() {
+    if (!_firebaseAvailable) {
+      return null;
+    }
+    try {
+      return FirebaseAuth.instance.authStateChanges().listen((User? user) {
+        if (!mounted) {
+          return;
+        }
+        setState(() {
+          _currentUser = user;
+        });
       });
-    });
+    } catch (_) {
+      return null;
+    }
   }
 
   bool _isHiddenPage(AppNavigationPage page) {
@@ -87,6 +120,9 @@ class _AppShellScreenState extends State<AppShellScreen> {
   }
 
   Future<void> _openAccountPage() async {
+    if (!_firebaseAvailable) {
+      return;
+    }
     await Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (BuildContext context) =>
@@ -179,27 +215,31 @@ class _AppShellScreenState extends State<AppShellScreen> {
           },
         ),
         actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.account_circle, color: Colors.white),
-            onPressed: _openAccountPage,
-            tooltip: 'Account',
-          ),
-          if (_currentUser != null)
+          if (_firebaseAvailable) ...<Widget>[
             IconButton(
-              icon: const Icon(Icons.logout, color: Colors.white),
-              onPressed: () async {
-                await FirebaseAuth.instance.signOut();
-              },
-              tooltip: 'Logout',
-            )
-          else
-            IconButton(
-              icon: const Icon(Icons.login, color: Colors.white),
-              onPressed: () {
-                Navigator.of(context).pushNamed('/login');
-              },
-              tooltip: 'Login',
+              icon: const Icon(Icons.account_circle, color: Colors.white),
+              onPressed: _openAccountPage,
+              tooltip: 'Account',
             ),
+            if (_currentUser != null)
+              IconButton(
+                icon: const Icon(Icons.logout, color: Colors.white),
+                onPressed: () async {
+                  try {
+                    await FirebaseAuth.instance.signOut();
+                  } catch (_) {}
+                },
+                tooltip: 'Logout',
+              )
+            else
+              IconButton(
+                icon: const Icon(Icons.login, color: Colors.white),
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/login');
+                },
+                tooltip: 'Login',
+              ),
+          ],
         ],
       ),
       body: IndexedStack(

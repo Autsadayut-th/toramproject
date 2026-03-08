@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 const String _appLogoAssetPath = 'assets/logo/logo.png';
 
@@ -35,9 +36,29 @@ class AppNavigationDrawer extends StatelessWidget {
   final VoidCallback onOpenCompare;
   final VoidCallback onOpenSettings;
 
+  bool _isFirebaseAvailable() {
+    try {
+      return Firebase.apps.isNotEmpty;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  bool _readAuthenticatedState(bool firebaseAvailable) {
+    if (!firebaseAvailable) {
+      return false;
+    }
+    try {
+      return FirebaseAuth.instance.currentUser != null;
+    } catch (_) {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final bool isAuthenticated = FirebaseAuth.instance.currentUser != null;
+    final bool firebaseAvailable = _isFirebaseAvailable();
+    final bool isAuthenticated = _readAuthenticatedState(firebaseAvailable);
 
     return Drawer(
       backgroundColor: const Color(0xFF000000),
@@ -146,15 +167,19 @@ class AppNavigationDrawer extends StatelessWidget {
                 ),
               ),
               child: OutlinedButton.icon(
-                onPressed: () async {
-                  final NavigatorState navigator = Navigator.of(context);
-                  navigator.pop();
-                  if (isAuthenticated) {
-                    await FirebaseAuth.instance.signOut();
-                    return;
-                  }
-                  navigator.pushNamed('/login');
-                },
+                onPressed: !firebaseAvailable
+                    ? null
+                    : () async {
+                        final NavigatorState navigator = Navigator.of(context);
+                        navigator.pop();
+                        if (isAuthenticated) {
+                          try {
+                            await FirebaseAuth.instance.signOut();
+                          } catch (_) {}
+                          return;
+                        }
+                        navigator.pushNamed('/login');
+                      },
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Colors.white,
                   side: BorderSide(
@@ -162,8 +187,20 @@ class AppNavigationDrawer extends StatelessWidget {
                   ),
                   minimumSize: const Size.fromHeight(44),
                 ),
-                icon: Icon(isAuthenticated ? Icons.logout : Icons.login),
-                label: Text(isAuthenticated ? 'Logout' : 'Login'),
+                icon: Icon(
+                  !firebaseAvailable
+                      ? Icons.cloud_off
+                      : isAuthenticated
+                      ? Icons.logout
+                      : Icons.login,
+                ),
+                label: Text(
+                  !firebaseAvailable
+                      ? 'Firebase unavailable'
+                      : isAuthenticated
+                      ? 'Logout'
+                      : 'Login',
+                ),
               ),
             ),
           ],
