@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -27,74 +28,122 @@ class AiBuildRecommendationResult {
 class AiBuildRecommendationService {
   const AiBuildRecommendationService();
 
+  static const Duration _cacheTtl = Duration(minutes: 5);
+  static const int _maxAttempts = 2;
+  static final Map<String, _AiRecommendationCacheEntry> _cache =
+      <String, _AiRecommendationCacheEntry>{};
+
   Future<AiBuildRecommendationResult> fetchRecommendations({
     required Map<String, dynamic> payload,
     Duration timeout = const Duration(seconds: 15),
   }) async {
+    final String cacheKey = _payloadCacheKey(payload);
+    final DateTime now = DateTime.now();
+    final _AiRecommendationCacheEntry? cached = _cache[cacheKey];
+    if (cached != null && now.difference(cached.cachedAt) <= _cacheTtl) {
+      return cached.result;
+    }
+
     final Uri endpoint = _resolveEndpoint();
-    final http.Response response = await http
-        .post(
-          endpoint,
-          headers: const <String, String>{'Content-Type': 'application/json'},
-          body: jsonEncode(payload),
-        )
-        .timeout(timeout);
+    Object? lastError;
+    for (int attempt = 0; attempt < _maxAttempts; attempt++) {
+      try {
+        final http.Response response = await http
+            .post(
+              endpoint,
+              headers: const <String, String>{
+                'Content-Type': 'application/json',
+              },
+              body: jsonEncode(payload),
+            )
+            .timeout(timeout);
 
-    if (response.statusCode < 200 || response.statusCode >= 300) {
-      throw Exception(
-        'AI recommendation request failed (${response.statusCode})',
-      );
-    }
+        if (_isRetryableStatusCode(response.statusCode) &&
+            attempt < _maxAttempts - 1) {
+          await Future<void>.delayed(_retryDelay(attempt));
+          continue;
+        }
 
-    final dynamic decoded = jsonDecode(response.body);
-    if (decoded is! Map<String, dynamic>) {
-      throw const FormatException('Invalid AI response payload.');
-    }
+        if (response.statusCode < 200 || response.statusCode >= 300) {
+          throw Exception(
+            'AI recommendation request failed (${response.statusCode})',
+          );
+        }
 
-    final String source =
-        decoded['source']?.toString().trim().toLowerCase() ?? 'unknown';
-    final String message = decoded['message']?.toString().trim() ?? '';
-    final String providerMessage =
-        decoded['providerMessage']?.toString().trim() ?? '';
-    final String summary = decoded['summary']?.toString().trim() ?? '';
-    final List<String> explanations = _readStringList(decoded['explanations']);
+        final dynamic decoded = jsonDecode(response.body);
+        if (decoded is! Map<String, dynamic>) {
+          throw const FormatException('Invalid AI response payload.');
+        }
 
-    final List<AiRecommendationItem> recommendationItems =
-        _readRecommendationItems(
-          v2Payload: decoded['recommendationsV2'],
-          v1Payload: decoded['recommendations'],
-          source: source.isEmpty ? 'unknown' : source,
-          fallbackExplanations: explanations,
+        final String source =
+            decoded['source']?.toString().trim().toLowerCase() ?? 'unknown';
+        final String message = decoded['message']?.toString().trim() ?? '';
+        final String providerMessage =
+            decoded['providerMessage']?.toString().trim() ?? '';
+        final String summary = decoded['summary']?.toString().trim() ?? '';
+        final List<String> explanations = _readStringList(
+          decoded['explanations'],
         );
-    if (recommendationItems.isEmpty) {
-      throw const FormatException('AI response has no recommendations.');
+
+        final List<AiRecommendationItem> recommendationItems =
+            _readRecommendationItems(
+              v2Payload: decoded['recommendationsV2'],
+              v1Payload: decoded['recommendations'],
+              source: source.isEmpty ? 'unknown' : source,
+              fallbackExplanations: explanations,
+            );
+        if (recommendationItems.isEmpty) {
+          throw const FormatException('AI response has no recommendations.');
+        }
+
+        final List<String> normalizedExplanations = recommendationItems
+            .map((AiRecommendationItem item) {
+              final String explanation = item.explanation.trim();
+              if (explanation.isNotEmpty) {
+                return explanation;
+              }
+              return 'This recommendation addresses: ${item.normalizedMessage}';
+            })
+            .toList(growable: false);
+
+        final List<String> recommendations = recommendationItems
+            .map((AiRecommendationItem item) => item.normalizedMessage)
+            .where((String message) => message.isNotEmpty)
+            .take(6)
+            .toList(growable: false);
+
+        final AiBuildRecommendationResult result = AiBuildRecommendationResult(
+          recommendationItems: recommendationItems
+              .take(6)
+              .toList(growable: false),
+          recommendations: recommendations,
+          source: source.isEmpty ? 'unknown' : source,
+          message: message,
+          providerMessage: providerMessage,
+          summary: summary,
+          explanations: normalizedExplanations.take(6).toList(growable: false),
+        );
+
+        if (result.source == 'gemini') {
+          _cache[cacheKey] = _AiRecommendationCacheEntry(
+            result: result,
+            cachedAt: now,
+          );
+        }
+        return result;
+      } catch (error) {
+        lastError = error;
+        final bool canRetry =
+            _isRetryableError(error) && attempt < _maxAttempts - 1;
+        if (!canRetry) {
+          rethrow;
+        }
+        await Future<void>.delayed(_retryDelay(attempt));
+      }
     }
 
-    final List<String> normalizedExplanations = recommendationItems
-        .map((AiRecommendationItem item) {
-          final String explanation = item.explanation.trim();
-          if (explanation.isNotEmpty) {
-            return explanation;
-          }
-          return 'This recommendation addresses: ${item.normalizedMessage}';
-        })
-        .toList(growable: false);
-
-    final List<String> recommendations = recommendationItems
-        .map((AiRecommendationItem item) => item.normalizedMessage)
-        .where((String message) => message.isNotEmpty)
-        .take(6)
-        .toList(growable: false);
-
-    return AiBuildRecommendationResult(
-      recommendationItems: recommendationItems.take(6).toList(growable: false),
-      recommendations: recommendations,
-      source: source.isEmpty ? 'unknown' : source,
-      message: message,
-      providerMessage: providerMessage,
-      summary: summary,
-      explanations: normalizedExplanations.take(6).toList(growable: false),
-    );
+    throw lastError ??
+        const FormatException('AI recommendation request failed unexpectedly.');
   }
 
   Uri _resolveEndpoint() {
@@ -108,6 +157,29 @@ class AiBuildRecommendationService {
       port: base.hasPort ? base.port : null,
       path: '/api/recommend',
     );
+  }
+
+  String _payloadCacheKey(Map<String, dynamic> payload) {
+    return jsonEncode(payload);
+  }
+
+  bool _isRetryableStatusCode(int statusCode) {
+    return statusCode == 429 ||
+        statusCode == 502 ||
+        statusCode == 503 ||
+        statusCode == 504;
+  }
+
+  bool _isRetryableError(Object error) {
+    if (error is http.ClientException) {
+      return true;
+    }
+    return false;
+  }
+
+  Duration _retryDelay(int attempt) {
+    final int millis = 350 * (attempt + 1);
+    return Duration(milliseconds: millis);
   }
 
   List<AiRecommendationItem> _readRecommendationItems({
@@ -347,4 +419,14 @@ class AiBuildRecommendationService {
     }
     items.add(candidate);
   }
+}
+
+class _AiRecommendationCacheEntry {
+  const _AiRecommendationCacheEntry({
+    required this.result,
+    required this.cachedAt,
+  });
+
+  final AiBuildRecommendationResult result;
+  final DateTime cachedAt;
 }

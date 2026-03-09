@@ -998,6 +998,24 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
               ),
             ),
           ),
+          if (canGenerateAi &&
+              !_isAiRecommendationLoading &&
+              !hasRemoteAi) ...<Widget>[
+            const SizedBox(height: 6),
+            Align(
+              alignment: Alignment.center,
+              child: TextButton.icon(
+                onPressed: _generateAiRecommendationsNow,
+                icon: const Icon(Icons.refresh, size: 14),
+                label: const Text('Retry'),
+                style: TextButton.styleFrom(
+                  foregroundColor: colorScheme.onSurface.withValues(
+                    alpha: 0.78,
+                  ),
+                ),
+              ),
+            ),
+          ],
           if (!canGenerateAi) ...<Widget>[
             const SizedBox(height: 6),
             Center(

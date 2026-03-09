@@ -6,9 +6,13 @@ const DEFAULT_FALLBACK = [
 const DEFAULT_GEMINI_MODEL = 'gemini-3.1-flash-lite-preview';
 const DEFAULT_EXPLANATION_MAX_OUTPUT_TOKENS = 220;
 const DEFAULT_GEMINI_REQUEST_TIMEOUT_MS = 8000;
+const DEFAULT_AI_RETRY_ATTEMPTS = 2;
+const DEFAULT_AI_RETRY_BASE_DELAY_MS = 350;
+const DEFAULT_AI_CACHE_TTL_MS = 5 * 60 * 1000;
 const GEMINI_MODEL_ALIASES = {
   'gemini-3.1-flash-lite': 'gemini-3.1-flash-lite-preview',
 };
+const AI_EXPLANATION_CACHE = new Map();
 const SUPPORTED_RECOMMENDATION_CATEGORIES = new Set([
   'analysis',
   'stat',
@@ -669,6 +673,66 @@ function buildClientSafeAiError(error) {
   return message;
 }
 
+function sleep(ms) {
+  const delay = Number(ms);
+  if (!Number.isFinite(delay) || delay <= 0) {
+    return Promise.resolve();
+  }
+  return new Promise((resolve) => setTimeout(resolve, delay));
+}
+
+function resolveAiRetryAttempts() {
+  const configured = Number(process.env.AI_RETRY_ATTEMPTS ?? '');
+  if (Number.isFinite(configured) && configured >= 1 && configured <= 4) {
+    return Math.floor(configured);
+  }
+  return DEFAULT_AI_RETRY_ATTEMPTS;
+}
+
+function resolveAiCacheTtlMs() {
+  const configured = Number(process.env.AI_CACHE_TTL_MS ?? '');
+  if (Number.isFinite(configured) && configured >= 10000 && configured <= 3600000) {
+    return Math.floor(configured);
+  }
+  return DEFAULT_AI_CACHE_TTL_MS;
+}
+
+function buildAiCacheKey(input, recommendations) {
+  return JSON.stringify({
+    input,
+    recommendations,
+  });
+}
+
+function readAiCache(cacheKey) {
+  const row = AI_EXPLANATION_CACHE.get(cacheKey);
+  if (!row) {
+    return null;
+  }
+  if (!row.expiresAt || row.expiresAt < Date.now()) {
+    AI_EXPLANATION_CACHE.delete(cacheKey);
+    return null;
+  }
+  return row.value;
+}
+
+function writeAiCache(cacheKey, value) {
+  AI_EXPLANATION_CACHE.set(cacheKey, {
+    expiresAt: Date.now() + resolveAiCacheTtlMs(),
+    value,
+  });
+}
+
+function isRetryableAiError(error) {
+  const message = errorMessage(error).toLowerCase();
+  return (
+    /request failed \((429|500|502|503|504)\)/i.test(message) ||
+    /high demand/i.test(message) ||
+    /resource_exhausted/i.test(message) ||
+    /temporarily unavailable/i.test(message)
+  );
+}
+
 function normalizeGeminiModel(rawModel) {
   const normalized = String(rawModel || '')
     .trim()
@@ -827,7 +891,23 @@ async function requestGeminiExplanation(input, recommendations) {
 
 async function requestAiExplanation(input, recommendations) {
   resolveProvider();
-  return requestGeminiExplanation(input, recommendations);
+  const maxAttempts = resolveAiRetryAttempts();
+  let lastError;
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    try {
+      return await requestGeminiExplanation(input, recommendations);
+    } catch (error) {
+      lastError = error;
+      const canRetry =
+        isRetryableAiError(error) && attempt < maxAttempts - 1;
+      if (!canRetry) {
+        throw error;
+      }
+      const backoffMs = DEFAULT_AI_RETRY_BASE_DELAY_MS * (attempt + 1);
+      await sleep(backoffMs);
+    }
+  }
+  throw lastError || new Error('AI request failed.');
 }
 
 module.exports = async function handler(req, res) {
@@ -849,12 +929,33 @@ module.exports = async function handler(req, res) {
     fallbackRecommendationItems,
   );
   const compactInput = pickFields(input);
+  const cacheKey = buildAiCacheKey(compactInput, fallbackRecommendationTexts);
+  const cached = readAiCache(cacheKey);
+  if (cached) {
+    const recommendationItemsWithExplanations = withRecommendationItemExplanations(
+      fallbackRecommendationItems,
+      cached.explanations,
+    );
+    return res.status(200).json({
+      source: 'gemini',
+      message: cached.summary,
+      providerMessage: `${providerLabel('gemini')} (cache)` ,
+      summary: cached.summary,
+      explanations: cached.explanations,
+      recommendations: fallbackRecommendationTexts,
+      recommendationsV2: recommendationItemsWithExplanations,
+    });
+  }
 
   try {
     const aiResult = await requestAiExplanation(
       compactInput,
       fallbackRecommendationTexts,
     );
+    writeAiCache(cacheKey, {
+      summary: aiResult.summary,
+      explanations: aiResult.explanations,
+    });
     const recommendationItemsWithExplanations =
       withRecommendationItemExplanations(
         fallbackRecommendationItems,
