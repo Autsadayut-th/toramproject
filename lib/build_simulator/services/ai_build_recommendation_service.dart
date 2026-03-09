@@ -35,7 +35,7 @@ class AiBuildRecommendationService {
 
   Future<AiBuildRecommendationResult> fetchRecommendations({
     required Map<String, dynamic> payload,
-    Duration timeout = const Duration(seconds: 15),
+    Duration timeout = const Duration(seconds: 22),
   }) async {
     final String cacheKey = _payloadCacheKey(payload);
     final DateTime now = DateTime.now();

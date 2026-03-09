@@ -80,7 +80,6 @@ flutter:
     - assets/data/items/
     - assets/data/logo/
     - assets/data/system/
-    - assets/data/version/
     - assets/logo/logo.png
     - assets/fonts/MaterialIcons-Regular.otf
 

@@ -6,10 +6,10 @@ const DEFAULT_FALLBACK = [
 const DEFAULT_GEMINI_MODEL = 'gemini-3.1-flash-lite-preview';
 const DEFAULT_EXPLANATION_MAX_OUTPUT_TOKENS = 128;
 const DEFAULT_GEMINI_REQUEST_TIMEOUT_MS = 15000;
-const DEFAULT_AI_RETRY_ATTEMPTS = 3;
+const DEFAULT_AI_RETRY_ATTEMPTS = 2;
 const DEFAULT_AI_RETRY_BASE_DELAY_MS = 350;
 const DEFAULT_AI_CACHE_TTL_MS = 5 * 60 * 1000;
-const DEFAULT_AI_TOTAL_TIMEOUT_MS = 12000;
+const DEFAULT_AI_TOTAL_TIMEOUT_MS = 18000;
 const GEMINI_MODEL_ALIASES = {
   'gemini-3.1-flash-lite': 'gemini-3.1-flash-lite-preview',
 };
@@ -554,21 +554,45 @@ function withRecommendationItemExplanations(items, explanations) {
   });
 }
 
+function parseLooseExplanationPayload(text, recommendations) {
+  const cleaned = stripCodeFence(String(text || '')).trim();
+  const lines = cleaned
+    .split('\n')
+    .map((line) =>
+      line
+        .trim()
+        .replace(/^\d+[\).:-]\s*/, '')
+        .replace(/^[-*]\s*/, '')
+        .trim(),
+    )
+    .filter(Boolean);
+  const summary = normalizeExplanationSummary(lines[0] || cleaned);
+  const explanationCandidates = lines.length > 1 ? lines.slice(1) : lines;
+  return {
+    summary,
+    explanations: normalizeExplanations(explanationCandidates, recommendations),
+  };
+}
+
 function parseModelExplanationPayload(text, recommendations) {
   const cleaned = stripCodeFence(text);
   if (!cleaned) {
     throw new Error('Model explanation response is empty.');
   }
 
-  let parsed;
+  let parsed = null;
   try {
     parsed = JSON.parse(cleaned);
   } catch (_) {
-    parsed = extractJson(cleaned);
+    try {
+      parsed = extractJson(cleaned);
+    } catch (_) {
+      return parseLooseExplanationPayload(cleaned, recommendations);
+    }
   }
 
   if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
-    throw new Error('Model explanation response is not a JSON object.');
+    return parseLooseExplanationPayload(cleaned, recommendations);
   }
 
   return {
@@ -661,6 +685,12 @@ function buildClientSafeAiError(error) {
   const message = errorMessage(error);
   if (isQuotaError(error)) {
     return 'AI quota exceeded (429). Check Gemini billing/quota settings.';
+  }
+  if (
+    /no json object found/i.test(message) ||
+    /response is not a json object/i.test(message)
+  ) {
+    return 'AI returned an invalid format. Please retry.';
   }
   if (/timed out|timeout/i.test(message)) {
     return 'AI request timed out. Please try again.';
