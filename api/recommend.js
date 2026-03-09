@@ -5,6 +5,7 @@ const DEFAULT_FALLBACK = [
 ];
 const DEFAULT_GEMINI_MODEL = 'gemini-3.1-flash-lite-preview';
 const DEFAULT_EXPLANATION_MAX_OUTPUT_TOKENS = 220;
+const DEFAULT_GEMINI_REQUEST_TIMEOUT_MS = 8000;
 const GEMINI_MODEL_ALIASES = {
   'gemini-3.1-flash-lite': 'gemini-3.1-flash-lite-preview',
 };
@@ -703,6 +704,14 @@ function resolveGeminiMaxOutputTokens() {
   return DEFAULT_EXPLANATION_MAX_OUTPUT_TOKENS;
 }
 
+function resolveGeminiRequestTimeoutMs() {
+  const configured = Number(process.env.GEMINI_REQUEST_TIMEOUT_MS ?? '');
+  if (Number.isFinite(configured) && configured >= 1000 && configured <= 15000) {
+    return Math.floor(configured);
+  }
+  return DEFAULT_GEMINI_REQUEST_TIMEOUT_MS;
+}
+
 function extractGeminiText(json) {
   const candidates = Array.isArray(json?.candidates) ? json.candidates : [];
   const parts = candidates[0]?.content?.parts;
@@ -732,6 +741,7 @@ async function requestGeminiExplanation(input, recommendations) {
 
   const promptText = buildExplanationPrompt({ input, recommendations });
   const maxOutputTokens = resolveGeminiMaxOutputTokens();
+  const requestTimeoutMs = resolveGeminiRequestTimeoutMs();
   const configuredModel = normalizeGeminiModel(process.env.GEMINI_MODEL);
   const candidateModels = configuredModel === DEFAULT_GEMINI_MODEL
     ? [configuredModel]
@@ -743,27 +753,40 @@ async function requestGeminiExplanation(input, recommendations) {
       `https://generativelanguage.googleapis.com/v1beta/models/` +
       `${encodeURIComponent(model)}:generateContent`;
 
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'x-goog-api-key': apiKey,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        contents: [
-          {
-            role: 'user',
-            parts: [{ text: promptText }],
-          },
-        ],
-        generationConfig: {
-          temperature: 0.2,
-          maxOutputTokens,
-          responseMimeType: 'application/json',
-          responseSchema: EXPLANATION_SCHEMA,
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), requestTimeoutMs);
+    let response;
+    try {
+      response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'x-goog-api-key': apiKey,
+          'Content-Type': 'application/json',
         },
-      }),
-    });
+        body: JSON.stringify({
+          contents: [
+            {
+              role: 'user',
+              parts: [{ text: promptText }],
+            },
+          ],
+          generationConfig: {
+            temperature: 0.2,
+            maxOutputTokens,
+            responseMimeType: 'application/json',
+            responseSchema: EXPLANATION_SCHEMA,
+          },
+        }),
+        signal: controller.signal,
+      });
+    } catch (error) {
+      if (error && (error.name === 'AbortError' || /aborted/i.test(String(error)))) {
+        throw new Error(`Gemini request timed out after ${requestTimeoutMs}ms.`);
+      }
+      throw error;
+    } finally {
+      clearTimeout(timeoutId);
+    }
 
     if (response.ok) {
       const json = await response.json();

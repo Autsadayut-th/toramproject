@@ -29,7 +29,7 @@ class AiBuildRecommendationService {
 
   Future<AiBuildRecommendationResult> fetchRecommendations({
     required Map<String, dynamic> payload,
-    Duration timeout = const Duration(seconds: 10),
+    Duration timeout = const Duration(seconds: 15),
   }) async {
     final Uri endpoint = _resolveEndpoint();
     final http.Response response = await http
