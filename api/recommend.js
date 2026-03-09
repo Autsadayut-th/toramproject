@@ -4,9 +4,9 @@ const DEFAULT_FALLBACK = [
   'Balance damage stats with survivability so your combo can run consistently.',
 ];
 const DEFAULT_GEMINI_MODEL = 'gemini-3.1-flash-lite-preview';
-const DEFAULT_EXPLANATION_MAX_OUTPUT_TOKENS = 220;
-const DEFAULT_GEMINI_REQUEST_TIMEOUT_MS = 8000;
-const DEFAULT_AI_RETRY_ATTEMPTS = 2;
+const DEFAULT_EXPLANATION_MAX_OUTPUT_TOKENS = 128;
+const DEFAULT_GEMINI_REQUEST_TIMEOUT_MS = 15000;
+const DEFAULT_AI_RETRY_ATTEMPTS = 3;
 const DEFAULT_AI_RETRY_BASE_DELAY_MS = 350;
 const DEFAULT_AI_CACHE_TTL_MS = 5 * 60 * 1000;
 const GEMINI_MODEL_ALIASES = {
