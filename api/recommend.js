@@ -506,7 +506,7 @@ function parseModelRecommendations(text) {
 
 function normalizeExplanationSummary(value) {
   const text = String(value || '').trim().replace(/\s+/g, ' ');
-  if (!text) {
+  if (!isMeaningfulExplanationText(text)) {
     return 'Gemini explanation is unavailable, but the local recommendations remain valid.';
   }
   return text;
@@ -528,7 +528,7 @@ function normalizeExplanations(value, recommendations) {
 
   const cleaned = value
     .map((item) => String(item || '').trim().replace(/\s+/g, ' '))
-    .filter(Boolean)
+    .filter((line) => isMeaningfulExplanationText(line))
     .slice(0, recommendations.length);
 
   while (cleaned.length < recommendations.length) {
@@ -536,6 +536,20 @@ function normalizeExplanations(value, recommendations) {
   }
 
   return cleaned;
+}
+
+function isMeaningfulExplanationText(value) {
+  const text = String(value || '').trim().replace(/\s+/g, ' ');
+  if (!text) {
+    return false;
+  }
+  if (!/[\p{L}\p{N}]/u.test(text)) {
+    return false;
+  }
+  if (/^(summary|explanations?)\s*[:：]?\s*$/i.test(text)) {
+    return false;
+  }
+  return true;
 }
 
 function withRecommendationItemExplanations(items, explanations) {
@@ -565,8 +579,9 @@ function parseLooseExplanationPayload(text, recommendations) {
         .replace(/^[-*]\s*/, '')
         .trim(),
     )
-    .filter(Boolean);
-  const summary = normalizeExplanationSummary(lines[0] || cleaned);
+    .filter((line) => isMeaningfulExplanationText(line));
+  const summarySeed = lines[0] || (isMeaningfulExplanationText(cleaned) ? cleaned : '');
+  const summary = normalizeExplanationSummary(summarySeed);
   const explanationCandidates = lines.length > 1 ? lines.slice(1) : lines;
   return {
     summary,
