@@ -9,6 +9,7 @@ const DEFAULT_GEMINI_REQUEST_TIMEOUT_MS = 15000;
 const DEFAULT_AI_RETRY_ATTEMPTS = 3;
 const DEFAULT_AI_RETRY_BASE_DELAY_MS = 350;
 const DEFAULT_AI_CACHE_TTL_MS = 5 * 60 * 1000;
+const DEFAULT_AI_TOTAL_TIMEOUT_MS = 12000;
 const GEMINI_MODEL_ALIASES = {
   'gemini-3.1-flash-lite': 'gemini-3.1-flash-lite-preview',
 };
@@ -697,6 +698,14 @@ function resolveAiCacheTtlMs() {
   return DEFAULT_AI_CACHE_TTL_MS;
 }
 
+function resolveAiTotalTimeoutMs() {
+  const configured = Number(process.env.AI_TOTAL_TIMEOUT_MS ?? '');
+  if (Number.isFinite(configured) && configured >= 3000 && configured <= 30000) {
+    return Math.floor(configured);
+  }
+  return DEFAULT_AI_TOTAL_TIMEOUT_MS;
+}
+
 function buildAiCacheKey(input, recommendations) {
   return JSON.stringify({
     input,
@@ -797,7 +806,7 @@ function extractGeminiText(json) {
   return combined;
 }
 
-async function requestGeminiExplanation(input, recommendations) {
+async function requestGeminiExplanation(input, recommendations, options = {}) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     throw new Error('GEMINI_API_KEY is not configured.');
@@ -805,7 +814,14 @@ async function requestGeminiExplanation(input, recommendations) {
 
   const promptText = buildExplanationPrompt({ input, recommendations });
   const maxOutputTokens = resolveGeminiMaxOutputTokens();
-  const requestTimeoutMs = resolveGeminiRequestTimeoutMs();
+  const configuredRequestTimeoutMs = resolveGeminiRequestTimeoutMs();
+  const limitFromBudget = Number(options.requestTimeoutMs);
+  const requestTimeoutMs = Number.isFinite(limitFromBudget)
+    ? Math.max(
+      1000,
+      Math.min(configuredRequestTimeoutMs, Math.floor(limitFromBudget)),
+    )
+    : configuredRequestTimeoutMs;
   const configuredModel = normalizeGeminiModel(process.env.GEMINI_MODEL);
   const candidateModels = configuredModel === DEFAULT_GEMINI_MODEL
     ? [configuredModel]
@@ -892,10 +908,19 @@ async function requestGeminiExplanation(input, recommendations) {
 async function requestAiExplanation(input, recommendations) {
   resolveProvider();
   const maxAttempts = resolveAiRetryAttempts();
+  const totalTimeoutMs = resolveAiTotalTimeoutMs();
+  const startedAt = Date.now();
   let lastError;
   for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    const elapsedMs = Date.now() - startedAt;
+    const remainingMs = totalTimeoutMs - elapsedMs;
+    if (remainingMs < 1000) {
+      throw new Error(`Gemini request timed out after ${totalTimeoutMs}ms.`);
+    }
     try {
-      return await requestGeminiExplanation(input, recommendations);
+      return await requestGeminiExplanation(input, recommendations, {
+        requestTimeoutMs: remainingMs,
+      });
     } catch (error) {
       lastError = error;
       const canRetry =
@@ -904,6 +929,10 @@ async function requestAiExplanation(input, recommendations) {
         throw error;
       }
       const backoffMs = DEFAULT_AI_RETRY_BASE_DELAY_MS * (attempt + 1);
+      const elapsedAfterErrorMs = Date.now() - startedAt;
+      if (elapsedAfterErrorMs + backoffMs >= totalTimeoutMs) {
+        throw new Error(`Gemini request timed out after ${totalTimeoutMs}ms.`);
+      }
       await sleep(backoffMs);
     }
   }
