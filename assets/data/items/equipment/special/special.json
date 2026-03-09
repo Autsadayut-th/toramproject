@@ -1,0 +1,7108 @@
+{
+  "adamantite_charmstone_special_armor": {
+    "id": 1,
+    "key": "adamantite_charmstone_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 5000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "additional_magic_book_special_armor": {
+    "id": 2,
+    "key": "additional_magic_book_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "additional_magic",
+        "value": 30,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "additional_melee_book_special_armor": {
+    "id": 3,
+    "key": "additional_melee_book_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "additional_melee",
+        "value": 30,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "adroit_mage_s_bangle_special_armor": {
+    "id": 4,
+    "key": "adroit_mage_s_bangle_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dex",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "adroit_warrior_s_bangle_special_armor": {
+    "id": 5,
+    "key": "adroit_warrior_s_bangle_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dex",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "ancient_shell_necklace_special_armor": {
+    "id": 6,
+    "key": "ancient_shell_necklace_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [
+      {
+        "effect": "flinch_unavailable"
+      }
+    ],
+    "obtained_from": []
+  },
+  "unknown_armor_7_armor": {
+    "id": 7,
+    "key": "unknown_armor_7_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "ankh_of_resurrection_special_armor": {
+    "id": 8,
+    "key": "ankh_of_resurrection_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Golden Casket",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "anti_melee_system_special_armor": {
+    "id": 9,
+    "key": "anti_melee_system_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "magic_resistance",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_barrier",
+        "value": 2000,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "aristocrat_ring_special_armor": {
+    "id": 10,
+    "key": "aristocrat_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "aromatic_bangle_special_armor": {
+    "id": 11,
+    "key": "aromatic_bangle_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "natural_hp_regen",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 30,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Berry Pomum (Lv 38)",
+        "map": "Harde Hill",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Berry Pomum (Lv 40)",
+        "map": "Harde Hill",
+        "dye": ""
+      }
+    ]
+  },
+  "astral_lamp_special_armor": {
+    "id": 12,
+    "key": "astral_lamp_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Galamp (Lv 121)",
+        "map": "Phantom Wisp's Hideout",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Galamp (Lv 124)",
+        "map": "Phantom Wisp's Hideout",
+        "dye": ""
+      }
+    ]
+  },
+  "bear_warrior_obi_special_armor": {
+    "id": 13,
+    "key": "bear_warrior_obi_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "beast_fang_talisman_special_armor": {
+    "id": 14,
+    "key": "beast_fang_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Mech Little Boar (Lv 97)",
+        "map": "Sykea Deep Valley",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Mech Little Boar (Lv 99)",
+        "map": "Sykea Deep Valley",
+        "dye": ""
+      }
+    ]
+  },
+  "beastlord_ring_special_armor": {
+    "id": 15,
+    "key": "beastlord_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "bitter_pumpkin_talisman_special_armor": {
+    "id": 16,
+    "key": "bitter_pumpkin_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Calabari (Lv 180)",
+        "map": "Risus Valley: Area 3",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Calabari (Lv 178)",
+        "map": "Risus Valley: Area 1",
+        "dye": ""
+      }
+    ]
+  },
+  "booster_cast_special_armor": {
+    "id": 17,
+    "key": "booster_cast_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "exp_gain",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [
+      {
+        "condition": {
+          "armor": "heavy"
+        },
+        "stat": {
+          "stat_key": "motion_speed",
+          "value": -10,
+          "value_type": "percent"
+        }
+      }
+    ],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Momia (Lv 225)",
+        "map": "Deusania's Lab",
+        "dye": ""
+      }
+    ]
+  },
+  "bow_thimble_special_armor": {
+    "id": 18,
+    "key": "bow_thimble_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 30,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_19_armor": {
+    "id": 19,
+    "key": "unknown_armor_19_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "bow_thimble_zc_special_armor": {
+    "id": 20,
+    "key": "bow_thimble_zc_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 15,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "broken_watch_special_armor": {
+    "id": 21,
+    "key": "broken_watch_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Cursed Clock (Lv 71)",
+        "map": "Magic Waste Site: Area 2",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Cursed Clock (Lv 71)",
+        "map": "Magic Waste Site: Area 3",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Dirty Antique",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "buzz_ring_special_armor": {
+    "id": 22,
+    "key": "buzz_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Honeybee (Lv 128)",
+        "map": "Cookie Road",
+        "dye": ""
+      }
+    ]
+  },
+  "caravan_cord_special_armor": {
+    "id": 23,
+    "key": "caravan_cord_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "caravan_talisman_special_armor": {
+    "id": 24,
+    "key": "caravan_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "chocolate_charm_special_armor": {
+    "id": 25,
+    "key": "chocolate_charm_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "chocolate_charm_ii_special_armor": {
+    "id": 26,
+    "key": "chocolate_charm_ii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 600,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "chocolate_charm_iii_special_armor": {
+    "id": 27,
+    "key": "chocolate_charm_iii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 700,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "chocolate_leaf_talisman_special_armor": {
+    "id": 28,
+    "key": "chocolate_leaf_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Shell Mask (Lv 75)",
+        "map": "Sweet Hades",
+        "dye": ""
+      }
+    ]
+  },
+  "chocolate_ring_special_armor": {
+    "id": 29,
+    "key": "chocolate_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 350,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "chocolate_ring_ii_special_armor": {
+    "id": 30,
+    "key": "chocolate_ring_ii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 450,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_31_armor": {
+    "id": 31,
+    "key": "unknown_armor_31_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "chocolate_ring_iii_special_armor": {
+    "id": 32,
+    "key": "chocolate_ring_iii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 550,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 40,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 400,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "cookie_ring_special_armor": {
+    "id": 33,
+    "key": "cookie_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 350,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "cookie_ring_ii_special_armor": {
+    "id": 34,
+    "key": "cookie_ring_ii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 450,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "cookie_talisman_special_armor": {
+    "id": 35,
+    "key": "cookie_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1000,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "cookie_talisman_ii_special_armor": {
+    "id": 36,
+    "key": "cookie_talisman_ii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 1800,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "coral_peach_talisman_special_armor": {
+    "id": 37,
+    "key": "coral_peach_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Atoble (Lv 226)",
+        "map": "Labrum Atoll",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Atoble (Lv 228)",
+        "map": "Labrum Atoll",
+        "dye": ""
+      }
+    ]
+  },
+  "cursed_gold_coin_special_armor": {
+    "id": 38,
+    "key": "cursed_gold_coin_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "drop_rate",
+        "value": -100,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Sea Ghost Wooden Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "dark_fighter_bangle_special_armor": {
+    "id": 39,
+    "key": "dark_fighter_bangle_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Controlled Fighter (Lv 95)",
+        "map": "Dark Castle: Area 1",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Controlled Fighter (Lv 95)",
+        "map": "Dark Castle: Area 2",
+        "dye": ""
+      }
+    ]
+  },
+  "dark_knight_amulet_special_armor": {
+    "id": 40,
+    "key": "dark_knight_amulet_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Controlled Knight (Lv 93)",
+        "map": "Dark Castle: Area 1",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Controlled Knight (Lv 93)",
+        "map": "Dark Castle: Area 2",
+        "dye": ""
+      }
+    ]
+  },
+  "dark_shaman_talisman_special_armor": {
+    "id": 41,
+    "key": "dark_shaman_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 800,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -50,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Sibylares (Very Hard) (Lv 250)",
+        "map": "Phasma Forest: Area 3",
+        "dye": ""
+      }
+    ]
+  },
+  "dark_talisman_flash_special_armor": {
+    "id": 42,
+    "key": "dark_talisman_flash_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 900,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Suspicious Old Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_43_armor": {
+    "id": 43,
+    "key": "unknown_armor_43_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "dark_talisman_magic_special_armor": {
+    "id": 44,
+    "key": "dark_talisman_magic_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 900,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Suspicious Old Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "dark_talisman_power_special_armor": {
+    "id": 45,
+    "key": "dark_talisman_power_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 900,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Suspicious Old Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "dark_talisman_resist_special_armor": {
+    "id": 46,
+    "key": "dark_talisman_resist_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 900,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Suspicious Old Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "dark_talisman_unknown_special_armor": {
+    "id": 47,
+    "key": "dark_talisman_unknown_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 900,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": -1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "item_cooldown",
+        "value": -1,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Suspicious Old Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "day_sakura_charmstone_special_armor": {
+    "id": 48,
+    "key": "day_sakura_charmstone_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 750,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": -4,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "dexterity_talisman_special_armor": {
+    "id": 49,
+    "key": "dexterity_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 2,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "dexterity_talisman_ii_special_armor": {
+    "id": 50,
+    "key": "dexterity_talisman_ii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "dexterity_talisman_iii_special_armor": {
+    "id": 51,
+    "key": "dexterity_talisman_iii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "dexterity_talisman_iv_special_armor": {
+    "id": 52,
+    "key": "dexterity_talisman_iv_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "dexterity_talisman_v_special_armor": {
+    "id": 53,
+    "key": "dexterity_talisman_v_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 600,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "dexterity_talisman_vi_special_armor": {
+    "id": 54,
+    "key": "dexterity_talisman_vi_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 12,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 700,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_55_armor": {
+    "id": 55,
+    "key": "unknown_armor_55_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "dragonfly_ring_special_armor": {
+    "id": 56,
+    "key": "dragonfly_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "agi",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "additional_melee",
+        "value": 50,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Venofly (Lv 246)",
+        "map": "Perdida Wasteland",
+        "dye": ""
+      }
+    ]
+  },
+  "duo_additional_book_special_armor": {
+    "id": 57,
+    "key": "duo_additional_book_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "additional_melee",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "additional_magic",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "falling_star_talisman_special_armor": {
+    "id": 58,
+    "key": "falling_star_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Mesoside (Lv 247)",
+        "map": "Menabra Plains",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Mesoside (Lv 245)",
+        "map": "Menabra Plains",
+        "dye": ""
+      }
+    ]
+  },
+  "fragrant_fox_furnace_special_armor": {
+    "id": 59,
+    "key": "fragrant_fox_furnace_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stronger_against_wind",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Maple Fox (Lv 201)",
+        "map": "Madeleine Plains",
+        "dye": ""
+      }
+    ]
+  },
+  "full_blossom_charmstone_special_armor": {
+    "id": 60,
+    "key": "full_blossom_charmstone_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 750,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 750,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": -8,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "gapapa_special_armor": {
+    "id": 61,
+    "key": "gapapa_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 588,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 588,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_barrier",
+        "value": 588,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_barrier",
+        "value": 588,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "ghilly_sheet_special_armor": {
+    "id": 62,
+    "key": "ghilly_sheet_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": -20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -40,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Ghilly (Lv 53)",
+        "map": "Maia Diela",
+        "dye": ""
+      }
+    ]
+  },
+  "ghost_telescope_special_armor": {
+    "id": 63,
+    "key": "ghost_telescope_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Sea Ghost Wooden Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "gleeful_vine_bangle_special_armor": {
+    "id": 64,
+    "key": "gleeful_vine_bangle_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stability",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Tulin (Lv 160)",
+        "map": "Sugar Plain",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Tulin (Lv 164)",
+        "map": "Sugar Plain",
+        "dye": ""
+      }
+    ]
+  },
+  "glory_ring_indirect_special_armor": {
+    "id": 65,
+    "key": "glory_ring_indirect_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "[Orb Shop] Glory Ring Case",
+        "map": "Sofya City: Government Office",
+        "dye": ""
+      }
+    ]
+  },
+  "glory_ring_magic_sword_special_armor": {
+    "id": 66,
+    "key": "glory_ring_magic_sword_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "[Orb Shop] Glory Ring Case",
+        "map": "Sofya City: Government Office",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_67_armor": {
+    "id": 67,
+    "key": "unknown_armor_67_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "glory_ring_melee_special_armor": {
+    "id": 68,
+    "key": "glory_ring_melee_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "[Orb Shop] Glory Ring Case",
+        "map": "Sofya City: Government Office",
+        "dye": ""
+      }
+    ]
+  },
+  "glory_ring_memory_special_armor": {
+    "id": 69,
+    "key": "glory_ring_memory_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "exp_gain",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "[Orb Shop] Glory Ring Case",
+        "map": "Sofya City: Government Office",
+        "dye": ""
+      }
+    ]
+  },
+  "glory_ring_restore_special_armor": {
+    "id": 70,
+    "key": "glory_ring_restore_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [
+      {
+        "effect": "tumble_unavailable"
+      }
+    ],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "[Orb Shop] Glory Ring Case",
+        "map": "Sofya City: Government Office",
+        "dye": ""
+      }
+    ]
+  },
+  "glowing_sea_talisman_special_armor": {
+    "id": 71,
+    "key": "glowing_sea_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Amiya (Lv 171)",
+        "map": "Underwater Canyon: Area 1",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Amiya (Lv 172)",
+        "map": "Underwater Canyon: Area 2",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Amiya (Lv 173)",
+        "map": "Underwater Canyon: Area 3",
+        "dye": ""
+      }
+    ]
+  },
+  "gorilla_talisman_special_armor": {
+    "id": 72,
+    "key": "gorilla_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 3500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": -2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 25,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "great_nature_talisman_special_armor": {
+    "id": 73,
+    "key": "great_nature_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 2000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "revive_time",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Treemit (Lv 191)",
+        "map": "Flumen Plains",
+        "dye": ""
+      }
+    ]
+  },
+  "guidance_lantern_special_armor": {
+    "id": 74,
+    "key": "guidance_lantern_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Light Angler (Lv 131)",
+        "map": "Turnus Mine: Area 1",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Light Angler (Lv 132)",
+        "map": "Turnus Mine: Area 3",
+        "dye": ""
+      }
+    ]
+  },
+  "hallucination_spore_special_armor": {
+    "id": 75,
+    "key": "hallucination_spore_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [
+      {
+        "effect": "tumble_unavailable"
+      }
+    ],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Solopy (Lv 169)",
+        "map": "Turnus Mine: Area 3",
+        "dye": ""
+      }
+    ]
+  },
+  "handless_watch_special_armor": {
+    "id": 76,
+    "key": "handless_watch_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Cursed Clock (Lv 71)",
+        "map": "Magic Waste Site: Area 2",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Cursed Clock (Lv 71)",
+        "map": "Magic Waste Site: Area 3",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Dirty Antique",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "happiness_talisman_special_armor": {
+    "id": 77,
+    "key": "happiness_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Tylul (Lv 123)",
+        "map": "Mt. Mithurna: Entrance",
+        "dye": ""
+      }
+    ]
+  },
+  "hard_arm_guard_special_armor": {
+    "id": 78,
+    "key": "hard_arm_guard_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_79_armor": {
+    "id": 79,
+    "key": "unknown_armor_79_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "ice_bird_talisman_special_armor": {
+    "id": 80,
+    "key": "ice_bird_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Glafur (Lv 222)",
+        "map": "Algid Passage",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Glafur (Lv 225)",
+        "map": "Algid Passage",
+        "dye": ""
+      }
+    ]
+  },
+  "ice_crystal_ring_special_armor": {
+    "id": 81,
+    "key": "ice_crystal_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stronger_against_fire",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": -5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Flying Quartz (Lv 44)",
+        "map": "Ethos Fortress",
+        "dye": ""
+      }
+    ]
+  },
+  "inverted_tree_crest_special_armor": {
+    "id": 84,
+    "key": "inverted_tree_crest_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": -25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Gegner (Lv 250)",
+        "map": "Tower of Clamor: Rooftop",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gegner (Lv 400)",
+        "map": "Tower of Clamor: Rooftop",
+        "dye": ""
+      }
+    ]
+  },
+  "knight_s_talisman_special_armor": {
+    "id": 85,
+    "key": "knight_s_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "lost_ring_special_armor": {
+    "id": 86,
+    "key": "lost_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mdef",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_power",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_recharge",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Duston (Lv 88)",
+        "map": "Klaspe Slum",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Duston (Lv 91)",
+        "map": "Klaspe Slum",
+        "dye": ""
+      }
+    ]
+  },
+  "lovely_ocean_talisman_special_armor": {
+    "id": 87,
+    "key": "lovely_ocean_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Maringer (Lv 233)",
+        "map": "Seabed",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Maringer (Lv 235)",
+        "map": "Seabed",
+        "dye": ""
+      }
+    ]
+  },
+  "machina_ring_special_armor": {
+    "id": 88,
+    "key": "machina_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Ultimate Machina (Lv 129)",
+        "map": "Droma Square",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Ultimate Machina (Lv 139)",
+        "map": "Droma Square",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Ultimate Machina (Lv 149)",
+        "map": "Droma Square",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Ultimate Machina (Lv 159)",
+        "map": "Droma Square",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Ultimate Machina (Lv 179)",
+        "map": "Droma Square",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Ultimate Machina (Megiston 2018) (Lv 160)",
+        "map": "Event",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Zahhak Machina (Megiston 2019) (Lv 165)",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "magic_swordsman_s_ring_special_armor": {
+    "id": 89,
+    "key": "magic_swordsman_s_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": -25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": -25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "magic_talisman_special_armor": {
+    "id": 90,
+    "key": "magic_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 2,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_91_armor": {
+    "id": 91,
+    "key": "unknown_armor_91_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "magic_talisman_ii_special_armor": {
+    "id": 92,
+    "key": "magic_talisman_ii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "magic_talisman_iii_special_armor": {
+    "id": 93,
+    "key": "magic_talisman_iii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "magic_talisman_iv_special_armor": {
+    "id": 94,
+    "key": "magic_talisman_iv_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "magic_talisman_v_special_armor": {
+    "id": 95,
+    "key": "magic_talisman_v_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 600,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "magic_talisman_vi_special_armor": {
+    "id": 96,
+    "key": "magic_talisman_vi_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 12,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 700,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "magician_s_bangle_special_armor": {
+    "id": 97,
+    "key": "magician_s_bangle_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "magician_s_ring_special_armor": {
+    "id": 98,
+    "key": "magician_s_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": -25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": -25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "misanga_special_armor": {
+    "id": 99,
+    "key": "misanga_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "mischievous_pocket_watch_special_armor": {
+    "id": 100,
+    "key": "mischievous_pocket_watch_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -90,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -90,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 1000,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Manshadow (Lv 160)",
+        "map": "Manor of Surprises",
+        "dye": ""
+      }
+    ]
+  },
+  "muscle_talisman_special_armor": {
+    "id": 101,
+    "key": "muscle_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 2,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "muscle_talisman_ii_special_armor": {
+    "id": 102,
+    "key": "muscle_talisman_ii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_103_armor": {
+    "id": 103,
+    "key": "unknown_armor_103_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "muscle_talisman_iii_special_armor": {
+    "id": 104,
+    "key": "muscle_talisman_iii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "muscle_talisman_iv_special_armor": {
+    "id": 105,
+    "key": "muscle_talisman_iv_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "muscle_talisman_v_special_armor": {
+    "id": 106,
+    "key": "muscle_talisman_v_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 600,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "muscle_talisman_vi_special_armor": {
+    "id": 107,
+    "key": "muscle_talisman_vi_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 12,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 700,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "navida_talisman_special_armor": {
+    "id": 108,
+    "key": "navida_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 2,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "int",
+        "value": 2,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "agi",
+        "value": 2,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dex",
+        "value": 2,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": -2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Snowman (Lv 139)",
+        "map": "Noeliel Castle 2F (120-140)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Snowman (Lv 99)",
+        "map": "Noeliel Castle: 2F (80-100)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Snowman (Lv 119)",
+        "map": "Noeliel Castle: 2F (100-120)",
+        "dye": ""
+      }
+    ]
+  },
+  "night_sakura_charmstone_special_armor": {
+    "id": 109,
+    "key": "night_sakura_charmstone_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 750,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": -4,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "noeliel_talisman_special_armor": {
+    "id": 110,
+    "key": "noeliel_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": -1,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "nymon_s_presence_special_armor": {
+    "id": 111,
+    "key": "nymon_s_presence_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stronger_against_earth",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "painless_left_arm_special_armor": {
+    "id": 112,
+    "key": "painless_left_arm_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Coofer (Lv 178)",
+        "map": "Nezim Wetlands",
+        "dye": ""
+      }
+    ]
+  },
+  "pendulum_special_armor": {
+    "id": 113,
+    "key": "pendulum_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "philosopher_s_ring_special_armor": {
+    "id": 114,
+    "key": "philosopher_s_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 30,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Owl (Lv 53)",
+        "map": "Land Under Cultivation: Area 1",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Owl (Lv 54)",
+        "map": "Land Under Cultivation: Area 3",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_115_armor": {
+    "id": 115,
+    "key": "unknown_armor_115_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "pico_cream_ring_special_armor": {
+    "id": 116,
+    "key": "pico_cream_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Pico (Lv 125)",
+        "map": "Creme Cliff (Valentine's Day Event)",
+        "dye": ""
+      }
+    ]
+  },
+  "potum_talisman_special_armor": {
+    "id": 117,
+    "key": "potum_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": -6,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Ghost Potum (Lv 66)",
+        "map": "Calle mort",
+        "dye": ""
+      }
+    ]
+  },
+  "powered_gear_special_armor": {
+    "id": 118,
+    "key": "powered_gear_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "def",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mdef",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dodge",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "prajna_charmstone_special_armor": {
+    "id": 119,
+    "key": "prajna_charmstone_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "int",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "proof_of_resistance_special_armor": {
+    "id": 120,
+    "key": "proof_of_resistance_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "proof_of_victory_special_armor": {
+    "id": 121,
+    "key": "proof_of_victory_special_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "pumpkin_ring_special_armor": {
+    "id": 122,
+    "key": "pumpkin_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "pyroxene_nugget_special_armor": {
+    "id": 123,
+    "key": "pyroxene_nugget_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stronger_against_dark",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Pojo (Lv 249)",
+        "map": "Siccus Plains",
+        "dye": ""
+      }
+    ]
+  },
+  "ring_of_greed_special_armor": {
+    "id": 124,
+    "key": "ring_of_greed_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": -25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": -25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "ring_of_universe_special_armor": {
+    "id": 125,
+    "key": "ring_of_universe_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "int",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "vit",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "agi",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dex",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "robust_charmstone_special_armor": {
+    "id": 126,
+    "key": "robust_charmstone_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stability",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_127_armor": {
+    "id": 127,
+    "key": "unknown_armor_127_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "rock_horn_beast_bangle_special_armor": {
+    "id": 128,
+    "key": "rock_horn_beast_bangle_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [
+      {
+        "condition": {
+          "armor": "heavy"
+        },
+        "stat": {
+          "stat_key": "fractional_barrier",
+          "value": 10,
+          "value_type": "percent"
+        }
+      }
+    ],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Petraceras (Lv 217)",
+        "map": "Kabla Jabali",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Petraceras (Lv 219)",
+        "map": "Kabla Jabali",
+        "dye": ""
+      }
+    ]
+  },
+  "rosetta_shard_special_armor": {
+    "id": 129,
+    "key": "rosetta_shard_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": -2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Golden Casket",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "rosetta_stone_special_armor": {
+    "id": 130,
+    "key": "rosetta_stone_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 1000,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Golden Casket",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "sable_bracelet_special_armor": {
+    "id": 131,
+    "key": "sable_bracelet_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Flying Egg (Lv 181)",
+        "map": "Sable Plains",
+        "dye": ""
+      }
+    ]
+  },
+  "sacred_bell_talisman_special_armor": {
+    "id": 132,
+    "key": "sacred_bell_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Sentreast (Lv 180)",
+        "map": "Tomte Pavillion (170-190)",
+        "dye": ""
+      }
+    ]
+  },
+  "sailor_s_talisman_special_armor": {
+    "id": 133,
+    "key": "sailor_s_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stronger_against_water",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 4,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "sakura_bear_charmstone_special_armor": {
+    "id": 134,
+    "key": "sakura_bear_charmstone_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mdef",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "sakura_charmstone_special_armor": {
+    "id": 135,
+    "key": "sakura_charmstone_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": -2,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "salmon_jerky_talisman_special_armor": {
+    "id": 136,
+    "key": "salmon_jerky_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "sand_veil_ring_special_armor": {
+    "id": 137,
+    "key": "sand_veil_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "earth_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -30,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Sand Frosch (Lv 46)",
+        "map": "Centerio Highlands",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Sand Frosch (Lv 47)",
+        "map": "Centerio Highlands",
+        "dye": ""
+      }
+    ]
+  },
+  "scarecrow_marker_special_armor": {
+    "id": 138,
+    "key": "scarecrow_marker_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Crow Killer (Lv 130)",
+        "map": "Cookie Road",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_139_armor": {
+    "id": 139,
+    "key": "unknown_armor_139_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "scary_face_talisman_special_armor": {
+    "id": 140,
+    "key": "scary_face_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Fangs (Lv 236)",
+        "map": "Path to the Deep Sea",
+        "dye": ""
+      }
+    ]
+  },
+  "sea_fog_compass_special_armor": {
+    "id": 141,
+    "key": "sea_fog_compass_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 10000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": -50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Sea Ghost Wooden Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "seahorse_bangle_special_armor": {
+    "id": 142,
+    "key": "seahorse_bangle_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Famarin (Lv 239)",
+        "map": "Espuma Dome: Area 1",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Famarin (Lv 240)",
+        "map": "Espuma Dome: Area 2",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Famarin (Lv 241)",
+        "map": "Espuma Dome: Area 3",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Bangrudom (Coffee) (Lv 290)",
+        "map": "El Scaro: Back Alley",
+        "dye": ""
+      }
+    ]
+  },
+  "sealing_bandage_special_armor": {
+    "id": 143,
+    "key": "sealing_bandage_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": -50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "int",
+        "value": -50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "vit",
+        "value": -50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "agi",
+        "value": -50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dex",
+        "value": -50,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Golden Casket",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "seashell_choco_talisman_special_armor": {
+    "id": 144,
+    "key": "seashell_choco_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [
+      {
+        "effect": "flinch_unavailable"
+      },
+      {
+        "effect": "tumble_unavailable"
+      }
+    ],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Shell Kraken (Lv 74)",
+        "map": "Sweet Hades",
+        "dye": ""
+      }
+    ]
+  },
+  "shield_plus_special_armor": {
+    "id": 145,
+    "key": "shield_plus_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "guard_power",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_recharge",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "snow_potum_doll_special_armor": {
+    "id": 146,
+    "key": "snow_potum_doll_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": -6,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Milk Potum (Lv 67)",
+        "map": "Polde Ice Valley",
+        "dye": ""
+      }
+    ]
+  },
+  "sofys_talisman_special_armor": {
+    "id": 147,
+    "key": "sofys_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "sofys_talisman_ii_special_armor": {
+    "id": 148,
+    "key": "sofys_talisman_ii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "solar_ring_special_armor": {
+    "id": 149,
+    "key": "solar_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "additional_magic",
+        "value": 30,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Rainy Season Event",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "speed_talisman_special_armor": {
+    "id": 150,
+    "key": "speed_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 2,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_151_armor": {
+    "id": 151,
+    "key": "unknown_armor_151_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "speed_talisman_ii_special_armor": {
+    "id": 152,
+    "key": "speed_talisman_ii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "speed_talisman_iii_special_armor": {
+    "id": 153,
+    "key": "speed_talisman_iii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "speed_talisman_iv_special_armor": {
+    "id": 154,
+    "key": "speed_talisman_iv_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "speed_talisman_v_special_armor": {
+    "id": 155,
+    "key": "speed_talisman_v_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 600,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "speed_talisman_vi_special_armor": {
+    "id": 156,
+    "key": "speed_talisman_vi_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 12,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 700,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "spirit_tree_bangle_special_armor": {
+    "id": 157,
+    "key": "spirit_tree_bangle_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "additional_magic",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Kodama (Lv 85)",
+        "map": "Garden of Sublimation: Area 1",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Kodama (Lv 85)",
+        "map": "Garden of Sublimation: Area 2",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Kodama (Lv 88)",
+        "map": "Garden of Sublimation: Area 3",
+        "dye": ""
+      }
+    ]
+  },
+  "spy_s_talisman_special_armor": {
+    "id": 159,
+    "key": "spy_s_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "stamina_talisman_special_armor": {
+    "id": 160,
+    "key": "stamina_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 2,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "stamina_talisman_ii_special_armor": {
+    "id": 161,
+    "key": "stamina_talisman_ii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "stamina_talisman_iii_special_armor": {
+    "id": 162,
+    "key": "stamina_talisman_iii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_163_armor": {
+    "id": 163,
+    "key": "unknown_armor_163_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "stamina_talisman_iv_special_armor": {
+    "id": 164,
+    "key": "stamina_talisman_iv_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "stamina_talisman_v_special_armor": {
+    "id": 165,
+    "key": "stamina_talisman_v_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 600,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "stamina_talisman_vi_special_armor": {
+    "id": 166,
+    "key": "stamina_talisman_vi_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 12,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 700,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "starfish_shuriken_special_armor": {
+    "id": 167,
+    "key": "starfish_shuriken_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Coraxic (Lv 225)",
+        "map": "Labrum Atoll",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Coraxic (Lv 227)",
+        "map": "Labrum Atoll",
+        "dye": ""
+      }
+    ]
+  },
+  "steeplejack_talisman_special_armor": {
+    "id": 168,
+    "key": "steeplejack_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "agi",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [
+      {
+        "effect": "tumble_unavailable"
+      }
+    ],
+    "obtained_from": []
+  },
+  "stoodie_s_ring_i_special_armor": {
+    "id": 169,
+    "key": "stoodie_s_ring_i_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "stoodie_s_ring_ii_special_armor": {
+    "id": 170,
+    "key": "stoodie_s_ring_ii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "stoodie_s_ring_iii_special_armor": {
+    "id": 171,
+    "key": "stoodie_s_ring_iii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": -20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "supple_ring_special_armor": {
+    "id": 172,
+    "key": "supple_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Strange Tentacle (Lv 166)",
+        "map": "Avant Plastida: Area 1",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Strange Tentacle (Lv 167)",
+        "map": "Avant Plastida: Area 2",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Strange Tentacle (Lv 168)",
+        "map": "Avant Plastida: Area 3",
+        "dye": ""
+      }
+    ]
+  },
+  "talisman_special_armor": {
+    "id": 173,
+    "key": "talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "General Store: Mutoto",
+        "map": "El Scaro",
+        "dye": ""
+      },
+      {
+        "source_type": "npc",
+        "name": "General Store: Adala",
+        "map": "Hora Diomedea",
+        "dye": ""
+      },
+      {
+        "source_type": "npc",
+        "name": "General Store: Litoa",
+        "map": "Nov Saterica",
+        "dye": ""
+      },
+      {
+        "source_type": "npc",
+        "name": "General Store: Kifa",
+        "map": "Draco Town",
+        "dye": ""
+      }
+    ]
+  },
+  "talisman_of_deep_silence_special_armor": {
+    "id": 174,
+    "key": "talisman_of_deep_silence_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "earth_resistance",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Doridi (Lv 244)",
+        "map": "Carretera Mar",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_175_armor": {
+    "id": 175,
+    "key": "unknown_armor_175_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "terrestrial_talisman_special_armor": {
+    "id": 176,
+    "key": "terrestrial_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 3000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "time_warp_watch_special_armor": {
+    "id": 177,
+    "key": "time_warp_watch_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": -9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 1000,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Dirty Antique",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "toe_beans_talisman_special_armor": {
+    "id": 178,
+    "key": "toe_beans_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Pond Snake (Lv 171)",
+        "map": "Chocolate Reservoir",
+        "dye": ""
+      }
+    ]
+  },
+  "toughness_bangle_special_armor": {
+    "id": 179,
+    "key": "toughness_bangle_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Corroded Fighter (Lv 81)",
+        "map": "Spring of Rebirth: Lower",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Corroded Fighter (Lv 81)",
+        "map": "Spring of Rebirth: Middle",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Corroded Fighter (Lv 85)",
+        "map": "Spring of Rebirth: Upper",
+        "dye": ""
+      }
+    ]
+  },
+  "unsheathe_bangle_special_armor": {
+    "id": 180,
+    "key": "unsheathe_bangle_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 30,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "valley_guardian_stone_special_armor": {
+    "id": 181,
+    "key": "valley_guardian_stone_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Acamia (Lv 195)",
+        "map": "Vulcani Crater Base",
+        "dye": ""
+      }
+    ]
+  },
+  "warm_talisman_special_armor": {
+    "id": 182,
+    "key": "warm_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Cream Alpoca (Lv 222)",
+        "map": "Anglaise Forest",
+        "dye": ""
+      }
+    ]
+  },
+  "warrior_s_bangle_special_armor": {
+    "id": 184,
+    "key": "warrior_s_bangle_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "hp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "weaken_talisman_special_armor": {
+    "id": 185,
+    "key": "weaken_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": -100,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "int",
+        "value": -100,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "vit",
+        "value": -100,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "agi",
+        "value": -100,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dex",
+        "value": -100,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "yozakura_bangle_special_armor": {
+    "id": 186,
+    "key": "yozakura_bangle_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "physical_barrier",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_barrier",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "barrier_cooldown",
+        "value": -150,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Cerabes (Hanami 2017) (Lv 60)",
+        "map": "Hanami Venue: Summit",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Cerabes (Hanami 2017) (Lv 80)",
+        "map": "Hanami Venue: Summit",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Cerabes (Hanami 2017) (Lv 100)",
+        "map": "Hanami Venue: Summit",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_187_armor": {
+    "id": 187,
+    "key": "unknown_armor_187_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "anniv_festive_bangle_special_armor": {
+    "id": 188,
+    "key": "anniv_festive_bangle_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Anniv Equipment Box II",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "anniv_festive_ring_special_armor": {
+    "id": 189,
+    "key": "anniv_festive_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Anniv Equipment Box II",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "anniv_festive_bangle_ii_special_armor": {
+    "id": 190,
+    "key": "anniv_festive_bangle_ii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 2,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Anniv Equipment Box IV",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "anniv_festive_ring_ii_special_armor": {
+    "id": 191,
+    "key": "anniv_festive_ring_ii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 2,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Anniv Equipment Box IV",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "anniv_festive_bangle_iii_special_armor": {
+    "id": 192,
+    "key": "anniv_festive_bangle_iii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Anniv Equipment Box VI",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "anniv_festive_ring_iii_special_armor": {
+    "id": 193,
+    "key": "anniv_festive_ring_iii_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "exp_gain",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Anniv Equipment Box VI",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "mistletoe_talisman_special_armor": {
+    "id": 194,
+    "key": "mistletoe_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Pova (Lv 32)",
+        "map": "Lonogo Canyon",
+        "dye": ""
+      }
+    ]
+  },
+  "beast_talisman_special_armor": {
+    "id": 195,
+    "key": "beast_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "type": "scaled",
+        "stat_key": "atk",
+        "scale_from": "vit",
+        "ratio_percent": 5
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Proto Leon (Lv 115)",
+        "map": "Singolare Ruins: 3rd Floor",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Proto Leon (Lv 105)",
+        "map": "Singolare Ruins: 3rd Floor",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Proto Leon (Lv 125)",
+        "map": "Singolare Ruins: 3rd Floor",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Proto Leon (Lv 135)",
+        "map": "Singolare Ruins: 3rd Floor",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Proto Leon (Lv 155)",
+        "map": "Singolare Ruins: 3rd Floor",
+        "dye": ""
+      }
+    ]
+  },
+  "road_sheep_talisman_special_armor": {
+    "id": 196,
+    "key": "road_sheep_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Bo Peep (Lv 187)",
+        "map": "Country Road",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Bo Peep (Lv 185)",
+        "map": "Country Road",
+        "dye": ""
+      }
+    ]
+  },
+  "stump_drum_special_armor": {
+    "id": 197,
+    "key": "stump_drum_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 25,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Bombor (Lv 205)",
+        "map": "Nebula Plain",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Bombor (Lv 208)",
+        "map": "Nebula Plain",
+        "dye": ""
+      }
+    ]
+  },
+  "twin_head_dragon_talisman_special_armor": {
+    "id": 198,
+    "key": "twin_head_dragon_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": -3,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [
+      {
+        "effect": "flinch_unavailable"
+      },
+      {
+        "effect": "tumble_unavailable"
+      },
+      {
+        "effect": "stun_unavailable"
+      }
+    ],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Zahhak Machina (Lv 130)",
+        "map": "Lufenas Mansion: Hall",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Zahhak Machina (Lv 140)",
+        "map": "Lufenas Mansion: Hall",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Zahhak Machina (Lv 150)",
+        "map": "Lufenas Mansion: Hall",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Zahhak Machina (Lv 170)",
+        "map": "Lufenas Mansion: Hall",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_199_armor": {
+    "id": 199,
+    "key": "unknown_armor_199_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "smart_puppy_talisman_special_armor": {
+    "id": 200,
+    "key": "smart_puppy_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 11,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [
+      {
+        "effect": "tumble_unavailable"
+      }
+    ],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Malum (Lv 220)",
+        "map": "Day Sakura Garden: Mountains",
+        "dye": ""
+      }
+    ]
+  },
+  "specistida_special_armor": {
+    "id": 201,
+    "key": "specistida_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Juvestida (Lv 186)",
+        "map": "Nov Diela Area 1",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Juvestida (Lv 187)",
+        "map": "Nov Diela Area 2",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Juvestida (Lv 188)",
+        "map": "Nov Diela Area 3",
+        "dye": ""
+      }
+    ]
+  },
+  "dark_night_talisman_special_armor": {
+    "id": 202,
+    "key": "dark_night_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Earustica (Lv 158)",
+        "map": "Pupalov Sector",
+        "dye": ""
+      }
+    ]
+  },
+  "dragon_ring_special_armor": {
+    "id": 203,
+    "key": "dragon_ring_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 3000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Plodocus (Lv 211)",
+        "map": "Stairway to Vital Point",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Plodocus (Lv 213)",
+        "map": "Stairway to Vital Point",
+        "dye": ""
+      }
+    ]
+  },
+  "scorching_talisman_special_armor": {
+    "id": 204,
+    "key": "scorching_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Bombermeow (Lv 149)",
+        "map": "Fabriska Sector",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Bombermeow (Lv 151)",
+        "map": "Fabriska Sector",
+        "dye": ""
+      }
+    ]
+  },
+  "snowland_talisman_special_armor": {
+    "id": 205,
+    "key": "snowland_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Acernix (Lv 135)",
+        "map": "Garden of Ice & Snow",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Acernix (Lv 138)",
+        "map": "Garden of Ice & Snow",
+        "dye": ""
+      }
+    ]
+  },
+  "spring_breeze_talisman_special_armor": {
+    "id": 206,
+    "key": "spring_breeze_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Ovinymon (Lv 169)",
+        "map": "Celarra Plateau",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Ovinymon (Lv 172)",
+        "map": "Celarra Plateau",
+        "dye": ""
+      }
+    ]
+  },
+  "sunshine_talisman_special_armor": {
+    "id": 207,
+    "key": "sunshine_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Climber Potum (Lv 166)",
+        "map": "Inje Village",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Climber Potum (Lv 169)",
+        "map": "Inje Village",
+        "dye": ""
+      }
+    ]
+  },
+  "tree_talisman_special_armor": {
+    "id": 208,
+    "key": "tree_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "earth_resistance",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Monstletoe (Lv 152)",
+        "map": "Altoale Sector",
+        "dye": ""
+      }
+    ]
+  },
+  "hard_shell_talisman_special_armor": {
+    "id": 209,
+    "key": "hard_shell_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 21,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mdef",
+        "value": -30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_barrier",
+        "value": 1000,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Squnail (Lv 111)",
+        "map": "Ultimea Sewer: South",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Squnail (Lv 115)",
+        "map": "Ultimea Sewer: South",
+        "dye": ""
+      }
+    ]
+  },
+  "big_tree_talisman_special_armor": {
+    "id": 210,
+    "key": "big_tree_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "earth_resistance",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_211_armor": {
+    "id": 211,
+    "key": "unknown_armor_211_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "blue_pearl_talisman_special_armor": {
+    "id": 212,
+    "key": "blue_pearl_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "str",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "int",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "agi",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dex",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Water City Jewel Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "enlightened_bangle_special_armor": {
+    "id": 213,
+    "key": "enlightened_bangle_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "str",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "int",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "vit",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "agi",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dex",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Meditating Potum (Lv 132)",
+        "map": "Heresy Corridor",
+        "dye": ""
+      }
+    ]
+  },
+  "green_pearl_talisman_special_armor": {
+    "id": 214,
+    "key": "green_pearl_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "str",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "int",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "agi",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dex",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "weapon_atk",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Water City Jewel Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "moxiz_strap_special_armor": {
+    "id": 215,
+    "key": "moxiz_strap_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "earth_resistance",
+        "value": -3,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Moxiz (Lv 91)",
+        "map": "Cradle of Soldier: Inside",
+        "dye": ""
+      }
+    ]
+  },
+  "pearl_talisman_special_armor": {
+    "id": 216,
+    "key": "pearl_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "str",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "int",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "agi",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dex",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Water City Jewel Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "purple_pearl_talisman_special_armor": {
+    "id": 217,
+    "key": "purple_pearl_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "str",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "int",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dex",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "agi",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Water City Jewel Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "red_pearl_talisman_special_armor": {
+    "id": 218,
+    "key": "red_pearl_talisman_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "str",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "int",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "agi",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dex",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Water City Jewel Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "broker_s_insignia_special_armor": {
+    "id": 219,
+    "key": "broker_s_insignia_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dodge",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Bangrudom (Coffee) (Lv 290)",
+        "map": "El Scaro: Back Alley",
+        "dye": ""
+      }
+    ]
+  },
+  "steel_ring_flash_special_armor": {
+    "id": 220,
+    "key": "steel_ring_flash_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 1500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 60,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Vintage Iron Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "steel_ring_magic_special_armor": {
+    "id": 221,
+    "key": "steel_ring_magic_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 1500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Vintage Iron Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "steel_ring_power_special_armor": {
+    "id": 222,
+    "key": "steel_ring_power_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 1500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Vintage Iron Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_223_armor": {
+    "id": 223,
+    "key": "unknown_armor_223_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "steel_ring_resist_special_armor": {
+    "id": 224,
+    "key": "steel_ring_resist_special_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 1500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Vintage Iron Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  }
+}

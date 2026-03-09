@@ -1,0 +1,21 @@
+{
+  "avatar_rules": {
+
+    "sections": 3,
+
+    "slots_per_section": 3,
+
+    "sections_name": [
+      "top",
+      "bottom",
+      "accessory"
+    ],
+
+    "no_duplicate_stat_in_same_section": true,
+
+    "slot_unlock_rule": {
+      "slot3_requires_slot2": true
+    }
+
+  }
+}

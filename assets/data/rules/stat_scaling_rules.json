@@ -1,0 +1,256 @@
+{
+  "global_stats": {
+    "STR": {
+      "critical_damage": 0.2
+    },
+
+    "INT": {
+      "max_mp": 0.1
+    },
+
+    "VIT": {
+      "max_hp_formula": "(0.33 * level)"
+    },
+
+    "AGI": {
+      "cspd": 1.16
+    },
+
+    "DEX": {
+      "cspd": 2.94,
+      "accuracy": 1
+    }
+  },
+
+  "armor_modifier": {
+    "MDEF": {
+      "heavy": 0.25,
+      "light": 1,
+      "normal": 0.1,
+      "no_armor": 2
+    },
+
+    "DEF": {
+      "heavy": 0.25,
+      "light": 1,
+      "normal": 0.1,
+      "no_armor": 2
+    },
+
+    "FLEE": {
+      "heavy": 1.75,
+      "light": 1,
+      "normal": 2,
+      "no_armor": 0.75
+    }
+  },
+
+  "weapon_scaling": {
+
+    "one_hand_sword": {
+      "STR": {
+        "atk": 2,
+        "stability": 0.025,
+        "aspd": 0.2
+      },
+      "INT": {
+        "matk": 3
+      },
+      "AGI": {
+        "aspd": 4.2
+      },
+      "DEX": {
+        "atk": 2,
+        "matk": 1,
+        "stability": 0.075
+      }
+    },
+
+    "dual_sword": {
+      "STR": {
+        "atk": 1,
+        "sub_atk": 1,
+        "stability": 0.025,
+        "sub_stability": 0.06,
+        "aspd": 0.2
+      },
+      "INT": {
+        "matk": 3
+      },
+      "AGI": {
+        "atk": 1,
+        "sub_atk": 3,
+        "sub_stability": 0.04,
+        "aspd": 4.2
+      },
+      "DEX": {
+        "atk": 2,
+        "matk": 1,
+        "stability": 0.075
+      }
+    },
+
+    "two_hand_sword": {
+      "STR": {
+        "atk": 3,
+        "aspd": 0.2
+      },
+      "INT": {
+        "matk": 3
+      },
+      "AGI": {
+        "aspd": 2.1
+      },
+      "DEX": {
+        "atk": 1,
+        "matk": 1,
+        "stability": 0.1
+      }
+    },
+
+    "bow": {
+      "STR": {
+        "atk": 1,
+        "stability": 0.05
+      },
+      "INT": {
+        "matk": 3
+      },
+      "AGI": {
+        "aspd": 3.1
+      },
+      "DEX": {
+        "atk": 3,
+        "matk": 1,
+        "stability": 0.05,
+        "aspd": 0.2
+      }
+    },
+
+    "bowgun": {
+      "STR": {
+        "stability": 0.05
+      },
+      "INT": {
+        "matk": 3
+      },
+      "AGI": {
+        "aspd": 2.2
+      },
+      "DEX": {
+        "atk": 4,
+        "matk": 1,
+        "aspd": 0.2
+      }
+    },
+
+    "staff": {
+      "STR": {
+        "atk": 3,
+        "stability": 0.05
+      },
+      "INT": {
+        "atk": 1,
+        "matk": 4,
+        "aspd": 0.2
+      },
+      "AGI": {
+        "aspd": 1.8
+      },
+      "DEX": {
+        "matk": 1
+      }
+    },
+
+    "magic_device": {
+      "INT": {
+        "atk": 2,
+        "matk": 4,
+        "aspd": 0.2
+      },
+      "AGI": {
+        "atk": 2,
+        "aspd": 4
+      },
+      "DEX": {
+        "matk": 1,
+        "stability": 0.1
+      }
+    },
+
+    "knuckle": {
+      "STR": {
+        "aspd": 0.1
+      },
+      "INT": {
+        "matk": 4
+      },
+      "AGI": {
+        "atk": 2,
+        "aspd": 4.6
+      },
+      "DEX": {
+        "atk": 0.5,
+        "matk": 1,
+        "stability": 0.025,
+        "aspd": 0.1
+      }
+    },
+
+    "halberd": {
+      "STR": {
+        "atk": 2.5,
+        "stability": 0.05,
+        "aspd": 0.2
+      },
+      "INT": {
+        "matk": 2
+      },
+      "AGI": {
+        "atk": 1.5,
+        "matk": 1,
+        "aspd": 3.5
+      },
+      "DEX": {
+        "matk": 1,
+        "stability": 0.05
+      }
+    },
+
+    "katana": {
+      "STR": {
+        "atk": 1.5,
+        "stability": 0.075,
+        "aspd": 0.3
+      },
+      "INT": {
+        "matk": 2
+      },
+      "AGI": {
+        "matk": 1,
+        "aspd": 3.9
+      },
+      "DEX": {
+        "atk": 2.5,
+        "matk": 1,
+        "stability": 0.025
+      }
+    },
+
+    "barehand": {
+      "STR": {
+        "atk": 1
+      },
+      "INT": {
+        "matk": 3
+      },
+      "AGI": {
+        "aspd": 9.6
+      },
+      "DEX": {
+        "matk": 1
+      }
+    }
+
+  }
+}

@@ -1,0 +1,24 @@
+เวลาโหลด item ใน Dart
+
+ทำแบบนี้
+-----------------------------------------------------
+String normalizeType(String rawType, Map alias) {
+  if (alias.containsKey(rawType)) {
+    return alias[rawType];
+  }
+  return rawType;
+}
+-----------------------------------------------------
+
+
+เวลาอ่าน item
+-----------------------------------------------------
+String rawType = item["type"];
+
+String type = normalizeType(rawType, typeAlias);
+-----------------------------------------------------
+ตอนนี้
+
+1H Sword → 1H_SWORD
+
+ระบบ rules ใช้งานได้ทันที

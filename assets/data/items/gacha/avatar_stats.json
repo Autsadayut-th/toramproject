@@ -1,0 +1,113 @@
+{
+  "avatar_stat_pool": [
+
+    {"stat":"STR","type":"flat","values":[1,2,3,4,5,6,7,8,9,10]},
+    {"stat":"INT","type":"flat","values":[1,2,3,4,5,6,7,8,9,10]},
+    {"stat":"VIT","type":"flat","values":[1,2,3,4,5,6,7,8,9,10]},
+    {"stat":"AGI","type":"flat","values":[1,2,3,4,5,6,7,8,9,10]},
+    {"stat":"DEX","type":"flat","values":[1,2,3,4,5,6,7,8,9,10]},
+
+    {"stat":"STR","type":"percent","values":[1,2,3]},
+    {"stat":"INT","type":"percent","values":[1,2,3]},
+    {"stat":"VIT","type":"percent","values":[1,2,3]},
+    {"stat":"AGI","type":"percent","values":[1,2,3]},
+    {"stat":"DEX","type":"percent","values":[1,2,3]},
+
+    {"stat":"MaxHP","type":"flat","values":[100,200,300,400,500,600,700,800,900,1000]},
+    {"stat":"MaxHP","type":"percent","values":[5,10,15]},
+
+    {"stat":"MaxMP","type":"flat","values":[10,20,30,40,50,60,70,80,90,100]},
+
+    {"stat":"WeaponATK","type":"flat","values":[3,6,9,12,15,18,21,24,27,30]},
+    {"stat":"WeaponATK","type":"percent","values":[1,2,3]},
+
+    {"stat":"ATK","type":"flat","values":[3,6,9,12,15,18,21,24,27,30]},
+    {"stat":"ATK","type":"percent","values":[1,2,3]},
+
+    {"stat":"MATK","type":"flat","values":[3,6,9,12,15,18,21,24,27,30]},
+    {"stat":"MATK","type":"percent","values":[1,2,3]},
+
+    {"stat":"Stability","type":"percent","values":[1,2,3]},
+
+    {"stat":"Accuracy","type":"flat","values":[3,6,9,12,15,18,21,24,27,30]},
+    {"stat":"Accuracy","type":"percent","values":[1,2,3]},
+
+    {"stat":"Dodge","type":"flat","values":[3,6,9,12,15,18,21,24,27,30]},
+    {"stat":"Dodge","type":"percent","values":[1,2,3]},
+
+    {"stat":"DEF","type":"flat","values":[10,20,30,40,50,60,70,80,90,100]},
+    {"stat":"DEF","type":"percent","values":[1,2,3,4,5]},
+
+    {"stat":"MDEF","type":"flat","values":[10,20,30,40,50,60,70,80,90,100]},
+    {"stat":"MDEF","type":"percent","values":[1,2,3,4,5]},
+
+    {"stat":"ASPD","type":"flat","values":[10,20,30,40,50,60,70,80,90,100]},
+    {"stat":"ASPD","type":"percent","values":[1,2,3,4,5,6,7,8,9,10]},
+
+    {"stat":"CSPD","type":"flat","values":[10,20,30,40,50,60,70,80,90,100]},
+    {"stat":"CSPD","type":"percent","values":[1,2,3,4,5,6,7,8,9,10]},
+
+    {"stat":"NaturalHPRegen","type":"flat","values":[10,20,30,40,50,60,70,80,90,100]},
+    {"stat":"NaturalHPRegen","type":"percent","values":[5,10,15,20,25]},
+
+    {"stat":"NaturalMPRegen","type":"flat","values":[1,2,3,4,5,6,7,8,9,10]},
+    {"stat":"NaturalMPRegen","type":"percent","values":[5,10,15,20,25]},
+
+    {"stat":"AttackMPRecovery","type":"flat","values":[1,2,3,4,5,6,7,8,9,10]},
+
+    {"stat":"CriticalRate","type":"flat","values":[1,2,3,4,5]},
+    {"stat":"CriticalRate","type":"percent","values":[1,2,3]},
+
+    {"stat":"CriticalDamage","type":"flat","values":[1,2,3,4,5]},
+    {"stat":"CriticalDamage","type":"percent","values":[1,2,3]},
+
+    {"stat":"AilmentResistance","type":"percent","values":[1,2,3,4,5,6,7,8,9,10]},
+
+    {"stat":"GuardRecharge","type":"percent","values":[1,2,3]},
+    {"stat":"GuardPower","type":"percent","values":[1,2,3]},
+
+    {"stat":"EvasionRecharge","type":"percent","values":[1,2,3]},
+
+    {"stat":"PhysicalResistance","type":"percent","values":[1,2,3,4,5,6,7,8,9,10]},
+    {"stat":"MagicResistance","type":"percent","values":[1,2,3,4,5,6,7,8,9,10]},
+
+    {"stat":"PhysicalPierce","type":"percent","values":[1,2,3,4,5,6,7,8,9,10]},
+    {"stat":"MagicPierce","type":"percent","values":[1,2,3,4,5,6,7,8,9,10]},
+
+    {"stat":"DamageToFire","type":"percent","values":[1,2,3]},
+    {"stat":"DamageToWater","type":"percent","values":[1,2,3]},
+    {"stat":"DamageToWind","type":"percent","values":[1,2,3]},
+    {"stat":"DamageToEarth","type":"percent","values":[1,2,3]},
+    {"stat":"DamageToLight","type":"percent","values":[1,2,3]},
+    {"stat":"DamageToDark","type":"percent","values":[1,2,3]},
+    {"stat":"DamageToNeutral","type":"percent","values":[1,2,3]},
+
+    {"stat":"Aggro","type":"percent","values":[-10,-9,-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8,9,10]},
+
+    {"stat":"FireResistance","type":"percent","values":[1,2,3,4,5,6,7,8,9,10]},
+    {"stat":"WaterResistance","type":"percent","values":[1,2,3,4,5,6,7,8,9,10]},
+    {"stat":"WindResistance","type":"percent","values":[1,2,3,4,5,6,7,8,9,10]},
+    {"stat":"EarthResistance","type":"percent","values":[1,2,3,4,5,6,7,8,9,10]},
+    {"stat":"LightResistance","type":"percent","values":[1,2,3,4,5,6,7,8,9,10]},
+    {"stat":"DarkResistance","type":"percent","values":[1,2,3,4,5,6,7,8,9,10]},
+    {"stat":"NeutralResistance","type":"percent","values":[1,2,3,4,5,6,7,8,9,10]},
+
+    {"stat":"ShortRangeDamage","type":"percent","values":[1,2,3]},
+    {"stat":"LongRangeDamage","type":"percent","values":[1,2,3]},
+
+    {"stat":"Anticipate","type":"percent","values":[1,2,3]},
+    {"stat":"GuardBreak","type":"percent","values":[1,2,3]},
+
+    {"stat":"AdditionalMelee","type":"percent","values":[10,20,30,40,50]},
+    {"stat":"AdditionalMagic","type":"percent","values":[10,20,30,40,50]},
+
+    {"stat":"Reflect","type":"percent","values":[5,10,15]},
+
+    {"stat":"PhysicalBarrier","type":"flat","values":[100,200,300,400,500,600,700,800,900,1000]},
+    {"stat":"MagicBarrier","type":"flat","values":[100,200,300,400,500,600,700,800,900,1000]},
+
+    {"stat":"FractionalBarrier","type":"percent","values":[1,2,3,4,5,6,7,8,9,10]},
+    {"stat":"BarrierCooldown","type":"percent","values":[3,6,9,12,15]}
+
+  ]
+}

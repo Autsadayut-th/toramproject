@@ -1,0 +1,6879 @@
+{
+  "fighter_uniform_armor": {
+    "id": 1,
+    "key": "fighter_uniform_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 0,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mdef",
+        "value": -30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Goldoon (Fall 2017) (Lv 140)",
+        "map": "Gravel Terrace",
+        "dye": ""
+      }
+    ]
+  },
+  "potum_academy_tracksuit_armor": {
+    "id": 2,
+    "key": "potum_academy_tracksuit_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [
+      {
+        "condition": {
+          "armor": "heavy"
+        },
+        "stat": {
+          "stat_key": "critical_rate",
+          "value": 100,
+          "value_type": "flat"
+        }
+      },
+      {
+        "condition": {
+          "armor": "light"
+        },
+        "stat": {
+          "stat_key": "aspd",
+          "value": 1000,
+          "value_type": "flat"
+        }
+      }
+    ],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "sakura_kimono_armor": {
+    "id": 41,
+    "key": "sakura_kimono_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 20,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "shadow_suit_armor": {
+    "id": 4,
+    "key": "shadow_suit_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stability",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 120,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 11,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [
+      {
+        "condition": {
+          "weapon": "arrow"
+        },
+        "stat": {
+          "stat_key": "long_range_damage",
+          "value": 11,
+          "value_type": "percent"
+        }
+      }
+    ],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "test1_armor": {
+    "id": 5,
+    "key": "test1_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "pom_loungewear_armor": {
+    "id": 6,
+    "key": "pom_loungewear_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 40,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 40,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 60,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "revive_time",
+        "value": 60,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "unknown_armor_7_armor": {
+    "id": 7,
+    "key": "unknown_armor_7_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "soda_swimsuit_armor": {
+    "id": 9,
+    "key": "soda_swimsuit_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "natural_hp_regen",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Yuveria (Lv 175)",
+        "map": "Underwater Canyon: Depths",
+        "dye": "61 77 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Yuveria (Lv 185)",
+        "map": "Underwater Canyon: Depths",
+        "dye": "61 77 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Yuveria (Lv 195)",
+        "map": "Underwater Canyon: Depths",
+        "dye": "61 77 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Yuveria (Lv 205)",
+        "map": "Underwater Canyon: Depths",
+        "dye": "61 77 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Yuveria (Lv 225)",
+        "map": "Underwater Canyon: Depths",
+        "dye": "61 77 C"
+      }
+    ]
+  },
+  "adventurer_s_garb_armor": {
+    "id": 16,
+    "key": "adventurer_s_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 9,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Golden Coryn (2017) (Lv 100)",
+        "map": "Wanderer's Plain",
+        "dye": "5 B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Coryn (2017) (Lv 100)",
+        "map": "Rakau Plains",
+        "dye": "A 5 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Rakau Plains",
+        "dye": "A 5 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Coryn (2017) (Lv 100)",
+        "map": "Yorl Highlands",
+        "dye": "A B 5"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Coryn (2017) (Lv 100)",
+        "map": "Darkanon Plain",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Darkanon Plain",
+        "dye": "49 B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Wanderer's Plain",
+        "dye": "A 49 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Event",
+        "dye": "A B 49"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Yorl Highlands",
+        "dye": "63 B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Rakau Plains",
+        "dye": "A 47 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Wanderer's Plain",
+        "dye": "A B 47"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Event",
+        "dye": "44 B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Wanderer's Plain",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Marchitar (Hanami 2017) (Lv 100)",
+        "map": "Hanami Venue: Summit",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Coryn (2017) (Lv 100)",
+        "map": "Wanderer's Plain",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Rakau Plains",
+        "dye": "71 B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Darkanon Plain",
+        "dye": "A 71 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Coryn (2017) (Lv 100)",
+        "map": "Yorl Highlands",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Yorl Highlands",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Yorl Highlands",
+        "dye": "A 29 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Event",
+        "dye": "A B 30"
+      },
+      {
+        "source_type": "monster",
+        "name": "Nightmare Potum (Lv 120)",
+        "map": "Garden of Beginning",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Event",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Yorl Highlands",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Rakau Plains",
+        "dye": "A B 35"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Wanderer's Plain",
+        "dye": "A B 12"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Yorl Highlands",
+        "dye": "A 14 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Yorl Highlands",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Wanderer's Plain",
+        "dye": "A B 2"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Event",
+        "dye": "19 B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Coryn (2017) (Lv 100)",
+        "map": "Darkanon Plain",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Coryn (2017) (Lv 100)",
+        "map": "Yorl Highlands",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Cerabes (Hanami 2017) (Lv 100)",
+        "map": "Hanami Venue: Summit",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Cerabes (Hanami 2017) (Lv 80)",
+        "map": "Hanami Venue: Summit",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Cerabes (Hanami 2017) (Lv 60)",
+        "map": "Hanami Venue: Summit",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Marchitar (Hanami 2017) (Lv 100)",
+        "map": "Hanami Venue: Summit",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Marchitar (Hanami 2017) (Lv 80)",
+        "map": "Hanami Venue: Summit",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Marchitar (Hanami 2017) (Lv 60)",
+        "map": "Hanami Venue: Summit",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Darkanon Plain",
+        "dye": "38 B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Coryn (2017) (Lv 100)",
+        "map": "Rakau Plains",
+        "dye": "38 B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Event",
+        "dye": "38 B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Event",
+        "dye": "A 38 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Event",
+        "dye": "A B 52"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Rakau Plains",
+        "dye": "37 B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Darkanon Plain",
+        "dye": "A 37 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Yorl Highlands",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Wanderer's Plain",
+        "dye": "A B 40"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Wanderer's Plain",
+        "dye": "6 B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Yorl Highlands",
+        "dye": "A B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Rakau Plains",
+        "dye": "21 B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Wanderer's Plain",
+        "dye": "A B 21"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Darkanon Plain",
+        "dye": "A 20 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Rakau Plains",
+        "dye": "9 B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Darkanon Plain",
+        "dye": "A 9 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Event",
+        "dye": "A 42 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Coryn (2017) (Lv 100)",
+        "map": "Darkanon Plain",
+        "dye": "1 B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Rakau Plains",
+        "dye": "1 B C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (5M DL) (Lv 100)",
+        "map": "Darkanon Plain",
+        "dye": "A 1 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Coryn (2017) (Lv 100)",
+        "map": "Wanderer's Plain",
+        "dye": "A 1 C"
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Coryn (2017) (Lv 100)",
+        "map": "Rakau Plains",
+        "dye": "A B 1"
+      }
+    ]
+  },
+  "santa_suit_armor": {
+    "id": 17,
+    "key": "santa_suit_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stronger_against_dark",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 4,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "b_b_garb_armor": {
+    "id": 20,
+    "key": "b_b_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 11,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "B.B. Goblin (Megiston 2016) (Lv 80)",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_19_armor": {
+    "id": 19,
+    "key": "unknown_armor_19_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "leather_armor_armor": {
+    "id": 22,
+    "key": "leather_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 11,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "mage_robe_armor": {
+    "id": 25,
+    "key": "mage_robe_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 15,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "warrior_mail_armor": {
+    "id": 28,
+    "key": "warrior_mail_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 15,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "gladiator_armor_armor": {
+    "id": 32,
+    "key": "gladiator_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 16,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_recharge",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "weapon_atk",
+        "value": 12,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Megiston (Lv 225)",
+        "map": "Anniversary Arena: 5th Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Megiston (Lv 235)",
+        "map": "Anniversary Arena: 5th Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Megiston (Lv 245)",
+        "map": "Anniversary Arena: 5th Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Megiston (Lv 265)",
+        "map": "Anniversary Arena: 5th Venue",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_31_armor": {
+    "id": 31,
+    "key": "unknown_armor_31_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "hunter_s_garb_armor": {
+    "id": 35,
+    "key": "hunter_s_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 18,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "straye_garb_armor": {
+    "id": 38,
+    "key": "straye_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 18,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 5000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 1000,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Super Vanilla Potum (Lv 195)",
+        "map": "Anniversary Arena: 5th Venue",
+        "dye": ""
+      }
+    ]
+  },
+  "halloween_garb_armor": {
+    "id": 39,
+    "key": "halloween_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "santa_suit_ii_armor": {
+    "id": 42,
+    "key": "santa_suit_ii_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stronger_against_dark",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_43_armor": {
+    "id": 43,
+    "key": "unknown_armor_43_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "forest_wolf_garb_armor": {
+    "id": 46,
+    "key": "forest_wolf_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 21,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "magic_crystal_armor_armor": {
+    "id": 50,
+    "key": "magic_crystal_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 24,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 750,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Candela Soda (White Day 2018) (Lv 130)",
+        "map": "Douce Hamlet",
+        "dye": "28 63 47"
+      },
+      {
+        "source_type": "monster",
+        "name": "Candela Cola (White Day 2018) (Lv 160)",
+        "map": "Douce Hamlet",
+        "dye": "28 63 47"
+      }
+    ]
+  },
+  "fightwear_armor": {
+    "id": 54,
+    "key": "fightwear_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 25,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Handmade Cookie (Plain) (Lv 100)",
+        "map": "El Scaro",
+        "dye": "24 72 9"
+      },
+      {
+        "source_type": "monster",
+        "name": "Handmade Cookie (Cocoa) (Lv 130)",
+        "map": "El Scaro",
+        "dye": "24 72 9"
+      },
+      {
+        "source_type": "monster",
+        "name": "Handmade Cookie (Choco) (Lv 160)",
+        "map": "El Scaro",
+        "dye": "24 72 9"
+      }
+    ]
+  },
+  "unknown_armor_55_armor": {
+    "id": 55,
+    "key": "unknown_armor_55_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "brutal_dragon_armor_armor": {
+    "id": 59,
+    "key": "brutal_dragon_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 27,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 4,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Brutal Dragon Decel (Megiston 2016) (Lv 90)",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "green_dragon_garb_armor": {
+    "id": 62,
+    "key": "green_dragon_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 30,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "otsukimi_garb_armor": {
+    "id": 63,
+    "key": "otsukimi_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 700,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mdef",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "plate_armor_armor": {
+    "id": 69,
+    "key": "plate_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "type": "scaled",
+        "stat_key": "atk",
+        "scale_from": "vit",
+        "ratio_percent": 100
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Silver Coryn (2021) (Lv 100)",
+        "map": "Rakau Plains",
+        "dye": "2 3 4"
+      },
+      {
+        "source_type": "monster",
+        "name": "Silver Coryn (2021) (Lv 100)",
+        "map": "Yorl Highlands",
+        "dye": "2 3 4"
+      },
+      {
+        "source_type": "monster",
+        "name": "Silver Coryn (2021) (Lv 100)",
+        "map": "Darkanon Plain",
+        "dye": "2 3 4"
+      },
+      {
+        "source_type": "monster",
+        "name": "Silver Coryn (2021) (Lv 100)",
+        "map": "Wanderer's Plain",
+        "dye": "2 3 4"
+      },
+      {
+        "source_type": "monster",
+        "name": "Silver Coryn (2021) (Lv 100)",
+        "map": "Tolbas GrassLand",
+        "dye": "2 3 4"
+      }
+    ]
+  },
+  "unknown_armor_67_armor": {
+    "id": 67,
+    "key": "unknown_armor_67_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "santa_suit_iii_armor": {
+    "id": 70,
+    "key": "santa_suit_iii_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stronger_against_dark",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "spa_wear_armor": {
+    "id": 71,
+    "key": "spa_wear_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 60,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "earth_resistance",
+        "value": -25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "weapon_atk",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "aqua_garb_armor": {
+    "id": 74,
+    "key": "aqua_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 32,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "scale_armor_armor": {
+    "id": 102,
+    "key": "scale_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 43,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "ooze_armor_armor": {
+    "id": 81,
+    "key": "ooze_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 36,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 75,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Chocolate Ooze (Dark) (Valentine 2018) (Lv 150)",
+        "map": "Underground Channel",
+        "dye": "71 71 72"
+      }
+    ]
+  },
+  "unknown_armor_79_armor": {
+    "id": 79,
+    "key": "unknown_armor_79_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "assassin_garb_armor": {
+    "id": 83,
+    "key": "assassin_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 38,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "oracle_robe_armor": {
+    "id": 87,
+    "key": "oracle_robe_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 39,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 14,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Zoe (Lv 75)",
+        "map": "Halloween Mansion Basement",
+        "dye": "82 83 25"
+      },
+      {
+        "source_type": "monster",
+        "name": "Zoe (Lv 100)",
+        "map": "Halloween Mansion Basement",
+        "dye": "82 83 25"
+      },
+      {
+        "source_type": "monster",
+        "name": "Zoe (Lv 125)",
+        "map": "Halloween Mansion Basement",
+        "dye": "82 83 25"
+      }
+    ]
+  },
+  "magic_swordsman_s_garb_armor": {
+    "id": 89,
+    "key": "magic_swordsman_s_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 40,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "sakura_kimono_ii_armor": {
+    "id": 92,
+    "key": "sakura_kimono_ii_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 40,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "unknown_armor_91_armor": {
+    "id": 91,
+    "key": "unknown_armor_91_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "santa_suit_iv_armor": {
+    "id": 93,
+    "key": "santa_suit_iv_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 40,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stronger_against_dark",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "killer_coat_armor": {
+    "id": 97,
+    "key": "killer_coat_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 43,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": -100,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Zega (Lv 100)",
+        "map": "Event",
+        "dye": "1 1 1"
+      },
+      {
+        "source_type": "monster",
+        "name": "Zega (Lv 150)",
+        "map": "Event",
+        "dye": "1 1 1"
+      }
+    ]
+  },
+  "medic_coat_armor": {
+    "id": 100,
+    "key": "medic_coat_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 43,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "natural_hp_regen",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 30,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Zarth (Lv 100)",
+        "map": "Zarth's Mansion: Back",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Zarth (Lv 125)",
+        "map": "Zarth's Mansion: Back",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Zarth (Lv 150)",
+        "map": "Zarth's Mansion: Back",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Zarth (Lv 175)",
+        "map": "Zarth's Mansion: Back",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_103_armor": {
+    "id": 103,
+    "key": "unknown_armor_103_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "reindeer_suit_armor": {
+    "id": 104,
+    "key": "reindeer_suit_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 46,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": -150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 25,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "outerworld_armor_armor": {
+    "id": 107,
+    "key": "outerworld_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 47,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "diomedea_suit_armor": {
+    "id": 109,
+    "key": "diomedea_suit_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 48,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "knight_armor_armor": {
+    "id": 116,
+    "key": "knight_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 52,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 7,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Pillar Golem (Lv 70)",
+        "map": "Lost Town: Magic Barrier",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Pillar Golem (Lv 60)",
+        "map": "Lost Town: Magic Barrier",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Pillar Golem (Lv 80)",
+        "map": "Lost Town: Magic Barrier",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Pillar Golem (Lv 90)",
+        "map": "Lost Town: Magic Barrier",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Pillar Golem (Lv 110)",
+        "map": "Lost Town: Magic Barrier",
+        "dye": ""
+      }
+    ]
+  },
+  "mad_doctor_garb_armor": {
+    "id": 113,
+    "key": "mad_doctor_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": -25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": -25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_barrier",
+        "value": 666,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "santa_suit_v_armor": {
+    "id": 114,
+    "key": "santa_suit_v_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stronger_against_water",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stronger_against_dark",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_115_armor": {
+    "id": 115,
+    "key": "unknown_armor_115_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "brigandine_armor": {
+    "id": 119,
+    "key": "brigandine_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 60,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "sakura_kimono_iii_armor": {
+    "id": 121,
+    "key": "sakura_kimono_iii_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 60,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "santa_suit_vi_armor": {
+    "id": 122,
+    "key": "santa_suit_vi_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 60,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 700,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stronger_against_water",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stronger_against_dark",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "armigma_armor": {
+    "id": 126,
+    "key": "armigma_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 63,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": -50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "weapon_atk",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [
+      {
+        "effect": "flinch_unavailable"
+      }
+    ],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Evil Crystal Beast (Megiston 2017) (Lv 130)",
+        "map": "Event",
+        "dye": "1 46 31"
+      }
+    ]
+  },
+  "unknown_armor_127_armor": {
+    "id": 127,
+    "key": "unknown_armor_127_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "lil_devil_garb_armor": {
+    "id": 128,
+    "key": "lil_devil_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 66,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": -30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": -666,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "praetor_suit_armor": {
+    "id": 131,
+    "key": "praetor_suit_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 67,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "crow_robe_armor": {
+    "id": 132,
+    "key": "crow_robe_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 70,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stability",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Zarth (Lv 125)",
+        "map": "Zarth's Mansion: Back",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Zarth (Lv 150)",
+        "map": "Zarth's Mansion: Back",
+        "dye": ""
+      }
+    ]
+  },
+  "twilight_dress_armor": {
+    "id": 135,
+    "key": "twilight_dress_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 70,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "aubergine_armor_armor": {
+    "id": 136,
+    "key": "aubergine_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 74,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 60,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Aubergine Dragon Auvio (Lv 235)",
+        "map": "Rakau Plains",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Aubergine Dragon Auvio (Lv 245)",
+        "map": "Rakau Plains",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Aubergine Dragon Auvio (Lv 255)",
+        "map": "Rakau Plains",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Aubergine Dragon Auvio (Lv 275)",
+        "map": "Rakau Plains",
+        "dye": ""
+      }
+    ]
+  },
+  "anniversary_dress_armor": {
+    "id": 138,
+    "key": "anniversary_dress_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 75,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_139_armor": {
+    "id": 139,
+    "key": "unknown_armor_139_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "erudite_uniform_armor": {
+    "id": 140,
+    "key": "erudite_uniform_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 75,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "earth_resistance",
+        "value": 30,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Demonic Quasar (Megiston 2021) (Lv 230)",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "oriental_robe_armor": {
+    "id": 141,
+    "key": "oriental_robe_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 75,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Golden Casket",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "ritual_dress_armor": {
+    "id": 142,
+    "key": "ritual_dress_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 75,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 5000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Titeres (Lv 160)",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "sorcery_dress_armor": {
+    "id": 143,
+    "key": "sorcery_dress_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 75,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stability",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": -75,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_barrier",
+        "value": 3000,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [
+      {
+        "effect": "tumble_unavailable"
+      }
+    ],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Usasama the Necromancer (Lv 185)",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "resort_swimsuit_armor": {
+    "id": 144,
+    "key": "resort_swimsuit_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 76,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "fortistra_armor": {
+    "id": 148,
+    "key": "fortistra_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 80,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stronger_against_light",
+        "value": -30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Grecia the Goddess of Courage (7M DL) (Lv 150)",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "sakura_kimono_iv_armor": {
+    "id": 150,
+    "key": "sakura_kimono_iv_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 80,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_151_armor": {
+    "id": 151,
+    "key": "unknown_armor_151_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "stoodie_s_robe_armor": {
+    "id": 153,
+    "key": "stoodie_s_robe_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 80,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "ninja_costume_armor": {
+    "id": 155,
+    "key": "ninja_costume_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 83,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "holy_robe_armor": {
+    "id": 158,
+    "key": "holy_robe_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 86,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "halloween_garb_ii_armor": {
+    "id": 159,
+    "key": "halloween_garb_ii_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 90,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_barrier",
+        "value": 3000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_barrier",
+        "value": 3000,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "phalanx_armor_armor": {
+    "id": 160,
+    "key": "phalanx_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 90,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "natural_hp_regen",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "earth_resistance",
+        "value": -75,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_barrier",
+        "value": 3000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_barrier",
+        "value": 3000,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "valentine_s_day_costume_armor": {
+    "id": 161,
+    "key": "valentine_s_day_costume_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 90,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dex",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 25,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "earth_resistance",
+        "value": -40,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [
+      {
+        "condition": {
+          "armor": "heavy"
+        },
+        "stat": {
+          "stat_key": "long_range_damage",
+          "value": 3,
+          "value_type": "percent"
+        }
+      }
+    ],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "snowman_garb_armor": {
+    "id": 162,
+    "key": "snowman_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 92,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 7000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stronger_against_fire",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": -70,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_163_armor": {
+    "id": 163,
+    "key": "unknown_armor_163_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "ocean_dancer_armor": {
+    "id": 164,
+    "key": "ocean_dancer_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 94,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": -70,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "absolute_dodge",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "jumpsuit_armor": {
+    "id": 165,
+    "key": "jumpsuit_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 97,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "item_cooldown",
+        "value": -1,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Maton Sword (Lv 205)",
+        "map": "Event",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Maton Sword (Lv 195)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Maton Sword (Lv 200)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Maton Sword (Lv 205)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Maton Sword (Lv 210)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Maton Sword (Lv 215)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Maton Sword (Lv 220)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Maton Sword (Lv 225)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Maton Sword (Lv 230)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      }
+    ]
+  },
+  "comfy_pom_knit_sweater_armor": {
+    "id": 166,
+    "key": "comfy_pom_knit_sweater_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Pom Knitted Outfit Set",
+        "map": "Snowball Mini Game Venue",
+        "dye": ""
+      }
+    ]
+  },
+  "cool_summer_yukata_armor": {
+    "id": 167,
+    "key": "cool_summer_yukata_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 1500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stronger_against_fire",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 9,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Lalun (Summer Event Exchange)",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "empress_mail_armor": {
+    "id": 169,
+    "key": "empress_mail_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mdef",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": -40,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "P. Avatar (Lv 800)",
+        "map": "Event",
+        "dye": "1 1 54"
+      },
+      {
+        "source_type": "monster",
+        "name": "P. Avatar (2023) (Lv 400)",
+        "map": "Event",
+        "dye": "1 54 22"
+      }
+    ]
+  },
+  "finpen_wet_suit_armor": {
+    "id": 170,
+    "key": "finpen_wet_suit_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": -60,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "fortuita_vestibus_armor": {
+    "id": 176,
+    "key": "fortuita_vestibus_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 5000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Mercy (Banana) (Lv 190)",
+        "map": "Dunkel Valley",
+        "dye": "A 26 C"
+      }
+    ]
+  },
+  "unknown_armor_175_armor": {
+    "id": 175,
+    "key": "unknown_armor_175_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "iris_armor_armor": {
+    "id": 177,
+    "key": "iris_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "weapon_atk",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (12M DL) (Lv 100)",
+        "map": "Rakau Plains",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (12M DL) (Lv 100)",
+        "map": "Yorl Highlands",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (12M DL) (Lv 100)",
+        "map": "Darkanon Plain",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (12M DL) (Lv 100)",
+        "map": "Wanderer's Plain",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (12M DL) (Lv 100)",
+        "map": "Tolbas GrassLand",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Golden Potum (12M DL) (Lv 100)",
+        "map": "Rakau Plains",
+        "dye": "7 7 7"
+      }
+    ]
+  },
+  "palanquin_carrier_garment_armor": {
+    "id": 178,
+    "key": "palanquin_carrier_garment_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "natural_hp_regen",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "hp",
+        "value": 10000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mdef",
+        "value": -99,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 750,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "revive_time",
+        "value": -25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Gigantic Octopus (Lv 140)",
+        "map": "Saltau's Beach: Beach House",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gigantic Octopus (Lv 150)",
+        "map": "Saltau's Beach: Beach House",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gigantic Octopus (Lv 160)",
+        "map": "Saltau's Beach: Beach House",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gigantic Octopus (Lv 170)",
+        "map": "Saltau's Beach: Beach House",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gigantic Octopus (Lv 190)",
+        "map": "Saltau's Beach: Beach House",
+        "dye": ""
+      }
+    ]
+  },
+  "summer_outfit_armor": {
+    "id": 179,
+    "key": "summer_outfit_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "mozt_armor_armor": {
+    "id": 182,
+    "key": "mozt_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 102,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "jeremiah_mail_armor": {
+    "id": 184,
+    "key": "jeremiah_mail_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 110,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "mummy_bandage_outfit_armor": {
+    "id": 185,
+    "key": "mummy_bandage_outfit_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 111,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 40,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": -100,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [
+      {
+        "condition": {
+          "armor": "heavy"
+        },
+        "stat": {
+          "stat_key": "fire_resistance",
+          "value": 75,
+          "value_type": "percent"
+        }
+      }
+    ],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "dark_syndicate_vilment_armor": {
+    "id": 253,
+    "key": "dark_syndicate_vilment_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 222,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 4000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 4,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Gift from the Syndicate",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_187_armor": {
+    "id": 187,
+    "key": "unknown_armor_187_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "savage_mail_armor": {
+    "id": 189,
+    "key": "savage_mail_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 114,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_barrier",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "additional_melee",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Ageladanios (Lv 218)",
+        "map": "Ducia Coast: Area 1",
+        "dye": ""
+      }
+    ]
+  },
+  "oni_garb_armor": {
+    "id": 190,
+    "key": "oni_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 117,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stability",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "type": "scaled",
+        "stat_key": "atk",
+        "scale_from": "vit",
+        "ratio_percent": 100
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "evil_garb_of_death_armor": {
+    "id": 191,
+    "key": "evil_garb_of_death_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 120,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mdef",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 30,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Gespenst (Lv 175)",
+        "map": "Event",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gespenst (Lv 225)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gespenst (Lv 220)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gespenst (Lv 215)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gespenst (Lv 210)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gespenst (Lv 205)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gespenst (Lv 200)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gespenst (Lv 195)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gespenst (Lv 190)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gespenst (Lv 185)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gespenst (Lv 180)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gespenst (Lv 175)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gespenst (Lv 170)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gespenst (Lv 165)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gespenst (Lv 230)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      }
+    ]
+  },
+  "lil_empress_garb_armor": {
+    "id": 194,
+    "key": "lil_empress_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 120,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "soldier_armor_armor": {
+    "id": 197,
+    "key": "soldier_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 123,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "fluffy_kinaco_onesie_armor": {
+    "id": 198,
+    "key": "fluffy_kinaco_onesie_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 125,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 7500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_199_armor": {
+    "id": 199,
+    "key": "unknown_armor_199_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "steel_mail_m_armor": {
+    "id": 200,
+    "key": "steel_mail_m_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 128,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "int",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": -50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "absolute_dodge",
+        "value": 9,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [
+      {
+        "condition": {
+          "armor": "heavy"
+        },
+        "stat": {
+          "stat_key": "aspd",
+          "value": 50,
+          "value_type": "percent"
+        }
+      }
+    ],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Vintage Iron Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "steel_mail_p_armor": {
+    "id": 201,
+    "key": "steel_mail_p_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 128,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "str",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": -50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "absolute_accuracy",
+        "value": 9,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [
+      {
+        "condition": {
+          "armor": "heavy"
+        },
+        "stat": {
+          "stat_key": "aspd",
+          "value": 50,
+          "value_type": "percent"
+        }
+      }
+    ],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Vintage Iron Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "clyde_luxen_armor": {
+    "id": 202,
+    "key": "clyde_luxen_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 130,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": -25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [
+      {
+        "effect": "tumble_unavailable"
+      }
+    ],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "York (Megiston 2017) (Lv 150)",
+        "map": "Event",
+        "dye": "41 42 1"
+      }
+    ]
+  },
+  "cool_summer_yukata_ii_armor": {
+    "id": 203,
+    "key": "cool_summer_yukata_ii_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 130,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 2000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stronger_against_fire",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 9,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Lalun (Summer Event Exchange)",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "elfin_armor_armor": {
+    "id": 205,
+    "key": "elfin_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 130,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "seashell_armor": {
+    "id": 206,
+    "key": "seashell_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 130,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -200,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -100,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": -300,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Lalun (Summer Event Exchange)",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "magical_crimson_moon_garb_armor": {
+    "id": 207,
+    "key": "magical_crimson_moon_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 135,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 40,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": -60,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "sacred_ice_armor_armor": {
+    "id": 208,
+    "key": "sacred_ice_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 135,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stronger_against_water",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stronger_against_light",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "additional_melee",
+        "value": 100,
+        "value_type": "percent"
+      },
+      {
+        "type": "scaled",
+        "stat_key": "atk",
+        "scale_from": "int",
+        "ratio_percent": 100
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Noeliel the Ice Statue (raid) (Lv 112)",
+        "map": "Noeliel Castle: Hall (80-100)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Noeliel the Ice Statue (raid) (Lv 182)",
+        "map": "Noeliel Castle: Hall (120-140)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Noeliel the Ice Statue (raid) (Lv 172)",
+        "map": "Noeliel Castle: Hall (120-140)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Noeliel the Ice Statue (raid) (Lv 162)",
+        "map": "Noeliel Castle: Hall (120-140)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Noeliel the Ice Statue (raid) (Lv 152)",
+        "map": "Noeliel Castle: Hall (120-140)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Noeliel the Ice Statue (raid) (Lv 182)",
+        "map": "Noeliel Castle: Hall (100-120)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Noeliel the Ice Statue (raid) (Lv 162)",
+        "map": "Noeliel Castle: Hall (100-120)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Noeliel the Ice Statue (raid) (Lv 152)",
+        "map": "Noeliel Castle: Hall (100-120)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Noeliel the Ice Statue (raid) (Lv 142)",
+        "map": "Noeliel Castle: Hall (100-120)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Noeliel the Ice Statue (raid) (Lv 132)",
+        "map": "Noeliel Castle: Hall (100-120)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Noeliel the Ice Statue (raid) (Lv 162)",
+        "map": "Noeliel Castle: Hall (80-100)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Noeliel the Ice Statue (raid) (Lv 142)",
+        "map": "Noeliel Castle: Hall (80-100)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Noeliel the Ice Statue (raid) (Lv 132)",
+        "map": "Noeliel Castle: Hall (80-100)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Noeliel the Ice Statue (raid) (Lv 122)",
+        "map": "Noeliel Castle: Hall (80-100)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Noeliel the Ice Statue (raid) (Lv 202)",
+        "map": "Noeliel Castle: Hall (120-140)",
+        "dye": ""
+      }
+    ]
+  },
+  "water_priest_robe_armor": {
+    "id": 212,
+    "key": "water_priest_robe_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 140,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_211_armor": {
+    "id": 211,
+    "key": "unknown_armor_211_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "heaven_feather_garb_armor": {
+    "id": 215,
+    "key": "heaven_feather_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 141,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "anniversary_festive_garb_armor": {
+    "id": 217,
+    "key": "anniversary_festive_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 150,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "blancanine_armor_armor": {
+    "id": 218,
+    "key": "blancanine_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stability",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 750,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stronger_against_neutral",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Blancanine the White Fang (Megiston 2019) (Lv 195)",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "dress_of_wish_armor": {
+    "id": 219,
+    "key": "dress_of_wish_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -40,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Felien (Megiston 2018) (Lv 170)",
+        "map": "Event",
+        "dye": "38 6 70"
+      }
+    ]
+  },
+  "mulgoon_robe_armor": {
+    "id": 220,
+    "key": "mulgoon_robe_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 15000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 80,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 40,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Mulgoon (Lv 261)",
+        "map": "Menabra Plains",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Mulgoon (Lv 271)",
+        "map": "Menabra Plains",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Mulgoon (Lv 281)",
+        "map": "Menabra Plains",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Mulgoon (Lv 291)",
+        "map": "Menabra Plains",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Mulgoon (Lv 311)",
+        "map": "Menabra Plains",
+        "dye": ""
+      }
+    ]
+  },
+  "satan_armor_armor": {
+    "id": 221,
+    "key": "satan_armor_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 3000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": -400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stability",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Hero Potum (9M DL) (Lv 140)",
+        "map": "Sofya City: Government Office",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Hero Potum (9M DL) (Lv 150)",
+        "map": "Sofya City: Government Office",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Hero Potum (9M DL) (Lv 160)",
+        "map": "Sofya City: Government Office",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Hero Potum (9M DL) (Lv 170)",
+        "map": "Sofya City: Government Office",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Hero Potum (9M DL) (Lv 190)",
+        "map": "Sofya City: Government Office",
+        "dye": ""
+      }
+    ]
+  },
+  "lovely_bunny_hoodie_armor": {
+    "id": 222,
+    "key": "lovely_bunny_hoodie_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 158,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 100,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_223_armor": {
+    "id": 223,
+    "key": "unknown_armor_223_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "sakura_kimono_v_armor": {
+    "id": 224,
+    "key": "sakura_kimono_v_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 160,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "revive_time",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      },
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "snowwear_armor": {
+    "id": 225,
+    "key": "snowwear_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 160,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 3000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Snowball Fight",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "bark_mail_armor": {
+    "id": 229,
+    "key": "bark_mail_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 166,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 2000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -40,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 4,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Kuzto (Megiston 2020) (Lv 190)",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "curious_dress_armor": {
+    "id": 230,
+    "key": "curious_dress_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 166,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 100,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Ancient Empress Mezzaluna (Hell) (Lv 180)",
+        "map": "Event",
+        "dye": "A 83 19"
+      }
+    ]
+  },
+  "shiny_viridian_garb_power_armor": {
+    "id": 231,
+    "key": "shiny_viridian_garb_power_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 171,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "agi",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 30,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Viridian Butterfly Treasure Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "shiny_viridian_garb_smart_armor": {
+    "id": 232,
+    "key": "shiny_viridian_garb_smart_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 171,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dex",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 30,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Viridian Butterfly Treasure Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "brigand_coat_armor": {
+    "id": 233,
+    "key": "brigand_coat_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 175,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "additional_melee",
+        "value": 100,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 900,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "khalyps_mail_armor": {
+    "id": 236,
+    "key": "khalyps_mail_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 180,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_235_armor": {
+    "id": 235,
+    "key": "unknown_armor_235_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "phantom_mail_armor": {
+    "id": 237,
+    "key": "phantom_mail_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 180,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": -30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 12,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "absolute_dodge",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [
+      {
+        "condition": {
+          "armor": "heavy"
+        },
+        "stat": {
+          "stat_key": "long_range_damage",
+          "value": 11,
+          "value_type": "percent"
+        }
+      },
+      {
+        "condition": {
+          "armor": "light"
+        },
+        "stat": {
+          "stat_key": "short_range_damage",
+          "value": 11,
+          "value_type": "percent"
+        }
+      }
+    ],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "demon_empress_garb_armor": {
+    "id": 240,
+    "key": "demon_empress_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 187,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "halloween_garb_iii_armor": {
+    "id": 241,
+    "key": "halloween_garb_iii_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 194,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 750,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [
+      {
+        "condition": {
+          "weapon": "arrow"
+        },
+        "stat": {
+          "stat_key": "long_range_damage",
+          "value": 1,
+          "value_type": "percent"
+        }
+      }
+    ],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Neewollah (Very Hard) (Lv 225)",
+        "map": "Manor of Surprises: Grand Hall",
+        "dye": ""
+      }
+    ]
+  },
+  "anniversary_festive_garb_ii_armor": {
+    "id": 243,
+    "key": "anniversary_festive_garb_ii_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "dragoon_mail_armor": {
+    "id": 274,
+    "key": "dragoon_mail_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 280,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 3000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": -100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "tuxedo_armor": {
+    "id": 245,
+    "key": "tuxedo_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 10000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 25,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": -25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "wedding_dress_armor": {
+    "id": 246,
+    "key": "wedding_dress_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 25,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": -25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "unknown_armor_247_armor": {
+    "id": 247,
+    "key": "unknown_armor_247_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "zega_onesie_armor": {
+    "id": 248,
+    "key": "zega_onesie_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Zega (Megiston 2020) (Lv 220)",
+        "map": "Event",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Zega (Megiston 2021) (Lv 240)",
+        "map": "Event",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Zega (Megiston 2022) (Lv 260)",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "maiden_armor": {
+    "id": 251,
+    "key": "maiden_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 208,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "party_costume_armor": {
+    "id": 252,
+    "key": "party_costume_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 215,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 800,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 24,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 16,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 4,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [
+      {
+        "effect": "tumble_unavailable"
+      }
+    ],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "maple_coat_armor": {
+    "id": 254,
+    "key": "maple_coat_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 231,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 30,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Patissia (Lv 225)",
+        "map": "Event",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Patissia (Lv 215)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Patissia (Lv 220)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Patissia (Lv 225)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Patissia (Lv 230)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      }
+    ]
+  },
+  "winter_outfit_armor": {
+    "id": 255,
+    "key": "winter_outfit_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 231,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "sakura_kimono_vi_armor": {
+    "id": 256,
+    "key": "sakura_kimono_vi_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 240,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 5000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [
+      {
+        "effect": "tumble_unavailable"
+      }
+    ],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "anniversary_festive_garb_iii_armor": {
+    "id": 258,
+    "key": "anniversary_festive_garb_iii_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 250,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_259_armor": {
+    "id": 259,
+    "key": "unknown_armor_259_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "scuba_ranger_suit_armor": {
+    "id": 260,
+    "key": "scuba_ranger_suit_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 4000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 40,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": -40,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_power",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_recharge",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 7,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Yuveria (Lv 175)",
+        "map": "Underwater Canyon: Depths",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Yuveria (Lv 185)",
+        "map": "Underwater Canyon: Depths",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Yuveria (Lv 195)",
+        "map": "Underwater Canyon: Depths",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Yuveria (Lv 205)",
+        "map": "Underwater Canyon: Depths",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Yuveria (Lv 225)",
+        "map": "Underwater Canyon: Depths",
+        "dye": ""
+      }
+    ]
+  },
+  "trickster_costume_armor": {
+    "id": 263,
+    "key": "trickster_costume_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 255,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "shiny_viridian_garb_armor": {
+    "id": 264,
+    "key": "shiny_viridian_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 256,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 1200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Viridian Butterfly Treasure Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "stellar_fighter_lra_armor": {
+    "id": 265,
+    "key": "stellar_fighter_lra_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 256,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 7500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 25,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [
+      {
+        "condition": {
+          "weapon": "arrow"
+        },
+        "stat": {
+          "stat_key": "aspd",
+          "value": 500,
+          "value_type": "flat"
+        }
+      }
+    ],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Mysterious Music Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "stellar_fighter_sra_armor": {
+    "id": 266,
+    "key": "stellar_fighter_sra_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 256,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 7500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 25,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Mysterious Music Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "valentine_s_day_apron_armor": {
+    "id": 267,
+    "key": "valentine_s_day_apron_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 263,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "agi",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 40,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stronger_against_neutral",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "winter_outfit_ii_armor": {
+    "id": 270,
+    "key": "winter_outfit_ii_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 270,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 9000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 900,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 40,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 9,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "weapon_atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": -30,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Corey (Lv 192)",
+        "map": "Tower of Clamor: Area 1 (190-194)",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gegner (Lv 250)",
+        "map": "Tower of Clamor: Rooftop",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gegner (Lv 270)",
+        "map": "Tower of Clamor: Rooftop",
+        "dye": ""
+      },
+      {
+        "source_type": "monster",
+        "name": "Gegner (Lv 400)",
+        "map": "Tower of Clamor: Rooftop",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_271_armor": {
+    "id": 271,
+    "key": "unknown_armor_271_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "legendary_raven_garb_armor": {
+    "id": 272,
+    "key": "legendary_raven_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 271,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 20,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [
+      {
+        "effect": "tumble_unavailable"
+      }
+    ],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Pedrio (Lv 265)",
+        "map": "High Difficulty Boss Battle Event Venue",
+        "dye": ""
+      }
+    ]
+  },
+  "ocean_explorer_armor": {
+    "id": 273,
+    "key": "ocean_explorer_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 279,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 4500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "stability",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -45,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Sea Ghost Wooden Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "laureate_outfit_armor": {
+    "id": 275,
+    "key": "laureate_outfit_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 280,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "agi",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -40,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 9,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Guard Golem (Megiston 2022) (Lv 250)",
+        "map": "Event",
+        "dye": ""
+      }
+    ]
+  },
+  "anniversary_festive_garb_iv_armor": {
+    "id": 277,
+    "key": "anniversary_festive_garb_iv_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "antique_mail_armor": {
+    "id": 278,
+    "key": "antique_mail_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 15,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Bangrudom (Coffee) (Lv 290)",
+        "map": "El Scaro: Back Alley",
+        "dye": ""
+      }
+    ]
+  },
+  "stellar_fighter_armor": {
+    "id": 279,
+    "key": "stellar_fighter_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 306,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 15000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 25,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Mysterious Music Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "fluffy_rabbit_garb_armor": {
+    "id": 280,
+    "key": "fluffy_rabbit_garb_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 324,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "str",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 1100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [
+      {
+        "condition": {
+          "armor": "heavy"
+        },
+        "stat": {
+          "stat_key": "physical_resistance",
+          "value": 25,
+          "value_type": "percent"
+        }
+      }
+    ],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "shiny_viridian_garb_robust_armor": {
+    "id": 281,
+    "key": "shiny_viridian_garb_robust_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 342,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "vit",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "mp",
+        "value": 600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 40,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 12,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "neutral_resistance",
+        "value": 40,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "monster",
+        "name": "Viridian Butterfly Treasure Box",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "panda_costume_armor": {
+    "id": 282,
+    "key": "panda_costume_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 345,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "hp",
+        "value": 5000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "exp_gain",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "npc",
+        "name": "Blacksmith : Zaldo",
+        "map": "Sofya City: Blacksmith",
+        "dye": ""
+      }
+    ]
+  },
+  "unknown_armor_283_armor": {
+    "id": 283,
+    "key": "unknown_armor_283_armor",
+    "type": "armor",
+    "stats": [],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  },
+  "anniversary_festive_garb_v_armor": {
+    "id": 285,
+    "key": "anniversary_festive_garb_v_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 350,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": [
+      {
+        "source_type": "player",
+        "name": "Smith Skill",
+        "map": "-",
+        "dye": ""
+      }
+    ]
+  },
+  "anniversary_festive_garb_vi_armor": {
+    "id": 286,
+    "key": "anniversary_festive_garb_vi_armor",
+    "type": "armor",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 400,
+        "value_type": "flat"
+      }
+    ],
+    "conditional_stats": [],
+    "meta_effects": [],
+    "obtained_from": []
+  }
+}

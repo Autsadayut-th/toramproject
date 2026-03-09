@@ -1,0 +1,17 @@
+{
+  "crysta_slot_rules": {
+
+    "no_duplicate_crysta_in_same_equipment": true,
+
+    "no_same_upgrade_group_in_same_equipment": true,
+
+    "check_scope": "same_equipment_only",
+
+    "description": [
+      "ห้ามใส่คริสต้าตัวเดียวกันในอุปกรณ์ชิ้นเดียวกัน",
+      "ห้ามใส่คริสต้าที่อยู่ในสายอัปเกรดเดียวกันในอุปกรณ์ชิ้นเดียวกัน",
+      "สามารถใส่คริสต้าเดียวกันได้หากอยู่คนละอุปกรณ์"
+    ]
+
+  }
+}

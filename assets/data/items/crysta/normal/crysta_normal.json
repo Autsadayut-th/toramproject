@@ -1,0 +1,5826 @@
+[
+  {
+    "id": 1,
+    "key": "cake_potum",
+    "display": {
+      "name": "Cake Potum",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [],
+    "upgrade": {
+      "from": "platinum_potum"
+    }
+  },
+  {
+    "id": 2,
+    "key": "colon_boss",
+    "display": {
+      "name": "Colon Boss",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -40,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [],
+    "upgrade": {
+      "from": "boss_goblin"
+    }
+  },
+  {
+    "id": 3,
+    "key": "vevela",
+    "display": {
+      "name": "Vevela",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "ailment_resistance",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_power",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_recharge",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [],
+    "upgrade": {
+      "from": "caspy"
+    }
+  },
+  {
+    "id": 4,
+    "key": "wild_beast_lixi",
+    "display": {
+      "name": "Wild Beast Lixi",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": -100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [],
+    "upgrade": {
+      "from": "rhinosaur"
+    }
+  },
+  {
+    "id": 5,
+    "key": "piscruva",
+    "display": {
+      "name": "Piscruva",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": -300,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [],
+    "upgrade": {
+      "from": "guard_golem"
+    }
+  },
+  {
+    "id": 6,
+    "key": "dex_8",
+    "display": {
+      "name": "DEX+8",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 8,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Flying Tentacle (Lv 254)",
+        "dye": "",
+        "map": "Latum Wetlands"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "key": "remnant_of_beyond",
+    "display": {
+      "name": "Remnant of Beyond",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "physical_pierce",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Bemoz (Lv 300)",
+        "dye": "",
+        "map": "Deusania's Lab Innermost Chambers"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "key": "hp_800",
+    "display": {
+      "name": "HP+800",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 800,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Brekz (Lv 241)",
+        "dye": "",
+        "map": "Pipeline Corridor"
+      },
+      {
+        "monster": "Brekz (Lv 239)",
+        "dye": "",
+        "map": "Pipeline Corridor"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "key": "wiltileaf",
+    "display": {
+      "name": "Wiltileaf",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 12,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": 0,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Wiltileaf (Lv 305)",
+        "dye": "",
+        "map": "Eumano Village Ruins: Area 2"
+      }
+    ],
+    "upgrade": {
+      "from": "ageladanios"
+    }
+  },
+  {
+    "id": 11,
+    "key": "vit_8",
+    "display": {
+      "name": "VIT+8",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [],
+    "obtained_from": [
+      {
+        "monster": "Delphi (Lv 246)",
+        "dye": "",
+        "map": "Menabra Plains"
+      },
+      {
+        "monster": "Delphi (Lv 244)",
+        "dye": "",
+        "map": "Menabra Plains"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "key": "cspd_160",
+    "display": {
+      "name": "CSPD+160",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 160,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Corroded Starfish (Lv 234)",
+        "dye": "",
+        "map": "Path to the Deep Sea"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "key": "mp_400",
+    "display": {
+      "name": "MP+400",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 400,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pterois (Lv 242)",
+        "dye": "",
+        "map": "Carretera Mar"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "key": "limacina",
+    "display": {
+      "name": "Limacina",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Limacina (Lv 290)",
+        "dye": "",
+        "map": "Deep Sea: Zone 2"
+      }
+    ],
+    "upgrade": {
+      "from": "seraph_machina"
+    }
+  },
+  {
+    "id": 15,
+    "key": "torexesa",
+    "display": {
+      "name": "Torexesa",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": -200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Torexesa (Lv 259)",
+        "dye": "",
+        "map": "Aquacity: Parliament Hall"
+      },
+      {
+        "monster": "Torexesa (Lv 279)",
+        "dye": "",
+        "map": "Aquacity: Parliament Hall"
+      },
+      {
+        "monster": "Torexesa (Lv 289)",
+        "dye": "",
+        "map": "Aquacity: Parliament Hall"
+      },
+      {
+        "monster": "Torexesa (Lv 309)",
+        "dye": "",
+        "map": "Aquacity: Parliament Hall"
+      }
+    ],
+    "upgrade": {
+      "from": "black_shadow"
+    }
+  },
+  {
+    "id": 16,
+    "key": "red_ash_dragon_rudis",
+    "display": {
+      "name": "Red Ash Dragon Rudis",
+      "color": "red"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": -300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -7,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 9,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Red Ash Dragon Rudis (Lv 259)",
+        "dye": "",
+        "map": "Espuma Dome: Entrance"
+      },
+      {
+        "monster": "Red Ash Dragon Rudis (Lv 269)",
+        "dye": "",
+        "map": "Espuma Dome: Entrance"
+      },
+      {
+        "monster": "Red Ash Dragon Rudis (Lv 279)",
+        "dye": "",
+        "map": "Espuma Dome: Entrance"
+      },
+      {
+        "monster": "Red Ash Dragon Rudis (Lv 299)",
+        "dye": "",
+        "map": "Espuma Dome: Entrance"
+      }
+    ],
+    "upgrade": {
+      "from": "gravicep"
+    }
+  },
+  {
+    "id": 17,
+    "key": "accuracy_16",
+    "display": {
+      "name": "Accuracy+16",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 16,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Alipipi (Lv 228)",
+        "dye": "",
+        "map": "Subma Cave"
+      },
+      {
+        "monster": "Alipipi (Lv 230)",
+        "dye": "",
+        "map": "Subma Cave"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "key": "kuffania",
+    "display": {
+      "name": "Kuffania",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "stability",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -12,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Kuffania (Lv 250)",
+        "dye": "",
+        "map": "Risus Valley: Area 2"
+      }
+    ],
+    "upgrade": {
+      "from": "mithurna_lynx"
+    }
+  },
+  {
+    "id": 20,
+    "key": "lilicarolla",
+    "display": {
+      "name": "Lilicarolla",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": -100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "katana_only_unsheathe_attack",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Lilicarolla (Lv 278)",
+        "dye": "",
+        "map": "Frozen Falls: Area 1"
+      }
+    ],
+    "upgrade": {
+      "from": "tappler"
+    }
+  },
+  {
+    "id": 21,
+    "key": "dodge_16",
+    "display": {
+      "name": "Dodge+16",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 16,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Wolfelar (Lv 224)",
+        "dye": "",
+        "map": "Algid Passage"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "key": "charugon",
+    "display": {
+      "name": "Charugon",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 6,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Charugon (Lv 275)",
+        "dye": "",
+        "map": "Boma Konda: Underground Area"
+      }
+    ],
+    "upgrade": {
+      "from": "flare_volg"
+    }
+  },
+  {
+    "id": 23,
+    "key": "aspd_160",
+    "display": {
+      "name": "ASPD+160",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 160,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Konetz (Lv 226)",
+        "dye": "",
+        "map": "Jabali Kubwa: Area 1"
+      },
+      {
+        "monster": "Konetz (Lv 227)",
+        "dye": "",
+        "map": "Jabali Kubwa: Area 2"
+      },
+      {
+        "monster": "Konetz (Lv 228)",
+        "dye": "",
+        "map": "Jabali Kubwa: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "key": "orictoceras",
+    "display": {
+      "name": "Orictoceras",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 9,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "reduce_dmg_player_epicenter",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_foe_epicenter",
+        "value": -3,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Orictoceras (Lv 272)",
+        "dye": "",
+        "map": "Kabla Jabali"
+      }
+    ],
+    "upgrade": {
+      "from": "fanadon"
+    }
+  },
+  {
+    "id": 25,
+    "key": "aspd_140",
+    "display": {
+      "name": "ASPD+140",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 140,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Caverant (Lv 215)",
+        "dye": "",
+        "map": "Tunnel of Trials"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "key": "illuminitor",
+    "display": {
+      "name": "Illuminitor",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": -25,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "additional_melee",
+        "value": 25,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "additional_magic",
+        "value": 25,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Illuminitor (Lv 250)",
+        "dye": "",
+        "map": "Illuminare City: Route 1 (210-230)"
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "key": "dex_7",
+    "display": {
+      "name": "DEX+7",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 7,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Octaray (Lv 210)",
+        "dye": "",
+        "map": "Stairway to Vital Point"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "key": "brassozard",
+    "display": {
+      "name": "Brassozard",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Brassozard (Lv 263)",
+        "dye": "",
+        "map": "Operation Zone: Climate Control Area"
+      }
+    ],
+    "upgrade": {
+      "from": "volotur"
+    }
+  },
+  {
+    "id": 29,
+    "key": "int_7",
+    "display": {
+      "name": "INT+7",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 7,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Wymax (Lv 207)",
+        "dye": "",
+        "map": "Freight Corridor"
+      },
+      {
+        "monster": "Wymax (Lv 211)",
+        "dye": "",
+        "map": "Freight Corridor"
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "key": "melancia",
+    "display": {
+      "name": "Melancia",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "stability",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Melancia (Lv 225)",
+        "dye": "",
+        "map": "Phasma Forest: Area 2"
+      }
+    ],
+    "upgrade": {
+      "from": "radibat"
+    }
+  },
+  {
+    "id": 32,
+    "key": "str_7",
+    "display": {
+      "name": "STR+7",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 7,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Megadon (Lv 214)",
+        "dye": "",
+        "map": "Boma Moja: Area 2"
+      },
+      {
+        "monster": "Megadon (Lv 215)",
+        "dye": "",
+        "map": "Boma Moja: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "key": "cspd_140",
+    "display": {
+      "name": "CSPD+140",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 140,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Mist Roar (Lv 206)",
+        "dye": "",
+        "map": "Nebula Plain"
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "key": "gigantic_octopus",
+    "display": {
+      "name": "Gigantic Octopus",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": -4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": -2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "reduce_dmg_bowling",
+        "value": -1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Gigantic Octopus (Lv 140)",
+        "dye": "",
+        "map": "Saltau's Beach: Beach House"
+      },
+      {
+        "monster": "Gigantic Octopus (Lv 150)",
+        "dye": "",
+        "map": "Saltau's Beach: Beach House"
+      },
+      {
+        "monster": "Gigantic Octopus (Lv 160)",
+        "dye": "",
+        "map": "Saltau's Beach: Beach House"
+      },
+      {
+        "monster": "Gigantic Octopus (Lv 170)",
+        "dye": "",
+        "map": "Saltau's Beach: Beach House"
+      },
+      {
+        "monster": "Gigantic Octopus (Lv 190)",
+        "dye": "",
+        "map": "Saltau's Beach: Beach House"
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "key": "guard_golem",
+    "display": {
+      "name": "Guard Golem",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -225,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": -225,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Guard Golem (Lv 222)",
+        "dye": "",
+        "map": "Weredragon's Throat"
+      },
+      {
+        "monster": "Guard Golem (Lv 232)",
+        "dye": "",
+        "map": "Weredragon's Throat"
+      },
+      {
+        "monster": "Guard Golem (Lv 242)",
+        "dye": "",
+        "map": "Weredragon's Throat"
+      },
+      {
+        "monster": "Guard Golem (Lv 252)",
+        "dye": "",
+        "map": "Weredragon's Throat"
+      },
+      {
+        "monster": "Guard Golem (Lv 272)",
+        "dye": "",
+        "map": "Weredragon's Throat"
+      },
+      {
+        "monster": "Guard Golem (Megiston 2022) (Lv 250)",
+        "dye": "",
+        "map": "Event"
+      }
+    ],
+    "upgrade": {
+      "from": "guignol"
+    }
+  },
+  {
+    "id": 36,
+    "key": "rampion",
+    "display": {
+      "name": "Rampion",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "stability",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": -1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Rampion (Lv 254)",
+        "dye": "",
+        "map": "Milcaska Falls: Army Base"
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "key": "mp_350",
+    "display": {
+      "name": "MP+350",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 350,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Cormorant (Lv 202)",
+        "dye": "",
+        "map": "Vulcani Underground Passage"
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "key": "agi_7",
+    "display": {
+      "name": "AGI+7",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 7,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Denden (Lv 193)",
+        "dye": "",
+        "map": "Vulcani Foothills"
+      },
+      {
+        "monster": "Denden (Lv 196)",
+        "dye": "",
+        "map": "Vulcani Foothills"
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "key": "blazingur",
+    "display": {
+      "name": "Blazingur",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Blazingur (Lv 245)",
+        "dye": "",
+        "map": "Divido Valley: Area 3"
+      }
+    ],
+    "upgrade": {
+      "from": "aranea"
+    }
+  },
+  {
+    "id": 40,
+    "key": "accuracy_14",
+    "display": {
+      "name": "Accuracy+14",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 14,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Booboo (Lv 189)",
+        "dye": "",
+        "map": "Flumen Plains"
+      },
+      {
+        "monster": "Booboo (Lv 192)",
+        "dye": "",
+        "map": "Flumen Plains"
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "key": "dodge_14",
+    "display": {
+      "name": "Dodge+14",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 14,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ostrich (Lv 188)",
+        "dye": "",
+        "map": "Eumano Glade"
+      },
+      {
+        "monster": "Ostrich (Lv 190)",
+        "dye": "",
+        "map": "Eumano Glade"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "key": "dutannen",
+    "display": {
+      "name": "Dutannen",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 6,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Dutannen (Weak) (Lv 179)",
+        "dye": "",
+        "map": "Noeliel Castle: B4F"
+      },
+      {
+        "monster": "Dutannen (Medium) (Lv 199)",
+        "dye": "",
+        "map": "Noeliel Castle: B4F"
+      },
+      {
+        "monster": "Dutannen (Strong) (Lv 219)",
+        "dye": "",
+        "map": "Noeliel Castle: B4F"
+      }
+    ],
+    "upgrade": {
+      "from": "shawle"
+    }
+  },
+  {
+    "id": 44,
+    "key": "bullamius",
+    "display": {
+      "name": "Bullamius",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Bullamius (Lv 239)",
+        "dye": "",
+        "map": "Storage Yard: Area 2"
+      }
+    ],
+    "upgrade": {
+      "from": "salamander"
+    }
+  },
+  {
+    "id": 45,
+    "key": "vit_7",
+    "display": {
+      "name": "VIT+7",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 7,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Arhinotops (Lv 181)",
+        "dye": "",
+        "map": "Movere Specula"
+      },
+      {
+        "monster": "Arhinotops (Lv 184)",
+        "dye": "",
+        "map": "Movere Specula"
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "key": "hp_700",
+    "display": {
+      "name": "HP+700",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 700,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Horsenex (Lv 170)",
+        "dye": "",
+        "map": "Underwater Canyon: Area 1"
+      },
+      {
+        "monster": "Horsenex (Lv 171)",
+        "dye": "",
+        "map": "Underwater Canyon: Area 2"
+      },
+      {
+        "monster": "Horsenex (Lv 172)",
+        "dye": "",
+        "map": "Underwater Canyon: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "key": "rhinosaur",
+    "display": {
+      "name": "Rhinosaur",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Rhinosaur (Lv 233)",
+        "dye": "",
+        "map": "Fugitive Lake Swamp: Area 3"
+      }
+    ],
+    "upgrade": {
+      "from": "minotaur"
+    }
+  },
+  {
+    "id": 48,
+    "key": "panchos_kita_makura",
+    "display": {
+      "name": "Panchos Kita Makura",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "exp_gain",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "†Dark Lord† (Lv 220)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "key": "black_shadow",
+    "display": {
+      "name": "Black Shadow",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": -150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Black Shadow (Lv 199)",
+        "dye": "",
+        "map": "Rokoko City Ruins"
+      },
+      {
+        "monster": "Black Shadow (Lv 209)",
+        "dye": "",
+        "map": "Rokoko City Ruins"
+      },
+      {
+        "monster": "Black Shadow (Lv 219)",
+        "dye": "",
+        "map": "Rokoko City Ruins"
+      },
+      {
+        "monster": "Black Shadow (Lv 239)",
+        "dye": "",
+        "map": "Rokoko City Ruins"
+      },
+      {
+        "monster": "Black Shadow (Megiston 2021) (Lv 210)",
+        "dye": "",
+        "map": "Event"
+      }
+    ],
+    "upgrade": {
+      "from": "tuscog"
+    }
+  },
+  {
+    "id": 50,
+    "key": "cspd_120",
+    "display": {
+      "name": "CSPD+120",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 120,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Boon (Lv 175)",
+        "dye": "",
+        "map": "Rokoko City Ruins"
+      },
+      {
+        "monster": "Boon (Lv 172)",
+        "dye": "",
+        "map": "Rokoko City Ruins"
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "key": "int_6",
+    "display": {
+      "name": "INT +6",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Arbonymon (Lv 170)",
+        "dye": "",
+        "map": "Celarra Plateau"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "key": "ageladanios",
+    "display": {
+      "name": "Ageladanios",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": -1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ageladanios (Lv 218)",
+        "dye": "",
+        "map": "Ducia Coast: Area 1"
+      }
+    ],
+    "upgrade": {
+      "from": "lyark_master_specialist"
+    }
+  },
+  {
+    "id": 53,
+    "key": "mp_300",
+    "display": {
+      "name": "MP+300",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pojo (Lv 165)",
+        "dye": "",
+        "map": "Inje Village"
+      },
+      {
+        "monster": "Pojo (Lv 168)",
+        "dye": "",
+        "map": "Inje Village"
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "key": "str_6",
+    "display": {
+      "name": "STR+6",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Flooray (Lv 162)",
+        "dye": "",
+        "map": "Lunagent Cliff Base"
+      },
+      {
+        "monster": "Flooray (Lv 165)",
+        "dye": "",
+        "map": "Lunagent Cliff Base"
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "key": "tappler",
+    "display": {
+      "name": "Tappler",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": -50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 12,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Tappler (Lv 218)",
+        "dye": "",
+        "map": "Ruins of Urban Elban"
+      }
+    ],
+    "upgrade": {
+      "from": "odelon_machina"
+    }
+  },
+  {
+    "id": 57,
+    "key": "agi_6",
+    "display": {
+      "name": "AGI+6",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Minimyu (Lv 164)",
+        "dye": "",
+        "map": "Inanis Wilderness"
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "key": "hp_600",
+    "display": {
+      "name": "HP+600",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 600,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Florroractus (Lv 171)",
+        "dye": "",
+        "map": "Morga Wasteland: Area 1"
+      },
+      {
+        "monster": "Florroractus (Lv 172)",
+        "dye": "",
+        "map": "Morga Wasteland: Area 2"
+      },
+      {
+        "monster": "Florroractus (Lv 173)",
+        "dye": "",
+        "map": "Morga Wasteland: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "key": "gravicep",
+    "display": {
+      "name": "Gravicep",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": -100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 7,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Gravicep (Lv 184)",
+        "dye": "",
+        "map": "Recetacula Sector: Depot Rooftop"
+      },
+      {
+        "monster": "Gravicep (Lv 194)",
+        "dye": "",
+        "map": "Recetacula Sector: Depot Rooftop"
+      },
+      {
+        "monster": "Gravicep (Lv 204)",
+        "dye": "",
+        "map": "Recetacula Sector: Depot Rooftop"
+      },
+      {
+        "monster": "Gravicep (Lv 224)",
+        "dye": "",
+        "map": "Recetacula Sector: Depot Rooftop"
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "key": "vit_6",
+    "display": {
+      "name": "VIT+6",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Orustica (Lv 157)",
+        "dye": "",
+        "map": "Pupalov Sector"
+      },
+      {
+        "monster": "Orustica (Lv 159)",
+        "dye": "",
+        "map": "Pupalov Sector"
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "key": "dodge_12",
+    "display": {
+      "name": "Dodge+12",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 12,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Baloot (Lv 157)",
+        "dye": "",
+        "map": "Dikkit Sector"
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "key": "aspd_120",
+    "display": {
+      "name": "ASPD+120",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 120,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Mossy Mousey (Lv 151)",
+        "dye": "",
+        "map": "Altoale Sector"
+      },
+      {
+        "monster": "Mossy Mousey (Lv 154)",
+        "dye": "",
+        "map": "Altoale Sector"
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "key": "shawle",
+    "display": {
+      "name": "Shawle",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Shawle (Lv 130)",
+        "dye": "",
+        "map": "Joulu House: Hall (Lv 110)"
+      },
+      {
+        "monster": "Shawle (Lv 150)",
+        "dye": "",
+        "map": "Joulu House: Hall (Lv130)"
+      },
+      {
+        "monster": "Shawle (Lv 170)",
+        "dye": "",
+        "map": "Joulu House: Hall (Lv 150)"
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "key": "nuthoreth",
+    "display": {
+      "name": "Nuthoreth",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 150,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Nuthoreth (Lv 190)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Nuthoreth (Lv 200)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Nuthoreth (Lv 210)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Nuthoreth (Lv 230)",
+        "dye": "",
+        "map": "Event"
+      }
+    ],
+    "upgrade": {
+      "from": "nurethoth"
+    }
+  },
+  {
+    "id": 65,
+    "key": "radibat",
+    "display": {
+      "name": "Radibat",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "stability",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 4,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Radibat (Lv 200)",
+        "dye": "",
+        "map": "Zarth's Mansion: Study"
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "key": "gerumi",
+    "display": {
+      "name": "Gerumi",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Gerumi (Lv 180)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Gerumi (Lv 140)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Gerumi (Lv 100)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Gerumi (Lv 60)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Gerumi (Lv 20)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "key": "dex_6",
+    "display": {
+      "name": "Dex+6",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Moss Mole (Lv 146)",
+        "dye": "",
+        "map": "Forest of Ein"
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "key": "tuscog",
+    "display": {
+      "name": "Tuscog",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": -100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Tuscog (Lv 169)",
+        "dye": "",
+        "map": "Eryldan Street: Near the Forest of Ein"
+      },
+      {
+        "monster": "Tuscog (Lv 179)",
+        "dye": "",
+        "map": "Eryldan Street: Near the Forest of Ein"
+      },
+      {
+        "monster": "Tuscog (Lv 189)",
+        "dye": "",
+        "map": "Eryldan Street: Near the Forest of Ein"
+      },
+      {
+        "monster": "Tuscog (Lv 209)",
+        "dye": "",
+        "map": "Eryldan Street: Near the Forest of Ein"
+      },
+      {
+        "monster": "Tuscog (Megiston 2021) (Lv 200)",
+        "dye": "",
+        "map": "Event"
+      }
+    ],
+    "upgrade": {
+      "from": "york"
+    }
+  },
+  {
+    "id": 70,
+    "key": "accuracy_12",
+    "display": {
+      "name": "Accuracy+12",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 12,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Tulin (Lv 141)",
+        "dye": "",
+        "map": "Wazeero Street"
+      },
+      {
+        "monster": "Tulin (Lv 144)",
+        "dye": "",
+        "map": "Wazeero Street"
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "key": "critical_rate_5",
+    "display": {
+      "name": "Critical Rate +5",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Baby Finstern (Lv 153)",
+        "dye": "",
+        "map": "Dark Dragon Shrine: Middle"
+      },
+      {
+        "monster": "Baby Finstern (Lv 154)",
+        "dye": "",
+        "map": "Dark Dragon Shrine: Upper"
+      },
+      {
+        "monster": "Thief Rat (Lv 122)",
+        "dye": "",
+        "map": "Phantom Wisp's Hideout"
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "key": "str_5",
+    "display": {
+      "name": "STR+5",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Billy (Lv 136)",
+        "dye": "",
+        "map": "Garden of Ice & Snow"
+      },
+      {
+        "monster": "Billy (Lv 139)",
+        "dye": "",
+        "map": "Garden of Ice & Snow"
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "key": "carbuncle",
+    "display": {
+      "name": "Carbuncle",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reflect",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Carbuncle (Lv 183)",
+        "dye": "",
+        "map": "Hall of Construction Gods"
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "key": "vit_5",
+    "display": {
+      "name": "VIT+5",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Berylfree (Lv 133)",
+        "dye": "",
+        "map": "Barbaros Corridor"
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "key": "mithurna_lynx",
+    "display": {
+      "name": "Mithurna Lynx",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "stability",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -9,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Mithurna Lynx (Lv 177)",
+        "dye": "",
+        "map": "Ruins of Mt. Mithurna: Stylobate"
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "key": "hp_500",
+    "display": {
+      "name": "HP+500",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Tenoblepas (Lv 125)",
+        "dye": "",
+        "map": "Mt. Mithurna: Entrance"
+      },
+      {
+        "monster": "Tenoblepas (Lv 126)",
+        "dye": "",
+        "map": "Rokoko Plains"
+      },
+      {
+        "monster": "Tenoblepas (Lv 130)",
+        "dye": "",
+        "map": "Rokoko Plains"
+      },
+      {
+        "monster": "Carotabat (Lv 159)",
+        "dye": "",
+        "map": "Zarth's Mansion: Study"
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "key": "yashiro_azuki",
+    "display": {
+      "name": "Yashiro Azuki",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "exp_gain",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Yashiro Azuki (Lv30) (Lv 20)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki (Lv150) (Lv 170)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki (Lv150) (Lv 160)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki (Lv150) (Lv 150)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki (Lv150) (Lv 140)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki (Lv60) (Lv 130)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki (Lv60) (Lv 110)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki (Lv60) (Lv 100)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki (Lv60) (Lv 90)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki (Lv60) (Lv 80)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki (Lv30) (Lv 70)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki (Lv30) (Lv 50)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki (Lv30) (Lv 40)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki (Lv30) (Lv 30)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki (Lv150) (Lv 190)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "key": "fanadon",
+    "display": {
+      "name": "Fanadon",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "reduce_dmg_player_epicenter",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_foe_epicenter",
+        "value": -3,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Fanadon (Lv 171)",
+        "dye": "",
+        "map": "Curonne Forest: North Area 2"
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "key": "int_5",
+    "display": {
+      "name": "INT+5",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Fanalizard (Lv 120)",
+        "dye": "",
+        "map": "Curonne Forest: East"
+      },
+      {
+        "monster": "Fanalizard (Lv 123)",
+        "dye": "",
+        "map": "Curonne Forest: East"
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "key": "dex_5",
+    "display": {
+      "name": "DEX+5",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Lanbat (Lv 121)",
+        "dye": "",
+        "map": "Tolbas GrassLand"
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "key": "seraph_machina",
+    "display": {
+      "name": "Seraph Machina",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Seraph Machina (Lv 167)",
+        "dye": "",
+        "map": "Buried Tower: Inside"
+      }
+    ],
+    "upgrade": {
+      "from": "big_coryn"
+    }
+  },
+  {
+    "id": 83,
+    "key": "amoeba_machina",
+    "display": {
+      "name": "Amoeba Machina",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 4,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Amoeba Machina (Lv 158)",
+        "dye": "",
+        "map": "Ultimea Sewer: Southeast"
+      }
+    ],
+    "upgrade": {
+      "from": "crimsosch"
+    }
+  },
+  {
+    "id": 84,
+    "key": "aspd_100",
+    "display": {
+      "name": "ASPD+100",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Copia Cat (Lv 116)",
+        "dye": "",
+        "map": "Copia Reservoir"
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "key": "p_avatar",
+    "display": {
+      "name": "P. Avatar",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "fire_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "water_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "wind_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "earth_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "dark_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "exp_gain",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "P. Avatar (Lv 800)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "P. Avatar (2021) (Lv 400)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "P. Avatar (2022) (Lv 400)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "P. Avatar (2023) (Lv 400)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "key": "volotur",
+    "display": {
+      "name": "Volotur",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Volotur (Lv 160)",
+        "dye": "",
+        "map": "Suburb of Droma Square: Area 3"
+      }
+    ],
+    "upgrade": {
+      "from": "gigant_knight"
+    }
+  },
+  {
+    "id": 87,
+    "key": "dodge_10",
+    "display": {
+      "name": "Dodge+10",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Petarma (Lv 115)",
+        "dye": "",
+        "map": "Ultimea City: Roof"
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "key": "lyark_master_specialist",
+    "display": {
+      "name": "Lyark Master Specialist",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": -2,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Lyark Master Specialist (Lv 157)",
+        "dye": "",
+        "map": "Brahe Laboratory: 2nd Building"
+      }
+    ],
+    "upgrade": {
+      "from": "metal_stinger"
+    }
+  },
+  {
+    "id": 89,
+    "key": "cspd_100",
+    "display": {
+      "name": "CSPD+100",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Venomsch (Lv 112)",
+        "dye": "",
+        "map": "Ultimea Sewer: South"
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "key": "guignol",
+    "display": {
+      "name": "Guignol",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -175,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": -175,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Guignol (Lv 133)",
+        "dye": "",
+        "map": "Brahe Laboratory: 4th Building"
+      },
+      {
+        "monster": "Guignol (Lv 143)",
+        "dye": "",
+        "map": "Brahe Laboratory: 4th Building"
+      },
+      {
+        "monster": "Guignol (Lv 153)",
+        "dye": "",
+        "map": "Brahe Laboratory: 4th Building"
+      },
+      {
+        "monster": "Guignol (Lv 173)",
+        "dye": "",
+        "map": "Brahe Laboratory: 4th Building"
+      },
+      {
+        "monster": "Guignol (Megiston 2018) (Lv 150)",
+        "dye": "",
+        "map": "Event"
+      }
+    ],
+    "upgrade": {
+      "from": "nurethoth"
+    }
+  },
+  {
+    "id": 92,
+    "key": "accuracy_10",
+    "display": {
+      "name": "Accuracy+10",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Bio Launcher (Lv 117)",
+        "dye": "",
+        "map": "Brahe Laboratory: 1st Building"
+      },
+      {
+        "monster": "Bio Launcher (Lv 120)",
+        "dye": "",
+        "map": "Brahe Laboratory: 2nd Building"
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "key": "agi_5",
+    "display": {
+      "name": "AGI+5",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 5,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Energy Quartz (Lv 106)",
+        "dye": "",
+        "map": "Ultimea Sewer: East"
+      },
+      {
+        "monster": "Energy Quartz (Lv 108)",
+        "dye": "",
+        "map": "Ultimea Sewer: East"
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "key": "dodge_8",
+    "display": {
+      "name": "Dodge+8",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 8,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Tigris Machina (Lv 105)",
+        "dye": "",
+        "map": "Lufenas Mansion: Garden"
+      },
+      {
+        "monster": "Tigris Machina (Lv 104)",
+        "dye": "",
+        "map": "Lufenas Mansion: Garden"
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "key": "dex_4",
+    "display": {
+      "name": "DEX+4",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Lyark Vanguard (Lv 103)",
+        "dye": "",
+        "map": "Lufenas Mansion: Garden"
+      },
+      {
+        "monster": "Lyark Vanguard (Lv 106)",
+        "dye": "",
+        "map": "Lufenas Mansion: Garden"
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "key": "critical_rate_4",
+    "display": {
+      "name": "Critical Rate +4",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Nepenthe (Lv 113)",
+        "dye": "",
+        "map": "Monster's Forest: Foggy Way"
+      },
+      {
+        "monster": "Nepenthe (Lv 114)",
+        "dye": "",
+        "map": "Monster's Forest: Animal Trail"
+      },
+      {
+        "monster": "Nepenthe (Lv 114)",
+        "dye": "",
+        "map": "Monster's Forest: Deep Part"
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "key": "odelon_machina",
+    "display": {
+      "name": "Odelon Machina",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Odelon Machina (Lv 146)",
+        "dye": "",
+        "map": "Large Demi Machina Factory: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "key": "mp_250",
+    "display": {
+      "name": "MP+250",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 250,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Chill Puffer (Lv 109)",
+        "dye": "",
+        "map": "Navida City: Crossroad (100-120)"
+      },
+      {
+        "monster": "Chill Puffer (Lv 110)",
+        "dye": "",
+        "map": "Navida City: East (100-120)"
+      },
+      {
+        "monster": "Toy Bolg (Lv 122)",
+        "dye": "",
+        "map": "Cuervo Jail: 2nd Floor"
+      },
+      {
+        "monster": "Toy Bolg (Lv 123)",
+        "dye": "",
+        "map": "Cuervo Jail: 3rd Floor"
+      },
+      {
+        "monster": "Spooky Bat (Lv 160)",
+        "dye": "",
+        "map": "Zarth's Mansion: Study"
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "key": "mp_200",
+    "display": {
+      "name": "MP+200",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Coffee Jelly (Lv 96)",
+        "dye": "",
+        "map": "Sykea Deep Valley"
+      },
+      {
+        "monster": "Grecion (Lv 89)",
+        "dye": "",
+        "map": "Navida City: Crossroad (80-100)"
+      },
+      {
+        "monster": "Grecion (Lv 91)",
+        "dye": "",
+        "map": "Navida City: West (80-100)"
+      },
+      {
+        "monster": "Spooky Bat (Lv 132)",
+        "dye": "",
+        "map": "Zarth's Mansion: Parlor"
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "key": "int_4",
+    "display": {
+      "name": "INT+4",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Petally (Lv 94)",
+        "dye": "",
+        "map": "Peligro Landfill"
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "key": "aspd_80",
+    "display": {
+      "name": "ASPD+80",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 80,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Plant Machina (Lv 93)",
+        "dye": "",
+        "map": "Peligro Landfill"
+      },
+      {
+        "monster": "Plant Machina (Lv 95)",
+        "dye": "",
+        "map": "Peligro Landfill"
+      },
+      {
+        "monster": "Plant Machina (Lv 97)",
+        "dye": "",
+        "map": "Peligro Landfill"
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "key": "york",
+    "display": {
+      "name": "York",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": -75,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "York (Lv 118)",
+        "dye": "",
+        "map": "Huge Crysta Factory: Storage"
+      },
+      {
+        "monster": "York (Lv 128)",
+        "dye": "",
+        "map": "Huge Crysta Factory: Storage"
+      },
+      {
+        "monster": "York (Lv 138)",
+        "dye": "",
+        "map": "Huge Crysta Factory: Storage"
+      },
+      {
+        "monster": "York (Lv 158)",
+        "dye": "",
+        "map": "Huge Crysta Factory: Storage"
+      },
+      {
+        "monster": "York (Megiston 2017) (Lv 150)",
+        "dye": "",
+        "map": "Event"
+      }
+    ],
+    "upgrade": {
+      "from": "brutal_dragon_decel"
+    }
+  },
+  {
+    "id": 104,
+    "key": "agi_4",
+    "display": {
+      "name": "AGI+4",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Floral Bee (Lv 91)",
+        "dye": "",
+        "map": "Site of Simcracker"
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "key": "platinum_potum",
+    "display": {
+      "name": "Platinum Potum",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Platinum Potum (Normal) (6M DL) (Lv 100)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Platinum Potum (6M DL) (Lv 107)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Platinum Potum (6M DL) (Lv 120)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Platinum Potum (6M DL) (Lv 140)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Platinum Potum (7M DL) (Lv 150)",
+        "dye": "",
+        "map": "Event"
+      }
+    ],
+    "upgrade": {
+      "from": "king_potum"
+    }
+  },
+  {
+    "id": 106,
+    "key": "vit_4",
+    "display": {
+      "name": "VIT+4",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Slum Potum (Lv 89)",
+        "dye": "",
+        "map": "Klaspe Slum"
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "key": "salamander",
+    "display": {
+      "name": "Salamander",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Salamander (Lv 132)",
+        "dye": "",
+        "map": "Blazing Graben: Upper"
+      }
+    ],
+    "upgrade": {
+      "from": "gespenst"
+    }
+  },
+  {
+    "id": 108,
+    "key": "hp_400",
+    "display": {
+      "name": "HP+400",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 400,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Greg (Lv 84)",
+        "dye": "",
+        "map": "Artillery Defense Line"
+      },
+      {
+        "monster": "Carotabat (Lv 131)",
+        "dye": "",
+        "map": "Zarth's Mansion: Parlor"
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "key": "cspd_80",
+    "display": {
+      "name": "CSPD+80",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 80,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Evil Dark Book (Lv 92)",
+        "dye": "",
+        "map": "Dark Manor: Area 1"
+      },
+      {
+        "monster": "Evil Dark Book (Lv 90)",
+        "dye": "",
+        "map": "Dark Manor: Area 2"
+      },
+      {
+        "monster": "Evil Dark Book (Lv 92)",
+        "dye": "",
+        "map": "Dark Manor: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "key": "super_night_mushroom",
+    "display": {
+      "name": "Super Night Mushroom",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Super Night Mushroom (Hanami 2017) (Lv 60)",
+        "dye": "",
+        "map": "Hanami Venue: Summit"
+      },
+      {
+        "monster": "Super Night Mushroom (Hanami 2017) (Lv 80)",
+        "dye": "",
+        "map": "Hanami Venue: Summit"
+      },
+      {
+        "monster": "Super Night Mushroom (Hanami 2017) (Lv 100)",
+        "dye": "",
+        "map": "Hanami Venue: Summit"
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "key": "str_4",
+    "display": {
+      "name": "STR+4",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pecora (Lv 90)",
+        "dye": "",
+        "map": "Cradle of Soldier: Entrance"
+      },
+      {
+        "monster": "Pecora (Lv 87)",
+        "dye": "",
+        "map": "Cradle of Soldier: Entrance"
+      },
+      {
+        "monster": "Pecora (Lv 90)",
+        "dye": "",
+        "map": "Cradle of Soldier: Inside"
+      }
+    ]
+  },
+  {
+    "id": 112,
+    "key": "aranea",
+    "display": {
+      "name": "Aranea",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Aranea (Lv 100)",
+        "dye": "",
+        "map": "Garden of Sublimation: Central Part"
+      },
+      {
+        "monster": "Aranea (Lv 110)",
+        "dye": "",
+        "map": "Garden of Sublimation: Central Part"
+      },
+      {
+        "monster": "Aranea (Lv 120)",
+        "dye": "",
+        "map": "Garden of Sublimation: Central Part"
+      },
+      {
+        "monster": "Aranea (Lv 140)",
+        "dye": "",
+        "map": "Garden of Sublimation: Central Part"
+      }
+    ]
+  },
+  {
+    "id": 113,
+    "key": "accuracy_8",
+    "display": {
+      "name": "Accuracy+8",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 8,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Shiny Roar (Lv 86)",
+        "dye": "",
+        "map": "Garden of Sublimation: Area 1"
+      },
+      {
+        "monster": "Shiny Roar (Lv 86)",
+        "dye": "",
+        "map": "Garden of Sublimation: Area 2"
+      },
+      {
+        "monster": "Shiny Roar (Lv 86)",
+        "dye": "",
+        "map": "Garden of Sublimation: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 114,
+    "key": "aspd_60",
+    "display": {
+      "name": "ASPD+60",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 60,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ghost Potum (Lv 70)",
+        "dye": "",
+        "map": "Garden of Beginning"
+      }
+    ]
+  },
+  {
+    "id": 116,
+    "key": "agi_3",
+    "display": {
+      "name": "AGI+3",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Paratized Dog (Lv 69)",
+        "dye": "",
+        "map": "Dark Wasteland"
+      }
+    ]
+  },
+  {
+    "id": 117,
+    "key": "inzanio",
+    "display": {
+      "name": "Inzanio",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "guard_recharge",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": -1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "weapon_atk",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Inzanio the Dark Knight (Xmas Event 2016) (Lv 94)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      },
+      {
+        "monster": "Inzanio the Dark Knight (Lv 84)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      },
+      {
+        "monster": "Inzanio the Dark Knight (Lv 114)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      },
+      {
+        "monster": "Inzanio the Dark Knight (Lv 134)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      },
+      {
+        "monster": "Inzanio the Dark Knight (Lv 94)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      }
+    ]
+  },
+  {
+    "id": 118,
+    "key": "hp_300",
+    "display": {
+      "name": "HP+300",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pawn (Lv 78)",
+        "dye": "",
+        "map": "Fort Solfini: Wall"
+      },
+      {
+        "monster": "Pawn (Lv 82)",
+        "dye": "",
+        "map": "Fort Solfini: Outside"
+      },
+      {
+        "monster": "Pawn (Lv 82)",
+        "dye": "",
+        "map": "Fort Solfini: Inside"
+      },
+      {
+        "monster": "Carotabat (Lv 106)",
+        "dye": "",
+        "map": "Zarth's Mansion: Entrance"
+      }
+    ]
+  },
+  {
+    "id": 119,
+    "key": "critical_rate_3",
+    "display": {
+      "name": "Critical Rate+3",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Phobos (Lv 65)",
+        "dye": "",
+        "map": "Calle mort"
+      }
+    ]
+  },
+  {
+    "id": 120,
+    "key": "int_3",
+    "display": {
+      "name": "INT+3",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Shell Mask (Lv 73)",
+        "dye": "",
+        "map": "Abyss of No Return: Area 1"
+      },
+      {
+        "monster": "Shell Mask (Lv 75)",
+        "dye": "",
+        "map": "Abyss of No Return: Area 2"
+      },
+      {
+        "monster": "Shell Mask (Lv 76)",
+        "dye": "",
+        "map": "Abyss of No Return: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 121,
+    "key": "dex_3",
+    "display": {
+      "name": "DEX+3",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ropple (Lv 61)",
+        "dye": "",
+        "map": "Dunkel Valley"
+      }
+    ]
+  },
+  {
+    "id": 122,
+    "key": "cspd_60",
+    "display": {
+      "name": "CSPD+60",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 60,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Verdesch (Lv 68)",
+        "dye": "",
+        "map": "Teaus Hill: Marshland"
+      }
+    ]
+  },
+  {
+    "id": 123,
+    "key": "scrader",
+    "display": {
+      "name": "Scrader",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "natural_mp_regen",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxhp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Scrader (Lv 85)",
+        "dye": "",
+        "map": "Magic Waste Site: Deepest Part"
+      },
+      {
+        "monster": "Scrader (Lv 95)",
+        "dye": "",
+        "map": "Magic Waste Site: Deepest Part"
+      },
+      {
+        "monster": "Scrader (Lv 105)",
+        "dye": "",
+        "map": "Magic Waste Site: Deepest Part"
+      },
+      {
+        "monster": "Scrader (Lv 125)",
+        "dye": "",
+        "map": "Magic Waste Site: Deepest Part"
+      }
+    ]
+  },
+  {
+    "id": 124,
+    "key": "mp_150",
+    "display": {
+      "name": "MP+150",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 150,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Tulin (Lv 55)",
+        "dye": "",
+        "map": "Wanderer's Plain"
+      },
+      {
+        "monster": "Colton (Lv 70)",
+        "dye": "",
+        "map": "Navida City: Crossroad (60-80)"
+      },
+      {
+        "monster": "Colton (Lv 70)",
+        "dye": "",
+        "map": "Navida City: West  (60-80)"
+      },
+      {
+        "monster": "Spooky Bat (Lv 104)",
+        "dye": "",
+        "map": "Zarth's Mansion: Entrance"
+      }
+    ]
+  },
+  {
+    "id": 125,
+    "key": "str_3",
+    "display": {
+      "name": "STR+3",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Greg (Lv 58)",
+        "dye": "",
+        "map": "Wanderer's Plain"
+      }
+    ]
+  },
+  {
+    "id": 126,
+    "key": "metal_stinger",
+    "display": {
+      "name": "Metal Stinger",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "motion_speed",
+        "value": -1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Metal Stinger (Lv 82)",
+        "dye": "",
+        "map": "Akaku Desert: Area 1"
+      },
+      {
+        "monster": "Metal Stinger (Lv 82)",
+        "dye": "",
+        "map": "Akaku Desert: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 128,
+    "key": "megiston",
+    "display": {
+      "name": "Megiston",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "int",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "vit",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "agi",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dex",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "maxhp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 50,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Zega (Lv 100)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Zega (Lv 150)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 129,
+    "key": "dodge_6",
+    "display": {
+      "name": "Dodge+6",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Rodentail (Lv 52)",
+        "dye": "",
+        "map": "Maia Diela"
+      },
+      {
+        "monster": "Rodentail (Lv 55)",
+        "dye": "",
+        "map": "Maia Diela"
+      }
+    ]
+  },
+  {
+    "id": 130,
+    "key": "nurethoth",
+    "display": {
+      "name": "Nurethoth",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": -150,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Nurethoth (Lv 76)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      },
+      {
+        "monster": "Nurethoth (Lv 86)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      },
+      {
+        "monster": "Nurethoth (Lv 96)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      },
+      {
+        "monster": "Nurethoth (Lv 116)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      }
+    ]
+  },
+  {
+    "id": 131,
+    "key": "vit_3",
+    "display": {
+      "name": "VIT+3",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Colon Zombie (Lv 57)",
+        "dye": "",
+        "map": "Vyshed the Tainted Land: Area 1"
+      },
+      {
+        "monster": "Colon Zombie (Lv 59)",
+        "dye": "",
+        "map": "Vyshed the Tainted Land: Area 1"
+      },
+      {
+        "monster": "Colon Zombie (Lv 59)",
+        "dye": "",
+        "map": "Vyshed the Tainted Land: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 132,
+    "key": "hp_200",
+    "display": {
+      "name": "HP+200",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 200,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Basalt (Lv 49)",
+        "dye": "",
+        "map": "Fabizo Boundary"
+      }
+    ]
+  },
+  {
+    "id": 133,
+    "key": "b_b_goblin",
+    "display": {
+      "name": "B.B. Goblin",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "B.B. Goblin (Lv 70)",
+        "dye": "",
+        "map": "Rinom Plains"
+      },
+      {
+        "monster": "B.B. Goblin (Megiston 2016) (Lv 80)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "B.B. Goblin (Lv 80)",
+        "dye": "",
+        "map": "Rinom Plains"
+      },
+      {
+        "monster": "B.B. Goblin (Lv 90)",
+        "dye": "",
+        "map": "Rinom Plains"
+      },
+      {
+        "monster": "B.B. Goblin (Lv 110)",
+        "dye": "",
+        "map": "Rinom Plains"
+      }
+    ]
+  },
+  {
+    "id": 134,
+    "key": "masked_warrior",
+    "display": {
+      "name": "Masked Warrior",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": -3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Masked Warrior (Lv 67)",
+        "dye": "",
+        "map": "Land Under Cultivation: Hill"
+      },
+      {
+        "monster": "Masked Warrior (Lv 77)",
+        "dye": "",
+        "map": "Land Under Cultivation: Hill"
+      },
+      {
+        "monster": "Masked Warrior (Lv 87)",
+        "dye": "",
+        "map": "Land Under Cultivation: Hill"
+      },
+      {
+        "monster": "Masked Warrior (Lv 107)",
+        "dye": "",
+        "map": "Land Under Cultivation: Hill"
+      }
+    ]
+  },
+  {
+    "id": 135,
+    "key": "int_2",
+    "display": {
+      "name": "INT+2",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pojo (Lv 51)",
+        "dye": "",
+        "map": "Land Under Cultivation: Area 1"
+      },
+      {
+        "monster": "Pojo (Lv 53)",
+        "dye": "",
+        "map": "Land Under Cultivation: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 136,
+    "key": "accuracy_4",
+    "display": {
+      "name": "Accuracy+4",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Floral Bee (Lv 40)",
+        "dye": "",
+        "map": "Figo's Manor"
+      },
+      {
+        "monster": "Floral Bee (Lv 41)",
+        "dye": "",
+        "map": "Figo's Manor"
+      }
+    ]
+  },
+  {
+    "id": 137,
+    "key": "caspy",
+    "display": {
+      "name": "Caspy",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "ailment_resistance",
+        "value": -6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_power",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_recharge",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Caspy (Lv 77)",
+        "dye": "",
+        "map": "Ancient Empress Tomb: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 138,
+    "key": "vit_2",
+    "display": {
+      "name": "VIT+2",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Stone (Lv 31)",
+        "dye": "",
+        "map": "Zoktzda Ruins : Abnormal Space"
+      },
+      {
+        "monster": "Stone (Lv 33)",
+        "dye": "",
+        "map": "Zoktzda Ruins : Abnormal Space"
+      }
+    ]
+  },
+  {
+    "id": 140,
+    "key": "str_2",
+    "display": {
+      "name": "STR+2",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Skeleton (Lv 30)",
+        "dye": "",
+        "map": "Zoktzda Ruins"
+      }
+    ]
+  },
+  {
+    "id": 141,
+    "key": "str_1",
+    "display": {
+      "name": "STR+1",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Beak (Lv 11)",
+        "dye": "",
+        "map": "Ruined Temple Town"
+      },
+      {
+        "monster": "Beak (Lv 12)",
+        "dye": "",
+        "map": "Ruined Temple Town"
+      },
+      {
+        "monster": "Beak (Lv 18)",
+        "dye": "",
+        "map": "Ruined Temple: Area 1"
+      },
+      {
+        "monster": "Beak (Lv 19)",
+        "dye": "",
+        "map": "Ruined Temple: Area 1"
+      }
+    ]
+  },
+  {
+    "id": 142,
+    "key": "silver_roar",
+    "display": {
+      "name": "Silver Roar",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": -8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Silver Roar (Lv 42)",
+        "dye": "",
+        "map": "Debakcy Channel: B1"
+      }
+    ]
+  },
+  {
+    "id": 143,
+    "key": "ruin_golem",
+    "display": {
+      "name": "Ruin Golem",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mdef",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ruin Golem (Lv 45)",
+        "dye": "",
+        "map": "Zoktzda ruins : Reversed Hall"
+      },
+      {
+        "monster": "Ruin Golem (Lv 55)",
+        "dye": "",
+        "map": "Zoktzda ruins : Reversed Hall"
+      },
+      {
+        "monster": "Ruin Golem (Lv 65)",
+        "dye": "",
+        "map": "Zoktzda ruins : Reversed Hall"
+      },
+      {
+        "monster": "Ruin Golem (Lv 85)",
+        "dye": "",
+        "map": "Zoktzda ruins : Reversed Hall"
+      }
+    ]
+  },
+  {
+    "id": 144,
+    "key": "mp_50",
+    "display": {
+      "name": "MP+50",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 50,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Raffy (Lv 9)",
+        "dye": "",
+        "map": "Ruined Temple Town"
+      },
+      {
+        "monster": "Raffy (Lv 10)",
+        "dye": "",
+        "map": "Suedor Cliff"
+      },
+      {
+        "monster": "Raffy (Lv 3)",
+        "dye": "",
+        "map": "Rugio Ruins"
+      },
+      {
+        "monster": "Raffy (Lv 5)",
+        "dye": "",
+        "map": "Rugio Ruins"
+      },
+      {
+        "monster": "Raffy (Lv 10)",
+        "dye": "",
+        "map": "Ruined Temple Town"
+      },
+      {
+        "monster": "Raffy (Lv 12)",
+        "dye": "",
+        "map": "Suedor Cliff"
+      }
+    ]
+  },
+  {
+    "id": 145,
+    "key": "mp_100",
+    "display": {
+      "name": "MP+100",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Voda Roar (Lv 37)",
+        "dye": "",
+        "map": "Lutaros Cavern Entrance"
+      },
+      {
+        "monster": "Voda Roar (Lv 37)",
+        "dye": "",
+        "map": "Lutaros Cavern: B1"
+      }
+    ]
+  },
+  {
+    "id": 146,
+    "key": "mochelo",
+    "display": {
+      "name": "Mochelo",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Mochelo (Lv 43)",
+        "dye": "",
+        "map": "Fiery Volcano: Area 3"
+      },
+      {
+        "monster": "Mochelo (Lv 53)",
+        "dye": "",
+        "map": "Fiery Volcano: Area 3"
+      },
+      {
+        "monster": "Mochelo (Lv 63)",
+        "dye": "",
+        "map": "Fiery Volcano: Area 3"
+      },
+      {
+        "monster": "Mochelo (Lv 83)",
+        "dye": "",
+        "map": "Fiery Volcano: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 147,
+    "key": "minotaur",
+    "display": {
+      "name": "Minotaur",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Minotaur (Lv 32)",
+        "dye": "",
+        "map": "Ruined Temple: Forbidden hall"
+      },
+      {
+        "monster": "Minotaur (Lv 42)",
+        "dye": "",
+        "map": "Ruined Temple: Forbidden hall"
+      },
+      {
+        "monster": "Minotaur (Lv 52)",
+        "dye": "",
+        "map": "Ruined Temple: Forbidden hall"
+      },
+      {
+        "monster": "Minotaur (Lv 72)",
+        "dye": "",
+        "map": "Ruined Temple: Forbidden hall"
+      }
+    ]
+  },
+  {
+    "id": 148,
+    "key": "mauez",
+    "display": {
+      "name": "Mauez",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Mauez (Lv 55)",
+        "dye": "",
+        "map": "New Moon Palace: Innermost"
+      },
+      {
+        "monster": "Mauez (Lv 65)",
+        "dye": "",
+        "map": "New Moon Palace: Innermost"
+      },
+      {
+        "monster": "Mauez (Lv 75)",
+        "dye": "",
+        "map": "New Moon Palace: Innermost"
+      },
+      {
+        "monster": "Mauez (Lv 95)",
+        "dye": "",
+        "map": "New Moon Palace: Innermost"
+      }
+    ]
+  },
+  {
+    "id": 149,
+    "key": "king_potum",
+    "display": {
+      "name": "King Potum",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -5,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "King Potum (Lv 50)",
+        "dye": "",
+        "map": "Athema Ruins: Area 1"
+      }
+    ]
+  },
+  {
+    "id": 150,
+    "key": "int_1",
+    "display": {
+      "name": "INT+1",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pomum (Lv 7)",
+        "dye": "",
+        "map": "Reug Salt Plains: Wanderers Camp"
+      }
+    ]
+  },
+  {
+    "id": 152,
+    "key": "hp_100",
+    "display": {
+      "name": "HP+100",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 100,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Roar (Lv 21)",
+        "dye": "",
+        "map": "Ruined Temple: Area 2"
+      },
+      {
+        "monster": "Roar (Lv 21)",
+        "dye": "",
+        "map": "Ruined Temple: Area 3"
+      },
+      {
+        "monster": "Conoppy (Lv 26)",
+        "dye": "",
+        "map": "Yorl Highlands"
+      },
+      {
+        "monster": "Conoppy (Lv 25)",
+        "dye": "",
+        "map": "Yorl Highlands"
+      }
+    ]
+  },
+  {
+    "id": 153,
+    "key": "gigant_knight",
+    "display": {
+      "name": "Gigant Knight",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Gigant Knight (Lv 76)",
+        "dye": "",
+        "map": "Saham Crater"
+      }
+    ]
+  },
+  {
+    "id": 154,
+    "key": "gespenst",
+    "display": {
+      "name": "Gespenst",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": -1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": -1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Gespenst (Lv 20)",
+        "dye": "",
+        "map": "Underground Channel"
+      },
+      {
+        "monster": "Gespenst (Lv 30)",
+        "dye": "",
+        "map": "Underground Channel"
+      },
+      {
+        "monster": "Gespenst (Lv 40)",
+        "dye": "",
+        "map": "Underground Channel"
+      },
+      {
+        "monster": "Gespenst (Lv 60)",
+        "dye": "",
+        "map": "Underground Channel"
+      }
+    ]
+  },
+  {
+    "id": 155,
+    "key": "forest_wolf",
+    "display": {
+      "name": "Forest Wolf",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Forest Wolf (Lv 30)",
+        "dye": "",
+        "map": "Marbaro Forest: Deepest Part"
+      },
+      {
+        "monster": "Forest Wolf (Lv 40)",
+        "dye": "",
+        "map": "Marbaro Forest: Deepest Part"
+      },
+      {
+        "monster": "Forest Wolf (Lv 50)",
+        "dye": "",
+        "map": "Marbaro Forest: Deepest Part"
+      },
+      {
+        "monster": "Forest Wolf (Lv 70)",
+        "dye": "",
+        "map": "Marbaro Forest: Deepest Part"
+      }
+    ]
+  },
+  {
+    "id": 156,
+    "key": "flare_volg",
+    "display": {
+      "name": "Flare Volg",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "str",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": -4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Flare Volg (Lv 50)",
+        "dye": "",
+        "map": "Fiery Volcano: Boss Map"
+      },
+      {
+        "monster": "Flare Volg (Lv 60)",
+        "dye": "",
+        "map": "Fiery Volcano: Boss Map"
+      },
+      {
+        "monster": "Flare Volg (Lv 70)",
+        "dye": "",
+        "map": "Fiery Volcano: Boss Map"
+      },
+      {
+        "monster": "Flare Volg (Lv 90)",
+        "dye": "",
+        "map": "Fiery Volcano: Boss Map"
+      }
+    ]
+  },
+  {
+    "id": 157,
+    "key": "dodge_4",
+    "display": {
+      "name": "Dodge+4",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Beak (Lv 32)",
+        "dye": "",
+        "map": "Scaro Town: Area 1"
+      },
+      {
+        "monster": "Beak (Lv 33)",
+        "dye": "",
+        "map": "Scaro Town: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 158,
+    "key": "dodge_2",
+    "display": {
+      "name": "Dodge+2",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dodge",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Goblin (Lv 20)",
+        "dye": "",
+        "map": "Ruined Temple: Area 1"
+      },
+      {
+        "monster": "Goblin (Lv 20)",
+        "dye": "",
+        "map": "Ruined Temple: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 159,
+    "key": "dex_2",
+    "display": {
+      "name": "DEX+2",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Stone (Lv 39)",
+        "dye": "",
+        "map": "New Moon Palace"
+      }
+    ]
+  },
+  {
+    "id": 160,
+    "key": "dex_1",
+    "display": {
+      "name": "DEX+1",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Nemico (Lv 11)",
+        "dye": "",
+        "map": "Underground Ruins: B1"
+      },
+      {
+        "monster": "Nemico (Lv 11)",
+        "dye": "",
+        "map": "Underground Ruins: B2"
+      },
+      {
+        "monster": "Nemico (Lv 13)",
+        "dye": "",
+        "map": "Underground Ruins: B2"
+      }
+    ]
+  },
+  {
+    "id": 161,
+    "key": "cspd_40",
+    "display": {
+      "name": "CSPD+40",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 40,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pojo (Lv 39)",
+        "dye": "",
+        "map": "Darkanon Plain"
+      },
+      {
+        "monster": "Pojo (Lv 38)",
+        "dye": "",
+        "map": "Darkanon Plain"
+      }
+    ]
+  },
+  {
+    "id": 162,
+    "key": "cspd_20",
+    "display": {
+      "name": "CSPD+20",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "cspd",
+        "value": 20,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Night Mushroom (Lv 10)",
+        "dye": "",
+        "map": "Reug Salt Plains: Wanderers Camp"
+      },
+      {
+        "monster": "Night Mushroom (Lv 13)",
+        "dye": "",
+        "map": "Isthmus Of Kaus"
+      },
+      {
+        "monster": "Night Mushroom (Lv 15)",
+        "dye": "",
+        "map": "Isthmus Of Kaus"
+      }
+    ]
+  },
+  {
+    "id": 164,
+    "key": "critical_rate_2",
+    "display": {
+      "name": "Critical Rate+2",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Rotta Nemico (Lv 45)",
+        "dye": "",
+        "map": "Saham Underground Cave: B1"
+      }
+    ]
+  },
+  {
+    "id": 165,
+    "key": "critical_rate_1",
+    "display": {
+      "name": "Critical Rate+1",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Boar (Lv 25)",
+        "dye": "",
+        "map": "Nisel Mountain"
+      },
+      {
+        "monster": "Boar (Lv 26)",
+        "dye": "",
+        "map": "Nisel Mountain: Mountainside"
+      },
+      {
+        "monster": "Boar (Lv 27)",
+        "dye": "",
+        "map": "Nisel Mountain: Near The Top"
+      }
+    ]
+  },
+  {
+    "id": 166,
+    "key": "crimsosch",
+    "display": {
+      "name": "Crimsosch",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -9,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Crimsosh (Lv 37)",
+        "dye": "",
+        "map": "Athema Ruins: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 167,
+    "key": "brutal_dragon_decel",
+    "display": {
+      "name": "Brutal Dragon Decel",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": -50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Brutal Dragon Decel (Lv 40)",
+        "dye": "",
+        "map": "Nisel Mountain: The Top"
+      },
+      {
+        "monster": "Brutal Dragon Decel (Megiston 2016) (Lv 90)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Brutal Dragon Decel (Lv 50)",
+        "dye": "",
+        "map": "Nisel Mountain: The Top"
+      },
+      {
+        "monster": "Brutal Dragon Decel (Lv 60)",
+        "dye": "",
+        "map": "Nisel Mountain: The Top"
+      }
+    ]
+  },
+  {
+    "id": 168,
+    "key": "boss_goblin",
+    "display": {
+      "name": "Boss Goblin",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Boss Goblin (Lv 40)",
+        "dye": "",
+        "map": "Ribisco Cave: Deepest Part"
+      },
+      {
+        "monster": "Boss Goblin (Megiston 2016) (Lv 80)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Boss Goblin (Lv 50)",
+        "dye": "",
+        "map": "Ribisco Cave: Deepest Part"
+      },
+      {
+        "monster": "Boss Goblin (Lv 60)",
+        "dye": "",
+        "map": "Ribisco Cave: Deepest Part"
+      },
+      {
+        "monster": "Boss Goblin (Lv 80)",
+        "dye": "",
+        "map": "Ribisco Cave: Deepest Part"
+      }
+    ]
+  },
+  {
+    "id": 169,
+    "key": "boss_colon",
+    "display": {
+      "name": "Boss Colon",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 70,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 30,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "The Strongest boss in game (Lv 999)",
+        "dye": "",
+        "map": "Land Under Development"
+      },
+      {
+        "monster": "Boss Colon (Lv 20)",
+        "dye": "",
+        "map": "Land Under Development"
+      },
+      {
+        "monster": "Boss Colon (Lv 30)",
+        "dye": "",
+        "map": "Land Under Development"
+      },
+      {
+        "monster": "Boss Colon (Lv 50)",
+        "dye": "",
+        "map": "Land Under Development"
+      }
+    ]
+  },
+  {
+    "id": 170,
+    "key": "big_coryn",
+    "display": {
+      "name": "Big Coryn",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ailment_resistance",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Big Coryn (Lv 60)",
+        "dye": "",
+        "map": "Douce Hamlet"
+      }
+    ]
+  },
+  {
+    "id": 171,
+    "key": "astol",
+    "display": {
+      "name": "Astol",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "evasion_recharge",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Astol (Lv 50)",
+        "dye": "",
+        "map": "Aulada Ancient Tower"
+      },
+      {
+        "monster": "Astol (Lv 60)",
+        "dye": "",
+        "map": "Aulada Ancient Tower"
+      },
+      {
+        "monster": "Astol (Lv 70)",
+        "dye": "",
+        "map": "Aulada Ancient Tower"
+      },
+      {
+        "monster": "Astol (Lv 90)",
+        "dye": "",
+        "map": "Aulada Ancient Tower"
+      }
+    ]
+  },
+  {
+    "id": 172,
+    "key": "aspd_40",
+    "display": {
+      "name": "ASPD+40",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 40,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Flame Roar (Lv 43)",
+        "dye": "",
+        "map": "Saham Crater"
+      }
+    ]
+  },
+  {
+    "id": 173,
+    "key": "aspd_20",
+    "display": {
+      "name": "ASPD+20",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "aspd",
+        "value": 20,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Hound (Lv 13)",
+        "dye": "",
+        "map": "Isthmus Of Kaus"
+      },
+      {
+        "monster": "Hound (Lv 18)",
+        "dye": "",
+        "map": "Isthmus Of Kaus"
+      },
+      {
+        "monster": "Hound (Lv 15)",
+        "dye": "",
+        "map": "Isthmus Of Kaus"
+      }
+    ]
+  },
+  {
+    "id": 174,
+    "key": "agi_2",
+    "display": {
+      "name": "AGI+2",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Cliff Pico (Lv 33)",
+        "dye": "",
+        "map": "Lonogo Canyon"
+      }
+    ]
+  },
+  {
+    "id": 176,
+    "key": "agi_1",
+    "display": {
+      "name": "AGI+1",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 1,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pico (Lv 18)",
+        "dye": "",
+        "map": "Rinom Plains"
+      }
+    ]
+  },
+  {
+    "id": 177,
+    "key": "accuracy_2",
+    "display": {
+      "name": "Accuracy+2",
+      "color": "blue"
+    },
+    "type": "normal",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Torpo (Lv 8)",
+        "dye": "",
+        "map": "Underground Ruins"
+      }
+    ]
+  }
+]

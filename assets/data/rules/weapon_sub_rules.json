@@ -1,0 +1,67 @@
+{
+  "main_to_allowed_sub": {
+    "BARE_HAND": [
+      "DAGGER",
+      "SHIELD",
+      "ARROW",
+      "MAGIC_DEVICE",
+      "KNUCKLES",
+      "NINJUTSU_SCROLL"
+    ],
+
+    "1H_SWORD": [
+      "DAGGER",
+      "SHIELD",
+      "ARROW",
+      "NINJUTSU_SCROLL",
+      "1H_SWORD",
+      "MAGIC_DEVICE",
+      "KNUCKLES"
+    ],
+
+    "2H_SWORD": [],
+
+    "BOW": [
+      "ARROW",
+      "KATANA"
+    ],
+
+    "BOWGUN": [
+      "DAGGER",
+      "SHIELD",
+      "ARROW",
+      "MAGIC_DEVICE",
+      "KNUCKLES"
+    ],
+
+    "STAFF": [
+      "DAGGER",
+      "SHIELD",
+      "ARROW",
+      "MAGIC_DEVICE",
+      "KNUCKLES",
+      "NINJUTSU_SCROLL"
+    ],
+
+    "MAGIC_DEVICE": [
+      "NINJUTSU_SCROLL"
+    ],
+
+    "KNUCKLES": [
+      "DAGGER",
+      "SHIELD",
+      "ARROW",
+      "MAGIC_DEVICE"
+    ],
+
+    "HALBERD": [
+      "DAGGER",
+      "ARROW"
+    ],
+
+    "KATANA": [
+      "DAGGER",
+      "NINJUTSU_SCROLL"
+    ]
+  }
+}

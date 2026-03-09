@@ -1,0 +1,113 @@
+{
+  "build_evaluation": {
+
+    "physical_build": {
+
+      "required": {
+        "critical_rate": 100
+      },
+
+      "recommended": {
+        "critical_damage": 250
+      },
+
+      "priority_stats": [
+        "ATK",
+        "Critical Rate",
+        "Critical Damage",
+        "Physical Pierce",
+        "Short Range Damage",
+        "Long Range Damage"
+      ],
+
+      "stats": {
+        "physical_pierce": {
+          "minimum": 50,
+          "ideal": 100
+        }
+      },
+
+      "notes": [
+        "Critical Rate 100 ทำให้ตีคริติคอลได้ทุกครั้ง",
+        "Physical Pierce ช่วยลดผลของ DEF บอส"
+      ]
+    },
+
+
+    "magic_build": {
+
+      "priority_stats": [
+        "MATK",
+        "MaxMP",
+        "Magic Pierce",
+        "CSPD"
+      ],
+
+      "recommended": {
+        "max_mp": 1000
+      },
+
+      "stats": {
+        "magic_pierce": {
+          "minimum": 50,
+          "ideal": 100
+        }
+      },
+
+      "notes": [
+        "Magic Pierce ช่วยให้เวทไม่ติด MDEF"
+      ]
+    },
+
+
+    "magic_crit_build": {
+
+      "required": {
+        "critical_rate": 150
+      },
+
+      "recommended": {
+        "critical_rate": 200,
+        "critical_damage": 250
+      },
+
+      "notes": [
+        "Staff สามารถเล่นสาย Magic Crit ได้"
+      ]
+    },
+
+
+    "high_speed_builds": {
+
+      "dual_sword": {
+        "aspd": {
+          "ideal": 6000,
+          "motion_speed": 50,
+          "note": "ASPD 6000 เป็นค่าที่เมื่อรวมบัฟแล้วสามารถถึง Motion Speed 50%"
+        }
+      },
+
+      "speed_sword": {
+        "aspd": {
+          "ideal": 6000,
+          "motion_speed": 50
+        }
+      }
+
+    },
+
+
+    "pierce_exceptions": {
+
+      "bow": {
+        "reason": "Bow มีสกิลเจาะเกราะในตัว"
+      },
+
+      "bowgun": {
+        "reason": "Bowgun มี Armor Break และ Pierce จากสกิล"
+      }
+
+    }
+
+  }
+}

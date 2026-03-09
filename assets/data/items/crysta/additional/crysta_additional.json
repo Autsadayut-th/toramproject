@@ -1,0 +1,3995 @@
+[
+  {
+    "id": 1,
+    "key": "top_star_potum",
+    "display": {
+      "name": "Top-Star Potum",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": -150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 900,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 900,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [],
+    "upgrade": {
+      "from": "sunlight_potum"
+    }
+  },
+  {
+    "id": 2,
+    "key": "shadow_devil_cavalier",
+    "display": {
+      "name": "Shadow Devil Cavalier",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": -100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stability",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_resistance",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "revive_time",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 3,
+    "key": "forbidden_shawle",
+    "display": {
+      "name": "Forbidden Shawle",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": -200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [],
+    "upgrade": {
+      "from": "prudent_blue_shadow"
+    }
+  },
+  {
+    "id": 4,
+    "key": "gula",
+    "display": {
+      "name": "Gula",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [],
+    "upgrade": {
+      "from": "junior_dragon_zyvio"
+    }
+  },
+  {
+    "id": 5,
+    "key": "royal_ox_king_ii",
+    "display": {
+      "name": "Royal Ox King II",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": -30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 12,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [],
+    "upgrade": {
+      "from": "royal_ox_king"
+    }
+  },
+  {
+    "id": 6,
+    "key": "pillorocas",
+    "display": {
+      "name": "Pillorocas",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": -5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 50,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 8,
+    "key": "goblin_zucotto",
+    "display": {
+      "name": "Goblin Zucotto",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 24,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "shield_only_motion_speed",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Goblin Zucotto (Plain) (Lv 220)",
+        "dye": "",
+        "map": "Anglaise Forest"
+      },
+      {
+        "monster": "Goblin Zucotto (Cocoa) (Lv 250)",
+        "dye": "",
+        "map": "Anglaise Forest"
+      },
+      {
+        "monster": "Goblin Zucotto (Choco) (Lv 280)",
+        "dye": "",
+        "map": "Anglaise Forest"
+      },
+      {
+        "monster": "Goblin Zucotto (Coffee) (Lv 310)",
+        "dye": "",
+        "map": "Anglaise Forest"
+      }
+    ],
+    "upgrade": {
+      "from": "alfenix"
+    }
+  },
+  {
+    "id": 9,
+    "key": "erkuch",
+    "display": {
+      "name": "Erkuch",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 24,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "staff_only_motion_speed",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [],
+    "upgrade": {
+      "from": "garnache"
+    }
+  },
+  {
+    "id": 10,
+    "key": "castilia",
+    "display": {
+      "name": "Castilia",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "accuracy",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": -900,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_device_only_motion_speed",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "ninjutsu_scroll_only_magic_pierce",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Castilia (Lv 310)",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "key": "jibril_iii",
+    "display": {
+      "name": "Jibril III",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 16,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 11,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [],
+    "upgrade": {
+      "from": "jibril_ii"
+    }
+  },
+  {
+    "id": 12,
+    "key": "jibril_ii",
+    "display": {
+      "name": "Jibril II",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 12,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 2,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [],
+    "upgrade": {
+      "from": "jibril"
+    }
+  },
+  {
+    "id": 13,
+    "key": "jibril",
+    "display": {
+      "name": "Jibril",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 2,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "natural_mp_regen",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "anticipate",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 14,
+    "key": "jiva",
+    "display": {
+      "name": "Jiva",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Jiva (Lv 293)",
+        "dye": "",
+        "map": "Little Shrine of Grace: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "key": "giant_pelulu",
+    "display": {
+      "name": "Giant Pelulu",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": -100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "light_armor_only_physical_pierce",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 16,
+    "key": "eripmav",
+    "display": {
+      "name": "Eripmav",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 18,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Eripmav (Easy) (Lv 200)",
+        "dye": "",
+        "map": "Risus Valley: Depths"
+      },
+      {
+        "monster": "Eripmav (Normal) (Lv 225)",
+        "dye": "",
+        "map": "Risus Valley: Depths"
+      },
+      {
+        "monster": "Eripmav (Hard) (Lv 250)",
+        "dye": "",
+        "map": "Risus Valley: Depths"
+      }
+    ],
+    "upgrade": {
+      "from": "neewollah"
+    }
+  },
+  {
+    "id": 17,
+    "key": "fantica",
+    "display": {
+      "name": "Fantica",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 5000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "def",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_power",
+        "value": 15,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Fantica (Lv 284)",
+        "dye": "",
+        "map": "Espuma Dome: Area 2"
+      }
+    ],
+    "upgrade": {
+      "from": "grylle"
+    }
+  },
+  {
+    "id": 18,
+    "key": "falburrows",
+    "display": {
+      "name": "Falburrows",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "dodge",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "absolute_dodge",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "bowgun_only_short_range_damage",
+        "value": 9,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Falburrows (Lv 215)",
+        "dye": "",
+        "map": "Saltau's Beach (Night)"
+      },
+      {
+        "monster": "Falburrows (Lv 225)",
+        "dye": "",
+        "map": "Saltau's Beach (Night)"
+      },
+      {
+        "monster": "Falburrows (Lv 235)",
+        "dye": "",
+        "map": "Saltau's Beach (Night)"
+      },
+      {
+        "monster": "Falburrows (Lv 255)",
+        "dye": "",
+        "map": "Saltau's Beach (Night)"
+      },
+      {
+        "monster": "Falburrows (High Difficulty) (Lv 255)",
+        "dye": "",
+        "map": "Saltau's Beach (Night)"
+      },
+      {
+        "monster": "Falburrows (High Difficulty) (Lv 265)",
+        "dye": "",
+        "map": "Saltau's Beach (Night)"
+      },
+      {
+        "monster": "Falburrows (High Difficulty) (Lv 275)",
+        "dye": "",
+        "map": "Saltau's Beach (Night)"
+      },
+      {
+        "monster": "Falburrows (High Difficulty) (Lv 295)",
+        "dye": "",
+        "map": "Saltau's Beach (Night)"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "key": "amargon",
+    "display": {
+      "name": "Amargon",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": -300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 800,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Broker Goblin (Plain) (Lv 180)",
+        "dye": "",
+        "map": "El Scaro: Back Alley"
+      },
+      {
+        "monster": "Broker Goblin (Cocoa) (Lv 210)",
+        "dye": "",
+        "map": "El Scaro: Back Alley"
+      },
+      {
+        "monster": "Broker Goblin (Choco) (Lv 240)",
+        "dye": "",
+        "map": "El Scaro: Back Alley"
+      },
+      {
+        "monster": "Broker Goblin (Coffee) (Lv 270)",
+        "dye": "",
+        "map": "El Scaro: Back Alley"
+      }
+    ],
+    "upgrade": {
+      "from": "candela_ii"
+    }
+  },
+  {
+    "id": 21,
+    "key": "soldner",
+    "display": {
+      "name": "Soldner",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 800,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Broker Goblin (Plain) (Lv 180)",
+        "dye": "",
+        "map": "El Scaro: Back Alley"
+      },
+      {
+        "monster": "Broker Goblin (Cocoa) (Lv 210)",
+        "dye": "",
+        "map": "El Scaro: Back Alley"
+      },
+      {
+        "monster": "Broker Goblin (Choco) (Lv 240)",
+        "dye": "",
+        "map": "El Scaro: Back Alley"
+      },
+      {
+        "monster": "Broker Goblin (Coffee) (Lv 270)",
+        "dye": "",
+        "map": "El Scaro: Back Alley"
+      }
+    ],
+    "upgrade": {
+      "from": "chocolate_ooze_ii"
+    }
+  },
+  {
+    "id": 22,
+    "key": "mage_filecia",
+    "display": {
+      "name": "Mage Filecia",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "int",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 9,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "stability",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_device_only_reduce_dmg_bowling",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "staff_only_guard_break",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Mage Filecia (Plain) (Lv 190)",
+        "dye": "",
+        "map": "El Scaro: Back Alley"
+      },
+      {
+        "monster": "Mage Filecia (Cocoa) (Lv 220)",
+        "dye": "",
+        "map": "El Scaro: Back Alley"
+      },
+      {
+        "monster": "Mage Filecia (Choco) (Lv 250)",
+        "dye": "",
+        "map": "El Scaro: Back Alley"
+      },
+      {
+        "monster": "Mage Filecia (Coffee) (Lv 280)",
+        "dye": "",
+        "map": "El Scaro: Back Alley"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "key": "lunadore",
+    "display": {
+      "name": "Lunadore",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "drop_rate",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Lunadore (Lv 1)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Lunadore (Lv 10)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Lunadore (Lv 20)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Lunadore (Lv 30)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Lunadore (Lv 50)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "key": "exdocus",
+    "display": {
+      "name": "Exdocus",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mdef",
+        "value": 150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_barrier",
+        "value": 1500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_barrier",
+        "value": 1500,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Exdocus (Lv 266)",
+        "dye": "",
+        "map": "Stairway to Vital Point"
+      }
+    ],
+    "upgrade": {
+      "from": "corroded_knight_captain"
+    }
+  },
+  {
+    "id": 25,
+    "key": "burning_dragon_igneus",
+    "display": {
+      "name": "Burning Dragon Igneus",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "agi",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 8,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Burning Dragon Igneus (Lv 235)",
+        "dye": "",
+        "map": "Boma Moja: Village Center"
+      },
+      {
+        "monster": "Burning Dragon Igneus (Lv 245)",
+        "dye": "",
+        "map": "Boma Moja: Village Center"
+      },
+      {
+        "monster": "Burning Dragon Igneus (Lv 255)",
+        "dye": "",
+        "map": "Boma Moja: Village Center"
+      },
+      {
+        "monster": "Burning Dragon Igneus (Lv 275)",
+        "dye": "",
+        "map": "Boma Moja: Village Center"
+      }
+    ],
+    "upgrade": {
+      "from": "king_piton"
+    }
+  },
+  {
+    "id": 26,
+    "key": "neo_wandering_wheel",
+    "display": {
+      "name": "Neo Wandering Wheel",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 75,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -16,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "EX Arena Entry (7th Anniv)",
+        "dye": "",
+        "map": "Anniversary Arena: 7th Venue"
+      }
+    ],
+    "upgrade": {
+      "from": "wandering_wheel"
+    }
+  },
+  {
+    "id": 27,
+    "key": "goldigem",
+    "display": {
+      "name": "Goldigem",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 3000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "reduce_dmg_player_epicenter",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_charge",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_straight_line",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Goldigem (Lv 222)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Goldigem (Lv 232)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Goldigem (Lv 242)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Goldigem (Lv 262)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      }
+    ],
+    "upgrade": {
+      "from": "felicitoad"
+    }
+  },
+  {
+    "id": 28,
+    "key": "evil_lefina",
+    "display": {
+      "name": "Evil Lefina",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": -4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_resistance",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 12,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "heavy_armor_only_physical_resistance",
+        "value": 24,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Evil Lefina (Plain) (Lv 170)",
+        "dye": "",
+        "map": "El Scaro"
+      },
+      {
+        "monster": "Evil Lefina (Cocoa) (Lv 200)",
+        "dye": "",
+        "map": "El Scaro"
+      },
+      {
+        "monster": "Evil Lefina (Choco) (Lv 230)",
+        "dye": "",
+        "map": "El Scaro"
+      },
+      {
+        "monster": "Evil Lefina (Coffee) (Lv 260)",
+        "dye": "",
+        "map": "El Scaro"
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "key": "mieli",
+    "display": {
+      "name": "Mieli",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Mieli (Milk) (Lv 160)",
+        "dye": "",
+        "map": "Rakau Plains"
+      },
+      {
+        "monster": "Mieli (Sweet) (Lv 190)",
+        "dye": "",
+        "map": "Rakau Plains"
+      },
+      {
+        "monster": "Mieli (Bitter) (Lv 220)",
+        "dye": "",
+        "map": "Rakau Plains"
+      },
+      {
+        "monster": "Mieli (Dark) (Lv 250)",
+        "dye": "",
+        "map": "Rakau Plains"
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "key": "purro",
+    "display": {
+      "name": "Purro",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "drop_rate",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Purro (Lv 1)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Purro (Lv 10)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Purro (Lv 20)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Purro (Lv 30)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Purro (Lv 50)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "key": "prudent_blue_shadow",
+    "display": {
+      "name": "Prudent Blue Shadow",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": -150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 8,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Dutannen (Max) (Lv 239)",
+        "dye": "",
+        "map": "Noeliel Castle: B4F"
+      }
+    ],
+    "upgrade": {
+      "from": "baphomela"
+    }
+  },
+  {
+    "id": 33,
+    "key": "gordo",
+    "display": {
+      "name": "Gordo",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 7,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 80,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Gordo (Lv 242)",
+        "dye": "",
+        "map": "Eumano Glade"
+      }
+    ],
+    "upgrade": {
+      "from": "wandering_wheel"
+    }
+  },
+  {
+    "id": 34,
+    "key": "neewollah",
+    "display": {
+      "name": "Neewollah",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 15,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Neewollah (Easy) (Lv 150)",
+        "dye": "",
+        "map": "Manor of Surprises: Grand Hall"
+      },
+      {
+        "monster": "Neewollah (Normal) (Lv 175)",
+        "dye": "",
+        "map": "Manor of Surprises: Grand Hall"
+      },
+      {
+        "monster": "Neewollah (Hard) (Lv 200)",
+        "dye": "",
+        "map": "Manor of Surprises: Grand Hall"
+      },
+      {
+        "monster": "Neewollah (Very Hard) (Lv 225)",
+        "dye": "",
+        "map": "Manor of Surprises: Grand Hall"
+      }
+    ],
+    "upgrade": {
+      "from": "zarth"
+    }
+  },
+  {
+    "id": 35,
+    "key": "junior_dragon_zyvio",
+    "display": {
+      "name": "Junior Dragon Zyvio",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "guard_break",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Junior Dragon Zyvio (Lv 214)",
+        "dye": "",
+        "map": "Storage Yard: Arena"
+      },
+      {
+        "monster": "Junior Dragon Zyvio (Lv 224)",
+        "dye": "",
+        "map": "Storage Yard: Arena"
+      },
+      {
+        "monster": "Junior Dragon Zyvio (Lv 234)",
+        "dye": "",
+        "map": "Storage Yard: Arena"
+      },
+      {
+        "monster": "Junior Dragon Zyvio (Lv 254)",
+        "dye": "",
+        "map": "Storage Yard: Arena"
+      },
+      {
+        "monster": "Junior Dragon Zyvio (Megiston 2022) (Lv 220)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "key": "trocostida",
+    "display": {
+      "name": "Trocostida",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 5,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Trocostida (Lv 230)",
+        "dye": "",
+        "map": "Nov Diela Area 1"
+      }
+    ],
+    "upgrade": {
+      "from": "dusk_machina"
+    }
+  },
+  {
+    "id": 37,
+    "key": "yashiro_azuki_s_mom_ii",
+    "display": {
+      "name": "Yashiro Azuki's Mom II",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "†Dark Lord† (Lv 220)",
+        "dye": "",
+        "map": "Event"
+      }
+    ],
+    "upgrade": {
+      "from": "narumi_hina"
+    }
+  },
+  {
+    "id": 38,
+    "key": "dark_lord",
+    "display": {
+      "name": "†Dark Lord†",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "†Dark Lord† (Lv 220)",
+        "dye": "",
+        "map": "Event"
+      }
+    ],
+    "upgrade": {
+      "from": "yashiro_azuki_s_dad"
+    }
+  },
+  {
+    "id": 39,
+    "key": "royal_ox_king",
+    "display": {
+      "name": "Royal Ox King",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 40,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 8,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pillow Kitagawa",
+        "dye": "",
+        "map": "Kitagawa Dream Center"
+      }
+    ],
+    "upgrade": {
+      "from": "ox_king"
+    }
+  },
+  {
+    "id": 40,
+    "key": "pillow_kitagawa",
+    "display": {
+      "name": "Pillow Kitagawa",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 2000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "revive_time",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 8,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pillow Kitagawa",
+        "dye": "",
+        "map": "Kitagawa Dream Center"
+      }
+    ],
+    "upgrade": {
+      "from": "ox_king"
+    }
+  },
+  {
+    "id": 41,
+    "key": "ox_king",
+    "display": {
+      "name": "Ox King",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "aggro",
+        "value": -20,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pillow Kitagawa",
+        "dye": "",
+        "map": "Kitagawa Dream Center"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "key": "lord_of_nezim",
+    "display": {
+      "name": "Lord of Nezim",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "vit",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxhp",
+        "value": 3000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "knuckle_only_short_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Lord of Nezim (Lv 227)",
+        "dye": "",
+        "map": "Nezim Wetlands"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "key": "alfenix",
+    "display": {
+      "name": "Alfenix",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 18,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "atk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Alfenix (Lv 150)",
+        "dye": "",
+        "map": "El Scaro"
+      },
+      {
+        "monster": "Alfenix (Lv 180)",
+        "dye": "",
+        "map": "El Scaro"
+      },
+      {
+        "monster": "Alfenix (Lv 210)",
+        "dye": "",
+        "map": "El Scaro"
+      },
+      {
+        "monster": "Alfenix (Lv 230)",
+        "dye": "",
+        "map": "El Scaro"
+      }
+    ],
+    "upgrade": {
+      "from": "handmade_cookie"
+    }
+  },
+  {
+    "id": 45,
+    "key": "garnache",
+    "display": {
+      "name": "Garnache",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 18,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "matk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Garnache (Bitter) (Lv 200)",
+        "dye": "",
+        "map": "Creme Cliff (Valentine's Day Event)"
+      },
+      {
+        "monster": "Garnache (Milk) (Lv 140)",
+        "dye": "",
+        "map": "Creme Cliff (Valentine's Day Event)"
+      },
+      {
+        "monster": "Garnache (Sweet) (Lv 170)",
+        "dye": "",
+        "map": "Creme Cliff (Valentine's Day Event)"
+      },
+      {
+        "monster": "Garnache (Dark) (Lv 230)",
+        "dye": "",
+        "map": "Creme Cliff (Valentine's Day Event)"
+      }
+    ],
+    "upgrade": {
+      "from": "eidenliebe"
+    }
+  },
+  {
+    "id": 46,
+    "key": "stellar_ooze",
+    "display": {
+      "name": "Stellar Ooze",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 60,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 600,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 20,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Stellar Ooze (Lv 230)",
+        "dye": "",
+        "map": "Event"
+      }
+    ],
+    "upgrade": {
+      "from": "gespenst_ii"
+    }
+  },
+  {
+    "id": 47,
+    "key": "bovinio",
+    "display": {
+      "name": "Bovinio",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "drop_rate",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Bonivio (New Year Event 2021) (Lv 10)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "key": "underwater_ruins_monster",
+    "display": {
+      "name": "Underwater Ruins Monster",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "heavy_armor_only_aggro",
+        "value": 20,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Adaro (High Difficulty) (Lv 200)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (High Difficulty) (Lv 210)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (High Difficulty) (Lv 220)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (High Difficulty) (Lv 230)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (High Difficulty) (Lv 250)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      }
+    ],
+    "upgrade": {
+      "from": "adaro"
+    }
+  },
+  {
+    "id": 49,
+    "key": "adaro",
+    "display": {
+      "name": "Adaro",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "matk",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "heavy_armor_only_aggro",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Adaro (Lv 170)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (Lv 180)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (Lv 190)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (Lv 210)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "key": "tardigrademon",
+    "display": {
+      "name": "Tardigrademon",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": -200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 450,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Tardigrademon (Lv 213)",
+        "dye": "",
+        "map": "Old Lufenas Mansion Ruins"
+      }
+    ],
+    "upgrade": {
+      "from": "seltirios"
+    }
+  },
+  {
+    "id": 51,
+    "key": "felicitoad",
+    "display": {
+      "name": "Felicitoad",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 2000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "reduce_dmg_charge",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "reduce_dmg_straight_line",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Felicitoad (Lv 140)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Felicitoad (Lv 150)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Felicitoad (Lv 160)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Felicitoad (Lv 170)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Felicitoad (Lv 190)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      }
+    ],
+    "upgrade": {
+      "from": "g_iconos"
+    }
+  },
+  {
+    "id": 52,
+    "key": "mercy",
+    "display": {
+      "name": "Mercy",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 15,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Mercy (Plain) (Lv 130)",
+        "dye": "",
+        "map": "Dunkel Valley"
+      },
+      {
+        "monster": "Mercy (Strawberry) (Lv 160)",
+        "dye": "",
+        "map": "Dunkel Valley"
+      },
+      {
+        "monster": "Mercy (Banana) (Lv 190)",
+        "dye": "",
+        "map": "Dunkel Valley"
+      },
+      {
+        "monster": "Mercy (Choco Banana) (Lv 220)",
+        "dye": "",
+        "map": "Dunkel Valley"
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "key": "mega_alpoca",
+    "display": {
+      "name": "Mega Alpoca",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 6,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Mega Alpoca (Lv 204)",
+        "dye": "",
+        "map": "Labilans Sector: Area 3"
+      }
+    ],
+    "upgrade": {
+      "from": "giant_boar"
+    }
+  },
+  {
+    "id": 54,
+    "key": "omochi",
+    "display": {
+      "name": "Omochi",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "drop_rate",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Omochi (Lv 1)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Omochi (Lv 10)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Omochi (Lv 20)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Omochi (Lv 30)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Omochi (Lv 50)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "key": "narumi_hina",
+    "display": {
+      "name": "Narumi Hina",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Narumi Hina (Lv 50 Raid) (Lv 50)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv170 Raid) (Lv 190)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv170 Raid) (Lv 180)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv170 Raid) (Lv 170)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv 110 Raid) (Lv 150)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv 110 Raid) (Lv 1130)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv 110 Raid) (Lv 120)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv 110 Raid) (Lv 110)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv 50 Raid) (Lv 90)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv 50 Raid) (Lv 70)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv 50 Raid) (Lv 60)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv170 Raid) (Lv 210)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "key": "yashiro_azuki_s_dad",
+    "display": {
+      "name": "Yashiro Azuki's Dad",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 3,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Narumi Hina (Lv 50 Raid) (Lv 50)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv170 Raid) (Lv 190)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv170 Raid) (Lv 180)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv170 Raid) (Lv 170)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv 110 Raid) (Lv 150)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv 110 Raid) (Lv 1130)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv 110 Raid) (Lv 120)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv 110 Raid) (Lv 110)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv 50 Raid) (Lv 90)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv 50 Raid) (Lv 70)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv 50 Raid) (Lv 60)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Narumi Hina (Lv170 Raid) (Lv 210)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "key": "zarth",
+    "display": {
+      "name": "Zarth",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 4,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 8,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 12,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Zarth (Lv 100)",
+        "dye": "",
+        "map": "Zarth's Mansion: Back"
+      },
+      {
+        "monster": "Zarth (Lv 125)",
+        "dye": "",
+        "map": "Zarth's Mansion: Back"
+      },
+      {
+        "monster": "Zarth (Lv 150)",
+        "dye": "",
+        "map": "Zarth's Mansion: Back"
+      },
+      {
+        "monster": "Zarth (Lv 175)",
+        "dye": "",
+        "map": "Zarth's Mansion: Back"
+      }
+    ],
+    "upgrade": {
+      "from": "zoe"
+    }
+  },
+  {
+    "id": 59,
+    "key": "king_piton",
+    "display": {
+      "name": "King Piton",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "King Piton (Lv 163)",
+        "dye": "",
+        "map": "Elf Mountains: Shrine"
+      },
+      {
+        "monster": "King Piton (Lv 173)",
+        "dye": "",
+        "map": "Elf Mountains: Shrine"
+      },
+      {
+        "monster": "King Piton (Lv 183)",
+        "dye": "",
+        "map": "Elf Mountains: Shrine"
+      },
+      {
+        "monster": "King Piton (Lv 203)",
+        "dye": "",
+        "map": "Elf Mountains: Shrine"
+      }
+    ],
+    "upgrade": {
+      "from": "proto_leon"
+    }
+  },
+  {
+    "id": 60,
+    "key": "goldenia",
+    "display": {
+      "name": "Goldenia",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 2000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": -300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fractional_barrier",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Goldenia (Lv 187)",
+        "dye": "",
+        "map": "Elf Mountains: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "key": "handmade_cookie",
+    "display": {
+      "name": "Handmade Cookie",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "physical_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Handmade Cookie (Plain) (Lv 100)",
+        "dye": "",
+        "map": "El Scaro"
+      },
+      {
+        "monster": "Handmade Cookie (Cocoa) (Lv 130)",
+        "dye": "",
+        "map": "El Scaro"
+      },
+      {
+        "monster": "Handmade Cookie (Choco) (Lv 160)",
+        "dye": "",
+        "map": "El Scaro"
+      },
+      {
+        "monster": "Handmade Cookie (Coffee) (Lv 190)",
+        "dye": "",
+        "map": "El Scaro"
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "key": "grand_pojo",
+    "display": {
+      "name": "Grand Pojo",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "drop_rate",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Grand Pojo (Lv 10)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "key": "eidenliebe",
+    "display": {
+      "name": "Eidenliebe",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 12,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_pierce",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": -15,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Eidenliebe (Milk) (Lv 90)",
+        "dye": "",
+        "map": "Maia Diela"
+      },
+      {
+        "monster": "Eidenliebe (Sweet) (Lv 120)",
+        "dye": "",
+        "map": "Maia Diela"
+      },
+      {
+        "monster": "Eidenliebe (Bitter) (Lv 150)",
+        "dye": "",
+        "map": "Maia Diela"
+      },
+      {
+        "monster": "Eidenliebe (Dark) (Lv 180)",
+        "dye": "",
+        "map": "Maia Diela"
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "key": "altoblepas",
+    "display": {
+      "name": "Altoblepas",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "dex",
+        "value": 1,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": -20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 4,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Altoblepas (Lv 174)",
+        "dye": "",
+        "map": "Rokoko Plains"
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "key": "yashiro_azuki_s_mom",
+    "display": {
+      "name": "Yashiro Azuki's Mom",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "physical_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "magic_resistance",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "reduce_dmg_bullet",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Yashiro Azuki's Mom (Lv30) (Lv 35)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki's Mom (Lv150) (Lv 175)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki's Mom (Lv150) (Lv 165)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki's Mom (Lv150) (Lv 155)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki's Mom (Lv60) (Lv 135)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki's Mom (Lv60) (Lv 115)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki's Mom (Lv60) (Lv 105)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki's Mom (Lv60) (Lv 95)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki's Mom (Lv30) (Lv 75)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki's Mom (Lv30) (Lv 55)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki's Mom (Lv30) (Lv 45)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Yashiro Azuki's Mom (Lv150) (Lv 195)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "key": "zoe",
+    "display": {
+      "name": "Zoe",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 3,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 9,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Zoe (Lv 75)",
+        "dye": "",
+        "map": "Halloween Mansion Basement"
+      },
+      {
+        "monster": "Zoe (Lv 100)",
+        "dye": "",
+        "map": "Halloween Mansion Basement"
+      },
+      {
+        "monster": "Zoe (Lv 125)",
+        "dye": "",
+        "map": "Halloween Mansion Basement"
+      },
+      {
+        "monster": "Zoe (Lv 150)",
+        "dye": "",
+        "map": "Halloween Mansion Basement"
+      }
+    ],
+    "upgrade": {
+      "from": "jeila"
+    }
+  },
+  {
+    "id": 68,
+    "key": "solopy",
+    "display": {
+      "name": "Solopy",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 450,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Solopy (Lv 169)",
+        "dye": "",
+        "map": "Turnus Mine: Area 3"
+      }
+    ],
+    "upgrade": {
+      "from": "golden_skeleton"
+    }
+  },
+  {
+    "id": 69,
+    "key": "wandering_wheel",
+    "display": {
+      "name": "Wandering Wheel",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 75,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -14,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Wandering Wheel (Lv 163)",
+        "dye": "",
+        "map": "Ultimea Palace: Demi Machina Storage"
+      }
+    ],
+    "upgrade": {
+      "from": "grass_dragon_yelb"
+    }
+  },
+  {
+    "id": 70,
+    "key": "gespenst_ii",
+    "display": {
+      "name": "Gespenst II",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "accuracy",
+        "value": 30,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 400,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_rate",
+        "value": 10,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Gespenst (Lv 175)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Gespenst High Difficulty Exchange",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      },
+      {
+        "monster": "Gespenst (Lv 225)",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      },
+      {
+        "monster": "Gespenst (Lv 220)",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      },
+      {
+        "monster": "Gespenst (Lv 215)",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      },
+      {
+        "monster": "Gespenst (Lv 210)",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      },
+      {
+        "monster": "Gespenst (Lv 205)",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      },
+      {
+        "monster": "Gespenst (Lv 200)",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      },
+      {
+        "monster": "Gespenst (Lv 195)",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      },
+      {
+        "monster": "Gespenst (Lv 190)",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      },
+      {
+        "monster": "Gespenst (Lv 185)",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      },
+      {
+        "monster": "Gespenst (Lv 180)",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      },
+      {
+        "monster": "Gespenst (Lv 175)",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      },
+      {
+        "monster": "Gespenst (Lv 170)",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      },
+      {
+        "monster": "Gespenst (Lv 165)",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      },
+      {
+        "monster": "Gespenst (Lv 230)",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "key": "g_iconos",
+    "display": {
+      "name": "G. Iconos",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 1000,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "reduce_dmg_charge",
+        "value": 10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Golden Iconos (2018) (Lv 75)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Golden Iconos (2018) (Lv 85)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Golden Iconos (2018) (Lv 95)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      },
+      {
+        "monster": "Golden Iconos (2018) (Lv 115)",
+        "dye": "",
+        "map": "Sofya City: Government Office"
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "key": "candela_ii",
+    "display": {
+      "name": "Candela II",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": -250,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 600,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Candela Soda (White Day 2018) (Lv 130)",
+        "dye": "",
+        "map": "Douce Hamlet"
+      },
+      {
+        "monster": "Candela Cola (White Day 2018) (Lv 160)",
+        "dye": "",
+        "map": "Douce Hamlet"
+      }
+    ],
+    "upgrade": {
+      "from": "candela"
+    }
+  },
+  {
+    "id": 73,
+    "key": "chocolate_ooze_ii",
+    "display": {
+      "name": "Chocolate Ooze II",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": -15,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 600,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Chocolate Ooze (Bitter) (Valentine 2018) (Lv 120)",
+        "dye": "",
+        "map": "Underground Channel"
+      },
+      {
+        "monster": "Chocolate Ooze (Dark) (Valentine 2018) (Lv 150)",
+        "dye": "",
+        "map": "Underground Channel"
+      }
+    ],
+    "upgrade": {
+      "from": "chocolate_ooze"
+    }
+  },
+  {
+    "id": 74,
+    "key": "perro",
+    "display": {
+      "name": "Perro",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "drop_rate",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Perro (Lv 1)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Perro (Lv 10)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Perro (Lv 20)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Perro (Lv 30)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Perro (Lv 50)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "key": "baphomela",
+    "display": {
+      "name": "Baphomela",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "short_range_damage",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 6,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 6,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Baphomela (Lv 120)",
+        "dye": "",
+        "map": "Navida City: Central Square"
+      },
+      {
+        "monster": "Baphomela (Lv 130)",
+        "dye": "",
+        "map": "Navida City: Central Square"
+      },
+      {
+        "monster": "Baphomela (Lv 140)",
+        "dye": "",
+        "map": "Navida City: Central Square"
+      },
+      {
+        "monster": "Baphomela (Lv 150)",
+        "dye": "",
+        "map": "Navida City: Central Square"
+      },
+      {
+        "monster": "Baphomela (Lv 170)",
+        "dye": "",
+        "map": "Navida City: Central Square"
+      }
+    ],
+    "upgrade": {
+      "from": "twilight_dragon"
+    }
+  },
+  {
+    "id": 76,
+    "key": "dusk_machina",
+    "display": {
+      "name": "Dusk Machina",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 20,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aggro",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Dusk Machina (Lv 142)",
+        "dye": "",
+        "map": "Small Demi Machina Factory: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "key": "jeila",
+    "display": {
+      "name": "Jeila",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 2,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 6,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Jeila (Lv 50)",
+        "dye": "",
+        "map": "Halloween Castle"
+      },
+      {
+        "monster": "Jeila (Lv 75)",
+        "dye": "",
+        "map": "Halloween Castle"
+      },
+      {
+        "monster": "Jeila (Lv 100)",
+        "dye": "",
+        "map": "Halloween Castle"
+      },
+      {
+        "monster": "Jeila (Lv 125)",
+        "dye": "",
+        "map": "Halloween Castle"
+      }
+    ],
+    "upgrade": {
+      "from": "pumpking"
+    }
+  },
+  {
+    "id": 78,
+    "key": "proto_leon",
+    "display": {
+      "name": "Proto Leon",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 8,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Proto Leon (Lv 115)",
+        "dye": "",
+        "map": "Singolare Ruins: 3rd Floor"
+      },
+      {
+        "monster": "Proto Leon (Lv 125)",
+        "dye": "",
+        "map": "Singolare Ruins: 3rd Floor"
+      },
+      {
+        "monster": "Proto Leon (Lv 135)",
+        "dye": "",
+        "map": "Singolare Ruins: 3rd Floor"
+      },
+      {
+        "monster": "Proto Leon (Lv 155)",
+        "dye": "",
+        "map": "Singolare Ruins: 3rd Floor"
+      }
+    ],
+    "upgrade": {
+      "from": "warmonger"
+    }
+  },
+  {
+    "id": 80,
+    "key": "ancient_empress_ii",
+    "display": {
+      "name": "Ancient Empress II",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 30,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": -20,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ancient Empress Mezzaluna (Lv 135)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Ancient Empress (7M DL) (Lv 150)",
+        "dye": "",
+        "map": "Event"
+      }
+    ],
+    "upgrade": {
+      "from": "ancient_empress"
+    }
+  },
+  {
+    "id": 81,
+    "key": "corroded_knight_captain",
+    "display": {
+      "name": "Corroded Knight Captain",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "def",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "mdef",
+        "value": 100,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "physical_barrier",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "magic_barrier",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Corroded Knight Captain (Lv 128)",
+        "dye": "",
+        "map": "Dark Manor: Area 1"
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "key": "candela",
+    "display": {
+      "name": "Candela",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": -200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Candela (Lemon) (Lv 70)",
+        "dye": "",
+        "map": "Douce Hamlet"
+      },
+      {
+        "monster": "Candela (Mint) (Lv 100)",
+        "dye": "",
+        "map": "Douce Hamlet"
+      },
+      {
+        "monster": "Candela Melon (White Day 2018) (Lv 40)",
+        "dye": "",
+        "map": "Douce Hamlet"
+      },
+      {
+        "monster": "Candela Lemon (White Day 2018) (Lv 70)",
+        "dye": "",
+        "map": "Douce Hamlet"
+      },
+      {
+        "monster": "Candela Mint (White Day 2018) (Lv 100)",
+        "dye": "",
+        "map": "Douce Hamlet"
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "key": "chocolate_ooze",
+    "display": {
+      "name": "Chocolate Ooze",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 200,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 500,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Chocolate Ooze (Sweet) (Valentine 2017) (Lv 30)",
+        "dye": "",
+        "map": "Underground Channel"
+      },
+      {
+        "monster": "Chocolate Ooze (Bitter) (Valentine 2017) (Lv 60)",
+        "dye": "",
+        "map": "Underground Channel"
+      },
+      {
+        "monster": "Chocolate Ooze (Dark) (Valentine 2017) (Lv 90)",
+        "dye": "",
+        "map": "Underground Channel"
+      },
+      {
+        "monster": "Chocolate Ooze (White) (Valentine 2018) (Lv 30)",
+        "dye": "",
+        "map": "Underground Channel"
+      },
+      {
+        "monster": "Chocolate Ooze (Milk) (Valentine 2018) (Lv 60)",
+        "dye": "",
+        "map": "Underground Channel"
+      },
+      {
+        "monster": "Chocolate Ooze (Sweet) (Valentine 2018) (Lv 90)",
+        "dye": "",
+        "map": "Underground Channel"
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "key": "twilight_dragon",
+    "display": {
+      "name": "Twilight Dragon",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "short_range_damage",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": 4,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "unsheathe_attack",
+        "value": 4,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Twilight Dragon (Lv 100)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      },
+      {
+        "monster": "Twilight Dragon (Lv 110)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      },
+      {
+        "monster": "Twilight Dragon (Lv 120)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      },
+      {
+        "monster": "Twilight Dragon (Lv 140)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "key": "grylle",
+    "display": {
+      "name": "Grylle",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 500,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "def",
+        "value": 5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "guard_power",
+        "value": 5,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Grylle (Lv 90)",
+        "dye": "",
+        "map": "Wanderer's Plain"
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "key": "pumpking",
+    "display": {
+      "name": "Pumpking",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_damage",
+        "value": 1,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "fire_resistance",
+        "value": 2,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "attack_mp_recovery",
+        "value": 3,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pumpking (Lv 25)",
+        "dye": "",
+        "map": "Tir Na Nog Square"
+      },
+      {
+        "monster": "Pumpking (Lv 50)",
+        "dye": "",
+        "map": "Tir Na Nog Square"
+      },
+      {
+        "monster": "Pumpking (Lv 75)",
+        "dye": "",
+        "map": "Tir Na Nog Square"
+      },
+      {
+        "monster": "Pumpking (Lv 100)",
+        "dye": "",
+        "map": "Tir Na Nog Square"
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "key": "sunlight_potum",
+    "display": {
+      "name": "Sunlight Potum",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": -5,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": -75,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 300,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Sunlight Potum (Lv 100)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Sunlight Potum (Lv 100)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "key": "grass_dragon_yelb",
+    "display": {
+      "name": "Grass Dragon Yelb",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "atk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "long_range_damage",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Grass Dragon Yelb (Lv 73)",
+        "dye": "",
+        "map": "Albatif Village"
+      },
+      {
+        "monster": "Grass Dragon Yelb (Lv 63)",
+        "dye": "",
+        "map": "Albatif Village"
+      },
+      {
+        "monster": "Grass Dragon Yelb (Lv 83)",
+        "dye": "",
+        "map": "Albatif Village"
+      },
+      {
+        "monster": "Grass Dragon Yelb (Lv 93)",
+        "dye": "",
+        "map": "Albatif Village"
+      },
+      {
+        "monster": "Grass Dragon Yelb (Lv 113)",
+        "dye": "",
+        "map": "Albatif Village"
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "key": "ancient_empress",
+    "display": {
+      "name": "Ancient Empress",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "matk",
+        "value": 3,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 50,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": -10,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ancient Empress Mezzaluna (Lv 64)",
+        "dye": "",
+        "map": "Ancient Empress Tomb: Deepest Part"
+      },
+      {
+        "monster": "Ancient Empress Mezzaluna (Megiston 2016) (Lv 110)",
+        "dye": "",
+        "map": "Event"
+      },
+      {
+        "monster": "Ancient Empress Mezzaluna (Lv 74)",
+        "dye": "",
+        "map": "Ancient Empress Tomb: Deepest Part"
+      },
+      {
+        "monster": "Ancient Empress Mezzaluna (Lv 84)",
+        "dye": "",
+        "map": "Ancient Empress Tomb: Deepest Part"
+      },
+      {
+        "monster": "Ancient Empress Mezzaluna (Lv 104)",
+        "dye": "",
+        "map": "Ancient Empress Tomb: Deepest Part"
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "key": "warmonger",
+    "display": {
+      "name": "Warmonger",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "critical_rate",
+        "value": 6,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "critical_damage",
+        "value": 2,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Warmonger (Lv 60)",
+        "dye": "",
+        "map": "Haotas Ravine: Deepest Part"
+      },
+      {
+        "monster": "Warmonger (Lv 70)",
+        "dye": "",
+        "map": "Haotas Ravine: Deepest Part"
+      },
+      {
+        "monster": "Warmonger (Lv 80)",
+        "dye": "",
+        "map": "Haotas Ravine: Deepest Part"
+      },
+      {
+        "monster": "Warmonger (Lv 100)",
+        "dye": "",
+        "map": "Haotas Ravine: Deepest Part"
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "key": "seltirios",
+    "display": {
+      "name": "Seltirios",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxmp",
+        "value": -150,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "cspd",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Seltirios (Lv 60)",
+        "dye": "",
+        "map": "Aulada Ancient Tower"
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "key": "golden_skeleton",
+    "display": {
+      "name": "Golden Skeleton",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": -10,
+        "value_type": "percent"
+      },
+      {
+        "stat_key": "aspd",
+        "value": 300,
+        "value_type": "flat"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Golden Skeleton (Lv 54)",
+        "dye": "",
+        "map": "Zoktzda Ruins"
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "key": "giant_boar",
+    "display": {
+      "name": "Giant Boar",
+      "color": "yellow"
+    },
+    "type": "additional",
+    "stats": [
+      {
+        "stat_key": "maxhp",
+        "value": 50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "maxmp",
+        "value": 50,
+        "value_type": "flat"
+      },
+      {
+        "stat_key": "short_range_damage",
+        "value": 1,
+        "value_type": "percent"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Giant Boar (Lv 52)",
+        "dye": "",
+        "map": "Nisel Mountain"
+      }
+    ]
+  }
+]

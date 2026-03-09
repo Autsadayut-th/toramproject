@@ -1,0 +1,23 @@
+{
+  "weapon_types": {
+    "1H Sword": "1H_SWORD",
+    "2H Sword": "2H_SWORD",
+    "Bow": "BOW",
+    "Bowgun": "BOWGUN",
+    "Staff": "STAFF",
+    "Magic Device": "MAGIC_DEVICE",
+    "Knuckles": "KNUCKLES",
+    "Halberd": "HALBERD",
+    "Katana": "KATANA",
+    "Bare Hand": "BARE_HAND"
+  },
+
+  "sub_weapon_types": {
+    "Dagger": "DAGGER",
+    "Shield": "SHIELD",
+    "Arrow": "ARROW",
+    "Magic Device": "MAGIC_DEVICE",
+    "Knuckles": "KNUCKLES",
+    "Ninjutsu Scroll": "NINJUTSU_SCROLL"
+  }
+}

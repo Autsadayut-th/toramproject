@@ -1,0 +1,2474 @@
+[
+  {
+    "id": 1,
+    "name": "Goddess's Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 1
+    },
+    "stats": [
+      {
+        "key": "int",
+        "value": 5
+      },
+      {
+        "key": "maxmp",
+        "value": 100
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": -10
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Imitacia (Lv 109)",
+        "dye": "",
+        "map": "Dark Castle: Grand Hall"
+      },
+      {
+        "monster": "Imitacia (Lv 99)",
+        "dye": "",
+        "map": "Dark Castle: Grand Hall"
+      },
+      {
+        "monster": "Imitacia (Lv 119)",
+        "dye": "",
+        "map": "Dark Castle: Grand Hall"
+      },
+      {
+        "monster": "Imitacia (Lv 129)",
+        "dye": "",
+        "map": "Dark Castle: Grand Hall"
+      },
+      {
+        "monster": "Imitacia (Lv 149)",
+        "dye": "",
+        "map": "Dark Castle: Grand Hall"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Throwing Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 1
+    },
+    "stats": [
+      {
+        "key": "int",
+        "value": 1
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 3,
+    "name": "Caravan Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 4
+    },
+    "stats": [
+      {
+        "key": "evasion_recharge_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Power Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 8
+    },
+    "stats": [
+      {
+        "key": "str",
+        "value": 2
+      },
+      {
+        "key": "weapon_atk",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Twilight Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 10
+    },
+    "stats": [
+      {
+        "key": "aspd_pct",
+        "value": 10
+      },
+      {
+        "key": "cspd_pct",
+        "value": 10
+      },
+      {
+        "key": "additional_melee_pct",
+        "value": 10
+      },
+      {
+        "key": "additional_magic_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Twilight Dragon (Lv 100)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      },
+      {
+        "monster": "Twilight Dragon (Lv 90)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      },
+      {
+        "monster": "Twilight Dragon (Lv 110)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      },
+      {
+        "monster": "Twilight Dragon (Lv 120)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      },
+      {
+        "monster": "Twilight Dragon (Lv 140)",
+        "dye": "",
+        "map": "Fort Solfini: Roof"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 12
+    },
+    "stats": [
+      {
+        "key": "dodge",
+        "value": 3
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Thorny Twig [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 14
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 1
+      },
+      {
+        "key": "stability_pct",
+        "value": 7,
+        "condition": {
+          "weapon_required": "bowgun"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Shell Mask (Lv 23)",
+        "dye": "",
+        "map": "Nisel Mountain"
+      },
+      {
+        "monster": "Shell Mask (Lv 27)",
+        "dye": "",
+        "map": "Nisel Mountain: Mountainside"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Flower Bud Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 15
+    },
+    "stats": [
+      {
+        "key": "matk_pct",
+        "value": 1
+      },
+      {
+        "key": "cspd",
+        "value": 300
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Floragonet (Lv 129)",
+        "dye": "",
+        "map": "Cookie Road"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Magic Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 15
+    },
+    "stats": [
+      {
+        "key": "cspd",
+        "value": 50
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 5
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Heavy Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 17
+    },
+    "stats": [
+      {
+        "key": "str",
+        "value": 3
+      },
+      {
+        "key": "accuracy",
+        "value": -3
+      },
+      {
+        "key": "critical_rate",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Knife Shaft [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 20,
+      "stability": 0
+    },
+    "stats": [
+      {
+        "key": "critical_damage",
+        "value": 1
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 10
+      },
+      {
+        "key": "weapon_atk",
+        "value": 30,
+        "condition": {
+          "weapon_required": "bowgun"
+        }
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 13,
+    "name": "Storm Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 20
+    },
+    "stats": [
+      {
+        "key": "dodge_pct",
+        "value": 7
+      },
+      {
+        "key": "aspd_pct",
+        "value": 7
+      },
+      {
+        "key": "critical_rate_pct",
+        "value": 7
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Forestia (Lv 49)",
+        "dye": "",
+        "map": "Land Of Chaos"
+      },
+      {
+        "monster": "Forestia (Lv 39)",
+        "dye": "",
+        "map": "Land Of Chaos"
+      },
+      {
+        "monster": "Forestia (Lv 59)",
+        "dye": "",
+        "map": "Land Of Chaos"
+      },
+      {
+        "monster": "Forestia (Lv 69)",
+        "dye": "",
+        "map": "Land Of Chaos"
+      },
+      {
+        "monster": "Forestia (Lv 89)",
+        "dye": "",
+        "map": "Land Of Chaos"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Parrying Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 22
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Parrying Dagger ZC [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 22
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "critical_rate",
+        "value": 5,
+        "condition": {
+          "weapon_required": "bowgun"
+        }
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 16,
+    "name": "Army Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 27
+    },
+    "stats": [
+      {
+        "key": "dex",
+        "value": 2
+      },
+      {
+        "key": "maxmp",
+        "value": 100
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Magical Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 30
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 300
+      },
+      {
+        "key": "additional_magic_pct",
+        "value": 70
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 18,
+    "name": "Sailor's Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 30
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 100
+      },
+      {
+        "key": "matk_pct",
+        "value": 1
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": -3
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 20,
+    "name": "Lightweight Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 33,
+      "stability": 0
+    },
+    "stats": [
+      {
+        "key": "magic_resistance_pct",
+        "value": -10
+      },
+      {
+        "key": "aspd",
+        "value": 100
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Blood Drain Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 40
+    },
+    "stats": [
+      {
+        "key": "natural_hp_regen_pct",
+        "value": 5
+      },
+      {
+        "key": "stability_pct",
+        "value": -10
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Marshmallow Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 45
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 100
+      },
+      {
+        "key": "accuracy_pct",
+        "value": 10
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 10
+      },
+      {
+        "key": "stability_pct",
+        "value": 10,
+        "condition": {
+          "weapon_required": "bowgun"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Fin Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 47
+    },
+    "stats": [
+      {
+        "key": "stability_pct",
+        "value": -10
+      },
+      {
+        "key": "critical_damage",
+        "value": 5
+      },
+      {
+        "key": "fire_resistance_pct",
+        "value": -20
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Finpen (Lv 83)",
+        "dye": "",
+        "map": "Spring of Rebirth: Lower"
+      },
+      {
+        "monster": "Finpen (Lv 83)",
+        "dye": "",
+        "map": "Spring of Rebirth: Middle"
+      },
+      {
+        "monster": "Finpen (Lv 85)",
+        "dye": "",
+        "map": "Spring of Rebirth: Upper"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Kukri [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 50
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 7
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 10
+      },
+      {
+        "key": "additional_melee_pct",
+        "value": 50
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Corroded Knight (Lv 78)",
+        "dye": "",
+        "map": "Trace of Dark River"
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Kukri [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 50
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 10
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 10
+      },
+      {
+        "key": "additional_melee_pct",
+        "value": 50
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Bush Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 54
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 6
+      },
+      {
+        "key": "aspd_pct",
+        "value": -2
+      },
+      {
+        "key": "weapon_atk",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Demi Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 54
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 150
+      },
+      {
+        "key": "critical_rate",
+        "value": 5
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": -30
+      },
+      {
+        "key": "flinch_unavailable",
+        "value": true
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Demi Machina (Lv 86)",
+        "dye": "",
+        "map": "Artillery Defense Line"
+      },
+      {
+        "monster": "Demi Marchina (Lv 87)",
+        "dye": "",
+        "map": "Artillery Defense Line"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Dully Glowing Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 54
+    },
+    "stats": [
+      {
+        "key": "agi",
+        "value": 2
+      },
+      {
+        "key": "critical_rate",
+        "value": 4
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 29,
+    "name": "Chocolate Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 60
+    },
+    "stats": [
+      {
+        "key": "natural_hp_regen_pct",
+        "value": 15
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 5
+      },
+      {
+        "key": "tumble_unavailable",
+        "value": true
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Cursed Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 60,
+      "stability": 0
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": -200
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 5
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": -5
+      },
+      {
+        "key": "weapon_atk",
+        "value": 13
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Death Zombeast (Lv 42)",
+        "dye": "",
+        "map": "Ethos Fortress"
+      },
+      {
+        "monster": "Death Zombeast (Lv 45)",
+        "dye": "",
+        "map": "Ethos Fortress"
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "name": "Sorting Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 60
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 5
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": -5
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Sorter Golem (Lv 125)",
+        "dye": "",
+        "map": "Joulu House: Gift Room (Lv 100)"
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Sorting Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 60
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 10
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": -10
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Sorter Golem (Lv 146)",
+        "dye": "",
+        "map": "Joulu House: Gift Room (Lv 130)"
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Sorting Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 60
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 15
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": -15
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Sorter Golem (Lv 167)",
+        "dye": "",
+        "map": "Joulu House: Gift Room (Lv 150)"
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "name": "Trench Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 60
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 5
+      },
+      {
+        "key": "def",
+        "value": 15
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Coronella (Lv 162)",
+        "dye": "",
+        "map": "Inanis Wilderness"
+      },
+      {
+        "monster": "Coronella (Lv 166)",
+        "dye": "",
+        "map": "Inanis Wilderness"
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "name": "Anniv Festive Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 62
+    },
+    "stats": [
+      {
+        "key": "cspd",
+        "value": 100
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 10
+      },
+      {
+        "key": "tumble_unavailable",
+        "value": true
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Anniv Equipment Box I",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Biscuit Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 70
+    },
+    "stats": [
+      {
+        "key": "natural_hp_regen_pct",
+        "value": 10
+      },
+      {
+        "key": "maxmp",
+        "value": 200
+      },
+      {
+        "key": "aggro_pct",
+        "value": -20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Dive Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 70
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 12
+      },
+      {
+        "key": "wind_resistance_pct",
+        "value": -9
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Rat Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 71
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 5
+      },
+      {
+        "key": "aspd",
+        "value": 250
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Soldier Rat (Lv 107)",
+        "dye": "",
+        "map": "Ultimea Sewer: East"
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Odd-Shaped Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 72,
+      "stability": 0
+    },
+    "stats": [
+      {
+        "key": "mdef_pct",
+        "value": -33
+      },
+      {
+        "key": "critical_damage",
+        "value": 3
+      },
+      {
+        "key": "critical_damage_pct",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Nurethoth (Lv 76)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      },
+      {
+        "monster": "Nurethoth (Lv 66)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      },
+      {
+        "monster": "Nurethoth (Lv 86)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      },
+      {
+        "monster": "Nurethoth (Lv 96)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      },
+      {
+        "monster": "Nurethoth (Lv 116)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Sealing Talisman [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 72,
+      "stability": 0
+    },
+    "stats": [
+      {
+        "key": "matk_pct",
+        "value": 3
+      },
+      {
+        "key": "cspd_pct",
+        "value": 10
+      },
+      {
+        "key": "light_resistance_pct",
+        "value": -30
+      },
+      {
+        "key": "light_resistance",
+        "value": 25,
+        "condition": {
+          "weapon_required": "staff"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Besy (Lv 182)",
+        "dye": "",
+        "map": "Arche Valley: Area 1"
+      },
+      {
+        "monster": "Besy (Lv 183)",
+        "dye": "",
+        "map": "Arche Valley: Area 2"
+      },
+      {
+        "monster": "Besy (Lv 184)",
+        "dye": "",
+        "map": "Arche Valley: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Guardian Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 80
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 10
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Galdon (Lv 129)",
+        "dye": "",
+        "map": "Buried Tower: Collapsed Top"
+      },
+      {
+        "monster": "Galdon (Lv 131)",
+        "dye": "",
+        "map": "Buried Tower: Inside"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Wood Choco Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 82
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 400
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 4
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Gramp (Lv 76)",
+        "dye": "",
+        "map": "Sweet Hades"
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Chaos Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 84
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 1000
+      },
+      {
+        "key": "maxmp",
+        "value": -100
+      },
+      {
+        "key": "neutral_resistance_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Mozto Machina (Lv 114)",
+        "dye": "",
+        "map": "Large Demi Machina Factory: Deepest Part"
+      },
+      {
+        "monster": "Mozto Machina (Lv 124)",
+        "dye": "",
+        "map": "Large Demi Machina Factory: Deepest Part"
+      },
+      {
+        "monster": "Mozto Machina (Lv 134)",
+        "dye": "",
+        "map": "Large Demi Machina Factory: Deepest Part"
+      },
+      {
+        "monster": "Mozto Machina (Lv 144)",
+        "dye": "",
+        "map": "Large Demi Machina Factory: Deepest Part"
+      },
+      {
+        "monster": "Mozto Machina (Lv 164)",
+        "dye": "",
+        "map": "Large Demi Machina Factory: Deepest Part"
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "name": "Antique Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 100
+    },
+    "stats": [],
+    "obtained_from": [
+      {
+        "monster": "Cursed Clock (Lv 71)",
+        "dye": "",
+        "map": "Magic Waste Site: Area 2"
+      },
+      {
+        "monster": "Cursed Clock (Lv 71)",
+        "dye": "",
+        "map": "Magic Waste Site: Area 3"
+      },
+      {
+        "monster": "Dirty Antique",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Holy Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 100
+    },
+    "stats": [
+      {
+        "key": "matk_pct",
+        "value": 2
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "tumble_unavailable",
+        "value": true
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Destiny Cube (Lv 146)",
+        "dye": "",
+        "map": "Hall of Special Gods"
+      },
+      {
+        "monster": "Destiny Cube (Lv 147)",
+        "dye": "",
+        "map": "Hall of Construction Gods"
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "name": "Lil Empress Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 104
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 10
+      },
+      {
+        "key": "water_resistance_pct",
+        "value": -15
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Venena Coenubia (Lv 140)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      },
+      {
+        "monster": "Venena Coenubia (YK Wifey) (Lv 150)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      },
+      {
+        "monster": "Venena Coenubia (YK Wifey) (Lv 160)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      },
+      {
+        "monster": "Venena Coenubia (YK Wifey) (Lv 170)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      },
+      {
+        "monster": "Venena Coenubia (YK Wifey) (Lv 190)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Icy Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 110
+    },
+    "stats": [
+      {
+        "key": "water_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "tumble_unavailable",
+        "value": true
+      },
+      {
+        "key": "pct_stronger_against_fire",
+        "value": 5,
+        "condition": {
+          "weapon_required": "1-handed_sword"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Acernix (Lv 141)",
+        "dye": "",
+        "map": "Tomte Pavillion (130-150)"
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "name": "Insect Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 110
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 30
+      },
+      {
+        "key": "aspd",
+        "value": 200
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Insector (Lv 162)",
+        "dye": "",
+        "map": "Labilans Sector: Area 1"
+      },
+      {
+        "monster": "Insector (Lv 163)",
+        "dye": "",
+        "map": "Labilans Sector: Area 2"
+      },
+      {
+        "monster": "Insector (Lv 164)",
+        "dye": "",
+        "map": "Labilans Sector: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "name": "Sakura Princess Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 110
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 100
+      },
+      {
+        "key": "stability_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_power_pct",
+        "value": 25
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 25
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Mimesia (Easy) (Lv 120)",
+        "dye": "",
+        "map": "Sakura Castle Donjon: Top"
+      },
+      {
+        "monster": "Mimesia (Normal) (Lv 140)",
+        "dye": "",
+        "map": "Sakura Castle Donjon: Top"
+      },
+      {
+        "monster": "Mimesia (Hard) (Lv 160)",
+        "dye": "",
+        "map": "Sakura Castle Donjon: Top"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "name": "Trick Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 121
+    },
+    "stats": [
+      {
+        "key": "cspd",
+        "value": 150
+      },
+      {
+        "key": "additional_magic_pct",
+        "value": 75
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Zarth (Lv 175)",
+        "dye": "",
+        "map": "Zarth's Mansion: Back"
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "name": "Anniv Festive Dagger II [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 126
+    },
+    "stats": [
+      {
+        "key": "cspd",
+        "value": 200
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 12
+      },
+      {
+        "key": "tumble_unavailable",
+        "value": true
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Anniv Equipment Box III",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "name": "Apple Branch Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 126
+    },
+    "stats": [
+      {
+        "key": "aspd_pct",
+        "value": 5
+      },
+      {
+        "key": "pct_stronger_against_wind",
+        "value": 5
+      },
+      {
+        "key": "wind_resistance_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Coryn (Lv 161)",
+        "dye": "",
+        "map": "Sugar Plain"
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "name": "Sashimi Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 130
+    },
+    "stats": [
+      {
+        "key": "pct_stronger_against_water",
+        "value": 5
+      },
+      {
+        "key": "water_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": -15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Porgy (Lv 163)",
+        "dye": "",
+        "map": "Lunagent Cliff Base"
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "name": "Twilight Sakura Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 130
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 400
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Amalgam (Lv 140)",
+        "dye": "",
+        "map": "Twilight Sakura Castle: Top"
+      },
+      {
+        "monster": "Amalgam (Lv 160)",
+        "dye": "",
+        "map": "Twilight Sakura Castle: Top"
+      },
+      {
+        "monster": "Amalgam (Lv 180)",
+        "dye": "",
+        "map": "Twilight Sakura Castle: Top"
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "name": "Hefty Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 138
+    },
+    "stats": [
+      {
+        "key": "str",
+        "value": 4
+      },
+      {
+        "key": "critical_rate",
+        "value": 4
+      },
+      {
+        "key": "critical_damage",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Hunky Chocogato (Lv 172)",
+        "dye": "",
+        "map": "Chocolate Reservoir"
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "name": "Demon Empress Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 150
+    },
+    "stats": [
+      {
+        "key": "magic_pierce_pct",
+        "value": 5
+      },
+      {
+        "key": "critical_rate",
+        "value": 10
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Venena Metacoenubia (Lv 185)",
+        "dye": "",
+        "map": "Neo Plastida"
+      },
+      {
+        "monster": "Venena Metacoenubia (Lv 195)",
+        "dye": "",
+        "map": "Neo Plastida"
+      },
+      {
+        "monster": "Venena Metacoenubia (Lv 205)",
+        "dye": "",
+        "map": "Neo Plastida"
+      },
+      {
+        "monster": "Venena Metacoenubia (Lv 215)",
+        "dye": "",
+        "map": "Neo Plastida"
+      },
+      {
+        "monster": "Venena Metacoenubia (Lv 235)",
+        "dye": "",
+        "map": "Neo Plastida"
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "name": "Fallen Angel Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 150
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 3
+      },
+      {
+        "key": "critical_damage",
+        "value": 3
+      },
+      {
+        "key": "recoil_pct",
+        "value": 0.01
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Bubble Bogey (Lv 177)",
+        "dye": "",
+        "map": "Barbaros Corridor"
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "name": "Kitchen Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 150
+    },
+    "stats": [
+      {
+        "key": "pct_stronger_against_earth",
+        "value": 5
+      },
+      {
+        "key": "earth_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": -15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Tomaton (Lv 170)",
+        "dye": "",
+        "map": "Phasma Forest: Area 1"
+      },
+      {
+        "monster": "Tomaton (Lv 171)",
+        "dye": "",
+        "map": "Phasma Forest: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "name": "Life Branch Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 150,
+      "stability": 0
+    },
+    "stats": [
+      {
+        "key": "natural_hp_regen_pct",
+        "value": 10
+      },
+      {
+        "key": "maxhp_pct",
+        "value": 20
+      },
+      {
+        "key": "stability_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Arigazella (Lv 180)",
+        "dye": "",
+        "map": "Movere Specula"
+      },
+      {
+        "monster": "Arigazella (Lv 183)",
+        "dye": "",
+        "map": "Movere Specula"
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "name": "Beak Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 157
+    },
+    "stats": [
+      {
+        "key": "str_pct",
+        "value": 1
+      },
+      {
+        "key": "atk_pct",
+        "value": 1
+      },
+      {
+        "key": "stability_pct",
+        "value": -3
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Dodos (Lv 192)",
+        "dye": "",
+        "map": "Vulcani Foothills"
+      },
+      {
+        "monster": "Dodos (Lv 195)",
+        "dye": "",
+        "map": "Vulcani Foothills"
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "name": "Scarlet Sakura Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 170
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 7
+      },
+      {
+        "key": "critical_rate",
+        "value": 14
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Dreamy Scarlet Sakura (Nightmare) (Lv 220)",
+        "dye": "",
+        "map": "Lush Falls : Upstream"
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "name": "Scratch Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 170
+    },
+    "stats": [
+      {
+        "key": "accuracy_pct",
+        "value": 8
+      },
+      {
+        "key": "aspd_pct",
+        "value": 20
+      },
+      {
+        "key": "additional_melee_pct",
+        "value": 50
+      },
+      {
+        "key": "additional_magic_pct",
+        "value": 50
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Nix (Lv 200)",
+        "dye": "",
+        "map": "Illuminare City: Route 1 (190-210)"
+      },
+      {
+        "monster": "Nix (Lv 200)",
+        "dye": "",
+        "map": "Illuminare City: Route 2 (190-210)"
+      },
+      {
+        "monster": "Nix (Lv 200)",
+        "dye": "",
+        "map": "Illuminare City: Route 3 (190-210)"
+      },
+      {
+        "monster": "Nix (Lv 202)",
+        "dye": "",
+        "map": "Illuminare City: Route 3 (190-210)"
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "name": "Steel Leaf Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 178
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 5
+      },
+      {
+        "key": "fire_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "long_range_damage_pct",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "name": "Rock Fang Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 179
+    },
+    "stats": [],
+    "obtained_from": [
+      {
+        "monster": "Stone (Lv 139)",
+        "dye": "",
+        "map": "Forgotten Cave"
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "name": "Anniv Festive Dagger III [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 183
+    },
+    "stats": [
+      {
+        "key": "cspd",
+        "value": 300
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 14
+      },
+      {
+        "key": "tumble_unavailable",
+        "value": true
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Anniv Equipment Box V",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "name": "Corroded Dragon Claw Sword [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 183
+    },
+    "stats": [
+      {
+        "key": "aggro_pct",
+        "value": 20
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 10
+      },
+      {
+        "key": "reduce_dmg_(floor)_pct",
+        "value": 30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Corroded Dragist (Lv 212)",
+        "dye": "",
+        "map": "Stairway to Vital Point"
+      },
+      {
+        "monster": "Corroded Dragist (Lv 214)",
+        "dye": "",
+        "map": "Stairway to Vital Point"
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "name": "Honeybee Sting Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 183,
+      "stability": 0
+    },
+    "stats": [
+      {
+        "key": "agi_pct",
+        "value": 1
+      },
+      {
+        "key": "dodge_pct",
+        "value": 10
+      },
+      {
+        "key": "critical_rate",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Floral Bee (Lv 200)",
+        "dye": "",
+        "map": "Madeleine Plains"
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "name": "Pearl Sakura Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 200
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 250
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "aggro_pct",
+        "value": -20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "name": "Anger Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 219
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 20
+      },
+      {
+        "key": "aggro_pct",
+        "value": 80
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Anchorsea (Lv 232)",
+        "dye": "",
+        "map": "Seabed"
+      },
+      {
+        "monster": "Anchorsea (Lv 234)",
+        "dye": "",
+        "map": "Seabed"
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "name": "Tuning Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 222
+    },
+    "stats": [
+      {
+        "key": "stability_pct",
+        "value": 10
+      },
+      {
+        "key": "critical_rate",
+        "value": 10
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 75,
+    "name": "Melting Knife [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 234
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 5
+      },
+      {
+        "key": "water_resistance_pct",
+        "value": -15
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 5
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Magmanus (Lv 248)",
+        "dye": "",
+        "map": "Perdida Wasteland"
+      },
+      {
+        "monster": "Magmanus (Lv 250)",
+        "dye": "",
+        "map": "Perdida Wasteland"
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "name": "Dewclaw Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 236
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 15
+      },
+      {
+        "key": "critical_damage_pct",
+        "value": -1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ragus (Lv 158)",
+        "dye": "",
+        "map": "Manor of Surprises"
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "name": "Anniv Festive Dagger IV [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 242
+    },
+    "stats": [
+      {
+        "key": "cspd",
+        "value": 400
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 16
+      },
+      {
+        "key": "tumble_unavailable",
+        "value": true
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Anniv Equipment Box VII",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "name": "Dagger of Grace [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 242
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 1000
+      },
+      {
+        "key": "maxmp",
+        "value": 200
+      },
+      {
+        "key": "aggro_pct",
+        "value": -30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Apapat (Lv 246)",
+        "dye": "",
+        "map": "Little Shrine of Grace: Area 1"
+      },
+      {
+        "monster": "Apapat (Lv 247)",
+        "dye": "",
+        "map": "Little Shrine of Grace: Area 2"
+      },
+      {
+        "monster": "Apapat (Lv 248)",
+        "dye": "",
+        "map": "Little Shrine of Grace: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "name": "Frog Warrior Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 250
+    },
+    "stats": [
+      {
+        "key": "accuracy_pct",
+        "value": 5
+      },
+      {
+        "key": "aggro_pct",
+        "value": -10
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 1
+      },
+      {
+        "key": "motion_speed_pct",
+        "value": 3
+      },
+      {
+        "key": "cspd_pct",
+        "value": 20,
+        "condition": {
+          "weapon_required": "bowgun"
+        }
+      },
+      {
+        "key": "critical_rate_pct",
+        "value": 20,
+        "condition": {
+          "weapon_required": "1-handed_sword"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Zapo (Lv 246)",
+        "dye": "",
+        "map": "Puerta Islands: Adit"
+      },
+      {
+        "monster": "Zapo (Lv 256)",
+        "dye": "",
+        "map": "Puerta Islands: Adit"
+      },
+      {
+        "monster": "Zapo (Lv 266)",
+        "dye": "",
+        "map": "Puerta Islands: Adit"
+      },
+      {
+        "monster": "Zapo (Lv 276)",
+        "dye": "",
+        "map": "Puerta Islands: Adit"
+      },
+      {
+        "monster": "Zapo (Lv 296)",
+        "dye": "",
+        "map": "Puerta Islands: Adit"
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "name": "Medical Messer [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 295,
+      "stability": 0
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 20
+      },
+      {
+        "key": "critical_rate_pct",
+        "value": 20
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 10
+      },
+      {
+        "key": "invincible_aid_(sec)",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Bemoz (Lv 300)",
+        "dye": "",
+        "map": "Deusania's Lab Innermost Chambers"
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "name": "Sakura Branch Dagger [Dagger]",
+    "type": "Dagger",
+    "base": {
+      "atk": 300
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 1
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 2
+      },
+      {
+        "key": "magic_pierce_pct",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ivy (Lv 222)",
+        "dye": "",
+        "map": "Day Sakura Garden: Mountains"
+      }
+    ]
+  }
+]

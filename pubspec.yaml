@@ -76,6 +76,11 @@ flutter:
     - assets/data/skill_menu/images/Sprite/
     - assets/data/monster_library/
     - assets/data/rules/
+    - assets/data/ai_modules/
+    - assets/data/items/
+    - assets/data/logo/
+    - assets/data/system/
+    - assets/data/version/
     - assets/logo/logo.png
     - assets/fonts/MaterialIcons-Regular.otf
 

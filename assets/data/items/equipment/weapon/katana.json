@@ -1,0 +1,10342 @@
+[
+  {
+    "id": 1,
+    "name": "Abyssal Katana [Katana]",
+    "type": "Katana",
+    "base": {},
+    "stats": [],
+    "obtained_from": [
+      {
+        "monster": "Biskyva (Lv 273)",
+        "dye": "",
+        "map": "Aquastida Central"
+      },
+      {
+        "monster": "Biskyva (Lv 283)",
+        "dye": "",
+        "map": "Aquastida Central"
+      },
+      {
+        "monster": "Biskyva (Lv 293)",
+        "dye": "",
+        "map": "Aquastida Central"
+      },
+      {
+        "monster": "Biskyva (Lv 303)",
+        "dye": "",
+        "map": "Aquastida Central"
+      },
+      {
+        "monster": "Biskyva (Lv 323)",
+        "dye": "",
+        "map": "Aquastida Central"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Assassin Blade [Katana]",
+    "type": "Katana",
+    "base": {},
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 750
+      },
+      {
+        "key": "critical_rate",
+        "value": 75
+      },
+      {
+        "key": "light_resistance_pct",
+        "value": -25
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Fladorga (Lv 247)",
+        "dye": "",
+        "map": "Little Shrine of Grace: Area 1"
+      },
+      {
+        "monster": "Fladorga (Lv 248)",
+        "dye": "",
+        "map": "Little Shrine of Grace: Area 2"
+      },
+      {
+        "monster": "Fladorga (Lv 249)",
+        "dye": "",
+        "map": "Little Shrine of Grace: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Fake Sakura Storm [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 1
+    },
+    "stats": [
+      {
+        "key": "weapon_atk",
+        "value": 1
+      }
+    ],
+    "obtained_from": []
+  },
+  {
+    "id": 4,
+    "name": "Shirasaya [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 4,
+      "stability": 70
+    },
+    "stats": [],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Shirasaya [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 4,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Shirasaya [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 4,
+      "stability": 70
+    },
+    "stats": [],
+    "obtained_from": []
+  },
+  {
+    "id": 8,
+    "name": "Nameless Uchigatana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 6,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Nameless Uchigatana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 6,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 16
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Nameless Uchigatana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 6,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Kijimu (Lv 11)",
+        "dye": "",
+        "map": "Suedor Cliff"
+      },
+      {
+        "monster": "Kijimu (Lv 13)",
+        "dye": "",
+        "map": "Suedor Cliff"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Aobato [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 10,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 100
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Aobato [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 10,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 18
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Aobato [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 10,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 75
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Beak (Lv 11)",
+        "dye": "",
+        "map": "Ruined Temple Town"
+      },
+      {
+        "monster": "Beak (Lv 12)",
+        "dye": "",
+        "map": "Ruined Temple Town"
+      },
+      {
+        "monster": "Beak (Lv 18)",
+        "dye": "",
+        "map": "Ruined Temple: Area 1"
+      },
+      {
+        "monster": "Beak (Lv 19)",
+        "dye": "",
+        "map": "Ruined Temple: Area 1"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "3rd Anniv Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 11,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 1
+      },
+      {
+        "key": "critical_rate",
+        "value": 2
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 1
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      },
+      {
+        "monster": "Anniv Equipment Box III",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "3rd Anniv Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 11,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 19
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "4th Anniv Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 11,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 1
+      },
+      {
+        "key": "critical_rate",
+        "value": 2
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 1
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      },
+      {
+        "monster": "Anniv Equipment Box IV",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "4th Anniv Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 11,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 19
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Golden Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 12,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "int",
+        "value": 3
+      },
+      {
+        "key": "maxmp",
+        "value": 250
+      },
+      {
+        "key": "aspd",
+        "value": 100
+      },
+      {
+        "key": "critical_rate",
+        "value": 10
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Kuwagumo [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 13,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 100
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Kuwagumo [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 13,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 19
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Kuwagumo [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 13,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 50
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Fire Ghost (Lv 28)",
+        "dye": "",
+        "map": "Fiery Volcano: Area 1"
+      },
+      {
+        "monster": "Fire Ghost (Lv 28)",
+        "dye": "",
+        "map": "Fiery Volcano: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Minotaur's Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 15,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 3
+      },
+      {
+        "key": "fire_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Minotaur's Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 15,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Minotaur's Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "def": 17,
+      "atk": 15
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 5
+      },
+      {
+        "key": "fire_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Minotaur (Lv 32)",
+        "dye": "",
+        "map": "Ruined Temple: Forbidden hall"
+      },
+      {
+        "monster": "Minotaur (Lv 22)",
+        "dye": "",
+        "map": "Ruined Temple: Forbidden hall"
+      },
+      {
+        "monster": "Minotaur (Lv 42)",
+        "dye": "",
+        "map": "Ruined Temple: Forbidden hall"
+      },
+      {
+        "monster": "Minotaur (Lv 52)",
+        "dye": "",
+        "map": "Ruined Temple: Forbidden hall"
+      },
+      {
+        "monster": "Minotaur (Lv 72)",
+        "dye": "",
+        "map": "Ruined Temple: Forbidden hall"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Kiraboshi [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 17,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 5
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Kiraboshi [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 17,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 21
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Kiraboshi [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 17,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 4
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Stone (Lv 39)",
+        "dye": "",
+        "map": "New Moon Palace"
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "name": "3rd Anniv Katana II [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 22,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 2
+      },
+      {
+        "key": "critical_rate",
+        "value": 4
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 2
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "name": "3rd Anniv Katana II [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 22,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 23
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "name": "4th Anniv Katana II [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 22,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 2
+      },
+      {
+        "key": "critical_rate",
+        "value": 4
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 2
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "name": "4th Anniv Katana II [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 22,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 23
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Death Samurai Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 22,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 1500
+      },
+      {
+        "key": "critical_rate",
+        "value": 50
+      },
+      {
+        "key": "earth_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 3
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "reduce_dmg_(bullet)_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "name": "Death Samurai Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 22,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 22
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "name": "Tatetsuba [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 22,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Tatetsuba [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 22,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 23
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Tatetsuba [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 22,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Bone Dragonewt (Lv 45)",
+        "dye": "",
+        "map": "Ancient Empress Tomb: Area 1"
+      },
+      {
+        "monster": "Bone Dragonewt (Lv 46)",
+        "dye": "",
+        "map": "Ancient Empress Tomb: Area 1"
+      },
+      {
+        "monster": "Bone Dragonewt (Lv 46)",
+        "dye": "",
+        "map": "Ancient Empress Tomb: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Ooze Lamina [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 24,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "critical_damage_pct",
+        "value": 2
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "additional_magic_pct",
+        "value": 25
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Ooze Lamina [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 24,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 23
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Ooze Lamina [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 24,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "critical_damage_pct",
+        "value": 3
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "additional_magic_pct",
+        "value": 50
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ooze (Lv 52)",
+        "dye": "",
+        "map": "Lutaros Cavern: Deepest Part"
+      },
+      {
+        "monster": "Ooze (Lv 42)",
+        "dye": "",
+        "map": "Lutaros Cavern: Deepest Part"
+      },
+      {
+        "monster": "Ooze (Lv 62)",
+        "dye": "",
+        "map": "Lutaros Cavern: Deepest Part"
+      },
+      {
+        "monster": "Ooze (Lv 72)",
+        "dye": "",
+        "map": "Lutaros Cavern: Deepest Part"
+      },
+      {
+        "monster": "Ooze (Lv 92)",
+        "dye": "",
+        "map": "Lutaros Cavern: Deepest Part"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Koga Koshirae [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 26,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 300
+      },
+      {
+        "key": "atk_pct",
+        "value": 2
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Koga Koshirae [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 26,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 24
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Koga Koshirae [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 26,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 250
+      },
+      {
+        "key": "atk_pct",
+        "value": 2
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 8
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Colon Zombie (Lv 57)",
+        "dye": "",
+        "map": "Vyshed the Tainted Land: Area 1"
+      },
+      {
+        "monster": "Colon Zombie (Lv 59)",
+        "dye": "",
+        "map": "Vyshed the Tainted Land: Area 1"
+      },
+      {
+        "monster": "Colon Zombie (Lv 59)",
+        "dye": "",
+        "map": "Vyshed the Tainted Land: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "name": "Sakura Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 27,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 100
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "critical_damage",
+        "value": 1
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 1
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 1
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Sakura Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 27,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 200
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "critical_damage",
+        "value": 2
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 3
+      },
+      {
+        "key": "weapon_atk",
+        "value": 120
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Mimesia (Nightmare) (Lv 180)",
+        "dye": "A B C",
+        "map": "Sakura Castle Donjon: Top"
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "name": "Shura Koshirae [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 32,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 20
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Shura Koshirae [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 32,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 26
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "name": "Shura Koshirae [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 32,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "guard_power_pct",
+        "value": 18
+      },
+      {
+        "key": "guard_recharge_pct",
+        "value": 18
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Targa (Lv 72)",
+        "dye": "",
+        "map": "Abyss of No Return: Area 1"
+      },
+      {
+        "monster": "Targa (Lv 77)",
+        "dye": "",
+        "map": "Abyss of No Return: Area 2"
+      },
+      {
+        "monster": "Targa (Lv 78)",
+        "dye": "",
+        "map": "Abyss of No Return: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "name": "3rd Anniv Katana III [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 34,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 3
+      },
+      {
+        "key": "critical_rate",
+        "value": 6
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 3
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "name": "4th Anniv Katana III [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 34,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 3
+      },
+      {
+        "key": "critical_rate",
+        "value": 6
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 3
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "name": "4th Anniv Katana III [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 34,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 27
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "name": "5th Anniv Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 34,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 4
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 15
+      },
+      {
+        "key": "critical_rate",
+        "value": 12
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 4
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 8
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      },
+      {
+        "monster": "Anniv Equipment Box V",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "name": "5th Anniv Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 34,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 27
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "name": "Faldios [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 34,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "stability_pct",
+        "value": 2
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 1
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 25
+      },
+      {
+        "key": "magic_barrier",
+        "value": 1000
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "name": "Faldios [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 34,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 27
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "name": "Faldios [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 34,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "stability_pct",
+        "value": 4
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 2
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 25
+      },
+      {
+        "key": "magic_barrier",
+        "value": 500
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Nurethoth (Lv 76)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      },
+      {
+        "monster": "Nurethoth (Lv 66)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      },
+      {
+        "monster": "Nurethoth (Lv 86)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      },
+      {
+        "monster": "Nurethoth (Lv 96)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      },
+      {
+        "monster": "Nurethoth (Lv 116)",
+        "dye": "",
+        "map": "Gate to Another World: Front"
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "name": "Sumire Renkyoku [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 37,
+      "stability": 65
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 10
+      },
+      {
+        "key": "critical_damage",
+        "value": 10
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "name": "Sumire Renkyoku [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 37,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 28
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "name": "Sumire Renkyoku [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 37,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 5
+      },
+      {
+        "key": "critical_damage",
+        "value": 10
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Flying Executioner (Lv 89)",
+        "dye": "",
+        "map": "Cradle of Soldier: Entrance"
+      },
+      {
+        "monster": "Flying Executioner (Lv 89)",
+        "dye": "",
+        "map": "Cradle of Soldier: Inside"
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "name": "6th Anniv Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 40,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 4
+      },
+      {
+        "key": "critical_rate",
+        "value": 30
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 4
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 8
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      },
+      {
+        "monster": "Anniv Equipment Box VI",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "name": "6th Anniv Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 40,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 28
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "name": "Ice Katana Ace [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 40,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 400
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 2
+      },
+      {
+        "key": "additional_magic_pct",
+        "value": 100
+      },
+      {
+        "key": "atk_up_(int_pct)",
+        "value": 100
+      },
+      {
+        "key": "atk_down_(str_pct)",
+        "value": 150
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "name": "Ice Katana Ace [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 40,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 28
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "name": "Kuro Momiji [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 43,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "stability_pct",
+        "value": 5
+      },
+      {
+        "key": "aspd",
+        "value": 400
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "name": "Kuro Momiji [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 43,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 29
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "name": "Kuro Momiji [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 43,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "stability_pct",
+        "value": 3
+      },
+      {
+        "key": "aspd",
+        "value": 300
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Blaze Ant (Lv 99)",
+        "dye": "",
+        "map": "Blazing Graben: Upper"
+      },
+      {
+        "monster": "Blaze Ant (Lv 99)",
+        "dye": "",
+        "map": "Blazing Graben: Lower"
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "name": "3rd Anniv Katana IV [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 46,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 4
+      },
+      {
+        "key": "critical_rate",
+        "value": 8
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 4
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 8
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "name": "3rd Anniv Katana IV [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 46,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "name": "4th Anniv Katana IV [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 46,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 4
+      },
+      {
+        "key": "critical_rate",
+        "value": 8
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 4
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 8
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "name": "4th Anniv Katana IV [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 46,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "name": "Mafu Swordstick [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 46,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dodge",
+        "value": 30
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "name": "Mafu Swordstick [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 46,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "name": "Mafu Swordstick [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 46,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dodge",
+        "value": 40
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": 20
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Zolban (Lv 98)",
+        "dye": "",
+        "map": "Dark Mirror"
+      },
+      {
+        "monster": "Zolban (Lv 88)",
+        "dye": "",
+        "map": "Dark Mirror"
+      },
+      {
+        "monster": "Zolban (Lv 108)",
+        "dye": "",
+        "map": "Dark Mirror"
+      },
+      {
+        "monster": "Zolban (Lv 118)",
+        "dye": "",
+        "map": "Dark Mirror"
+      },
+      {
+        "monster": "Zolban (Lv 138)",
+        "dye": "",
+        "map": "Dark Mirror"
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "name": "Kuro Tsurubami [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 50,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 1200
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 6
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "name": "Kuro Tsurubami [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 50,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 31
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "name": "Kuro Tsurubami [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 50,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 1000
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 5
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Torture Machina (Lv 106)",
+        "dye": "",
+        "map": "Small Demi Machina Factory: Area 1"
+      },
+      {
+        "monster": "Torture Machina (Lv 106)",
+        "dye": "",
+        "map": "Small Demi Machina Factory: Area 2"
+      },
+      {
+        "monster": "Torture Machina (Lv 109)",
+        "dye": "",
+        "map": "Small Demi Machina Factory: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "name": "3rd Anniv Katana V [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 56,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 5
+      },
+      {
+        "key": "critical_rate",
+        "value": 10
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 5
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "name": "3rd Anniv Katana V [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 56,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 32
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "name": "4th Anniv Katana V [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 56,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 5
+      },
+      {
+        "key": "critical_rate",
+        "value": 10
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 5
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "name": "4th Anniv Katana V [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 56,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 32
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "name": "5th Anniv Katana II [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 56,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 5
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 15
+      },
+      {
+        "key": "critical_rate",
+        "value": 15
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 5
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 9
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "name": "5th Anniv Katana II [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 56,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 32
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "name": "Death Samurai Sword II [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 56,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 3000
+      },
+      {
+        "key": "critical_rate",
+        "value": 75
+      },
+      {
+        "key": "earth_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 6
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "reduce_dmg_(bullet)_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "name": "Death Samurai Sword II [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 56,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 31
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "name": "Iron Fang [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 56,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 8
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 4
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 16
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "name": "Iron Fang [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 56,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 32
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "name": "Iron Fang [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 56,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 8
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 4
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 12
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Retainer Doll (Lv 120)",
+        "dye": "",
+        "map": "Brahe Laboratory: 2nd Building"
+      },
+      {
+        "monster": "Ice Evil Clock (Lv 117)",
+        "dye": "",
+        "map": "Noeliel Castle: Entrance (100-120)"
+      },
+      {
+        "monster": "Ice Evil Clocl (Lv 120)",
+        "dye": "",
+        "map": "Noeliel Castle: 2F (100-120)"
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "name": "Mukuro Koshirae [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 56,
+      "stability": 75
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 500
+      },
+      {
+        "key": "critical_damage",
+        "value": 4
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "name": "6th Anniv Katana II [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 64,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 5
+      },
+      {
+        "key": "critical_rate",
+        "value": 30
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 5
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "name": "6th Anniv Katana II [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 64,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 34
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "name": "7th Anniv Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 64,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 4
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 10
+      },
+      {
+        "key": "critical_rate",
+        "value": 30
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 4
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 15
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 30
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      },
+      {
+        "monster": "Anniv Equipment Box VII",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "name": "7th Anniv Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 64,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 34
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "name": "Dia Lamina [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 64,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "str_pct",
+        "value": 4
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 5
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 4
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "name": "Kasakiri [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 64,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 30
+      },
+      {
+        "key": "aggro_pct",
+        "value": -15
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Cannon Golem (Lv 123)",
+        "dye": "",
+        "map": "Suburb of Droma Square: Area 1"
+      },
+      {
+        "monster": "Cannon Golem (Lv 125)",
+        "dye": "",
+        "map": "Suburb of Droma Square: Area 2"
+      },
+      {
+        "monster": "Cannon Golem (Lv 126)",
+        "dye": "",
+        "map": "Suburb of Droma Square: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "name": "Kasakiri [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 64,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 40
+      },
+      {
+        "key": "aggro_pct",
+        "value": -20
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "name": "Kasakiri [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 64,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 34
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "name": "Chocolate Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 65,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 8
+      },
+      {
+        "key": "aggro_pct",
+        "value": -30
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 25
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "name": "Bokuto [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 70,
+      "stability": 80
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 1000
+      },
+      {
+        "key": "fire_resistance_pct",
+        "value": -20
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 5
+      },
+      {
+        "key": "neutral_resistance_pct",
+        "value": 25
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 25
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Lalun (Summer Event Exchange)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "name": "Caro Tesla [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 70,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 500
+      },
+      {
+        "key": "atk_pct",
+        "value": 5
+      },
+      {
+        "key": "dodge_pct",
+        "value": -40
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": -20
+      },
+      {
+        "key": "aggro_pct",
+        "value": 50
+      },
+      {
+        "key": "element",
+        "value": "water"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Lalvada (Lv 117)",
+        "dye": "",
+        "map": "Monster's Forest: Deep Part"
+      },
+      {
+        "monster": "Lalvada (Lv 127)",
+        "dye": "",
+        "map": "Monster's Forest: Deep Part"
+      },
+      {
+        "monster": "Lalvada (Lv 137)",
+        "dye": "",
+        "map": "Monster's Forest: Deep Part"
+      },
+      {
+        "monster": "Lalvada (Lv 147)",
+        "dye": "",
+        "map": "Monster's Forest: Deep Part"
+      },
+      {
+        "monster": "Lalvada (Lv 167)",
+        "dye": "",
+        "map": "Monster's Forest: Deep Part"
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "name": "Caro Tesla [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 70,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 300
+      },
+      {
+        "key": "atk_pct",
+        "value": 5
+      },
+      {
+        "key": "dodge_pct",
+        "value": -40
+      },
+      {
+        "key": "evasion_recharge_pct",
+        "value": -20
+      },
+      {
+        "key": "aggro_pct",
+        "value": 40
+      },
+      {
+        "key": "element",
+        "value": "water"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "name": "Caro Tesla [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 70,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 36
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "name": "Korakiri [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 70,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "str_pct",
+        "value": 3
+      },
+      {
+        "key": "maxmp",
+        "value": 100
+      },
+      {
+        "key": "atk_pct",
+        "value": 6
+      },
+      {
+        "key": "critical_damage",
+        "value": 1
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pelle (Lv 130)",
+        "dye": "",
+        "map": "Turnus Mine: Area 1"
+      },
+      {
+        "monster": "Pelle (Lv 132)",
+        "dye": "",
+        "map": "Turnus Mine: Area 2"
+      },
+      {
+        "monster": "Puppet Dragon (Lv 121)",
+        "dye": "",
+        "map": "Joulu House: Gift Room (Lv 100)"
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "name": "Korakiri [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 70,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "str_pct",
+        "value": 3
+      },
+      {
+        "key": "maxmp",
+        "value": 200
+      },
+      {
+        "key": "atk_pct",
+        "value": 6
+      },
+      {
+        "key": "critical_damage",
+        "value": 1
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "name": "Korakiri [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 70,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 36
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 112,
+    "name": "3rd Anniv Katana VI [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 71,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 6
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 4
+      },
+      {
+        "key": "critical_rate",
+        "value": 12
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 6
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 113,
+    "name": "3rd Anniv Katana VI [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 71,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 36
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 114,
+    "name": "4th Anniv Katana VI [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 71,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 6
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 4
+      },
+      {
+        "key": "critical_rate",
+        "value": 12
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 6
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 116,
+    "name": "4th Anniv Katana VI [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 71,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 36
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 117,
+    "name": "Iradium [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 76,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": -30
+      },
+      {
+        "key": "atk_pct",
+        "value": 5
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 5
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 30
+      },
+      {
+        "key": "aggro_pct",
+        "value": -15
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ultimate Machina (Lv 129)",
+        "dye": "",
+        "map": "Droma Square"
+      },
+      {
+        "monster": "Ultimate Machina (Lv 139)",
+        "dye": "",
+        "map": "Droma Square"
+      },
+      {
+        "monster": "Ultimate Machina (Lv 149)",
+        "dye": "",
+        "map": "Droma Square"
+      },
+      {
+        "monster": "Ultimate Machina (Lv 159)",
+        "dye": "",
+        "map": "Droma Square"
+      },
+      {
+        "monster": "Ultimate Machina (Lv 179)",
+        "dye": "",
+        "map": "Droma Square"
+      }
+    ]
+  },
+  {
+    "id": 118,
+    "name": "Iradium [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 76,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": -15
+      },
+      {
+        "key": "atk_pct",
+        "value": 5
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 3
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 30
+      },
+      {
+        "key": "aggro_pct",
+        "value": -5
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 119,
+    "name": "Iradium [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 76,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 37
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 120,
+    "name": "Iradium [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 76,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": -30
+      },
+      {
+        "key": "atk_pct",
+        "value": 6
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 1
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "aggro_pct",
+        "value": -45
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 25
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ultimate Machina (Megiston 2018) (Lv 160)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 121,
+    "name": "Seiun [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 79,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "accuracy_pct",
+        "value": 9
+      },
+      {
+        "key": "critical_rate",
+        "value": 13
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Sanctuary Guardian (Lv 146)",
+        "dye": "",
+        "map": "Shrine of the Gods: Area 4"
+      },
+      {
+        "monster": "Sanctuary Guardian (Lv 148)",
+        "dye": "",
+        "map": "Hall of Special Gods"
+      },
+      {
+        "monster": "Toy Bolg (Lv 139)",
+        "dye": "",
+        "map": "Joulu House: Depot (Lv 130)"
+      }
+    ]
+  },
+  {
+    "id": 122,
+    "name": "Seiun [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 79,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "accuracy_pct",
+        "value": 10
+      },
+      {
+        "key": "critical_rate",
+        "value": 15
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 123,
+    "name": "Seiun [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 79,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 37
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 124,
+    "name": "3rd Anniv Katana VII [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 83,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 6
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 8
+      },
+      {
+        "key": "critical_rate",
+        "value": 14
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 6
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 125,
+    "name": "3rd Anniv Katana VII [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 83,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 38
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 126,
+    "name": "4th Anniv Katana VII [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 83,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 6
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 8
+      },
+      {
+        "key": "critical_rate",
+        "value": 14
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 6
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 128,
+    "name": "4th Anniv Katana VII [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 83,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 38
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 129,
+    "name": "5th Anniv Katana III [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 83,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 6
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 15
+      },
+      {
+        "key": "critical_rate",
+        "value": 18
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 6
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 130,
+    "name": "5th Anniv Katana III [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 83,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 38
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 131,
+    "name": "6th Anniv Katana III [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 88,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 6
+      },
+      {
+        "key": "critical_rate",
+        "value": 30
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 6
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 12
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 15
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 132,
+    "name": "6th Anniv Katana III [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 88,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 39
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 133,
+    "name": "7th Anniv Katana II [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 88,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 6
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 12
+      },
+      {
+        "key": "critical_rate",
+        "value": 30
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 6
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 17
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 30
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 134,
+    "name": "7th Anniv Katana II [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 88,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 39
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 135,
+    "name": "8th Anniv Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 88,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 6
+      },
+      {
+        "key": "maxmp",
+        "value": 150
+      },
+      {
+        "key": "atk_pct",
+        "value": 6
+      },
+      {
+        "key": "critical_rate",
+        "value": 35
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 5
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 35
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 136,
+    "name": "8th Anniv Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 88,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 39
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 137,
+    "name": "Kanpuu [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 88,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 6
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 10
+      },
+      {
+        "key": "mdef_pct",
+        "value": -30
+      },
+      {
+        "key": "aggro_pct",
+        "value": -20
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Rafflesian (Lv 157)",
+        "dye": "",
+        "map": "Morthell Swell: Area 1"
+      },
+      {
+        "monster": "Rafflesian (Lv 159)",
+        "dye": "",
+        "map": "Morthell Swell: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 138,
+    "name": "Kanpuu [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 88,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 6
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 10
+      },
+      {
+        "key": "mdef_pct",
+        "value": -50
+      },
+      {
+        "key": "aggro_pct",
+        "value": -30
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 140,
+    "name": "Kanpuu [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 88,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 39
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 141,
+    "name": "Sakura Lantern Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 88,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 40
+      },
+      {
+        "key": "pct_stronger_against_earth",
+        "value": 25
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 10
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 142,
+    "name": "Snow Bear Candy [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 88,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 400
+      },
+      {
+        "key": "critical_rate",
+        "value": 20
+      },
+      {
+        "key": "pct_stronger_against_wind",
+        "value": 25
+      },
+      {
+        "key": "fire_resistance_pct",
+        "value": -10
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Snow Bear Box",
+        "dye": "",
+        "map": "Snowball Mini Game Venue"
+      }
+    ]
+  },
+  {
+    "id": 143,
+    "name": "Lil Empress Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 91,
+      "stability": 65
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 6
+      },
+      {
+        "key": "aspd",
+        "value": 200
+      },
+      {
+        "key": "critical_rate",
+        "value": 25
+      },
+      {
+        "key": "aggro_pct",
+        "value": -15
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Venena Coenubia (Lv 140)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      },
+      {
+        "monster": "Venena Coenubia (YK Wifey) (Lv 150)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      },
+      {
+        "monster": "Venena Coenubia (YK Wifey) (Lv 160)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      },
+      {
+        "monster": "Venena Coenubia (YK Wifey) (Lv 170)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      },
+      {
+        "monster": "Venena Coenubia (YK Wifey) (Lv 190)",
+        "dye": "",
+        "map": "Ultimea Palace: Throne"
+      }
+    ]
+  },
+  {
+    "id": 144,
+    "name": "Lil Empress Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 91,
+      "stability": 65
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 6
+      },
+      {
+        "key": "aspd",
+        "value": 600
+      },
+      {
+        "key": "critical_rate",
+        "value": 20
+      },
+      {
+        "key": "aggro_pct",
+        "value": -10
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 145,
+    "name": "Lil Empress Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 91,
+      "stability": 65
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 38
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 146,
+    "name": "Sacred Ice Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 92,
+      "stability": 75
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 6
+      },
+      {
+        "key": "aspd_pct",
+        "value": 120
+      },
+      {
+        "key": "pct_stronger_against_light",
+        "value": -25
+      },
+      {
+        "key": "pct_stronger_against_dark",
+        "value": 10
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "atk_up_(agi_pct)",
+        "value": 100
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Noeliel the Ice Statue (Lv 141)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (120-140)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (raid) (Lv 182)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (120-140)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (raid) (Lv 172)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (120-140)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (raid) (Lv 162)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (120-140)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (raid) (Lv 152)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (120-140)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (Lv 191)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (120-140)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (Lv 171)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (120-140)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (Lv 161)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (120-140)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (Lv 151)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (120-140)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (raid) (Lv 202)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (120-140)"
+      }
+    ]
+  },
+  {
+    "id": 147,
+    "name": "Sacred Ice Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 92,
+      "stability": 75
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 2
+      },
+      {
+        "key": "aspd_pct",
+        "value": 40
+      },
+      {
+        "key": "pct_stronger_against_light",
+        "value": -25
+      },
+      {
+        "key": "pct_stronger_against_dark",
+        "value": 10
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 1
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "atk_up_(agi_pct)",
+        "value": 100
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Noeliel the Ice Statue (Lv 102)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (80-100)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (raid) (Lv 142)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (80-100)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (raid) (Lv 132)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (80-100)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (raid) (Lv 122)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (80-100)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (raid) (Lv 112)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (80-100)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (Lv 152)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (80-100)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (Lv 132)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (80-100)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (Lv 122)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (80-100)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (Lv 112)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (80-100)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (raid) (Lv 162)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (80-100)"
+      }
+    ]
+  },
+  {
+    "id": 148,
+    "name": "Sacred Ice Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 92,
+      "stability": 75
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 4
+      },
+      {
+        "key": "aspd_pct",
+        "value": 80
+      },
+      {
+        "key": "pct_stronger_against_light",
+        "value": -25
+      },
+      {
+        "key": "pct_stronger_against_dark",
+        "value": 10
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 3
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "atk_up_(agi_pct)",
+        "value": 100
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Noeliel the Ice Statue (Lv 122)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (100-120)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (raid) (Lv 162)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (100-120)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (raid) (Lv 152)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (100-120)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (raid) (Lv 142)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (100-120)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (raid) (Lv 132)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (100-120)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (Lv 172)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (100-120)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (Lv 152)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (100-120)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (Lv 142)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (100-120)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (Lv 132)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (100-120)"
+      },
+      {
+        "monster": "Noeliel the Ice Statue (raid) (Lv 182)",
+        "dye": "",
+        "map": "Noeliel Castle: Hall (100-120)"
+      }
+    ]
+  },
+  {
+    "id": 149,
+    "name": "4th Anniv Katana VIII [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 96,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 6
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 12
+      },
+      {
+        "key": "critical_rate",
+        "value": 16
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 6
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 150,
+    "name": "4th Anniv Katana VIII [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 96,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 41
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 152,
+    "name": "5th Anniv Katana IV [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 96,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 6
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 15
+      },
+      {
+        "key": "critical_rate",
+        "value": 21
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 6
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 11
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 153,
+    "name": "5th Anniv Katana IV [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 96,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 41
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 154,
+    "name": "Adamantine Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 96,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 10
+      },
+      {
+        "key": "critical_damage",
+        "value": 5
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Corphibi (Lv 172)",
+        "dye": "",
+        "map": "Deltzon Research Zone: Area 1"
+      },
+      {
+        "monster": "Corphibi (Lv 173)",
+        "dye": "",
+        "map": "Deltzon Research Zone: Area 2"
+      },
+      {
+        "monster": "Corphibi (Lv 174)",
+        "dye": "",
+        "map": "Deltzon Research Zone: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 155,
+    "name": "Adamantine Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 96,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "vit_pct",
+        "value": 12
+      },
+      {
+        "key": "critical_damage",
+        "value": 6
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 156,
+    "name": "Adamantine Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 96,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 41
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 157,
+    "name": "Orion's Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 99,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dodge",
+        "value": -50
+      },
+      {
+        "key": "critical_rate",
+        "value": 100
+      },
+      {
+        "key": "light_resistance_pct",
+        "value": -30
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 25
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Snowball Fight",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 158,
+    "name": "Dragon Claw Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 100,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 1000
+      },
+      {
+        "key": "critical_damage_pct",
+        "value": 3
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 6
+      },
+      {
+        "key": "absolute_accuracy_pct",
+        "value": 5
+      },
+      {
+        "key": "reduce_dmg_(straight_line)_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Finstern the Dark Dragon (Lv 156)",
+        "dye": "",
+        "map": "Dark Dragon Shrine: Near the Top"
+      },
+      {
+        "monster": "Finstern the Dark Dragon (Lv 166)",
+        "dye": "",
+        "map": "Dark Dragon Shrine: Near the Top"
+      },
+      {
+        "monster": "Finstern the Dark Dragon (Lv 176)",
+        "dye": "",
+        "map": "Dark Dragon Shrine: Near the Top"
+      },
+      {
+        "monster": "Finstern the Dark Dragon (Lv 186)",
+        "dye": "",
+        "map": "Dark Dragon Shrine: Near the Top"
+      },
+      {
+        "monster": "Finstern the Dark Dragon (Lv 206)",
+        "dye": "",
+        "map": "Dark Dragon Shrine: Near the Top"
+      }
+    ]
+  },
+  {
+    "id": 159,
+    "name": "Dragon Claw Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 100,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 500
+      },
+      {
+        "key": "critical_damage_pct",
+        "value": 3
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 6
+      },
+      {
+        "key": "absolute_accuracy_pct",
+        "value": 5
+      },
+      {
+        "key": "reduce_dmg_(straight_line)_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 160,
+    "name": "Dragon Claw Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 100,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 41
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 161,
+    "name": "Dragon Claw Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 100,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 15
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      },
+      {
+        "key": "atk_up_(agi_pct)",
+        "value": 250
+      },
+      {
+        "key": "reduce_dmg_(straight_line)_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Finstern the Dark Dragon (Megiston 2020) (Lv 200)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 162,
+    "name": "Modestia (old) [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 100,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 1000
+      },
+      {
+        "key": "critical_rate",
+        "value": 100
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "P. Avatar (Lv 800)",
+        "dye": "54 2 2",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 164,
+    "name": "Pacific Saury [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 100,
+      "stability": 60
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 3000
+      },
+      {
+        "key": "accuracy",
+        "value": 111
+      },
+      {
+        "key": "critical_rate",
+        "value": 11
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 7
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 7
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 165,
+    "name": "Crystal Lamina [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 106,
+      "stability": 60
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 500
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": -15
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "accuracy_pct",
+        "value": 40
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 25
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Crystal Titan (Lv 138)",
+        "dye": "",
+        "map": "Decaying Ruins"
+      },
+      {
+        "monster": "Crystal Titan (Lv 148)",
+        "dye": "",
+        "map": "Decaying Ruins"
+      },
+      {
+        "monster": "Crystal Titan (Lv 158)",
+        "dye": "",
+        "map": "Decaying Ruins"
+      },
+      {
+        "monster": "Crystal Titan (Lv 168)",
+        "dye": "",
+        "map": "Decaying Ruins"
+      },
+      {
+        "monster": "Crystal Titan (Lv 188)",
+        "dye": "",
+        "map": "Decaying Ruins"
+      }
+    ]
+  },
+  {
+    "id": 166,
+    "name": "Crystal Lamina [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 106,
+      "stability": 60
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 200
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": -10
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "accuracy_pct",
+        "value": 20
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 25
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 167,
+    "name": "Crystal Lamina [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 106,
+      "stability": 60
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 39
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 168,
+    "name": "Crystal Lamina [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 106,
+      "stability": 60
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 250
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": -5
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "accuracy_pct",
+        "value": 30
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 25
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 7
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Crystal Titan (Megiston 2019) (Lv 175)",
+        "dye": "46 B 30",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 169,
+    "name": "Death Samurai Sword III [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 106,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 4500
+      },
+      {
+        "key": "critical_rate",
+        "value": 100
+      },
+      {
+        "key": "earth_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 9
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "reduce_dmg_(bullet)_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 170,
+    "name": "Death Samurai Sword III [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 106,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 41
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 171,
+    "name": "Glacial Ice Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 106,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 5
+      },
+      {
+        "key": "matk_pct",
+        "value": 5
+      },
+      {
+        "key": "aspd",
+        "value": 250
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 10
+      },
+      {
+        "key": "tumble_unavailable",
+        "value": true
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Evil Shadow (Lv 137)",
+        "dye": "",
+        "map": "Reindeer Forest"
+      }
+    ]
+  },
+  {
+    "id": 172,
+    "name": "Glacial Ice Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 106,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 6
+      },
+      {
+        "key": "matk_pct",
+        "value": 6
+      },
+      {
+        "key": "aspd",
+        "value": 500
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 15
+      },
+      {
+        "key": "tumble_unavailable",
+        "value": true
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Evil Shadow (Lv 157)",
+        "dye": "",
+        "map": "Reindeer Forest"
+      }
+    ]
+  },
+  {
+    "id": 173,
+    "name": "Glacial Ice Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 106,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 6
+      },
+      {
+        "key": "matk_pct",
+        "value": 6
+      },
+      {
+        "key": "aspd",
+        "value": 750
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 20
+      },
+      {
+        "key": "tumble_unavailable",
+        "value": true
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Evil Shadow (Lv 177)",
+        "dye": "",
+        "map": "Reindeer Forest"
+      }
+    ]
+  },
+  {
+    "id": 174,
+    "name": "Red Spider Lily [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 106,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "element",
+        "value": "dark"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 12
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 8
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Santaby (Lv 182)",
+        "dye": "",
+        "map": "Tomte Pavillion (170-190)"
+      },
+      {
+        "monster": "Enty (Lv 185)",
+        "dye": "",
+        "map": "Witch's Woods Area 1"
+      },
+      {
+        "monster": "Enty (Lv 186)",
+        "dye": "",
+        "map": "Witch's Woods Area 2"
+      },
+      {
+        "monster": "Enty (Lv 187)",
+        "dye": "",
+        "map": "Witch's Woods Area 3"
+      }
+    ]
+  },
+  {
+    "id": 176,
+    "name": "Red Spider Lily [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 106,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 42
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 177,
+    "name": "Red Spider Lily [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 106,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "element",
+        "value": "dark"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 12
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 12
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 12
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 178,
+    "name": "Orion's Sword (Snowball Event 2021) [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 108,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dodge",
+        "value": -50
+      },
+      {
+        "key": "critical_rate",
+        "value": 100
+      },
+      {
+        "key": "light_resistance_pct",
+        "value": -30
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 30
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Snowball Event NPC",
+        "dye": "",
+        "map": "Snowball Mini Game Venue"
+      }
+    ]
+  },
+  {
+    "id": 179,
+    "name": "4th Anniv Katana IX [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 110,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 16
+      },
+      {
+        "key": "critical_rate",
+        "value": 18
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 7
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 180,
+    "name": "4th Anniv Katana IX [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 110,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 43
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 181,
+    "name": "5th Anniv Katana V [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 110,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 15
+      },
+      {
+        "key": "critical_rate",
+        "value": 24
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 7
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 12
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 182,
+    "name": "5th Anniv Katana V [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 110,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 43
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 183,
+    "name": "6th Anniv Katana IV [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 110,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 7
+      },
+      {
+        "key": "critical_rate",
+        "value": 30
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 7
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 14
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 15
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 184,
+    "name": "6th Anniv Katana IV [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 110,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 43
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 185,
+    "name": "7th Anniv Katana III [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 110,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 14
+      },
+      {
+        "key": "critical_rate",
+        "value": 30
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 7
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 19
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 30
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 186,
+    "name": "7th Anniv Katana III [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 110,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 43
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 188,
+    "name": "8th Anniv Katana II [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 110,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 7
+      },
+      {
+        "key": "maxmp",
+        "value": 170
+      },
+      {
+        "key": "atk_pct",
+        "value": 7
+      },
+      {
+        "key": "critical_rate",
+        "value": 35
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 6
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 35
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 189,
+    "name": "8th Anniv Katana II [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 110,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 43
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 190,
+    "name": "9th Anniv Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 110,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 6
+      },
+      {
+        "key": "atk_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 10
+      },
+      {
+        "key": "cspd",
+        "value": 600
+      },
+      {
+        "key": "critical_rate",
+        "value": 40
+      },
+      {
+        "key": "atk_up_(agi_pct)",
+        "value": 250
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 40
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 191,
+    "name": "9th Anniv Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 110,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 43
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 192,
+    "name": "Seadevil Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 110,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 400
+      },
+      {
+        "key": "atk_pct",
+        "value": 6
+      },
+      {
+        "key": "fire_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "aggro_pct",
+        "value": -25
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Adaro (Lv 160)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (Lv 170)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (Lv 180)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (Lv 190)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (Lv 210)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      }
+    ]
+  },
+  {
+    "id": 193,
+    "name": "Seadevil Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 110,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 600
+      },
+      {
+        "key": "atk_pct",
+        "value": 8
+      },
+      {
+        "key": "fire_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": -75
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Adaro (High Difficulty) (Lv 200)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (High Difficulty) (Lv 210)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (High Difficulty) (Lv 220)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (High Difficulty) (Lv 230)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      },
+      {
+        "monster": "Adaro (High Difficulty) (Lv 250)",
+        "dye": "",
+        "map": "Underwater Ruins: Deepest"
+      }
+    ]
+  },
+  {
+    "id": 194,
+    "name": "Homura [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 115,
+      "stability": 80
+    },
+    "stats": [
+      {
+        "key": "earth_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 7
+      },
+      {
+        "key": "additional_melee_pct",
+        "value": 50
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Smilodocanis (Lv 194)",
+        "dye": "",
+        "map": "Guardian Forest: Lost Woods"
+      },
+      {
+        "monster": "Smilodocanis (Lv 194)",
+        "dye": "",
+        "map": "Guardian Forest: Inner Area"
+      },
+      {
+        "monster": "Confeito (Lv 197)",
+        "dye": "",
+        "map": "Noeliel Castle: B1F (190-210)"
+      },
+      {
+        "monster": "Confeito (Lv 199)",
+        "dye": "",
+        "map": "Noeliel Castle: B1F (190-210)"
+      },
+      {
+        "monster": "Confeito (Lv 199)",
+        "dye": "",
+        "map": "Noeliel Castle: B2F (190-210)"
+      },
+      {
+        "monster": "Confeito (Lv 199)",
+        "dye": "",
+        "map": "Noeliel Castle: B3F (190-210)"
+      },
+      {
+        "monster": "Smilodocanis (Lv 196)",
+        "dye": "",
+        "map": "Guardian Forest: Outer Area"
+      }
+    ]
+  },
+  {
+    "id": 195,
+    "name": "Homura [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 115,
+      "stability": 80
+    },
+    "stats": [
+      {
+        "key": "earth_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 7
+      },
+      {
+        "key": "additional_melee_pct",
+        "value": 100
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 196,
+    "name": "Homura [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 115,
+      "stability": 80
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 44
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 197,
+    "name": "Mortal Lamina [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 115,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 7
+      },
+      {
+        "key": "critical_rate",
+        "value": 70
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Gravicep (Lv 174)",
+        "dye": "",
+        "map": "Recetacula Sector: Depot Rooftop"
+      },
+      {
+        "monster": "Gravicep (Lv 184)",
+        "dye": "",
+        "map": "Recetacula Sector: Depot Rooftop"
+      },
+      {
+        "monster": "Gravicep (Lv 194)",
+        "dye": "",
+        "map": "Recetacula Sector: Depot Rooftop"
+      },
+      {
+        "monster": "Gravicep (Lv 204)",
+        "dye": "",
+        "map": "Recetacula Sector: Depot Rooftop"
+      },
+      {
+        "monster": "Gravicep (Lv 224)",
+        "dye": "",
+        "map": "Recetacula Sector: Depot Rooftop"
+      }
+    ]
+  },
+  {
+    "id": 198,
+    "name": "Mortal Lamina [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 115,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 7
+      },
+      {
+        "key": "critical_rate",
+        "value": 50
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 200,
+    "name": "Mortal Lamina [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 115,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 44
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 201,
+    "name": "5th Anniv Katana VI [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 120,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 15
+      },
+      {
+        "key": "critical_rate",
+        "value": 27
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 7
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 13
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 4
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 202,
+    "name": "5th Anniv Katana VI [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 120,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 45
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 203,
+    "name": "Pseudopumpkin Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 120,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "def",
+        "value": 60
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_barrier",
+        "value": 2000
+      },
+      {
+        "key": "atk_up_(agi_pct)",
+        "value": 250
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 204,
+    "name": "Milk Chocolate Churro [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 125,
+      "stability": 80
+    },
+    "stats": [
+      {
+        "key": "dodge_pct",
+        "value": 10
+      },
+      {
+        "key": "aspd",
+        "value": 1000
+      },
+      {
+        "key": "aspd_pct",
+        "value": 100
+      },
+      {
+        "key": "atk_up_(agi_pct)",
+        "value": 250
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 205,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 125,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 100
+      },
+      {
+        "key": "aspd",
+        "value": 1000
+      },
+      {
+        "key": "critical_rate",
+        "value": 100
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 5
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception (2nd Part)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 206,
+    "name": "Shirogane [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 125,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 7
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 7
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 7
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Tetracle (Lv 206)",
+        "dye": "",
+        "map": "Arstida: Area 1"
+      },
+      {
+        "monster": "Tetracle (Lv 208)",
+        "dye": "",
+        "map": "Arstida: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 207,
+    "name": "Shirogane [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 125,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 7
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 14
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 7
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 208,
+    "name": "Shirogane [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 125,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 45
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 209,
+    "name": "5th Anniv Katana VII [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 130,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 15
+      },
+      {
+        "key": "critical_rate",
+        "value": 30
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 7
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 14
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 210,
+    "name": "5th Anniv Katana VII [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 130,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 46
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 212,
+    "name": "6th Anniv Katana V [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 130,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 7
+      },
+      {
+        "key": "critical_rate",
+        "value": 30
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 7
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 14
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 20
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 6
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 213,
+    "name": "6th Anniv Katana V [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 130,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 46
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 214,
+    "name": "7th Anniv Katana IV [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 130,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 16
+      },
+      {
+        "key": "critical_rate",
+        "value": 30
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 7
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 21
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 30
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 215,
+    "name": "7th Anniv Katana IV [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 130,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 46
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 216,
+    "name": "8th Anniv Katana III [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 130,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 7
+      },
+      {
+        "key": "maxmp",
+        "value": 190
+      },
+      {
+        "key": "atk_pct",
+        "value": 7
+      },
+      {
+        "key": "critical_rate",
+        "value": 35
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 7
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 35
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 217,
+    "name": "8th Anniv Katana III [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 130,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 46
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 218,
+    "name": "9th Anniv Katana II [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 130,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 7
+      },
+      {
+        "key": "atk_pct",
+        "value": 7
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 13
+      },
+      {
+        "key": "cspd",
+        "value": 720
+      },
+      {
+        "key": "critical_rate",
+        "value": 40
+      },
+      {
+        "key": "atk_up_(agi_pct)",
+        "value": 250
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 40
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 219,
+    "name": "9th Anniv Katana II [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 130,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 46
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 220,
+    "name": "Demon Empress Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 130,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 7
+      },
+      {
+        "key": "critical_rate",
+        "value": 25
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 25
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 15
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 200,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Venena Metacoenubia (Lv 185)",
+        "dye": "",
+        "map": "Neo Plastida"
+      },
+      {
+        "monster": "Venena Metacoenubia (Lv 195)",
+        "dye": "",
+        "map": "Neo Plastida"
+      },
+      {
+        "monster": "Venena Metacoenubia (Lv 205)",
+        "dye": "",
+        "map": "Neo Plastida"
+      },
+      {
+        "monster": "Venena Metacoenubia (Lv 215)",
+        "dye": "",
+        "map": "Neo Plastida"
+      },
+      {
+        "monster": "Venena Metacoenubia (Lv 235)",
+        "dye": "",
+        "map": "Neo Plastida"
+      }
+    ]
+  },
+  {
+    "id": 221,
+    "name": "Demon Empress Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 130,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 7
+      },
+      {
+        "key": "critical_rate",
+        "value": 20
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 10
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 20
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 20,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 222,
+    "name": "Demon Empress Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 130,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 46
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 224,
+    "name": "Murasame [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 136
+    },
+    "stats": [
+      {
+        "key": "critical_rate",
+        "value": 160
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "motion_speed_pct",
+        "value": 40
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 20
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 80
+      },
+      {
+        "key": "recoil_pct",
+        "value": 3
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Sunken Treasure",
+        "dye": "",
+        "map": "-"
+      },
+      {
+        "monster": "Sunken Treasure",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 225,
+    "name": "Purple Lightning Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 136,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 8
+      },
+      {
+        "key": "accuracy",
+        "value": 75
+      },
+      {
+        "key": "critical_rate",
+        "value": 30
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Serpentragon (Lv 215)",
+        "dye": "",
+        "map": "Boma Moja: Area 1"
+      }
+    ]
+  },
+  {
+    "id": 226,
+    "name": "Purple Lightning Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 136,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 8
+      },
+      {
+        "key": "accuracy",
+        "value": 80
+      },
+      {
+        "key": "critical_rate",
+        "value": 40
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 227,
+    "name": "Purple Lightning Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 136,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 47
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 228,
+    "name": "Yozakura Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 136,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 2
+      },
+      {
+        "key": "accuracy",
+        "value": 300
+      },
+      {
+        "key": "aspd",
+        "value": 600
+      },
+      {
+        "key": "pct_stronger_against_dark",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 6
+      },
+      {
+        "key": "reduce_dmg_(floor)_pct",
+        "value": 30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 229,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 141,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 4
+      },
+      {
+        "key": "atk_pct",
+        "value": 8
+      },
+      {
+        "key": "wind_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": -30
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 7
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception (2nd Part)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 230,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 141,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 4
+      },
+      {
+        "key": "atk_pct",
+        "value": 8
+      },
+      {
+        "key": "earth_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": -30
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 7
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception (2nd Part)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 231,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 141,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 8
+      },
+      {
+        "key": "wind_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "aggro_pct",
+        "value": -10
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 10
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 2
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception (2nd Part)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 232,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 141,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 8
+      },
+      {
+        "key": "earth_resistance_pct",
+        "value": 5
+      },
+      {
+        "key": "aggro_pct",
+        "value": -10
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 10
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 2
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception (2nd Part)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 233,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 141,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 3000
+      },
+      {
+        "key": "atk_pct",
+        "value": 7
+      },
+      {
+        "key": "wind_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "aggro_pct",
+        "value": -40
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 4
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception (2nd Part)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 234,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 141,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 3000
+      },
+      {
+        "key": "atk_pct",
+        "value": 7
+      },
+      {
+        "key": "earth_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "aggro_pct",
+        "value": -40
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 4
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception (2nd Part)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 236,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 141,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 8
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "wind_resistance_pct",
+        "value": 30
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception (2nd Part)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 237,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 141,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 8
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "earth_resistance_pct",
+        "value": 30
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 30
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception (2nd Part)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 238,
+    "name": "Black Shadow Nodachi [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 142,
+      "stability": 60
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 5000
+      },
+      {
+        "key": "atk_pct",
+        "value": 8
+      },
+      {
+        "key": "stability_pct",
+        "value": 5
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 20
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 30
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Black Shadow (Lv 189)",
+        "dye": "",
+        "map": "Rokoko City Ruins"
+      },
+      {
+        "monster": "Black Shadow (Lv 199)",
+        "dye": "",
+        "map": "Rokoko City Ruins"
+      },
+      {
+        "monster": "Black Shadow (Lv 209)",
+        "dye": "",
+        "map": "Rokoko City Ruins"
+      },
+      {
+        "monster": "Black Shadow (Lv 219)",
+        "dye": "",
+        "map": "Rokoko City Ruins"
+      },
+      {
+        "monster": "Black Shadow (Lv 239)",
+        "dye": "",
+        "map": "Rokoko City Ruins"
+      },
+      {
+        "monster": "Black Shadow (Megiston 2021) (Lv 210)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 239,
+    "name": "Black Shadow Nodachi [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 142,
+      "stability": 60
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 3000
+      },
+      {
+        "key": "atk_pct",
+        "value": 8
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 20
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 240,
+    "name": "Black Shadow Nodachi [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 142,
+      "stability": 60
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 47
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 241,
+    "name": "6th Anniv Katana VI [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 146,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 8
+      },
+      {
+        "key": "critical_rate",
+        "value": 30
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 8
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 16
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 20
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 8
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 242,
+    "name": "6th Anniv Katana VI [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 146,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 49
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 243,
+    "name": "7th Anniv Katana V [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 146,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 8
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 18
+      },
+      {
+        "key": "critical_rate",
+        "value": 30
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 8
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 23
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 30
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 244,
+    "name": "7th Anniv Katana V [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 146,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 49
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 245,
+    "name": "8th Anniv Katana IV [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 146,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 8
+      },
+      {
+        "key": "maxmp",
+        "value": 210
+      },
+      {
+        "key": "atk_pct",
+        "value": 8
+      },
+      {
+        "key": "critical_rate",
+        "value": 35
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 8
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 35
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 246,
+    "name": "8th Anniv Katana IV [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 146,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 49
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 248,
+    "name": "9th Anniv Katana III [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 146,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 8
+      },
+      {
+        "key": "atk_pct",
+        "value": 8
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 16
+      },
+      {
+        "key": "cspd",
+        "value": 840
+      },
+      {
+        "key": "critical_rate",
+        "value": 40
+      },
+      {
+        "key": "atk_up_(agi_pct)",
+        "value": 250
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 40
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 249,
+    "name": "9th Anniv Katana III [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 146,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 49
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 250,
+    "name": "Beastlord Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 146,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 48
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 251,
+    "name": "Blue Spinel Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 146,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 20
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      },
+      {
+        "key": "aggro_pct",
+        "value": 40,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Oris (Lv 221)",
+        "dye": "",
+        "map": "Weredragon's Vital Point: Area 1"
+      },
+      {
+        "monster": "Oris (Lv 223)",
+        "dye": "",
+        "map": "Weredragon's Vital Point: Area 2"
+      }
+    ]
+  },
+  {
+    "id": 252,
+    "name": "Blue Spinel Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 146,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 30
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 25
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      },
+      {
+        "key": "aggro_pct",
+        "value": 70,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 253,
+    "name": "Blue Spinel Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 146,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 49
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 254,
+    "name": "Scarlet Sakura Fairy Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 149,
+      "stability": 60
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 10000
+      },
+      {
+        "key": "accuracy",
+        "value": 75
+      },
+      {
+        "key": "critical_rate",
+        "value": 25
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 10
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Amalgam (Lv 200)",
+        "dye": "",
+        "map": "Twilight Sakura Castle: Top"
+      }
+    ]
+  },
+  {
+    "id": 255,
+    "name": "Modestia (old) [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 150,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 1000
+      },
+      {
+        "key": "critical_rate",
+        "value": 120
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "P. Avatar (2021) (Lv 400)",
+        "dye": "54 2 2",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 256,
+    "name": "Orion's Sword (Snowball Event 2022) [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 150,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dodge",
+        "value": -50
+      },
+      {
+        "key": "critical_rate",
+        "value": 105
+      },
+      {
+        "key": "light_resistance_pct",
+        "value": -25
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 30
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Snowball Event NPC",
+        "dye": "",
+        "map": "Snowball Mini Game Venue"
+      }
+    ]
+  },
+  {
+    "id": 257,
+    "name": "Pearl Sakura Mystic Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 150,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": 30
+      },
+      {
+        "key": "cspd_pct",
+        "value": 50
+      },
+      {
+        "key": "critical_rate",
+        "value": 50
+      },
+      {
+        "key": "critical_rate_pct",
+        "value": 25
+      },
+      {
+        "key": "pct_stronger_against_earth",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 258,
+    "name": "Cruel Lamina [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 152,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 400
+      },
+      {
+        "key": "stability_pct",
+        "value": 20
+      },
+      {
+        "key": "aspd_pct",
+        "value": 60
+      },
+      {
+        "key": "pct_stronger_against_wind",
+        "value": 5
+      },
+      {
+        "key": "aggro_pct",
+        "value": -40
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 8
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "War Dragon Turba (Lv 207)",
+        "dye": "",
+        "map": "Prime Ramus: Village"
+      },
+      {
+        "monster": "War Dragon Turba (Lv 217)",
+        "dye": "",
+        "map": "Prime Ramus: Village"
+      },
+      {
+        "monster": "War Dragon Turba (Lv 227)",
+        "dye": "",
+        "map": "Prime Ramus: Village"
+      },
+      {
+        "monster": "War Dragon Turba (Lv 237)",
+        "dye": "",
+        "map": "Prime Ramus: Village"
+      },
+      {
+        "monster": "War Dragon Turba (Lv 257)",
+        "dye": "",
+        "map": "Prime Ramus: Village"
+      }
+    ]
+  },
+  {
+    "id": 260,
+    "name": "Cruel Lamina [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 152,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 400
+      },
+      {
+        "key": "stability_pct",
+        "value": 2
+      },
+      {
+        "key": "aspd_pct",
+        "value": 50
+      },
+      {
+        "key": "pct_stronger_against_wind",
+        "value": 5
+      },
+      {
+        "key": "aggro_pct",
+        "value": -30
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 8
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 261,
+    "name": "Cruel Lamina [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 152,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 50
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 262,
+    "name": "Cruel Lamina [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 152,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxmp",
+        "value": 400
+      },
+      {
+        "key": "atk_pct",
+        "value": 9
+      },
+      {
+        "key": "stability_pct",
+        "value": 10
+      },
+      {
+        "key": "aspd_pct",
+        "value": 70
+      },
+      {
+        "key": "aggro_pct",
+        "value": -50
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "War Dragon Turba (Megiston 2022) (Lv 240)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 263,
+    "name": "Hakuro Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 158,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 6000
+      },
+      {
+        "key": "maxmp",
+        "value": 200
+      },
+      {
+        "key": "critical_rate",
+        "value": 40
+      },
+      {
+        "key": "pct_stronger_against_dark",
+        "value": 10
+      },
+      {
+        "key": "element",
+        "value": "light"
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 264,
+    "name": "Sword of Light (Katana) [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 158,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 3000
+      },
+      {
+        "key": "maxmp",
+        "value": 300
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 10
+      },
+      {
+        "key": "critical_rate",
+        "value": 100
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10
+      },
+      {
+        "key": "tumble_unavailable",
+        "value": true
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 30
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Slayers: Collab Prize Exchange",
+        "dye": "",
+        "map": "Sofya City"
+      }
+    ]
+  },
+  {
+    "id": 265,
+    "name": "White Viper [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 158,
+      "stability": 60
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 8
+      },
+      {
+        "key": "critical_rate",
+        "value": 60
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 7
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Voda (Lv 236)",
+        "dye": "",
+        "map": "Puerta Islands: Area 1"
+      },
+      {
+        "monster": "Voda (Lv 237)",
+        "dye": "",
+        "map": "Puerta Islands: Area 2"
+      },
+      {
+        "monster": "Voda (Lv 238)",
+        "dye": "",
+        "map": "Puerta Islands: Area 3"
+      }
+    ]
+  },
+  {
+    "id": 266,
+    "name": "Combat Knife [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 163,
+      "stability": 80
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 30
+      },
+      {
+        "key": "critical_rate",
+        "value": 30
+      },
+      {
+        "key": "critical_rate_pct",
+        "value": 30
+      },
+      {
+        "key": "light_resistance_pct",
+        "value": -30
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 9
+      },
+      {
+        "key": "atk_up_(agi_pct)",
+        "value": 250
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Ignitrus (Lv 251)",
+        "dye": "",
+        "map": "Vulcani Crater Base"
+      }
+    ]
+  },
+  {
+    "id": 267,
+    "name": "Modestia [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 168,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 1000
+      },
+      {
+        "key": "critical_rate",
+        "value": 120
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Mysterious Exchange (P. Avatar 2022)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 268,
+    "name": "7th Anniv Katana VI [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 169,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 9
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 20
+      },
+      {
+        "key": "critical_rate",
+        "value": 30
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 9
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 25
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 30
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 269,
+    "name": "7th Anniv Katana VI [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 169,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 52
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 270,
+    "name": "8th Anniv Katana V [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 169,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 9
+      },
+      {
+        "key": "maxmp",
+        "value": 230
+      },
+      {
+        "key": "atk_pct",
+        "value": 9
+      },
+      {
+        "key": "critical_rate",
+        "value": 35
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 9
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 35
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 272,
+    "name": "8th Anniv Katana V [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 169,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 52
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 273,
+    "name": "9th Anniv Katana IV [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 169,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 9
+      },
+      {
+        "key": "atk_pct",
+        "value": 9
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 19
+      },
+      {
+        "key": "cspd",
+        "value": 960
+      },
+      {
+        "key": "critical_rate",
+        "value": 40
+      },
+      {
+        "key": "atk_up_(agi_pct)",
+        "value": 250
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 40
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 274,
+    "name": "9th Anniv Katana IV [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 169,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 52
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 275,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 169,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "accuracy",
+        "value": 125
+      },
+      {
+        "key": "aspd",
+        "value": 1000
+      },
+      {
+        "key": "critical_rate",
+        "value": 125
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 10
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 10
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception: 2nd Part (2023)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 276,
+    "name": "Burning Ember Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 175,
+      "stability": 65
+    },
+    "stats": [
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 20
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 9
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 30
+      },
+      {
+        "key": "reduce_dmg_(floor)_pct",
+        "value": 25
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      },
+      {
+        "key": "aggro_pct",
+        "value": -20,
+        "condition": {
+          "weapon_required": "ninjutsu_scroll"
+        }
+      },
+      {
+        "key": "atk_up_(agi_pct)",
+        "value": 250
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Burning Dragon Igneus (Lv 225)",
+        "dye": "",
+        "map": "Boma Moja: Village Center"
+      },
+      {
+        "monster": "Burning Dragon Igneus (Lv 235)",
+        "dye": "",
+        "map": "Boma Moja: Village Center"
+      },
+      {
+        "monster": "Burning Dragon Igneus (Lv 245)",
+        "dye": "",
+        "map": "Boma Moja: Village Center"
+      },
+      {
+        "monster": "Burning Dragon Igneus (Lv 255)",
+        "dye": "",
+        "map": "Boma Moja: Village Center"
+      },
+      {
+        "monster": "Burning Dragon Igneus (Lv 275)",
+        "dye": "",
+        "map": "Boma Moja: Village Center"
+      }
+    ]
+  },
+  {
+    "id": 277,
+    "name": "Burning Ember Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 175,
+      "stability": 65
+    },
+    "stats": [
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 30
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 9
+      },
+      {
+        "key": "fractional_barrier_pct",
+        "value": 15
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 15
+      },
+      {
+        "key": "reduce_dmg_(floor)_pct",
+        "value": 15
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      },
+      {
+        "key": "aggro_pct",
+        "value": -30,
+        "condition": {
+          "weapon_required": "ninjutsu_scroll"
+        }
+      },
+      {
+        "key": "atk_up_(agi_pct)",
+        "value": 200
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 278,
+    "name": "Burning Ember Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 175,
+      "stability": 65
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 53
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 279,
+    "name": "Orion's Sword (Snowball Event 2023) [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 175,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dodge",
+        "value": -50
+      },
+      {
+        "key": "critical_rate",
+        "value": 105
+      },
+      {
+        "key": "light_resistance_pct",
+        "value": -25
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 35
+      },
+      {
+        "key": "anticipate_pct",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Snowball Event NPC",
+        "dye": "",
+        "map": "Snowball Mini Game Venue"
+      }
+    ]
+  },
+  {
+    "id": 280,
+    "name": "8th Anniv Katana VI [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 10
+      },
+      {
+        "key": "maxmp",
+        "value": 250
+      },
+      {
+        "key": "atk_pct",
+        "value": 10
+      },
+      {
+        "key": "critical_rate",
+        "value": 35
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 35
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 281,
+    "name": "8th Anniv Katana VI [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 55
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 282,
+    "name": "9th Anniv Katana V [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 10
+      },
+      {
+        "key": "atk_pct",
+        "value": 10
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 22
+      },
+      {
+        "key": "cspd",
+        "value": 1080
+      },
+      {
+        "key": "critical_rate",
+        "value": 40
+      },
+      {
+        "key": "atk_up_(agi_pct)",
+        "value": 250
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 40
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 284,
+    "name": "9th Anniv Katana V [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 55
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 285,
+    "name": "Brass Dragon Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 10
+      },
+      {
+        "key": "accuracy",
+        "value": 100
+      },
+      {
+        "key": "aspd",
+        "value": 1000
+      },
+      {
+        "key": "critical_rate_pct",
+        "value": 200
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "additional_melee_pct",
+        "value": 100
+      },
+      {
+        "key": "reduce_dmg_(charge)_pct",
+        "value": 40
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Brass Dragon Reguita (Lv 240)",
+        "dye": "",
+        "map": "Boma Konda: Village Center"
+      },
+      {
+        "monster": "Brass Dragon Reguita (Lv 250)",
+        "dye": "",
+        "map": "Boma Konda: Village Center"
+      },
+      {
+        "monster": "Brass Dragon Reguita (Lv 260)",
+        "dye": "",
+        "map": "Boma Konda: Village Center"
+      },
+      {
+        "monster": "Brass Dragon Reguita (Lv 270)",
+        "dye": "",
+        "map": "Boma Konda: Village Center"
+      },
+      {
+        "monster": "Brass Dragon Reguita (Lv 290)",
+        "dye": "",
+        "map": "Boma Konda: Village Center"
+      }
+    ]
+  },
+  {
+    "id": 286,
+    "name": "Brass Dragon Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 10
+      },
+      {
+        "key": "accuracy",
+        "value": 200
+      },
+      {
+        "key": "aspd",
+        "value": 1000
+      },
+      {
+        "key": "critical_rate_pct",
+        "value": 100
+      },
+      {
+        "key": "element",
+        "value": "light"
+      },
+      {
+        "key": "additional_melee_pct",
+        "value": 100
+      },
+      {
+        "key": "reduce_dmg_(charge)_pct",
+        "value": 10
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 287,
+    "name": "Brass Dragon Sword [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 55
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 288,
+    "name": "Modestia [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 1000
+      },
+      {
+        "key": "critical_rate",
+        "value": 120
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 15
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Mysterious Exchange (P. Avatar 2023)",
+        "dye": "",
+        "map": "Event"
+      }
+    ]
+  },
+  {
+    "id": 289,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 5
+      },
+      {
+        "key": "atk_pct",
+        "value": 10
+      },
+      {
+        "key": "wind_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "aggro_pct",
+        "value": -40
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 7
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 15
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception: 2nd Part (2023)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 290,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 5
+      },
+      {
+        "key": "atk_pct",
+        "value": 10
+      },
+      {
+        "key": "earth_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "aggro_pct",
+        "value": -40
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 7
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 15
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception: 2nd Part (2023)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 291,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 10
+      },
+      {
+        "key": "wind_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": -20
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 10
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 3
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 10
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception: 2nd Part (2023)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 292,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 10
+      },
+      {
+        "key": "earth_resistance_pct",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": -20
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 10
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 3
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 10
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception: 2nd Part (2023)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 293,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 5000
+      },
+      {
+        "key": "atk_pct",
+        "value": 9
+      },
+      {
+        "key": "wind_resistance_pct",
+        "value": 25
+      },
+      {
+        "key": "aggro_pct",
+        "value": -60
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 4
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 25
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception: 2nd Part (2023)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 294,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "maxhp",
+        "value": 5000
+      },
+      {
+        "key": "atk_pct",
+        "value": 9
+      },
+      {
+        "key": "earth_resistance_pct",
+        "value": 25
+      },
+      {
+        "key": "aggro_pct",
+        "value": -60
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 4
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 25
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception: 2nd Part (2023)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 296,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 10
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "wind_resistance_pct",
+        "value": 35
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "element",
+        "value": "earth"
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 35
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception: 2nd Part (2023)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 297,
+    "name": "Patriot Edge [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "atk_pct",
+        "value": 10
+      },
+      {
+        "key": "physical_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "magic_resistance_pct",
+        "value": 20
+      },
+      {
+        "key": "earth_resistance_pct",
+        "value": 35
+      },
+      {
+        "key": "ailment_resistance_pct",
+        "value": 15
+      },
+      {
+        "key": "element",
+        "value": "fire"
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 35
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] HATSUNE MIKU's Collab Event Reception: 2nd Part (2023)",
+        "dye": "",
+        "map": "HATSUNE MIKU Collab Venue"
+      }
+    ]
+  },
+  {
+    "id": 298,
+    "name": "Yatagarasu [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 194,
+      "stability": 80
+    },
+    "stats": [
+      {
+        "key": "maxhp_pct",
+        "value": -40
+      },
+      {
+        "key": "atk_pct",
+        "value": 10
+      },
+      {
+        "key": "accuracy_pct",
+        "value": 30
+      },
+      {
+        "key": "aggro_pct",
+        "value": -50
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "pct_stronger_against_neutral",
+        "value": 35
+      },
+      {
+        "key": "absolute_dodge_pct",
+        "value": 20
+      },
+      {
+        "key": "attack_range_(m)",
+        "value": 2.5
+      },
+      {
+        "key": "cspd_pct",
+        "value": 100,
+        "condition": {
+          "weapon_required": "ninjutsu_scroll"
+        }
+      },
+      {
+        "key": "critical_rate_pct",
+        "value": 100
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Pedrio (Lv 265)",
+        "dye": "",
+        "map": "High Difficulty Boss Battle Event Venue"
+      }
+    ]
+  },
+  {
+    "id": 299,
+    "name": "Raiden [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 198,
+      "stability": 80
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 1000
+      },
+      {
+        "key": "cspd_pct",
+        "value": 55
+      },
+      {
+        "key": "water_resistance_pct",
+        "value": -50
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 15
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10,
+        "condition": {
+          "weapon_required": "light_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Bemoz (Lv 225)",
+        "dye": "",
+        "map": "Deusania's Lab Innermost Chambers"
+      }
+    ]
+  },
+  {
+    "id": 300,
+    "name": "Raiden [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 198,
+      "stability": 80
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 1000
+      },
+      {
+        "key": "cspd_pct",
+        "value": 65
+      },
+      {
+        "key": "water_resistance_pct",
+        "value": -40
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 20
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10,
+        "condition": {
+          "weapon_required": "light_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Bemoz (Lv 250)",
+        "dye": "",
+        "map": "Deusania's Lab Innermost Chambers"
+      }
+    ]
+  },
+  {
+    "id": 301,
+    "name": "Raiden [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 198,
+      "stability": 80
+    },
+    "stats": [
+      {
+        "key": "aspd",
+        "value": 1000
+      },
+      {
+        "key": "cspd_pct",
+        "value": 75
+      },
+      {
+        "key": "water_resistance_pct",
+        "value": -30
+      },
+      {
+        "key": "element",
+        "value": "wind"
+      },
+      {
+        "key": "attack_mp_recovery",
+        "value": 25
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10,
+        "condition": {
+          "weapon_required": "light_armor"
+        }
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Bemoz (Lv 275)",
+        "dye": "",
+        "map": "Deusania's Lab Innermost Chambers"
+      }
+    ]
+  },
+  {
+    "id": 302,
+    "name": "Abyss Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 213
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 10
+      },
+      {
+        "key": "maxhp",
+        "value": 7500
+      },
+      {
+        "key": "pct_stronger_against_fire",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": -75
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10
+      },
+      {
+        "key": "invincible_aid_(sec)",
+        "value": 2
+      },
+      {
+        "key": "absolute_dodge_pct",
+        "value": 20
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "Vatudo (Lv 255)",
+        "dye": "",
+        "map": "Deep Sea: Deepest Zone"
+      },
+      {
+        "monster": "Vatudo (Lv 275)",
+        "dye": "",
+        "map": "Deep Sea: Deepest Zone"
+      },
+      {
+        "monster": "Vatudo (Lv 285)",
+        "dye": "",
+        "map": "Deep Sea: Deepest Zone"
+      },
+      {
+        "monster": "Vatudo (Lv 305)",
+        "dye": "",
+        "map": "Deep Sea: Deepest Zone"
+      }
+    ]
+  },
+  {
+    "id": 303,
+    "name": "Abyss Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 213,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 10
+      },
+      {
+        "key": "maxhp",
+        "value": 10000
+      },
+      {
+        "key": "pct_stronger_against_fire",
+        "value": 10
+      },
+      {
+        "key": "aggro_pct",
+        "value": -100
+      },
+      {
+        "key": "element",
+        "value": "water"
+      },
+      {
+        "key": "unsheathe_attack_pct",
+        "value": 10
+      },
+      {
+        "key": "invincible_aid_(sec)",
+        "value": 1
+      },
+      {
+        "key": "absolute_dodge_pct",
+        "value": 5
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 304,
+    "name": "Abyss Katana [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 213,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 58
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 305,
+    "name": "9th Anniv Katana VI [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 220,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "dex_pct",
+        "value": 10
+      },
+      {
+        "key": "atk_pct",
+        "value": 11
+      },
+      {
+        "key": "physical_pierce_pct",
+        "value": 25
+      },
+      {
+        "key": "cspd",
+        "value": 1200
+      },
+      {
+        "key": "critical_rate",
+        "value": 40
+      },
+      {
+        "key": "atk_up_(agi_pct)",
+        "value": 250
+      },
+      {
+        "key": "reduce_dmg_(bowling)_pct",
+        "value": 40
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[NPC] Blacksmith : Zaldo",
+        "dye": "",
+        "map": "Sofya City: Blacksmith"
+      }
+    ]
+  },
+  {
+    "id": 306,
+    "name": "9th Anniv Katana VI [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 220,
+      "stability": 70
+    },
+    "stats": [
+      {
+        "key": "potential",
+        "value": 59
+      }
+    ],
+    "obtained_from": [
+      {
+        "monster": "[Player] Smith Skill",
+        "dye": "",
+        "map": "-"
+      }
+    ]
+  },
+  {
+    "id": 308,
+    "name": "Tsukikage-Sakuya [Katana]",
+    "type": "Katana",
+    "base": {
+      "atk": 226
+    },
+    "stats": [
+      {
+        "key": "physical_pierce_pct",
+        "value": 10
+      },
+      {
+        "key": "pct_stronger_against_dark",
+        "value": 25
+      },
+      {
+        "key": "light_resistance_pct",
+        "value": 30
+      },
+      {
+        "key": "dark_resistance_pct",
+        "value": 30
+      },
+      {
+        "key": "element",
+        "value": "dark"
+      },
+      {
+        "key": "short_range_damage_pct",
+        "value": 10
+      },
+      {
+        "key": "motion_speed_pct",
+        "value": 10
+      },
+      {
+        "key": "aspd",
+        "value": 900,
+        "condition": {
+          "weapon_required": "heavy_armor"
+        }
+      },
+      {
+        "key": "guard_break_pct",
+        "value": 30
+      }
+    ],
+    "obtained_from": []
+  }
+]

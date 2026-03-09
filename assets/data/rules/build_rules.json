@@ -1,0 +1,78 @@
+{
+  "build_types": [
+    {
+      "id": "physical_dps",
+      "name": "Physical DPS",
+      "priority_stats": [
+        "atk_percent",
+        "atk_flat",
+        "critical_rate",
+        "critical_damage",
+        "physical_pierce",
+        "short_range_damage",
+        "long_range_damage"
+      ],
+      "recommended_weapons": [
+        "1H_SWORD",
+        "2H_SWORD",
+        "HALBERD",
+        "BOW",
+        "KATANA",
+        "BOWGUN"
+      ],
+      "description": "High damage physical build focusing on ATK and critical damage."
+    },
+
+    {
+      "id": "magic_dps",
+      "name": "Magic DPS",
+      "priority_stats": [
+        "matk_percent",
+        "matk_flat",
+        "magic_pierce",
+        "max_mp",
+        "cast_speed",
+        "magic_critical"
+      ],
+      "recommended_weapons": [
+        "STAFF",
+        "MAGIC_DEVICE"
+      ],
+      "description": "Magic damage build focusing on MATK and magic penetration."
+    },
+
+    {
+      "id": "tank",
+      "name": "Tank",
+      "priority_stats": [
+        "max_hp",
+        "physical_resistance",
+        "magic_resistance",
+        "aggro",
+        "guard_power",
+        "guard_rate"
+      ],
+      "recommended_weapons": [
+        "1H_SWORD",
+        "KNUCKLES"
+      ],
+      "description": "Defensive build focused on HP, resistance, and aggro generation."
+    },
+
+    {
+      "id": "support",
+      "name": "Support",
+      "priority_stats": [
+        "max_mp",
+        "cast_speed",
+        "heal_power",
+        "buff_duration"
+      ],
+      "recommended_weapons": [
+        "STAFF",
+        "MAGIC_DEVICE"
+      ],
+      "description": "Support build focused on casting speed and support skills."
+    }
+  ]
+}
