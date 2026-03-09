@@ -194,10 +194,11 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
   }
 
   Widget _sectionTitle(String title) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Text(
       title,
-      style: const TextStyle(
-        color: Colors.white70,
+      style: TextStyle(
+        color: colorScheme.onSurface.withValues(alpha: 0.75),
         fontSize: 11,
         fontWeight: FontWeight.w700,
         letterSpacing: 0.3,
@@ -206,6 +207,7 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
   }
 
   Widget _slotRow(String label, String value) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: Row(
@@ -214,7 +216,10 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
             width: 58,
             child: Text(
               label,
-              style: const TextStyle(color: Colors.white54, fontSize: 11),
+              style: TextStyle(
+                color: colorScheme.onSurface.withValues(alpha: 0.6),
+                fontSize: 11,
+              ),
             ),
           ),
           const SizedBox(width: 6),
@@ -223,7 +228,7 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
               value,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(color: Colors.white, fontSize: 11),
+              style: TextStyle(color: colorScheme.onSurface, fontSize: 11),
             ),
           ),
         ],
@@ -232,17 +237,20 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
   }
 
   Widget _statChip(String label, int value) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       decoration: BoxDecoration(
-        color: const Color(0xFF11161B),
+        color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: const Color(0x44FFFFFF)),
+        border: Border.all(
+          color: colorScheme.onSurface.withValues(alpha: 0.24),
+        ),
       ),
       child: Text(
         '$label $value',
-        style: const TextStyle(
-          color: Colors.white70,
+        style: TextStyle(
+          color: colorScheme.onSurface.withValues(alpha: 0.75),
           fontSize: 11,
           fontWeight: FontWeight.w600,
         ),
@@ -254,8 +262,10 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
     required String label,
     required IconData icon,
     required VoidCallback onPressed,
-    Color color = Colors.white,
+    Color? color,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color resolvedColor = color ?? colorScheme.onSurface;
     return SizedBox(
       width: double.infinity,
       child: OutlinedButton.icon(
@@ -263,9 +273,9 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
         icon: Icon(icon, size: 15),
         label: Text(label),
         style: OutlinedButton.styleFrom(
-          foregroundColor: color,
-          side: BorderSide(color: color.withValues(alpha: 0.36)),
-          backgroundColor: const Color(0xFF12181F),
+          foregroundColor: resolvedColor,
+          side: BorderSide(color: resolvedColor.withValues(alpha: 0.36)),
+          backgroundColor: colorScheme.surfaceContainerHighest,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -281,6 +291,7 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
     required int sourceIndex,
     required int fallbackIndex,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final String buildId = _buildId(
       build,
       sourceIndex >= 0 ? sourceIndex : fallbackIndex,
@@ -309,13 +320,16 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: <Color>[Color(0xFF121212), Color(0xFF0D1115)],
+          colors: <Color>[
+            colorScheme.surfaceContainerHigh,
+            colorScheme.surfaceContainerHighest,
+          ],
         ),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0x33FFFFFF)),
+        border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.2)),
       ),
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
@@ -331,8 +345,8 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
                         name,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: TextStyle(
+                          color: colorScheme.onSurface,
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
                         ),
@@ -348,22 +362,28 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
                       icon: Icon(
                         favorite ? Icons.star : Icons.star_border,
                         color: favorite
-                            ? const Color(0xFFFFD56A)
-                            : Colors.white54,
+                            ? colorScheme.primary
+                            : colorScheme.onSurface.withValues(alpha: 0.54),
                       ),
                     ),
                   ],
                 ),
                 Text(
                   _savedAtLabel(build),
-                  style: const TextStyle(color: Colors.white60, fontSize: 12),
+                  style: TextStyle(
+                    color: colorScheme.onSurface.withValues(alpha: 0.62),
+                    fontSize: 12,
+                  ),
                 ),
                 const SizedBox(height: 10),
                 Text(
                   _equipmentPreview(build),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(color: Colors.white70, fontSize: 12),
+                  style: TextStyle(
+                    color: colorScheme.onSurface.withValues(alpha: 0.75),
+                    fontSize: 12,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Wrap(
@@ -393,7 +413,7 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
                       icon: const Icon(Icons.delete_outline, size: 16),
                       label: const Text('Delete'),
                       style: FilledButton.styleFrom(
-                        foregroundColor: const Color(0xFFFFC0C0),
+                        foregroundColor: colorScheme.error,
                       ),
                     ),
                   ],
@@ -415,8 +435,8 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
                       name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: colorScheme.onSurface,
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
                       ),
@@ -424,8 +444,8 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
                     const SizedBox(height: 6),
                     Text(
                       _savedAtLabel(build),
-                      style: const TextStyle(
-                        color: Colors.white60,
+                      style: TextStyle(
+                        color: colorScheme.onSurface.withValues(alpha: 0.62),
                         fontSize: 12,
                       ),
                     ),
@@ -435,7 +455,7 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
               Container(
                 width: 1,
                 margin: const EdgeInsets.symmetric(horizontal: 12),
-                color: const Color(0x22FFFFFF),
+                color: colorScheme.onSurface.withValues(alpha: 0.14),
               ),
               Expanded(
                 child: Column(
@@ -452,7 +472,7 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
               Container(
                 width: 1,
                 margin: const EdgeInsets.symmetric(horizontal: 12),
-                color: const Color(0x22FFFFFF),
+                color: colorScheme.onSurface.withValues(alpha: 0.14),
               ),
               Expanded(
                 child: Column(
@@ -475,7 +495,7 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
               Container(
                 width: 1,
                 margin: const EdgeInsets.symmetric(horizontal: 12),
-                color: const Color(0x22FFFFFF),
+                color: colorScheme.onSurface.withValues(alpha: 0.14),
               ),
               Expanded(
                 child: Column(
@@ -491,8 +511,8 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
                       icon: Icon(
                         favorite ? Icons.star : Icons.star_border,
                         color: favorite
-                            ? const Color(0xFFFFD56A)
-                            : Colors.white54,
+                            ? colorScheme.primary
+                            : colorScheme.onSurface.withValues(alpha: 0.54),
                       ),
                       tooltip: favorite ? 'Remove favorite' : 'Mark favorite',
                     ),
@@ -513,7 +533,7 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
                       label: 'Delete',
                       icon: Icons.delete_outline,
                       onPressed: () => _deleteBuild(build),
-                      color: const Color(0xFFFFC0C0),
+                      color: colorScheme.error,
                     ),
                   ],
                 ),
@@ -577,25 +597,44 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
     );
     final String? nextName = await showDialog<String>(
       context: context,
-      builder: (BuildContext context) => AlertDialog(
-        backgroundColor: const Color(0xFF2A2A2A),
-        title: const Text('Rename Build'),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          decoration: const InputDecoration(hintText: 'Enter build name'),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel'),
+      builder: (BuildContext context) {
+        final ColorScheme colorScheme = Theme.of(context).colorScheme;
+        return AlertDialog(
+          backgroundColor: colorScheme.surfaceContainerHigh,
+          title: Text(
+            'Rename Build',
+            style: TextStyle(color: colorScheme.onSurface),
           ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(controller.text.trim()),
-            child: const Text('Save'),
+          content: TextField(
+            controller: controller,
+            autofocus: true,
+            style: TextStyle(color: colorScheme.onSurface),
+            decoration: InputDecoration(
+              hintText: 'Enter build name',
+              hintStyle: TextStyle(
+                color: colorScheme.onSurface.withValues(alpha: 0.54),
+              ),
+              filled: true,
+              fillColor: colorScheme.surfaceContainerHighest,
+            ),
           ),
-        ],
-      ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancel'),
+            ),
+            FilledButton(
+              onPressed: () =>
+                  Navigator.of(context).pop(controller.text.trim()),
+              style: FilledButton.styleFrom(
+                backgroundColor: colorScheme.primary,
+                foregroundColor: colorScheme.onPrimary,
+              ),
+              child: const Text('Save'),
+            ),
+          ],
+        );
+      },
     );
 
     controller.dispose();
@@ -618,26 +657,36 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
     final bool confirmed =
         await showDialog<bool>(
           context: context,
-          builder: (BuildContext context) => AlertDialog(
-            backgroundColor: const Color(0xFF2A2A2A),
-            title: const Text('Delete Build'),
-            content: const Text(
-              'This action removes the selected build from your saved list.',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: const Text('Cancel'),
+          builder: (BuildContext context) {
+            final ColorScheme colorScheme = Theme.of(context).colorScheme;
+            return AlertDialog(
+              backgroundColor: colorScheme.surfaceContainerHigh,
+              title: Text(
+                'Delete Build',
+                style: TextStyle(color: colorScheme.onSurface),
               ),
-              FilledButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                style: FilledButton.styleFrom(
-                  backgroundColor: const Color(0xFF4A4A4A),
+              content: Text(
+                'This action removes the selected build from your saved list.',
+                style: TextStyle(
+                  color: colorScheme.onSurface.withValues(alpha: 0.8),
                 ),
-                child: const Text('Delete'),
               ),
-            ],
-          ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: const Text('Cancel'),
+                ),
+                FilledButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  style: FilledButton.styleFrom(
+                    backgroundColor: colorScheme.primary,
+                    foregroundColor: colorScheme.onPrimary,
+                  ),
+                  child: const Text('Delete'),
+                ),
+              ],
+            );
+          },
         ) ??
         false;
 
@@ -659,6 +708,7 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final List<Map<String, dynamic>> visibleBuilds = _visibleBuilds();
     final bool isMobile = MediaQuery.sizeOf(context).width < 1024;
     final bool isEmbeddedInShell = widget.onNavigate != null;
@@ -670,58 +720,75 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
       widget.onNavigate?.call(page);
     }
 
-    final Widget content = Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
-          child: TextField(
-            controller: _searchController,
-            onChanged: (_) => setState(() {}),
-            decoration: InputDecoration(
-              hintText: 'Search by name or equipment key',
-              prefixIcon: const Icon(Icons.search),
-              filled: true,
-              fillColor: const Color(0xFF10161A),
-              hintStyle: const TextStyle(color: Colors.white54),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
-                borderSide: const BorderSide(color: Color(0x44FFFFFF)),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
-                borderSide: const BorderSide(color: Color(0x44FFFFFF)),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
-                borderSide: const BorderSide(color: Color(0x66FFFFFF)),
+    final Widget content = ColoredBox(
+      color: colorScheme.surface,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
+            child: TextField(
+              controller: _searchController,
+              style: TextStyle(color: colorScheme.onSurface),
+              onChanged: (_) => setState(() {}),
+              decoration: InputDecoration(
+                hintText: 'Search by name or equipment key',
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: colorScheme.onSurface.withValues(alpha: 0.75),
+                ),
+                filled: true,
+                fillColor: colorScheme.surfaceContainerHighest,
+                hintStyle: TextStyle(
+                  color: colorScheme.onSurface.withValues(alpha: 0.54),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: BorderSide(
+                    color: colorScheme.onSurface.withValues(alpha: 0.24),
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: BorderSide(
+                    color: colorScheme.onSurface.withValues(alpha: 0.24),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: BorderSide(
+                    color: colorScheme.onSurface.withValues(alpha: 0.45),
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-        Expanded(
-          child: visibleBuilds.isEmpty
-              ? const Center(
-                  child: Text(
-                    'No saved builds found.',
-                    style: TextStyle(color: Colors.white70),
+          Expanded(
+            child: visibleBuilds.isEmpty
+                ? Center(
+                    child: Text(
+                      'No saved builds found.',
+                      style: TextStyle(
+                        color: colorScheme.onSurface.withValues(alpha: 0.75),
+                      ),
+                    ),
+                  )
+                : ListView.builder(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    itemCount: visibleBuilds.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final Map<String, dynamic> build = visibleBuilds[index];
+                      final int sourceIndex = _builds.indexOf(build);
+                      return _buildSavedBuildCard(
+                        context: context,
+                        build: build,
+                        sourceIndex: sourceIndex,
+                        fallbackIndex: index,
+                      );
+                    },
                   ),
-                )
-              : ListView.builder(
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                  itemCount: visibleBuilds.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final Map<String, dynamic> build = visibleBuilds[index];
-                    final int sourceIndex = _builds.indexOf(build);
-                    return _buildSavedBuildCard(
-                      context: context,
-                      build: build,
-                      sourceIndex: sourceIndex,
-                      fallbackIndex: index,
-                    );
-                  },
-                ),
-        ),
-      ],
+          ),
+        ],
+      ),
     );
 
     if (isEmbeddedInShell) {
@@ -729,7 +796,7 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF000000),
+      backgroundColor: colorScheme.surface,
       drawer: isMobile
           ? null
           : AppNavigationDrawer(
@@ -757,6 +824,8 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
               },
             ),
       appBar: AppBar(
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
         automaticallyImplyLeading: false,
         leading: isMobile
             ? null

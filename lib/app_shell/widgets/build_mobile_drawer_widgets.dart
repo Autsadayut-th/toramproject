@@ -15,25 +15,30 @@ class _DrawerSectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF0F0F0F),
+        color: colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0x33FFFFFF)),
+        border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
             children: <Widget>[
-              Icon(icon, color: Colors.white70, size: 18),
+              Icon(
+                icon,
+                color: colorScheme.onSurface.withValues(alpha: 0.75),
+                size: 18,
+              ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   title,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: colorScheme.onSurface,
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
                   ),
@@ -61,21 +66,22 @@ class _RecommendationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(0xFF161616),
+        color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: const Color(0x33FFFFFF)),
+        border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.2)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             '$index.',
-            style: const TextStyle(
-              color: Colors.white70,
+            style: TextStyle(
+              color: colorScheme.onSurface.withValues(alpha: 0.75),
               fontSize: 12,
               fontWeight: FontWeight.w700,
             ),
@@ -84,7 +90,7 @@ class _RecommendationTile extends StatelessWidget {
           Expanded(
             child: Text(
               message,
-              style: const TextStyle(color: Colors.white, fontSize: 12),
+              style: TextStyle(color: colorScheme.onSurface, fontSize: 12),
             ),
           ),
         ],
@@ -114,6 +120,7 @@ class _SavedBuildTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
@@ -122,9 +129,9 @@ class _SavedBuildTile extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         constraints: const BoxConstraints(minHeight: 120),
         decoration: BoxDecoration(
-          color: const Color(0xFF121212),
+          color: colorScheme.surfaceContainerHigh,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0x33FFFFFF)),
+          border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.2)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,8 +140,8 @@ class _SavedBuildTile extends StatelessWidget {
               name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: colorScheme.onSurface,
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
               ),
@@ -149,17 +156,17 @@ class _SavedBuildTile extends StatelessWidget {
                 _SavedBuildActionText(
                   label: 'Load',
                   onTap: onLoad,
-                  color: Colors.white,
+                  color: colorScheme.onSurface,
                 ),
                 _SavedBuildActionText(
                   label: 'Export Code',
                   onTap: onShare,
-                  color: Colors.white70,
+                  color: colorScheme.onSurface.withValues(alpha: 0.75),
                 ),
                 _SavedBuildActionText(
                   label: 'X',
                   onTap: onDelete,
-                  color: Colors.white70,
+                  color: colorScheme.onSurface.withValues(alpha: 0.75),
                 ),
               ],
             ),
@@ -168,9 +175,11 @@ class _SavedBuildTile extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
               decoration: BoxDecoration(
-                color: const Color(0xFF0B0B0B),
+                color: colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: const Color(0x22FFFFFF)),
+                border: Border.all(
+                  color: colorScheme.onSurface.withValues(alpha: 0.15),
+                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,8 +188,8 @@ class _SavedBuildTile extends StatelessWidget {
                     codeLine,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: Colors.white60,
+                    style: TextStyle(
+                      color: colorScheme.onSurface.withValues(alpha: 0.65),
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
                     ),
@@ -190,7 +199,10 @@ class _SavedBuildTile extends StatelessWidget {
                     savedAtLine,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.white54, fontSize: 11),
+                    style: TextStyle(
+                      color: colorScheme.onSurface.withValues(alpha: 0.54),
+                      fontSize: 11,
+                    ),
                   ),
                 ],
               ),
@@ -215,6 +227,7 @@ class _SavedBuildActionText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final bool isEnabled = onTap != null;
     return Material(
       color: Colors.transparent,
@@ -226,20 +239,22 @@ class _SavedBuildActionText extends StatelessWidget {
           constraints: const BoxConstraints(minHeight: 36),
           decoration: BoxDecoration(
             color: isEnabled
-                ? const Color(0xFF141414)
-                : const Color(0xFF111111),
+                ? colorScheme.surfaceContainerHighest
+                : colorScheme.surfaceContainerHigh,
             borderRadius: BorderRadius.circular(9),
             border: Border.all(
               color: isEnabled
-                  ? const Color(0x66FFFFFF)
-                  : const Color(0x22FFFFFF),
+                  ? colorScheme.onSurface.withValues(alpha: 0.35)
+                  : colorScheme.onSurface.withValues(alpha: 0.15),
             ),
           ),
           child: Text(
             label,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: isEnabled ? color : Colors.white24,
+              color: isEnabled
+                  ? color
+                  : colorScheme.onSurface.withValues(alpha: 0.24),
               fontSize: 12,
               fontWeight: FontWeight.w700,
             ),
@@ -273,21 +288,22 @@ class _StatsCategoryBlock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.only(top: 12),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF111111),
+        color: colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0x33FFFFFF)),
+        border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             title,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: colorScheme.onSurface,
               fontWeight: FontWeight.w700,
               fontSize: 13,
             ),
@@ -301,16 +317,16 @@ class _StatsCategoryBlock extends StatelessWidget {
                   Expanded(
                     child: Text(
                       row.value,
-                      style: const TextStyle(
-                        color: Colors.white70,
+                      style: TextStyle(
+                        color: colorScheme.onSurface.withValues(alpha: 0.75),
                         fontSize: 12,
                       ),
                     ),
                   ),
                   Text(
                     _displayValue(row.key),
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
                     ),

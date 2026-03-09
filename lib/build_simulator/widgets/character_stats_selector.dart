@@ -64,6 +64,7 @@ class CharacterStatsSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final String selectedPersonalType = _normalizedPersonalStatType();
     final int safeUsed = usedStatPoints < 0 ? 0 : usedStatPoints;
     final int safeTotal = totalStatPoints <= 0 ? 1 : totalStatPoints;
@@ -77,9 +78,11 @@ class CharacterStatsSelector extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           decoration: BoxDecoration(
-            color: const Color(0xFF101010),
+            color: colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
+            border: Border.all(
+              color: colorScheme.onSurface.withValues(alpha: 0.18),
+            ),
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,17 +93,17 @@ class CharacterStatsSelector extends StatelessWidget {
                   children: [
                     Text(
                       'Character Properties ($safeUsed / $safeTotal stat points used)',
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: colorScheme.onSurface,
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                     const SizedBox(height: 2),
-                    const Text(
+                    Text(
                       'Lv max 999, each main stat max 510',
                       style: TextStyle(
-                        color: Colors.white54,
+                        color: colorScheme.onSurface.withValues(alpha: 0.54),
                         fontSize: 10,
                         height: 1.3,
                       ),
@@ -110,8 +113,8 @@ class CharacterStatsSelector extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 4),
                         child: Text(
                           'Stat points exceeded by $exceededPoints points.',
-                          style: const TextStyle(
-                            color: Color(0xFFFF8A80),
+                          style: TextStyle(
+                            color: colorScheme.error,
                             fontSize: 10,
                             fontWeight: FontWeight.w700,
                           ),
@@ -182,17 +185,19 @@ class CharacterStatsSelector extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           decoration: BoxDecoration(
-            color: const Color(0xFF101010),
+            color: colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
+            border: Border.all(
+              color: colorScheme.onSurface.withValues(alpha: 0.18),
+            ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Text(
+              Text(
                 'Personal Stat',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: colorScheme.onSurface,
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
                 ),
@@ -200,9 +205,9 @@ class CharacterStatsSelector extends StatelessWidget {
               const SizedBox(height: 8),
               DropdownButtonFormField<String>(
                 initialValue: selectedPersonalType,
-                dropdownColor: const Color(0xFF141414),
-                iconEnabledColor: Colors.white70,
-                style: const TextStyle(color: Colors.white, fontSize: 12),
+                dropdownColor: colorScheme.surfaceContainerHigh,
+                iconEnabledColor: colorScheme.onSurface.withValues(alpha: 0.75),
+                style: TextStyle(color: colorScheme.onSurface, fontSize: 12),
                 decoration: InputDecoration(
                   isDense: true,
                   contentPadding: const EdgeInsets.symmetric(
@@ -210,23 +215,23 @@ class CharacterStatsSelector extends StatelessWidget {
                     vertical: 8,
                   ),
                   filled: true,
-                  fillColor: const Color(0xFF141414),
+                  fillColor: colorScheme.surfaceContainerHigh,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide: BorderSide(
-                      color: Colors.white.withValues(alpha: 0.18),
+                      color: colorScheme.onSurface.withValues(alpha: 0.18),
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide: BorderSide(
-                      color: Colors.white.withValues(alpha: 0.18),
+                      color: colorScheme.onSurface.withValues(alpha: 0.18),
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide: BorderSide(
-                      color: Colors.white.withValues(alpha: 0.35),
+                      color: colorScheme.onSurface.withValues(alpha: 0.35),
                     ),
                   ),
                 ),
@@ -264,8 +269,8 @@ class CharacterStatsSelector extends StatelessWidget {
           child: FilledButton(
             onPressed: onRecalculate,
             style: FilledButton.styleFrom(
-              backgroundColor: const Color(0xFF1A1A1A),
-              foregroundColor: Colors.white,
+              backgroundColor: colorScheme.primary,
+              foregroundColor: colorScheme.onPrimary,
             ),
             child: const Text('Recalculate'),
           ),
@@ -331,6 +336,7 @@ class _InlineNumberAdjusterState extends State<_InlineNumberAdjuster> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -349,8 +355,8 @@ class _InlineNumberAdjusterState extends State<_InlineNumberAdjuster> {
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: colorScheme.onSurface,
               fontWeight: FontWeight.w700,
             ),
             decoration: InputDecoration(
@@ -360,23 +366,23 @@ class _InlineNumberAdjusterState extends State<_InlineNumberAdjuster> {
                 vertical: 7,
               ),
               filled: true,
-              fillColor: const Color(0xFF141414),
+              fillColor: colorScheme.surfaceContainerHigh,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide(
-                  color: Colors.white.withValues(alpha: 0.18),
+                  color: colorScheme.onSurface.withValues(alpha: 0.18),
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide(
-                  color: Colors.white.withValues(alpha: 0.18),
+                  color: colorScheme.onSurface.withValues(alpha: 0.18),
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide(
-                  color: Colors.white.withValues(alpha: 0.35),
+                  color: colorScheme.onSurface.withValues(alpha: 0.35),
                 ),
               ),
             ),
@@ -404,13 +410,14 @@ class _HeaderIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(6),
       child: SizedBox(
         width: 20,
         height: 20,
-        child: Icon(icon, size: 16, color: Colors.white),
+        child: Icon(icon, size: 16, color: colorScheme.onSurface),
       ),
     );
   }
@@ -474,12 +481,15 @@ class _StatRowState extends State<_StatRow> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(0xFF101010),
+        color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
+        border: Border.all(
+          color: colorScheme.onSurface.withValues(alpha: 0.18),
+        ),
       ),
       child: Column(
         children: [
@@ -489,8 +499,8 @@ class _StatRowState extends State<_StatRow> {
                 width: 42,
                 child: Text(
                   widget.label,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: colorScheme.onSurface,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -511,8 +521,8 @@ class _StatRowState extends State<_StatRow> {
                   keyboardType: TextInputType.number,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: colorScheme.onSurface,
                     fontWeight: FontWeight.w700,
                   ),
                   decoration: InputDecoration(
@@ -522,23 +532,23 @@ class _StatRowState extends State<_StatRow> {
                       vertical: 6,
                     ),
                     filled: true,
-                    fillColor: const Color(0xFF141414),
+                    fillColor: colorScheme.surfaceContainerHigh,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(6),
                       borderSide: BorderSide(
-                        color: Colors.white.withValues(alpha: 0.18),
+                        color: colorScheme.onSurface.withValues(alpha: 0.18),
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(6),
                       borderSide: BorderSide(
-                        color: Colors.white.withValues(alpha: 0.18),
+                        color: colorScheme.onSurface.withValues(alpha: 0.18),
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(6),
                       borderSide: BorderSide(
-                        color: Colors.white.withValues(alpha: 0.35),
+                        color: colorScheme.onSurface.withValues(alpha: 0.35),
                       ),
                     ),
                   ),
@@ -561,8 +571,8 @@ class _StatRowState extends State<_StatRow> {
             max: widget.max.toDouble(),
             divisions: widget.max - widget.min,
             label: widget.value.toString(),
-            activeColor: Colors.white,
-            inactiveColor: Colors.white24,
+            activeColor: colorScheme.primary,
+            inactiveColor: colorScheme.onSurface.withValues(alpha: 0.24),
             onChanged: (double value) {
               widget.onChanged(value.round().clamp(widget.min, widget.max));
             },
@@ -581,6 +591,7 @@ class _SquareIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(6),
@@ -588,11 +599,13 @@ class _SquareIconButton extends StatelessWidget {
         width: 28,
         height: 28,
         decoration: BoxDecoration(
-          color: const Color(0xFF1A1A1A),
+          color: colorScheme.surfaceContainerHigh,
           borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: Colors.white.withValues(alpha: 0.24)),
+          border: Border.all(
+            color: colorScheme.onSurface.withValues(alpha: 0.24),
+          ),
         ),
-        child: Icon(icon, size: 16, color: Colors.white),
+        child: Icon(icon, size: 16, color: colorScheme.onSurface),
       ),
     );
   }

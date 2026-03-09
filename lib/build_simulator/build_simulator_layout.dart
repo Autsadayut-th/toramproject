@@ -54,13 +54,19 @@ extension _BuildSimulatorScreenUI on BuildSimulatorScreenState {
   }
 
   Widget _buildAmbientBackground() {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final List<Color> gradientColors = <Color>[
+      colorScheme.surface,
+      colorScheme.surfaceContainerLow,
+      colorScheme.surfaceContainer,
+    ];
     return IgnorePointer(
       child: DecoratedBox(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0xFF000000), Color(0xFF050505), Color(0xFF0A0A0A)],
+            colors: gradientColors,
           ),
         ),
         child: Stack(
@@ -72,7 +78,7 @@ extension _BuildSimulatorScreenUI on BuildSimulatorScreenState {
                 height: 260,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: const Color(0xFFFFFFFF).withValues(alpha: 0.05),
+                  color: colorScheme.primary.withValues(alpha: 0.08),
                 ),
               ),
             ),
@@ -83,7 +89,7 @@ extension _BuildSimulatorScreenUI on BuildSimulatorScreenState {
                 height: 220,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: const Color(0xFFFFFFFF).withValues(alpha: 0.04),
+                  color: colorScheme.secondary.withValues(alpha: 0.08),
                 ),
               ),
             ),
@@ -96,23 +102,25 @@ extension _BuildSimulatorScreenUI on BuildSimulatorScreenState {
   Widget _buildCollapsibleCard({
     required String title,
     required IconData iconData,
-    Color iconColor = Colors.white,
+    Color? iconColor,
     required bool isExpanded,
     required VoidCallback onToggle,
     required Widget child,
     double? height,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color resolvedIconColor = iconColor ?? colorScheme.onSurface;
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF0D0D0D).withValues(alpha: 0.82),
+        color: colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: const Color(0xFFFFFFFF).withValues(alpha: 0.22),
+          color: colorScheme.onSurface.withValues(alpha: 0.22),
           width: 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.24),
+            color: colorScheme.onSurface.withValues(alpha: 0.18),
             blurRadius: 24,
             offset: const Offset(0, 10),
           ),
@@ -129,8 +137,8 @@ extension _BuildSimulatorScreenUI on BuildSimulatorScreenState {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    const Color(0xFF111111).withValues(alpha: 0.78),
-                    const Color(0xFF080808).withValues(alpha: 0.76),
+                    colorScheme.surfaceContainerHighest,
+                    colorScheme.surfaceContainerHigh,
                   ],
                 ),
                 borderRadius: const BorderRadius.vertical(
@@ -139,21 +147,21 @@ extension _BuildSimulatorScreenUI on BuildSimulatorScreenState {
               ),
               child: Row(
                 children: [
-                  Icon(iconData, color: iconColor, size: 22),
+                  Icon(iconData, color: resolvedIconColor, size: 22),
                   const SizedBox(width: 10),
                   Text(
                     title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      color: colorScheme.onSurface,
                       letterSpacing: 0.2,
                     ),
                   ),
                   const Spacer(),
                   Icon(
                     isExpanded ? Icons.expand_less : Icons.expand_more,
-                    color: Colors.white70,
+                    color: colorScheme.onSurface.withValues(alpha: 0.75),
                   ),
                 ],
               ),

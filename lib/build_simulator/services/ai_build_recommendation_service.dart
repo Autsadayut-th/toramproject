@@ -2,8 +2,11 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+import 'ai/recommendation_item.dart';
+
 class AiBuildRecommendationResult {
   const AiBuildRecommendationResult({
+    required this.recommendationItems,
     required this.recommendations,
     required this.source,
     required this.message,
@@ -12,6 +15,7 @@ class AiBuildRecommendationResult {
     required this.explanations,
   });
 
+  final List<AiRecommendationItem> recommendationItems;
   final List<String> recommendations;
   final String source;
   final String message;
@@ -47,13 +51,6 @@ class AiBuildRecommendationService {
       throw const FormatException('Invalid AI response payload.');
     }
 
-    final List<String> recommendations = _readStringList(
-      decoded['recommendations'],
-    );
-    if (recommendations.isEmpty) {
-      throw const FormatException('AI response has no recommendations.');
-    }
-
     final String source =
         decoded['source']?.toString().trim().toLowerCase() ?? 'unknown';
     final String message = decoded['message']?.toString().trim() ?? '';
@@ -61,13 +58,42 @@ class AiBuildRecommendationService {
         decoded['providerMessage']?.toString().trim() ?? '';
     final String summary = decoded['summary']?.toString().trim() ?? '';
     final List<String> explanations = _readStringList(decoded['explanations']);
+
+    final List<AiRecommendationItem> recommendationItems =
+        _readRecommendationItems(
+          v2Payload: decoded['recommendationsV2'],
+          v1Payload: decoded['recommendations'],
+          source: source.isEmpty ? 'unknown' : source,
+          fallbackExplanations: explanations,
+        );
+    if (recommendationItems.isEmpty) {
+      throw const FormatException('AI response has no recommendations.');
+    }
+
+    final List<String> normalizedExplanations = recommendationItems
+        .map((AiRecommendationItem item) {
+          final String explanation = item.explanation.trim();
+          if (explanation.isNotEmpty) {
+            return explanation;
+          }
+          return 'This recommendation addresses: ${item.normalizedMessage}';
+        })
+        .toList(growable: false);
+
+    final List<String> recommendations = recommendationItems
+        .map((AiRecommendationItem item) => item.normalizedMessage)
+        .where((String message) => message.isNotEmpty)
+        .take(6)
+        .toList(growable: false);
+
     return AiBuildRecommendationResult(
-      recommendations: recommendations.take(6).toList(growable: false),
+      recommendationItems: recommendationItems.take(6).toList(growable: false),
+      recommendations: recommendations,
       source: source.isEmpty ? 'unknown' : source,
       message: message,
       providerMessage: providerMessage,
       summary: summary,
-      explanations: explanations.take(6).toList(growable: false),
+      explanations: normalizedExplanations.take(6).toList(growable: false),
     );
   }
 
@@ -82,6 +108,114 @@ class AiBuildRecommendationService {
       port: base.hasPort ? base.port : null,
       path: '/api/recommend',
     );
+  }
+
+  List<AiRecommendationItem> _readRecommendationItems({
+    required dynamic v2Payload,
+    required dynamic v1Payload,
+    required String source,
+    required List<String> fallbackExplanations,
+  }) {
+    final List<AiRecommendationItem> normalized = <AiRecommendationItem>[];
+
+    if (v2Payload is List) {
+      for (int i = 0; i < v2Payload.length; i++) {
+        final dynamic raw = v2Payload[i];
+        if (raw is! Map) {
+          continue;
+        }
+        final Map<String, dynamic> data = Map<String, dynamic>.from(raw);
+        final String message = _readMessage(data);
+        if (message.isEmpty) {
+          continue;
+        }
+
+        final int priority = _readInt(data['priority'], fallback: 3);
+        final double confidence = _readDouble(
+          data['confidence'],
+          fallback: 0.7,
+        );
+        final String category =
+            data['category']?.toString().trim() ?? 'analysis';
+        final String itemSource = data['source']?.toString().trim() ?? source;
+        final String reason = data['reason']?.toString().trim() ?? '';
+        final String explanation = _readExplanation(
+          data: data,
+          index: i,
+          fallbackExplanations: fallbackExplanations,
+        );
+        final String id =
+            data['id']?.toString().trim() ??
+            AiRecommendationItem.buildId(category, message);
+
+        _addItem(
+          normalized,
+          AiRecommendationItem.fromText(
+            id: id,
+            message: message,
+            category: category,
+            priority: priority,
+            source: itemSource,
+            confidence: confidence,
+            reason: reason,
+            explanation: explanation,
+          ),
+        );
+      }
+    }
+
+    if (normalized.isEmpty) {
+      final List<String> legacy = _readStringList(v1Payload);
+      for (int i = 0; i < legacy.length; i++) {
+        final String message = legacy[i].trim();
+        if (message.isEmpty) {
+          continue;
+        }
+        final String explanation = i < fallbackExplanations.length
+            ? fallbackExplanations[i]
+            : '';
+        _addItem(
+          normalized,
+          AiRecommendationItem.fromText(
+            message: message,
+            category: 'analysis',
+            priority: 3,
+            source: source,
+            confidence: 0.7,
+            explanation: explanation,
+          ),
+        );
+      }
+    }
+
+    return normalized.take(6).toList(growable: false);
+  }
+
+  String _readExplanation({
+    required Map<String, dynamic> data,
+    required int index,
+    required List<String> fallbackExplanations,
+  }) {
+    final String direct =
+        data['explanation']?.toString().trim() ??
+        data['explain']?.toString().trim() ??
+        '';
+    if (direct.isNotEmpty) {
+      return direct;
+    }
+    if (index < fallbackExplanations.length) {
+      return fallbackExplanations[index].trim();
+    }
+    return '';
+  }
+
+  String _readMessage(Map<String, dynamic> data) {
+    final String message =
+        data['message']?.toString().trim() ??
+        data['text']?.toString().trim() ??
+        data['recommendation']?.toString().trim() ??
+        '';
+    return message;
   }
 
   List<String> _readStringList(dynamic value) {
@@ -170,5 +304,47 @@ class AiBuildRecommendationService {
       }
     }
     return values.toList(growable: false);
+  }
+
+  int _readInt(dynamic value, {required int fallback}) {
+    if (value is int) {
+      return value;
+    }
+    if (value is num) {
+      return value.toInt();
+    }
+    if (value is String) {
+      return int.tryParse(value.trim()) ?? fallback;
+    }
+    return fallback;
+  }
+
+  double _readDouble(dynamic value, {required double fallback}) {
+    if (value is double) {
+      return value;
+    }
+    if (value is num) {
+      return value.toDouble();
+    }
+    if (value is String) {
+      return double.tryParse(value.trim()) ?? fallback;
+    }
+    return fallback;
+  }
+
+  void _addItem(
+    List<AiRecommendationItem> items,
+    AiRecommendationItem candidate,
+  ) {
+    if (!candidate.isValid) {
+      return;
+    }
+    final String message = candidate.normalizedMessage;
+    for (final AiRecommendationItem existing in items) {
+      if (existing.normalizedMessage == message) {
+        return;
+      }
+    }
+    items.add(candidate);
   }
 }

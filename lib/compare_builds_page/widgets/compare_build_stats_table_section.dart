@@ -7,6 +7,7 @@ extension _CompareBuildsStatsTableSection on _CompareBuildsPageState {
     required bool showOnlyDifferences,
     required bool sortByDifference,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final List<({String key, int left, int right, int delta})> rows =
         _CompareBuildsPageState._compareKeys.map((String key) {
           final int leftValue = _summaryValue(firstBuild, key);
@@ -39,20 +40,22 @@ extension _CompareBuildsStatsTableSection on _CompareBuildsPageState {
         width: double.infinity,
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: const Color(0xFF111111),
+          color: colorScheme.surfaceContainerHigh,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.white.withValues(alpha: 0.16)),
+          border: Border.all(
+            color: colorScheme.onSurface.withValues(alpha: 0.16),
+          ),
         ),
-        child: const Text(
+        child: Text(
           'No differences found in current filter.',
-          style: TextStyle(color: Colors.white70),
+          style: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.75)),
         ),
       );
     }
 
     final Widget table = DataTable(
       headingRowColor: WidgetStatePropertyAll(
-        const Color(0xFF151515),
+        colorScheme.surfaceContainerHighest,
       ),
       dataRowMinHeight: 44,
       dataRowMaxHeight: 52,
@@ -67,12 +70,12 @@ extension _CompareBuildsStatsTableSection on _CompareBuildsPageState {
             ? '+${_formatStatValue(row.key, row.delta)}'
             : _formatStatValue(row.key, row.delta);
         final Color deltaColor = row.delta > 0
-            ? const Color(0xFF78E08F)
+            ? colorScheme.primary
             : row.delta < 0
-            ? const Color(0xFFFF9A9A)
-            : Colors.white70;
+            ? colorScheme.error
+            : colorScheme.onSurface.withValues(alpha: 0.75);
         final Color rowBorderColor = row.delta == 0
-            ? Colors.white.withValues(alpha: 0.04)
+            ? colorScheme.onSurface.withValues(alpha: 0.04)
             : deltaColor.withValues(alpha: 0.30);
         return DataRow(
           color: WidgetStatePropertyAll(
@@ -84,19 +87,23 @@ extension _CompareBuildsStatsTableSection on _CompareBuildsPageState {
             DataCell(
               Text(
                 row.key,
-                style: const TextStyle(color: Colors.white),
+                style: TextStyle(color: colorScheme.onSurface),
               ),
             ),
             DataCell(
               Text(
                 _formatStatValue(row.key, row.left),
-                style: const TextStyle(color: Colors.white70),
+                style: TextStyle(
+                  color: colorScheme.onSurface.withValues(alpha: 0.75),
+                ),
               ),
             ),
             DataCell(
               Text(
                 _formatStatValue(row.key, row.right),
-                style: const TextStyle(color: Colors.white70),
+                style: TextStyle(
+                  color: colorScheme.onSurface.withValues(alpha: 0.75),
+                ),
               ),
             ),
             DataCell(
@@ -126,9 +133,11 @@ extension _CompareBuildsStatsTableSection on _CompareBuildsPageState {
           width: double.infinity,
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: const Color(0xFF111111),
+            color: colorScheme.surfaceContainerHigh,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.16)),
+            border: Border.all(
+              color: colorScheme.onSurface.withValues(alpha: 0.16),
+            ),
           ),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,

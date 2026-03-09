@@ -20,39 +20,38 @@ class _EquipmentLibraryDataView extends StatefulWidget {
 
 class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
   static const int _itemsPerPage = 27;
-  static const List<_SearchModeOption> _searchModeOptions =
-      <_SearchModeOption>[
-        _SearchModeOption(
-          token: 'all',
-          label: 'All',
-          description: 'Search all fields',
-        ),
-        _SearchModeOption(
-          token: 'name',
-          label: 'Name',
-          description: 'Search item name',
-        ),
-        _SearchModeOption(
-          token: 'key',
-          label: 'Key',
-          description: 'Search item key',
-        ),
-        _SearchModeOption(
-          token: 'type',
-          label: 'Type',
-          description: 'Search equipment type',
-        ),
-        _SearchModeOption(
-          token: 'color',
-          label: 'Color',
-          description: 'Search crystal color',
-        ),
-        _SearchModeOption(
-          token: 'stat',
-          label: 'Stat',
-          description: 'Search stat_key',
-        ),
-      ];
+  static const List<_SearchModeOption> _searchModeOptions = <_SearchModeOption>[
+    _SearchModeOption(
+      token: 'all',
+      label: 'All',
+      description: 'Search all fields',
+    ),
+    _SearchModeOption(
+      token: 'name',
+      label: 'Name',
+      description: 'Search item name',
+    ),
+    _SearchModeOption(
+      token: 'key',
+      label: 'Key',
+      description: 'Search item key',
+    ),
+    _SearchModeOption(
+      token: 'type',
+      label: 'Type',
+      description: 'Search equipment type',
+    ),
+    _SearchModeOption(
+      token: 'color',
+      label: 'Color',
+      description: 'Search crystal color',
+    ),
+    _SearchModeOption(
+      token: 'stat',
+      label: 'Stat',
+      description: 'Search stat_key',
+    ),
+  ];
   static const List<String> _weaponTypeFilterOrder = <String>[
     '1h_sword',
     '2h_sword',
@@ -188,10 +187,12 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
     if (keyword.isEmpty) {
       return _searchModeOptions;
     }
-    return _searchModeOptions.where((_SearchModeOption option) {
-      return option.token.startsWith(keyword) ||
-          option.label.toLowerCase().startsWith(keyword);
-    }).toList(growable: false);
+    return _searchModeOptions
+        .where((_SearchModeOption option) {
+          return option.token.startsWith(keyword) ||
+              option.label.toLowerCase().startsWith(keyword);
+        })
+        .toList(growable: false);
   }
 
   void _applySearchMode(_SearchModeOption option) {
@@ -353,206 +354,227 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
     String? selectedTypeKey = activeTypeFilterKey;
     final bool hasCategoryChoices = categories.length > 1;
 
-    final ({String category, String? typeKey})? selection =
-        await showDialog<({String category, String? typeKey})>(
-          context: context,
-          builder: (BuildContext dialogContext) {
-            return Dialog(
-              backgroundColor: const Color(0xFF101010),
-              insetPadding: const EdgeInsets.symmetric(
-                horizontal: 24,
-                vertical: 24,
-              ),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 540),
-                child: StatefulBuilder(
-                  builder: (BuildContext context, StateSetter setDialogState) {
-                    final List<EquipmentLibraryItem> selectedCategoryItems =
-                        allCategories[selectedCategory] ??
-                        const <EquipmentLibraryItem>[];
-                    final List<String> availableTypeKeys = _buildTypeFilterKeys(
-                      items: selectedCategoryItems,
-                      activeCategory: selectedCategory,
-                      widgetAllowedTypes: widgetAllowedTypes,
-                    );
-                    if (selectedTypeKey != null &&
-                        !availableTypeKeys.contains(selectedTypeKey)) {
-                      selectedTypeKey = null;
-                    }
-                    final bool hasTypeChoices = availableTypeKeys.length > 1;
+    final ({String category, String? typeKey})?
+    selection = await showDialog<({String category, String? typeKey})>(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        final ColorScheme colorScheme = Theme.of(dialogContext).colorScheme;
+        return Dialog(
+          backgroundColor: colorScheme.surfaceContainerHigh,
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 24,
+            vertical: 24,
+          ),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 540),
+            child: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setDialogState) {
+                final List<EquipmentLibraryItem> selectedCategoryItems =
+                    allCategories[selectedCategory] ??
+                    const <EquipmentLibraryItem>[];
+                final List<String> availableTypeKeys = _buildTypeFilterKeys(
+                  items: selectedCategoryItems,
+                  activeCategory: selectedCategory,
+                  widgetAllowedTypes: widgetAllowedTypes,
+                );
+                if (selectedTypeKey != null &&
+                    !availableTypeKeys.contains(selectedTypeKey)) {
+                  selectedTypeKey = null;
+                }
+                final bool hasTypeChoices = availableTypeKeys.length > 1;
 
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
                           children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                const Expanded(
-                                  child: Text(
-                                    'Filter Library',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
+                            Expanded(
+                              child: Text(
+                                'Filter Library',
+                                style: TextStyle(
+                                  color: colorScheme.onSurface,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
                                 ),
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.of(dialogContext).pop(),
-                                  child: const Text(
-                                    'Close',
-                                    style: TextStyle(color: Colors.white70),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                            if (hasCategoryChoices) ...<Widget>[
-                              const SizedBox(height: 4),
-                              const Text(
-                                'Category',
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.of(dialogContext).pop(),
+                              child: Text(
+                                'Close',
                                 style: TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Wrap(
-                                spacing: 8,
-                                runSpacing: 8,
-                                children: categories
-                                    .map((String category) {
-                                      return ChoiceChip(
-                                        selectedColor: const Color(0xFF2E74FF),
-                                        backgroundColor: const Color(
-                                          0xFF161B22,
-                                        ),
-                                        side: const BorderSide(
-                                          color: Color(0x44FFFFFF),
-                                        ),
-                                        labelStyle: const TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                        selected: selectedCategory == category,
-                                        label: Text(category),
-                                        onSelected: (_) {
-                                          setDialogState(() {
-                                            selectedCategory = category;
-                                          });
-                                        },
-                                      );
-                                    })
-                                    .toList(growable: false),
-                              ),
-                              const SizedBox(height: 14),
-                            ],
-                            if (hasTypeChoices) ...<Widget>[
-                              const Text(
-                                'Type',
-                                style: TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Wrap(
-                                spacing: 8,
-                                runSpacing: 8,
-                                children: <Widget>[
-                                  ChoiceChip(
-                                    selectedColor: const Color(0xFF2E74FF),
-                                    backgroundColor: const Color(0xFF161B22),
-                                    side: const BorderSide(
-                                      color: Color(0x44FFFFFF),
-                                    ),
-                                    labelStyle: const TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                    selected: selectedTypeKey == null,
-                                    label: const Text('All'),
-                                    onSelected: (_) {
-                                      setDialogState(() {
-                                        selectedTypeKey = null;
-                                      });
-                                    },
-                                  ),
-                                  ...availableTypeKeys.map((String typeKey) {
-                                    final bool selected =
-                                        selectedTypeKey == typeKey;
-                                    return ChoiceChip(
-                                      selectedColor: const Color(0xFF2E74FF),
-                                      backgroundColor: const Color(0xFF161B22),
-                                      side: const BorderSide(
-                                        color: Color(0x44FFFFFF),
-                                      ),
-                                      labelStyle: const TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                      selected: selected,
-                                      label: Text(
-                                        _formatTypeFilterLabel(
-                                          typeKey,
-                                          category: selectedCategory,
-                                        ),
-                                      ),
-                                      onSelected: (_) {
-                                        setDialogState(() {
-                                          selectedTypeKey = typeKey;
-                                        });
-                                      },
-                                    );
-                                  }),
-                                ],
-                              ),
-                            ],
-                            const SizedBox(height: 16),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                TextButton(
-                                  onPressed: () {
-                                    setDialogState(() {
-                                      selectedCategory = categories.isEmpty
-                                          ? activeCategory
-                                          : categories.first;
-                                      selectedTypeKey = null;
-                                    });
-                                  },
-                                  child: const Text(
-                                    'Reset',
-                                    style: TextStyle(color: Colors.white70),
+                                  color: colorScheme.onSurface.withValues(
+                                    alpha: 0.75,
                                   ),
                                 ),
-                                const SizedBox(width: 8),
-                                FilledButton(
-                                  onPressed: () {
-                                    Navigator.of(dialogContext).pop((
-                                      category: selectedCategory,
-                                      typeKey: selectedTypeKey,
-                                    ));
-                                  },
-                                  style: FilledButton.styleFrom(
-                                    backgroundColor: const Color(0xFF2E74FF),
-                                  ),
-                                  child: const Text('Apply'),
-                                ),
-                              ],
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            );
-          },
+                        if (hasCategoryChoices) ...<Widget>[
+                          const SizedBox(height: 4),
+                          Text(
+                            'Category',
+                            style: TextStyle(
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.75,
+                              ),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: categories
+                                .map((String category) {
+                                  return ChoiceChip(
+                                    selectedColor: colorScheme.primaryContainer,
+                                    backgroundColor:
+                                        colorScheme.surfaceContainerHighest,
+                                    side: BorderSide(
+                                      color: colorScheme.onSurface.withValues(
+                                        alpha: 0.24,
+                                      ),
+                                    ),
+                                    labelStyle: TextStyle(
+                                      color: colorScheme.onSurface,
+                                    ),
+                                    selected: selectedCategory == category,
+                                    label: Text(category),
+                                    onSelected: (_) {
+                                      setDialogState(() {
+                                        selectedCategory = category;
+                                      });
+                                    },
+                                  );
+                                })
+                                .toList(growable: false),
+                          ),
+                          const SizedBox(height: 14),
+                        ],
+                        if (hasTypeChoices) ...<Widget>[
+                          Text(
+                            'Type',
+                            style: TextStyle(
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.75,
+                              ),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: <Widget>[
+                              ChoiceChip(
+                                selectedColor: colorScheme.primaryContainer,
+                                backgroundColor:
+                                    colorScheme.surfaceContainerHighest,
+                                side: BorderSide(
+                                  color: colorScheme.onSurface.withValues(
+                                    alpha: 0.24,
+                                  ),
+                                ),
+                                labelStyle: TextStyle(
+                                  color: colorScheme.onSurface,
+                                ),
+                                selected: selectedTypeKey == null,
+                                label: const Text('All'),
+                                onSelected: (_) {
+                                  setDialogState(() {
+                                    selectedTypeKey = null;
+                                  });
+                                },
+                              ),
+                              ...availableTypeKeys.map((String typeKey) {
+                                final bool selected =
+                                    selectedTypeKey == typeKey;
+                                return ChoiceChip(
+                                  selectedColor: colorScheme.primaryContainer,
+                                  backgroundColor:
+                                      colorScheme.surfaceContainerHighest,
+                                  side: BorderSide(
+                                    color: colorScheme.onSurface.withValues(
+                                      alpha: 0.24,
+                                    ),
+                                  ),
+                                  labelStyle: TextStyle(
+                                    color: colorScheme.onSurface,
+                                  ),
+                                  selected: selected,
+                                  label: Text(
+                                    _formatTypeFilterLabel(
+                                      typeKey,
+                                      category: selectedCategory,
+                                    ),
+                                  ),
+                                  onSelected: (_) {
+                                    setDialogState(() {
+                                      selectedTypeKey = typeKey;
+                                    });
+                                  },
+                                );
+                              }),
+                            ],
+                          ),
+                        ],
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                setDialogState(() {
+                                  selectedCategory = categories.isEmpty
+                                      ? activeCategory
+                                      : categories.first;
+                                  selectedTypeKey = null;
+                                });
+                              },
+                              child: Text(
+                                'Reset',
+                                style: TextStyle(
+                                  color: colorScheme.onSurface.withValues(
+                                    alpha: 0.75,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            FilledButton(
+                              onPressed: () {
+                                Navigator.of(dialogContext).pop((
+                                  category: selectedCategory,
+                                  typeKey: selectedTypeKey,
+                                ));
+                              },
+                              style: FilledButton.styleFrom(
+                                backgroundColor: colorScheme.primary,
+                                foregroundColor: colorScheme.onPrimary,
+                              ),
+                              child: const Text('Apply'),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
         );
+      },
+    );
 
     if (!mounted || selection == null) {
       return;
@@ -565,6 +587,7 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return FutureBuilder<Map<String, List<EquipmentLibraryItem>>>(
       future: _libraryFuture,
       builder:
@@ -583,9 +606,9 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      const Text(
+                      Text(
                         'Failed to load equipment data.',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: colorScheme.onSurface),
                       ),
                       const SizedBox(height: 10),
                       TextButton(
@@ -727,15 +750,22 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
     required List<String> typeFilterKeys,
     required String? activeTypeFilterKey,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
     return Container(
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF15110E), Color(0xFF0B0D10)],
+          colors: <Color>[
+            colorScheme.surfaceContainerHigh,
+            colorScheme.surfaceContainerHighest,
+          ],
         ),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0x22FFFFFF)),
+        border: Border.all(
+          color: colorScheme.onSurface.withValues(alpha: isLight ? 0.24 : 0.14),
+        ),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -783,14 +813,16 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
                               }
                             : null,
                         style: OutlinedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: const Color(0xFF10161A),
-                          disabledForegroundColor: Colors.white38,
-                          disabledBackgroundColor: const Color(0xFF10161A),
+                          foregroundColor: colorScheme.onSurface,
+                          backgroundColor: colorScheme.surfaceContainerHighest,
+                          disabledForegroundColor: colorScheme.onSurface
+                              .withValues(alpha: 0.38),
+                          disabledBackgroundColor:
+                              colorScheme.surfaceContainerHighest,
                           side: BorderSide(
                             color: activeFilterCount > 0
-                                ? const Color(0xFFD8B36A)
-                                : const Color(0xFF5D7283),
+                                ? colorScheme.primary
+                                : colorScheme.onSurface.withValues(alpha: 0.35),
                           ),
                           padding: EdgeInsets.zero,
                           shape: RoundedRectangleBorder(
@@ -810,14 +842,18 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
                             vertical: 2,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF2E74FF),
+                            color: colorScheme.primary,
                             borderRadius: BorderRadius.circular(999),
-                            border: Border.all(color: const Color(0xFF8FB4FF)),
+                            border: Border.all(
+                              color: colorScheme.onPrimary.withValues(
+                                alpha: 0.72,
+                              ),
+                            ),
                           ),
                           child: Text(
                             '$activeFilterCount',
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: TextStyle(
+                              color: colorScheme.onPrimary,
                               fontSize: 10,
                               fontWeight: FontWeight.w700,
                             ),
@@ -840,19 +876,23 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
                       vertical: 10,
                     ),
                     decoration: BoxDecoration(
-                      color: _libraryWarmAccent.withValues(alpha: 0.08),
+                      color: colorScheme.primaryContainer.withValues(
+                        alpha: 0.35,
+                      ),
                       borderRadius: BorderRadius.circular(14),
                       border: Border.all(
-                        color: _libraryWarmAccent.withValues(alpha: 0.2),
+                        color: colorScheme.primary.withValues(alpha: 0.3),
                       ),
                     ),
-                    child: const Row(
+                    child: Row(
                       children: <Widget>[
                         Expanded(
                           child: Text(
                             'Tap any card to select it for the active equipment slot.',
                             style: TextStyle(
-                              color: Colors.white70,
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.75,
+                              ),
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
                             ),
@@ -884,6 +924,8 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
   }
 
   Widget _buildSearchField() {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
     final List<_SearchModeOption> matchingModes = _matchingSearchModes(
       _searchQuery,
     );
@@ -893,26 +935,28 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
       children: <Widget>[
         TextField(
           controller: _searchController,
-          style: const TextStyle(color: Colors.white),
-          cursorColor: _libraryWarmAccent,
+          style: TextStyle(color: colorScheme.onSurface),
+          cursorColor: colorScheme.primary,
           decoration: InputDecoration(
             hintText:
                 'Search by name, key, type, color, stat... (type @ to choose)',
-            hintStyle: const TextStyle(color: Colors.white54),
+            hintStyle: TextStyle(
+              color: colorScheme.onSurface.withValues(alpha: 0.54),
+            ),
             suffixIcon: _searchQuery.isEmpty
                 ? null
                 : TextButton(
                     onPressed: _clearSearch,
-                    child: const Text(
+                    child: Text(
                       'Clear',
                       style: TextStyle(
-                        color: Colors.white54,
+                        color: colorScheme.onSurface.withValues(alpha: 0.54),
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
             filled: true,
-            fillColor: const Color(0xFF10161A),
+            fillColor: colorScheme.surfaceContainerHighest,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 18,
               vertical: 18,
@@ -920,19 +964,23 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: BorderSide(
-                color: _libraryCoolAccent.withValues(alpha: 0.18),
+                color: colorScheme.onSurface.withValues(
+                  alpha: isLight ? 0.28 : 0.18,
+                ),
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: BorderSide(
-                color: _libraryCoolAccent.withValues(alpha: 0.18),
+                color: colorScheme.onSurface.withValues(
+                  alpha: isLight ? 0.28 : 0.18,
+                ),
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: BorderSide(
-                color: _libraryWarmAccent.withValues(alpha: 0.7),
+                color: colorScheme.primary.withValues(alpha: 0.7),
                 width: 1.4,
               ),
             ),
@@ -945,31 +993,33 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
             width: double.infinity,
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFF0E1317),
+              color: colorScheme.surfaceContainerHigh,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: _libraryCoolAccent.withValues(alpha: 0.28),
+                color: colorScheme.onSurface.withValues(alpha: 0.28),
               ),
             ),
             child: Wrap(
               spacing: 8,
               runSpacing: 8,
-              children: matchingModes.map((_SearchModeOption option) {
-                return ActionChip(
-                  label: Text('@${option.token}  ${option.label}'),
-                  onPressed: () => _applySearchMode(option),
-                  backgroundColor: const Color(0xFF1A2128),
-                  side: BorderSide(
-                    color: _libraryCoolAccent.withValues(alpha: 0.34),
-                  ),
-                  labelStyle: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  tooltip: option.description,
-                );
-              }).toList(growable: false),
+              children: matchingModes
+                  .map((_SearchModeOption option) {
+                    return ActionChip(
+                      label: Text('@${option.token}  ${option.label}'),
+                      onPressed: () => _applySearchMode(option),
+                      backgroundColor: colorScheme.surfaceContainerHighest,
+                      side: BorderSide(
+                        color: colorScheme.onSurface.withValues(alpha: 0.34),
+                      ),
+                      labelStyle: TextStyle(
+                        color: colorScheme.onSurface,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      tooltip: option.description,
+                    );
+                  })
+                  .toList(growable: false),
             ),
           ),
         ],
@@ -978,6 +1028,8 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
   }
 
   Widget _buildEmptyState({required String activeCategory}) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
     final bool hasSearchQuery = _searchQuery.trim().isNotEmpty;
 
     return Center(
@@ -986,21 +1038,28 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
         constraints: const BoxConstraints(maxWidth: 520),
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0xFF171311), Color(0xFF0D1115)],
+            colors: <Color>[
+              colorScheme.surfaceContainerHigh,
+              colorScheme.surfaceContainerHighest,
+            ],
           ),
           borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: const Color(0x22FFFFFF)),
+          border: Border.all(
+            color: colorScheme.onSurface.withValues(
+              alpha: isLight ? 0.24 : 0.14,
+            ),
+          ),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const Text(
+            Text(
               'No items found',
               style: TextStyle(
-                color: Colors.white,
+                color: colorScheme.onSurface,
                 fontSize: 18,
                 fontWeight: FontWeight.w800,
               ),
@@ -1011,8 +1070,8 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
                   ? 'No results in $activeCategory match "${_searchQuery.trim()}".'
                   : 'There are no items available in $activeCategory for the current filters.',
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.white70,
+              style: TextStyle(
+                color: colorScheme.onSurface.withValues(alpha: 0.75),
                 fontSize: 13,
                 height: 1.4,
               ),
@@ -1022,7 +1081,7 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
               TextButton(
                 onPressed: _clearSearch,
                 style: TextButton.styleFrom(
-                  foregroundColor: const Color.fromARGB(255, 31, 155, 14),
+                  foregroundColor: colorScheme.primary,
                 ),
                 child: const Text('Clear search'),
               ),

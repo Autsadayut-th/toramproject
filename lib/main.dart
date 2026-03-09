@@ -8,10 +8,12 @@ import 'package:toramonline/firebase_options.dart';
 import 'app_shell/app_shell_page.dart';
 import 'critical_simulator_page/critical_simulator_page.dart';
 import 'login_builds_page/login_screen.dart';
+import 'shared/app_theme_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _ensureIconFontsLoaded();
+  await AppThemeController.instance.load();
 
   runApp(const MyApp());
 }
@@ -34,39 +36,69 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData baseTheme = ThemeData.dark();
-    final TextTheme thaiTextTheme = GoogleFonts.notoSansThaiTextTheme(
-      baseTheme.textTheme,
-    );
-    final TextTheme thaiPrimaryTextTheme = GoogleFonts.notoSansThaiTextTheme(
-      baseTheme.primaryTextTheme,
-    );
+    final AppThemeController themeController = AppThemeController.instance;
+    return AnimatedBuilder(
+      animation: themeController,
+      builder: (BuildContext context, _) {
+        final ThemeData darkBase = ThemeData.dark(useMaterial3: true);
+        final ThemeData lightBase = ThemeData.light(useMaterial3: true);
 
-    return MaterialApp(
-      title: 'Toram Build Simulator',
+        final TextTheme darkTextTheme = GoogleFonts.notoSansThaiTextTheme(
+          darkBase.textTheme,
+        );
+        final TextTheme darkPrimaryTextTheme =
+            GoogleFonts.notoSansThaiTextTheme(darkBase.primaryTextTheme);
+        final TextTheme lightTextTheme = GoogleFonts.notoSansThaiTextTheme(
+          lightBase.textTheme,
+        );
+        final TextTheme lightPrimaryTextTheme =
+            GoogleFonts.notoSansThaiTextTheme(lightBase.primaryTextTheme);
 
-      debugShowCheckedModeBanner: false,
-      routes: <String, WidgetBuilder>{
-        '/login': (_) => const LoginScreen(),
-        '/app': (_) => const AppShellScreen(),
-        '/critical-simulator': (_) => const CriticalSimulatorPage(),
-      },
-      theme: baseTheme.copyWith(
-        scaffoldBackgroundColor: const Color(0xFF000000),
-        textTheme: thaiTextTheme,
-        primaryTextTheme: thaiPrimaryTextTheme,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF000000),
-          foregroundColor: Colors.white,
-        ),
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(
+        final ThemeData darkTheme = darkBase.copyWith(
+          scaffoldBackgroundColor: const Color(0xFF000000),
+          textTheme: darkTextTheme,
+          primaryTextTheme: darkPrimaryTextTheme,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xFF000000),
             foregroundColor: Colors.white,
-            textStyle: const TextStyle(fontWeight: FontWeight.w600),
           ),
-        ),
-      ),
-      home: const FirebaseBootstrapGate(),
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.white,
+              textStyle: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+          ),
+        );
+        final ThemeData lightTheme = lightBase.copyWith(
+          scaffoldBackgroundColor: const Color(0xFFFFFFFF),
+          textTheme: lightTextTheme,
+          primaryTextTheme: lightPrimaryTextTheme,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xFFFFFFFF),
+            foregroundColor: Colors.black,
+          ),
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.black,
+              textStyle: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+          ),
+        );
+
+        return MaterialApp(
+          title: 'Toram Build Simulator',
+          debugShowCheckedModeBanner: false,
+          routes: <String, WidgetBuilder>{
+            '/login': (_) => const LoginScreen(),
+            '/app': (_) => const AppShellScreen(),
+            '/critical-simulator': (_) => const CriticalSimulatorPage(),
+          },
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: themeController.themeMode,
+          home: const FirebaseBootstrapGate(),
+        );
+      },
     );
   }
 }
@@ -157,9 +189,12 @@ class _LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xFF000000),
-      body: Center(child: CircularProgressIndicator(color: Color(0xFF0E9F6E))),
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    return Scaffold(
+      backgroundColor: colorScheme.surface,
+      body: Center(
+        child: CircularProgressIndicator(color: colorScheme.primary),
+      ),
     );
   }
 }
@@ -171,8 +206,11 @@ class _FirebaseMissingConfigScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
+    final Color borderColor = colorScheme.onSurface.withValues(alpha: 0.18);
     return Scaffold(
-      backgroundColor: const Color(0xFF000000),
+      backgroundColor: colorScheme.surface,
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
@@ -180,11 +218,9 @@ class _FirebaseMissingConfigScreen extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 640),
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: const Color(0xFF0D0D0D),
+              color: colorScheme.surfaceContainerHigh,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: const Color(0xFFFFFFFF).withValues(alpha: 0.18),
-              ),
+              border: Border.all(color: borderColor),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -192,18 +228,14 @@ class _FirebaseMissingConfigScreen extends StatelessWidget {
               children: <Widget>[
                 const Text(
                   'Firebase is not configured',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  ),
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 10),
                 Text(
                   'Login and register require Firebase configuration. '
                   'Add your Firebase project files, then restart the app.',
                   style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.75),
+                    color: colorScheme.onSurface.withValues(alpha: 0.75),
                     height: 1.45,
                   ),
                 ),
@@ -219,10 +251,8 @@ class _FirebaseMissingConfigScreen extends StatelessWidget {
                 OutlinedButton.icon(
                   onPressed: onOpenWithoutAuth,
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    side: BorderSide(
-                      color: Colors.white.withValues(alpha: 0.36),
-                    ),
+                    foregroundColor: colorScheme.onSurface,
+                    side: BorderSide(color: borderColor),
                     minimumSize: const Size.fromHeight(46),
                   ),
                   icon: const Icon(Icons.play_arrow),
@@ -248,7 +278,9 @@ class _SetupStepText extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8),
       child: Text(
         text,
-        style: TextStyle(color: Colors.white.withValues(alpha: 0.9)),
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.9),
+        ),
       ),
     );
   }

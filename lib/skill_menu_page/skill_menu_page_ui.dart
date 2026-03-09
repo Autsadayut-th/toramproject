@@ -2,23 +2,31 @@ part of 'skill_menu_page.dart';
 
 extension _SkillMenuPageUI on _SkillMenuPageState {
   Widget _buildErrorState(Object error) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const Icon(Icons.error_outline, size: 36, color: Colors.white70),
+            Icon(
+              Icons.error_outline,
+              size: 36,
+              color: colorScheme.onSurface.withValues(alpha: 0.75),
+            ),
             const SizedBox(height: 12),
-            const Text(
+            Text(
               'Failed to load skill data.',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: colorScheme.onSurface),
             ),
             const SizedBox(height: 8),
             Text(
               error.toString(),
               textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white60, fontSize: 12),
+              style: TextStyle(
+                color: colorScheme.onSurface.withValues(alpha: 0.62),
+                fontSize: 12,
+              ),
             ),
             const SizedBox(height: 12),
             FilledButton.tonalIcon(
@@ -39,14 +47,18 @@ extension _SkillMenuPageUI on _SkillMenuPageState {
     required List<SkillEntry> visibleSkills,
   }) {
     if (availableTrees.isEmpty || activeTree.isEmpty) {
-      return const Center(
+      final ColorScheme colorScheme = Theme.of(context).colorScheme;
+      return Center(
         child: Text(
           'No skill tree available for selected category.',
-          style: TextStyle(color: Colors.white70),
+          style: TextStyle(
+            color: colorScheme.onSurface.withValues(alpha: 0.75),
+          ),
         ),
       );
     }
 
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Column(
       children: <Widget>[
         Padding(
@@ -55,8 +67,8 @@ extension _SkillMenuPageUI on _SkillMenuPageState {
             alignment: Alignment.centerLeft,
             child: Text(
               '${data.categoryForTree(activeTree)} / $activeTree | ${visibleSkills.length} skill(s)',
-              style: const TextStyle(
-                color: Colors.white70,
+              style: TextStyle(
+                color: colorScheme.onSurface.withValues(alpha: 0.75),
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
               ),
@@ -76,6 +88,7 @@ extension _SkillMenuPageUI on _SkillMenuPageState {
                 present: _present,
               );
             },
+            context: context,
           ),
         ),
       ],

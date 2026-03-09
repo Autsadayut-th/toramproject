@@ -8,6 +8,7 @@ class _SkillTreeNode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final String imageAssetPath = skill.imageAssetPath.trim();
     return Tooltip(
       message: '${skill.name} (Lv ${skill.unlockLevel?.toString() ?? '-'})',
@@ -20,34 +21,37 @@ class _SkillTreeNode extends StatelessWidget {
           padding: const EdgeInsets.all(2.6),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: const Color(0xFF000000),
-            border: Border.all(color: const Color(0xFFFFFFFF), width: 1.4),
+            color: colorScheme.surface,
+            border: Border.all(
+              color: colorScheme.onSurface.withValues(alpha: 0.85),
+              width: 1.4,
+            ),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFFFFFFFF).withValues(alpha: 0.12),
+                color: colorScheme.onSurface.withValues(alpha: 0.12),
                 blurRadius: 6,
                 spreadRadius: 0.5,
               ),
             ],
           ),
           child: Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xFF000000),
+              color: colorScheme.surfaceContainerHigh,
             ),
             child: ClipOval(
               child: imageAssetPath.isEmpty
-                  ? const Icon(
+                  ? Icon(
                       Icons.auto_awesome,
-                      color: Color(0xFFBDBDBD),
+                      color: colorScheme.onSurface.withValues(alpha: 0.6),
                       size: 20,
                     )
                   : Image.asset(
                       imageAssetPath,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => const Icon(
+                      errorBuilder: (_, __, ___) => Icon(
                         Icons.auto_awesome,
-                        color: Color(0xFFBDBDBD),
+                        color: colorScheme.onSurface.withValues(alpha: 0.6),
                         size: 20,
                       ),
                     ),
@@ -60,19 +64,23 @@ class _SkillTreeNode extends StatelessWidget {
 }
 
 class _SkillTreeConnectorPainter extends CustomPainter {
-  const _SkillTreeConnectorPainter({required this.edges});
+  const _SkillTreeConnectorPainter({
+    required this.edges,
+    required this.lineColor,
+  });
 
   final List<_SkillTreeEdgeLayout> edges;
+  final Color lineColor;
 
   @override
   void paint(Canvas canvas, Size size) {
     final Paint linePaint = Paint()
-      ..color = const Color(0xFFFFFFFF)
+      ..color = lineColor
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
     final Paint jointPaint = Paint()
-      ..color = const Color(0xFFFFFFFF)
+      ..color = lineColor
       ..style = PaintingStyle.fill;
 
     for (final _SkillTreeEdgeLayout edge in edges) {
@@ -98,6 +106,6 @@ class _SkillTreeConnectorPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _SkillTreeConnectorPainter oldDelegate) {
-    return oldDelegate.edges != edges;
+    return oldDelegate.edges != edges || oldDelegate.lineColor != lineColor;
   }
 }

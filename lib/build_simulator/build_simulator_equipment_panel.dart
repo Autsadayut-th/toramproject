@@ -14,7 +14,6 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
   Widget _buildEquipmentPanel() {
     return ToramCard(
       title: 'Equipment Configuration',
-      titleColor: Colors.white,
       icon: Icons.shield,
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -83,6 +82,9 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
     required Widget child,
     required double minHeight,
   }) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
+    final bool isLight = theme.brightness == Brightness.light;
     final placeholderHeight = (minHeight - 48).isNegative
         ? 0.0
         : minHeight - 48;
@@ -90,9 +92,11 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 180),
       decoration: BoxDecoration(
-        color: const Color(0xFF0A0A0A),
+        color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
+        border: Border.all(
+          color: colorScheme.onSurface.withValues(alpha: isLight ? 0.28 : 0.18),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,13 +108,13 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Row(
                 children: [
-                  Icon(iconData, color: Colors.white, size: 18),
+                  Icon(iconData, color: colorScheme.onSurface, size: 18),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       title,
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: colorScheme.onSurface,
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
                       ),
@@ -118,7 +122,7 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
                   ),
                   Icon(
                     isExpanded ? Icons.expand_less : Icons.expand_more,
-                    color: Colors.white70,
+                    color: colorScheme.onSurface.withValues(alpha: 0.75),
                     size: 18,
                   ),
                 ],
@@ -130,7 +134,11 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
               width: double.infinity,
               decoration: BoxDecoration(
                 border: Border(
-                  top: BorderSide(color: Colors.white.withValues(alpha: 0.12)),
+                  top: BorderSide(
+                    color: colorScheme.onSurface.withValues(
+                      alpha: isLight ? 0.2 : 0.12,
+                    ),
+                  ),
                 ),
               ),
               padding: const EdgeInsets.all(12),
@@ -235,8 +243,18 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         selectedDisplayName: _equipmentName(_mainWeaponId),
         selectedEquipmentItem: _findEquipmentByKey(_mainWeaponId),
         searchCandidates: _mainWeaponSearchCandidates(),
+        allowedItemTypes: _allowedMainWeaponTypeNames(),
         statPreview: _equipmentStatPreview(_mainWeaponId),
         onEquipChanged: (id) {
+          if (!_isMainWeaponSelectionAllowed(id)) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Main weapon type is not allowed.'),
+                duration: Duration(seconds: 2),
+              ),
+            );
+            return;
+          }
           _setStateAndRecalculate(() => _mainWeaponId = id);
         },
         enhance: _enhMain,
@@ -257,7 +275,13 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
   }
 
   List<EquipmentLibraryItem> _mainWeaponSearchCandidates() {
-    return _equipmentSearchCandidatesByCategory('weapon');
+    final List<EquipmentLibraryItem> candidates =
+        _equipmentSearchCandidatesByCategory('weapon');
+    return candidates
+        .where((EquipmentLibraryItem item) {
+          return _isMainWeaponSelectionAllowed(item.key);
+        })
+        .toList(growable: false);
   }
 
   List<EquipmentLibraryItem> _subWeaponSearchCandidates() {

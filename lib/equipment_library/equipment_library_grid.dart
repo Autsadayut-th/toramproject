@@ -77,13 +77,28 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
     required int previewLimit,
     required String activeCategory,
   }) {
-    final List<EquipmentStat> previewStats = item.stats
-        .take(previewLimit)
-        .toList(growable: false);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final Color cardBorderColor = colorScheme.outline.withValues(
+      alpha: isLight ? 0.6 : 0.45,
+    );
+    final Color actionBorderColor = colorScheme.outline.withValues(
+      alpha: isLight ? 0.55 : 0.4,
+    );
     final Color accentColor = _itemAccentColor(
       item: item,
       activeCategory: activeCategory,
     );
+    final Color imageFrameBorderColor =
+        Color.lerp(
+          colorScheme.outline.withValues(alpha: isLight ? 0.55 : 0.42),
+          accentColor,
+          isLight ? 0.52 : 0.64,
+        ) ??
+        accentColor.withValues(alpha: isLight ? 0.55 : 0.48);
+    final List<EquipmentStat> previewStats = item.stats
+        .take(previewLimit)
+        .toList(growable: false);
     final String actionLabel = widget.pickMode
         ? 'Tap to equip'
         : 'Open details';
@@ -102,16 +117,19 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
       borderRadius: BorderRadius.circular(20),
       child: Container(
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0xFF17191C), Color(0xFF0C0E11)],
+            colors: <Color>[
+              colorScheme.surfaceContainerHigh,
+              colorScheme.surfaceContainerHighest,
+            ],
           ),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: accentColor.withValues(alpha: 0.22)),
-          boxShadow: const <BoxShadow>[
+          border: Border.all(color: cardBorderColor, width: 1.1),
+          boxShadow: <BoxShadow>[
             BoxShadow(
-              color: Color(0x33000000),
+              color: colorScheme.onSurface.withValues(alpha: 0.12),
               blurRadius: 18,
               offset: Offset(0, 10),
             ),
@@ -132,11 +150,23 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
                         width: 44,
                         height: 44,
                         decoration: BoxDecoration(
-                          color: accentColor.withValues(alpha: 0.12),
+                          color: accentColor.withValues(
+                            alpha: isLight ? 0.18 : 0.14,
+                          ),
                           borderRadius: BorderRadius.circular(14),
                           border: Border.all(
-                            color: accentColor.withValues(alpha: 0.32),
+                            color: imageFrameBorderColor,
+                            width: 1.15,
                           ),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: colorScheme.onSurface.withValues(
+                                alpha: isLight ? 0.08 : 0.12,
+                              ),
+                              blurRadius: 6,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
                         ),
                         child: _buildEquipmentVisual(
                           item,
@@ -158,8 +188,8 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
                               item.name,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                color: Colors.white,
+                              style: TextStyle(
+                                color: colorScheme.onSurface,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w800,
                                 height: 1.2,
@@ -199,10 +229,10 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
                           item.upgradeFrom!.isNotEmpty)
                         _buildMetaPill(
                           text: 'Upgradeable',
-                          borderColor: _libraryCoolAccent.withValues(
+                          borderColor: colorScheme.secondary.withValues(
                             alpha: 0.24,
                           ),
-                          backgroundColor: _libraryCoolAccent.withValues(
+                          backgroundColor: colorScheme.secondary.withValues(
                             alpha: 0.08,
                           ),
                         ),
@@ -225,7 +255,7 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
                           _buildStatChip(
                             text:
                                 '+${item.stats.length - previewStats.length} more',
-                            accentColor: _libraryWarmAccent,
+                            accentColor: colorScheme.primary,
                           ),
                       ],
                     ),
@@ -237,11 +267,9 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
                       vertical: 11,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF0F1418),
+                      color: colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(14),
-                      border: Border.all(
-                        color: _libraryCoolAccent.withValues(alpha: 0.18),
-                      ),
+                      border: Border.all(color: actionBorderColor),
                     ),
                     child: Row(
                       children: <Widget>[
@@ -250,8 +278,10 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
                             actionLabel,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              color: Colors.white70,
+                            style: TextStyle(
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.75,
+                              ),
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
                             ),
@@ -282,6 +312,7 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
     required Color borderColor,
     required Color backgroundColor,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
       decoration: BoxDecoration(
@@ -291,8 +322,8 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
       ),
       child: Text(
         text,
-        style: const TextStyle(
-          color: Colors.white,
+        style: TextStyle(
+          color: colorScheme.onSurface,
           fontSize: 11,
           fontWeight: FontWeight.w700,
         ),
@@ -301,24 +332,28 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
   }
 
   Widget _buildStatChip({required String text, required Color accentColor}) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: <Color>[
             accentColor.withValues(alpha: 0.14),
-            const Color(0xFF161A1E),
+            colorScheme.surfaceContainerHigh,
           ],
         ),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: accentColor.withValues(alpha: 0.24)),
+        border: Border.all(
+          color: accentColor.withValues(alpha: isLight ? 0.36 : 0.24),
+        ),
       ),
       child: Text(
         text,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: const TextStyle(
-          color: Colors.white,
+        style: TextStyle(
+          color: colorScheme.onSurface,
           fontSize: 11,
           fontWeight: FontWeight.w600,
         ),

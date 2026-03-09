@@ -5,6 +5,7 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
     required Map<String, dynamic>? firstBuild,
     required Map<String, dynamic>? secondBuild,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Map<String, num> firstSummary = _summaryMap(firstBuild);
     final Map<String, num> secondSummary = _summaryMap(secondBuild);
     final List<ToramRadarMetricSpec> metrics = ToramRadarProfile.metrics;
@@ -51,19 +52,19 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFF2A2A2A),
+        color: colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: const Color(0xFFFFFFFF).withValues(alpha: 0.16),
+          color: colorScheme.onSurface.withValues(alpha: 0.16),
         ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Build Compare Graph',
             style: TextStyle(
-              color: Colors.white,
+              color: colorScheme.onSurface,
               fontWeight: FontWeight.w700,
               fontSize: 14,
             ),
@@ -82,12 +83,16 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
                       painter: _CompareRadarPainter(
                         firstValues: firstNormalized,
                         secondValues: secondNormalized,
-                        gridColor: const Color(0x66FFFFFF),
-                        axisColor: const Color(0x33FFFFFF),
-                        firstFillColor: const Color(0x6678A8FF),
-                        firstStrokeColor: const Color(0xFFB8D2FF),
-                        secondFillColor: const Color(0x66FF8A80),
-                        secondStrokeColor: const Color(0xFFFFC5C0),
+                        gridColor: colorScheme.onSurface.withValues(alpha: 0.4),
+                        axisColor: colorScheme.onSurface.withValues(alpha: 0.2),
+                        firstFillColor: colorScheme.primary.withValues(
+                          alpha: 0.34,
+                        ),
+                        firstStrokeColor: colorScheme.primary,
+                        secondFillColor: colorScheme.secondary.withValues(
+                          alpha: 0.34,
+                        ),
+                        secondStrokeColor: colorScheme.secondary,
                       ),
                     ),
                   ),
@@ -116,11 +121,11 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
             runSpacing: 8,
             children: [
               _buildLegendDot(
-                color: const Color(0xFFB8D2FF),
+                color: colorScheme.primary,
                 text: 'Build A',
               ),
               _buildLegendDot(
-                color: const Color(0xFFFFC5C0),
+                color: colorScheme.secondary,
                 text: 'Build B',
               ),
             ],
@@ -131,6 +136,7 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
   }
 
   Widget _buildLegendDot({required Color color, required String text}) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -142,7 +148,10 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
         const SizedBox(width: 6),
         Text(
           text,
-          style: const TextStyle(color: Colors.white70, fontSize: 12),
+          style: TextStyle(
+            color: colorScheme.onSurface.withValues(alpha: 0.75),
+            fontSize: 12,
+          ),
         ),
       ],
     );
@@ -156,6 +165,7 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
     TextAlign textAlign = TextAlign.center,
     double maxWidth = 124,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final CrossAxisAlignment axisAlignment = textAlign == TextAlign.left
         ? CrossAxisAlignment.start
         : textAlign == TextAlign.right
@@ -172,8 +182,8 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
           children: [
             Text(
               label,
-              style: const TextStyle(
-                color: Color(0xFFFFE082),
+              style: TextStyle(
+                color: colorScheme.primary,
                 fontSize: 10,
                 fontWeight: FontWeight.w700,
               ),
@@ -181,8 +191,8 @@ extension _CompareBuildsRadarSection on _CompareBuildsPageState {
             ),
             Text(
               '${_numberText(left)} / ${_numberText(right)}',
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: colorScheme.onSurface,
                 fontSize: 10,
                 fontWeight: FontWeight.w700,
               ),

@@ -32,11 +32,12 @@ class AppMobileBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return BottomNavigationBar(
       currentIndex: _selectedIndex(),
-      backgroundColor: const Color(0xFF0A0A0A),
-      selectedItemColor: const Color(0xFFFFFFFF),
-      unselectedItemColor: const Color(0xAAFFFFFF),
+      backgroundColor: colorScheme.surfaceContainerHigh,
+      selectedItemColor: colorScheme.primary,
+      unselectedItemColor: colorScheme.onSurface.withValues(alpha: 0.7),
       type: BottomNavigationBarType.fixed,
       selectedFontSize: 11,
       unselectedFontSize: 11,

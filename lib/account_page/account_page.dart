@@ -88,11 +88,12 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   Widget _buildCurrentUserCard(User? user) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final bool isSignedIn = user != null;
     final String signedInLabel = isSignedIn ? 'Signed in' : 'Guest';
     final Color signedInColor = isSignedIn
-        ? const Color(0xFF4A4A4A)
-        : const Color(0xFF3A3A3A);
+        ? colorScheme.primaryContainer
+        : colorScheme.surfaceContainerHighest;
     final String emailText = user?.email?.trim().isNotEmpty == true
         ? user?.email ?? '-'
         : '-';
@@ -105,9 +106,9 @@ class _AccountPageState extends State<AccountPage> {
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFF111111),
+        color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0x33FFFFFF)),
+        border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,8 +126,8 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 child: Text(
                   signedInLabel,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: colorScheme.onSurface,
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
                   ),
@@ -153,6 +154,7 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   Widget _buildUserInfoRow(String label, String value) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -160,8 +162,8 @@ class _AccountPageState extends State<AccountPage> {
           width: 96,
           child: Text(
             label,
-            style: const TextStyle(
-              color: Colors.white70,
+            style: TextStyle(
+              color: colorScheme.onSurface.withValues(alpha: 0.75),
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),
@@ -171,7 +173,7 @@ class _AccountPageState extends State<AccountPage> {
         Expanded(
           child: SelectableText(
             value,
-            style: const TextStyle(color: Colors.white, fontSize: 12),
+            style: TextStyle(color: colorScheme.onSurface, fontSize: 12),
           ),
         ),
       ],
@@ -180,22 +182,28 @@ class _AccountPageState extends State<AccountPage> {
 
   void _showMessage(
     String message, {
-    Color backgroundColor = const Color(0xFF111111),
+    Color? backgroundColor,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
         behavior: SnackBarBehavior.floating,
-        backgroundColor: backgroundColor,
+        backgroundColor: backgroundColor ?? colorScheme.surfaceContainerHigh,
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: const Color(0xFF000000),
-      appBar: AppBar(title: const Text('Account')),
+      backgroundColor: colorScheme.surface,
+      appBar: AppBar(
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
+        title: const Text('Account'),
+      ),
       body: StreamBuilder<User?>(
         stream: _authService.authStateChanges(),
         builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
@@ -208,10 +216,10 @@ class _AccountPageState extends State<AccountPage> {
                 constraints: const BoxConstraints(maxWidth: 520),
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF0D0D0D),
+                  color: colorScheme.surfaceContainerHigh,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: const Color(0xFFFFFFFF).withValues(alpha: 0.14),
+                    color: colorScheme.onSurface.withValues(alpha: 0.14),
                   ),
                 ),
                 child: Form(
@@ -220,30 +228,30 @@ class _AccountPageState extends State<AccountPage> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      const Text(
+                      Text(
                         'Account',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
-                          color: Colors.white,
+                          color: colorScheme.onSurface,
                         ),
                       ),
                       const SizedBox(height: 10),
                       _buildCurrentUserCard(user),
                       const SizedBox(height: 18),
-                      const Text(
+                      Text(
                         'Forgot Password',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
-                          color: Colors.white,
+                          color: colorScheme.onSurface,
                         ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         'Enter your account email and we will send a password reset link.',
                         style: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.72),
+                          color: colorScheme.onSurface.withValues(alpha: 0.72),
                           height: 1.35,
                         ),
                       ),
@@ -253,7 +261,7 @@ class _AccountPageState extends State<AccountPage> {
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.done,
                         autofillHints: const <String>[AutofillHints.email],
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyle(color: colorScheme.onSurface),
                         decoration: _fieldDecoration(
                           label: 'Email',
                           hint: 'name@example.com',
@@ -266,20 +274,20 @@ class _AccountPageState extends State<AccountPage> {
                       ElevatedButton.icon(
                         onPressed: _isSending ? null : _sendResetEmail,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF4A4A4A),
-                          foregroundColor: Colors.white,
+                          backgroundColor: colorScheme.primary,
+                          foregroundColor: colorScheme.onPrimary,
                           minimumSize: const Size.fromHeight(48),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
                         icon: _isSending
-                            ? const SizedBox(
+                            ? SizedBox(
                                 width: 18,
                                 height: 18,
                                 child: CircularProgressIndicator(
                                   strokeWidth: 2,
-                                  color: Colors.white,
+                                  color: colorScheme.onPrimary,
                                 ),
                               )
                             : const Icon(Icons.mark_email_read_outlined),
@@ -294,9 +302,9 @@ class _AccountPageState extends State<AccountPage> {
                             ? null
                             : () => Navigator.of(context).pop(),
                         style: OutlinedButton.styleFrom(
-                          foregroundColor: Colors.white,
+                          foregroundColor: colorScheme.onSurface,
                           side: BorderSide(
-                            color: Colors.white.withValues(alpha: 0.3),
+                            color: colorScheme.onSurface.withValues(alpha: 0.3),
                           ),
                           minimumSize: const Size.fromHeight(44),
                           shape: RoundedRectangleBorder(
@@ -321,23 +329,29 @@ class _AccountPageState extends State<AccountPage> {
     required String hint,
     required IconData icon,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return InputDecoration(
       labelText: label,
       hintText: hint,
       filled: true,
-      fillColor: const Color(0xFF141414),
-      labelStyle: TextStyle(color: Colors.white.withValues(alpha: 0.9)),
-      hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.42)),
-      prefixIcon: Icon(icon, color: Colors.white70),
+      fillColor: colorScheme.surfaceContainerHighest,
+      labelStyle: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.9)),
+      hintStyle: TextStyle(
+        color: colorScheme.onSurface.withValues(alpha: 0.42),
+      ),
+      prefixIcon: Icon(icon, color: colorScheme.onSurface.withValues(alpha: 0.75)),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
         borderSide: BorderSide(
-          color: const Color(0xFFFFFFFF).withValues(alpha: 0.22),
+          color: colorScheme.onSurface.withValues(alpha: 0.22),
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: Color(0xFF666666), width: 1.6),
+        borderSide: BorderSide(
+          color: colorScheme.onSurface.withValues(alpha: 0.5),
+          width: 1.6,
+        ),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),

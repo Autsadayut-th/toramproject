@@ -15,9 +15,14 @@ class MonsterLibraryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: const Color(0xFF000000),
-      appBar: AppBar(title: Text(title)),
+      backgroundColor: colorScheme.surface,
+      appBar: AppBar(
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
+        title: Text(title),
+      ),
       body: const _MonsterLibraryDataView(),
     );
   }

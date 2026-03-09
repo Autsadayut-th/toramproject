@@ -16,16 +16,22 @@ class ToramCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
+    final bool isLight = theme.brightness == Brightness.light;
+    final double borderAlpha = isLight ? 0.24 : 0.16;
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF0A0A0A).withValues(alpha: 0.82),
+        color: colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: const Color(0xFFFFFFFF).withValues(alpha: 0.16),
+          color: colorScheme.onSurface.withValues(alpha: borderAlpha),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.2),
+            color: colorScheme.onSurface.withValues(
+              alpha: isLight ? 0.10 : 0.16,
+            ),
             blurRadius: 14,
             offset: const Offset(0, 6),
           ),
@@ -38,7 +44,7 @@ class ToramCard extends StatelessWidget {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Icon(icon, color: Colors.white, size: 20),
+                Icon(icon, color: colorScheme.onSurface, size: 20),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
@@ -47,7 +53,7 @@ class ToramCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 16,
-                      color: titleColor ?? Colors.white,
+                      color: titleColor ?? colorScheme.onSurface,
                       fontWeight: FontWeight.w700,
                     ),
                   ),

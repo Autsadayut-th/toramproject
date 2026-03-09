@@ -1,10 +1,12 @@
-﻿part of 'equipment_library_page.dart';
+part of 'equipment_library_page.dart';
 
 extension _EquipmentLibraryPagination on _EquipmentLibraryDataViewState {
   Widget _buildPaginationBar({
     required int currentPage,
     required int totalPages,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
     const int maxVisiblePages = 10;
     int startPage = 1;
     if (totalPages > maxVisiblePages) {
@@ -28,13 +30,20 @@ extension _EquipmentLibraryPagination on _EquipmentLibraryDataViewState {
           width: double.infinity,
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
+            gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [Color(0xFF171311), Color(0xFF0D1115)],
+              colors: <Color>[
+                colorScheme.surfaceContainerHigh,
+                colorScheme.surfaceContainerHighest,
+              ],
             ),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: const Color(0x22FFFFFF)),
+            border: Border.all(
+              color: colorScheme.onSurface.withValues(
+                alpha: isLight ? 0.24 : 0.14,
+              ),
+            ),
           ),
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
@@ -86,12 +95,14 @@ extension _EquipmentLibraryPagination on _EquipmentLibraryDataViewState {
     required VoidCallback onTap,
     bool isSelected = false,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
     final Color borderColor = isSelected
-        ? _libraryWarmAccent
-        : _libraryCoolAccent.withValues(alpha: 0.32);
+        ? colorScheme.primary
+        : colorScheme.onSurface.withValues(alpha: isLight ? 0.42 : 0.32);
     final Color textColor = enabled || isSelected
-        ? Colors.white
-        : Colors.white38;
+        ? colorScheme.onSurface
+        : colorScheme.onSurface.withValues(alpha: 0.38);
 
     return InkWell(
       onTap: enabled ? onTap : null,
@@ -103,10 +114,13 @@ extension _EquipmentLibraryPagination on _EquipmentLibraryDataViewState {
           gradient: LinearGradient(
             colors: isSelected
                 ? <Color>[
-                    _libraryWarmAccent.withValues(alpha: 0.28),
-                    _libraryCoolAccent.withValues(alpha: 0.2),
+                    colorScheme.primary.withValues(alpha: 0.28),
+                    colorScheme.secondary.withValues(alpha: 0.2),
                   ]
-                : <Color>[const Color(0xFF10161A), const Color(0xFF0D1115)],
+                : <Color>[
+                    colorScheme.surfaceContainerHighest,
+                    colorScheme.surfaceContainerHigh,
+                  ],
           ),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: borderColor, width: isSelected ? 2 : 1),

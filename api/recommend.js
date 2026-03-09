@@ -8,6 +8,14 @@ const DEFAULT_EXPLANATION_MAX_OUTPUT_TOKENS = 220;
 const GEMINI_MODEL_ALIASES = {
   'gemini-3.1-flash-lite': 'gemini-3.1-flash-lite-preview',
 };
+const SUPPORTED_RECOMMENDATION_CATEGORIES = new Set([
+  'analysis',
+  'stat',
+  'rule',
+  'crysta',
+  'equipment',
+  'upgrade_path',
+]);
 
 const RECOMMENDATION_SCHEMA = {
   type: 'OBJECT',
@@ -93,6 +101,141 @@ function normalizeRecommendations(value, fallback) {
     return [...fallback];
   }
   return unique.slice(0, 6);
+}
+
+function normalizeRecommendationCategory(value) {
+  const normalized = String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_|_$/g, '');
+  if (SUPPORTED_RECOMMENDATION_CATEGORIES.has(normalized)) {
+    return normalized;
+  }
+  return 'analysis';
+}
+
+function normalizeRecommendationPriority(value) {
+  const parsed = Number(value ?? 3);
+  if (!Number.isFinite(parsed)) {
+    return 3;
+  }
+  return Math.max(1, Math.min(5, Math.trunc(parsed)));
+}
+
+function normalizeRecommendationConfidence(value) {
+  const parsed = Number(value ?? 0.7);
+  if (!Number.isFinite(parsed)) {
+    return 0.7;
+  }
+  if (parsed < 0) {
+    return 0;
+  }
+  if (parsed > 1) {
+    return 1;
+  }
+  return parsed;
+}
+
+function recommendationIdFromMessage(category, message, index) {
+  const slug = String(message || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_|_$/g, '')
+    .slice(0, 64);
+  const safeSlug = slug || 'item';
+  const safeCategory = normalizeRecommendationCategory(category);
+  return `${safeCategory}_${safeSlug}_${index + 1}`;
+}
+
+function defaultRecommendationItem(message, index) {
+  const text = String(message || '').trim();
+  return {
+    id: recommendationIdFromMessage('analysis', text, index),
+    message: text,
+    category: 'analysis',
+    priority: 3,
+    source: 'rule',
+    confidence: 0.7,
+    reason: '',
+    explanation: '',
+  };
+}
+
+function normalizeRecommendationItems(value, fallbackRecommendations) {
+  const fallbackTexts = normalizeRecommendations(
+    fallbackRecommendations,
+    DEFAULT_FALLBACK,
+  );
+  const uniqueMessages = new Set();
+  const items = [];
+
+  if (Array.isArray(value)) {
+    for (let i = 0; i < value.length; i += 1) {
+      const row = value[i];
+      if (!row || typeof row !== 'object' || Array.isArray(row)) {
+        continue;
+      }
+      const rawMessage =
+        (typeof row.message === 'string' && row.message) ||
+        (typeof row.text === 'string' && row.text) ||
+        (typeof row.recommendation === 'string' && row.recommendation) ||
+        '';
+      const message = String(rawMessage || '').trim();
+      if (!message) {
+        continue;
+      }
+      const messageKey = message.toLowerCase();
+      if (uniqueMessages.has(messageKey)) {
+        continue;
+      }
+      uniqueMessages.add(messageKey);
+      const category = normalizeRecommendationCategory(row.category);
+      const item = {
+        id:
+          String(row.id || '').trim() ||
+          recommendationIdFromMessage(category, message, i),
+        message,
+        category,
+        priority: normalizeRecommendationPriority(row.priority),
+        source: String(row.source || 'rule').trim().toLowerCase() || 'rule',
+        confidence: normalizeRecommendationConfidence(row.confidence),
+        reason: String(row.reason || '').trim(),
+        explanation: String(row.explanation || row.explain || '').trim(),
+      };
+      items.push(item);
+    }
+  }
+
+  if (items.length === 0) {
+    for (let i = 0; i < fallbackTexts.length; i += 1) {
+      const message = String(fallbackTexts[i] || '').trim();
+      if (!message) {
+        continue;
+      }
+      const messageKey = message.toLowerCase();
+      if (uniqueMessages.has(messageKey)) {
+        continue;
+      }
+      uniqueMessages.add(messageKey);
+      items.push(defaultRecommendationItem(message, i));
+    }
+  }
+
+  return items.slice(0, 6);
+}
+
+function recommendationItemsToTexts(items) {
+  if (!Array.isArray(items)) {
+    return [];
+  }
+  return items
+    .map((item) => String(item?.message || '').trim())
+    .filter(Boolean)
+    .slice(0, 6);
 }
 
 function looksLikeRecommendationJson(text) {
@@ -389,6 +532,22 @@ function normalizeExplanations(value, recommendations) {
   return cleaned;
 }
 
+function withRecommendationItemExplanations(items, explanations) {
+  const normalizedItems = normalizeRecommendationItems(
+    items,
+    recommendationItemsToTexts(items),
+  );
+  const normalizedExplanations = normalizeExplanations(
+    explanations,
+    recommendationItemsToTexts(normalizedItems),
+  );
+  return normalizedItems.map((item, index) => {
+    const existing = String(item.explanation || '').trim();
+    const explanation = existing || normalizedExplanations[index] || '';
+    return { ...item, explanation };
+  });
+}
+
 function parseModelExplanationPayload(text, recommendations) {
   const cleaned = stripCodeFence(text);
   if (!cleaned) {
@@ -659,29 +818,47 @@ module.exports = async function handler(req, res) {
     input.fallbackRecommendations,
     DEFAULT_FALLBACK,
   );
+  const fallbackRecommendationItems = normalizeRecommendationItems(
+    input.fallbackRecommendationItems,
+    fallbackRecommendations,
+  );
+  const fallbackRecommendationTexts = recommendationItemsToTexts(
+    fallbackRecommendationItems,
+  );
   const compactInput = pickFields(input);
 
   try {
     const aiResult = await requestAiExplanation(
       compactInput,
-      fallbackRecommendations,
+      fallbackRecommendationTexts,
     );
+    const recommendationItemsWithExplanations =
+      withRecommendationItemExplanations(
+        fallbackRecommendationItems,
+        aiResult.explanations,
+      );
     return res.status(200).json({
       source: aiResult.provider,
       message: aiResult.summary,
       providerMessage: `${providerLabel(aiResult.provider)} (${aiResult.model})`,
       summary: aiResult.summary,
       explanations: aiResult.explanations,
-      recommendations: fallbackRecommendations,
+      recommendations: fallbackRecommendationTexts,
+      recommendationsV2: recommendationItemsWithExplanations,
     });
   } catch (error) {
+    const fallbackItemsWithExplanations = withRecommendationItemExplanations(
+      fallbackRecommendationItems,
+      [],
+    );
     return res.status(200).json({
       source: 'fallback',
       message: buildClientSafeAiError(error),
       providerMessage: '',
       summary: '',
-      explanations: [],
-      recommendations: fallbackRecommendations,
+      explanations: normalizeExplanations([], fallbackRecommendationTexts),
+      recommendations: fallbackRecommendationTexts,
+      recommendationsV2: fallbackItemsWithExplanations,
     });
   }
 };

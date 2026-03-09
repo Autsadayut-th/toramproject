@@ -13,10 +13,13 @@ extension _MonsterLibraryDetailsSheet on _MonsterLibraryDataViewState {
           maxChildSize: 0.92,
           expand: false,
           builder: (BuildContext context, ScrollController controller) {
+            final ColorScheme colorScheme = Theme.of(context).colorScheme;
             return Container(
-              decoration: const BoxDecoration(
-                color: Color(0xFF090909),
-                borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
+              decoration: BoxDecoration(
+                color: colorScheme.surface,
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(18),
+                ),
               ),
               child: ListView(
                 controller: controller,
@@ -27,7 +30,7 @@ extension _MonsterLibraryDetailsSheet on _MonsterLibraryDataViewState {
                       width: 44,
                       height: 4,
                       decoration: BoxDecoration(
-                        color: const Color(0x55FFFFFF),
+                        color: colorScheme.onSurface.withValues(alpha: 0.34),
                         borderRadius: BorderRadius.circular(999),
                       ),
                     ),
@@ -35,8 +38,8 @@ extension _MonsterLibraryDetailsSheet on _MonsterLibraryDataViewState {
                   const SizedBox(height: 14),
                   Text(
                     item.name,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                     ),
@@ -44,12 +47,14 @@ extension _MonsterLibraryDetailsSheet on _MonsterLibraryDataViewState {
                   const SizedBox(height: 6),
                   Text(
                     'Lv ${item.level} - ${item.family}',
-                    style: const TextStyle(color: Colors.white70),
+                    style: TextStyle(
+                      color: colorScheme.onSurface.withValues(alpha: 0.75),
+                    ),
                   ),
                   const SizedBox(height: 12),
                   _buildMonsterImagePlaceholder(height: 160),
                   const SizedBox(height: 14),
-                  const Divider(color: Color(0x33FFFFFF)),
+                  Divider(color: colorScheme.onSurface.withValues(alpha: 0.2)),
                   const SizedBox(height: 6),
                   _detailRow('Element', item.element),
                   _detailRow('HP', item.hp.toString()),
@@ -57,17 +62,22 @@ extension _MonsterLibraryDetailsSheet on _MonsterLibraryDataViewState {
                   _detailRow('Map Key', item.mapKey),
                   _detailRow('Monster ID', item.id),
                   const SizedBox(height: 10),
-                  const Text(
+                  Text(
                     'Drops',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: colorScheme.onSurface,
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                   const SizedBox(height: 8),
                   if (item.drops.isEmpty)
-                    const Text('-', style: TextStyle(color: Colors.white54))
+                    Text(
+                      '-',
+                      style: TextStyle(
+                        color: colorScheme.onSurface.withValues(alpha: 0.54),
+                      ),
+                    )
                   else
                     Wrap(
                       spacing: 8,
@@ -86,6 +96,7 @@ extension _MonsterLibraryDetailsSheet on _MonsterLibraryDataViewState {
   }
 
   Widget _detailRow(String label, String value) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
@@ -93,13 +104,18 @@ extension _MonsterLibraryDetailsSheet on _MonsterLibraryDataViewState {
         children: <Widget>[
           SizedBox(
             width: 100,
-            child: Text(label, style: const TextStyle(color: Colors.white70)),
+            child: Text(
+              label,
+              style: TextStyle(
+                color: colorScheme.onSurface.withValues(alpha: 0.75),
+              ),
+            ),
           ),
           Expanded(
             child: Text(
               value,
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: colorScheme.onSurface,
                 fontWeight: FontWeight.w600,
               ),
             ),

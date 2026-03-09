@@ -17,6 +17,7 @@ import '../saved_builds_page/saved_builds_page.dart';
 import '../settings_data_page/settings_data_page.dart';
 import '../shared/app_navigation_drawer.dart';
 import '../shared/app_mobile_bottom_navigation_bar.dart';
+import '../shared/app_theme_controller.dart';
 import '../skill_menu_page/skill_menu_page.dart';
 
 part 'widgets/build_mobile_drawer.dart';
@@ -152,6 +153,8 @@ class _AppShellScreenState extends State<AppShellScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
     final bool isMobile = MediaQuery.sizeOf(context).width < 1024;
     final bool showMobileBuildSummaryLeading =
         isMobile && _currentPage == AppNavigationPage.build;
@@ -163,14 +166,14 @@ class _AppShellScreenState extends State<AppShellScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF000000),
-        foregroundColor: Colors.white,
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
         leadingWidth: 84,
         titleSpacing: 6,
         title: Text(
           _getPageTitle(_currentPage),
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: colorScheme.onSurface,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -180,7 +183,7 @@ class _AppShellScreenState extends State<AppShellScreen> {
             return Row(
               children: <Widget>[
                 IconButton(
-                  icon: const Icon(Icons.menu, color: Colors.white),
+                  icon: const Icon(Icons.menu),
                   onPressed: () => Scaffold.of(context).openDrawer(),
                   tooltip: showMobileBuildSummaryLeading
                       ? 'Build Summary'
@@ -190,10 +193,10 @@ class _AppShellScreenState extends State<AppShellScreen> {
                   width: 28,
                   height: 28,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF0E0E0E),
+                    color: colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(6),
                     border: Border.all(
-                      color: const Color(0xFFFFFFFF).withValues(alpha: 0.36),
+                      color: colorScheme.onSurface.withValues(alpha: 0.36),
                     ),
                   ),
                   padding: const EdgeInsets.all(3),
@@ -203,10 +206,10 @@ class _AppShellScreenState extends State<AppShellScreen> {
                     gaplessPlayback: true,
                     errorBuilder:
                         (BuildContext context, Object _, StackTrace? __) =>
-                            const Icon(
+                            Icon(
                               Icons.auto_awesome,
                               size: 15,
-                              color: Colors.white,
+                              color: colorScheme.onSurface,
                             ),
                   ),
                 ),
@@ -215,15 +218,28 @@ class _AppShellScreenState extends State<AppShellScreen> {
           },
         ),
         actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              AppThemeController.instance.isLightMode
+                  ? Icons.dark_mode_outlined
+                  : Icons.light_mode_outlined,
+            ),
+            onPressed: () {
+              unawaited(AppThemeController.instance.toggle());
+            },
+            tooltip: AppThemeController.instance.isLightMode
+                ? 'Use dark theme'
+                : 'Use light theme',
+          ),
           if (_firebaseAvailable) ...<Widget>[
             IconButton(
-              icon: const Icon(Icons.account_circle, color: Colors.white),
+              icon: const Icon(Icons.account_circle),
               onPressed: _openAccountPage,
               tooltip: 'Account',
             ),
             if (_currentUser != null)
               IconButton(
-                icon: const Icon(Icons.logout, color: Colors.white),
+                icon: const Icon(Icons.logout),
                 onPressed: () async {
                   try {
                     await FirebaseAuth.instance.signOut();
@@ -233,7 +249,7 @@ class _AppShellScreenState extends State<AppShellScreen> {
               )
             else
               IconButton(
-                icon: const Icon(Icons.login, color: Colors.white),
+                icon: const Icon(Icons.login),
                 onPressed: () {
                   Navigator.of(context).pushNamed('/login');
                 },

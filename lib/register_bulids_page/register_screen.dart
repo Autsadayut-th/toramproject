@@ -101,23 +101,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void _showMessage(
     String message, {
-    Color backgroundColor = const Color(0xFF111111),
+    Color? backgroundColor,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
         behavior: SnackBarBehavior.floating,
-        backgroundColor: backgroundColor,
+        backgroundColor: backgroundColor ?? colorScheme.surfaceContainerHigh,
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: const Color(0xFF000000),
+      backgroundColor: colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF000000),
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
         title: Text(widget.title),
       ),
       body: Center(
@@ -127,10 +130,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
             constraints: const BoxConstraints(maxWidth: 460),
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: const Color(0xFF0D0D0D),
+              color: colorScheme.surfaceContainerHigh,
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: const Color(0xFFFFFFFF).withValues(alpha: 0.14),
+                color: colorScheme.onSurface.withValues(alpha: 0.14),
               ),
             ),
             child: Form(
@@ -138,10 +141,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  const Text(
+                  Text(
                     'Register with Email',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: colorScheme.onSurface,
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
                     ),
@@ -151,7 +154,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     widget.subtitle ??
                         'Your account will be created in Firebase Authentication.',
                     style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.72),
+                      color: colorScheme.onSurface.withValues(alpha: 0.72),
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -161,7 +164,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     autofillHints: const <String>[AutofillHints.email],
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: colorScheme.onSurface),
                     decoration: _fieldDecoration(
                       label: 'Email',
                       hint: 'name@example.com',
@@ -187,7 +190,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     obscureText: _obscurePassword,
                     textInputAction: TextInputAction.next,
                     autofillHints: const <String>[AutofillHints.newPassword],
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: colorScheme.onSurface),
                     decoration: _fieldDecoration(
                       label: 'Password',
                       hint: 'At least 8 characters',
@@ -202,7 +205,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           _obscurePassword
                               ? Icons.visibility_outlined
                               : Icons.visibility_off_outlined,
-                          color: Colors.white70,
+                          color: colorScheme.onSurface.withValues(alpha: 0.75),
                         ),
                       ),
                     ),
@@ -223,7 +226,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     obscureText: _obscureConfirmPassword,
                     textInputAction: TextInputAction.done,
                     autofillHints: const <String>[AutofillHints.password],
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: colorScheme.onSurface),
                     decoration: _fieldDecoration(
                       label: 'Confirm password',
                       hint: 'Repeat your password',
@@ -238,7 +241,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           _obscureConfirmPassword
                               ? Icons.visibility_outlined
                               : Icons.visibility_off_outlined,
-                          color: Colors.white70,
+                          color: colorScheme.onSurface.withValues(alpha: 0.75),
                         ),
                       ),
                     ),
@@ -257,13 +260,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const SizedBox(height: 10),
                   CheckboxListTile(
                     value: _acceptedTerms,
-                    activeColor: const Color(0xFF0E9F6E),
+                    activeColor: colorScheme.primary,
                     contentPadding: EdgeInsets.zero,
                     controlAffinity: ListTileControlAffinity.leading,
                     title: Text(
                       'I accept the terms and privacy policy.',
                       style: TextStyle(
-                        color: Colors.white.withValues(alpha: 0.86),
+                        color: colorScheme.onSurface.withValues(alpha: 0.86),
                         fontSize: 13,
                       ),
                     ),
@@ -279,20 +282,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ElevatedButton(
                     onPressed: _isLoading ? null : _submit,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF0E9F6E),
-                      foregroundColor: Colors.white,
+                      backgroundColor: colorScheme.primary,
+                      foregroundColor: colorScheme.onPrimary,
                       minimumSize: const Size.fromHeight(48),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                     child: _isLoading
-                        ? const SizedBox(
+                        ? SizedBox(
                             width: 20,
                             height: 20,
                             child: CircularProgressIndicator(
                               strokeWidth: 2,
-                              color: Colors.white,
+                              color: colorScheme.onPrimary,
                             ),
                           )
                         : const Text(
@@ -315,24 +318,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
     required IconData icon,
     Widget? suffixIcon,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return InputDecoration(
       labelText: label,
       hintText: hint,
       filled: true,
-      fillColor: const Color(0xFF141414),
-      labelStyle: TextStyle(color: Colors.white.withValues(alpha: 0.9)),
-      hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.42)),
-      prefixIcon: Icon(icon, color: Colors.white70),
+      fillColor: colorScheme.surfaceContainerHighest,
+      labelStyle: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.9)),
+      hintStyle: TextStyle(
+        color: colorScheme.onSurface.withValues(alpha: 0.42),
+      ),
+      prefixIcon: Icon(icon, color: colorScheme.onSurface.withValues(alpha: 0.75)),
       suffixIcon: suffixIcon,
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
         borderSide: BorderSide(
-          color: const Color(0xFFFFFFFF).withValues(alpha: 0.22),
+          color: colorScheme.onSurface.withValues(alpha: 0.22),
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: Color(0xFF0E9F6E), width: 1.6),
+        borderSide: BorderSide(color: colorScheme.primary, width: 1.6),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),

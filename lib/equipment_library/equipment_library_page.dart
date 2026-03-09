@@ -13,9 +13,6 @@ part 'equipment_library_grid.dart';
 part 'equipment_library_pagination.dart';
 part 'equipment_library_formatters.dart';
 
-const Color _libraryWarmAccent = Color(0xFFD8B36A);
-const Color _libraryCoolAccent = Color(0xFF5D7283);
-
 class EquipmentLibraryScreen extends StatelessWidget {
   const EquipmentLibraryScreen({
     super.key,
@@ -58,6 +55,7 @@ class EquipmentLibraryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final bool isMobile = MediaQuery.sizeOf(context).width < 1024;
     final bool isEmbeddedInShell = !pickMode && onNavigate != null;
     final bool showMobileNav = !pickMode && !isEmbeddedInShell && isMobile;
@@ -77,11 +75,14 @@ class EquipmentLibraryScreen extends StatelessWidget {
       }
     }
 
-    final Widget content = _EquipmentLibraryDataView(
-      pickMode: pickMode,
-      initialCategory: initialCategory,
-      allowedCategories: allowedCategories,
-      allowedTypes: allowedTypes,
+    final Widget content = ColoredBox(
+      color: colorScheme.surface,
+      child: _EquipmentLibraryDataView(
+        pickMode: pickMode,
+        initialCategory: initialCategory,
+        allowedCategories: allowedCategories,
+        allowedTypes: allowedTypes,
+      ),
     );
 
     if (isEmbeddedInShell) {
@@ -89,7 +90,7 @@ class EquipmentLibraryScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF000000),
+      backgroundColor: colorScheme.surface,
       drawer: showGlobalMenu
           ? AppNavigationDrawer(
               currentPage: AppNavigationPage.equipment,
@@ -105,16 +106,18 @@ class EquipmentLibraryScreen extends StatelessWidget {
             )
           : null,
       appBar: AppBar(
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
         title: Text(title),
         automaticallyImplyLeading: !showGlobalMenu && !showMobileNav,
         leading: showGlobalMenu
             ? Builder(
                 builder: (BuildContext context) => TextButton(
                   onPressed: () => Scaffold.of(context).openDrawer(),
-                  child: const Text(
+                  child: Text(
                     'Menu',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: colorScheme.onSurface,
                       fontWeight: FontWeight.w700,
                     ),
                   ),

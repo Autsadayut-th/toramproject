@@ -57,11 +57,12 @@ class AppNavigationDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final bool firebaseAvailable = _isFirebaseAvailable();
     final bool isAuthenticated = _readAuthenticatedState(firebaseAvailable);
 
     return Drawer(
-      backgroundColor: const Color(0xFF000000),
+      backgroundColor: colorScheme.surface,
       child: SafeArea(
         child: Column(
           children: <Widget>[
@@ -74,7 +75,7 @@ class AppNavigationDrawer extends StatelessWidget {
                     decoration: BoxDecoration(
                       border: Border(
                         bottom: BorderSide(
-                          color: const Color(0xFFFFFFFF).withValues(alpha: 0.2),
+                          color: colorScheme.onSurface.withValues(alpha: 0.2),
                         ),
                       ),
                     ),
@@ -84,12 +85,12 @@ class AppNavigationDrawer extends StatelessWidget {
                           width: 36,
                           height: 36,
                           decoration: BoxDecoration(
-                            color: const Color(0xFF0E0E0E),
+                            color: colorScheme.surfaceContainerHighest,
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
-                              color: const Color(
-                                0xFFFFFFFF,
-                              ).withValues(alpha: 0.28),
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.28,
+                              ),
                             ),
                           ),
                           padding: const EdgeInsets.all(4),
@@ -102,18 +103,18 @@ class AppNavigationDrawer extends StatelessWidget {
                                   BuildContext context,
                                   Object _,
                                   StackTrace? __,
-                                ) => const Icon(
+                                ) => Icon(
                                   Icons.auto_awesome,
-                                  color: Colors.white,
+                                  color: colorScheme.onSurface,
                                 ),
                           ),
                         ),
                         const SizedBox(width: 12),
-                        const Expanded(
+                        Expanded(
                           child: Text(
                             'Build Tools',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: colorScheme.onSurface,
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
                             ),
@@ -123,12 +124,14 @@ class AppNavigationDrawer extends StatelessWidget {
                     ),
                   ),
                   _tile(
+                    context: context,
                     icon: Icons.build,
                     label: 'Build Simulator',
                     selected: currentPage == AppNavigationPage.build,
                     onTap: onOpenBuild,
                   ),
                   _tile(
+                    context: context,
                     icon: Icons.menu_book_outlined,
                     label: 'Equipment Library',
                     selected: currentPage == AppNavigationPage.equipment,
@@ -136,18 +139,21 @@ class AppNavigationDrawer extends StatelessWidget {
                   ),
                   if (onOpenCritical != null)
                     _tile(
+                      context: context,
                       icon: Icons.track_changes,
                       label: 'Critical Simulator',
                       selected: currentPage == AppNavigationPage.critical,
                       onTap: onOpenCritical!,
                     ),
                   _tile(
+                    context: context,
                     icon: Icons.bookmark_border,
                     label: 'Saved Builds',
                     selected: currentPage == AppNavigationPage.saved,
                     onTap: onOpenSaved,
                   ),
                   _tile(
+                    context: context,
                     icon: Icons.compare_arrows,
                     label: 'Compare Builds',
                     selected: currentPage == AppNavigationPage.compare,
@@ -162,7 +168,7 @@ class AppNavigationDrawer extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    color: const Color(0xFFFFFFFF).withValues(alpha: 0.16),
+                    color: colorScheme.onSurface.withValues(alpha: 0.16),
                   ),
                 ),
               ),
@@ -181,9 +187,9 @@ class AppNavigationDrawer extends StatelessWidget {
                         navigator.pushNamed('/login');
                       },
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: Colors.white,
+                  foregroundColor: colorScheme.onSurface,
                   side: BorderSide(
-                    color: const Color(0xFFFFFFFF).withValues(alpha: 0.36),
+                    color: colorScheme.onSurface.withValues(alpha: 0.36),
                   ),
                   minimumSize: const Size.fromHeight(44),
                 ),
@@ -210,16 +216,23 @@ class AppNavigationDrawer extends StatelessWidget {
   }
 
   Widget _tile({
+    required BuildContext context,
     required IconData icon,
     required String label,
     required bool selected,
     required VoidCallback onTap,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return ListTile(
-      leading: Icon(icon, color: selected ? Colors.white : Colors.white70),
-      title: Text(label, style: const TextStyle(color: Colors.white)),
+      leading: Icon(
+        icon,
+        color: selected
+            ? colorScheme.onSurface
+            : colorScheme.onSurface.withValues(alpha: 0.7),
+      ),
+      title: Text(label, style: TextStyle(color: colorScheme.onSurface)),
       selected: selected,
-      selectedTileColor: const Color(0x22FFFFFF),
+      selectedTileColor: colorScheme.onSurface.withValues(alpha: 0.12),
       onTap: onTap,
     );
   }

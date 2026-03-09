@@ -88,12 +88,15 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
   }
 
   Widget _buildSummaryModeSwitch() {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
-        color: const Color(0xFF111111),
+        color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0x44FFFFFF)),
+        border: Border.all(
+          color: colorScheme.onSurface.withValues(alpha: 0.24),
+        ),
       ),
       child: Row(
         children: <Widget>[
@@ -115,6 +118,7 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
     required String label,
     required _DrawerSummaryViewMode mode,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final bool isActive = _summaryViewMode == mode;
     return Expanded(
       child: InkWell(
@@ -130,12 +134,14 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 7),
           decoration: BoxDecoration(
-            color: isActive ? const Color(0xFF2B2B2B) : Colors.transparent,
+            color: isActive
+                ? colorScheme.surfaceContainerHigh
+                : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
               color: isActive
-                  ? const Color(0x66FFFFFF)
-                  : const Color(0x22FFFFFF),
+                  ? colorScheme.onSurface.withValues(alpha: 0.35)
+                  : colorScheme.onSurface.withValues(alpha: 0.15),
             ),
           ),
           child: Text(
@@ -144,7 +150,9 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
             style: TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w600,
-              color: isActive ? Colors.white : Colors.white70,
+              color: isActive
+                  ? colorScheme.onSurface
+                  : colorScheme.onSurface.withValues(alpha: 0.75),
             ),
           ),
         ),
@@ -222,19 +230,23 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
   }
 
   Widget _buildItemDetailsView(List<Map<String, dynamic>> itemDetails) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     if (itemDetails.isEmpty) {
-      return const Text(
+      return Text(
         'No item selected.',
-        style: TextStyle(fontSize: 12, color: Colors.white70),
+        style: TextStyle(
+          fontSize: 12,
+          color: colorScheme.onSurface.withValues(alpha: 0.75),
+        ),
       );
     }
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: const Color(0xFF121212).withValues(alpha: 0.94),
+        color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0x33FFFFFF)),
+        border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -250,6 +262,7 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
   }
 
   Widget _buildItemDetailsSection(Map<String, dynamic> detail) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final String slotLabel = detail['slotLabel']?.toString().trim() ?? '-';
     final String itemName = detail['itemName']?.toString().trim() ?? '';
     final List<Map<String, dynamic>> stats = _readDetailStats(detail['stats']);
@@ -259,10 +272,10 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
       children: <Widget>[
         Text(
           '$slotLabel:',
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w700,
-            color: Color(0xFFE0E0E0),
+            color: colorScheme.onSurface.withValues(alpha: 0.85),
           ),
         ),
         const SizedBox(height: 2),
@@ -272,28 +285,36 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
             hasItem ? itemName : '-',
             style: TextStyle(
               fontSize: 13,
-              color: hasItem ? const Color(0xFF9BC9FF) : Colors.white54,
+              color: hasItem
+                  ? colorScheme.primary
+                  : colorScheme.onSurface.withValues(alpha: 0.54),
               fontWeight: FontWeight.w600,
             ),
           ),
         ),
         if (!hasItem) ...<Widget>[
           const SizedBox(height: 4),
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(left: 14),
             child: Text(
               'No item selected',
-              style: TextStyle(fontSize: 12, color: Colors.white54),
+              style: TextStyle(
+                fontSize: 12,
+                color: colorScheme.onSurface.withValues(alpha: 0.54),
+              ),
             ),
           ),
         ] else ...<Widget>[
           const SizedBox(height: 5),
           if (stats.isEmpty)
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 14),
               child: Text(
                 'No stat data',
-                style: TextStyle(fontSize: 12, color: Colors.white54),
+                style: TextStyle(
+                  fontSize: 12,
+                  color: colorScheme.onSurface.withValues(alpha: 0.54),
+                ),
               ),
             )
           else
@@ -312,9 +333,9 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                     Expanded(
                       child: Text(
                         label,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
-                          color: Colors.white70,
+                          color: colorScheme.onSurface.withValues(alpha: 0.75),
                         ),
                       ),
                     ),
@@ -324,8 +345,8 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                       style: TextStyle(
                         fontSize: 12,
                         color: isNegative
-                            ? const Color(0xFFA84B4B)
-                            : Colors.white,
+                            ? colorScheme.error
+                            : colorScheme.onSurface,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -352,11 +373,12 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
 
   void _onSaveBuild() {
     if (_hasSaveLimit && !_canSaveBuild) {
+      final ColorScheme colorScheme = Theme.of(context).colorScheme;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(_guestSaveLimitMessage),
+        SnackBar(
+          content: const Text(_guestSaveLimitMessage),
           behavior: SnackBarBehavior.floating,
-          backgroundColor: Color(0xFF1A1A1A),
+          backgroundColor: colorScheme.surfaceContainerHigh,
         ),
       );
       return;
@@ -373,11 +395,12 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
     if (!mounted) {
       return;
     }
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
         behavior: SnackBarBehavior.floating,
-        backgroundColor: const Color(0xFF1A1A1A),
+        backgroundColor: colorScheme.surfaceContainerHigh,
       ),
     );
   }
@@ -418,23 +441,26 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
     final String? code = await showDialog<String>(
       context: context,
       builder: (BuildContext context) {
+        final ColorScheme colorScheme = Theme.of(context).colorScheme;
         return AlertDialog(
-          backgroundColor: const Color(0xFF1A1A1A),
-          title: const Text(
+          backgroundColor: colorScheme.surfaceContainerHigh,
+          title: Text(
             'Import Build Code',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: colorScheme.onSurface),
           ),
           content: TextField(
             controller: codeController,
             autofocus: true,
             minLines: 2,
             maxLines: 4,
-            style: const TextStyle(color: Colors.white, fontSize: 12),
+            style: TextStyle(color: colorScheme.onSurface, fontSize: 12),
             decoration: InputDecoration(
               hintText: 'Paste shared build code (TB...)',
-              hintStyle: const TextStyle(color: Colors.white54),
+              hintStyle: TextStyle(
+                color: colorScheme.onSurface.withValues(alpha: 0.54),
+              ),
               filled: true,
-              fillColor: const Color(0xFF0F0F0F),
+              fillColor: colorScheme.surfaceContainerHighest,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 10,
                 vertical: 10,
@@ -442,12 +468,14 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(
-                  color: const Color(0xFFFFFFFF).withValues(alpha: 0.22),
+                  color: colorScheme.onSurface.withValues(alpha: 0.22),
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(color: Color(0x66FFFFFF)),
+                borderSide: BorderSide(
+                  color: colorScheme.onSurface.withValues(alpha: 0.45),
+                ),
               ),
             ),
           ),
@@ -461,7 +489,8 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                 Navigator.of(context).pop(codeController.text);
               },
               style: FilledButton.styleFrom(
-                backgroundColor: const Color(0xFF4A4A4A),
+                backgroundColor: colorScheme.primary,
+                foregroundColor: colorScheme.onPrimary,
               ),
               child: const Text('Import'),
             ),
@@ -481,15 +510,18 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
         await showDialog<bool>(
           context: context,
           builder: (BuildContext context) {
+            final ColorScheme colorScheme = Theme.of(context).colorScheme;
             return AlertDialog(
-              backgroundColor: const Color(0xFF1A1A1A),
-              title: const Text(
+              backgroundColor: colorScheme.surfaceContainerHigh,
+              title: Text(
                 'Clear All Data',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: colorScheme.onSurface),
               ),
-              content: const Text(
+              content: Text(
                 'Delete all current values and saved builds?',
-                style: TextStyle(color: Colors.white70),
+                style: TextStyle(
+                  color: colorScheme.onSurface.withValues(alpha: 0.75),
+                ),
               ),
               actions: <Widget>[
                 TextButton(
@@ -499,7 +531,8 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                 FilledButton(
                   onPressed: () => Navigator.of(context).pop(true),
                   style: FilledButton.styleFrom(
-                    backgroundColor: const Color(0xFF4A4A4A),
+                    backgroundColor: colorScheme.primary,
+                    foregroundColor: colorScheme.onPrimary,
                   ),
                   child: const Text('Delete'),
                 ),
@@ -521,8 +554,9 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Drawer(
-      backgroundColor: const Color(0xFF000000),
+      backgroundColor: colorScheme.surface,
       child: SafeArea(
         child: AnimatedBuilder(
           animation: widget.coordinator,
@@ -552,11 +586,11 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    const Expanded(
+                    Expanded(
                       child: Text(
                         'Build Tools',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: colorScheme.onSurface,
                           fontSize: 17,
                           fontWeight: FontWeight.w700,
                         ),
@@ -564,7 +598,10 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                     ),
                     IconButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.close, color: Colors.white70),
+                      icon: Icon(
+                        Icons.close,
+                        color: colorScheme.onSurface.withValues(alpha: 0.75),
+                      ),
                       tooltip: 'Close',
                     ),
                   ],
@@ -596,10 +633,10 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                                   : Icons.rule,
                               size: 14,
                               color: isAiLoading
-                                  ? const Color(0xFFFFE082)
+                                  ? colorScheme.tertiary
                                   : hasRemoteAi
-                                  ? const Color(0xFFB7FFC6)
-                                  : const Color(0xFFFFCCBC),
+                                  ? colorScheme.secondary
+                                  : colorScheme.primary,
                             ),
                             const SizedBox(width: 6),
                             Expanded(
@@ -610,8 +647,10 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                                 style: TextStyle(
                                   fontSize: 11,
                                   color: isAiLoading
-                                      ? const Color(0xFFFFF8E1)
-                                      : Colors.white70,
+                                      ? colorScheme.tertiary
+                                      : colorScheme.onSurface.withValues(
+                                          alpha: 0.75,
+                                        ),
                                 ),
                               ),
                             ),
@@ -619,10 +658,12 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                         ),
                         const SizedBox(height: 10),
                         if (aiRecommendations.isEmpty)
-                          const Text(
+                          Text(
                             'No recommendations yet.',
                             style: TextStyle(
-                              color: Colors.white70,
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.75,
+                              ),
                               fontSize: 12,
                             ),
                           )
@@ -650,18 +691,16 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                       width: 28,
                       height: 28,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF1A1A1A),
+                        color: colorScheme.surfaceContainerHighest,
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
-                          color: const Color(
-                            0xFFFFFFFF,
-                          ).withValues(alpha: 0.24),
+                          color: colorScheme.onSurface.withValues(alpha: 0.24),
                         ),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.cleaning_services,
                         size: 15,
-                        color: Colors.white,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -674,8 +713,10 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                             _guestSaveLimitMessage,
                             style: TextStyle(
                               color: canSaveBuild
-                                  ? Colors.white70
-                                  : const Color(0xFFFFB3B3),
+                                  ? colorScheme.onSurface.withValues(
+                                      alpha: 0.75,
+                                    )
+                                  : colorScheme.error,
                               fontSize: 11,
                             ),
                           ),
@@ -685,29 +726,37 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                       TextField(
                         controller: _buildNameController,
                         onSubmitted: (_) => _onSaveBuild(),
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: TextStyle(
+                          color: colorScheme.onSurface,
                           fontSize: 13,
                         ),
                         decoration: InputDecoration(
                           hintText: 'Enter build name...',
-                          hintStyle: const TextStyle(color: Colors.white54),
+                          hintStyle: TextStyle(
+                            color: colorScheme.onSurface.withValues(
+                              alpha: 0.54,
+                            ),
+                          ),
                           contentPadding: const EdgeInsets.symmetric(
                             horizontal: 12,
                             vertical: 14,
                           ),
                           filled: true,
-                          fillColor: const Color(0xFF0A0A0A),
+                          fillColor: colorScheme.surfaceContainerHighest,
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(
-                              color: Color(0x44FFFFFF),
+                            borderSide: BorderSide(
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.24,
+                              ),
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(
-                              color: Color(0x77FFFFFF),
+                            borderSide: BorderSide(
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.45,
+                              ),
                             ),
                           ),
                         ),
@@ -721,9 +770,11 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                               icon: const Icon(Icons.save, size: 16),
                               label: const Text('Save Build'),
                               style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.white,
-                                side: const BorderSide(
-                                  color: Color(0x66FFFFFF),
+                                foregroundColor: colorScheme.onSurface,
+                                side: BorderSide(
+                                  color: colorScheme.onSurface.withValues(
+                                    alpha: 0.35,
+                                  ),
                                 ),
                                 shape: const StadiumBorder(),
                                 padding: const EdgeInsets.symmetric(
@@ -742,9 +793,12 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                               ),
                               label: const Text('Import Code'),
                               style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.white70,
-                                side: const BorderSide(
-                                  color: Color(0x44FFFFFF),
+                                foregroundColor: colorScheme.onSurface
+                                    .withValues(alpha: 0.75),
+                                side: BorderSide(
+                                  color: colorScheme.onSurface.withValues(
+                                    alpha: 0.24,
+                                  ),
                                 ),
                                 shape: const StadiumBorder(),
                                 padding: const EdgeInsets.symmetric(
@@ -762,14 +816,20 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: const Color(0xFF101010),
+                            color: colorScheme.surfaceContainerHighest,
                             borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: const Color(0x33FFFFFF)),
+                            border: Border.all(
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.2,
+                              ),
+                            ),
                           ),
-                          child: const Text(
+                          child: Text(
                             'No saved builds yet.',
                             style: TextStyle(
-                              color: Colors.white70,
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.75,
+                              ),
                               fontSize: 12,
                             ),
                           ),
@@ -808,12 +868,14 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                           ),
                         ),
                       if (savedBuilds.length > visibleSavedBuilds.length)
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.only(top: 2),
                           child: Text(
                             'Showing first 5 builds.',
                             style: TextStyle(
-                              color: Colors.white54,
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.54,
+                              ),
                               fontSize: 11,
                             ),
                           ),

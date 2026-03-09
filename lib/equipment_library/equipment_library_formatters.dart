@@ -2,6 +2,7 @@ part of 'equipment_library_page.dart';
 
 extension _EquipmentLibraryFormatters on _EquipmentLibraryDataViewState {
   Color _equipmentTypeAccentColor(String type) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final String normalized = _normalizeEquipmentTypeKey(type);
     switch (normalized) {
       case '1h_sword':
@@ -9,40 +10,41 @@ extension _EquipmentLibraryFormatters on _EquipmentLibraryDataViewState {
       case 'katana':
       case 'dagger':
       case 'halberd':
-        return const Color(0xFFFFCC80);
+        return colorScheme.tertiary;
       case 'bow':
       case 'bowgun':
       case 'arrow':
-        return const Color(0xFF90CAF9);
+        return colorScheme.primary;
       case 'staff':
       case 'magic_device':
       case 'ninjutsu_scroll':
-        return const Color(0xFFB39DDB);
+        return colorScheme.secondary;
       case 'shield':
       case 'armor':
-        return const Color(0xFFA5D6A7);
+        return colorScheme.primaryContainer;
       case 'additional':
-        return const Color(0xFFFFAB91);
+        return colorScheme.tertiaryContainer;
       case 'special':
-        return const Color(0xFFFFE082);
+        return colorScheme.secondaryContainer;
       default:
-        return const Color(0xFFB0BEC5);
+        return colorScheme.onSurface.withValues(alpha: 0.75);
     }
   }
 
   Color _crystalAccentColor(String colorKey) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     switch (colorKey) {
       case 'red':
-        return const Color(0xFFE57373);
+        return colorScheme.error;
       case 'green':
-        return const Color(0xFF81C784);
+        return colorScheme.tertiary;
       case 'yellow':
-        return const Color(0xFFFFD54F);
+        return colorScheme.primary;
       case 'purple':
-        return const Color(0xFFBA68C8);
+        return colorScheme.secondary;
       case 'blue':
       default:
-        return const Color(0xFF64B5F6);
+        return colorScheme.primary;
     }
   }
 
@@ -269,9 +271,33 @@ extension _EquipmentLibraryFormatters on _EquipmentLibraryDataViewState {
     required double height,
     required String activeCategory,
   }) {
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color accentColor = _itemAccentColor(
       item: item,
       activeCategory: activeCategory,
+    );
+    final double accentLuminance = accentColor.computeLuminance();
+    final Color contrastAccent = isLight && accentLuminance > 0.62
+        ? (Color.lerp(accentColor, colorScheme.primary, 0.62) ??
+              colorScheme.primary)
+        : accentColor;
+    final Color outerFrameBorderColor =
+        Color.lerp(
+          colorScheme.outline.withValues(alpha: isLight ? 0.74 : 0.55),
+          contrastAccent,
+          isLight ? 0.44 : 0.58,
+        ) ??
+        contrastAccent.withValues(alpha: isLight ? 0.66 : 0.56);
+    final Color innerFrameBorderColor =
+        Color.lerp(
+          colorScheme.outline.withValues(alpha: isLight ? 0.8 : 0.62),
+          contrastAccent,
+          isLight ? 0.68 : 0.78,
+        ) ??
+        contrastAccent.withValues(alpha: isLight ? 0.76 : 0.64);
+    final Color innerFrameFillColor = contrastAccent.withValues(
+      alpha: isLight ? 0.26 : 0.18,
     );
     final String typeLabel = _itemTypeDisplayLabel(
       item: item,
@@ -283,13 +309,18 @@ extension _EquipmentLibraryFormatters on _EquipmentLibraryDataViewState {
       height: height,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF202020), Color(0xFF121212)],
+          colors: <Color>[
+            colorScheme.surfaceContainerHigh,
+            colorScheme.surfaceContainerHighest,
+          ],
         ),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xFF666666)),
+        border: Border.all(
+          color: colorScheme.onSurface.withValues(alpha: 0.24),
+        ),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -297,22 +328,44 @@ extension _EquipmentLibraryFormatters on _EquipmentLibraryDataViewState {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              width: height >= 120 ? 56 : 44,
-              height: height >= 120 ? 56 : 44,
+              width: height >= 120 ? 60 : 48,
+              height: height >= 120 ? 60 : 48,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: accentColor.withValues(alpha: 0.14),
-                border: Border.all(color: accentColor.withValues(alpha: 0.42)),
+                color: colorScheme.surfaceContainerHighest,
+                border: Border.all(color: outerFrameBorderColor, width: 1.45),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: colorScheme.onSurface.withValues(
+                      alpha: isLight ? 0.10 : 0.14,
+                    ),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
-              child: _buildEquipmentVisual(
-                item,
-                iconSize: height >= 120 ? 28 : 22,
-                imagePadding: height >= 120 ? 10 : 8,
-                overrideAssetPath: _itemVisualAssetPath(
-                  item: item,
-                  activeCategory: activeCategory,
+              child: Padding(
+                padding: const EdgeInsets.all(2),
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: innerFrameFillColor,
+                    border: Border.all(
+                      color: innerFrameBorderColor,
+                      width: 1.2,
+                    ),
+                  ),
+                  child: _buildEquipmentVisual(
+                    item,
+                    iconSize: height >= 120 ? 28 : 22,
+                    imagePadding: height >= 120 ? 10 : 8,
+                    overrideAssetPath: _itemVisualAssetPath(
+                      item: item,
+                      activeCategory: activeCategory,
+                    ),
+                    accentColorOverride: contrastAccent,
+                  ),
                 ),
-                accentColorOverride: accentColor,
               ),
             ),
             const SizedBox(height: 8),
@@ -322,7 +375,7 @@ extension _EquipmentLibraryFormatters on _EquipmentLibraryDataViewState {
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: accentColor,
+                color: contrastAccent,
                 fontSize: height >= 120 ? 12 : 11,
                 fontWeight: FontWeight.w700,
               ),

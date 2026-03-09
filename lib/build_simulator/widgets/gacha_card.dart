@@ -46,6 +46,7 @@ class GachaCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return FutureBuilder<AvatarGachaConfig>(
       future: AvatarGachaDataService.load(),
       builder: (BuildContext context, AsyncSnapshot<AvatarGachaConfig> snapshot) {
@@ -64,9 +65,12 @@ class GachaCard extends StatelessWidget {
 
         final AvatarGachaConfig? config = snapshot.data;
         if (config == null) {
-          return const Text(
+          return Text(
             'Avatar stat pool is unavailable.',
-            style: TextStyle(color: Colors.white70, fontSize: 12),
+            style: TextStyle(
+              color: colorScheme.onSurface.withValues(alpha: 0.75),
+              fontSize: 12,
+            ),
           );
         }
 
@@ -103,11 +107,11 @@ class GachaCard extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text(
+            Text(
               'Avatar stat pool is loaded from toram-data and applied to the build summary.',
               style: TextStyle(
                 fontSize: 11,
-                color: Colors.white70,
+                color: colorScheme.onSurface.withValues(alpha: 0.75),
                 height: 1.35,
               ),
             ),
@@ -174,20 +178,21 @@ class GachaCard extends StatelessWidget {
     required AvatarGachaConfig config,
     required _GachaSectionData section,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF111111),
+        color: colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0x33FFFFFF)),
+        border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             section.title,
-            style: const TextStyle(
-              color: Color(0xFFFFE082),
+            style: TextStyle(
+              color: colorScheme.primary,
               fontSize: 12,
               fontWeight: FontWeight.w700,
               letterSpacing: 0.3,
@@ -218,6 +223,7 @@ class GachaCard extends StatelessWidget {
     required _GachaSectionData section,
     required int slotIndex,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final String currentValue = section.values[slotIndex];
     final bool isThirdSlot = slotIndex == 2;
     final bool requiresSecondSlot = config.slot3RequiresSlot2 && isThirdSlot;
@@ -267,7 +273,10 @@ class GachaCard extends StatelessWidget {
       children: <Widget>[
         Text(
           'Slot ${slotIndex + 1}',
-          style: const TextStyle(color: Colors.white70, fontSize: 12),
+          style: TextStyle(
+            color: colorScheme.onSurface.withValues(alpha: 0.75),
+            fontSize: 12,
+          ),
         ),
         const SizedBox(height: 4),
         InkWell(
@@ -296,13 +305,13 @@ class GachaCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
             decoration: BoxDecoration(
               color: isEnabled
-                  ? const Color(0xFF0A0A0A)
-                  : const Color(0xFF0A0A0A).withValues(alpha: 0.55),
+                  ? colorScheme.surfaceContainerHighest
+                  : colorScheme.surfaceContainerHighest.withValues(alpha: 0.55),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
                 color: isEnabled
-                    ? const Color(0x33FFFFFF)
-                    : const Color(0x22FFFFFF),
+                    ? colorScheme.onSurface.withValues(alpha: 0.2)
+                    : colorScheme.onSurface.withValues(alpha: 0.14),
               ),
             ),
             child: Row(
@@ -314,8 +323,8 @@ class GachaCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: currentValue.isEmpty
-                          ? Colors.white70
-                          : Colors.white,
+                          ? colorScheme.onSurface.withValues(alpha: 0.75)
+                          : colorScheme.onSurface,
                       fontSize: 12,
                     ),
                   ),
@@ -323,7 +332,9 @@ class GachaCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 Icon(
                   Icons.arrow_drop_down,
-                  color: isEnabled ? Colors.white70 : Colors.white24,
+                  color: isEnabled
+                      ? colorScheme.onSurface.withValues(alpha: 0.75)
+                      : colorScheme.onSurface.withValues(alpha: 0.24),
                   size: 20,
                 ),
               ],
@@ -331,11 +342,14 @@ class GachaCard extends StatelessWidget {
           ),
         ),
         if (requiresSecondSlot && !isEnabled)
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(top: 4, left: 2),
             child: Text(
               'Unlock by choosing Slot 2 first.',
-              style: TextStyle(color: Colors.white54, fontSize: 10),
+              style: TextStyle(
+                color: colorScheme.onSurface.withValues(alpha: 0.54),
+                fontSize: 10,
+              ),
             ),
           ),
       ],
@@ -355,6 +369,7 @@ class GachaCard extends StatelessWidget {
         return StatefulBuilder(
           builder:
               (BuildContext context, void Function(VoidCallback fn) setState) {
+                final ColorScheme colorScheme = Theme.of(context).colorScheme;
                 final String normalizedQuery = query.trim().toLowerCase();
                 final bool showNone =
                     normalizedQuery.isEmpty ||
@@ -367,14 +382,16 @@ class GachaCard extends StatelessWidget {
                     .toList(growable: false);
 
                 return Dialog(
-                  backgroundColor: const Color(0xFF0D0D0D),
+                  backgroundColor: colorScheme.surfaceContainerHigh,
                   insetPadding: const EdgeInsets.symmetric(
                     horizontal: 20,
                     vertical: 20,
                   ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
-                    side: const BorderSide(color: Color(0x33FFFFFF)),
+                    side: BorderSide(
+                      color: colorScheme.onSurface.withValues(alpha: 0.2),
+                    ),
                   ),
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(
@@ -391,8 +408,8 @@ class GachaCard extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   title,
-                                  style: const TextStyle(
-                                    color: Colors.white,
+                                  style: TextStyle(
+                                    color: colorScheme.onSurface,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -400,9 +417,11 @@ class GachaCard extends StatelessWidget {
                               ),
                               IconButton(
                                 onPressed: () => Navigator.of(context).pop(),
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.close,
-                                  color: Colors.white70,
+                                  color: colorScheme.onSurface.withValues(
+                                    alpha: 0.75,
+                                  ),
                                 ),
                                 tooltip: 'Close',
                               ),
@@ -418,39 +437,51 @@ class GachaCard extends StatelessWidget {
                                 query = value;
                               });
                             },
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: TextStyle(
+                              color: colorScheme.onSurface,
                               fontSize: 13,
                             ),
                             decoration: InputDecoration(
                               hintText: 'Search gacha stat...',
-                              hintStyle: const TextStyle(color: Colors.white54),
-                              prefixIcon: const Icon(
+                              hintStyle: TextStyle(
+                                color: colorScheme.onSurface.withValues(
+                                  alpha: 0.54,
+                                ),
+                              ),
+                              prefixIcon: Icon(
                                 Icons.search,
-                                color: Colors.white70,
+                                color: colorScheme.onSurface.withValues(
+                                  alpha: 0.75,
+                                ),
                               ),
                               filled: true,
-                              fillColor: const Color(0xFF131313),
+                              fillColor: colorScheme.surfaceContainerHighest,
                               contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 12,
                                 vertical: 10,
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(
-                                  color: Color(0x33FFFFFF),
+                                borderSide: BorderSide(
+                                  color: colorScheme.onSurface.withValues(
+                                    alpha: 0.2,
+                                  ),
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(
-                                  color: Color(0x33FFFFFF),
+                                borderSide: BorderSide(
+                                  color: colorScheme.onSurface.withValues(
+                                    alpha: 0.2,
+                                  ),
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(
-                                  color: Color(0x66FFE082),
+                                borderSide: BorderSide(
+                                  color: colorScheme.primary.withValues(
+                                    alpha: 0.7,
+                                  ),
                                 ),
                               ),
                             ),
@@ -462,6 +493,7 @@ class GachaCard extends StatelessWidget {
                             children: <Widget>[
                               if (showNone)
                                 _buildOptionTile(
+                                  context: context,
                                   title: 'None',
                                   subtitle: 'Clear this slot',
                                   selected: currentValue.isEmpty,
@@ -469,6 +501,7 @@ class GachaCard extends StatelessWidget {
                                 ),
                               ...visibleOptions.map((AvatarStatOption option) {
                                 return _buildOptionTile(
+                                  context: context,
                                   title: option.label,
                                   subtitle: option.statKey,
                                   selected: option.id == currentValue,
@@ -484,16 +517,20 @@ class GachaCard extends StatelessWidget {
                                     vertical: 14,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFF151515),
+                                    color: colorScheme.surfaceContainerHighest,
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(
-                                      color: const Color(0x33FFFFFF),
+                                      color: colorScheme.onSurface.withValues(
+                                        alpha: 0.2,
+                                      ),
                                     ),
                                   ),
-                                  child: const Text(
+                                  child: Text(
                                     'No results found.',
                                     style: TextStyle(
-                                      color: Colors.white70,
+                                      color: colorScheme.onSurface.withValues(
+                                        alpha: 0.75,
+                                      ),
                                       fontSize: 12,
                                     ),
                                   ),
@@ -526,11 +563,13 @@ class GachaCard extends StatelessWidget {
   }
 
   Widget _buildOptionTile({
+    required BuildContext context,
     required String title,
     required String subtitle,
     required bool selected,
     required VoidCallback onTap,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(8),
@@ -538,10 +577,14 @@ class GachaCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
-          color: selected ? const Color(0xFF1F1F1F) : const Color(0xFF151515),
+          color: selected
+              ? colorScheme.surfaceContainerHighest
+              : colorScheme.surfaceContainerHigh,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: selected ? const Color(0x66FFE082) : const Color(0x33FFFFFF),
+            color: selected
+                ? colorScheme.primary.withValues(alpha: 0.7)
+                : colorScheme.onSurface.withValues(alpha: 0.2),
           ),
         ),
         child: Row(
@@ -553,7 +596,9 @@ class GachaCard extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      color: selected ? const Color(0xFFFFE082) : Colors.white,
+                      color: selected
+                          ? colorScheme.primary
+                          : colorScheme.onSurface,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),
@@ -561,13 +606,16 @@ class GachaCard extends StatelessWidget {
                   const SizedBox(height: 2),
                   Text(
                     subtitle,
-                    style: const TextStyle(color: Colors.white54, fontSize: 10),
+                    style: TextStyle(
+                      color: colorScheme.onSurface.withValues(alpha: 0.54),
+                      fontSize: 10,
+                    ),
                   ),
                 ],
               ),
             ),
             if (selected)
-              const Icon(Icons.check, color: Color(0xFFFFE082), size: 16),
+              Icon(Icons.check, color: colorScheme.primary, size: 16),
           ],
         ),
       ),

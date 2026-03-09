@@ -4,10 +4,12 @@ import '../skill_menu_page.dart';
 
 class SkillFilterWidgets {
   static Widget buildCustomChip({
+    required BuildContext context,
     required String label,
     required bool selected,
     required VoidCallback onSelected,
   }) {
+    final ColorScheme scheme = Theme.of(context).colorScheme;
     return InkWell(
       onTap: onSelected,
       borderRadius: BorderRadius.circular(20),
@@ -16,20 +18,28 @@ class SkillFilterWidgets {
         decoration: BoxDecoration(
           gradient: selected
               ? LinearGradient(
-                  colors: [const Color(0xFF4A4A4A), const Color(0xFF3A3A3A)],
+                  colors: <Color>[
+                    scheme.primaryContainer,
+                    scheme.primaryContainer.withValues(alpha: 0.82),
+                  ],
                 )
               : LinearGradient(
-                  colors: [const Color(0xFF2A2A2A), const Color(0xFF1A1A1A)],
+                  colors: <Color>[
+                    scheme.surfaceContainerHigh,
+                    scheme.surfaceContainerHighest,
+                  ],
                 ),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: selected ? const Color(0xFF888888) : const Color(0xFF666666),
+            color: selected
+                ? scheme.primary.withValues(alpha: 0.7)
+                : scheme.onSurface.withValues(alpha: 0.32),
             width: selected ? 2 : 1,
           ),
           boxShadow: selected
               ? [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.4),
+                    color: scheme.onSurface.withValues(alpha: 0.24),
                     blurRadius: 4,
                     offset: const Offset(0, 2),
                   ),
@@ -39,18 +49,11 @@ class SkillFilterWidgets {
         child: Text(
           label,
           style: TextStyle(
-            color: selected ? Colors.white : Colors.white70,
+            color: selected
+                ? scheme.onPrimaryContainer
+                : scheme.onSurface.withValues(alpha: 0.82),
             fontSize: 12,
             fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
-            shadows: selected
-                ? [
-                    const Shadow(
-                      color: Colors.black,
-                      offset: Offset(1, 1),
-                      blurRadius: 1,
-                    ),
-                  ]
-                : null,
           ),
         ),
       ),
@@ -58,6 +61,7 @@ class SkillFilterWidgets {
   }
 
   static Widget buildCategoryFilter(
+    BuildContext context,
     SkillLibraryData data,
     String selectedCategory,
     List<String> availableCategories,
@@ -83,6 +87,7 @@ class SkillFilterWidgets {
                 ? data.totalSkills
                 : data.totalSkillsInCategory(category);
             return buildCustomChip(
+              context: context,
               label: '$label ($count)',
               selected: selected == category,
               onSelected: () => onCategorySelected(category),
@@ -93,6 +98,7 @@ class SkillFilterWidgets {
   }
 
   static Widget buildTreeFilter(
+    BuildContext context,
     SkillLibraryData data,
     String selectedCategory,
     String selectedTree,
@@ -118,6 +124,7 @@ class SkillFilterWidgets {
                       : data.totalSkillsInCategory(selectedCategory))
                 : (data.skillsByTree[tree]?.length ?? 0);
             return buildCustomChip(
+              context: context,
               label: '$label ($count)',
               selected: selected == tree,
               onSelected: () => onTreeSelected(tree),
@@ -128,11 +135,13 @@ class SkillFilterWidgets {
   }
 
   static Widget buildMetaPanel(
+    BuildContext context,
     SkillLibraryData data,
     int resultCount,
     int currentPage,
     int totalPages,
   ) {
+    final ColorScheme scheme = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(10),
@@ -140,13 +149,19 @@ class SkillFilterWidgets {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [const Color(0xFF2A2A2A), const Color(0xFF1A1A1A)],
+          colors: <Color>[
+            scheme.surfaceContainerHigh,
+            scheme.surfaceContainerHighest,
+          ],
         ),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF666666), width: 1),
+        border: Border.all(
+          color: scheme.onSurface.withValues(alpha: 0.32),
+          width: 1,
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.6),
+            color: scheme.onSurface.withValues(alpha: 0.26),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -157,8 +172,8 @@ class SkillFilterWidgets {
         children: [
           Text(
             'Skill Library',
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: scheme.onSurface,
               fontSize: 16,
               fontWeight: FontWeight.w700,
             ),
@@ -166,7 +181,10 @@ class SkillFilterWidgets {
           const SizedBox(height: 4),
           Text(
             'Total Skills: ${data.totalSkills} | Showing: $resultCount | Page: $currentPage/$totalPages',
-            style: const TextStyle(color: Colors.white70, fontSize: 12),
+            style: TextStyle(
+              color: scheme.onSurface.withValues(alpha: 0.75),
+              fontSize: 12,
+            ),
           ),
         ],
       ),

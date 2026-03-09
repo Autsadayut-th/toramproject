@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import '../map_library/map_library_page.dart';
 import '../monster_library/monster_library_page.dart';
 import '../shared/app_mobile_bottom_navigation_bar.dart';
+import '../shared/app_theme_controller.dart';
 import '../shared/app_navigation_drawer.dart';
 
 class SettingsDataPage extends StatefulWidget {
@@ -127,11 +128,13 @@ class _SettingsDataPageState extends State<SettingsDataPage> {
   }
 
   Future<void> _confirmClearAllData() async {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
     final bool confirmed =
         await showDialog<bool>(
           context: context,
           builder: (BuildContext context) => AlertDialog(
-            backgroundColor: const Color(0xFF2A2A2A),
+            backgroundColor: colorScheme.surfaceContainerHigh,
             title: const Text('Clear All Data'),
             content: const Text(
               'This action clears current build values, saved builds, and display settings.',
@@ -144,7 +147,8 @@ class _SettingsDataPageState extends State<SettingsDataPage> {
               FilledButton(
                 onPressed: () => Navigator.of(context).pop(true),
                 style: FilledButton.styleFrom(
-                  backgroundColor: const Color(0xFF4A4A4A),
+                  backgroundColor: colorScheme.primary,
+                  foregroundColor: colorScheme.onPrimary,
                 ),
                 child: const Text('Clear'),
               ),
@@ -178,8 +182,11 @@ class _SettingsDataPageState extends State<SettingsDataPage> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
     final bool isMobile = MediaQuery.sizeOf(context).width < 1024;
     final bool isEmbeddedInShell = widget.onNavigate != null;
+    final bool isLightTheme = AppThemeController.instance.isLightMode;
 
     void onSelectMobileNav(AppNavigationPage page) {
       if (page == AppNavigationPage.settings) {
@@ -200,12 +207,14 @@ class _SettingsDataPageState extends State<SettingsDataPage> {
               children: [
                 Text(
                   'Saved builds: ${widget.savedBuilds.length}',
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: colorScheme.onSurface),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   'Equipment cache size: ${widget.equipmentCacheCount}',
-                  style: const TextStyle(color: Colors.white70),
+                  style: TextStyle(
+                    color: colorScheme.onSurface.withValues(alpha: 0.75),
+                  ),
                 ),
               ],
             ),
@@ -216,9 +225,11 @@ class _SettingsDataPageState extends State<SettingsDataPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const Text(
+                Text(
                   'Open dedicated pages for Monster and Map references.',
-                  style: TextStyle(color: Colors.white70),
+                  style: TextStyle(
+                    color: colorScheme.onSurface.withValues(alpha: 0.75),
+                  ),
                 ),
                 const SizedBox(height: 10),
                 Wrap(
@@ -245,13 +256,15 @@ class _SettingsDataPageState extends State<SettingsDataPage> {
             title: 'Display',
             child: SwitchListTile(
               contentPadding: EdgeInsets.zero,
-              title: const Text(
+              title: Text(
                 'Show recommendations panel',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: colorScheme.onSurface),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 'Control visibility of AI recommendations in the simulator.',
-                style: TextStyle(color: Colors.white70),
+                style: TextStyle(
+                  color: colorScheme.onSurface.withValues(alpha: 0.75),
+                ),
               ),
               value: _showRecommendations,
               onChanged: (bool value) {
@@ -259,6 +272,29 @@ class _SettingsDataPageState extends State<SettingsDataPage> {
                   _showRecommendations = value;
                 });
                 widget.onShowRecommendationsChanged(value);
+              },
+            ),
+          ),
+          const SizedBox(height: 14),
+          _panel(
+            title: 'Theme',
+            child: SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text(
+                'Use light theme (white)',
+                style: TextStyle(color: colorScheme.onSurface),
+              ),
+              subtitle: Text(
+                'Turn off to use dark theme (black).',
+                style: TextStyle(
+                  color: colorScheme.onSurface.withValues(alpha: 0.75),
+                ),
+              ),
+              value: isLightTheme,
+              onChanged: (bool value) {
+                AppThemeController.instance.saveThemeModeUnawaited(
+                  value ? ThemeMode.light : ThemeMode.dark,
+                );
               },
             ),
           ),
@@ -293,16 +329,18 @@ class _SettingsDataPageState extends State<SettingsDataPage> {
                 TextField(
                   controller: _jsonController,
                   maxLines: 12,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontFamily: 'monospace',
                     fontSize: 12,
-                    color: Colors.white,
+                    color: colorScheme.onSurface,
                   ),
                   decoration: InputDecoration(
                     hintText: 'Paste build JSON here...',
-                    hintStyle: const TextStyle(color: Colors.white54),
+                    hintStyle: TextStyle(
+                      color: colorScheme.onSurface.withValues(alpha: 0.54),
+                    ),
                     filled: true,
-                    fillColor: const Color(0xFF2A2A2A),
+                    fillColor: colorScheme.surfaceContainerHighest,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -319,8 +357,8 @@ class _SettingsDataPageState extends State<SettingsDataPage> {
               child: FilledButton.icon(
                 onPressed: _confirmClearAllData,
                 style: FilledButton.styleFrom(
-                  backgroundColor: const Color(0xFF4A4A4A),
-                  foregroundColor: Colors.white,
+                  backgroundColor: colorScheme.errorContainer,
+                  foregroundColor: colorScheme.onErrorContainer,
                 ),
                 icon: const Icon(Icons.delete_forever),
                 label: const Text('Clear All Data'),
@@ -336,7 +374,7 @@ class _SettingsDataPageState extends State<SettingsDataPage> {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF000000),
+      backgroundColor: colorScheme.surface,
       drawer: isMobile
           ? null
           : AppNavigationDrawer(
@@ -386,14 +424,15 @@ class _SettingsDataPageState extends State<SettingsDataPage> {
   }
 
   Widget _panel({required String title, required Widget child}) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFF2A2A2A),
+        color: colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: const Color(0xFFFFFFFF).withValues(alpha: 0.16),
+          color: colorScheme.onSurface.withValues(alpha: 0.16),
         ),
       ),
       child: Column(
@@ -401,8 +440,8 @@ class _SettingsDataPageState extends State<SettingsDataPage> {
         children: [
           Text(
             title,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: colorScheme.onSurface,
               fontWeight: FontWeight.w700,
               fontSize: 14,
             ),

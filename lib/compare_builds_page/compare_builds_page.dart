@@ -247,6 +247,7 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Map<String, dynamic>? firstBuild = _buildById(_firstBuildId);
     final Map<String, dynamic>? secondBuild = _buildById(_secondBuildId);
     final bool isMobile = MediaQuery.sizeOf(context).width < 1024;
@@ -271,241 +272,254 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
       widget.onNavigate?.call(page);
     }
 
-    final Widget content = _builds.length < 2
-        ? const Center(
-            child: Padding(
-              padding: EdgeInsets.all(24),
-              child: Text(
-                'At least 2 saved builds are required to compare.',
-                style: TextStyle(color: Colors.white70),
-                textAlign: TextAlign.center,
+    final Widget content = ColoredBox(
+      color: colorScheme.surface,
+      child: _builds.length < 2
+          ? Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Text(
+                  'At least 2 saved builds are required to compare.',
+                  style: TextStyle(
+                    color: colorScheme.onSurface.withValues(alpha: 0.75),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
-            ),
-          )
-        : SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 1160),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    LayoutBuilder(
-                      builder:
-                          (BuildContext context, BoxConstraints constraints) {
-                            final bool stackSelectors =
-                                constraints.maxWidth < 860;
-                            final Widget selectorA = _buildSelector(
-                              label: 'Build A',
-                              selectedId: _firstBuildId,
-                              onChanged: (String? value) {
-                                setState(() {
-                                  _firstBuildId = value;
-                                });
-                              },
-                            );
-                            final Widget selectorB = _buildSelector(
-                              label: 'Build B',
-                              selectedId: _secondBuildId,
-                              onChanged: (String? value) {
-                                setState(() {
-                                  _secondBuildId = value;
-                                });
-                              },
-                            );
-                            if (stackSelectors) {
-                              return Column(
+            )
+          : SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1160),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      LayoutBuilder(
+                        builder:
+                            (BuildContext context, BoxConstraints constraints) {
+                              final bool stackSelectors =
+                                  constraints.maxWidth < 860;
+                              final Widget selectorA = _buildSelector(
+                                label: 'Build A',
+                                selectedId: _firstBuildId,
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    _firstBuildId = value;
+                                  });
+                                },
+                              );
+                              final Widget selectorB = _buildSelector(
+                                label: 'Build B',
+                                selectedId: _secondBuildId,
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    _secondBuildId = value;
+                                  });
+                                },
+                              );
+                              if (stackSelectors) {
+                                return Column(
+                                  children: <Widget>[
+                                    selectorA,
+                                    const SizedBox(height: 10),
+                                    selectorB,
+                                  ],
+                                );
+                              }
+                              return Row(
                                 children: <Widget>[
-                                  selectorA,
-                                  const SizedBox(height: 10),
-                                  selectorB,
+                                  Expanded(child: selectorA),
+                                  const SizedBox(width: 12),
+                                  Expanded(child: selectorB),
                                 ],
                               );
-                            }
-                            return Row(
-                              children: <Widget>[
-                                Expanded(child: selectorA),
-                                const SizedBox(width: 12),
-                                Expanded(child: selectorB),
-                              ],
-                            );
-                          },
-                    ),
-                    const SizedBox(height: 14),
-                    Wrap(
-                      spacing: 10,
-                      runSpacing: 10,
-                      children: [
-                        OutlinedButton.icon(
-                          onPressed: _swapBuildSelection,
-                          icon: const Icon(Icons.swap_horiz),
-                          label: const Text('Swap A/B'),
-                        ),
-                        FilledButton.tonalIcon(
-                          onPressed: firstBuild == null
-                              ? null
-                              : () {
-                                  widget.onLoadBuild(_firstBuildId!);
-                                  if (widget.onNavigate != null) {
-                                    widget.onNavigate!(AppNavigationPage.build);
-                                    return;
-                                  }
-                                  Navigator.of(context).pop();
-                                },
-                          icon: const Icon(Icons.play_arrow),
-                          label: const Text('Load Build A'),
-                        ),
-                        FilledButton.tonalIcon(
-                          onPressed: secondBuild == null
-                              ? null
-                              : () {
-                                  widget.onLoadBuild(_secondBuildId!);
-                                  if (widget.onNavigate != null) {
-                                    widget.onNavigate!(AppNavigationPage.build);
-                                    return;
-                                  }
-                                  Navigator.of(context).pop();
-                                },
-                          icon: const Icon(Icons.play_arrow),
-                          label: const Text('Load Build B'),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 14),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF2A2A2A),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: const Color(
-                            0xFFFFFFFF,
-                          ).withValues(alpha: 0.16),
-                        ),
+                            },
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      const SizedBox(height: 14),
+                      Wrap(
+                        spacing: 10,
+                        runSpacing: 10,
                         children: [
-                          Text(
-                            _displayName(
-                              firstBuild ?? _builds.first,
-                              firstBuild == null
-                                  ? 0
-                                  : _builds.indexOf(firstBuild),
-                            ),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                            ),
+                          OutlinedButton.icon(
+                            onPressed: _swapBuildSelection,
+                            icon: const Icon(Icons.swap_horiz),
+                            label: const Text('Swap A/B'),
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'Main: ${_slotLabel(firstBuild, 'mainWeaponId')}  '
-                            'Sub: ${_slotLabel(firstBuild, 'subWeaponId')}  '
-                            'Armor: ${_slotLabel(firstBuild, 'armorId')}',
-                            style: const TextStyle(
-                              color: Colors.white70,
-                              fontSize: 12,
-                            ),
+                          FilledButton.tonalIcon(
+                            onPressed: firstBuild == null
+                                ? null
+                                : () {
+                                    widget.onLoadBuild(_firstBuildId!);
+                                    if (widget.onNavigate != null) {
+                                      widget.onNavigate!(
+                                        AppNavigationPage.build,
+                                      );
+                                      return;
+                                    }
+                                    Navigator.of(context).pop();
+                                  },
+                            icon: const Icon(Icons.play_arrow),
+                            label: const Text('Load Build A'),
                           ),
-                          const SizedBox(height: 10),
-                          Text(
-                            _displayName(
-                              secondBuild ?? _builds[1],
-                              secondBuild == null
-                                  ? 1
-                                  : _builds.indexOf(secondBuild),
-                            ),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'Main: ${_slotLabel(secondBuild, 'mainWeaponId')}  '
-                            'Sub: ${_slotLabel(secondBuild, 'subWeaponId')}  '
-                            'Armor: ${_slotLabel(secondBuild, 'armorId')}',
-                            style: const TextStyle(
-                              color: Colors.white70,
-                              fontSize: 12,
-                            ),
+                          FilledButton.tonalIcon(
+                            onPressed: secondBuild == null
+                                ? null
+                                : () {
+                                    widget.onLoadBuild(_secondBuildId!);
+                                    if (widget.onNavigate != null) {
+                                      widget.onNavigate!(
+                                        AppNavigationPage.build,
+                                      );
+                                      return;
+                                    }
+                                    Navigator.of(context).pop();
+                                  },
+                            icon: const Icon(Icons.play_arrow),
+                            label: const Text('Load Build B'),
                           ),
                         ],
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: <Widget>[
-                        _summaryChip(
-                          icon: Icons.compare_arrows,
-                          label: 'Different Stats',
-                          value: '$differenceCount/${_compareKeys.length}',
+                      const SizedBox(height: 14),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: colorScheme.surfaceContainerHigh,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: colorScheme.onSurface.withValues(
+                              alpha: 0.16,
+                            ),
+                          ),
                         ),
-                        _summaryChip(
-                          icon: Icons.arrow_back,
-                          label: 'Build A Leads',
-                          value: '$buildALeadCount',
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              _displayName(
+                                firstBuild ?? _builds.first,
+                                firstBuild == null
+                                    ? 0
+                                    : _builds.indexOf(firstBuild),
+                              ),
+                              style: TextStyle(
+                                color: colorScheme.onSurface,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'Main: ${_slotLabel(firstBuild, 'mainWeaponId')}  '
+                              'Sub: ${_slotLabel(firstBuild, 'subWeaponId')}  '
+                              'Armor: ${_slotLabel(firstBuild, 'armorId')}',
+                              style: TextStyle(
+                                color: colorScheme.onSurface.withValues(
+                                  alpha: 0.75,
+                                ),
+                                fontSize: 12,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              _displayName(
+                                secondBuild ?? _builds[1],
+                                secondBuild == null
+                                    ? 1
+                                    : _builds.indexOf(secondBuild),
+                              ),
+                              style: TextStyle(
+                                color: colorScheme.onSurface,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'Main: ${_slotLabel(secondBuild, 'mainWeaponId')}  '
+                              'Sub: ${_slotLabel(secondBuild, 'subWeaponId')}  '
+                              'Armor: ${_slotLabel(secondBuild, 'armorId')}',
+                              style: TextStyle(
+                                color: colorScheme.onSurface.withValues(
+                                  alpha: 0.75,
+                                ),
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
                         ),
-                        _summaryChip(
-                          icon: Icons.arrow_forward,
-                          label: 'Build B Leads',
-                          value: '$buildBLeadCount',
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 14),
-                    _buildCompareRadarCard(
-                      firstBuild: firstBuild,
-                      secondBuild: secondBuild,
-                    ),
-                    const SizedBox(height: 14),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: <Widget>[
-                        FilterChip(
-                          label: const Text('Only Differences'),
-                          selected: _showOnlyDifferences,
-                          onSelected: (bool selected) {
-                            setState(() {
-                              _showOnlyDifferences = selected;
-                            });
-                          },
-                        ),
-                        FilterChip(
-                          label: const Text('Sort By Delta'),
-                          selected: _sortByDifference,
-                          onSelected: (bool selected) {
-                            setState(() {
-                              _sortByDifference = selected;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    _buildCenteredCompareTable(
-                      firstBuild: firstBuild,
-                      secondBuild: secondBuild,
-                      showOnlyDifferences: _showOnlyDifferences,
-                      sortByDifference: _sortByDifference,
-                    ),
-                  ],
+                      ),
+                      const SizedBox(height: 10),
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: <Widget>[
+                          _summaryChip(
+                            icon: Icons.compare_arrows,
+                            label: 'Different Stats',
+                            value: '$differenceCount/${_compareKeys.length}',
+                          ),
+                          _summaryChip(
+                            icon: Icons.arrow_back,
+                            label: 'Build A Leads',
+                            value: '$buildALeadCount',
+                          ),
+                          _summaryChip(
+                            icon: Icons.arrow_forward,
+                            label: 'Build B Leads',
+                            value: '$buildBLeadCount',
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 14),
+                      _buildCompareRadarCard(
+                        firstBuild: firstBuild,
+                        secondBuild: secondBuild,
+                      ),
+                      const SizedBox(height: 14),
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: <Widget>[
+                          FilterChip(
+                            label: const Text('Only Differences'),
+                            selected: _showOnlyDifferences,
+                            onSelected: (bool selected) {
+                              setState(() {
+                                _showOnlyDifferences = selected;
+                              });
+                            },
+                          ),
+                          FilterChip(
+                            label: const Text('Sort By Delta'),
+                            selected: _sortByDifference,
+                            onSelected: (bool selected) {
+                              setState(() {
+                                _sortByDifference = selected;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      _buildCenteredCompareTable(
+                        firstBuild: firstBuild,
+                        secondBuild: secondBuild,
+                        showOnlyDifferences: _showOnlyDifferences,
+                        sortByDifference: _sortByDifference,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          );
+    );
 
     if (isEmbeddedInShell) {
       return content;
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF000000),
+      backgroundColor: colorScheme.surface,
       drawer: isMobile
           ? null
           : AppNavigationDrawer(
@@ -533,6 +547,8 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
               },
             ),
       appBar: AppBar(
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
         automaticallyImplyLeading: false,
         leading: isMobile
             ? null
@@ -559,17 +575,18 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
     required String? selectedId,
     required ValueChanged<String?> onChanged,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return InputDecorator(
       decoration: InputDecoration(
         labelText: label,
         filled: true,
-        fillColor: const Color(0xFF101010),
+        fillColor: colorScheme.surfaceContainerHighest,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           value: selectedId,
-          dropdownColor: const Color(0xFF101010),
+          dropdownColor: colorScheme.surfaceContainerHighest,
           isExpanded: true,
           items: List<DropdownMenuItem<String>>.generate(_builds.length, (
             int i,
@@ -594,30 +611,37 @@ class _CompareBuildsPageState extends State<CompareBuildsPage> {
     required String label,
     required String value,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(0xFF141414),
+        color: colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
+        border: Border.all(
+          color: colorScheme.onSurface.withValues(alpha: 0.18),
+        ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Icon(icon, size: 14, color: Colors.white70),
+          Icon(
+            icon,
+            size: 14,
+            color: colorScheme.onSurface.withValues(alpha: 0.75),
+          ),
           const SizedBox(width: 6),
           Text(
             '$label: ',
-            style: const TextStyle(
-              color: Colors.white70,
+            style: TextStyle(
+              color: colorScheme.onSurface.withValues(alpha: 0.75),
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),
           ),
           Text(
             value,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: colorScheme.onSurface,
               fontSize: 12,
               fontWeight: FontWeight.w700,
             ),

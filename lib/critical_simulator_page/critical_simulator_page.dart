@@ -131,11 +131,12 @@ class _CriticalSimulatorPageState extends State<CriticalSimulatorPage> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: const Color(0xFF000000),
+      backgroundColor: colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF000000),
-        foregroundColor: Colors.white,
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
         title: const Text('Critical Simulator'),
       ),
       body: SingleChildScrollView(
@@ -154,17 +155,19 @@ class _CriticalSimulatorPageState extends State<CriticalSimulatorPage> {
                   width: double.infinity,
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF0F1216),
+                    color: colorScheme.surfaceContainerHigh,
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: const Color(0x33FFFFFF)),
+                    border: Border.all(
+                      color: colorScheme.onSurface.withValues(alpha: 0.2),
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
                         'Rule source: $_rulesAssetPath',
-                        style: const TextStyle(
-                          color: Colors.white70,
+                        style: TextStyle(
+                          color: colorScheme.onSurface.withValues(alpha: 0.75),
                           fontSize: 12,
                         ),
                       ),
@@ -172,8 +175,8 @@ class _CriticalSimulatorPageState extends State<CriticalSimulatorPage> {
                         const SizedBox(height: 6),
                         Text(
                           _rulesError!,
-                          style: const TextStyle(
-                            color: Color(0xFFFFB3B3),
+                          style: TextStyle(
+                            color: colorScheme.error,
                             fontSize: 12,
                           ),
                         ),
@@ -190,7 +193,9 @@ class _CriticalSimulatorPageState extends State<CriticalSimulatorPage> {
                       Text(
                         'Critical Rate = ${_formatNumber(_rules.criticalRateBase)} + '
                         '(CRT x ${_formatNumber(_rules.crtRatio)}) + Flat + Percent',
-                        style: const TextStyle(color: Colors.white70),
+                        style: TextStyle(
+                          color: colorScheme.onSurface.withValues(alpha: 0.75),
+                        ),
                       ),
                       const SizedBox(height: 12),
                       Wrap(
@@ -244,7 +249,9 @@ class _CriticalSimulatorPageState extends State<CriticalSimulatorPage> {
                       Text(
                         'Critical Damage = ${_formatNumber(_rules.criticalDamageBase)} + '
                         '(STR x ${_formatNumber(_rules.strRatio)}) + Flat + Percent',
-                        style: const TextStyle(color: Colors.white70),
+                        style: TextStyle(
+                          color: colorScheme.onSurface.withValues(alpha: 0.75),
+                        ),
                       ),
                       const SizedBox(height: 12),
                       Wrap(
@@ -334,21 +341,22 @@ class _SectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFF0D0F12),
+        color: colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0x33FFFFFF)),
+        border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             title,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: colorScheme.onSurface,
               fontSize: 16,
               fontWeight: FontWeight.w700,
             ),
@@ -376,29 +384,36 @@ class _NumberField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return SizedBox(
       width: width,
       child: TextField(
         controller: controller,
         keyboardType: const TextInputType.numberWithOptions(decimal: true),
         onChanged: onChanged,
-        style: const TextStyle(color: Colors.white),
+        style: TextStyle(color: colorScheme.onSurface),
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: const TextStyle(color: Colors.white70),
+          labelStyle: TextStyle(
+            color: colorScheme.onSurface.withValues(alpha: 0.75),
+          ),
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 12,
             vertical: 12,
           ),
           filled: true,
-          fillColor: const Color(0xFF0A0F14),
+          fillColor: colorScheme.surfaceContainerHighest,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(color: Color(0x44FFFFFF)),
+            borderSide: BorderSide(
+              color: colorScheme.onSurface.withValues(alpha: 0.24),
+            ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(color: Color(0x66FFFFFF)),
+            borderSide: BorderSide(
+              color: colorScheme.onSurface.withValues(alpha: 0.45),
+            ),
           ),
         ),
       ),
@@ -419,26 +434,30 @@ class _ResultBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       constraints: const BoxConstraints(minWidth: 220),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: const Color(0xFF121821),
+        color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: const Color(0x33FFFFFF)),
+        border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             label,
-            style: const TextStyle(color: Colors.white70, fontSize: 12),
+            style: TextStyle(
+              color: colorScheme.onSurface.withValues(alpha: 0.75),
+              fontSize: 12,
+            ),
           ),
           const SizedBox(height: 4),
           Text(
             '$value$suffix',
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: colorScheme.onSurface,
               fontSize: 18,
               fontWeight: FontWeight.w700,
             ),

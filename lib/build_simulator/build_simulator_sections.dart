@@ -2,15 +2,18 @@ part of 'build_simulator_page.dart';
 
 extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
   BoxDecoration _panelDecoration() {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
+    final bool isLight = theme.brightness == Brightness.light;
     return BoxDecoration(
-      color: const Color(0xFF0D0D0D).withValues(alpha: 0.86),
+      color: colorScheme.surfaceContainerHigh,
       borderRadius: BorderRadius.circular(16),
       border: Border.all(
-        color: const Color(0xFFFFFFFF).withValues(alpha: 0.16),
+        color: colorScheme.onSurface.withValues(alpha: isLight ? 0.24 : 0.16),
       ),
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withValues(alpha: 0.18),
+          color: colorScheme.onSurface.withValues(alpha: 0.12),
           blurRadius: 14,
           offset: const Offset(0, 6),
         ),
@@ -19,6 +22,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
   }
 
   Widget _sectionTitle(IconData iconData, String title) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Row(
       children: [
         Container(
@@ -26,9 +30,9 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
           height: 30,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: const Color(0xFF1A1A1A).withValues(alpha: 0.9),
+            color: colorScheme.surfaceContainerHighest,
           ),
-          child: Icon(iconData, color: const Color(0xFFFFFFFF), size: 17),
+          child: Icon(iconData, color: colorScheme.onSurface, size: 17),
         ),
         const SizedBox(width: 10),
         Expanded(
@@ -36,11 +40,11 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
             title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'Orbitron',
               fontSize: 15,
               fontWeight: FontWeight.w600,
-              color: Colors.white,
+              color: colorScheme.onSurface,
               letterSpacing: 0.3,
             ),
           ),
@@ -70,6 +74,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
   }
 
   Widget _buildStatsSummaryHeader() {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Row(
       children: [
         Container(
@@ -77,12 +82,12 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
           height: 30,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: const Color(0xFF1A1A1A).withValues(alpha: 0.9),
+            color: colorScheme.surfaceContainerHighest,
           ),
-          child: const Icon(Icons.assessment, color: Colors.white, size: 17),
+          child: Icon(Icons.assessment, color: colorScheme.onSurface, size: 17),
         ),
         const SizedBox(width: 10),
-        const Expanded(
+        Expanded(
           child: Text(
             'Stats Summary',
             maxLines: 1,
@@ -91,7 +96,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
               fontFamily: 'Orbitron',
               fontSize: 15,
               fontWeight: FontWeight.w600,
-              color: Colors.white,
+              color: colorScheme.onSurface,
               letterSpacing: 0.3,
             ),
           ),
@@ -101,12 +106,15 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
   }
 
   Widget _buildSummaryModeSwitch() {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
-        color: const Color(0xFF111111),
+        color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0x44FFFFFF)),
+        border: Border.all(
+          color: colorScheme.onSurface.withValues(alpha: 0.24),
+        ),
       ),
       child: Row(
         children: [
@@ -128,6 +136,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
     required String label,
     required _SummaryViewMode mode,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final bool isActive = _summaryViewMode == mode;
     return Expanded(
       child: InkWell(
@@ -143,12 +152,14 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 7),
           decoration: BoxDecoration(
-            color: isActive ? const Color(0xFF2B2B2B) : Colors.transparent,
+            color: isActive
+                ? colorScheme.surfaceContainerHigh
+                : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
               color: isActive
-                  ? const Color(0x66FFFFFF)
-                  : const Color(0x22FFFFFF),
+                  ? colorScheme.onSurface.withValues(alpha: 0.35)
+                  : colorScheme.onSurface.withValues(alpha: 0.15),
             ),
           ),
           child: Text(
@@ -157,7 +168,9 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
             style: TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w600,
-              color: isActive ? Colors.white : Colors.white70,
+              color: isActive
+                  ? colorScheme.onSurface
+                  : colorScheme.onSurface.withValues(alpha: 0.75),
             ),
           ),
         ),
@@ -204,13 +217,14 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
   }
 
   Widget _buildSelectedItemDetailsView() {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: const Color(0xFF121212).withValues(alpha: 0.94),
+        color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0x33FFFFFF)),
+        border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -247,17 +261,18 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
   }
 
   Widget _buildGachaStatsSection() {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final List<Map<String, String>> gachaStats = _buildGachaStatsRows();
     final bool hasStats = gachaStats.isNotEmpty;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text(
+        Text(
           'Avatar Gacha:',
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w700,
-            color: Color(0xFFE0E0E0),
+            color: colorScheme.onSurface.withValues(alpha: 0.85),
           ),
         ),
         const SizedBox(height: 2),
@@ -267,18 +282,23 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
             hasStats ? 'Top / Bottom / Accessory' : '-',
             style: TextStyle(
               fontSize: 13,
-              color: hasStats ? const Color(0xFF9BC9FF) : Colors.white54,
+              color: hasStats
+                  ? colorScheme.primary
+                  : colorScheme.onSurface.withValues(alpha: 0.54),
               fontWeight: FontWeight.w600,
             ),
           ),
         ),
         if (!hasStats) ...<Widget>[
           const SizedBox(height: 4),
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(left: 14),
             child: Text(
               'No gacha selected',
-              style: TextStyle(fontSize: 12, color: Colors.white54),
+              style: TextStyle(
+                fontSize: 12,
+                color: colorScheme.onSurface.withValues(alpha: 0.54),
+              ),
             ),
           ),
         ] else ...<Widget>[
@@ -298,9 +318,9 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
                   Expanded(
                     child: Text(
                       label,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 12,
-                        color: Colors.white70,
+                        color: colorScheme.onSurface.withValues(alpha: 0.75),
                       ),
                     ),
                   ),
@@ -310,8 +330,8 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
                     style: TextStyle(
                       fontSize: 12,
                       color: isNegative
-                          ? const Color(0xFFA84B4B)
-                          : Colors.white,
+                          ? colorScheme.error
+                          : colorScheme.onSurface,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -415,6 +435,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
     required String slotLabel,
     required EquipmentLibraryItem? item,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final String itemName = item?.name.trim() ?? '';
     final List<EquipmentStat> baseStats = item == null
         ? const <EquipmentStat>[]
@@ -440,10 +461,10 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
       children: <Widget>[
         Text(
           '$slotLabel:',
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w700,
-            color: Color(0xFFE0E0E0),
+            color: colorScheme.onSurface.withValues(alpha: 0.85),
           ),
         ),
         const SizedBox(height: 2),
@@ -454,29 +475,35 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
             style: TextStyle(
               fontSize: 13,
               color: itemName.isEmpty
-                  ? Colors.white54
-                  : const Color(0xFF9BC9FF),
+                  ? colorScheme.onSurface.withValues(alpha: 0.54)
+                  : colorScheme.primary,
               fontWeight: FontWeight.w600,
             ),
           ),
         ),
         if (item == null) ...<Widget>[
           const SizedBox(height: 4),
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(left: 14),
             child: Text(
               'No item selected',
-              style: TextStyle(fontSize: 12, color: Colors.white54),
+              style: TextStyle(
+                fontSize: 12,
+                color: colorScheme.onSurface.withValues(alpha: 0.54),
+              ),
             ),
           ),
         ] else ...<Widget>[
           const SizedBox(height: 5),
           if (orderedStats.isEmpty)
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 14),
               child: Text(
                 'No stat data',
-                style: TextStyle(fontSize: 12, color: Colors.white54),
+                style: TextStyle(
+                  fontSize: 12,
+                  color: colorScheme.onSurface.withValues(alpha: 0.54),
+                ),
               ),
             )
           else
@@ -495,6 +522,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
   }
 
   Widget _buildEquipmentStatLine(EquipmentStat stat) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final String label = _equipmentStatLabel(stat);
     final String value = _equipmentStatValue(stat);
     final bool isPositive = stat.value >= 0;
@@ -503,7 +531,10 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
         Expanded(
           child: Text(
             label,
-            style: const TextStyle(fontSize: 12, color: Colors.white70),
+            style: TextStyle(
+              fontSize: 12,
+              color: colorScheme.onSurface.withValues(alpha: 0.75),
+            ),
           ),
         ),
         const SizedBox(width: 8),
@@ -511,7 +542,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
           value,
           style: TextStyle(
             fontSize: 12,
-            color: isPositive ? Colors.white : const Color(0xFFA84B4B),
+            color: isPositive ? colorScheme.onSurface : colorScheme.error,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -657,6 +688,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
     String title,
     List<MapEntry<String, String>> rows,
   ) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final children = <Widget>[];
     for (int i = 0; i < rows.length; i++) {
       final key = rows[i].key;
@@ -678,23 +710,26 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
         children: [
           Row(
             children: [
-              Icon(iconData, color: const Color(0xFFFFFFFF), size: 16),
+              Icon(iconData, color: colorScheme.onSurface, size: 16),
               const SizedBox(width: 6),
               Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFFFFFFFF),
+                  color: colorScheme.onSurface,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 6),
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               border: Border(
-                bottom: BorderSide(color: Color(0x44FFFFFF), width: 1),
+                bottom: BorderSide(
+                  color: colorScheme.onSurface.withValues(alpha: 0.24),
+                  width: 1,
+                ),
               ),
             ),
           ),
@@ -706,24 +741,30 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
   }
 
   Widget _statRow(String label, String value) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 6),
-      decoration: const BoxDecoration(
-        border: Border(bottom: BorderSide(color: Color(0x22FFFFFF), width: 1)),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: colorScheme.onSurface.withValues(alpha: 0.14),
+            width: 1,
+          ),
+        ),
       ),
       child: Row(
         children: [
           Expanded(
             child: Text(
               label,
-              style: const TextStyle(fontSize: 12, color: Color(0xFFFFFFFF)),
+              style: TextStyle(fontSize: 12, color: colorScheme.onSurface),
             ),
           ),
           Text(
             value,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
-              color: Color(0xFFFFFFFF),
+              color: colorScheme.onSurface,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -733,41 +774,150 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
   }
 
   Widget _buildRecommendationsSection() {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final bool hasRemoteAi = _isRemoteAiSource(_aiRecommendationSource);
     final bool canGenerateAi = _canUseAiGeneration;
-    final children = <Widget>[];
-    for (int i = 0; i < _recommendations.length; i++) {
+    final bool canSendFeedback = _activeUserId != null;
+    final List<AiRecommendationItem> recommendationItems =
+        _effectiveRecommendationItems();
+    final List<Widget> children = <Widget>[];
+    for (int i = 0; i < recommendationItems.length; i++) {
+      final AiRecommendationItem recommendation = recommendationItems[i];
+      final String feedbackState =
+          _feedbackByRecommendationId[recommendation.id] ?? '';
+      final String categoryLabel = recommendation.category
+          .replaceAll('_', ' ')
+          .trim();
       children.add(
         Container(
           margin: const EdgeInsets.only(bottom: 10),
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
           decoration: BoxDecoration(
-            color: const Color(0xFF151515).withValues(alpha: 0.78),
+            color: colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(10),
-            border: const Border(
-              left: BorderSide(color: Color(0xFFFFFFFF), width: 3),
+            border: Border(
+              left: BorderSide(color: colorScheme.primary, width: 3),
             ),
           ),
-          child: Row(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                '${i + 1}.',
-                style: const TextStyle(
-                  color: Color(0xFFFFFFFF),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${i + 1}.',
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      recommendation.message,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: colorScheme.onSurface,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: colorScheme.surfaceContainerHigh,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: colorScheme.onSurface.withValues(alpha: 0.2),
+                      ),
+                    ),
+                    child: Text(
+                      categoryLabel,
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: colorScheme.onSurface.withValues(alpha: 0.75),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  _recommendations[i],
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Color(0xFFFFFFFF),
+              if (recommendation.explanation.trim().isNotEmpty) ...<Widget>[
+                const SizedBox(height: 6),
+                Text(
+                  recommendation.explanation.trim(),
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: colorScheme.onSurface.withValues(alpha: 0.75),
                   ),
                 ),
+              ],
+              const SizedBox(height: 8),
+              Row(
+                children: <Widget>[
+                  InkWell(
+                    onTap: !canSendFeedback
+                        ? null
+                        : () {
+                            _onRecommendationFeedback(
+                              recommendation: recommendation,
+                              reaction: 'like',
+                            );
+                          },
+                    borderRadius: BorderRadius.circular(14),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
+                      child: Icon(
+                        Icons.thumb_up_alt_outlined,
+                        size: 14,
+                        color: feedbackState == 'like'
+                            ? colorScheme.primary
+                            : colorScheme.onSurface.withValues(alpha: 0.54),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  InkWell(
+                    onTap: !canSendFeedback
+                        ? null
+                        : () {
+                            _onRecommendationFeedback(
+                              recommendation: recommendation,
+                              reaction: 'dislike',
+                            );
+                          },
+                    borderRadius: BorderRadius.circular(14),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
+                      child: Icon(
+                        Icons.thumb_down_alt_outlined,
+                        size: 14,
+                        color: feedbackState == 'dislike'
+                            ? colorScheme.error
+                            : colorScheme.onSurface.withValues(alpha: 0.54),
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  Text(
+                    'p${recommendation.priority} • ${(recommendation.confidence * 100).round()}%',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: colorScheme.onSurface.withValues(alpha: 0.54),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -793,10 +943,10 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
                     : Icons.rule,
                 size: 14,
                 color: _isAiRecommendationLoading
-                    ? const Color(0xFFFFE082)
+                    ? colorScheme.tertiary
                     : hasRemoteAi
-                    ? const Color(0xFFB7FFC6)
-                    : const Color(0xFFFFCCBC),
+                    ? colorScheme.secondary
+                    : colorScheme.primary,
               ),
               const SizedBox(width: 6),
               Expanded(
@@ -807,8 +957,8 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
                   style: TextStyle(
                     fontSize: 11,
                     color: _isAiRecommendationLoading
-                        ? const Color(0xFFFFF8E1)
-                        : Colors.white70,
+                        ? colorScheme.tertiary
+                        : colorScheme.onSurface.withValues(alpha: 0.75),
                   ),
                 ),
               ),
@@ -837,8 +987,10 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
                     : 'Generate',
               ),
               style: OutlinedButton.styleFrom(
-                foregroundColor: Colors.white,
-                side: const BorderSide(color: Color(0x66FFFFFF)),
+                foregroundColor: colorScheme.onSurface,
+                side: BorderSide(
+                  color: colorScheme.onSurface.withValues(alpha: 0.35),
+                ),
                 padding: const EdgeInsets.symmetric(
                   horizontal: 18,
                   vertical: 8,
@@ -848,10 +1000,25 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
           ),
           if (!canGenerateAi) ...<Widget>[
             const SizedBox(height: 6),
-            const Center(
+            Center(
               child: Text(
                 'Login is required for AI Generate.',
-                style: TextStyle(fontSize: 11, color: Colors.white54),
+                style: TextStyle(
+                  fontSize: 11,
+                  color: colorScheme.onSurface.withValues(alpha: 0.54),
+                ),
+              ),
+            ),
+          ],
+          if (!canSendFeedback) ...<Widget>[
+            const SizedBox(height: 6),
+            Center(
+              child: Text(
+                'Login to send recommendation feedback.',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: colorScheme.onSurface.withValues(alpha: 0.54),
+                ),
               ),
             ),
           ],
@@ -902,6 +1069,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
   }
 
   Widget _buildSaveLoadSection() {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final int? maxSavedBuilds = _maxSavedBuilds;
     final bool hasSaveLimit = maxSavedBuilds != null;
     final bool canSaveBuild = !hasSaveLimit || !_isSavedBuildLimitReached;
@@ -922,10 +1090,10 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
             margin: const EdgeInsets.only(bottom: 10),
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFF121212).withValues(alpha: 0.9),
+              color: colorScheme.surfaceContainerHigh,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: const Color(0xFFFFFFFF).withValues(alpha: 0.18),
+                color: colorScheme.onSurface.withValues(alpha: 0.18),
               ),
             ),
             child: Column(
@@ -935,9 +1103,9 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
                   name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 14,
-                    color: Color(0xFFFFFFFF),
+                    color: colorScheme.onSurface,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -950,17 +1118,17 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
                   children: <Widget>[
                     _buildDesktopSavedBuildActionChip(
                       label: 'Load',
-                      color: Colors.white,
+                      color: colorScheme.onSurface,
                       onTap: () => _onLoadBuild(i),
                     ),
                     _buildDesktopSavedBuildActionChip(
                       label: 'Export Code',
-                      color: Colors.white70,
+                      color: colorScheme.onSurface.withValues(alpha: 0.75),
                       onTap: () => _onCopyBuildShareCode(i),
                     ),
                     _buildDesktopSavedBuildActionChip(
                       label: 'X',
-                      color: Colors.white70,
+                      color: colorScheme.onSurface.withValues(alpha: 0.75),
                       onTap: () => _onDeleteBuild(i),
                     ),
                   ],
@@ -973,9 +1141,11 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
                     vertical: 8,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF0B0B0B),
+                    color: colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(6),
-                    border: Border.all(color: const Color(0x22FFFFFF)),
+                    border: Border.all(
+                      color: colorScheme.onSurface.withValues(alpha: 0.14),
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -984,9 +1154,9 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
                         _savedBuildCodePreview(build),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 11,
-                          color: Colors.white60,
+                          color: colorScheme.onSurface.withValues(alpha: 0.62),
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -995,9 +1165,9 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
                         _savedBuildSavedAtPreview(build),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 11,
-                          color: Colors.white54,
+                          color: colorScheme.onSurface.withValues(alpha: 0.54),
                         ),
                       ),
                     ],
@@ -1013,22 +1183,26 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF0F0F0F),
+        color: colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0x33FFFFFF)),
+        border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: <Widget>[
-              const Icon(Icons.save_outlined, color: Colors.white70, size: 18),
+              Icon(
+                Icons.save_outlined,
+                color: colorScheme.onSurface.withValues(alpha: 0.75),
+                size: 18,
+              ),
               const SizedBox(width: 8),
-              const Expanded(
+              Expanded(
                 child: Text(
                   'Save / Load Build',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: colorScheme.onSurface,
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
                   ),
@@ -1042,16 +1216,16 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
                   width: 28,
                   height: 28,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1A1A1A),
+                    color: colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: const Color(0xFFFFFFFF).withValues(alpha: 0.24),
+                      color: colorScheme.onSurface.withValues(alpha: 0.24),
                     ),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.cleaning_services,
                     size: 15,
-                    color: Colors.white,
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ),
@@ -1065,8 +1239,8 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
                 BuildSimulatorScreenState._guestSaveLimitMessage,
                 style: TextStyle(
                   color: canSaveBuild
-                      ? Colors.white70
-                      : const Color(0xFFFFB3B3),
+                      ? colorScheme.onSurface.withValues(alpha: 0.75)
+                      : colorScheme.error,
                   fontSize: 11,
                 ),
               ),
@@ -1076,23 +1250,29 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
           TextField(
             controller: _buildNameController,
             onSubmitted: (_) => _onSaveBuild(),
-            style: const TextStyle(color: Colors.white, fontSize: 13),
+            style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
             decoration: InputDecoration(
               hintText: 'Enter build name...',
-              hintStyle: const TextStyle(color: Colors.white54),
+              hintStyle: TextStyle(
+                color: colorScheme.onSurface.withValues(alpha: 0.54),
+              ),
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 12,
                 vertical: 14,
               ),
               filled: true,
-              fillColor: const Color(0xFF0A0A0A),
+              fillColor: colorScheme.surfaceContainerHighest,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Color(0x44FFFFFF)),
+                borderSide: BorderSide(
+                  color: colorScheme.onSurface.withValues(alpha: 0.24),
+                ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Color(0x77FFFFFF)),
+                borderSide: BorderSide(
+                  color: colorScheme.onSurface.withValues(alpha: 0.45),
+                ),
               ),
             ),
           ),
@@ -1105,8 +1285,10 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
                   icon: const Icon(Icons.save, size: 16),
                   label: const Text('Save Build'),
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    side: const BorderSide(color: Color(0x66FFFFFF)),
+                    foregroundColor: colorScheme.onSurface,
+                    side: BorderSide(
+                      color: colorScheme.onSurface.withValues(alpha: 0.35),
+                    ),
                     shape: const StadiumBorder(),
                     padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
@@ -1119,8 +1301,12 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
                   icon: const Icon(Icons.download_for_offline, size: 16),
                   label: const Text('Import Code'),
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.white70,
-                    side: const BorderSide(color: Color(0x44FFFFFF)),
+                    foregroundColor: colorScheme.onSurface.withValues(
+                      alpha: 0.75,
+                    ),
+                    side: BorderSide(
+                      color: colorScheme.onSurface.withValues(alpha: 0.24),
+                    ),
                     shape: const StadiumBorder(),
                     padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
@@ -1135,23 +1321,31 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
               padding: const EdgeInsets.symmetric(vertical: 12),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: const Color(0xFF101010),
+                color: colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: const Color(0x33FFFFFF)),
+                border: Border.all(
+                  color: colorScheme.onSurface.withValues(alpha: 0.2),
+                ),
               ),
-              child: const Text(
+              child: Text(
                 'No saved builds yet.',
-                style: TextStyle(color: Colors.white70, fontSize: 12),
+                style: TextStyle(
+                  color: colorScheme.onSurface.withValues(alpha: 0.75),
+                  fontSize: 12,
+                ),
               ),
             )
           else
             Column(children: savedWidgets),
           if (_savedBuilds.length > visibleSavedBuildCount)
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 2),
               child: Text(
                 'Showing first 5 builds.',
-                style: TextStyle(color: Colors.white54, fontSize: 11),
+                style: TextStyle(
+                  color: colorScheme.onSurface.withValues(alpha: 0.54),
+                  fontSize: 11,
+                ),
               ),
             ),
         ],
@@ -1164,6 +1358,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
     required Color color,
     required VoidCallback? onTap,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final bool isEnabled = onTap != null;
     return Material(
       color: Colors.transparent,
@@ -1175,20 +1370,22 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
           constraints: const BoxConstraints(minHeight: 36),
           decoration: BoxDecoration(
             color: isEnabled
-                ? const Color(0xFF141414)
-                : const Color(0xFF111111),
+                ? colorScheme.surfaceContainerHighest
+                : colorScheme.surfaceContainerHigh,
             borderRadius: BorderRadius.circular(9),
             border: Border.all(
               color: isEnabled
-                  ? const Color(0x66FFFFFF)
-                  : const Color(0x22FFFFFF),
+                  ? colorScheme.onSurface.withValues(alpha: 0.35)
+                  : colorScheme.onSurface.withValues(alpha: 0.15),
             ),
           ),
           child: Text(
             label,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: isEnabled ? color : Colors.white24,
+              color: isEnabled
+                  ? color
+                  : colorScheme.onSurface.withValues(alpha: 0.24),
               fontSize: 12,
               fontWeight: FontWeight.w700,
             ),

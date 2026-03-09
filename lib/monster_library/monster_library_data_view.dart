@@ -54,8 +54,9 @@ class _MonsterLibraryDataViewState extends State<_MonsterLibraryDataView> {
     await showDialog<void>(
       context: context,
       builder: (BuildContext dialogContext) {
+        final ColorScheme colorScheme = Theme.of(dialogContext).colorScheme;
         return Dialog(
-          backgroundColor: const Color(0xFF101010),
+          backgroundColor: colorScheme.surfaceContainerHigh,
           insetPadding: const EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 24,
@@ -71,11 +72,11 @@ class _MonsterLibraryDataViewState extends State<_MonsterLibraryDataView> {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          const Expanded(
+                          Expanded(
                             child: Text(
                               'Select Family',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: colorScheme.onSurface,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w700,
                               ),
@@ -83,9 +84,11 @@ class _MonsterLibraryDataViewState extends State<_MonsterLibraryDataView> {
                           ),
                           IconButton(
                             onPressed: () => Navigator.of(dialogContext).pop(),
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.close,
-                              color: Colors.white70,
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.75,
+                              ),
                             ),
                             tooltip: 'Close',
                           ),
@@ -106,13 +109,16 @@ class _MonsterLibraryDataViewState extends State<_MonsterLibraryDataView> {
                                         )
                                         .length;
                               return ChoiceChip(
-                                selectedColor: const Color(0xFF202020),
-                                backgroundColor: const Color(0xFF101010),
-                                side: const BorderSide(
-                                  color: Color(0x44FFFFFF),
+                                selectedColor: colorScheme.primaryContainer,
+                                backgroundColor:
+                                    colorScheme.surfaceContainerHighest,
+                                side: BorderSide(
+                                  color: colorScheme.onSurface.withValues(
+                                    alpha: 0.26,
+                                  ),
                                 ),
-                                labelStyle: const TextStyle(
-                                  color: Colors.white,
+                                labelStyle: TextStyle(
+                                  color: colorScheme.onSurface,
                                 ),
                                 label: Text('$family ($count)'),
                                 selected: activeFamily == family,
@@ -140,6 +146,7 @@ class _MonsterLibraryDataViewState extends State<_MonsterLibraryDataView> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return FutureBuilder<List<MonsterLibraryItem>>(
       future: _libraryFuture,
       builder:
@@ -158,9 +165,9 @@ class _MonsterLibraryDataViewState extends State<_MonsterLibraryDataView> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      const Text(
+                      Text(
                         'Failed to load monster data.',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: colorScheme.onSurface),
                       ),
                       const SizedBox(height: 10),
                       TextButton.icon(
@@ -222,34 +229,48 @@ class _MonsterLibraryDataViewState extends State<_MonsterLibraryDataView> {
                       Expanded(
                         child: TextField(
                           controller: _searchController,
-                          style: const TextStyle(color: Colors.white),
-                          cursorColor: Colors.white70,
+                          style: TextStyle(color: colorScheme.onSurface),
+                          cursorColor: colorScheme.onSurface.withValues(
+                            alpha: 0.75,
+                          ),
                           decoration: InputDecoration(
                             hintText:
                                 'Search by name, id, family, map, element...',
-                            hintStyle: const TextStyle(color: Colors.white54),
-                            prefixIcon: const Icon(
+                            hintStyle: TextStyle(
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.54,
+                              ),
+                            ),
+                            prefixIcon: Icon(
                               Icons.search,
-                              color: Colors.white70,
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.75,
+                              ),
                             ),
                             filled: true,
-                            fillColor: const Color(0xFF0F0F0F),
+                            fillColor: colorScheme.surfaceContainerHighest,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                color: Color(0x33FFFFFF),
+                              borderSide: BorderSide(
+                                color: colorScheme.onSurface.withValues(
+                                  alpha: 0.2,
+                                ),
                               ),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                color: Color(0x33FFFFFF),
+                              borderSide: BorderSide(
+                                color: colorScheme.onSurface.withValues(
+                                  alpha: 0.2,
+                                ),
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                color: Color(0x66FFFFFF),
+                              borderSide: BorderSide(
+                                color: colorScheme.onSurface.withValues(
+                                  alpha: 0.45,
+                                ),
                               ),
                             ),
                           ),
@@ -277,11 +298,15 @@ class _MonsterLibraryDataViewState extends State<_MonsterLibraryDataView> {
                                 );
                               },
                               style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.white70,
-                                side: const BorderSide(
-                                  color: Color(0x33FFFFFF),
+                                foregroundColor: colorScheme.onSurface
+                                    .withValues(alpha: 0.75),
+                                side: BorderSide(
+                                  color: colorScheme.onSurface.withValues(
+                                    alpha: 0.2,
+                                  ),
                                 ),
-                                backgroundColor: const Color(0xFF0F0F0F),
+                                backgroundColor:
+                                    colorScheme.surfaceContainerHighest,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -297,10 +322,14 @@ class _MonsterLibraryDataViewState extends State<_MonsterLibraryDataView> {
                 ),
                 Expanded(
                   child: filteredItems.isEmpty
-                      ? const Center(
+                      ? Center(
                           child: Text(
                             'No monsters found.',
-                            style: TextStyle(color: Colors.white70),
+                            style: TextStyle(
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.75,
+                              ),
+                            ),
                           ),
                         )
                       : LayoutBuilder(

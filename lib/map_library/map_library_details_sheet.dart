@@ -13,10 +13,13 @@ extension _MapLibraryDetailsSheet on _MapLibraryDataViewState {
           maxChildSize: 0.92,
           expand: false,
           builder: (BuildContext context, ScrollController controller) {
+            final ColorScheme colorScheme = Theme.of(context).colorScheme;
             return Container(
-              decoration: const BoxDecoration(
-                color: Color(0xFF090909),
-                borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
+              decoration: BoxDecoration(
+                color: colorScheme.surface,
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(18),
+                ),
               ),
               child: ListView(
                 controller: controller,
@@ -27,7 +30,7 @@ extension _MapLibraryDetailsSheet on _MapLibraryDataViewState {
                       width: 44,
                       height: 4,
                       decoration: BoxDecoration(
-                        color: const Color(0x55FFFFFF),
+                        color: colorScheme.onSurface.withValues(alpha: 0.34),
                         borderRadius: BorderRadius.circular(999),
                       ),
                     ),
@@ -35,8 +38,8 @@ extension _MapLibraryDetailsSheet on _MapLibraryDataViewState {
                   const SizedBox(height: 14),
                   Text(
                     item.name,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: colorScheme.onSurface,
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                     ),
@@ -44,12 +47,14 @@ extension _MapLibraryDetailsSheet on _MapLibraryDataViewState {
                   const SizedBox(height: 6),
                   Text(
                     item.region,
-                    style: const TextStyle(color: Colors.white70),
+                    style: TextStyle(
+                      color: colorScheme.onSurface.withValues(alpha: 0.75),
+                    ),
                   ),
                   const SizedBox(height: 12),
                   _buildMapImagePlaceholder(height: 160),
                   const SizedBox(height: 14),
-                  const Divider(color: Color(0x33FFFFFF)),
+                  Divider(color: colorScheme.onSurface.withValues(alpha: 0.2)),
                   const SizedBox(height: 6),
                   _detailRow('Map Key', item.key),
                   _detailRow('Region', item.region),
@@ -59,17 +64,22 @@ extension _MapLibraryDetailsSheet on _MapLibraryDataViewState {
                   ),
                   _detailRow('Monster Count', monsters.length.toString()),
                   const SizedBox(height: 10),
-                  const Text(
+                  Text(
                     'Monsters',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: colorScheme.onSurface,
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                   const SizedBox(height: 8),
                   if (monsters.isEmpty)
-                    const Text('-', style: TextStyle(color: Colors.white54))
+                    Text(
+                      '-',
+                      style: TextStyle(
+                        color: colorScheme.onSurface.withValues(alpha: 0.54),
+                      ),
+                    )
                   else
                     Wrap(
                       spacing: 8,
@@ -92,6 +102,7 @@ extension _MapLibraryDetailsSheet on _MapLibraryDataViewState {
   }
 
   Widget _detailRow(String label, String value) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
@@ -99,13 +110,18 @@ extension _MapLibraryDetailsSheet on _MapLibraryDataViewState {
         children: <Widget>[
           SizedBox(
             width: 130,
-            child: Text(label, style: const TextStyle(color: Colors.white70)),
+            child: Text(
+              label,
+              style: TextStyle(
+                color: colorScheme.onSurface.withValues(alpha: 0.75),
+              ),
+            ),
           ),
           Expanded(
             child: Text(
               value,
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: colorScheme.onSurface,
                 fontWeight: FontWeight.w600,
               ),
             ),

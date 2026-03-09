@@ -96,14 +96,15 @@ class _ArmorModeSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final String active = _normalize(value);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text(
+        Text(
           'Armor Mode',
           style: TextStyle(
-            color: Colors.white,
+            color: colorScheme.onSurface,
             fontSize: 12,
             fontWeight: FontWeight.w700,
           ),
@@ -119,15 +120,17 @@ class _ArmorModeSelector extends StatelessWidget {
                   label: Text(option.value),
                   selected: isSelected,
                   showCheckmark: true,
-                  selectedColor: const Color(0xFFE1C86D),
-                  backgroundColor: const Color(0xFF151515),
+                  selectedColor: colorScheme.primaryContainer,
+                  backgroundColor: colorScheme.surfaceContainerHighest,
                   side: BorderSide(
                     color: isSelected
-                        ? const Color(0xFFEED98D)
-                        : const Color(0x55FFFFFF),
+                        ? colorScheme.primary
+                        : colorScheme.onSurface.withValues(alpha: 0.34),
                   ),
                   labelStyle: TextStyle(
-                    color: isSelected ? const Color(0xFF141414) : Colors.white,
+                    color: isSelected
+                        ? colorScheme.onPrimaryContainer
+                        : colorScheme.onSurface,
                     fontWeight: FontWeight.w700,
                     fontSize: 12,
                   ),
@@ -140,7 +143,7 @@ class _ArmorModeSelector extends StatelessWidget {
         Text(
           'Empty armor slot uses the in-game no-armor formula automatically.',
           style: TextStyle(
-            color: Colors.white.withValues(alpha: 0.58),
+            color: colorScheme.onSurface.withValues(alpha: 0.58),
             fontSize: 11,
           ),
         ),

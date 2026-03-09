@@ -84,8 +84,9 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
         await showDialog<({String category, String tree})>(
           context: context,
           builder: (BuildContext dialogContext) {
+            final ColorScheme colorScheme = Theme.of(dialogContext).colorScheme;
             return Dialog(
-              backgroundColor: const Color(0xFF101010),
+              backgroundColor: colorScheme.surfaceContainerHigh,
               insetPadding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 24,
@@ -113,11 +114,11 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
                           children: <Widget>[
                             Row(
                               children: <Widget>[
-                                const Expanded(
+                                Expanded(
                                   child: Text(
                                     'Filter Skills',
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: colorScheme.onSurface,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w700,
                                     ),
@@ -126,24 +127,31 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
                                 TextButton(
                                   onPressed: () =>
                                       Navigator.of(dialogContext).pop(),
-                                  child: const Text(
+                                  child: Text(
                                     'Close',
-                                    style: TextStyle(color: Colors.white70),
+                                    style: TextStyle(
+                                      color: colorScheme.onSurface.withValues(
+                                        alpha: 0.75,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
                             const SizedBox(height: 8),
-                            const Text(
+                            Text(
                               'Category',
                               style: TextStyle(
-                                color: Colors.white70,
+                                color: colorScheme.onSurface.withValues(
+                                  alpha: 0.75,
+                                ),
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                             const SizedBox(height: 8),
                             SkillFilterWidgets.buildCategoryFilter(
+                              context,
                               data,
                               dialogCategory,
                               _availableCategories(data),
@@ -159,16 +167,19 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
                               },
                             ),
                             const SizedBox(height: 14),
-                            const Text(
+                            Text(
                               'Tree',
                               style: TextStyle(
-                                color: Colors.white70,
+                                color: colorScheme.onSurface.withValues(
+                                  alpha: 0.75,
+                                ),
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                             const SizedBox(height: 8),
                             SkillFilterWidgets.buildTreeFilter(
+                              context,
                               data,
                               dialogCategory,
                               dialogTree,
@@ -190,9 +201,13 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
                                       dialogTree = _allTreeKey;
                                     });
                                   },
-                                  child: const Text(
+                                  child: Text(
                                     'Reset',
-                                    style: TextStyle(color: Colors.white70),
+                                    style: TextStyle(
+                                      color: colorScheme.onSurface.withValues(
+                                        alpha: 0.75,
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(width: 8),
@@ -204,10 +219,10 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
                                     ));
                                   },
                                   style: FilledButton.styleFrom(
-                                    backgroundColor: const Color(0xFF2E74FF),
-                                    foregroundColor: Colors.white,
+                                    backgroundColor: colorScheme.primary,
+                                    foregroundColor: colorScheme.onPrimary,
                                   ),
-                                  child: const Text('Apply'),
+                                  child: Text('Apply'),
                                 ),
                               ],
                             ),
@@ -281,6 +296,7 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
   }
 
   Widget _buildSearchToolbar(SkillLibraryData data) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final List<String> categories = _availableCategories(data);
     final bool canOpenFilter =
         categories.length > 1 || _availableTrees(data).length > 1;
@@ -288,13 +304,18 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
 
     return Container(
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: <Color>[Color(0xFF15110E), Color(0xFF0B0D10)],
+          colors: <Color>[
+            colorScheme.surfaceContainerHigh,
+            colorScheme.surfaceContainerHighest,
+          ],
         ),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0x22FFFFFF)),
+        border: Border.all(
+          color: colorScheme.onSurface.withValues(alpha: 0.14),
+        ),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -314,14 +335,16 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
                             ? () => _openFiltersDialog(data)
                             : null,
                         style: OutlinedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: const Color(0xFF10161A),
-                          disabledForegroundColor: Colors.white38,
-                          disabledBackgroundColor: const Color(0xFF10161A),
+                          foregroundColor: colorScheme.onSurface,
+                          backgroundColor: colorScheme.surfaceContainerHighest,
+                          disabledForegroundColor: colorScheme.onSurface
+                              .withValues(alpha: 0.38),
+                          disabledBackgroundColor:
+                              colorScheme.surfaceContainerHighest,
                           side: BorderSide(
                             color: activeFilterCount > 0
-                                ? const Color(0xFFD8B36A)
-                                : const Color(0xFF5D7283),
+                                ? colorScheme.primary
+                                : colorScheme.onSurface.withValues(alpha: 0.3),
                           ),
                           padding: EdgeInsets.zero,
                           shape: RoundedRectangleBorder(
@@ -341,14 +364,18 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
                             vertical: 2,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF2E74FF),
+                            color: colorScheme.primary,
                             borderRadius: BorderRadius.circular(999),
-                            border: Border.all(color: const Color(0xFF8FB4FF)),
+                            border: Border.all(
+                              color: colorScheme.primary.withValues(
+                                alpha: 0.65,
+                              ),
+                            ),
                           ),
                           child: Text(
                             '$activeFilterCount',
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: TextStyle(
+                              color: colorScheme.onPrimary,
                               fontSize: 10,
                               fontWeight: FontWeight.w700,
                             ),
@@ -374,13 +401,16 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
   }
 
   Widget _buildSkillSearchField() {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return TextField(
       controller: _searchController,
-      style: const TextStyle(color: Colors.white),
-      cursorColor: const Color(0xFFD8B36A),
+      style: TextStyle(color: colorScheme.onSurface),
+      cursorColor: colorScheme.primary,
       decoration: InputDecoration(
         hintText: 'Search in selected skill tree...',
-        hintStyle: const TextStyle(color: Colors.white54),
+        hintStyle: TextStyle(
+          color: colorScheme.onSurface.withValues(alpha: 0.54),
+        ),
         suffixIcon: _query.isEmpty
             ? null
             : TextButton(
@@ -390,31 +420,35 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
                     _query = '';
                   });
                 },
-                child: const Text(
+                child: Text(
                   'Clear',
                   style: TextStyle(
-                    color: Colors.white54,
+                    color: colorScheme.onSurface,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
         filled: true,
-        fillColor: const Color(0xFF10161A),
+        fillColor: colorScheme.surfaceContainerHighest,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 18,
           vertical: 18,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: Color(0x335D7283)),
+          borderSide: BorderSide(
+            color: colorScheme.onSurface.withValues(alpha: 0.24),
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: Color(0x335D7283)),
+          borderSide: BorderSide(
+            color: colorScheme.onSurface.withValues(alpha: 0.24),
+          ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: Color(0x99D8B36A), width: 1.4),
+          borderSide: BorderSide(color: colorScheme.primary, width: 1.4),
         ),
       ),
       onChanged: (String value) {
@@ -427,6 +461,7 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final bool isMobile = MediaQuery.sizeOf(context).width < 1024;
     final bool isEmbeddedInShell = widget.onNavigate != null;
 
@@ -444,47 +479,50 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
       }
     }
 
-    final Widget content = FutureBuilder<SkillLibraryData>(
-      future: _libraryFuture,
-      builder:
-          (BuildContext context, AsyncSnapshot<SkillLibraryData> snapshot) {
-            if (snapshot.connectionState != ConnectionState.done) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (snapshot.hasError) {
-              return _buildErrorState(snapshot.error!);
-            }
+    final Widget content = ColoredBox(
+      color: colorScheme.surface,
+      child: FutureBuilder<SkillLibraryData>(
+        future: _libraryFuture,
+        builder:
+            (BuildContext context, AsyncSnapshot<SkillLibraryData> snapshot) {
+              if (snapshot.connectionState != ConnectionState.done) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (snapshot.hasError) {
+                return _buildErrorState(snapshot.error!);
+              }
 
-            final SkillLibraryData data = snapshot.data!;
-            final List<String> availableTrees = _availableTrees(data);
-            final String activeTree = _activeTreeForTreeView(data);
-            final List<SkillEntry> treeSkills = _skillsForTreeView(
-              data,
-              activeTree,
-            );
+              final SkillLibraryData data = snapshot.data!;
+              final List<String> availableTrees = _availableTrees(data);
+              final String activeTree = _activeTreeForTreeView(data);
+              final List<SkillEntry> treeSkills = _skillsForTreeView(
+                data,
+                activeTree,
+              );
 
-            return Column(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.fromLTRB(
-                    16,
-                    isEmbeddedInShell ? 12 : 0,
-                    16,
-                    10,
+              return Column(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      16,
+                      isEmbeddedInShell ? 12 : 0,
+                      16,
+                      10,
+                    ),
+                    child: _buildSearchToolbar(data),
                   ),
-                  child: _buildSearchToolbar(data),
-                ),
-                Expanded(
-                  child: _buildSkillTreeView(
-                    data: data,
-                    availableTrees: availableTrees,
-                    activeTree: activeTree,
-                    visibleSkills: treeSkills,
+                  Expanded(
+                    child: _buildSkillTreeView(
+                      data: data,
+                      availableTrees: availableTrees,
+                      activeTree: activeTree,
+                      visibleSkills: treeSkills,
+                    ),
                   ),
-                ),
-              ],
-            );
-          },
+                ],
+              );
+            },
+      ),
     );
 
     if (isEmbeddedInShell) {
@@ -492,7 +530,7 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF000000),
+      backgroundColor: colorScheme.surface,
       drawer: isMobile
           ? null
           : AppNavigationDrawer(
@@ -508,6 +546,8 @@ class _SkillMenuPageState extends State<SkillMenuPage> {
                   onSelectDrawerPage(AppNavigationPage.settings),
             ),
       appBar: AppBar(
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
         automaticallyImplyLeading: false,
         leading: isMobile
             ? null

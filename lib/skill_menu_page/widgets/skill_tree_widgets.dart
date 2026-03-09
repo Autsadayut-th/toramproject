@@ -23,7 +23,9 @@ class SkillTreeWidgets {
     required List<String> trees,
     required String activeTree,
     required ValueChanged<String> onSelected,
+    required BuildContext context,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -42,24 +44,34 @@ class SkillTreeWidgets {
                     ),
                     decoration: BoxDecoration(
                       gradient: selected
-                          ? const LinearGradient(
-                              colors: [Color(0xFF4A4A4A), Color(0xFF3A3A3A)],
+                          ? LinearGradient(
+                              colors: <Color>[
+                                colorScheme.primaryContainer,
+                                colorScheme.primaryContainer.withValues(
+                                  alpha: 0.8,
+                                ),
+                              ],
                             )
-                          : const LinearGradient(
-                              colors: [Color(0xFF2A2A2A), Color(0xFF1A1A1A)],
+                          : LinearGradient(
+                              colors: <Color>[
+                                colorScheme.surfaceContainerHigh,
+                                colorScheme.surfaceContainerHighest,
+                              ],
                             ),
                       borderRadius: BorderRadius.circular(999),
                       border: Border.all(
                         color: selected
-                            ? const Color(0xFF888888)
-                            : const Color(0xFF666666),
+                            ? colorScheme.primary
+                            : colorScheme.onSurface.withValues(alpha: 0.3),
                         width: selected ? 2 : 1,
                       ),
                     ),
                     child: Text(
                       treeName,
                       style: TextStyle(
-                        color: selected ? Colors.white : Colors.white70,
+                        color: selected
+                            ? colorScheme.onPrimaryContainer
+                            : colorScheme.onSurface.withValues(alpha: 0.75),
                         fontSize: 12,
                         fontWeight: selected
                             ? FontWeight.w700
@@ -79,12 +91,14 @@ class SkillTreeWidgets {
     required String treeName,
     required List<SkillEntry> skills,
     required ValueChanged<SkillEntry> onTapSkill,
+    required BuildContext context,
   }) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     if (skills.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(
           'No skills found for this tree.',
-          style: TextStyle(color: Colors.white70),
+          style: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.75)),
         ),
       );
     }
@@ -98,13 +112,16 @@ class SkillTreeWidgets {
       width: double.infinity,
       margin: const EdgeInsets.fromLTRB(16, 10, 16, 16),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF0A0A0D), Color(0xFF17131D)],
+          colors: <Color>[
+            colorScheme.surfaceContainerHigh,
+            colorScheme.surfaceContainerHighest,
+          ],
         ),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0x44FFFFFF)),
+        border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.24)),
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(14),
@@ -126,6 +143,9 @@ class SkillTreeWidgets {
                           child: CustomPaint(
                             painter: _SkillTreeConnectorPainter(
                               edges: layout.edges,
+                              lineColor: colorScheme.onSurface.withValues(
+                                alpha: 0.75,
+                              ),
                             ),
                           ),
                         ),

@@ -10,6 +10,7 @@ class MainWeaponEquipmentSelector extends StatelessWidget {
     required this.selectedDisplayName,
     required this.selectedEquipmentItem,
     required this.searchCandidates,
+    required this.allowedItemTypes,
     required this.statPreview,
     required this.onEquipChanged,
     required this.enhance,
@@ -24,6 +25,7 @@ class MainWeaponEquipmentSelector extends StatelessWidget {
   final String? selectedDisplayName;
   final EquipmentLibraryItem? selectedEquipmentItem;
   final List<EquipmentLibraryItem> searchCandidates;
+  final List<String>? allowedItemTypes;
   final List<String> statPreview;
   final ValueChanged<String?> onEquipChanged;
   final int enhance;
@@ -47,6 +49,7 @@ class MainWeaponEquipmentSelector extends StatelessWidget {
       onEquipChanged: onEquipChanged,
       pickInitialCategory: 'Weapon',
       allowedCategories: const <String>['Weapon'],
+      allowedItemTypes: allowedItemTypes,
       pickTitle: 'Select Main Weapon',
       statsLabel: 'Weapon Stats',
       statPreview: statPreview,
