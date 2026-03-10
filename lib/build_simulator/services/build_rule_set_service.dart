@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import '../../shared/toram_data_github_service.dart';
 
 class BuildRuleSet {
@@ -8,6 +10,7 @@ class BuildRuleSet {
     required this.crystaSlotRules,
     required this.elementRules,
     required this.statScalingRules,
+    required this.refineRules,
   });
 
   final Map<String, dynamic> buildRules;
@@ -16,131 +19,145 @@ class BuildRuleSet {
   final Map<String, dynamic> crystaSlotRules;
   final Map<String, dynamic> elementRules;
   final Map<String, dynamic> statScalingRules;
+  final Map<String, dynamic> refineRules;
 
   int get physicalCritTarget {
-    final int fromCombat = _readIntPath(
-      combatRules,
-      <String>['critical_system', 'physical_target'],
-    );
+    final int fromCombat = _readIntPath(combatRules, <String>[
+      'critical_system',
+      'physical_target',
+    ]);
     if (fromCombat > 0) {
       return fromCombat;
     }
-    return _readIntPath(
-      buildEvaluationRules,
-      <String>['build_evaluation', 'physical_build', 'required', 'critical_rate'],
-      fallback: 100,
-    );
+    return _readIntPath(buildEvaluationRules, <String>[
+      'build_evaluation',
+      'physical_build',
+      'required',
+      'critical_rate',
+    ], fallback: 100);
   }
 
   int get magicStaffCritRecommended {
-    final int fromCombat = _readIntPath(
-      combatRules,
-      <String>['critical_system', 'magic_staff_target', 'recommended'],
-    );
+    final int fromCombat = _readIntPath(combatRules, <String>[
+      'critical_system',
+      'magic_staff_target',
+      'recommended',
+    ]);
     if (fromCombat > 0) {
       return fromCombat;
     }
-    return _readIntPath(
-      buildEvaluationRules,
-      <String>[
-        'build_evaluation',
-        'magic_crit_build',
-        'recommended',
-        'critical_rate',
-      ],
-      fallback: 200,
-    );
+    return _readIntPath(buildEvaluationRules, <String>[
+      'build_evaluation',
+      'magic_crit_build',
+      'recommended',
+      'critical_rate',
+    ], fallback: 200);
   }
 
   int get physicalPierceMinimum {
-    return _readIntPath(
-      buildEvaluationRules,
-      <String>[
-        'build_evaluation',
-        'physical_build',
-        'stats',
-        'physical_pierce',
-        'minimum',
-      ],
-      fallback: 15,
-    );
+    return _readIntPath(buildEvaluationRules, <String>[
+      'build_evaluation',
+      'physical_build',
+      'stats',
+      'physical_pierce',
+      'minimum',
+    ], fallback: 15);
   }
 
   int get magicPierceMinimum {
-    return _readIntPath(
-      buildEvaluationRules,
-      <String>['build_evaluation', 'magic_build', 'stats', 'magic_pierce', 'minimum'],
-      fallback: 15,
-    );
+    return _readIntPath(buildEvaluationRules, <String>[
+      'build_evaluation',
+      'magic_build',
+      'stats',
+      'magic_pierce',
+      'minimum',
+    ], fallback: 15);
   }
 
   int get magicMpRecommended {
-    return _readIntPath(
-      buildEvaluationRules,
-      <String>['build_evaluation', 'magic_build', 'recommended', 'max_mp'],
-      fallback: 300,
-    );
+    return _readIntPath(buildEvaluationRules, <String>[
+      'build_evaluation',
+      'magic_build',
+      'recommended',
+      'max_mp',
+    ], fallback: 300);
   }
 
   double get elementDamageBonus {
-    return _readNumPath(
-      elementRules,
-      <String>['element_system', 'damage_bonus'],
-    ).toDouble();
+    return _readNumPath(elementRules, <String>[
+      'element_system',
+      'damage_bonus',
+    ]).toDouble();
+  }
+
+  Map<String, String> get elementAdvantageMap {
+    final dynamic value = _readPath(elementRules, <String>[
+      'element_system',
+      'element_advantage',
+    ]);
+    if (value is! Map) {
+      return const <String, String>{};
+    }
+    final Map<String, String> result = <String, String>{};
+    for (final MapEntry<dynamic, dynamic> entry in value.entries) {
+      final String element = entry.key?.toString().trim().toLowerCase() ?? '';
+      final String target = entry.value?.toString().trim().toLowerCase() ?? '';
+      if (element.isEmpty || target.isEmpty) {
+        continue;
+      }
+      result[element] = target;
+    }
+    return result;
   }
 
   int get criticalDamageBase {
-    return _readIntPath(
-      combatRules,
-      <String>['critical_damage', 'base'],
-      fallback: 150,
-    );
+    return _readIntPath(combatRules, <String>[
+      'critical_damage',
+      'base',
+    ], fallback: 150);
   }
 
   int get criticalDamageSoftCap {
-    return _readIntPath(
-      combatRules,
-      <String>['critical_damage', 'soft_cap'],
-      fallback: 300,
-    );
+    return _readIntPath(combatRules, <String>[
+      'critical_damage',
+      'soft_cap',
+    ], fallback: 300);
   }
 
   double get criticalDamageOvercapPenalty {
-    return _readNumPath(
-      combatRules,
-      <String>['critical_damage', 'overcap_penalty'],
-      fallback: 0.5,
-    ).toDouble();
+    return _readNumPath(combatRules, <String>[
+      'critical_damage',
+      'overcap_penalty',
+    ], fallback: 0.5).toDouble();
   }
 
   double get strCriticalDamagePerPoint {
-    return _readNumPath(
-      statScalingRules,
-      <String>['global_stats', 'STR', 'critical_damage'],
-    ).toDouble();
+    return _readNumPath(statScalingRules, <String>[
+      'global_stats',
+      'STR',
+      'critical_damage',
+    ]).toDouble();
   }
 
   bool get noDuplicateCrystaInSameEquipment {
-    return _readBoolPath(
-      crystaSlotRules,
-      <String>['crysta_slot_rules', 'no_duplicate_crysta_in_same_equipment'],
-      fallback: false,
-    );
+    return _readBoolPath(crystaSlotRules, <String>[
+      'crysta_slot_rules',
+      'no_duplicate_crysta_in_same_equipment',
+    ], fallback: false);
   }
 
   bool get noSameUpgradeGroupInSameEquipment {
-    return _readBoolPath(
-      crystaSlotRules,
-      <String>['crysta_slot_rules', 'no_same_upgrade_group_in_same_equipment'],
-      fallback: false,
-    );
+    return _readBoolPath(crystaSlotRules, <String>[
+      'crysta_slot_rules',
+      'no_same_upgrade_group_in_same_equipment',
+    ], fallback: false);
   }
 
   String get crystaCheckScope {
-    return _readStringPath(
-      crystaSlotRules,
-      <String>['crysta_slot_rules', 'check_scope'],
-    );
+    return _readStringPath(crystaSlotRules, <String>[
+      'crysta_slot_rules',
+      'check_scope',
+    ]);
   }
 
   String buildNameForId(String buildId) {
@@ -163,7 +180,9 @@ class BuildRuleSet {
   }
 
   dynamic combatStatPriorityForWeapon(String weaponTypeKey) {
-    final Map<String, dynamic> root = _readMap(combatRules['build_stat_priority']);
+    final Map<String, dynamic> root = _readMap(
+      combatRules['build_stat_priority'],
+    );
     if (root.isEmpty) {
       return null;
     }
@@ -178,7 +197,9 @@ class BuildRuleSet {
   }
 
   Map<String, dynamic> weaponScalingForWeapon(String weaponTypeKey) {
-    final Map<String, dynamic> root = _readMap(statScalingRules['weapon_scaling']);
+    final Map<String, dynamic> root = _readMap(
+      statScalingRules['weapon_scaling'],
+    );
     if (root.isEmpty) {
       return const <String, dynamic>{};
     }
@@ -187,6 +208,26 @@ class BuildRuleSet {
       return const <String, dynamic>{};
     }
     return _readMap(root[scalingKey]);
+  }
+
+  double refinePercentForLevel(int refineLevel) {
+    final int safeLevel = refineLevel.clamp(0, 15).toInt();
+    final num fallback = safeLevel * safeLevel;
+    return _evaluateRefineFormula(
+      formulaKey: 'percent',
+      refineLevel: safeLevel,
+      fallback: fallback,
+    ).toDouble();
+  }
+
+  double refineFlatForLevel(int refineLevel) {
+    final int safeLevel = refineLevel.clamp(0, 15).toInt();
+    final num fallback = safeLevel;
+    return _evaluateRefineFormula(
+      formulaKey: 'flat',
+      refineLevel: safeLevel,
+      fallback: fallback,
+    ).toDouble();
   }
 
   Map<String, dynamic>? _buildTypeById(String buildId) {
@@ -289,7 +330,10 @@ class BuildRuleSet {
     return fallback;
   }
 
-  static String _readStringPath(Map<String, dynamic> source, List<String> path) {
+  static String _readStringPath(
+    Map<String, dynamic> source,
+    List<String> path,
+  ) {
     final dynamic value = _readPath(source, path);
     return value?.toString().trim() ?? '';
   }
@@ -329,6 +373,39 @@ class BuildRuleSet {
     };
     return aliases[normalized] ?? normalized;
   }
+
+  num _evaluateRefineFormula({
+    required String formulaKey,
+    required int refineLevel,
+    required num fallback,
+  }) {
+    final dynamic raw = _readPath(refineRules, <String>['formula', formulaKey]);
+    final String expression = raw?.toString().trim() ?? '';
+    if (expression.isEmpty) {
+      return fallback;
+    }
+
+    final String compact = expression
+        .toLowerCase()
+        .replaceAll('refine_level', refineLevel.toString())
+        .replaceAll(RegExp(r'\s+'), '');
+    if (compact.isEmpty) {
+      return fallback;
+    }
+    if (!RegExp(r'^[0-9\.\+\-\*\/\^\(\)]+$').hasMatch(compact)) {
+      return fallback;
+    }
+
+    try {
+      final double value = _RefineFormulaParser(compact).parse();
+      if (!value.isFinite) {
+        return fallback;
+      }
+      return value;
+    } catch (_) {
+      return fallback;
+    }
+  }
 }
 
 class BuildRuleSetService {
@@ -341,6 +418,7 @@ class BuildRuleSetService {
     'crystaSlotRules': 'rules/crysta_slot_rules.json',
     'elementRules': 'rules/element_rules.json',
     'statScalingRules': 'rules/stat_scaling_rules.json',
+    'refineRules': 'rules/refine_rules.json',
   };
 
   static BuildRuleSet? _cache;
@@ -351,7 +429,8 @@ class BuildRuleSetService {
       return cached;
     }
 
-    final Map<String, Map<String, dynamic>> loaded = <String, Map<String, dynamic>>{};
+    final Map<String, Map<String, dynamic>> loaded =
+        <String, Map<String, dynamic>>{};
     for (final MapEntry<String, String> entry in _remotePaths.entries) {
       try {
         loaded[entry.key] = await _loadRemoteMap(entry.value);
@@ -368,6 +447,7 @@ class BuildRuleSetService {
       crystaSlotRules: loaded['crystaSlotRules'] ?? const <String, dynamic>{},
       elementRules: loaded['elementRules'] ?? const <String, dynamic>{},
       statScalingRules: loaded['statScalingRules'] ?? const <String, dynamic>{},
+      refineRules: loaded['refineRules'] ?? const <String, dynamic>{},
     );
     _cache = ruleSet;
     return ruleSet;
@@ -386,5 +466,122 @@ class BuildRuleSetService {
 
   static void clearCache() {
     _cache = null;
+  }
+}
+
+class _RefineFormulaParser {
+  _RefineFormulaParser(String expression)
+    : _expression = expression,
+      _length = expression.length;
+
+  final String _expression;
+  final int _length;
+  int _index = 0;
+
+  double parse() {
+    final double value = _parseExpression();
+    if (_index != _length) {
+      throw const FormatException('Unexpected trailing token.');
+    }
+    return value;
+  }
+
+  double _parseExpression() {
+    double value = _parseTerm();
+    while (_index < _length) {
+      if (_match('+')) {
+        value += _parseTerm();
+        continue;
+      }
+      if (_match('-')) {
+        value -= _parseTerm();
+        continue;
+      }
+      break;
+    }
+    return value;
+  }
+
+  double _parseTerm() {
+    double value = _parsePower();
+    while (_index < _length) {
+      if (_match('*')) {
+        value *= _parsePower();
+        continue;
+      }
+      if (_match('/')) {
+        final double divisor = _parsePower();
+        if (divisor == 0) {
+          throw const FormatException('Division by zero.');
+        }
+        value /= divisor;
+        continue;
+      }
+      break;
+    }
+    return value;
+  }
+
+  double _parsePower() {
+    double value = _parseUnary();
+    if (_match('^')) {
+      final double exponent = _parsePower();
+      value = math.pow(value, exponent).toDouble();
+    }
+    return value;
+  }
+
+  double _parseUnary() {
+    if (_match('+')) {
+      return _parseUnary();
+    }
+    if (_match('-')) {
+      return -_parseUnary();
+    }
+    return _parsePrimary();
+  }
+
+  double _parsePrimary() {
+    if (_match('(')) {
+      final double value = _parseExpression();
+      if (!_match(')')) {
+        throw const FormatException('Missing closing parenthesis.');
+      }
+      return value;
+    }
+    return _parseNumber();
+  }
+
+  double _parseNumber() {
+    final int start = _index;
+    bool sawDigit = false;
+    bool sawDot = false;
+    while (_index < _length) {
+      final int code = _expression.codeUnitAt(_index);
+      final bool isDigit = code >= 48 && code <= 57;
+      if (isDigit) {
+        sawDigit = true;
+        _index += 1;
+        continue;
+      }
+      if (!sawDot && code == 46) {
+        sawDot = true;
+        _index += 1;
+        continue;
+      }
+      break;
+    }
+    if (!sawDigit) {
+      throw const FormatException('Expected number.');
+    }
+    return double.parse(_expression.substring(start, _index));
+  }
+
+  bool _match(String token) {
+    if (_index >= _length || _expression[_index] != token) {
+      return false;
+    }
+    _index += 1;
+    return true;
   }
 }

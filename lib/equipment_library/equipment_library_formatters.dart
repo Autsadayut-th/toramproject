@@ -386,6 +386,57 @@ extension _EquipmentLibraryFormatters on _EquipmentLibraryDataViewState {
     );
   }
 
+  List<String> _elementLabelsFromStats(List<EquipmentStat> stats) {
+    const List<String> elementOrder = <String>[
+      'fire',
+      'water',
+      'wind',
+      'earth',
+      'light',
+      'dark',
+      'neutral',
+    ];
+    final Set<String> seen = <String>{};
+    final List<String> keys = <String>[];
+
+    for (final EquipmentStat stat in stats) {
+      if (stat.value <= 0) {
+        continue;
+      }
+      final String key = stat.statKey.trim().toLowerCase();
+      if (!key.endsWith('_element')) {
+        continue;
+      }
+      final String elementKey = key.substring(
+        0,
+        key.length - '_element'.length,
+      );
+      if (elementKey.isEmpty) {
+        continue;
+      }
+      if (seen.add(elementKey)) {
+        keys.add(elementKey);
+      }
+    }
+
+    keys.sort((String a, String b) {
+      final int ia = elementOrder.indexOf(a);
+      final int ib = elementOrder.indexOf(b);
+      if (ia == -1 && ib == -1) {
+        return a.compareTo(b);
+      }
+      if (ia == -1) {
+        return 1;
+      }
+      if (ib == -1) {
+        return -1;
+      }
+      return ia.compareTo(ib);
+    });
+
+    return keys.map(_titleCase).toList(growable: false);
+  }
+
   String _formatStatValue(EquipmentStat stat) {
     final String sign = stat.value > 0 ? '+' : '';
     final String suffix = stat.valueType == 'percent' ? '%' : '';

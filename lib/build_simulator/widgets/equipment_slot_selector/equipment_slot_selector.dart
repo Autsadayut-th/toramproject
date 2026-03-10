@@ -69,6 +69,24 @@ class EquipmentSlotSelector extends StatefulWidget {
 class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
   static const int _minEnhance = 0;
   static const int _maxEnhance = 15;
+  static const Map<int, String> _enhanceLabelByLevel = <int, String>{
+    0: '+0',
+    1: '+1',
+    2: '+2',
+    3: '+3',
+    4: '+4',
+    5: '+5',
+    6: '+6',
+    7: '+7',
+    8: '+8',
+    9: '+9',
+    10: '+E',
+    11: '+D',
+    12: '+C',
+    13: '+B',
+    14: '+A',
+    15: '+S',
+  };
   static const List<_InlineSearchModeOption> _inlineSearchModeOptions =
       <_InlineSearchModeOption>[
         _InlineSearchModeOption(token: 'all', label: 'All'),
@@ -108,6 +126,11 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
     final ThemeData theme = Theme.of(context);
     final double alpha = theme.brightness == Brightness.light ? light : dark;
     return theme.colorScheme.onSurface.withValues(alpha: alpha);
+  }
+
+  String _enhanceLabel(int value) {
+    final int normalized = value.clamp(_minEnhance, _maxEnhance).toInt();
+    return _enhanceLabelByLevel[normalized] ?? '+$normalized';
   }
 
   @override
@@ -944,7 +967,7 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
             ),
             const Spacer(),
             Text(
-              '+${widget.enhance}',
+              _enhanceLabel(widget.enhance),
               style: TextStyle(
                 color: colorScheme.onSurface,
                 fontSize: 12,
@@ -958,7 +981,7 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
           min: _minEnhance.toDouble(),
           max: _maxEnhance.toDouble(),
           divisions: _maxEnhance - _minEnhance,
-          label: '+${widget.enhance}',
+          label: _enhanceLabel(widget.enhance),
           activeColor: colorScheme.primary,
           inactiveColor: colorScheme.onSurface.withValues(alpha: 0.24),
           onChanged: (double value) {

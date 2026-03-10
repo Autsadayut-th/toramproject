@@ -15,6 +15,13 @@ class EquipmentLibraryQueryService {
     'statkey',
     's',
   };
+  static const Set<String> _elementSearchModes = <String>{
+    'element',
+    'elements',
+    'ele',
+    'el',
+    'e',
+  };
 
   static String normalizeTypeKey(String value) {
     String normalized = value
@@ -108,7 +115,15 @@ class EquipmentLibraryQueryService {
             case 'color':
               return item.color.toLowerCase().contains(normalizedQuery);
             case 'stat':
-              return _containsStatKey(item: item, normalizedQuery: normalizedQuery);
+              return _containsStatKey(
+                item: item,
+                normalizedQuery: normalizedQuery,
+              );
+            case 'element':
+              return _containsElement(
+                item: item,
+                normalizedQuery: normalizedQuery,
+              );
             default:
               if (item.name.toLowerCase().contains(normalizedQuery) ||
                   item.key.toLowerCase().contains(normalizedQuery) ||
@@ -117,7 +132,10 @@ class EquipmentLibraryQueryService {
                 return true;
               }
               // Let the main search match stat_key too (ex: "atk", "critical_rate").
-              return _containsStatKey(item: item, normalizedQuery: normalizedQuery);
+              return _containsStatKey(
+                item: item,
+                normalizedQuery: normalizedQuery,
+              );
           }
         })
         .toList(growable: false);
@@ -164,6 +182,53 @@ class EquipmentLibraryQueryService {
     });
   }
 
+  static bool _containsElement({
+    required EquipmentLibraryItem item,
+    required String normalizedQuery,
+  }) {
+    final Set<String> elementKeys = <String>{
+      for (final EquipmentStat stat in item.stats)
+        if (stat.value > 0) ..._extractElementKeysFromStat(stat.statKey),
+    };
+    if (elementKeys.isEmpty) {
+      return false;
+    }
+
+    final List<String> queryTokens = _tokenizeStatSearch(normalizedQuery)
+        .where((String token) => token.isNotEmpty && token != 'element')
+        .toList(growable: false);
+    if (queryTokens.isEmpty) {
+      return true;
+    }
+
+    return queryTokens.every((String token) {
+      return elementKeys.any((String elementKey) {
+        return elementKey == token || elementKey.startsWith(token);
+      });
+    });
+  }
+
+  static Set<String> _extractElementKeysFromStat(String statKey) {
+    final String normalized = _normalizeStatSearchText(statKey);
+    if (normalized.isEmpty) {
+      return const <String>{};
+    }
+    if (normalized.endsWith('_element')) {
+      final String element = normalized.substring(
+        0,
+        normalized.length - '_element'.length,
+      );
+      if (element.isNotEmpty) {
+        return <String>{element};
+      }
+      return const <String>{};
+    }
+    if (normalized == 'element') {
+      return <String>{'element'};
+    }
+    return const <String>{};
+  }
+
   static List<String> _tokenizeStatSearch(String value) {
     final String normalized = _normalizeStatSearchText(value);
     if (normalized.isEmpty) {
@@ -190,9 +255,9 @@ class EquipmentLibraryQueryService {
       return (mode: 'all', term: trimmedQuery);
     }
 
-    final RegExpMatch? match = RegExp(r'^@([a-z_]+)\s*(.*)$').firstMatch(
-      trimmedQuery,
-    );
+    final RegExpMatch? match = RegExp(
+      r'^@([a-z_]+)\s*(.*)$',
+    ).firstMatch(trimmedQuery);
     if (match == null) {
       return (mode: 'all', term: trimmedQuery.substring(1).trim());
     }
@@ -216,6 +281,9 @@ class EquipmentLibraryQueryService {
     }
     if (_statSearchModes.contains(rawMode)) {
       return (mode: 'stat', term: normalizedTerm);
+    }
+    if (_elementSearchModes.contains(rawMode)) {
+      return (mode: 'element', term: normalizedTerm);
     }
     return (mode: 'all', term: normalizedTerm);
   }

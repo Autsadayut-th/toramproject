@@ -75,13 +75,52 @@ class AiRuleEngine {
     if (!AiBuildContext.isEmpty(context.equipmentSlots.mainWeaponId) &&
         context.level >= 60 &&
         ruleSet.elementDamageBonus > 0) {
-      _addRecommendation(
-        recommendations,
-        'Element advantage can add about ${(ruleSet.elementDamageBonus * 100).toStringAsFixed(0)}% damage. Prepare element-specific weapon variants.',
-      );
+      final Set<String> equippedElements = context.equippedElements();
+      final int bonusPercent = (ruleSet.elementDamageBonus * 100).toInt();
+      if (equippedElements.isEmpty) {
+        _addRecommendation(
+          recommendations,
+          'No weapon element detected. Add an elemental weapon/arrow to gain up to about $bonusPercent% advantage damage.',
+        );
+      } else {
+        final List<String> sortedElements = equippedElements.toList(
+          growable: false,
+        )..sort();
+        if (sortedElements.length == 1) {
+          final String element = sortedElements.first;
+          final String favored = ruleSet.elementAdvantageMap[element] ?? '';
+          if (favored.isNotEmpty) {
+            _addRecommendation(
+              recommendations,
+              'Element equipped: ${_displayElement(element)}. It is strong against ${_displayElement(favored)} (+$bonusPercent% by rules).',
+            );
+          } else {
+            _addRecommendation(
+              recommendations,
+              'Element equipped: ${_displayElement(element)}. Prepare element swaps to maximize the +$bonusPercent% advantage bonus.',
+            );
+          }
+        } else {
+          _addRecommendation(
+            recommendations,
+            'Element variants detected (${sortedElements.map(_displayElement).join(', ')}). Swap per boss element for about +$bonusPercent% advantage damage.',
+          );
+        }
+      }
     }
 
     return recommendations.toList(growable: false);
+  }
+
+  String _displayElement(String value) {
+    final String cleaned = value.trim().toLowerCase();
+    if (cleaned.isEmpty) {
+      return 'Unknown';
+    }
+    if (cleaned.length == 1) {
+      return cleaned.toUpperCase();
+    }
+    return '${cleaned[0].toUpperCase()}${cleaned.substring(1)}';
   }
 
   void _addRecommendation(List<String> recommendations, String value) {

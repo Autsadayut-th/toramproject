@@ -1,4 +1,5 @@
 import '../../equipment_library/models/equipment_library_item.dart';
+import 'build_rule_set_service.dart';
 
 class BuildCalculatorService {
   static const Map<String, num> summaryTemplate = <String, num>{
@@ -214,6 +215,9 @@ class BuildCalculatorService {
     required int personalStatValue,
     required int enhanceMain,
     required int enhanceSub,
+    required int enhanceArmor,
+    required int enhanceHelmet,
+    required int enhanceRing,
     required String armorState,
     required EquipmentLibraryItem? mainWeapon,
     required EquipmentLibraryItem? subWeapon,
@@ -222,6 +226,7 @@ class BuildCalculatorService {
     required EquipmentLibraryItem? ring,
     required Iterable<EquipmentStat> equippedCrystalStats,
     required Iterable<EquipmentStat> avatarStats,
+    BuildRuleSet? ruleSet,
   }) {
     final _CalculationBuckets buckets = _CalculationBuckets();
     final int normalizedLevel = level.clamp(1, 999).toInt();
@@ -330,6 +335,7 @@ class BuildCalculatorService {
       enhanceSub: enhanceSub,
       combatWeaponType: combatWeaponType,
       subWeaponType: normalizedSubWeaponType,
+      ruleSet: ruleSet,
     );
     final double baseStability = _baseStability(
       combatWeaponType: combatWeaponType,
@@ -340,6 +346,26 @@ class BuildCalculatorService {
       intValue: intValue,
       agiValue: agiValue,
       vitValue: vitValue,
+    );
+    final double refinedEquipmentDefBase = _effectiveRefinedEquipmentBase(
+      armorBase: buckets.armorDefBase,
+      helmetBase: buckets.helmetDefBase,
+      ringBase: buckets.ringDefBase,
+      otherBase: buckets.otherEquipmentDefBase,
+      enhanceArmor: enhanceArmor,
+      enhanceHelmet: enhanceHelmet,
+      enhanceRing: enhanceRing,
+      ruleSet: ruleSet,
+    );
+    final double refinedEquipmentMdefBase = _effectiveRefinedEquipmentBase(
+      armorBase: buckets.armorMdefBase,
+      helmetBase: buckets.helmetMdefBase,
+      ringBase: buckets.ringMdefBase,
+      otherBase: buckets.otherEquipmentMdefBase,
+      enhanceArmor: enhanceArmor,
+      enhanceHelmet: enhanceHelmet,
+      enhanceRing: enhanceRing,
+      ruleSet: ruleSet,
     );
 
     final Map<String, double> derivedBaseByKey = <String, double>{
@@ -370,11 +396,11 @@ class BuildCalculatorService {
       'DEF':
           normalizedLevel +
           (vitValue * _defArmorModifier[effectiveArmorState]!) +
-          buckets.equipmentDefBase,
+          refinedEquipmentDefBase,
       'MDEF':
           normalizedLevel +
           (intValue * _mdefArmorModifier[effectiveArmorState]!) +
-          buckets.equipmentMdefBase,
+          refinedEquipmentMdefBase,
       'ASPD':
           normalizedLevel +
           (_aspdBaseByWeapon[combatWeaponType] ?? 0) +
@@ -512,11 +538,25 @@ class BuildCalculatorService {
     }
 
     if (targetKey == 'DEF' && normalizedValueType == _baseValueType) {
-      buckets.equipmentDefBase += value;
+      _addEquipmentBaseForSlot(
+        slot: slot,
+        value: value,
+        onArmor: (double v) => buckets.armorDefBase += v,
+        onHelmet: (double v) => buckets.helmetDefBase += v,
+        onRing: (double v) => buckets.ringDefBase += v,
+        onOther: (double v) => buckets.otherEquipmentDefBase += v,
+      );
       return;
     }
     if (targetKey == 'MDEF' && normalizedValueType == _baseValueType) {
-      buckets.equipmentMdefBase += value;
+      _addEquipmentBaseForSlot(
+        slot: slot,
+        value: value,
+        onArmor: (double v) => buckets.armorMdefBase += v,
+        onHelmet: (double v) => buckets.helmetMdefBase += v,
+        onRing: (double v) => buckets.ringMdefBase += v,
+        onOther: (double v) => buckets.otherEquipmentMdefBase += v,
+      );
       return;
     }
     if (targetKey == 'Stability' && normalizedValueType == _baseValueType) {
@@ -578,10 +618,12 @@ class BuildCalculatorService {
     required int enhanceSub,
     required String combatWeaponType,
     required String subWeaponType,
+    BuildRuleSet? ruleSet,
   }) {
     final double refinedMainWeaponAtk = _refinedWeaponAtk(
       baseWeaponAtk: mainWeaponAtkBase,
       refineLevel: enhanceMain,
+      ruleSet: ruleSet,
     );
     final double refinedSubWeaponAtk =
         _subWeaponAddsWeaponAtk(
@@ -593,23 +635,101 @@ class BuildCalculatorService {
             refineLevel: _subWeaponUsesWeaponRefine(subWeaponType)
                 ? enhanceSub
                 : 0,
+            ruleSet: ruleSet,
           )
         : supplementalWeaponAtkBase;
     return (refinedMainWeaponAtk + refinedSubWeaponAtk + weaponAtkFlat) *
         (1 + (weaponAtkPercent / 100));
   }
 
+  static double _effectiveRefinedEquipmentBase({
+    required double armorBase,
+    required double helmetBase,
+    required double ringBase,
+    required double otherBase,
+    required int enhanceArmor,
+    required int enhanceHelmet,
+    required int enhanceRing,
+    BuildRuleSet? ruleSet,
+  }) {
+    return _refinedEquipmentBaseValue(
+          baseValue: armorBase,
+          refineLevel: enhanceArmor,
+          ruleSet: ruleSet,
+        ) +
+        _refinedEquipmentBaseValue(
+          baseValue: helmetBase,
+          refineLevel: enhanceHelmet,
+          ruleSet: ruleSet,
+        ) +
+        _refinedEquipmentBaseValue(
+          baseValue: ringBase,
+          refineLevel: enhanceRing,
+          ruleSet: ruleSet,
+        ) +
+        otherBase;
+  }
+
   static double _refinedWeaponAtk({
     required double baseWeaponAtk,
     required int refineLevel,
+    BuildRuleSet? ruleSet,
   }) {
     if (baseWeaponAtk <= 0 || refineLevel <= 0) {
       return baseWeaponAtk;
     }
     final int normalizedRefine = refineLevel.clamp(0, 15).toInt();
+    final double flatRefineBonus =
+        ruleSet?.refineFlatForLevel(normalizedRefine) ??
+        normalizedRefine.toDouble();
+    final double percentRefineBonus =
+        ruleSet?.refinePercentForLevel(normalizedRefine) ??
+        (normalizedRefine * normalizedRefine).toDouble();
     return baseWeaponAtk +
-        normalizedRefine +
-        (baseWeaponAtk * normalizedRefine * normalizedRefine / 100);
+        flatRefineBonus +
+        (baseWeaponAtk * percentRefineBonus / 100);
+  }
+
+  static double _refinedEquipmentBaseValue({
+    required double baseValue,
+    required int refineLevel,
+    BuildRuleSet? ruleSet,
+  }) {
+    if (baseValue <= 0 || refineLevel <= 0) {
+      return baseValue;
+    }
+    final int normalizedRefine = refineLevel.clamp(0, 15).toInt();
+    final double flatRefineBonus =
+        ruleSet?.refineFlatForLevel(normalizedRefine) ??
+        normalizedRefine.toDouble();
+    final double percentRefineBonus =
+        ruleSet?.refinePercentForLevel(normalizedRefine) ??
+        (normalizedRefine * normalizedRefine).toDouble();
+    return baseValue + flatRefineBonus + (baseValue * percentRefineBonus / 100);
+  }
+
+  static void _addEquipmentBaseForSlot({
+    required String slot,
+    required double value,
+    required void Function(double) onArmor,
+    required void Function(double) onHelmet,
+    required void Function(double) onRing,
+    required void Function(double) onOther,
+  }) {
+    switch (slot) {
+      case 'armor':
+        onArmor(value);
+        return;
+      case 'helmet':
+        onHelmet(value);
+        return;
+      case 'ring':
+        onRing(value);
+        return;
+      default:
+        onOther(value);
+        return;
+    }
   }
 
   static double _baseStability({
@@ -885,6 +1005,12 @@ class _CalculationBuckets {
   double weaponAtkPercent = 0;
   double mainWeaponBaseStability = 0;
   double supplementalStabilityBase = 0;
-  double equipmentDefBase = 0;
-  double equipmentMdefBase = 0;
+  double armorDefBase = 0;
+  double helmetDefBase = 0;
+  double ringDefBase = 0;
+  double otherEquipmentDefBase = 0;
+  double armorMdefBase = 0;
+  double helmetMdefBase = 0;
+  double ringMdefBase = 0;
+  double otherEquipmentMdefBase = 0;
 }

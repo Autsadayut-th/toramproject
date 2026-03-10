@@ -297,12 +297,26 @@ class EquipmentStat {
   final String valueType;
   final EquipmentStatCondition? condition;
 
+  static const Set<String> _knownElementKeys = <String>{
+    'fire',
+    'water',
+    'wind',
+    'earth',
+    'light',
+    'dark',
+    'neutral',
+  };
+
   factory EquipmentStat.fromJson(Map<String, dynamic> json) {
     final String legacyKey = json['key']?.toString().trim() ?? '';
     String normalizedKey = json['stat_key']?.toString().trim() ?? '';
     if (normalizedKey.isEmpty) {
       normalizedKey = legacyKey.replaceFirst(RegExp(r'_pct$'), '');
     }
+    normalizedKey = _normalizeElementStatKey(
+      normalizedKey,
+      rawValue: json['value'],
+    );
 
     String valueType = json['value_type']?.toString().trim() ?? '';
     if (valueType.isEmpty) {
@@ -311,10 +325,64 @@ class EquipmentStat {
 
     return EquipmentStat(
       statKey: normalizedKey,
-      value: _readNumericValue(json['value']),
+      value: _normalizeElementStatValue(
+        normalizedKey: normalizedKey,
+        rawValue: json['value'],
+      ),
       valueType: valueType,
       condition: EquipmentStatCondition.fromDynamic(json['condition']),
     );
+  }
+
+  static String _normalizeElementStatKey(String rawKey, {dynamic rawValue}) {
+    final String key = rawKey.trim().toLowerCase();
+    if (key != 'element') {
+      return rawKey;
+    }
+
+    final String value = rawValue?.toString().trim().toLowerCase() ?? '';
+    if (_knownElementKeys.contains(value)) {
+      return '${value}_element';
+    }
+    return rawKey;
+  }
+
+  static num _normalizeElementStatValue({
+    required String normalizedKey,
+    required dynamic rawValue,
+  }) {
+    final String key = normalizedKey.trim().toLowerCase();
+    if (!key.endsWith('_element')) {
+      return _readNumericValue(rawValue);
+    }
+
+    if (rawValue is bool) {
+      return rawValue ? 1 : 0;
+    }
+    if (rawValue is num) {
+      return rawValue;
+    }
+    if (rawValue is String) {
+      final String text = rawValue.trim().toLowerCase();
+      if (text.isEmpty) {
+        return 0;
+      }
+      final num? parsed = num.tryParse(text);
+      if (parsed != null) {
+        return parsed;
+      }
+      if (text == 'true') {
+        return 1;
+      }
+      if (text == 'false') {
+        return 0;
+      }
+      if (_knownElementKeys.contains(text)) {
+        return 1;
+      }
+      return 1;
+    }
+    return 1;
   }
 
   static num _readNumericValue(dynamic value) {

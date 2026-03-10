@@ -373,6 +373,9 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
       personalStatValue: _personalStatValue,
       enhanceMain: _enhMain,
       enhanceSub: _enhSub,
+      enhanceArmor: _enhArmor,
+      enhanceHelmet: _enhHelmet,
+      enhanceRing: _enhRing,
       armorState: _armorMode,
       mainWeapon: mainWeapon,
       subWeapon: subWeapon,
@@ -381,6 +384,7 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
       ring: ring,
       equippedCrystalStats: equippedCrystalStats,
       avatarStats: avatarStats,
+      ruleSet: _ruleSet,
     );
     _recommendationItems = BuildRecommendationService.generateItems(
       summary: _summary,

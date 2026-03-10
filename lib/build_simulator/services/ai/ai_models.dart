@@ -257,6 +257,25 @@ class AiBuildContext {
     return total;
   }
 
+  Set<String> equippedElements() {
+    final Set<String> elements = <String>{};
+    for (final EquipmentStat stat in combinedStats) {
+      final String key = stat.statKey.trim().toLowerCase();
+      if (!key.endsWith('_element')) {
+        continue;
+      }
+      if (stat.value <= 0) {
+        continue;
+      }
+      final String element = key.substring(0, key.length - '_element'.length);
+      if (element.isEmpty) {
+        continue;
+      }
+      elements.add(element);
+    }
+    return elements;
+  }
+
   bool hasDuplicateUpgradeGroup(List<String> crystalKeys) {
     final Set<String> seenRoots = <String>{};
     for (final String key in crystalKeys) {

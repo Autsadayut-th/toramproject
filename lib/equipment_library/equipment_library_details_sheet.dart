@@ -7,6 +7,8 @@ extension _EquipmentLibraryDetailsSheet on _EquipmentLibraryDataViewState {
   }) {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final List<String> elementLabels = _elementLabelsFromStats(item.stats);
+    final List<EquipmentStat> detailStats = item.stats.toList(growable: false);
     final Color accentColor = _itemAccentColor(
       item: item,
       activeCategory: activeCategory,
@@ -107,6 +109,45 @@ extension _EquipmentLibraryDetailsSheet on _EquipmentLibraryDataViewState {
                       ),
                     ],
                   ),
+                  if (elementLabels.isNotEmpty) ...<Widget>[
+                    const SizedBox(height: 10),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: accentColor.withValues(
+                          alpha: isLight ? 0.2 : 0.16,
+                        ),
+                        borderRadius: BorderRadius.circular(999),
+                        border: Border.all(
+                          color: accentColor.withValues(
+                            alpha: isLight ? 0.72 : 0.62,
+                          ),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Icon(
+                            Icons.bolt_rounded,
+                            size: 14,
+                            color: accentColor,
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            'Element: ${elementLabels.join(', ')}',
+                            style: TextStyle(
+                              color: colorScheme.onSurface,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: 12),
                   _buildEquipmentImageBox(
                     item,
@@ -144,7 +185,7 @@ extension _EquipmentLibraryDetailsSheet on _EquipmentLibraryDataViewState {
                   const SizedBox(height: 14),
                   Divider(color: colorScheme.onSurface.withValues(alpha: 0.2)),
                   const SizedBox(height: 6),
-                  for (final EquipmentStat stat in item.stats)
+                  for (final EquipmentStat stat in detailStats)
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       dense: true,

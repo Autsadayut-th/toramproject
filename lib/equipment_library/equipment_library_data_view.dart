@@ -51,6 +51,11 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
       label: 'Stat',
       description: 'Search stat_key',
     ),
+    _SearchModeOption(
+      token: 'element',
+      label: 'Element',
+      description: 'Search elemental attribute',
+    ),
   ];
   static const List<String> _weaponTypeFilterOrder = <String>[
     '1h_sword',
@@ -939,7 +944,7 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
           cursorColor: colorScheme.primary,
           decoration: InputDecoration(
             hintText:
-                'Search by name, key, type, color, stat... (type @ to choose)',
+                'Search by name, key, type, color, stat, element... (type @ to choose)',
             hintStyle: TextStyle(
               color: colorScheme.onSurface.withValues(alpha: 0.54),
             ),

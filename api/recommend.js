@@ -505,7 +505,7 @@ function parseModelRecommendations(text) {
 }
 
 function normalizeExplanationSummary(value) {
-  const text = String(value || '').trim().replace(/\s+/g, ' ');
+  const text = normalizeLooseExplanationLine(value);
   if (!isMeaningfulExplanationText(text)) {
     return 'Gemini explanation is unavailable, but the local recommendations remain valid.';
   }
@@ -527,7 +527,7 @@ function normalizeExplanations(value, recommendations) {
   }
 
   const cleaned = value
-    .map((item) => String(item || '').trim().replace(/\s+/g, ' '))
+    .map((item) => normalizeLooseExplanationLine(item))
     .filter((line) => isMeaningfulExplanationText(line))
     .slice(0, recommendations.length);
 
@@ -538,15 +538,50 @@ function normalizeExplanations(value, recommendations) {
   return cleaned;
 }
 
+function normalizeLooseExplanationLine(value) {
+  let text = String(value || '').trim();
+  if (!text) {
+    return '';
+  }
+
+  text = text
+    .replace(/^\d+[\).:-]\s*/, '')
+    .replace(/^[-*]\s*/, '')
+    .trim();
+
+  text = text.replace(/^["']?((summary)|(explanations?))["']?\s*[:：]\s*/i, '');
+  text = text.replace(/^\[\s*/, '').replace(/\s*\]$/, '').trim();
+  text = text.replace(/,$/, '').trim();
+
+  const hasWrappedDoubleQuote = text.startsWith('"') && text.endsWith('"');
+  const hasWrappedSingleQuote = text.startsWith("'") && text.endsWith("'");
+  if (hasWrappedDoubleQuote || hasWrappedSingleQuote) {
+    text = text.slice(1, -1).trim();
+  }
+
+  text = text
+    .replace(/\\"/g, '"')
+    .replace(/\\'/g, "'")
+    .replace(/\\n/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (!text || text === '[' || text === ']' || text === '{' || text === '}') {
+    return '';
+  }
+
+  return text;
+}
+
 function isMeaningfulExplanationText(value) {
-  const text = String(value || '').trim().replace(/\s+/g, ' ');
+  const text = normalizeLooseExplanationLine(value);
   if (!text) {
     return false;
   }
   if (!/[\p{L}\p{N}]/u.test(text)) {
     return false;
   }
-  if (/^(summary|explanations?)\s*[:：]?\s*$/i.test(text)) {
+  if (/^(summary|explanations?)$/i.test(text)) {
     return false;
   }
   return true;
@@ -572,15 +607,12 @@ function parseLooseExplanationPayload(text, recommendations) {
   const cleaned = stripCodeFence(String(text || '')).trim();
   const lines = cleaned
     .split('\n')
-    .map((line) =>
-      line
-        .trim()
-        .replace(/^\d+[\).:-]\s*/, '')
-        .replace(/^[-*]\s*/, '')
-        .trim(),
-    )
+    .map((line) => normalizeLooseExplanationLine(line))
     .filter((line) => isMeaningfulExplanationText(line));
-  const summarySeed = lines[0] || (isMeaningfulExplanationText(cleaned) ? cleaned : '');
+  const fallbackSummary = normalizeLooseExplanationLine(cleaned);
+  const summarySeed =
+    lines[0] ||
+    (isMeaningfulExplanationText(fallbackSummary) ? fallbackSummary : '');
   const summary = normalizeExplanationSummary(summarySeed);
   const explanationCandidates = lines.length > 1 ? lines.slice(1) : lines;
   return {
