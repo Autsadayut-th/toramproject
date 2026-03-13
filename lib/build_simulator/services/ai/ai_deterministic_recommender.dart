@@ -34,20 +34,47 @@ class AiDeterministicRecommender {
       );
     }
 
+    if (context.level < 60) {
+      return;
+    }
+
+    final List<String> refineTargets = <String>[];
+    final int mainWeaponTarget = _targetMainWeaponRefine(context.level);
     if (!AiBuildContext.isEmpty(context.equipmentSlots.mainWeaponId) &&
-        context.equipmentSlots.enhanceMain < 9 &&
-        context.level >= 60) {
+        context.equipmentSlots.enhanceMain < mainWeaponTarget) {
+      refineTargets.add(
+        'Main Weapon +${context.equipmentSlots.enhanceMain} -> ${_refineLabel(context, mainWeaponTarget)}',
+      );
+    }
+
+    final int armorTarget = _targetArmorRefine(context.level);
+    if (!AiBuildContext.isEmpty(context.equipmentSlots.armorId) &&
+        context.equipmentSlots.enhanceArmor < armorTarget) {
+      refineTargets.add(
+        'Armor +${context.equipmentSlots.enhanceArmor} -> ${_refineLabel(context, armorTarget)}',
+      );
+    }
+
+    final int helmetTarget = _targetHelmetRefine(context.level);
+    if (!AiBuildContext.isEmpty(context.equipmentSlots.helmetId) &&
+        context.equipmentSlots.enhanceHelmet < helmetTarget) {
+      refineTargets.add(
+        'Helmet +${context.equipmentSlots.enhanceHelmet} -> ${_refineLabel(context, helmetTarget)}',
+      );
+    }
+
+    if (refineTargets.isNotEmpty) {
       _add(
         items,
         AiRecommendationItem.fromText(
           message:
-              'Upgrade path: refine Main Weapon from +${context.equipmentSlots.enhanceMain} toward +9 for stable attack scaling.',
+              'Upgrade path: refine ${refineTargets.join(', ')} to match Lv.${context.level} progression.',
           category: 'upgrade_path',
           priority: 2,
           source: 'rule',
           confidence: 0.9,
           reason:
-              'Weapon refine gives one of the largest deterministic damage gains.',
+              'Refine targets are scaled by level so offense and survivability grow consistently.',
         ),
       );
     }
@@ -208,6 +235,66 @@ class AiDeterministicRecommender {
           return '${token[0].toUpperCase()}${token.substring(1)}';
         })
         .join(' ');
+  }
+
+  int _targetMainWeaponRefine(int level) {
+    if (level >= 220) {
+      return 12;
+    }
+    if (level >= 150) {
+      return 10;
+    }
+    return 9;
+  }
+
+  int _targetArmorRefine(int level) {
+    if (level >= 220) {
+      return 10;
+    }
+    if (level >= 150) {
+      return 9;
+    }
+    return 7;
+  }
+
+  int _targetHelmetRefine(int level) {
+    if (level >= 220) {
+      return 9;
+    }
+    if (level >= 150) {
+      return 7;
+    }
+    return 5;
+  }
+
+  String _refineLabel(AiBuildContext context, int level) {
+    final int normalized = level.clamp(0, 15).toInt();
+    final dynamic rawLevels = context.ruleSet?.refineRules['levels'];
+    if (rawLevels is Map) {
+      for (final MapEntry<dynamic, dynamic> entry in rawLevels.entries) {
+        final int? value = _toInt(entry.value);
+        if (value == normalized) {
+          final String label = entry.key?.toString().trim() ?? '';
+          if (label.isNotEmpty) {
+            return label;
+          }
+        }
+      }
+    }
+    return '+$normalized';
+  }
+
+  int? _toInt(dynamic value) {
+    if (value is int) {
+      return value;
+    }
+    if (value is num) {
+      return value.toInt();
+    }
+    if (value is String) {
+      return int.tryParse(value.trim());
+    }
+    return null;
   }
 
   void _add(List<AiRecommendationItem> items, AiRecommendationItem candidate) {

@@ -587,7 +587,13 @@ function isMeaningfulExplanationText(value) {
   return true;
 }
 
-function withRecommendationItemExplanations(items, explanations) {
+function withRecommendationItemExplanations(
+  items,
+  explanations,
+  options = {},
+) {
+  const preferGeneratedExplanations =
+    Boolean(options.preferGeneratedExplanations);
   const normalizedItems = normalizeRecommendationItems(
     items,
     recommendationItemsToTexts(items),
@@ -598,7 +604,10 @@ function withRecommendationItemExplanations(items, explanations) {
   );
   return normalizedItems.map((item, index) => {
     const existing = String(item.explanation || '').trim();
-    const explanation = existing || normalizedExplanations[index] || '';
+    const generated = normalizedExplanations[index] || '';
+    const explanation = preferGeneratedExplanations
+      ? generated || existing || ''
+      : existing || generated || '';
     return { ...item, explanation };
   });
 }
@@ -1041,6 +1050,7 @@ module.exports = async function handler(req, res) {
     const recommendationItemsWithExplanations = withRecommendationItemExplanations(
       fallbackRecommendationItems,
       cached.explanations,
+      { preferGeneratedExplanations: true },
     );
     return res.status(200).json({
       source: 'gemini',
@@ -1066,6 +1076,7 @@ module.exports = async function handler(req, res) {
       withRecommendationItemExplanations(
         fallbackRecommendationItems,
         aiResult.explanations,
+        { preferGeneratedExplanations: true },
       );
     return res.status(200).json({
       source: aiResult.provider,

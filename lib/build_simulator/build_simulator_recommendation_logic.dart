@@ -430,11 +430,7 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
       _showRestrictionMessage('Login required to use AI Generate.');
       return;
     }
-    final List<EquipmentLibraryItem> equippedItems = _equippedItems().toList(
-      growable: false,
-    );
     final Map<String, dynamic> payload = _buildAiRequestPayload(
-      equippedItems: equippedItems,
       fallbackRecommendations: _recommendations,
       fallbackRecommendationItems: _recommendationItems,
     );
@@ -443,7 +439,6 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
   }
 
   Map<String, dynamic> _buildAiRequestPayload({
-    required List<EquipmentLibraryItem> equippedItems,
     required List<String> fallbackRecommendations,
     required List<AiRecommendationItem> fallbackRecommendationItems,
   }) {
@@ -465,32 +460,6 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
         'enhanceHelmet': _enhHelmet,
         'enhanceRing': _enhRing,
       },
-      'avatarGachaStats': _selectedGachaStatsList()
-          .map(
-            (EquipmentStat stat) => <String, dynamic>{
-              'statKey': stat.statKey,
-              'value': stat.value,
-              'valueType': stat.valueType,
-            },
-          )
-          .toList(growable: false),
-      'equippedItems': equippedItems
-          .map(
-            (EquipmentLibraryItem item) => <String, dynamic>{
-              'name': item.name,
-              'type': item.type,
-              'stats': item.stats
-                  .map(
-                    (EquipmentStat stat) => <String, dynamic>{
-                      'statKey': stat.statKey,
-                      'value': stat.value,
-                      'valueType': stat.valueType,
-                    },
-                  )
-                  .toList(growable: false),
-            },
-          )
-          .toList(growable: false),
       'fallbackRecommendations': List<String>.from(fallbackRecommendations),
       'fallbackRecommendationItems': fallbackRecommendationItems
           .map((AiRecommendationItem item) => item.toJson())
