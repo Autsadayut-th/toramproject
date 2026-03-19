@@ -158,6 +158,7 @@ class _AppShellScreenState extends State<AppShellScreen> {
     final bool isMobile = MediaQuery.sizeOf(context).width < 1024;
     final bool showMobileBuildSummaryLeading =
         isMobile && _currentPage == AppNavigationPage.build;
+    final bool hasDrawer = !isMobile || showMobileBuildSummaryLeading;
 
     void onNavigateFromDrawer(AppNavigationPage page) {
       Navigator.of(context).pop();
@@ -168,7 +169,7 @@ class _AppShellScreenState extends State<AppShellScreen> {
       appBar: AppBar(
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
-        leadingWidth: 84,
+        leadingWidth: hasDrawer ? 84 : 52,
         titleSpacing: 6,
         title: Text(
           _getPageTitle(_currentPage),
@@ -182,13 +183,15 @@ class _AppShellScreenState extends State<AppShellScreen> {
           builder: (BuildContext context) {
             return Row(
               children: <Widget>[
-                IconButton(
-                  icon: const Icon(Icons.menu),
-                  onPressed: () => Scaffold.of(context).openDrawer(),
-                  tooltip: showMobileBuildSummaryLeading
-                      ? 'Build Summary'
-                      : 'Navigation menu',
-                ),
+                if (hasDrawer)
+                  IconButton(
+                    icon: const Icon(Icons.menu),
+                    onPressed: () => Scaffold.of(context).openDrawer(),
+                    tooltip: showMobileBuildSummaryLeading
+                        ? 'Build Summary'
+                        : 'Navigation menu',
+                  ),
+                if (!hasDrawer) const SizedBox(width: 8),
                 Container(
                   width: 28,
                   height: 28,
@@ -306,6 +309,8 @@ class _AppShellScreenState extends State<AppShellScreen> {
               coordinator: _coordinator,
               hasAdvancedAccess: _currentUser != null,
             )
+          : isMobile
+          ? null
           : AppNavigationDrawer(
               currentPage: _currentPage,
               onOpenBuild: () => onNavigateFromDrawer(AppNavigationPage.build),

@@ -25,6 +25,7 @@ class AppNavigationDrawer extends StatelessWidget {
     required this.onOpenSaved,
     required this.onOpenCompare,
     required this.onOpenSettings,
+    this.showOnlyBuild = false,
   });
 
   final AppNavigationPage currentPage;
@@ -35,6 +36,7 @@ class AppNavigationDrawer extends StatelessWidget {
   final VoidCallback onOpenSaved;
   final VoidCallback onOpenCompare;
   final VoidCallback onOpenSettings;
+  final bool showOnlyBuild;
 
   bool _isFirebaseAvailable() {
     try {
@@ -60,6 +62,8 @@ class AppNavigationDrawer extends StatelessWidget {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final bool firebaseAvailable = _isFirebaseAvailable();
     final bool isAuthenticated = _readAuthenticatedState(firebaseAvailable);
+    final bool isMobile = MediaQuery.sizeOf(context).width < 1024;
+    final bool showBuildOnly = showOnlyBuild || isMobile;
 
     return Drawer(
       backgroundColor: colorScheme.surface,
@@ -130,14 +134,15 @@ class AppNavigationDrawer extends StatelessWidget {
                     selected: currentPage == AppNavigationPage.build,
                     onTap: onOpenBuild,
                   ),
-                  _tile(
-                    context: context,
-                    icon: Icons.menu_book_outlined,
-                    label: 'Equipment Library',
-                    selected: currentPage == AppNavigationPage.equipment,
-                    onTap: onOpenEquipment,
-                  ),
-                  if (onOpenCritical != null)
+                  if (!showBuildOnly)
+                    _tile(
+                      context: context,
+                      icon: Icons.menu_book_outlined,
+                      label: 'Equipment Library',
+                      selected: currentPage == AppNavigationPage.equipment,
+                      onTap: onOpenEquipment,
+                    ),
+                  if (!showBuildOnly && onOpenCritical != null)
                     _tile(
                       context: context,
                       icon: Icons.track_changes,
@@ -145,20 +150,22 @@ class AppNavigationDrawer extends StatelessWidget {
                       selected: currentPage == AppNavigationPage.critical,
                       onTap: onOpenCritical!,
                     ),
-                  _tile(
-                    context: context,
-                    icon: Icons.bookmark_border,
-                    label: 'Saved Builds',
-                    selected: currentPage == AppNavigationPage.saved,
-                    onTap: onOpenSaved,
-                  ),
-                  _tile(
-                    context: context,
-                    icon: Icons.compare_arrows,
-                    label: 'Compare Builds',
-                    selected: currentPage == AppNavigationPage.compare,
-                    onTap: onOpenCompare,
-                  ),
+                  if (!showBuildOnly)
+                    _tile(
+                      context: context,
+                      icon: Icons.bookmark_border,
+                      label: 'Saved Builds',
+                      selected: currentPage == AppNavigationPage.saved,
+                      onTap: onOpenSaved,
+                    ),
+                  if (!showBuildOnly)
+                    _tile(
+                      context: context,
+                      icon: Icons.compare_arrows,
+                      label: 'Compare Builds',
+                      selected: currentPage == AppNavigationPage.compare,
+                      onTap: onOpenCompare,
+                    ),
                 ],
               ),
             ),

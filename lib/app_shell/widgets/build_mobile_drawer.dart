@@ -577,6 +577,8 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
             final String aiMessage = coordinator.aiRecommendationMessage;
             final bool hasRemoteAi = _isRemoteAiSource(aiSource);
             final bool canUseAiGeneration = widget.hasAdvancedAccess;
+            final bool canTriggerAi =
+                canUseAiGeneration && coordinator.canGenerateAiRecommendations;
             final bool shouldShowRecommendations =
                 coordinator.showRecommendations && canUseAiGeneration;
             final bool hasSaveLimit = _hasSaveLimit;
@@ -655,6 +657,34 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                               ),
                             ),
                           ],
+                        ),
+                        const SizedBox(height: 10),
+                        Align(
+                          alignment: Alignment.center,
+                          child: OutlinedButton.icon(
+                            onPressed: !canTriggerAi || isAiLoading
+                                ? null
+                                : coordinator.generateAiRecommendations,
+                            icon: Icon(
+                              isAiLoading ? Icons.sync : Icons.auto_awesome,
+                              size: 14,
+                            ),
+                            label: Text(
+                              isAiLoading ? 'Generating...' : 'Generate',
+                            ),
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: colorScheme.onSurface,
+                              side: BorderSide(
+                                color: colorScheme.onSurface.withValues(
+                                  alpha: 0.35,
+                                ),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 18,
+                                vertical: 8,
+                              ),
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         if (aiRecommendations.isEmpty)

@@ -12,6 +12,7 @@ extension _BuildSimulatorDataLoading on BuildSimulatorScreenState {
       onMergeSavedBuilds: _onMergeSavedBuilds,
       onSetShowRecommendations: _setShowRecommendationsPanel,
       onClearAllData: _onClearAll,
+      onGenerateAiRecommendations: _generateAiRecommendationsNow,
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) {

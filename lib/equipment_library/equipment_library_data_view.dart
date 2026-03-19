@@ -908,11 +908,16 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
                   ),
                   const SizedBox(height: 12),
                 ],
-                if (compact) ...<Widget>[
-                  _buildSearchField(),
-                  const SizedBox(height: 12),
-                  Align(alignment: Alignment.centerRight, child: filterButton),
-                ] else
+                if (compact)
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(child: _buildSearchField()),
+                      const SizedBox(width: 10),
+                      filterButton,
+                    ],
+                  )
+                else
                   Row(
                     children: <Widget>[
                       Expanded(child: _buildSearchField()),

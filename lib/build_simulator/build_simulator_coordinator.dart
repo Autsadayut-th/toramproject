@@ -43,6 +43,7 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
   void Function(List<Map<String, dynamic>> builds)? _mergeSavedBuilds;
   void Function(bool value)? _setShowRecommendations;
   VoidCallback? _clearAllData;
+  VoidCallback? _generateAiRecommendations;
 
   List<Map<String, dynamic>> get savedBuilds => _savedBuilds
       .map((Map<String, dynamic> item) {
@@ -85,6 +86,7 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     onMergeSavedBuilds,
     required void Function(bool value) onSetShowRecommendations,
     required VoidCallback onClearAllData,
+    required VoidCallback onGenerateAiRecommendations,
   }) {
     _loadBuildById = onLoadBuildById;
     _saveBuildByName = onSaveBuildByName;
@@ -95,6 +97,7 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     _mergeSavedBuilds = onMergeSavedBuilds;
     _setShowRecommendations = onSetShowRecommendations;
     _clearAllData = onClearAllData;
+    _generateAiRecommendations = onGenerateAiRecommendations;
   }
 
   void detachHandlers() {
@@ -107,6 +110,7 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     _mergeSavedBuilds = null;
     _setShowRecommendations = null;
     _clearAllData = null;
+    _generateAiRecommendations = null;
   }
 
   void updateSnapshot({
@@ -184,5 +188,11 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
 
   void clearAllData() {
     _clearAllData?.call();
+  }
+
+  bool get canGenerateAiRecommendations => _generateAiRecommendations != null;
+
+  void generateAiRecommendations() {
+    _generateAiRecommendations?.call();
   }
 }
