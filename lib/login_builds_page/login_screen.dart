@@ -1,4 +1,8 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../account_page/account_page.dart';
 import '../app_shell/app_shell_page.dart';
@@ -89,6 +93,31 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Future<void> _signInWithGoogle() async {
+    if (_isLoading) {
+      return;
+    }
+
+    _setLoading(true);
+
+    final AuthResult result = await _authService.signInWithGoogle();
+
+    if (!mounted) {
+      return;
+    }
+
+    _setLoading(false);
+
+    _showMessage(
+      result.message,
+      backgroundColor: LoginFormService.messageColorFor(result),
+    );
+
+    if (result.success) {
+      _goToHomeFromLoginRoute();
+    }
+  }
+
   void _openWithoutLogin() {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute<void>(
@@ -124,10 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  void _showMessage(
-    String message, {
-    Color? backgroundColor,
-  }) {
+  void _showMessage(String message, {Color? backgroundColor}) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -168,13 +194,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontSize: 26,
                       fontWeight: FontWeight.w700,
                       color: colorScheme.onSurface,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    'Use your Firebase account to continue.',
-                    style: TextStyle(
-                      color: colorScheme.onSurface.withValues(alpha: 0.72),
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -251,18 +270,61 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 6),
                   OutlinedButton(
+                    onPressed: _isLoading ? null : _signInWithGoogle,
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: colorScheme.onSurface,
+                      side: BorderSide(
+                        color: colorScheme.onSurface.withValues(alpha: 0.3),
+                      ),
+                      minimumSize: const Size.fromHeight(48),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SvgPicture.network(
+                          'https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg',
+                          width: 20,
+                          height: 20,
+                          placeholderBuilder: (BuildContext context) => Icon(
+                            Icons.account_circle,
+                            size: 20,
+                            color: colorScheme.onSurface.withValues(
+                              alpha: 0.75,
+                            ),
+                          ),
+                          colorFilter: ColorFilter.mode(
+                            colorScheme.onSurface.withValues(alpha: 0.8),
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        const Text(
+                          'Sign in with Google',
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  OutlinedButton(
                     onPressed: _isLoading ? null : _openWithoutLogin,
                     style: OutlinedButton.styleFrom(
                       foregroundColor: colorScheme.onSurface,
                       side: BorderSide(
                         color: colorScheme.onSurface.withValues(alpha: 0.3),
                       ),
-                      minimumSize: const Size.fromHeight(44),
+                      minimumSize: const Size.fromHeight(48),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text('Open simulator without guest'),
+                    child: const Text(
+                      'Open simulator as guest',
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
                   ),
                 ],
               ),
@@ -285,11 +347,16 @@ class _LoginScreenState extends State<LoginScreen> {
       hintText: hint,
       filled: true,
       fillColor: colorScheme.surfaceContainerHighest,
-      labelStyle: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.9)),
+      labelStyle: TextStyle(
+        color: colorScheme.onSurface.withValues(alpha: 0.9),
+      ),
       hintStyle: TextStyle(
         color: colorScheme.onSurface.withValues(alpha: 0.42),
       ),
-      prefixIcon: Icon(icon, color: colorScheme.onSurface.withValues(alpha: 0.75)),
+      prefixIcon: Icon(
+        icon,
+        color: colorScheme.onSurface.withValues(alpha: 0.75),
+      ),
       suffixIcon: suffixIcon,
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),

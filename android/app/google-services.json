@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "226367086845-acd0uhjfgdhgo1m564fjbmadmno11gsj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.toramonline",
+            "certificate_hash": "0d5824222731008af3c50fdf2cce30268dc1016c"
+          }
+        },
+        {
           "client_id": "226367086845-60qacrse8omvgincjkkrk1ivmvk0uljb.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "226367086845-60qacrse8omvgincjkkrk1ivmvk0uljb.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "226367086845-adgsk9uf5rj0nt22mudvuc5qtml2efr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.toramonline"
+              }
             }
           ]
         }
@@ -43,6 +58,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "226367086845-3s0p4j97f44kui3amj3ed2635pkrkiuq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.toramproject.fcmdemo",
+            "certificate_hash": "0d5824222731008af3c50fdf2cce30268dc1016c"
+          }
+        },
+        {
           "client_id": "226367086845-60qacrse8omvgincjkkrk1ivmvk0uljb.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -58,6 +81,13 @@
             {
               "client_id": "226367086845-60qacrse8omvgincjkkrk1ivmvk0uljb.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "226367086845-adgsk9uf5rj0nt22mudvuc5qtml2efr2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.toramonline"
+              }
             }
           ]
         }
