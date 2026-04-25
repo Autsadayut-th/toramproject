@@ -20,16 +20,20 @@ class FirebaseAuthService {
     : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   final FirebaseAuth _firebaseAuth;
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: const <String>['email', 'profile', 'openid'],
-  );
+  GoogleSignIn? _googleSignIn;
+
+  GoogleSignIn get _googleSignInClient {
+    return _googleSignIn ??= GoogleSignIn(
+      scopes: const <String>['email', 'profile', 'openid'],
+    );
+  }
 
   Stream<User?> authStateChanges() {
     return _firebaseAuth.authStateChanges();
   }
 
   Stream<GoogleSignInAccount?> googleAccountChanges() {
-    return _googleSignIn.onCurrentUserChanged;
+    return _googleSignInClient.onCurrentUserChanged;
   }
 
   Future<void> restoreGoogleSignInOnWeb() async {
@@ -38,7 +42,7 @@ class FirebaseAuthService {
     }
 
     try {
-      await _googleSignIn.signInSilently();
+      await _googleSignInClient.signInSilently();
     } catch (_) {
       // Ignore warm-up failures here; the interactive web button will retry.
     }
@@ -80,7 +84,7 @@ class FirebaseAuthService {
         );
       }
 
-      final GoogleSignInAccount? gUser = await _googleSignIn.signIn();
+      final GoogleSignInAccount? gUser = await _googleSignInClient.signIn();
       if (gUser == null) {
         return const AuthResult(
           success: false,
@@ -88,6 +92,8 @@ class FirebaseAuthService {
         );
       }
       return await signInWithGoogleAccount(gUser);
+    } on FirebaseAuthException catch (error) {
+      return _firebaseAuthFailure(error);
     } on PlatformException catch (error) {
       return AuthResult(
         success: false,
@@ -165,7 +171,9 @@ class FirebaseAuthService {
   }
 
   Future<void> signOut() async {
-    await _googleSignIn.signOut();
+    if (!kIsWeb && _googleSignIn != null) {
+      await _googleSignIn!.signOut();
+    }
     await _firebaseAuth.signOut();
   }
 

@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CriticalSimulatorPage extends StatefulWidget {
-  const CriticalSimulatorPage({super.key});
+  const CriticalSimulatorPage({
+    super.key,
+    this.embeddedInShell = false,
+  });
+
+  final bool embeddedInShell;
 
   @override
   State<CriticalSimulatorPage> createState() => _CriticalSimulatorPageState();
@@ -132,6 +137,204 @@ class _CriticalSimulatorPageState extends State<CriticalSimulatorPage> {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Widget content = SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 980),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              if (_isLoadingRules) ...<Widget>[
+                const LinearProgressIndicator(minHeight: 2),
+                const SizedBox(height: 10),
+              ],
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: colorScheme.surfaceContainerHigh,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: colorScheme.onSurface.withValues(alpha: 0.2),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Rule source: $_rulesAssetPath',
+                      style: TextStyle(
+                        color: colorScheme.onSurface.withValues(alpha: 0.75),
+                        fontSize: 12,
+                      ),
+                    ),
+                    if (_rulesError != null) ...<Widget>[
+                      const SizedBox(height: 6),
+                      Text(
+                        _rulesError!,
+                        style: TextStyle(
+                          color: colorScheme.error,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+              const SizedBox(height: 14),
+              _SectionCard(
+                title: '1. Critical Rate',
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Critical Rate = ${_formatNumber(_rules.criticalRateBase)} + '
+                      '(CRT x ${_formatNumber(_rules.crtRatio)}) + Flat + Percent',
+                      style: TextStyle(
+                        color: colorScheme.onSurface.withValues(alpha: 0.75),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      children: <Widget>[
+                        _NumberField(
+                          width: 220,
+                          label: 'CRT',
+                          controller: _crtController,
+                          onChanged: (String value) =>
+                              _onChanged(value, (double parsed) {
+                                _crt = parsed;
+                              }),
+                        ),
+                        _NumberField(
+                          width: 220,
+                          label: 'Flat Critical Rate',
+                          controller: _flatRateController,
+                          onChanged: (String value) =>
+                              _onChanged(value, (double parsed) {
+                                _flatCriticalRate = parsed;
+                              }),
+                        ),
+                        _NumberField(
+                          width: 220,
+                          label: 'Percent Critical Rate',
+                          controller: _percentRateController,
+                          onChanged: (String value) =>
+                              _onChanged(value, (double parsed) {
+                                _percentCriticalRate = parsed;
+                              }),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    _ResultBox(
+                      label: 'Final Critical Rate',
+                      value: _formatNumber(_criticalRate),
+                      suffix: '%',
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+              _SectionCard(
+                title: '2. Critical Damage',
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Critical Damage = ${_formatNumber(_rules.criticalDamageBase)} + '
+                      '(STR x ${_formatNumber(_rules.strRatio)}) + Flat + Percent',
+                      style: TextStyle(
+                        color: colorScheme.onSurface.withValues(alpha: 0.75),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      children: <Widget>[
+                        _NumberField(
+                          width: 220,
+                          label: 'STR',
+                          controller: _strController,
+                          onChanged: (String value) =>
+                              _onChanged(value, (double parsed) {
+                                _str = parsed;
+                              }),
+                        ),
+                        _NumberField(
+                          width: 220,
+                          label: 'Flat Critical Damage',
+                          controller: _flatDamageController,
+                          onChanged: (String value) =>
+                              _onChanged(value, (double parsed) {
+                                _flatCriticalDamage = parsed;
+                              }),
+                        ),
+                        _NumberField(
+                          width: 220,
+                          label: 'Percent Critical Damage',
+                          controller: _percentDamageController,
+                          onChanged: (String value) =>
+                              _onChanged(value, (double parsed) {
+                                _percentCriticalDamage = parsed;
+                              }),
+                        ),
+                        _NumberField(
+                          width: 220,
+                          label: 'Base Damage',
+                          controller: _baseDamageController,
+                          onChanged: (String value) =>
+                              _onChanged(value, (double parsed) {
+                                _baseDamage = parsed;
+                              }),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      children: <Widget>[
+                        _ResultBox(
+                          label: 'Raw Critical Damage',
+                          value: _formatNumber(_rawCriticalDamage),
+                          suffix: '%',
+                        ),
+                        _ResultBox(
+                          label: 'Final Critical Damage (Soft Cap)',
+                          value: _formatNumber(_finalCriticalDamage),
+                          suffix: '%',
+                        ),
+                        _ResultBox(
+                          label: 'Critical Multiplier',
+                          value: '${_formatNumber(_criticalMultiplier)}x',
+                        ),
+                        _ResultBox(
+                          label: 'Estimated Critical Hit',
+                          value: _formatNumber(_criticalHitDamage),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    if (widget.embeddedInShell) {
+      return ColoredBox(
+        color: colorScheme.surface,
+        child: content,
+      );
+    }
+
     return Scaffold(
       backgroundColor: colorScheme.surface,
       appBar: AppBar(
@@ -139,196 +342,7 @@ class _CriticalSimulatorPageState extends State<CriticalSimulatorPage> {
         foregroundColor: colorScheme.onSurface,
         title: const Text('Critical Simulator'),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 980),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                if (_isLoadingRules) ...<Widget>[
-                  const LinearProgressIndicator(minHeight: 2),
-                  const SizedBox(height: 10),
-                ],
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: colorScheme.surfaceContainerHigh,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: colorScheme.onSurface.withValues(alpha: 0.2),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Rule source: $_rulesAssetPath',
-                        style: TextStyle(
-                          color: colorScheme.onSurface.withValues(alpha: 0.75),
-                          fontSize: 12,
-                        ),
-                      ),
-                      if (_rulesError != null) ...<Widget>[
-                        const SizedBox(height: 6),
-                        Text(
-                          _rulesError!,
-                          style: TextStyle(
-                            color: colorScheme.error,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 14),
-                _SectionCard(
-                  title: '1. Critical Rate',
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Critical Rate = ${_formatNumber(_rules.criticalRateBase)} + '
-                        '(CRT x ${_formatNumber(_rules.crtRatio)}) + Flat + Percent',
-                        style: TextStyle(
-                          color: colorScheme.onSurface.withValues(alpha: 0.75),
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Wrap(
-                        spacing: 10,
-                        runSpacing: 10,
-                        children: <Widget>[
-                          _NumberField(
-                            width: 220,
-                            label: 'CRT',
-                            controller: _crtController,
-                            onChanged: (String value) =>
-                                _onChanged(value, (double parsed) {
-                                  _crt = parsed;
-                                }),
-                          ),
-                          _NumberField(
-                            width: 220,
-                            label: 'Flat Critical Rate',
-                            controller: _flatRateController,
-                            onChanged: (String value) =>
-                                _onChanged(value, (double parsed) {
-                                  _flatCriticalRate = parsed;
-                                }),
-                          ),
-                          _NumberField(
-                            width: 220,
-                            label: 'Percent Critical Rate',
-                            controller: _percentRateController,
-                            onChanged: (String value) =>
-                                _onChanged(value, (double parsed) {
-                                  _percentCriticalRate = parsed;
-                                }),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      _ResultBox(
-                        label: 'Final Critical Rate',
-                        value: _formatNumber(_criticalRate),
-                        suffix: '%',
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 12),
-                _SectionCard(
-                  title: '2. Critical Damage',
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Critical Damage = ${_formatNumber(_rules.criticalDamageBase)} + '
-                        '(STR x ${_formatNumber(_rules.strRatio)}) + Flat + Percent',
-                        style: TextStyle(
-                          color: colorScheme.onSurface.withValues(alpha: 0.75),
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Wrap(
-                        spacing: 10,
-                        runSpacing: 10,
-                        children: <Widget>[
-                          _NumberField(
-                            width: 220,
-                            label: 'STR',
-                            controller: _strController,
-                            onChanged: (String value) =>
-                                _onChanged(value, (double parsed) {
-                                  _str = parsed;
-                                }),
-                          ),
-                          _NumberField(
-                            width: 220,
-                            label: 'Flat Critical Damage',
-                            controller: _flatDamageController,
-                            onChanged: (String value) =>
-                                _onChanged(value, (double parsed) {
-                                  _flatCriticalDamage = parsed;
-                                }),
-                          ),
-                          _NumberField(
-                            width: 220,
-                            label: 'Percent Critical Damage',
-                            controller: _percentDamageController,
-                            onChanged: (String value) =>
-                                _onChanged(value, (double parsed) {
-                                  _percentCriticalDamage = parsed;
-                                }),
-                          ),
-                          _NumberField(
-                            width: 220,
-                            label: 'Base Damage',
-                            controller: _baseDamageController,
-                            onChanged: (String value) =>
-                                _onChanged(value, (double parsed) {
-                                  _baseDamage = parsed;
-                                }),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      Wrap(
-                        spacing: 10,
-                        runSpacing: 10,
-                        children: <Widget>[
-                          _ResultBox(
-                            label: 'Raw Critical Damage',
-                            value: _formatNumber(_rawCriticalDamage),
-                            suffix: '%',
-                          ),
-                          _ResultBox(
-                            label: 'Final Critical Damage (Soft Cap)',
-                            value: _formatNumber(_finalCriticalDamage),
-                            suffix: '%',
-                          ),
-                          _ResultBox(
-                            label: 'Critical Multiplier',
-                            value: '${_formatNumber(_criticalMultiplier)}x',
-                          ),
-                          _ResultBox(
-                            label: 'Estimated Critical Hit',
-                            value: _formatNumber(_criticalHitDamage),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+      body: content,
     );
   }
 }

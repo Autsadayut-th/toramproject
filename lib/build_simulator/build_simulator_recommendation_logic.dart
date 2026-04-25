@@ -629,6 +629,10 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
     required AiRecommendationItem recommendation,
     required String reaction,
   }) async {
+    if (_activeUserId == null) {
+      return;
+    }
+
     final String normalizedReaction = reaction.trim().toLowerCase();
     if (normalizedReaction != 'like' && normalizedReaction != 'dislike') {
       return;

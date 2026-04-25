@@ -32,6 +32,7 @@ class AppShellScreen extends StatefulWidget {
 
 class _AppShellScreenState extends State<AppShellScreen> {
   static const String _appLogoAssetPath = 'assets/logo/logo.png';
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final BuildSimulatorCoordinator _coordinator = BuildSimulatorCoordinator();
   AppNavigationPage _currentPage = AppNavigationPage.build;
   late final bool _firebaseAvailable;
@@ -161,11 +162,12 @@ class _AppShellScreenState extends State<AppShellScreen> {
     final bool hasDrawer = !isMobile || showMobileBuildSummaryLeading;
 
     void onNavigateFromDrawer(AppNavigationPage page) {
-      Navigator.of(context).pop();
+      _scaffoldKey.currentState?.closeDrawer();
       _onNavigate(page);
     }
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
@@ -271,7 +273,7 @@ class _AppShellScreenState extends State<AppShellScreen> {
             hasAdvancedAccess: _currentUser != null,
           ),
           EquipmentLibraryScreen(onNavigate: _onNavigate),
-          const CriticalSimulatorPage(),
+          const CriticalSimulatorPage(embeddedInShell: true),
           SkillMenuPage(onNavigate: _onNavigate),
           SavedBuildsPage(
             savedBuilds: _coordinator.savedBuilds,

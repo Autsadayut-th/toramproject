@@ -11,6 +11,7 @@ include: package:flutter_lints/flutter.yaml
 
 analyzer:
   exclude:
+    - build/**
     - assets/data/ai_modules/**
 
 linter:

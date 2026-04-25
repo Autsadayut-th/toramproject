@@ -50,6 +50,13 @@ extension _BuildSimulatorDataLoading on BuildSimulatorScreenState {
   Future<void> _refreshRecommendationFeedbackSnapshot({
     bool force = false,
   }) async {
+    if (_activeUserId == null) {
+      _setUiState(() {
+        _feedbackSnapshot = const RecommendationFeedbackSnapshot.empty();
+      });
+      return;
+    }
+
     if (_isLoadingFeedbackSnapshot) {
       return;
     }
@@ -76,11 +83,13 @@ extension _BuildSimulatorDataLoading on BuildSimulatorScreenState {
             .toList(growable: false);
       });
     } catch (error, stackTrace) {
-      _reportBackgroundLoadFailure(
-        label: 'Recommendation feedback aggregation load',
-        error: error,
-        stackTrace: stackTrace,
-      );
+      if (!error.toString().contains('permission-denied')) {
+        _reportBackgroundLoadFailure(
+          label: 'Recommendation feedback aggregation load',
+          error: error,
+          stackTrace: stackTrace,
+        );
+      }
     } finally {
       _isLoadingFeedbackSnapshot = false;
     }
