@@ -35,6 +35,8 @@ class EquipmentSlotSelector extends StatefulWidget {
     this.crystal2,
     this.onCrystal1Changed,
     this.onCrystal2Changed,
+    this.onCreateCustomItem,
+    this.createCustomTooltip,
   });
 
   final String idLabel;
@@ -61,6 +63,8 @@ class EquipmentSlotSelector extends StatefulWidget {
   final String? crystal2;
   final ValueChanged<String?>? onCrystal1Changed;
   final ValueChanged<String?>? onCrystal2Changed;
+  final VoidCallback? onCreateCustomItem;
+  final String? createCustomTooltip;
 
   @override
   State<EquipmentSlotSelector> createState() => _EquipmentSlotSelectorState();
@@ -899,6 +903,16 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
               enabled: true,
               tooltip: 'Browse library',
             ),
+            if (widget.onCreateCustomItem != null) ...<Widget>[
+              const SizedBox(width: 8),
+              _actionButton(
+                onTap: widget.onCreateCustomItem,
+                enabled: true,
+                tooltip:
+                    widget.createCustomTooltip ?? 'Create custom item',
+                icon: Icons.add,
+              ),
+            ],
           ],
         ),
         if (showInlineSuggestions) ...<Widget>[
@@ -1799,6 +1813,20 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
     required bool enabled,
     required String tooltip,
   }) {
+    return _actionButton(
+      onTap: onTap,
+      enabled: enabled,
+      tooltip: tooltip,
+      icon: Icons.menu_book_outlined,
+    );
+  }
+
+  Widget _actionButton({
+    required VoidCallback? onTap,
+    required bool enabled,
+    required String tooltip,
+    required IconData icon,
+  }) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Tooltip(
       message: tooltip,
@@ -1820,7 +1848,7 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
             ),
           ),
           child: Icon(
-            Icons.menu_book_outlined,
+            icon,
             size: 18,
             color: enabled
                 ? colorScheme.onSurface

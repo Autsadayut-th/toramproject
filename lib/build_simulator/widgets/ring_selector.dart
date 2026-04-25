@@ -17,6 +17,7 @@ class RingEquipmentSelector extends StatelessWidget {
     required this.crystal2,
     required this.onCrystal1Changed,
     required this.onCrystal2Changed,
+    this.onCreateCustomItem,
   });
 
   final String? selectedId;
@@ -30,6 +31,7 @@ class RingEquipmentSelector extends StatelessWidget {
   final String? crystal2;
   final ValueChanged<String?> onCrystal1Changed;
   final ValueChanged<String?> onCrystal2Changed;
+  final VoidCallback? onCreateCustomItem;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,8 @@ class RingEquipmentSelector extends StatelessWidget {
       crystal2: crystal2,
       onCrystal1Changed: onCrystal1Changed,
       onCrystal2Changed: onCrystal2Changed,
+      onCreateCustomItem: onCreateCustomItem,
+      createCustomTooltip: 'Create custom ring',
     );
   }
 }

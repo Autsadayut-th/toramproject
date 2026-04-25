@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'build_simulator_coordinator.dart';
+import '../custom_equipment/custom_equipment.dart';
 import '../equipment_library/models/equipment_library_item.dart';
 import '../equipment_library/repository/equipment_library_repository.dart';
 import 'services/ai_build_recommendation_service.dart';
@@ -33,6 +34,7 @@ part 'build_simulator_sections.dart';
 part 'build_simulator_data_loading.dart';
 part 'build_simulator_recommendation_logic.dart';
 part 'build_simulator_persistence_actions.dart';
+part 'build_simulator_custom_equipment.dart';
 
 enum _SummaryViewMode { metricList, itemDetails }
 
@@ -64,6 +66,8 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       FirebaseSavedBuildsService();
   final RecommendationFeedbackService _recommendationFeedbackService =
       RecommendationFeedbackService();
+  final CustomEquipmentStorageService _customEquipmentStorageService =
+      const CustomEquipmentStorageService();
 
   static const List<String> _characterStatKeys =
       BuildPersistenceService.characterStatKeys;
@@ -171,6 +175,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   bool _isSavingCloudSavedBuilds = false;
   bool _hasPendingCloudSync = false;
   String? _loadedCloudUserId;
+  int _customEquipmentCount = 0;
   RecommendationFeedbackSnapshot _feedbackSnapshot =
       const RecommendationFeedbackSnapshot.empty();
   bool _isLoadingFeedbackSnapshot = false;
@@ -194,6 +199,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     _loadCrystalLibrary();
     _loadWeaponRuleConfig();
     _loadRuleSetConfig();
+    unawaited(_refreshCustomEquipmentAccess());
     unawaited(_refreshCloudSavedBuilds(force: true));
     unawaited(_refreshRecommendationFeedbackSnapshot(force: true));
   }
@@ -220,6 +226,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
         oldWidget.isAuthenticated != widget.isAuthenticated;
     final bool userChanged = oldWidget.currentUserId != widget.currentUserId;
     if (authStateChanged || userChanged) {
+      unawaited(_refreshCustomEquipmentAccess());
       unawaited(_refreshCloudSavedBuilds(force: true));
       unawaited(_refreshRecommendationFeedbackSnapshot(force: true));
     }

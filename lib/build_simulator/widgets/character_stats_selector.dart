@@ -140,6 +140,7 @@ class CharacterStatsSelector extends StatelessWidget {
           min: _minLevel,
           max: _maxLevel,
           onChanged: onLevelChanged,
+          deferSliderCommit: true,
         ),
         const SizedBox(height: 8),
         _StatRow(
@@ -430,6 +431,7 @@ class _StatRow extends StatefulWidget {
     required this.min,
     required this.max,
     required this.onChanged,
+    this.deferSliderCommit = false,
   });
 
   final String label;
@@ -437,6 +439,7 @@ class _StatRow extends StatefulWidget {
   final int min;
   final int max;
   final ValueChanged<int> onChanged;
+  final bool deferSliderCommit;
 
   @override
   State<_StatRow> createState() => _StatRowState();
@@ -445,6 +448,7 @@ class _StatRow extends StatefulWidget {
 class _StatRowState extends State<_StatRow> {
   late final TextEditingController _controller;
   late final FocusNode _focusNode;
+  int? _dragValue;
 
   @override
   void initState() {
@@ -459,6 +463,9 @@ class _StatRowState extends State<_StatRow> {
     if (!_focusNode.hasFocus && oldWidget.value != widget.value) {
       _controller.text = widget.value.toString();
     }
+    if (_dragValue != null && oldWidget.value != widget.value) {
+      _dragValue = null;
+    }
   }
 
   @override
@@ -471,17 +478,22 @@ class _StatRowState extends State<_StatRow> {
   void _commitCurrentText() {
     final parsed = int.tryParse(_controller.text);
     if (parsed == null) {
-      _controller.text = widget.value.toString();
+      _controller.text = _effectiveValue.toString();
       return;
     }
     final clamped = parsed.clamp(widget.min, widget.max);
+    _dragValue = null;
     widget.onChanged(clamped);
     _controller.text = clamped.toString();
   }
 
+  int get _effectiveValue =>
+      (_dragValue ?? widget.value).clamp(widget.min, widget.max).toInt();
+
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final int effectiveValue = _effectiveValue;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
@@ -509,7 +521,7 @@ class _StatRowState extends State<_StatRow> {
               _SquareIconButton(
                 icon: Icons.remove,
                 onTap: () => widget.onChanged(
-                  (widget.value - 1).clamp(widget.min, widget.max),
+                  (effectiveValue - 1).clamp(widget.min, widget.max),
                 ),
               ),
               const SizedBox(width: 8),
@@ -560,22 +572,43 @@ class _StatRowState extends State<_StatRow> {
               _SquareIconButton(
                 icon: Icons.add,
                 onTap: () => widget.onChanged(
-                  (widget.value + 1).clamp(widget.min, widget.max),
+                  (effectiveValue + 1).clamp(widget.min, widget.max),
                 ),
               ),
             ],
           ),
           Slider(
-            value: widget.value.clamp(widget.min, widget.max).toDouble(),
+            value: effectiveValue.toDouble(),
             min: widget.min.toDouble(),
             max: widget.max.toDouble(),
             divisions: widget.max - widget.min,
-            label: widget.value.toString(),
+            label: effectiveValue.toString(),
             activeColor: colorScheme.primary,
             inactiveColor: colorScheme.onSurface.withValues(alpha: 0.24),
             onChanged: (double value) {
-              widget.onChanged(value.round().clamp(widget.min, widget.max));
+              final int nextValue = value.round().clamp(
+                widget.min,
+                widget.max,
+              );
+              if (widget.deferSliderCommit) {
+                setState(() {
+                  _dragValue = nextValue;
+                  _controller.text = nextValue.toString();
+                });
+                return;
+              }
+              widget.onChanged(nextValue);
             },
+            onChangeEnd: widget.deferSliderCommit
+                ? (double value) {
+                    final int nextValue = value.round().clamp(
+                      widget.min,
+                      widget.max,
+                    );
+                    _dragValue = null;
+                    widget.onChanged(nextValue);
+                  }
+                : null,
           ),
         ],
       ),
