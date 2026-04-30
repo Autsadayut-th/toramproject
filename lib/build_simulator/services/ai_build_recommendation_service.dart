@@ -30,6 +30,9 @@ class AiBuildRecommendationService {
 
   static const Duration _cacheTtl = Duration(minutes: 5);
   static const int _maxAttempts = 2;
+  static const String _defaultFallbackEndpoint =
+      'http://localhost:3000/api/recommend';
+  static final Uri? _configuredEndpoint = _computeConfiguredEndpoint();
   static final Map<String, _AiRecommendationCacheEntry> _cache =
       <String, _AiRecommendationCacheEntry>{};
 
@@ -149,7 +152,11 @@ class AiBuildRecommendationService {
   Uri _resolveEndpoint() {
     final Uri base = Uri.base;
     if (base.host.isEmpty) {
-      return Uri.parse('/api/recommend');
+      final Uri? configured = _configuredEndpoint;
+      if (configured != null) {
+        return configured;
+      }
+      return Uri.parse(_defaultFallbackEndpoint);
     }
     return Uri(
       scheme: base.scheme,
@@ -157,6 +164,36 @@ class AiBuildRecommendationService {
       port: base.hasPort ? base.port : null,
       path: '/api/recommend',
     );
+  }
+
+  static Uri? _computeConfiguredEndpoint() {
+    const String raw = String.fromEnvironment(
+      'AI_RECOMMEND_ENDPOINT',
+      defaultValue: '',
+    );
+    final String trimmed = raw.trim();
+    if (trimmed.isEmpty) {
+      return null;
+    }
+
+    final String normalized = trimmed.contains('://')
+        ? trimmed
+        : 'https://$trimmed';
+
+    Uri parsed;
+    try {
+      parsed = Uri.parse(normalized);
+    } catch (_) {
+      return null;
+    }
+
+    if (parsed.host.isEmpty) {
+      return null;
+    }
+    if (parsed.path.isEmpty) {
+      parsed = parsed.replace(path: '/api/recommend');
+    }
+    return parsed;
   }
 
   String _payloadCacheKey(Map<String, dynamic> payload) {

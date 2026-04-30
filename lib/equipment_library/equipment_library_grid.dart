@@ -99,6 +99,7 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
     final List<EquipmentStat> previewStats = item.stats
         .take(previewLimit)
         .toList(growable: false);
+    final bool isPlayerCreated = _isPlayerCreatedItem(item);
     final String actionLabel = widget.pickMode
         ? 'Tap to equip'
         : 'Open details';
@@ -225,6 +226,15 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
                         borderColor: accentColor.withValues(alpha: 0.24),
                         backgroundColor: accentColor.withValues(alpha: 0.08),
                       ),
+                      if (isPlayerCreated)
+                        _buildMetaPill(
+                          text: 'Custom',
+                          borderColor: colorScheme.primary.withValues(
+                            alpha: 0.3,
+                          ),
+                          backgroundColor: colorScheme.primaryContainer
+                              .withValues(alpha: 0.52),
+                        ),
                       if (item.upgradeFrom != null &&
                           item.upgradeFrom!.isNotEmpty)
                         _buildMetaPill(

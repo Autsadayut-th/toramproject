@@ -909,7 +909,7 @@ class BuildCalculatorService {
   }
 
   static bool _subWeaponUsesWeaponRefine(String subWeaponType) {
-    return false;
+    return subWeaponType == 'ARROW';
   }
 
   static bool _subWeaponAddsStability({

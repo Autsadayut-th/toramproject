@@ -42,6 +42,8 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
   void Function(List<Map<String, dynamic>> builds)? _replaceSavedBuilds;
   void Function(List<Map<String, dynamic>> builds)? _mergeSavedBuilds;
   void Function(bool value)? _setShowRecommendations;
+  void Function(Map<String, dynamic> item)? _upsertCustomEquipment;
+  void Function(String id)? _deleteCustomEquipmentById;
   VoidCallback? _clearAllData;
   VoidCallback? _generateAiRecommendations;
 
@@ -85,6 +87,8 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     required void Function(List<Map<String, dynamic>> builds)
     onMergeSavedBuilds,
     required void Function(bool value) onSetShowRecommendations,
+    required void Function(Map<String, dynamic> item) onUpsertCustomEquipment,
+    required void Function(String id) onDeleteCustomEquipmentById,
     required VoidCallback onClearAllData,
     required VoidCallback onGenerateAiRecommendations,
   }) {
@@ -96,6 +100,8 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     _replaceSavedBuilds = onReplaceSavedBuilds;
     _mergeSavedBuilds = onMergeSavedBuilds;
     _setShowRecommendations = onSetShowRecommendations;
+    _upsertCustomEquipment = onUpsertCustomEquipment;
+    _deleteCustomEquipmentById = onDeleteCustomEquipmentById;
     _clearAllData = onClearAllData;
     _generateAiRecommendations = onGenerateAiRecommendations;
   }
@@ -109,6 +115,8 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     _replaceSavedBuilds = null;
     _mergeSavedBuilds = null;
     _setShowRecommendations = null;
+    _upsertCustomEquipment = null;
+    _deleteCustomEquipmentById = null;
     _clearAllData = null;
     _generateAiRecommendations = null;
   }
@@ -184,6 +192,14 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
 
   void setShowRecommendations(bool value) {
     _setShowRecommendations?.call(value);
+  }
+
+  void upsertCustomEquipment(Map<String, dynamic> item) {
+    _upsertCustomEquipment?.call(Map<String, dynamic>.from(item));
+  }
+
+  void deleteCustomEquipmentById(String id) {
+    _deleteCustomEquipmentById?.call(id);
   }
 
   void clearAllData() {

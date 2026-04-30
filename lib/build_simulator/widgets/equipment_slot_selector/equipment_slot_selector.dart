@@ -536,11 +536,16 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
   }
 
   Future<void> _pickFromLibrary() async {
+    final Map<String, List<EquipmentLibraryItem>> inMemoryItemsByCategory =
+        <String, List<EquipmentLibraryItem>>{
+          widget.pickInitialCategory: widget.inlineSearchCandidates,
+        };
     final String? selectedKey = await EquipmentLibraryScreen.pickItemKey(
       context,
       initialCategory: widget.pickInitialCategory,
       allowedCategories: widget.allowedCategories,
       allowedTypes: widget.allowedItemTypes,
+      inMemoryItemsByCategory: inMemoryItemsByCategory,
       title: widget.pickTitle,
     );
     if (!mounted || selectedKey == null || selectedKey.isEmpty) {
@@ -908,8 +913,7 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
               _actionButton(
                 onTap: widget.onCreateCustomItem,
                 enabled: true,
-                tooltip:
-                    widget.createCustomTooltip ?? 'Create custom item',
+                tooltip: widget.createCustomTooltip ?? 'Create custom item',
                 icon: Icons.add,
               ),
             ],

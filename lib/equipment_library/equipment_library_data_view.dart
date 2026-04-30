@@ -6,12 +6,14 @@ class _EquipmentLibraryDataView extends StatefulWidget {
     required this.initialCategory,
     required this.allowedCategories,
     required this.allowedTypes,
+    required this.inMemoryItemsByCategory,
   });
 
   final bool pickMode;
   final String? initialCategory;
   final List<String>? allowedCategories;
   final List<String>? allowedTypes;
+  final Map<String, List<EquipmentLibraryItem>>? inMemoryItemsByCategory;
 
   @override
   State<_EquipmentLibraryDataView> createState() =>
@@ -83,11 +85,15 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
   final EquipmentLibraryRepository _repository = EquipmentLibraryRepository();
   final TextEditingController _searchController = TextEditingController();
 
+  static const String _sourceFilterAll = 'all_sources';
+  static const String _sourceFilterPlayerCreated = 'player_created';
+
   late Future<Map<String, List<EquipmentLibraryItem>>> _libraryFuture;
   String? _selectedCategory;
   String _searchQuery = '';
   int _currentPage = 1;
   String? _selectedTypeFilterKey;
+  String _sourceFilterKey = _sourceFilterAll;
 
   @override
   void initState() {
@@ -222,6 +228,88 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
     return normalized;
   }
 
+  bool _isPlayerCreatedItem(EquipmentLibraryItem item) {
+    return item.obtainedFrom.any((EquipmentObtainedSource source) {
+      final String sourceType = source.sourceType?.trim().toLowerCase() ?? '';
+      if (sourceType == 'custom') {
+        return true;
+      }
+      final String sourceName = source.source.trim().toLowerCase();
+      return sourceName == 'custom equipment';
+    });
+  }
+
+  String _resolveCategoryKey(
+    String rawCategory,
+    Map<String, List<EquipmentLibraryItem>> allCategories,
+  ) {
+    final String trimmed = rawCategory.trim();
+    if (trimmed.isEmpty) {
+      return '';
+    }
+    for (final String key in allCategories.keys) {
+      if (key.toLowerCase() == trimmed.toLowerCase()) {
+        return key;
+      }
+    }
+    for (final String key in _repository.categories) {
+      if (key.toLowerCase() == trimmed.toLowerCase()) {
+        return key;
+      }
+    }
+    return trimmed;
+  }
+
+  Map<String, List<EquipmentLibraryItem>> _mergeInMemoryItemsByCategory(
+    Map<String, List<EquipmentLibraryItem>> repositoryItemsByCategory,
+  ) {
+    final Map<String, List<EquipmentLibraryItem>> merged =
+        <String, List<EquipmentLibraryItem>>{};
+    repositoryItemsByCategory.forEach((
+      String category,
+      List<EquipmentLibraryItem> items,
+    ) {
+      merged[category] = List<EquipmentLibraryItem>.from(items);
+    });
+
+    final Map<String, List<EquipmentLibraryItem>> injected =
+        widget.inMemoryItemsByCategory ??
+        const <String, List<EquipmentLibraryItem>>{};
+    if (injected.isEmpty) {
+      return merged;
+    }
+
+    injected.forEach((String rawCategory, List<EquipmentLibraryItem> incoming) {
+      final String category = _resolveCategoryKey(rawCategory, merged);
+      if (category.isEmpty) {
+        return;
+      }
+
+      final Map<String, EquipmentLibraryItem> byKey =
+          <String, EquipmentLibraryItem>{
+            for (final EquipmentLibraryItem item
+                in (merged[category] ?? const <EquipmentLibraryItem>[]))
+              item.key.trim().toLowerCase(): item,
+          };
+      for (final EquipmentLibraryItem item in incoming) {
+        final String key = item.key.trim().toLowerCase();
+        if (key.isEmpty) {
+          continue;
+        }
+        byKey[key] = item;
+      }
+
+      final List<EquipmentLibraryItem> categoryItems =
+          byKey.values.toList(growable: false)
+            ..sort((EquipmentLibraryItem a, EquipmentLibraryItem b) {
+              return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+            });
+      merged[category] = categoryItems;
+    });
+
+    return merged;
+  }
+
   bool _isCrystalCategory(String category) {
     return category.trim().toLowerCase() == 'crystal';
   }
@@ -319,10 +407,12 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
   void _applyFilterSelection({
     required String category,
     required String? typeKey,
+    required String sourceFilterKey,
   }) {
     setState(() {
       _selectedCategory = category;
       _selectedTypeFilterKey = typeKey;
+      _sourceFilterKey = sourceFilterKey;
       _currentPage = 1;
     });
   }
@@ -347,99 +437,148 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
     required String activeCategory,
     required List<String> typeFilterKeys,
     required String? activeTypeFilterKey,
+    required bool customFilterAvailable,
+    required String activeSourceFilterKey,
   }) async {
     final Set<String>? widgetAllowedTypes = _normalizeTypeSet(
       widget.allowedTypes,
     );
-    if (categories.length <= 1 && typeFilterKeys.length <= 1) {
+    if (categories.length <= 1 &&
+        typeFilterKeys.length <= 1 &&
+        !customFilterAvailable) {
       return;
     }
 
     String selectedCategory = activeCategory;
     String? selectedTypeKey = activeTypeFilterKey;
+    String selectedSourceFilterKey = activeSourceFilterKey;
     final bool hasCategoryChoices = categories.length > 1;
 
-    final ({String category, String? typeKey})?
-    selection = await showDialog<({String category, String? typeKey})>(
-      context: context,
-      builder: (BuildContext dialogContext) {
-        final ColorScheme colorScheme = Theme.of(dialogContext).colorScheme;
-        return Dialog(
-          backgroundColor: colorScheme.surfaceContainerHigh,
-          insetPadding: const EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 24,
-          ),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 540),
-            child: StatefulBuilder(
-              builder: (BuildContext context, StateSetter setDialogState) {
-                final List<EquipmentLibraryItem> selectedCategoryItems =
-                    allCategories[selectedCategory] ??
-                    const <EquipmentLibraryItem>[];
-                final List<String> availableTypeKeys = _buildTypeFilterKeys(
-                  items: selectedCategoryItems,
-                  activeCategory: selectedCategory,
-                  widgetAllowedTypes: widgetAllowedTypes,
-                );
-                if (selectedTypeKey != null &&
-                    !availableTypeKeys.contains(selectedTypeKey)) {
-                  selectedTypeKey = null;
-                }
-                final bool hasTypeChoices = availableTypeKeys.length > 1;
+    final ({String category, String? typeKey, String sourceFilterKey})?
+    selection =
+        await showDialog<
+          ({String category, String? typeKey, String sourceFilterKey})
+        >(
+          context: context,
+          builder: (BuildContext dialogContext) {
+            final ColorScheme colorScheme = Theme.of(dialogContext).colorScheme;
+            return Dialog(
+              backgroundColor: colorScheme.surfaceContainerHigh,
+              insetPadding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 24,
+              ),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 540),
+                child: StatefulBuilder(
+                  builder: (BuildContext context, StateSetter setDialogState) {
+                    final List<EquipmentLibraryItem> selectedCategoryItems =
+                        allCategories[selectedCategory] ??
+                        const <EquipmentLibraryItem>[];
+                    final List<String> availableTypeKeys = _buildTypeFilterKeys(
+                      items: selectedCategoryItems,
+                      activeCategory: selectedCategory,
+                      widgetAllowedTypes: widgetAllowedTypes,
+                    );
+                    if (selectedTypeKey != null &&
+                        !availableTypeKeys.contains(selectedTypeKey)) {
+                      selectedTypeKey = null;
+                    }
+                    final bool hasTypeChoices = availableTypeKeys.length > 1;
 
-                return Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
+                    return Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Expanded(
-                              child: Text(
-                                'Filter Library',
-                                style: TextStyle(
-                                  color: colorScheme.onSurface,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
+                            Row(
+                              children: <Widget>[
+                                Expanded(
+                                  child: Text(
+                                    'Filter Library',
+                                    style: TextStyle(
+                                      color: colorScheme.onSurface,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.of(dialogContext).pop(),
+                                  child: Text(
+                                    'Close',
+                                    style: TextStyle(
+                                      color: colorScheme.onSurface.withValues(
+                                        alpha: 0.75,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            TextButton(
-                              onPressed: () =>
-                                  Navigator.of(dialogContext).pop(),
-                              child: Text(
-                                'Close',
+                            if (hasCategoryChoices) ...<Widget>[
+                              const SizedBox(height: 4),
+                              Text(
+                                'Category',
                                 style: TextStyle(
                                   color: colorScheme.onSurface.withValues(
                                     alpha: 0.75,
                                   ),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        if (hasCategoryChoices) ...<Widget>[
-                          const SizedBox(height: 4),
-                          Text(
-                            'Category',
-                            style: TextStyle(
-                              color: colorScheme.onSurface.withValues(
-                                alpha: 0.75,
+                              const SizedBox(height: 8),
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: categories
+                                    .map((String category) {
+                                      return ChoiceChip(
+                                        selectedColor:
+                                            colorScheme.primaryContainer,
+                                        backgroundColor:
+                                            colorScheme.surfaceContainerHighest,
+                                        side: BorderSide(
+                                          color: colorScheme.onSurface
+                                              .withValues(alpha: 0.24),
+                                        ),
+                                        labelStyle: TextStyle(
+                                          color: colorScheme.onSurface,
+                                        ),
+                                        selected: selectedCategory == category,
+                                        label: Text(category),
+                                        onSelected: (_) {
+                                          setDialogState(() {
+                                            selectedCategory = category;
+                                          });
+                                        },
+                                      );
+                                    })
+                                    .toList(growable: false),
                               ),
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            children: categories
-                                .map((String category) {
-                                  return ChoiceChip(
+                              const SizedBox(height: 14),
+                            ],
+                            if (hasTypeChoices) ...<Widget>[
+                              Text(
+                                'Type',
+                                style: TextStyle(
+                                  color: colorScheme.onSurface.withValues(
+                                    alpha: 0.75,
+                                  ),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: <Widget>[
+                                  ChoiceChip(
                                     selectedColor: colorScheme.primaryContainer,
                                     backgroundColor:
                                         colorScheme.surfaceContainerHighest,
@@ -451,135 +590,164 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                                     labelStyle: TextStyle(
                                       color: colorScheme.onSurface,
                                     ),
-                                    selected: selectedCategory == category,
-                                    label: Text(category),
+                                    selected: selectedTypeKey == null,
+                                    label: const Text('All'),
                                     onSelected: (_) {
                                       setDialogState(() {
-                                        selectedCategory = category;
+                                        selectedTypeKey = null;
                                       });
                                     },
-                                  );
-                                })
-                                .toList(growable: false),
-                          ),
-                          const SizedBox(height: 14),
-                        ],
-                        if (hasTypeChoices) ...<Widget>[
-                          Text(
-                            'Type',
-                            style: TextStyle(
-                              color: colorScheme.onSurface.withValues(
-                                alpha: 0.75,
+                                  ),
+                                  ...availableTypeKeys.map((String typeKey) {
+                                    final bool selected =
+                                        selectedTypeKey == typeKey;
+                                    return ChoiceChip(
+                                      selectedColor:
+                                          colorScheme.primaryContainer,
+                                      backgroundColor:
+                                          colorScheme.surfaceContainerHighest,
+                                      side: BorderSide(
+                                        color: colorScheme.onSurface.withValues(
+                                          alpha: 0.24,
+                                        ),
+                                      ),
+                                      labelStyle: TextStyle(
+                                        color: colorScheme.onSurface,
+                                      ),
+                                      selected: selected,
+                                      label: Text(
+                                        _formatTypeFilterLabel(
+                                          typeKey,
+                                          category: selectedCategory,
+                                        ),
+                                      ),
+                                      onSelected: (_) {
+                                        setDialogState(() {
+                                          selectedTypeKey = typeKey;
+                                        });
+                                      },
+                                    );
+                                  }),
+                                ],
                               ),
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            children: <Widget>[
-                              ChoiceChip(
-                                selectedColor: colorScheme.primaryContainer,
-                                backgroundColor:
-                                    colorScheme.surfaceContainerHighest,
-                                side: BorderSide(
-                                  color: colorScheme.onSurface.withValues(
-                                    alpha: 0.24,
-                                  ),
-                                ),
-                                labelStyle: TextStyle(
-                                  color: colorScheme.onSurface,
-                                ),
-                                selected: selectedTypeKey == null,
-                                label: const Text('All'),
-                                onSelected: (_) {
-                                  setDialogState(() {
-                                    selectedTypeKey = null;
-                                  });
-                                },
-                              ),
-                              ...availableTypeKeys.map((String typeKey) {
-                                final bool selected =
-                                    selectedTypeKey == typeKey;
-                                return ChoiceChip(
-                                  selectedColor: colorScheme.primaryContainer,
-                                  backgroundColor:
-                                      colorScheme.surfaceContainerHighest,
-                                  side: BorderSide(
-                                    color: colorScheme.onSurface.withValues(
-                                      alpha: 0.24,
-                                    ),
-                                  ),
-                                  labelStyle: TextStyle(
-                                    color: colorScheme.onSurface,
-                                  ),
-                                  selected: selected,
-                                  label: Text(
-                                    _formatTypeFilterLabel(
-                                      typeKey,
-                                      category: selectedCategory,
-                                    ),
-                                  ),
-                                  onSelected: (_) {
-                                    setDialogState(() {
-                                      selectedTypeKey = typeKey;
-                                    });
-                                  },
-                                );
-                              }),
+                              const SizedBox(height: 14),
                             ],
-                          ),
-                        ],
-                        const SizedBox(height: 16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                setDialogState(() {
-                                  selectedCategory = categories.isEmpty
-                                      ? activeCategory
-                                      : categories.first;
-                                  selectedTypeKey = null;
-                                });
-                              },
-                              child: Text(
-                                'Reset',
+                            if (customFilterAvailable) ...<Widget>[
+                              Text(
+                                'Source',
                                 style: TextStyle(
                                   color: colorScheme.onSurface.withValues(
                                     alpha: 0.75,
                                   ),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
-                            ),
-                            const SizedBox(width: 8),
-                            FilledButton(
-                              onPressed: () {
-                                Navigator.of(dialogContext).pop((
-                                  category: selectedCategory,
-                                  typeKey: selectedTypeKey,
-                                ));
-                              },
-                              style: FilledButton.styleFrom(
-                                backgroundColor: colorScheme.primary,
-                                foregroundColor: colorScheme.onPrimary,
+                              const SizedBox(height: 8),
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: <Widget>[
+                                  ChoiceChip(
+                                    selectedColor: colorScheme.primaryContainer,
+                                    backgroundColor:
+                                        colorScheme.surfaceContainerHighest,
+                                    side: BorderSide(
+                                      color: colorScheme.onSurface.withValues(
+                                        alpha: 0.24,
+                                      ),
+                                    ),
+                                    labelStyle: TextStyle(
+                                      color: colorScheme.onSurface,
+                                    ),
+                                    selected:
+                                        selectedSourceFilterKey ==
+                                        _sourceFilterAll,
+                                    label: const Text('All Sources'),
+                                    onSelected: (_) {
+                                      setDialogState(() {
+                                        selectedSourceFilterKey =
+                                            _sourceFilterAll;
+                                      });
+                                    },
+                                  ),
+                                  ChoiceChip(
+                                    selectedColor: colorScheme.primaryContainer,
+                                    backgroundColor:
+                                        colorScheme.surfaceContainerHighest,
+                                    side: BorderSide(
+                                      color: colorScheme.onSurface.withValues(
+                                        alpha: 0.24,
+                                      ),
+                                    ),
+                                    labelStyle: TextStyle(
+                                      color: colorScheme.onSurface,
+                                    ),
+                                    selected:
+                                        selectedSourceFilterKey ==
+                                        _sourceFilterPlayerCreated,
+                                    label: const Text('Player Created'),
+                                    onSelected: (_) {
+                                      setDialogState(() {
+                                        selectedSourceFilterKey =
+                                            _sourceFilterPlayerCreated;
+                                      });
+                                    },
+                                  ),
+                                ],
                               ),
-                              child: const Text('Apply'),
+                            ],
+                            const SizedBox(height: 16),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    setDialogState(() {
+                                      selectedCategory = categories.isEmpty
+                                          ? activeCategory
+                                          : categories.first;
+                                      selectedTypeKey = null;
+                                      selectedSourceFilterKey =
+                                          _sourceFilterAll;
+                                    });
+                                  },
+                                  child: Text(
+                                    'Reset',
+                                    style: TextStyle(
+                                      color: colorScheme.onSurface.withValues(
+                                        alpha: 0.75,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                FilledButton(
+                                  onPressed: () {
+                                    Navigator.of(dialogContext).pop((
+                                      category: selectedCategory,
+                                      typeKey: selectedTypeKey,
+                                      sourceFilterKey: selectedSourceFilterKey,
+                                    ));
+                                  },
+                                  style: FilledButton.styleFrom(
+                                    backgroundColor: colorScheme.primary,
+                                    foregroundColor: colorScheme.onPrimary,
+                                  ),
+                                  child: const Text('Apply'),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            );
+          },
         );
-      },
-    );
 
     if (!mounted || selection == null) {
       return;
@@ -587,6 +755,7 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
     _applyFilterSelection(
       category: selection.category,
       typeKey: selection.typeKey,
+      sourceFilterKey: selection.sourceFilterKey,
     );
   }
 
@@ -627,7 +796,9 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
             }
 
             final Map<String, List<EquipmentLibraryItem>> allCategories =
-                snapshot.data ?? <String, List<EquipmentLibraryItem>>{};
+                _mergeInMemoryItemsByCategory(
+                  snapshot.data ?? <String, List<EquipmentLibraryItem>>{},
+                );
             final List<String> categories =
                 EquipmentLibraryQueryService.availableCategories(
                   repositoryCategories: _repository.categories,
@@ -641,11 +812,30 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                 );
             final List<EquipmentLibraryItem> allItems =
                 allCategories[activeCategory] ?? const <EquipmentLibraryItem>[];
+            final bool customFilterAvailable = allItems.any(
+              _isPlayerCreatedItem,
+            );
+            final String activeSourceFilterKey =
+                customFilterAvailable &&
+                    _sourceFilterKey == _sourceFilterPlayerCreated
+                ? _sourceFilterPlayerCreated
+                : _sourceFilterAll;
+            final List<EquipmentLibraryItem> sourceFilteredItems;
+            switch (activeSourceFilterKey) {
+              case _sourceFilterPlayerCreated:
+                sourceFilteredItems = allItems
+                    .where(_isPlayerCreatedItem)
+                    .toList(growable: false);
+                break;
+              default:
+                sourceFilteredItems = allItems;
+                break;
+            }
             final Set<String>? widgetAllowedTypes = _normalizeTypeSet(
               widget.allowedTypes,
             );
             final List<String> typeFilterKeys = _buildTypeFilterKeys(
-              items: allItems,
+              items: sourceFilteredItems,
               activeCategory: activeCategory,
               widgetAllowedTypes: widgetAllowedTypes,
             );
@@ -660,7 +850,7 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                 );
             final List<EquipmentLibraryItem> filteredItems =
                 EquipmentLibraryQueryService.filterItems(
-                  items: allItems,
+                  items: sourceFilteredItems,
                   query: _searchQuery,
                   allowedTypes: effectiveAllowedTypes,
                   typeKeyResolver: (EquipmentLibraryItem item) {
@@ -692,6 +882,8 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                     activeCategory: activeCategory,
                     typeFilterKeys: typeFilterKeys,
                     activeTypeFilterKey: activeTypeFilterKey,
+                    customFilterAvailable: customFilterAvailable,
+                    activeSourceFilterKey: activeSourceFilterKey,
                   ),
                 ),
                 Expanded(
@@ -754,6 +946,8 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
     required String activeCategory,
     required List<String> typeFilterKeys,
     required String? activeTypeFilterKey,
+    required bool customFilterAvailable,
+    required String activeSourceFilterKey,
   }) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final bool isLight = Theme.of(context).brightness == Brightness.light;
@@ -778,7 +972,9 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
           builder: (BuildContext context, BoxConstraints constraints) {
             final bool compact = constraints.maxWidth < 720;
             final bool canOpenFilter =
-                categories.length > 1 || typeFilterKeys.length > 1;
+                categories.length > 1 ||
+                typeFilterKeys.length > 1 ||
+                customFilterAvailable;
             final bool hasTypeFilter = activeTypeFilterKey != null;
             final String activeTypeFilterLabel = activeTypeFilterKey == null
                 ? ''
@@ -788,15 +984,30 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
                   );
             final bool hasCategoryFilter =
                 categories.isNotEmpty && activeCategory != categories.first;
+            final bool hasSourceFilter =
+                customFilterAvailable &&
+                activeSourceFilterKey !=
+                    _EquipmentLibraryDataViewState._sourceFilterAll;
+            const String sourceFilterLabel = 'Player Created';
             final int activeFilterCount =
-                (hasCategoryFilter ? 1 : 0) + (hasTypeFilter ? 1 : 0);
+                (hasCategoryFilter ? 1 : 0) +
+                (hasTypeFilter ? 1 : 0) +
+                (hasSourceFilter ? 1 : 0);
             final Widget filterButton = Tooltip(
               message: activeFilterCount == 0
-                  ? 'Filter category and type'
+                  ? 'Filter category, type, and source'
+                  : hasCategoryFilter && hasTypeFilter && hasSourceFilter
+                  ? 'Category: $activeCategory, Type: $activeTypeFilterLabel, Source: $sourceFilterLabel'
                   : hasCategoryFilter && hasTypeFilter
                   ? 'Category: $activeCategory, Type: $activeTypeFilterLabel'
+                  : hasCategoryFilter && hasSourceFilter
+                  ? 'Category: $activeCategory, Source: $sourceFilterLabel'
+                  : hasTypeFilter && hasSourceFilter
+                  ? 'Type: $activeTypeFilterLabel, Source: $sourceFilterLabel'
                   : hasCategoryFilter
                   ? 'Category: $activeCategory'
+                  : hasSourceFilter
+                  ? 'Source: $sourceFilterLabel'
                   : 'Type: $activeTypeFilterLabel',
               child: SizedBox(
                 width: 52,
@@ -814,6 +1025,8 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
                                   activeCategory: activeCategory,
                                   typeFilterKeys: typeFilterKeys,
                                   activeTypeFilterKey: activeTypeFilterKey,
+                                  customFilterAvailable: customFilterAvailable,
+                                  activeSourceFilterKey: activeSourceFilterKey,
                                 );
                               }
                             : null,

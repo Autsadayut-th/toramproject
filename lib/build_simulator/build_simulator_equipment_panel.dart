@@ -348,9 +348,6 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         searchCandidates: _subWeaponSearchCandidates(),
         statPreview: _equipmentStatPreview(_subWeaponId),
         allowedItemTypes: _allowedSubWeaponTypeNames(),
-        onCreateCustomItem: () {
-          unawaited(_openCustomEquipmentCreator(category: 'weapon'));
-        },
         onEquipChanged: (id) {
           if (!_isSubWeaponSelectionAllowed(id)) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -439,9 +436,6 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         selectedEquipmentItem: _findEquipmentByKey(_helmetId),
         searchCandidates: _helmetSearchCandidates(),
         statPreview: _equipmentStatPreview(_helmetId),
-        onCreateCustomItem: () {
-          unawaited(_openCustomEquipmentCreator(category: 'additional'));
-        },
         onEquipChanged: (id) {
           _setStateAndRecalculate(() => _helmetId = id);
         },
@@ -478,9 +472,6 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         selectedEquipmentItem: _findEquipmentByKey(_ringId),
         searchCandidates: _ringSearchCandidates(),
         statPreview: _equipmentStatPreview(_ringId),
-        onCreateCustomItem: () {
-          unawaited(_openCustomEquipmentCreator(category: 'special'));
-        },
         onEquipChanged: (id) {
           _setStateAndRecalculate(() => _ringId = id);
         },

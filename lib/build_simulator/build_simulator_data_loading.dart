@@ -11,6 +11,8 @@ extension _BuildSimulatorDataLoading on BuildSimulatorScreenState {
       onReplaceSavedBuilds: _onReplaceSavedBuilds,
       onMergeSavedBuilds: _onMergeSavedBuilds,
       onSetShowRecommendations: _setShowRecommendationsPanel,
+      onUpsertCustomEquipment: _onUpsertCustomEquipment,
+      onDeleteCustomEquipmentById: _onDeleteCustomEquipmentById,
       onClearAllData: _onClearAll,
       onGenerateAiRecommendations: _generateAiRecommendationsNow,
     );
@@ -625,10 +627,39 @@ extension _BuildSimulatorDataLoading on BuildSimulatorScreenState {
     Map<String, String> categoryByKey,
   ) {
     _setUiState(() {
-      _equipmentByKey = byKey;
-      _equipmentCategoryByKey = categoryByKey;
+      _libraryEquipmentByKey = byKey;
+      _libraryEquipmentCategoryByKey = categoryByKey;
+      _equipmentByKey = _mergedEquipmentCacheByKey();
+      _equipmentCategoryByKey = _mergedEquipmentCategoryByKey();
       _recalculateAll();
     });
+  }
+
+  void _applyCustomEquipmentCache(
+    Map<String, EquipmentLibraryItem> byKey,
+    Map<String, String> categoryByKey,
+  ) {
+    _setUiState(() {
+      _customEquipmentByKey = byKey;
+      _customEquipmentCategoryByKey = categoryByKey;
+      _equipmentByKey = _mergedEquipmentCacheByKey();
+      _equipmentCategoryByKey = _mergedEquipmentCategoryByKey();
+      _recalculateAll();
+    });
+  }
+
+  Map<String, EquipmentLibraryItem> _mergedEquipmentCacheByKey() {
+    return <String, EquipmentLibraryItem>{
+      ..._libraryEquipmentByKey,
+      ..._customEquipmentByKey,
+    };
+  }
+
+  Map<String, String> _mergedEquipmentCategoryByKey() {
+    return <String, String>{
+      ..._libraryEquipmentCategoryByKey,
+      ..._customEquipmentCategoryByKey,
+    };
   }
 
   void _applyCrystalCache(Map<String, CrystalLibraryEntry> byKey) {

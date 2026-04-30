@@ -223,15 +223,12 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
     return '${stat.statKey.toUpperCase()} $sign$valueText${isPercent ? '%' : ''}';
   }
 
-  List<String> _equipmentStatPreview(String? equipmentKey, {int limit = 4}) {
+  List<String> _equipmentStatPreview(String? equipmentKey) {
     final EquipmentLibraryItem? item = _findEquipmentByKey(equipmentKey);
     if (item == null) {
       return const <String>[];
     }
-    return item.stats
-        .take(limit)
-        .map(_formatStatPreview)
-        .toList(growable: false);
+    return item.stats.map(_formatStatPreview).toList(growable: false);
   }
 
   Iterable<EquipmentLibraryItem> _equippedItems() sync* {

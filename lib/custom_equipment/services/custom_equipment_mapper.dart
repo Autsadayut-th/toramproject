@@ -37,8 +37,6 @@ class CustomEquipmentMapper {
     switch (value) {
       case 'weapon':
       case 'armor':
-      case 'additional':
-      case 'special':
         return value;
       default:
         return 'weapon';

@@ -4,14 +4,26 @@ const DEFAULT_FALLBACK = [
   'Balance damage stats with survivability so your combo can run consistently.',
 ];
 const DEFAULT_GEMINI_MODEL = 'gemini-3.1-flash-lite-preview';
+const DEFAULT_GROQ_MODEL = 'llama-3.1-8b-instant';
+const DEFAULT_OPENAI_MODEL = 'gpt-4o-mini';
 const DEFAULT_EXPLANATION_MAX_OUTPUT_TOKENS = 128;
 const DEFAULT_GEMINI_REQUEST_TIMEOUT_MS = 15000;
+const DEFAULT_GROQ_REQUEST_TIMEOUT_MS = 10000;
+const DEFAULT_OPENAI_REQUEST_TIMEOUT_MS = 10000;
 const DEFAULT_AI_RETRY_ATTEMPTS = 2;
 const DEFAULT_AI_RETRY_BASE_DELAY_MS = 350;
 const DEFAULT_AI_CACHE_TTL_MS = 5 * 60 * 1000;
 const DEFAULT_AI_TOTAL_TIMEOUT_MS = 18000;
 const GEMINI_MODEL_ALIASES = {
   'gemini-3.1-flash-lite': 'gemini-3.1-flash-lite-preview',
+};
+const GROQ_MODEL_ALIASES = {
+  'llama-3-8b': 'llama-3.1-8b-instant',
+  'llama3-8b': 'llama-3.1-8b-instant',
+};
+const OPENAI_MODEL_ALIASES = {
+  'gpt-4-mini': 'gpt-4o-mini',
+  'gpt4-mini': 'gpt-4o-mini',
 };
 const AI_EXPLANATION_CACHE = new Map();
 const SUPPORTED_RECOMMENDATION_CATEGORIES = new Set([
@@ -705,17 +717,27 @@ function buildExplanationPrompt({ input, recommendations }) {
 
 function resolveProvider() {
   const configured = (process.env.AI_PROVIDER || '').trim().toLowerCase();
-  if (configured && configured !== 'auto' && configured !== 'gemini') {
+  const validProviders = new Set(['auto', 'gemini', 'groq', 'openai']);
+  if (configured && !validProviders.has(configured)) {
     throw new Error(
-      'Invalid AI_PROVIDER. Use "gemini" or leave empty.',
+      'Invalid AI_PROVIDER. Use "gemini", "groq", "openai", "auto", or leave empty.',
     );
   }
-  return 'gemini';
+  if (configured === 'auto' || !configured) {
+    return 'auto';
+  }
+  return configured;
 }
 
 function providerLabel(provider) {
   if (provider === 'gemini') {
     return 'Google Gemini';
+  }
+  if (provider === 'groq') {
+    return 'Groq';
+  }
+  if (provider === 'openai') {
+    return 'OpenAI';
   }
   return 'AI';
 }
@@ -841,6 +863,24 @@ function normalizeGeminiModel(rawModel) {
   return GEMINI_MODEL_ALIASES[canonical] || canonical;
 }
 
+function normalizeGroqModel(rawModel) {
+  const normalized = String(rawModel || '').trim();
+  if (!normalized) {
+    return DEFAULT_GROQ_MODEL;
+  }
+  const canonical = normalized.toLowerCase();
+  return GROQ_MODEL_ALIASES[canonical] || canonical;
+}
+
+function normalizeOpenAIModel(rawModel) {
+  const normalized = String(rawModel || '').trim();
+  if (!normalized) {
+    return DEFAULT_OPENAI_MODEL;
+  }
+  const canonical = normalized.toLowerCase();
+  return OPENAI_MODEL_ALIASES[canonical] || normalized;
+}
+
 function isGeminiModelFormatError(status, bodyText) {
   const text = String(bodyText || '');
   if (status === 400) {
@@ -869,6 +909,22 @@ function resolveGeminiRequestTimeoutMs() {
     return Math.floor(configured);
   }
   return DEFAULT_GEMINI_REQUEST_TIMEOUT_MS;
+}
+
+function resolveGroqRequestTimeoutMs() {
+  const configured = Number(process.env.GROQ_REQUEST_TIMEOUT_MS ?? '');
+  if (Number.isFinite(configured) && configured >= 1000 && configured <= 15000) {
+    return Math.floor(configured);
+  }
+  return DEFAULT_GROQ_REQUEST_TIMEOUT_MS;
+}
+
+function resolveOpenAIRequestTimeoutMs() {
+  const configured = Number(process.env.OPENAI_REQUEST_TIMEOUT_MS ?? '');
+  if (Number.isFinite(configured) && configured >= 1000 && configured <= 15000) {
+    return Math.floor(configured);
+  }
+  return DEFAULT_OPENAI_REQUEST_TIMEOUT_MS;
 }
 
 function extractGeminiText(json) {
@@ -991,37 +1047,211 @@ async function requestGeminiExplanation(input, recommendations, options = {}) {
   throw lastError || new Error('Gemini request failed.');
 }
 
+async function requestGroqExplanation(input, recommendations, options = {}) {
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) {
+    throw new Error('GROQ_API_KEY is not configured.');
+  }
+
+  const promptText = buildExplanationPrompt({ input, recommendations });
+  const maxOutputTokens = resolveGeminiMaxOutputTokens();
+  const configuredRequestTimeoutMs = resolveGroqRequestTimeoutMs();
+  const limitFromBudget = Number(options.requestTimeoutMs);
+  const requestTimeoutMs = Number.isFinite(limitFromBudget)
+    ? Math.max(
+      1000,
+      Math.min(configuredRequestTimeoutMs, Math.floor(limitFromBudget)),
+    )
+    : configuredRequestTimeoutMs;
+  const configuredModel = normalizeGroqModel(process.env.GROQ_MODEL);
+
+  const endpoint = 'https://api.groq.com/openai/v1/chat/completions';
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), requestTimeoutMs);
+  let response;
+  try {
+    response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: configuredModel,
+        messages: [
+          {
+            role: 'user',
+            content: promptText,
+          },
+        ],
+        temperature: 0.2,
+        max_tokens: maxOutputTokens,
+        response_format: { type: 'json_object' },
+      }),
+      signal: controller.signal,
+    });
+  } catch (error) {
+    if (error && (error.name === 'AbortError' || /aborted/i.test(String(error)))) {
+      throw new Error(`Groq request timed out after ${requestTimeoutMs}ms.`);
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+
+  if (response.ok) {
+    const json = await response.json();
+    const outputText = json.choices?.[0]?.message?.content || '';
+    if (!outputText) {
+      throw new Error('Groq response has empty content.');
+    }
+    const explanation = parseModelExplanationPayload(
+      outputText,
+      recommendations,
+    );
+    return {
+      provider: 'groq',
+      model: configuredModel,
+      summary: explanation.summary,
+      explanations: explanation.explanations,
+    };
+  }
+
+  const bodyText = await response.text();
+  throw new Error(`Groq request failed (${response.status}): ${bodyText}`);
+}
+
+async function requestOpenAIExplanation(input, recommendations, options = {}) {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    throw new Error('OPENAI_API_KEY is not configured.');
+  }
+
+  const promptText = buildExplanationPrompt({ input, recommendations });
+  const maxOutputTokens = resolveGeminiMaxOutputTokens();
+  const configuredRequestTimeoutMs = resolveOpenAIRequestTimeoutMs();
+  const limitFromBudget = Number(options.requestTimeoutMs);
+  const requestTimeoutMs = Number.isFinite(limitFromBudget)
+    ? Math.max(
+      1000,
+      Math.min(configuredRequestTimeoutMs, Math.floor(limitFromBudget)),
+    )
+    : configuredRequestTimeoutMs;
+  const configuredModel = normalizeOpenAIModel(process.env.OPENAI_MODEL);
+
+  const endpoint = 'https://api.openai.com/v1/chat/completions';
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), requestTimeoutMs);
+  let response;
+  try {
+    response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: configuredModel,
+        messages: [
+          {
+            role: 'user',
+            content: promptText,
+          },
+        ],
+        temperature: 0.2,
+        max_tokens: maxOutputTokens,
+        response_format: { type: 'json_object' },
+      }),
+      signal: controller.signal,
+    });
+  } catch (error) {
+    if (error && (error.name === 'AbortError' || /aborted/i.test(String(error)))) {
+      throw new Error(`OpenAI request timed out after ${requestTimeoutMs}ms.`);
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+
+  if (response.ok) {
+    const json = await response.json();
+    const outputText = json.choices?.[0]?.message?.content || '';
+    if (!outputText) {
+      throw new Error('OpenAI response has empty content.');
+    }
+    const explanation = parseModelExplanationPayload(
+      outputText,
+      recommendations,
+    );
+    return {
+      provider: 'openai',
+      model: configuredModel,
+      summary: explanation.summary,
+      explanations: explanation.explanations,
+    };
+  }
+
+  const bodyText = await response.text();
+  throw new Error(`OpenAI request failed (${response.status}): ${bodyText}`);
+}
+
 async function requestAiExplanation(input, recommendations) {
-  resolveProvider();
+  const provider = resolveProvider();
   const maxAttempts = resolveAiRetryAttempts();
   const totalTimeoutMs = resolveAiTotalTimeoutMs();
   const startedAt = Date.now();
   let lastError;
-  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
-    const elapsedMs = Date.now() - startedAt;
-    const remainingMs = totalTimeoutMs - elapsedMs;
-    if (remainingMs < 1000) {
-      throw new Error(`Gemini request timed out after ${totalTimeoutMs}ms.`);
-    }
-    try {
-      return await requestGeminiExplanation(input, recommendations, {
-        requestTimeoutMs: remainingMs,
-      });
-    } catch (error) {
-      lastError = error;
-      const canRetry =
-        isRetryableAiError(error) && attempt < maxAttempts - 1;
-      if (!canRetry) {
-        throw error;
+
+  const providerChain = [];
+  if (provider === 'auto') {
+    providerChain.push('gemini', 'groq', 'openai');
+  } else {
+    providerChain.push(provider);
+  }
+
+  for (const currentProvider of providerChain) {
+    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+      const elapsedMs = Date.now() - startedAt;
+      const remainingMs = totalTimeoutMs - elapsedMs;
+      if (remainingMs < 1000) {
+        throw new Error(`AI request timed out after ${totalTimeoutMs}ms.`);
       }
-      const backoffMs = DEFAULT_AI_RETRY_BASE_DELAY_MS * (attempt + 1);
-      const elapsedAfterErrorMs = Date.now() - startedAt;
-      if (elapsedAfterErrorMs + backoffMs >= totalTimeoutMs) {
-        throw new Error(`Gemini request timed out after ${totalTimeoutMs}ms.`);
+      try {
+        if (currentProvider === 'gemini') {
+          return await requestGeminiExplanation(input, recommendations, {
+            requestTimeoutMs: remainingMs,
+          });
+        }
+        if (currentProvider === 'groq') {
+          return await requestGroqExplanation(input, recommendations, {
+            requestTimeoutMs: remainingMs,
+          });
+        }
+        if (currentProvider === 'openai') {
+          return await requestOpenAIExplanation(input, recommendations, {
+            requestTimeoutMs: remainingMs,
+          });
+        }
+        throw new Error(`Unknown provider: ${currentProvider}`);
+      } catch (error) {
+        lastError = error;
+        const canRetry =
+          isRetryableAiError(error) && attempt < maxAttempts - 1;
+        if (!canRetry) {
+          break;
+        }
+        const backoffMs = DEFAULT_AI_RETRY_BASE_DELAY_MS * (attempt + 1);
+        const elapsedAfterErrorMs = Date.now() - startedAt;
+        if (elapsedAfterErrorMs + backoffMs >= totalTimeoutMs) {
+          throw new Error(`AI request timed out after ${totalTimeoutMs}ms.`);
+        }
+        await sleep(backoffMs);
       }
-      await sleep(backoffMs);
     }
   }
+
   throw lastError || new Error('AI request failed.');
 }
 

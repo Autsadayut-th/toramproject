@@ -231,26 +231,31 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
         children: <Widget>[
           _buildEquipmentSlotStatsSection(
             slotLabel: 'Main Weapon',
+            equipmentKey: _mainWeaponId,
             item: _findEquipmentByKey(_mainWeaponId),
           ),
           const SizedBox(height: 12),
           _buildEquipmentSlotStatsSection(
             slotLabel: 'Sub Weapon',
+            equipmentKey: _subWeaponId,
             item: _findEquipmentByKey(_subWeaponId),
           ),
           const SizedBox(height: 12),
           _buildEquipmentSlotStatsSection(
             slotLabel: 'Armor',
+            equipmentKey: _armorId,
             item: _findEquipmentByKey(_armorId),
           ),
           const SizedBox(height: 12),
           _buildEquipmentSlotStatsSection(
             slotLabel: 'Additional',
+            equipmentKey: _helmetId,
             item: _findEquipmentByKey(_helmetId),
           ),
           const SizedBox(height: 12),
           _buildEquipmentSlotStatsSection(
             slotLabel: 'Special',
+            equipmentKey: _ringId,
             item: _findEquipmentByKey(_ringId),
           ),
           const SizedBox(height: 12),
@@ -433,6 +438,7 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
 
   Widget _buildEquipmentSlotStatsSection({
     required String slotLabel,
+    required String? equipmentKey,
     required EquipmentLibraryItem? item,
   }) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -455,6 +461,9 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
       ...baseStats,
       ...regularStats,
     ];
+    final CustomEquipmentItem? customItem = _findCustomEquipmentItemByKey(
+      equipmentKey,
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -481,6 +490,30 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
             ),
           ),
         ),
+        if (customItem != null)
+          Padding(
+            padding: const EdgeInsets.only(left: 14, top: 6),
+            child: Wrap(
+              spacing: 6,
+              runSpacing: 6,
+              children: <Widget>[
+                OutlinedButton.icon(
+                  onPressed: () {
+                    unawaited(_openCustomEquipmentEditorByKey(equipmentKey));
+                  },
+                  icon: const Icon(Icons.edit, size: 14),
+                  label: const Text('Edit'),
+                ),
+                OutlinedButton.icon(
+                  onPressed: () {
+                    unawaited(_confirmDeleteCustomEquipmentByKey(equipmentKey));
+                  },
+                  icon: const Icon(Icons.delete_outline, size: 14),
+                  label: const Text('Delete'),
+                ),
+              ],
+            ),
+          ),
         if (item == null) ...<Widget>[
           const SizedBox(height: 4),
           Padding(

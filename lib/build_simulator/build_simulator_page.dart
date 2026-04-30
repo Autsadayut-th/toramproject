@@ -68,6 +68,8 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       RecommendationFeedbackService();
   final CustomEquipmentStorageService _customEquipmentStorageService =
       const CustomEquipmentStorageService();
+  final FirebaseCustomEquipmentService _firebaseCustomEquipmentService =
+      FirebaseCustomEquipmentService();
 
   static const List<String> _characterStatKeys =
       BuildPersistenceService.characterStatKeys;
@@ -98,6 +100,14 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   Map<String, EquipmentLibraryItem> _equipmentByKey =
       <String, EquipmentLibraryItem>{};
   Map<String, String> _equipmentCategoryByKey = <String, String>{};
+  Map<String, EquipmentLibraryItem> _libraryEquipmentByKey =
+      <String, EquipmentLibraryItem>{};
+  Map<String, String> _libraryEquipmentCategoryByKey = <String, String>{};
+  Map<String, EquipmentLibraryItem> _customEquipmentByKey =
+      <String, EquipmentLibraryItem>{};
+  Map<String, String> _customEquipmentCategoryByKey = <String, String>{};
+  Map<String, CustomEquipmentItem> _customEquipmentItemByKey =
+      <String, CustomEquipmentItem>{};
   Map<String, CrystalLibraryEntry> _crystalsByKey =
       <String, CrystalLibraryEntry>{};
   Map<String, String> _weaponTypeAlias = <String, String>{};
@@ -175,7 +185,8 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   bool _isSavingCloudSavedBuilds = false;
   bool _hasPendingCloudSync = false;
   String? _loadedCloudUserId;
-  int _customEquipmentCount = 0;
+  bool _isSyncingCustomEquipment = false;
+  String? _loadedCustomEquipmentUserId;
   RecommendationFeedbackSnapshot _feedbackSnapshot =
       const RecommendationFeedbackSnapshot.empty();
   bool _isLoadingFeedbackSnapshot = false;
@@ -199,7 +210,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
     _loadCrystalLibrary();
     _loadWeaponRuleConfig();
     _loadRuleSetConfig();
-    unawaited(_refreshCustomEquipmentAccess());
+    unawaited(_refreshCustomEquipmentAccess(force: true));
     unawaited(_refreshCloudSavedBuilds(force: true));
     unawaited(_refreshRecommendationFeedbackSnapshot(force: true));
   }
@@ -226,7 +237,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
         oldWidget.isAuthenticated != widget.isAuthenticated;
     final bool userChanged = oldWidget.currentUserId != widget.currentUserId;
     if (authStateChanged || userChanged) {
-      unawaited(_refreshCustomEquipmentAccess());
+      unawaited(_refreshCustomEquipmentAccess(force: true));
       unawaited(_refreshCloudSavedBuilds(force: true));
       unawaited(_refreshRecommendationFeedbackSnapshot(force: true));
     }

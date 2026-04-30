@@ -20,6 +20,7 @@ class EquipmentLibraryScreen extends StatelessWidget {
     this.initialCategory,
     this.allowedCategories,
     this.allowedTypes,
+    this.inMemoryItemsByCategory,
     this.title = 'Equipment Library',
     this.onNavigate,
   });
@@ -28,6 +29,7 @@ class EquipmentLibraryScreen extends StatelessWidget {
   final String? initialCategory;
   final List<String>? allowedCategories;
   final List<String>? allowedTypes;
+  final Map<String, List<EquipmentLibraryItem>>? inMemoryItemsByCategory;
   final String title;
   final ValueChanged<AppNavigationPage>? onNavigate;
 
@@ -37,6 +39,7 @@ class EquipmentLibraryScreen extends StatelessWidget {
     required String title,
     List<String>? allowedCategories,
     List<String>? allowedTypes,
+    Map<String, List<EquipmentLibraryItem>>? inMemoryItemsByCategory,
   }) async {
     final EquipmentLibraryItem? selected = await Navigator.of(context)
         .push<EquipmentLibraryItem>(
@@ -46,6 +49,7 @@ class EquipmentLibraryScreen extends StatelessWidget {
               initialCategory: initialCategory,
               allowedCategories: allowedCategories,
               allowedTypes: allowedTypes,
+              inMemoryItemsByCategory: inMemoryItemsByCategory,
               title: title,
             ),
           ),
@@ -82,6 +86,7 @@ class EquipmentLibraryScreen extends StatelessWidget {
         initialCategory: initialCategory,
         allowedCategories: allowedCategories,
         allowedTypes: allowedTypes,
+        inMemoryItemsByCategory: inMemoryItemsByCategory,
       ),
     );
 
