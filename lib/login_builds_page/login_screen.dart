@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../account_page/account_page.dart';
 import '../app_shell/app_shell_page.dart';
 import '../auth/firebase_auth_service.dart';
+import '../forgot_password_page/forgot_password_page.dart';
 import '../register_bulids_page/register_screen.dart';
 import 'services/login_form_service.dart';
 
@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future<void> _openAccountPage() async {
+  Future<void> _openForgotPasswordPage() async {
     if (_isLoading) {
       return;
     }
@@ -87,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
     await Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (BuildContext context) =>
-            AccountPage(initialEmail: _emailController.text),
+            ForgotPasswordPage(initialEmail: _emailController.text),
       ),
     );
   }
@@ -264,8 +264,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text('Create new account'),
                   ),
                   TextButton(
-                    onPressed: _isLoading ? null : _openAccountPage,
-                    child: const Text('Forgot password / Account'),
+                    onPressed: _isLoading ? null : _openForgotPasswordPage,
+                    child: const Text('Forgot password'),
                   ),
                   const SizedBox(height: 6),
                   OutlinedButton(

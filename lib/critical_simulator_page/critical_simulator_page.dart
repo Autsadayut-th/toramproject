@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CriticalSimulatorPage extends StatefulWidget {
-  const CriticalSimulatorPage({
-    super.key,
-    this.embeddedInShell = false,
-  });
+  const CriticalSimulatorPage({super.key, this.embeddedInShell = false});
 
   final bool embeddedInShell;
 
@@ -170,10 +167,7 @@ class _CriticalSimulatorPageState extends State<CriticalSimulatorPage> {
                   const SizedBox(height: 6),
                   Text(
                     _rulesError!,
-                    style: TextStyle(
-                      color: colorScheme.error,
-                      fontSize: 12,
-                    ),
+                    style: TextStyle(color: colorScheme.error, fontSize: 12),
                   ),
                 ],
               ],
@@ -324,10 +318,7 @@ class _CriticalSimulatorPageState extends State<CriticalSimulatorPage> {
     );
 
     if (widget.embeddedInShell) {
-      return ColoredBox(
-        color: colorScheme.surface,
-        child: content,
-      );
+      return ColoredBox(color: colorScheme.surface, child: content);
     }
 
     return Scaffold(

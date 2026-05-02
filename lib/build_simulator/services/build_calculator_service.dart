@@ -226,6 +226,7 @@ class BuildCalculatorService {
     required EquipmentLibraryItem? ring,
     required Iterable<EquipmentStat> equippedCrystalStats,
     required Iterable<EquipmentStat> avatarStats,
+    required Map<String, List<String>> mainToAllowedSubTypes,
     BuildRuleSet? ruleSet,
   }) {
     final _CalculationBuckets buckets = _CalculationBuckets();
@@ -238,6 +239,11 @@ class BuildCalculatorService {
     );
     final String normalizedSubWeaponType = _normalizeWeaponType(
       subWeapon?.type,
+    );
+    final bool isSubWeaponAllowed = _isSubWeaponAllowedByRules(
+      mainWeaponType: normalizedMainWeaponType,
+      subWeaponType: normalizedSubWeaponType,
+      mainToAllowedSubTypes: mainToAllowedSubTypes,
     );
     final String combatWeaponType = _resolveCombatWeaponType(
       mainWeaponType: normalizedMainWeaponType,
@@ -254,6 +260,7 @@ class BuildCalculatorService {
       mainWeaponType: normalizedMainWeaponType,
       subWeaponType: normalizedSubWeaponType,
       armorState: effectiveArmorState,
+      isSubWeaponAllowed: isSubWeaponAllowed,
       buckets: buckets,
     );
     _accumulateItemStats(
@@ -263,6 +270,7 @@ class BuildCalculatorService {
       mainWeaponType: normalizedMainWeaponType,
       subWeaponType: normalizedSubWeaponType,
       armorState: effectiveArmorState,
+      isSubWeaponAllowed: isSubWeaponAllowed,
       buckets: buckets,
     );
     _accumulateItemStats(
@@ -272,6 +280,7 @@ class BuildCalculatorService {
       mainWeaponType: normalizedMainWeaponType,
       subWeaponType: normalizedSubWeaponType,
       armorState: effectiveArmorState,
+      isSubWeaponAllowed: isSubWeaponAllowed,
       buckets: buckets,
     );
     _accumulateItemStats(
@@ -281,6 +290,7 @@ class BuildCalculatorService {
       mainWeaponType: normalizedMainWeaponType,
       subWeaponType: normalizedSubWeaponType,
       armorState: effectiveArmorState,
+      isSubWeaponAllowed: isSubWeaponAllowed,
       buckets: buckets,
     );
     _accumulateItemStats(
@@ -290,6 +300,7 @@ class BuildCalculatorService {
       mainWeaponType: normalizedMainWeaponType,
       subWeaponType: normalizedSubWeaponType,
       armorState: effectiveArmorState,
+      isSubWeaponAllowed: isSubWeaponAllowed,
       buckets: buckets,
     );
     for (final EquipmentStat stat in equippedCrystalStats) {
@@ -300,6 +311,7 @@ class BuildCalculatorService {
         mainWeaponType: normalizedMainWeaponType,
         subWeaponType: normalizedSubWeaponType,
         armorState: effectiveArmorState,
+        isSubWeaponAllowed: isSubWeaponAllowed,
         buckets: buckets,
       );
     }
@@ -311,6 +323,7 @@ class BuildCalculatorService {
         mainWeaponType: normalizedMainWeaponType,
         subWeaponType: normalizedSubWeaponType,
         armorState: effectiveArmorState,
+        isSubWeaponAllowed: isSubWeaponAllowed,
         buckets: buckets,
       );
     }
@@ -333,8 +346,11 @@ class BuildCalculatorService {
       weaponAtkPercent: buckets.weaponAtkPercent,
       enhanceMain: enhanceMain,
       enhanceSub: enhanceSub,
+      mainWeaponType: normalizedMainWeaponType,
       combatWeaponType: combatWeaponType,
       subWeaponType: normalizedSubWeaponType,
+      isSubWeaponAllowed: isSubWeaponAllowed,
+      subWeaponHasBaseWeaponAtk: _itemHasBaseWeaponAtk(subWeapon),
       ruleSet: ruleSet,
     );
     final double baseStability = _baseStability(
@@ -471,6 +487,7 @@ class BuildCalculatorService {
     required String mainWeaponType,
     required String subWeaponType,
     required String armorState,
+    required bool isSubWeaponAllowed,
     required _CalculationBuckets buckets,
   }) {
     if (item == null) {
@@ -484,6 +501,7 @@ class BuildCalculatorService {
         mainWeaponType: mainWeaponType,
         subWeaponType: subWeaponType,
         armorState: armorState,
+        isSubWeaponAllowed: isSubWeaponAllowed,
         buckets: buckets,
       );
     }
@@ -496,6 +514,7 @@ class BuildCalculatorService {
     required String mainWeaponType,
     required String subWeaponType,
     required String armorState,
+    required bool isSubWeaponAllowed,
     required _CalculationBuckets buckets,
   }) {
     if (!_matchesCondition(
@@ -522,8 +541,10 @@ class BuildCalculatorService {
         if (slot == 'main') {
           buckets.mainWeaponAtkBase += value;
         } else if (_subWeaponAddsWeaponAtk(
+          mainWeaponType: mainWeaponType,
           combatWeaponType: combatWeaponType,
           subWeaponType: subWeaponType,
+          isSubWeaponAllowed: isSubWeaponAllowed,
         )) {
           buckets.supplementalWeaponAtkBase += value;
         }
@@ -563,8 +584,10 @@ class BuildCalculatorService {
       if (slot == 'main') {
         buckets.mainWeaponBaseStability += value;
       } else if (_subWeaponAddsStability(
+        mainWeaponType: mainWeaponType,
         combatWeaponType: combatWeaponType,
         subWeaponType: subWeaponType,
+        isSubWeaponAllowed: isSubWeaponAllowed,
       )) {
         buckets.supplementalStabilityBase += value;
       }
@@ -616,8 +639,11 @@ class BuildCalculatorService {
     required double weaponAtkPercent,
     required int enhanceMain,
     required int enhanceSub,
+    required String mainWeaponType,
     required String combatWeaponType,
     required String subWeaponType,
+    required bool isSubWeaponAllowed,
+    required bool subWeaponHasBaseWeaponAtk,
     BuildRuleSet? ruleSet,
   }) {
     final double refinedMainWeaponAtk = _refinedWeaponAtk(
@@ -627,12 +653,17 @@ class BuildCalculatorService {
     );
     final double refinedSubWeaponAtk =
         _subWeaponAddsWeaponAtk(
+          mainWeaponType: mainWeaponType,
           combatWeaponType: combatWeaponType,
           subWeaponType: subWeaponType,
+          isSubWeaponAllowed: isSubWeaponAllowed,
         )
         ? _refinedWeaponAtk(
             baseWeaponAtk: supplementalWeaponAtkBase,
-            refineLevel: _subWeaponUsesWeaponRefine(subWeaponType)
+            refineLevel: _subWeaponUsesWeaponRefine(
+              subWeaponType: subWeaponType,
+              subWeaponHasBaseWeaponAtk: subWeaponHasBaseWeaponAtk,
+            )
                 ? enhanceSub
                 : 0,
             ruleSet: ruleSet,
@@ -900,25 +931,65 @@ class BuildCalculatorService {
   }
 
   static bool _subWeaponAddsWeaponAtk({
+    required String mainWeaponType,
     required String combatWeaponType,
     required String subWeaponType,
+    required bool isSubWeaponAllowed,
   }) {
-    return combatWeaponType == 'BOW' ||
-        combatWeaponType == 'BOWGUN' ||
-        subWeaponType == 'ARROW';
+    return isSubWeaponAllowed && subWeaponType.isNotEmpty;
   }
 
-  static bool _subWeaponUsesWeaponRefine(String subWeaponType) {
-    return subWeaponType == 'ARROW';
+  static bool _subWeaponUsesWeaponRefine({
+    required String subWeaponType,
+    required bool subWeaponHasBaseWeaponAtk,
+  }) {
+    return subWeaponType.isNotEmpty && subWeaponHasBaseWeaponAtk;
   }
 
   static bool _subWeaponAddsStability({
+    required String mainWeaponType,
     required String combatWeaponType,
     required String subWeaponType,
+    required bool isSubWeaponAllowed,
   }) {
-    return combatWeaponType == 'BOW' ||
-        combatWeaponType == 'BOWGUN' ||
-        subWeaponType == 'ARROW';
+    return isSubWeaponAllowed && subWeaponType.isNotEmpty;
+  }
+
+  static bool _isSubWeaponAllowedByRules({
+    required String mainWeaponType,
+    required String subWeaponType,
+    required Map<String, List<String>> mainToAllowedSubTypes,
+  }) {
+    if (subWeaponType.isEmpty) {
+      return true;
+    }
+    if (mainWeaponType.isEmpty) {
+      return true;
+    }
+    final List<String>? allowed = mainToAllowedSubTypes[mainWeaponType];
+    if (allowed == null) {
+      return true;
+    }
+    return allowed.contains(subWeaponType);
+  }
+
+  static bool _itemHasBaseWeaponAtk(EquipmentLibraryItem? item) {
+    if (item == null) {
+      return false;
+    }
+    for (final EquipmentStat stat in item.stats) {
+      if (stat.statKey.trim().toLowerCase() != 'weapon_atk') {
+        continue;
+      }
+      if (stat.valueType.trim().toLowerCase() != _baseValueType) {
+        continue;
+      }
+      if (stat.value.toDouble() <= 0) {
+        continue;
+      }
+      return true;
+    }
+    return false;
   }
 
   static String _normalizeArmorState(String value) {
@@ -941,6 +1012,9 @@ class BuildCalculatorService {
       return 'DUAL_SWORD';
     }
     if (mainWeaponType.isEmpty) {
+      if (subWeaponType.isNotEmpty) {
+        return subWeaponType;
+      }
       return 'BARE_HAND';
     }
     return mainWeaponType;

@@ -535,6 +535,17 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
     _commitId();
   }
 
+  void _clearEquipmentSelection() {
+    _idFocusNode.unfocus();
+    widget.onEquipChanged(null);
+    if (_isInlineEditing) {
+      setState(() {
+        _isInlineEditing = false;
+        _idController.clear();
+      });
+    }
+  }
+
   Future<void> _pickFromLibrary() async {
     final Map<String, List<EquipmentLibraryItem>> inMemoryItemsByCategory =
         <String, List<EquipmentLibraryItem>>{
@@ -868,6 +879,7 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
         _canInlineNameSearch &&
         !showSelectedCard &&
         inlineSearchModes.isNotEmpty;
+    final bool hasSelectedId = (widget.selectedId ?? '').trim().isNotEmpty;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -916,6 +928,10 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
                 tooltip: widget.createCustomTooltip ?? 'Create custom item',
                 icon: Icons.add,
               ),
+            ],
+            if (hasSelectedId) ...<Widget>[
+              const SizedBox(width: 8),
+              _clearButton(onTap: _clearEquipmentSelection),
             ],
           ],
         ),

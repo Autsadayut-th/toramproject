@@ -381,6 +381,7 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
       ring: ring,
       equippedCrystalStats: equippedCrystalStats,
       avatarStats: avatarStats,
+      mainToAllowedSubTypes: _mainToAllowedSubTypes,
       ruleSet: _ruleSet,
     );
     _recommendationItems = BuildRecommendationService.generateItems(

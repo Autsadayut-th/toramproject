@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
+
 import '../../shared/toram_data_github_service.dart';
 
 class BuildWeaponRuleConfig {
@@ -18,9 +22,15 @@ class BuildWeaponRuleService {
   static const List<String> _typeAliasRemoteCandidates = <String>[
     'system/type_alias.json',
   ];
+  static const List<String> _typeAliasAssetCandidates = <String>[
+    'assets/data/system/type_alias.json',
+  ];
 
   static const List<String> _weaponSubRuleRemoteCandidates = <String>[
     'rules/weapon_sub_rules.json',
+  ];
+  static const List<String> _weaponSubRuleAssetCandidates = <String>[
+    'assets/data/rules/weapon_sub_rules.json',
   ];
 
   static BuildWeaponRuleConfig? _cache;
@@ -31,11 +41,13 @@ class BuildWeaponRuleService {
       return cached;
     }
 
-    final Map<String, dynamic> aliasRoot = await _loadFirstMapRemote(
-      _typeAliasRemoteCandidates,
+    final Map<String, dynamic> aliasRoot = await _loadFirstMapRemoteOrAsset(
+      remoteCandidates: _typeAliasRemoteCandidates,
+      assetCandidates: _typeAliasAssetCandidates,
     );
-    final Map<String, dynamic> ruleRoot = await _loadFirstMapRemote(
-      _weaponSubRuleRemoteCandidates,
+    final Map<String, dynamic> ruleRoot = await _loadFirstMapRemoteOrAsset(
+      remoteCandidates: _weaponSubRuleRemoteCandidates,
+      assetCandidates: _weaponSubRuleAssetCandidates,
     );
 
     final BuildWeaponRuleConfig config = BuildWeaponRuleConfig(
@@ -67,6 +79,37 @@ class BuildWeaponRuleService {
       }
     }
     throw StateError('Failed to load remote data: ${candidates.join(', ')}');
+  }
+
+  static Future<Map<String, dynamic>> _loadFirstMapRemoteOrAsset({
+    required List<String> remoteCandidates,
+    required List<String> assetCandidates,
+  }) async {
+    try {
+      return await _loadFirstMapRemote(remoteCandidates);
+    } catch (_) {
+      return _loadFirstMapAsset(assetCandidates);
+    }
+  }
+
+  static Future<Map<String, dynamic>> _loadFirstMapAsset(
+    List<String> candidates,
+  ) async {
+    for (final String assetPath in candidates) {
+      try {
+        final String raw = await rootBundle.loadString(assetPath);
+        final dynamic decoded = jsonDecode(raw);
+        if (decoded is Map<String, dynamic>) {
+          return decoded;
+        }
+        if (decoded is Map) {
+          return Map<String, dynamic>.from(decoded);
+        }
+      } catch (_) {
+        continue;
+      }
+    }
+    throw StateError('Failed to load asset data: ${candidates.join(', ')}');
   }
 
   static Map<String, String> _toStringMap(dynamic source) {
