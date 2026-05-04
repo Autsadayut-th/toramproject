@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../app_shell/app_shell_page.dart';
 import '../auth/firebase_auth_service.dart';
 import '../forgot_password_page/forgot_password_page.dart';
 import '../register_bulids_page/register_screen.dart';
+import '../shared/app_theme_controller.dart';
 import 'services/login_form_service.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -154,9 +154,21 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _showMessage(String message, {Color? backgroundColor}) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final String displayMessage = message.trim().isEmpty
+        ? 'System notification'
+        : message.trim();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(message),
+        content: Text(
+          displayMessage,
+          maxLines: 3,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
         behavior: SnackBarBehavior.floating,
         backgroundColor: backgroundColor ?? colorScheme.surfaceContainerHigh,
       ),
@@ -165,21 +177,60 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final bool isLightTheme = Theme.of(context).brightness == Brightness.light;
+    final Color backgroundColor = isLightTheme
+        ? const Color(0xFFF2EFF6)
+        : const Color(0xFF0D0B16);
+    final Color cardColor = isLightTheme
+        ? const Color(0xFFE6E2EC)
+        : const Color(0xFF2A2933);
+    final Color textPrimary = isLightTheme
+        ? const Color(0xFF26242E)
+        : const Color(0xFFF3F0FF);
+    final Color textSecondary = isLightTheme
+        ? const Color(0xFF5E5A6B)
+        : const Color(0xFFCBC7DA);
+    final Color primaryButton = isLightTheme
+        ? const Color(0xFF6D56B1)
+        : const Color(0xFFC8B6FF);
+    final Color primaryButtonText = isLightTheme
+        ? const Color(0xFFFFFFFF)
+        : const Color(0xFF2D1D52);
+    final Color outlineBorder = isLightTheme
+        ? const Color(0xFFB8B2C3)
+        : const Color(0xFF595866);
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double scale = screenWidth >= 900
+        ? 1.0
+        : (screenWidth >= 600 ? 0.88 : 0.62);
+    final double titleSize = 50 * scale;
+    final double bodyTextSize = 30 * scale;
+    final double buttonTextSize = 34 * scale;
+    final double fieldTextSize = 32 * scale;
+    final double iconSize = 34 * scale;
+    final double cardHorizontalPadding = 28 * scale;
+    final double cardVerticalPadding = 30 * scale;
+    final double cardRadius = 18 * scale;
+    final double fieldRadius = 16 * scale;
+
     return Scaffold(
-      backgroundColor: colorScheme.surface,
+      backgroundColor: backgroundColor,
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.symmetric(
+            horizontal: 24 * scale,
+            vertical: 30 * scale,
+          ),
           child: Container(
-            constraints: const BoxConstraints(maxWidth: 460),
-            padding: const EdgeInsets.all(24),
+            constraints: const BoxConstraints(maxWidth: 680),
+            padding: EdgeInsets.symmetric(
+              horizontal: cardHorizontalPadding,
+              vertical: cardVerticalPadding,
+            ),
             decoration: BoxDecoration(
-              color: colorScheme.surfaceContainerHigh,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: colorScheme.onSurface.withValues(alpha: 0.14),
-              ),
+              color: cardColor,
+              borderRadius: BorderRadius.circular(cardRadius),
+              border: Border.all(color: outlineBorder),
             ),
             child: Form(
               key: _formKey,
@@ -187,61 +238,111 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Text(
-                    'Sign In',
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w700,
-                      color: colorScheme.onSurface,
-                    ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(
+                          'Sign In',
+                          style: TextStyle(
+                            fontSize: titleSize,
+                            fontWeight: FontWeight.w700,
+                            color: textPrimary,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 12 * scale),
+                      SizedBox(
+                        width: 52 * scale,
+                        height: 52 * scale,
+                        child: IconButton(
+                          onPressed: () {
+                            unawaited(AppThemeController.instance.toggle());
+                          },
+                          icon: Icon(
+                            AppThemeController.instance.isLightMode
+                                ? Icons.dark_mode_outlined
+                                : Icons.light_mode_outlined,
+                            color: textPrimary,
+                            size: 24 * scale,
+                          ),
+                          tooltip: AppThemeController.instance.isLightMode
+                              ? 'Use dark theme'
+                              : 'Use light theme',
+                          style: IconButton.styleFrom(
+                            backgroundColor: isLightTheme
+                                ? const Color(0xFFF2EFF6)
+                                : const Color(0xFF34333D),
+                            side: BorderSide(color: outlineBorder),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8 * scale),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 30 * scale),
                   TextFormField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     autofillHints: const <String>[AutofillHints.email],
-                    style: TextStyle(color: colorScheme.onSurface),
+                    style: TextStyle(
+                      color: textPrimary,
+                      fontSize: fieldTextSize,
+                    ),
                     decoration: _fieldDecoration(
                       label: 'Email',
-                      hint: 'name@example.com',
+                      hint: ' ',
                       icon: Icons.email_outlined,
+                      isLightTheme: isLightTheme,
+                      scale: scale,
+                      cornerRadius: fieldRadius,
+                      iconSize: iconSize,
                     ),
                     validator: LoginFormService.validateEmail,
                   ),
-                  const SizedBox(height: 14),
+                  SizedBox(height: 20 * scale),
                   TextFormField(
                     controller: _passwordController,
                     obscureText: _obscurePassword,
                     textInputAction: TextInputAction.done,
                     autofillHints: const <String>[AutofillHints.password],
-                    style: TextStyle(color: colorScheme.onSurface),
+                    style: TextStyle(
+                      color: textPrimary,
+                      fontSize: fieldTextSize,
+                    ),
                     decoration: _fieldDecoration(
                       label: 'Password',
-                      hint: 'At least 8 characters',
+                      hint: ' ',
                       icon: Icons.lock_outline,
+                      isLightTheme: isLightTheme,
+                      scale: scale,
+                      cornerRadius: fieldRadius,
+                      iconSize: iconSize,
                       suffixIcon: IconButton(
                         onPressed: _togglePasswordVisibility,
                         icon: Icon(
                           _obscurePassword
                               ? Icons.visibility_outlined
                               : Icons.visibility_off_outlined,
-                          color: colorScheme.onSurface.withValues(alpha: 0.75),
+                          color: textSecondary,
+                          size: iconSize,
                         ),
                       ),
                     ),
                     validator: LoginFormService.validatePassword,
                     onFieldSubmitted: (_) => _submit(),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 22 * scale),
                   ElevatedButton(
                     onPressed: _isLoading ? null : _submit,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: colorScheme.primary,
-                      foregroundColor: colorScheme.onPrimary,
-                      minimumSize: const Size.fromHeight(48),
+                      backgroundColor: primaryButton,
+                      foregroundColor: primaryButtonText,
+                      minimumSize: Size.fromHeight(56 * scale),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(fieldRadius),
                       ),
                     ),
                     child: _isLoading
@@ -250,79 +351,97 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 20,
                             child: CircularProgressIndicator(
                               strokeWidth: 2,
-                              color: colorScheme.onPrimary,
+                              color: primaryButtonText,
                             ),
                           )
-                        : const Text(
+                        : Text(
                             'Sign In',
-                            style: TextStyle(fontWeight: FontWeight.w600),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: buttonTextSize,
+                            ),
                           ),
                   ),
-                  const SizedBox(height: 10),
-                  TextButton(
-                    onPressed: _isLoading ? null : _openRegister,
-                    child: const Text('Create new account'),
+                  SizedBox(height: 12 * scale),
+                  Row(
+                    children: <Widget>[
+                      TextButton(
+                        onPressed: _isLoading ? null : _openRegister,
+                        style: TextButton.styleFrom(
+                          foregroundColor: textPrimary,
+                          textStyle: TextStyle(
+                            fontSize: bodyTextSize,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        child: const Text('Create new account'),
+                      ),
+                      const Spacer(),
+                      TextButton(
+                        onPressed: _isLoading ? null : _openForgotPasswordPage,
+                        style: TextButton.styleFrom(
+                          foregroundColor: textPrimary,
+                          textStyle: TextStyle(
+                            fontSize: bodyTextSize,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        child: const Text('Forgot password'),
+                      ),
+                    ],
                   ),
-                  TextButton(
-                    onPressed: _isLoading ? null : _openForgotPasswordPage,
-                    child: const Text('Forgot password'),
-                  ),
-                  const SizedBox(height: 6),
+                  SizedBox(height: 4 * scale),
+                  Divider(thickness: 3 * scale, color: textPrimary),
+                  SizedBox(height: 14 * scale),
                   OutlinedButton(
                     onPressed: _isLoading ? null : _signInWithGoogle,
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: colorScheme.onSurface,
-                      side: BorderSide(
-                        color: colorScheme.onSurface.withValues(alpha: 0.3),
-                      ),
-                      minimumSize: const Size.fromHeight(48),
+                      foregroundColor: textPrimary,
+                      side: BorderSide(color: outlineBorder),
+                      minimumSize: Size.fromHeight(56 * scale),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(fieldRadius),
                       ),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        SvgPicture.network(
-                          'https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg',
-                          width: 20,
-                          height: 20,
-                          placeholderBuilder: (BuildContext context) => Icon(
-                            Icons.account_circle,
-                            size: 20,
-                            color: colorScheme.onSurface.withValues(
-                              alpha: 0.75,
-                            ),
-                          ),
-                          colorFilter: ColorFilter.mode(
-                            colorScheme.onSurface.withValues(alpha: 0.8),
-                            BlendMode.srcIn,
+                        Text(
+                          'G',
+                          style: TextStyle(
+                            fontSize: 40 * scale,
+                            fontWeight: FontWeight.w700,
+                            color: textPrimary,
                           ),
                         ),
-                        const SizedBox(width: 10),
-                        const Text(
+                        SizedBox(width: 12 * scale),
+                        Text(
                           'Sign in with Google',
-                          style: TextStyle(fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: buttonTextSize,
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 12 * scale),
                   OutlinedButton(
                     onPressed: _isLoading ? null : _openWithoutLogin,
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: colorScheme.onSurface,
-                      side: BorderSide(
-                        color: colorScheme.onSurface.withValues(alpha: 0.3),
-                      ),
-                      minimumSize: const Size.fromHeight(48),
+                      foregroundColor: textPrimary,
+                      side: BorderSide(color: outlineBorder),
+                      minimumSize: Size.fromHeight(56 * scale),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(fieldRadius),
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       'Open simulator as guest',
-                      style: TextStyle(fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: buttonTextSize,
+                      ),
                     ),
                   ),
                 ],
@@ -338,44 +457,56 @@ class _LoginScreenState extends State<LoginScreen> {
     required String label,
     required String hint,
     required IconData icon,
+    required bool isLightTheme,
+    required double scale,
+    required double cornerRadius,
+    required double iconSize,
     Widget? suffixIcon,
   }) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return InputDecoration(
       labelText: label,
       hintText: hint,
       filled: true,
-      fillColor: colorScheme.surfaceContainerHighest,
+      fillColor: isLightTheme
+          ? const Color(0xFFF1EDF6)
+          : const Color(0xFF34333D),
       labelStyle: TextStyle(
-        color: colorScheme.onSurface.withValues(alpha: 0.9),
+        color: isLightTheme ? const Color(0xFF585463) : const Color(0xFFD8D4E8),
+        fontSize: 34 * scale,
       ),
       hintStyle: TextStyle(
-        color: colorScheme.onSurface.withValues(alpha: 0.42),
+        color: isLightTheme ? const Color(0xFF878394) : const Color(0xFFA09CB3),
+        fontSize: 32 * scale,
       ),
       prefixIcon: Icon(
         icon,
-        color: colorScheme.onSurface.withValues(alpha: 0.75),
+        color: isLightTheme ? const Color(0xFF585463) : const Color(0xFFD8D4E8),
+        size: iconSize,
       ),
       suffixIcon: suffixIcon,
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(cornerRadius),
         borderSide: BorderSide(
-          color: colorScheme.onSurface.withValues(alpha: 0.22),
+          color: isLightTheme
+              ? const Color(0xFFB8B2C3)
+              : const Color(0xFF595866),
         ),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(cornerRadius),
         borderSide: BorderSide(
-          color: colorScheme.onSurface.withValues(alpha: 0.5),
+          color: isLightTheme
+              ? const Color(0xFF78718A)
+              : const Color(0xFFCAC6DA),
           width: 1.6,
         ),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(cornerRadius),
         borderSide: const BorderSide(color: Colors.redAccent),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(cornerRadius),
         borderSide: const BorderSide(color: Colors.redAccent, width: 1.6),
       ),
     );
