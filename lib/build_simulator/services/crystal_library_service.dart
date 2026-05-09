@@ -1,3 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+
 import '../../equipment_library/models/equipment_library_item.dart';
 import '../../shared/toram_data_github_service.dart';
 
@@ -150,7 +156,7 @@ class CrystalLibraryService {
     required String remotePath,
     required String fallbackCategory,
   }) async {
-    final dynamic decoded = await ToramDataGithubService.loadJson(remotePath);
+    final dynamic decoded = await _loadRemoteOrAssetJson(remotePath);
     final List<Map<String, dynamic>> rows = _normalizeRows(decoded);
     if (rows.isEmpty) {
       return const <CrystalLibraryEntry>[];
@@ -198,6 +204,32 @@ class CrystalLibraryService {
     }
 
     return entries.toList(growable: false);
+  }
+
+  static Future<dynamic> _loadRemoteOrAssetJson(String remotePath) async {
+    try {
+      return await ToramDataGithubService.loadJson(remotePath);
+    } catch (_) {
+      final String assetPath = _toAssetPath(remotePath);
+      try {
+        final String raw = await rootBundle.loadString(assetPath);
+        return jsonDecode(raw);
+      } catch (_) {
+        if (kIsWeb) {
+          rethrow;
+        }
+        final String raw = await File(assetPath).readAsString();
+        return jsonDecode(raw);
+      }
+    }
+  }
+
+  static String _toAssetPath(String remotePath) {
+    final String normalized = remotePath.trim().replaceFirst(
+      RegExp(r'^/+'),
+      '',
+    );
+    return 'assets/data/$normalized';
   }
 
   static List<Map<String, dynamic>> _normalizeRows(dynamic decoded) {

@@ -50,6 +50,7 @@ void main() {
       await tester.tap(find.text('Critical'));
       await tester.pump(const Duration(milliseconds: 300));
       expect(find.text('Critical Simulator'), findsWidgets);
+      expect(find.byIcon(Icons.menu), findsOneWidget);
     }
 
     await tester.tap(find.byIcon(Icons.menu));

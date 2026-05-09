@@ -62,8 +62,7 @@ class AppNavigationDrawer extends StatelessWidget {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final bool firebaseAvailable = _isFirebaseAvailable();
     final bool isAuthenticated = _readAuthenticatedState(firebaseAvailable);
-    final bool isMobile = MediaQuery.sizeOf(context).width < 1024;
-    final bool showBuildOnly = showOnlyBuild || isMobile;
+    final bool showBuildOnly = showOnlyBuild;
 
     return Drawer(
       backgroundColor: colorScheme.surface,

@@ -51,9 +51,11 @@ class FirebaseSavedBuildsService {
     return firestore.collection(_collectionName).doc(uid);
   }
 
-  Future<List<Map<String, dynamic>>> fetchSavedBuilds() async {
-    final String? uid = currentUserId;
-    final DocumentReference<Map<String, dynamic>>? userDoc = uid == null
+  Future<List<Map<String, dynamic>>> fetchSavedBuilds({
+    required String userId,
+  }) async {
+    final String uid = userId.trim();
+    final DocumentReference<Map<String, dynamic>>? userDoc = uid.isEmpty
         ? null
         : _userDoc(uid);
     if (userDoc == null) {
@@ -75,9 +77,12 @@ class FirebaseSavedBuildsService {
     return builds;
   }
 
-  Future<void> saveSavedBuilds(List<Map<String, dynamic>> savedBuilds) async {
-    final String? uid = currentUserId;
-    final DocumentReference<Map<String, dynamic>>? userDoc = uid == null
+  Future<void> saveSavedBuilds(
+    List<Map<String, dynamic>> savedBuilds, {
+    required String userId,
+  }) async {
+    final String uid = userId.trim();
+    final DocumentReference<Map<String, dynamic>>? userDoc = uid.isEmpty
         ? null
         : _userDoc(uid);
     if (userDoc == null) {

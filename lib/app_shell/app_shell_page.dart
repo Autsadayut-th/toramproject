@@ -157,9 +157,8 @@ class _AppShellScreenState extends State<AppShellScreen> {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final bool isMobile = MediaQuery.sizeOf(context).width < 1024;
-    final bool showMobileBuildSummaryLeading =
+    final bool usesMobileBuildSummaryDrawer =
         isMobile && _currentPage == AppNavigationPage.build;
-    final bool hasDrawer = !isMobile || showMobileBuildSummaryLeading;
 
     void onNavigateFromDrawer(AppNavigationPage page) {
       _scaffoldKey.currentState?.closeDrawer();
@@ -171,7 +170,7 @@ class _AppShellScreenState extends State<AppShellScreen> {
       appBar: AppBar(
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
-        leadingWidth: hasDrawer ? 84 : 52,
+        leadingWidth: 84,
         titleSpacing: 6,
         title: Text(
           _getPageTitle(_currentPage),
@@ -185,15 +184,13 @@ class _AppShellScreenState extends State<AppShellScreen> {
           builder: (BuildContext context) {
             return Row(
               children: <Widget>[
-                if (hasDrawer)
-                  IconButton(
-                    icon: const Icon(Icons.menu),
-                    onPressed: () => Scaffold.of(context).openDrawer(),
-                    tooltip: showMobileBuildSummaryLeading
-                        ? 'Build Summary'
-                        : 'Navigation menu',
-                  ),
-                if (!hasDrawer) const SizedBox(width: 8),
+                IconButton(
+                  icon: const Icon(Icons.menu),
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                  tooltip: usesMobileBuildSummaryDrawer
+                      ? 'Build Summary'
+                      : 'Navigation menu',
+                ),
                 Container(
                   width: 28,
                   height: 28,
@@ -306,13 +303,11 @@ class _AppShellScreenState extends State<AppShellScreen> {
               onSelect: _onNavigate,
             )
           : null,
-      drawer: showMobileBuildSummaryLeading
+      drawer: usesMobileBuildSummaryDrawer
           ? _BuildStatsSummaryDrawer(
               coordinator: _coordinator,
               hasAdvancedAccess: _currentUser != null,
             )
-          : isMobile
-          ? null
           : AppNavigationDrawer(
               currentPage: _currentPage,
               onOpenBuild: () => onNavigateFromDrawer(AppNavigationPage.build),

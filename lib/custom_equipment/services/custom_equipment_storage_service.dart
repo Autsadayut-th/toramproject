@@ -12,19 +12,36 @@ class CustomEquipmentStorageService {
   Future<List<CustomEquipmentItem>> loadItems() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String raw = prefs.getString(_storageKey) ?? '[]';
-    final dynamic decoded = jsonDecode(raw);
+    dynamic decoded;
+    try {
+      decoded = jsonDecode(raw);
+    } catch (_) {
+      await prefs.remove(_storageKey);
+      return const <CustomEquipmentItem>[];
+    }
     if (decoded is! List) {
+      await prefs.remove(_storageKey);
       return const <CustomEquipmentItem>[];
     }
 
-    return decoded
-        .whereType<Map>()
-        .map(
-          (Map row) =>
-              CustomEquipmentItem.fromJson(Map<String, dynamic>.from(row)),
-        )
-        .where((CustomEquipmentItem item) => item.isValid)
-        .toList(growable: false);
+    final List<CustomEquipmentItem> items = <CustomEquipmentItem>[];
+    for (final dynamic row in decoded) {
+      if (row is! Map) {
+        continue;
+      }
+      try {
+        final CustomEquipmentItem item = CustomEquipmentItem.fromJson(
+          Map<String, dynamic>.from(row),
+        );
+        if (item.isValid) {
+          items.add(item);
+        }
+      } catch (_) {
+        continue;
+      }
+    }
+
+    return items.toList(growable: false);
   }
 
   Future<void> saveItems(List<CustomEquipmentItem> items) async {
@@ -37,13 +54,14 @@ class CustomEquipmentStorageService {
 
   Future<List<CustomEquipmentItem>> upsertItem(CustomEquipmentItem item) async {
     final List<CustomEquipmentItem> items = await loadItems();
-    final List<CustomEquipmentItem> next = <CustomEquipmentItem>[
-      for (final CustomEquipmentItem existing in items)
-        if (existing.id != item.id) existing,
-      item.copyWith(updatedAt: DateTime.now()),
-    ]..sort((CustomEquipmentItem a, CustomEquipmentItem b) {
-        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
-      });
+    final List<CustomEquipmentItem> next =
+        <CustomEquipmentItem>[
+          for (final CustomEquipmentItem existing in items)
+            if (existing.id != item.id) existing,
+          item.copyWith(updatedAt: DateTime.now()),
+        ]..sort((CustomEquipmentItem a, CustomEquipmentItem b) {
+          return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+        });
     await saveItems(next);
     return next;
   }

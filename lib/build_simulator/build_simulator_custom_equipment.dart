@@ -188,13 +188,21 @@ extension _BuildSimulatorCustomEquipment on BuildSimulatorScreenState {
   }
 
   Future<void> _syncCustomEquipmentItemsToCloud(
-    List<CustomEquipmentItem> items,
-  ) async {
-    if (_activeUserId == null) {
+    List<CustomEquipmentItem> items, {
+    required String expectedUserId,
+  }) async {
+    final String activeUserId = (_activeUserId ?? '').trim();
+    if (activeUserId.isEmpty || activeUserId != expectedUserId) {
       return;
     }
-    await _firebaseCustomEquipmentService.saveItems(items);
-    _loadedCustomEquipmentUserId = _activeUserId;
+    await _firebaseCustomEquipmentService.saveItems(
+      items,
+      userId: expectedUserId,
+    );
+    if ((_activeUserId ?? '').trim() != expectedUserId) {
+      return;
+    }
+    _loadedCustomEquipmentUserId = expectedUserId;
   }
 
   Future<void> _refreshCustomEquipmentAccess({bool force = false}) async {
@@ -221,7 +229,9 @@ extension _BuildSimulatorCustomEquipment on BuildSimulatorScreenState {
       final List<CustomEquipmentItem> localItems =
           await _customEquipmentStorageService.loadItems();
       final List<CustomEquipmentItem> cloudItems =
-          await _firebaseCustomEquipmentService.fetchItems();
+          await _firebaseCustomEquipmentService.fetchItems(
+            userId: activeUserId,
+          );
       final List<CustomEquipmentItem> mergedItems = _mergeCustomEquipmentItems(
         localItems: localItems,
         cloudItems: cloudItems,
@@ -229,7 +239,10 @@ extension _BuildSimulatorCustomEquipment on BuildSimulatorScreenState {
 
       await _customEquipmentStorageService.saveItems(mergedItems);
       _syncCustomEquipmentCache(mergedItems);
-      await _syncCustomEquipmentItemsToCloud(mergedItems);
+      await _syncCustomEquipmentItemsToCloud(
+        mergedItems,
+        expectedUserId: activeUserId,
+      );
 
       if (!mounted) {
         _loadedCustomEquipmentUserId = activeUserId;
@@ -251,17 +264,26 @@ extension _BuildSimulatorCustomEquipment on BuildSimulatorScreenState {
   }
 
   Future<void> _upsertCustomEquipment(CustomEquipmentItem item) async {
-    final List<CustomEquipmentItem> items = await _customEquipmentStorageService
-        .upsertItem(item);
-    _syncCustomEquipmentCache(items);
     try {
-      await _syncCustomEquipmentItemsToCloud(items);
+      final List<CustomEquipmentItem> items =
+          await _customEquipmentStorageService.upsertItem(item);
+      _syncCustomEquipmentCache(items);
+
+      final String? activeUserId = _activeUserId;
+      if (activeUserId == null) {
+        return;
+      }
+      await _syncCustomEquipmentItemsToCloud(
+        items,
+        expectedUserId: activeUserId,
+      );
     } catch (error, stackTrace) {
       _reportBackgroundLoadFailure(
         label: 'Custom equipment cloud upsert',
         error: error,
         stackTrace: stackTrace,
       );
+      _showActionableCustomEquipmentError(isDelete: false);
     }
   }
 
@@ -288,18 +310,93 @@ extension _BuildSimulatorCustomEquipment on BuildSimulatorScreenState {
     if (targetId.isEmpty) {
       return;
     }
-    final List<CustomEquipmentItem> items = await _customEquipmentStorageService
-        .deleteItem(targetId);
-    _syncCustomEquipmentCache(items);
     try {
-      await _syncCustomEquipmentItemsToCloud(items);
+      final List<CustomEquipmentItem> items =
+          await _customEquipmentStorageService.deleteItem(targetId);
+      _syncCustomEquipmentCache(items);
+
+      final String? activeUserId = _activeUserId;
+      if (activeUserId == null) {
+        return;
+      }
+      await _syncCustomEquipmentItemsToCloud(
+        items,
+        expectedUserId: activeUserId,
+      );
     } catch (error, stackTrace) {
       _reportBackgroundLoadFailure(
         label: 'Custom equipment cloud delete',
         error: error,
         stackTrace: stackTrace,
       );
+      _showActionableCustomEquipmentError(isDelete: true);
     }
+  }
+
+  void _showActionableCustomEquipmentError({required bool isDelete}) {
+    if (!mounted) {
+      return;
+    }
+    final bool canLogin = !widget.isAuthenticated;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          isDelete
+              ? 'Unable to delete custom item. Offline mode active.'
+              : 'Unable to save custom item. Offline mode active.',
+        ),
+        behavior: SnackBarBehavior.floating,
+        action: SnackBarAction(
+          label: 'Options',
+          onPressed: () {
+            if (!mounted) {
+              return;
+            }
+            _showCustomEquipmentErrorOptions(canLogin: canLogin);
+          },
+        ),
+      ),
+    );
+  }
+
+  Future<void> _showCustomEquipmentErrorOptions({
+    required bool canLogin,
+  }) async {
+    if (!mounted) {
+      return;
+    }
+    await showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Custom Item Sync Unavailable'),
+          content: const Text(
+            'Cloud sync is currently unavailable. You can retry, login, or continue offline.',
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                unawaited(_refreshCustomEquipmentAccess(force: true));
+              },
+              child: const Text('Retry'),
+            ),
+            if (canLogin)
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(this.context).pushNamed('/login');
+                },
+                child: const Text('Login'),
+              ),
+            FilledButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Offline'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _showCustomEquipmentLoginPrompt() {

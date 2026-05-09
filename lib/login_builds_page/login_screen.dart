@@ -200,29 +200,29 @@ class _LoginScreenState extends State<LoginScreen> {
         ? const Color(0xFFB8B2C3)
         : const Color(0xFF595866);
     final double screenWidth = MediaQuery.of(context).size.width;
-    final double scale = screenWidth >= 900
-        ? 1.0
-        : (screenWidth >= 600 ? 0.88 : 0.62);
-    final double titleSize = 50 * scale;
-    final double bodyTextSize = 30 * scale;
-    final double buttonTextSize = 34 * scale;
-    final double fieldTextSize = 32 * scale;
-    final double iconSize = 34 * scale;
-    final double cardHorizontalPadding = 28 * scale;
-    final double cardVerticalPadding = 30 * scale;
-    final double cardRadius = 18 * scale;
-    final double fieldRadius = 16 * scale;
+    final bool isDesktop = screenWidth >= 900;
+    final bool isTablet = screenWidth >= 600 && screenWidth < 900;
+    final double scale = isDesktop ? 0.88 : (isTablet ? 0.85 : 0.81);
+    final double titleSize = (isDesktop ? 32 : (isTablet ? 30 : 26)) * scale;
+    final double bodyTextSize = (isDesktop ? 14 : 13) * scale;
+    final double buttonTextSize = (isDesktop ? 16 : 15) * scale;
+    final double fieldTextSize = (isDesktop ? 16 : 15) * scale;
+    final double iconSize = (isDesktop ? 20 : 18) * scale;
+    final double cardHorizontalPadding = (isDesktop ? 30 : 20) * scale;
+    final double cardVerticalPadding = (isDesktop ? 26 : 20) * scale;
+    final double cardRadius = (isDesktop ? 16 : 12) * scale;
+    final double fieldRadius = (isDesktop ? 13 : 11) * scale;
 
     return Scaffold(
       backgroundColor: backgroundColor,
       body: Center(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(
-            horizontal: 24 * scale,
-            vertical: 30 * scale,
+            horizontal: (isDesktop ? 20 : 14) * scale,
+            vertical: (isDesktop ? 24 : 16) * scale,
           ),
           child: Container(
-            constraints: const BoxConstraints(maxWidth: 680),
+            constraints: const BoxConstraints(maxWidth: 500),
             padding: EdgeInsets.symmetric(
               horizontal: cardHorizontalPadding,
               vertical: cardVerticalPadding,
@@ -250,10 +250,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 12 * scale),
+                      SizedBox(width: 10 * scale),
                       SizedBox(
-                        width: 52 * scale,
-                        height: 52 * scale,
+                        width: 46 * scale,
+                        height: 46 * scale,
                         child: IconButton(
                           onPressed: () {
                             unawaited(AppThemeController.instance.toggle());
@@ -263,7 +263,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ? Icons.dark_mode_outlined
                                 : Icons.light_mode_outlined,
                             color: textPrimary,
-                            size: 24 * scale,
+                            size: 22 * scale,
                           ),
                           tooltip: AppThemeController.instance.isLightMode
                               ? 'Use dark theme'
@@ -274,14 +274,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                 : const Color(0xFF34333D),
                             side: BorderSide(color: outlineBorder),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8 * scale),
+                              borderRadius: BorderRadius.circular(7 * scale),
                             ),
                           ),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 30 * scale),
+                  SizedBox(height: 16 * scale),
                   TextFormField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
@@ -302,7 +302,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     validator: LoginFormService.validateEmail,
                   ),
-                  SizedBox(height: 20 * scale),
+                  SizedBox(height: 12 * scale),
                   TextFormField(
                     controller: _passwordController,
                     obscureText: _obscurePassword,
@@ -334,13 +334,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     validator: LoginFormService.validatePassword,
                     onFieldSubmitted: (_) => _submit(),
                   ),
-                  SizedBox(height: 22 * scale),
+                  SizedBox(height: 14 * scale),
                   ElevatedButton(
                     onPressed: _isLoading ? null : _submit,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryButton,
                       foregroundColor: primaryButtonText,
-                      minimumSize: Size.fromHeight(56 * scale),
+                      minimumSize: Size.fromHeight(44 * scale),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(fieldRadius),
                       ),
@@ -362,7 +362,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                   ),
-                  SizedBox(height: 12 * scale),
+                  SizedBox(height: 6 * scale),
                   Row(
                     children: <Widget>[
                       TextButton(
@@ -390,15 +390,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 4 * scale),
-                  Divider(thickness: 3 * scale, color: textPrimary),
-                  SizedBox(height: 14 * scale),
+                  SizedBox(height: 2 * scale),
+                  Divider(thickness: 1.2 * scale, color: textPrimary),
+                  SizedBox(height: 8 * scale),
                   OutlinedButton(
                     onPressed: _isLoading ? null : _signInWithGoogle,
                     style: OutlinedButton.styleFrom(
                       foregroundColor: textPrimary,
                       side: BorderSide(color: outlineBorder),
-                      minimumSize: Size.fromHeight(56 * scale),
+                      minimumSize: Size.fromHeight(44 * scale),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(fieldRadius),
                       ),
@@ -409,12 +409,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         Text(
                           'G',
                           style: TextStyle(
-                            fontSize: 40 * scale,
+                            fontSize: 22 * scale,
                             fontWeight: FontWeight.w700,
                             color: textPrimary,
                           ),
                         ),
-                        SizedBox(width: 12 * scale),
+                        SizedBox(width: 10 * scale),
                         Text(
                           'Sign in with Google',
                           style: TextStyle(
@@ -425,13 +425,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 12 * scale),
+                  SizedBox(height: 8 * scale),
                   OutlinedButton(
                     onPressed: _isLoading ? null : _openWithoutLogin,
                     style: OutlinedButton.styleFrom(
                       foregroundColor: textPrimary,
                       side: BorderSide(color: outlineBorder),
-                      minimumSize: Size.fromHeight(56 * scale),
+                      minimumSize: Size.fromHeight(44 * scale),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(fieldRadius),
                       ),
@@ -472,11 +472,11 @@ class _LoginScreenState extends State<LoginScreen> {
           : const Color(0xFF34333D),
       labelStyle: TextStyle(
         color: isLightTheme ? const Color(0xFF585463) : const Color(0xFFD8D4E8),
-        fontSize: 34 * scale,
+        fontSize: 14 * scale,
       ),
       hintStyle: TextStyle(
         color: isLightTheme ? const Color(0xFF878394) : const Color(0xFFA09CB3),
-        fontSize: 32 * scale,
+        fontSize: 14 * scale,
       ),
       prefixIcon: Icon(
         icon,

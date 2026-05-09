@@ -121,7 +121,7 @@ extension _BuildSimulatorDataLoading on BuildSimulatorScreenState {
     _isLoadingCloudSavedBuilds = true;
     try {
       final List<Map<String, dynamic>> cloudBuilds = await _savedBuildsService
-          .fetchSavedBuilds();
+          .fetchSavedBuilds(userId: activeUserId);
       if (!mounted || _activeUserId != activeUserId) {
         return;
       }
@@ -156,7 +156,7 @@ extension _BuildSimulatorDataLoading on BuildSimulatorScreenState {
         stackTrace: stackTrace,
       );
       if (mounted) {
-        _showRestrictionMessage('Unable to load cloud saved builds.');
+        _showActionableCloudSavedBuildsError();
       }
     } finally {
       _isLoadingCloudSavedBuilds = false;
@@ -194,7 +194,13 @@ extension _BuildSimulatorDataLoading on BuildSimulatorScreenState {
               (Map<String, dynamic> build) => Map<String, dynamic>.from(build),
             )
             .toList(growable: false);
-        await _savedBuildsService.saveSavedBuilds(payload);
+        await _savedBuildsService.saveSavedBuilds(
+          payload,
+          userId: activeUserId,
+        );
+        if (_activeUserId != activeUserId) {
+          continue;
+        }
         _loadedCloudUserId = activeUserId;
       }
     } catch (error, stackTrace) {
@@ -204,11 +210,80 @@ extension _BuildSimulatorDataLoading on BuildSimulatorScreenState {
         stackTrace: stackTrace,
       );
       if (mounted) {
-        _showRestrictionMessage('Unable to sync saved builds to cloud.');
+        _showActionableCloudSavedBuildsError();
       }
     } finally {
       _isSavingCloudSavedBuilds = false;
     }
+  }
+
+  void _showActionableCloudSavedBuildsError() {
+    if (!mounted) {
+      return;
+    }
+    final bool canRetry =
+        !_isLoadingCloudSavedBuilds && !_isSavingCloudSavedBuilds;
+    final bool canLogin = !widget.isAuthenticated;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Cloud saved builds unavailable.'),
+        behavior: SnackBarBehavior.floating,
+        action: SnackBarAction(
+          label: 'Options',
+          onPressed: () {
+            if (!mounted) {
+              return;
+            }
+            _showCloudSavedBuildsOptions(
+              canRetry: canRetry,
+              canLogin: canLogin,
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Future<void> _showCloudSavedBuildsOptions({
+    required bool canRetry,
+    required bool canLogin,
+  }) async {
+    if (!mounted) {
+      return;
+    }
+    await showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Saved Builds Unavailable'),
+          content: const Text(
+            'Cloud sync is currently unavailable. You can retry, login, or continue offline.',
+          ),
+          actions: <Widget>[
+            if (canRetry)
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  unawaited(_refreshCloudSavedBuilds(force: true));
+                },
+                child: const Text('Retry'),
+              ),
+            if (canLogin)
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(this.context).pushNamed('/login');
+                },
+                child: const Text('Login'),
+              ),
+            FilledButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Offline'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   List<Map<String, dynamic>> _selectedItemDetailsSnapshot() {

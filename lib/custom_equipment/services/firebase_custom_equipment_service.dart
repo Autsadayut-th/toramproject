@@ -5,9 +5,11 @@ import 'package:firebase_core/firebase_core.dart';
 import '../models/custom_equipment_item.dart';
 
 class FirebaseCustomEquipmentService {
-  FirebaseCustomEquipmentService({FirebaseAuth? auth, FirebaseFirestore? firestore})
-    : _auth = auth ?? _safeAuth(),
-      _firestore = firestore ?? _safeFirestore();
+  FirebaseCustomEquipmentService({
+    FirebaseAuth? auth,
+    FirebaseFirestore? firestore,
+  }) : _auth = auth ?? _safeAuth(),
+       _firestore = firestore ?? _safeFirestore();
 
   static const String _collectionName = 'user_custom_equipment';
   static const String _itemsField = 'items';
@@ -53,9 +55,9 @@ class FirebaseCustomEquipmentService {
     return firestore.collection(_collectionName).doc(uid);
   }
 
-  Future<List<CustomEquipmentItem>> fetchItems() async {
-    final String? uid = currentUserId;
-    final DocumentReference<Map<String, dynamic>>? userDoc = uid == null
+  Future<List<CustomEquipmentItem>> fetchItems({required String userId}) async {
+    final String uid = userId.trim();
+    final DocumentReference<Map<String, dynamic>>? userDoc = uid.isEmpty
         ? null
         : _userDoc(uid);
     if (userDoc == null) {
@@ -85,9 +87,12 @@ class FirebaseCustomEquipmentService {
     return items;
   }
 
-  Future<void> saveItems(List<CustomEquipmentItem> items) async {
-    final String? uid = currentUserId;
-    final DocumentReference<Map<String, dynamic>>? userDoc = uid == null
+  Future<void> saveItems(
+    List<CustomEquipmentItem> items, {
+    required String userId,
+  }) async {
+    final String uid = userId.trim();
+    final DocumentReference<Map<String, dynamic>>? userDoc = uid.isEmpty
         ? null
         : _userDoc(uid);
     if (userDoc == null) {
