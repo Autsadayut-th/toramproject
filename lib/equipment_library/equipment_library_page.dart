@@ -23,6 +23,9 @@ class EquipmentLibraryScreen extends StatelessWidget {
     this.inMemoryItemsByCategory,
     this.title = 'Equipment Library',
     this.onNavigate,
+    this.onRequestCreateCustomItem,
+    this.onRequestEditCustomItem,
+    this.onRequestDeleteCustomItem,
   });
 
   final bool pickMode;
@@ -32,6 +35,10 @@ class EquipmentLibraryScreen extends StatelessWidget {
   final Map<String, List<EquipmentLibraryItem>>? inMemoryItemsByCategory;
   final String title;
   final ValueChanged<AppNavigationPage>? onNavigate;
+  final Future<EquipmentLibraryItem?> Function()? onRequestCreateCustomItem;
+  final Future<EquipmentLibraryItem?> Function(EquipmentLibraryItem)?
+  onRequestEditCustomItem;
+  final Future<bool> Function(EquipmentLibraryItem)? onRequestDeleteCustomItem;
 
   static Future<String?> pickItemKey(
     BuildContext context, {
@@ -40,6 +47,10 @@ class EquipmentLibraryScreen extends StatelessWidget {
     List<String>? allowedCategories,
     List<String>? allowedTypes,
     Map<String, List<EquipmentLibraryItem>>? inMemoryItemsByCategory,
+    Future<EquipmentLibraryItem?> Function()? onRequestCreateCustomItem,
+    Future<EquipmentLibraryItem?> Function(EquipmentLibraryItem)?
+    onRequestEditCustomItem,
+    Future<bool> Function(EquipmentLibraryItem)? onRequestDeleteCustomItem,
   }) async {
     final EquipmentLibraryItem? selected = await Navigator.of(context)
         .push<EquipmentLibraryItem>(
@@ -51,6 +62,9 @@ class EquipmentLibraryScreen extends StatelessWidget {
               allowedTypes: allowedTypes,
               inMemoryItemsByCategory: inMemoryItemsByCategory,
               title: title,
+              onRequestCreateCustomItem: onRequestCreateCustomItem,
+              onRequestEditCustomItem: onRequestEditCustomItem,
+              onRequestDeleteCustomItem: onRequestDeleteCustomItem,
             ),
           ),
         );
@@ -87,6 +101,9 @@ class EquipmentLibraryScreen extends StatelessWidget {
         allowedCategories: allowedCategories,
         allowedTypes: allowedTypes,
         inMemoryItemsByCategory: inMemoryItemsByCategory,
+        onRequestCreateCustomItem: onRequestCreateCustomItem,
+        onRequestEditCustomItem: onRequestEditCustomItem,
+        onRequestDeleteCustomItem: onRequestDeleteCustomItem,
       ),
     );
 

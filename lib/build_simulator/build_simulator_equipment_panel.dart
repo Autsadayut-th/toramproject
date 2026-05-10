@@ -263,8 +263,14 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         },
         crystal1: _mainCrystal1,
         crystal2: _mainCrystal2,
-        onCreateCustomItem: () {
-          unawaited(_openCustomEquipmentCreator(category: 'weapon'));
+        onCreateCustomItem: () async {
+          return await _openCustomEquipmentCreator(category: 'weapon');
+        },
+        onRequestEditCustomItem: (EquipmentLibraryItem item) async {
+          return await _openCustomEquipmentEditorByKey(item.key);
+        },
+        onRequestDeleteCustomItem: (EquipmentLibraryItem item) async {
+          return await _confirmDeleteCustomEquipmentByKey(item.key);
         },
         onCrystal1Changed: (v) {
           _setStateAndRecalculate(() => _mainCrystal1 = v);
@@ -366,6 +372,12 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         onEnhChanged: (v) {
           _setStateAndRecalculate(() => _enhSub = v);
         },
+        onRequestEditCustomItem: (EquipmentLibraryItem item) async {
+          return await _openCustomEquipmentEditorByKey(item.key);
+        },
+        onRequestDeleteCustomItem: (EquipmentLibraryItem item) async {
+          return await _confirmDeleteCustomEquipmentByKey(item.key);
+        },
       ),
       minHeight: minHeight,
     );
@@ -394,8 +406,14 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         selectedEquipmentItem: _findEquipmentByKey(_armorId),
         searchCandidates: _armorSearchCandidates(),
         statPreview: _equipmentStatPreview(_armorId),
-        onCreateCustomItem: () {
-          unawaited(_openCustomEquipmentCreator(category: 'armor'));
+        onCreateCustomItem: () async {
+          return await _openCustomEquipmentCreator(category: 'armor');
+        },
+        onRequestEditCustomItem: (EquipmentLibraryItem item) async {
+          return await _openCustomEquipmentEditorByKey(item.key);
+        },
+        onRequestDeleteCustomItem: (EquipmentLibraryItem item) async {
+          return await _confirmDeleteCustomEquipmentByKey(item.key);
         },
         onEquipChanged: (id) {
           _setStateAndRecalculate(() => _armorId = id);
@@ -451,6 +469,12 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         onCrystal2Changed: (v) {
           _setStateAndRecalculate(() => _helmetCrystal2 = v);
         },
+        onRequestEditCustomItem: (EquipmentLibraryItem item) async {
+          return await _openCustomEquipmentEditorByKey(item.key);
+        },
+        onRequestDeleteCustomItem: (EquipmentLibraryItem item) async {
+          return await _confirmDeleteCustomEquipmentByKey(item.key);
+        },
       ),
       minHeight: minHeight,
     );
@@ -486,6 +510,12 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         },
         onCrystal2Changed: (v) {
           _setStateAndRecalculate(() => _ringCrystal2 = v);
+        },
+        onRequestEditCustomItem: (EquipmentLibraryItem item) async {
+          return await _openCustomEquipmentEditorByKey(item.key);
+        },
+        onRequestDeleteCustomItem: (EquipmentLibraryItem item) async {
+          return await _confirmDeleteCustomEquipmentByKey(item.key);
         },
       ),
       minHeight: minHeight,

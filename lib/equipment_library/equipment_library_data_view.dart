@@ -7,6 +7,9 @@ class _EquipmentLibraryDataView extends StatefulWidget {
     required this.allowedCategories,
     required this.allowedTypes,
     required this.inMemoryItemsByCategory,
+    this.onRequestCreateCustomItem,
+    this.onRequestEditCustomItem,
+    this.onRequestDeleteCustomItem,
   });
 
   final bool pickMode;
@@ -14,6 +17,10 @@ class _EquipmentLibraryDataView extends StatefulWidget {
   final List<String>? allowedCategories;
   final List<String>? allowedTypes;
   final Map<String, List<EquipmentLibraryItem>>? inMemoryItemsByCategory;
+  final Future<EquipmentLibraryItem?> Function()? onRequestCreateCustomItem;
+  final Future<EquipmentLibraryItem?> Function(EquipmentLibraryItem)?
+  onRequestEditCustomItem;
+  final Future<bool> Function(EquipmentLibraryItem)? onRequestDeleteCustomItem;
 
   @override
   State<_EquipmentLibraryDataView> createState() =>
@@ -94,6 +101,11 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
   int _currentPage = 1;
   String? _selectedTypeFilterKey;
   String _sourceFilterKey = _sourceFilterAll;
+  final Set<String> _locallyHiddenItemKeys = <String>{};
+  final Map<String, EquipmentLibraryItem> _locallyEditedItemsByKey =
+      <String, EquipmentLibraryItem>{};
+  final Map<String, List<EquipmentLibraryItem>>
+  _locallyCreatedItemsByCategoryKey = <String, List<EquipmentLibraryItem>>{};
 
   @override
   void initState() {
@@ -237,6 +249,82 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
       final String sourceName = source.source.trim().toLowerCase();
       return sourceName == 'custom equipment';
     });
+  }
+
+  String _normalizedItemKey(String rawKey) {
+    return rawKey.trim().toLowerCase();
+  }
+
+  String _normalizedCategoryKey(String rawCategory) {
+    return rawCategory.trim().toLowerCase();
+  }
+
+  Future<void> _requestCreateCustomItem(String activeCategory) async {
+    final Future<EquipmentLibraryItem?> Function()? onCreate =
+        widget.onRequestCreateCustomItem;
+    if (onCreate == null) {
+      return;
+    }
+    final EquipmentLibraryItem? created = await onCreate();
+    if (!mounted || created == null) {
+      return;
+    }
+    final String normalizedKey = _normalizedItemKey(created.key);
+    if (normalizedKey.isEmpty) {
+      return;
+    }
+    final String normalizedCategory = _normalizedCategoryKey(activeCategory);
+    setState(() {
+      _locallyEditedItemsByKey[normalizedKey] = created;
+      _locallyHiddenItemKeys.remove(normalizedKey);
+      final List<EquipmentLibraryItem> createdItems =
+          _locallyCreatedItemsByCategoryKey.putIfAbsent(
+            normalizedCategory,
+            () => <EquipmentLibraryItem>[],
+          );
+      createdItems.removeWhere((EquipmentLibraryItem item) {
+        return _normalizedItemKey(item.key) == normalizedKey;
+      });
+      createdItems.insert(0, created);
+    });
+  }
+
+  Future<void> _requestEditCustomItem(EquipmentLibraryItem item) async {
+    final Future<EquipmentLibraryItem?> Function(EquipmentLibraryItem)? onEdit =
+        widget.onRequestEditCustomItem;
+    if (onEdit == null) {
+      return;
+    }
+    final EquipmentLibraryItem? updated = await onEdit(item);
+    if (!mounted || updated == null) {
+      return;
+    }
+    final String normalizedKey = _normalizedItemKey(updated.key);
+    if (normalizedKey.isEmpty) {
+      return;
+    }
+    setState(() {
+      _locallyEditedItemsByKey[normalizedKey] = updated;
+      _locallyHiddenItemKeys.remove(normalizedKey);
+    });
+  }
+
+  Future<void> _requestDeleteCustomItem(EquipmentLibraryItem item) async {
+    final Future<bool> Function(EquipmentLibraryItem)? onDelete =
+        widget.onRequestDeleteCustomItem;
+    if (onDelete == null) {
+      return;
+    }
+    final bool deleted = await onDelete(item);
+    if (!mounted || !deleted) {
+      return;
+    }
+    final String normalizedKey = _normalizedItemKey(item.key);
+    if (normalizedKey.isNotEmpty) {
+      setState(() {
+        _locallyHiddenItemKeys.add(normalizedKey);
+      });
+    }
   }
 
   String _resolveCategoryKey(
@@ -810,8 +898,30 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                   selectedCategory: _selectedCategory,
                   categories: categories,
                 );
-            final List<EquipmentLibraryItem> allItems =
-                allCategories[activeCategory] ?? const <EquipmentLibraryItem>[];
+            final String normalizedActiveCategoryKey = _normalizedCategoryKey(
+              activeCategory,
+            );
+            final List<EquipmentLibraryItem>
+            candidateItems = <EquipmentLibraryItem>[
+              ...?_locallyCreatedItemsByCategoryKey[normalizedActiveCategoryKey],
+              ...(allCategories[activeCategory] ??
+                  const <EquipmentLibraryItem>[]),
+            ];
+            final Set<String> seenItemKeys = <String>{};
+            final List<EquipmentLibraryItem> allItems = candidateItems
+                .where((EquipmentLibraryItem item) {
+                  final String normalizedKey = _normalizedItemKey(item.key);
+                  if (normalizedKey.isEmpty ||
+                      !seenItemKeys.add(normalizedKey)) {
+                    return false;
+                  }
+                  return !_locallyHiddenItemKeys.contains(normalizedKey);
+                })
+                .map((EquipmentLibraryItem item) {
+                  final String normalizedKey = _normalizedItemKey(item.key);
+                  return _locallyEditedItemsByKey[normalizedKey] ?? item;
+                })
+                .toList(growable: false);
             final bool customFilterAvailable = allItems.any(
               _isPlayerCreatedItem,
             );
@@ -1082,6 +1192,30 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
                 ),
               ),
             );
+            final Widget? createButton =
+                widget.onRequestCreateCustomItem == null
+                ? null
+                : Tooltip(
+                    message: 'Create custom item',
+                    child: SizedBox(
+                      width: 52,
+                      height: 52,
+                      child: FilledButton(
+                        onPressed: () async {
+                          await _requestCreateCustomItem(activeCategory);
+                        },
+                        style: FilledButton.styleFrom(
+                          backgroundColor: colorScheme.primary,
+                          foregroundColor: colorScheme.onPrimary,
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
+                        child: const Icon(Icons.add, size: 20),
+                      ),
+                    ),
+                  );
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1126,6 +1260,10 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Expanded(child: _buildSearchField()),
+                      if (createButton != null) ...<Widget>[
+                        const SizedBox(width: 10),
+                        createButton,
+                      ],
                       const SizedBox(width: 10),
                       filterButton,
                     ],
@@ -1134,6 +1272,10 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
                   Row(
                     children: <Widget>[
                       Expanded(child: _buildSearchField()),
+                      if (createButton != null) ...<Widget>[
+                        const SizedBox(width: 12),
+                        createButton,
+                      ],
                       const SizedBox(width: 12),
                       filterButton,
                     ],

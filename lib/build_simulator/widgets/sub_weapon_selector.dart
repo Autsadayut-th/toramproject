@@ -15,6 +15,8 @@ class SubWeaponEquipmentSelector extends StatelessWidget {
     required this.enhance,
     required this.onEnhChanged,
     this.onCreateCustomItem,
+    this.onRequestEditCustomItem,
+    this.onRequestDeleteCustomItem,
   });
 
   final String? selectedId;
@@ -25,7 +27,10 @@ class SubWeaponEquipmentSelector extends StatelessWidget {
   final ValueChanged<String?> onEquipChanged;
   final int enhance;
   final ValueChanged<int> onEnhChanged;
-  final VoidCallback? onCreateCustomItem;
+  final Future<EquipmentLibraryItem?> Function()? onCreateCustomItem;
+  final Future<EquipmentLibraryItem?> Function(EquipmentLibraryItem)?
+  onRequestEditCustomItem;
+  final Future<bool> Function(EquipmentLibraryItem)? onRequestDeleteCustomItem;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +52,8 @@ class SubWeaponEquipmentSelector extends StatelessWidget {
       enhance: enhance,
       onEnhChanged: onEnhChanged,
       onCreateCustomItem: onCreateCustomItem,
+      onRequestEditCustomItem: onRequestEditCustomItem,
+      onRequestDeleteCustomItem: onRequestDeleteCustomItem,
       createCustomTooltip: 'Create custom sub weapon',
     );
   }

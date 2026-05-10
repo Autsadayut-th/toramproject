@@ -36,6 +36,8 @@ class EquipmentSlotSelector extends StatefulWidget {
     this.onCrystal1Changed,
     this.onCrystal2Changed,
     this.onCreateCustomItem,
+    this.onRequestEditCustomItem,
+    this.onRequestDeleteCustomItem,
     this.createCustomTooltip,
   });
 
@@ -63,7 +65,10 @@ class EquipmentSlotSelector extends StatefulWidget {
   final String? crystal2;
   final ValueChanged<String?>? onCrystal1Changed;
   final ValueChanged<String?>? onCrystal2Changed;
-  final VoidCallback? onCreateCustomItem;
+  final Future<EquipmentLibraryItem?> Function()? onCreateCustomItem;
+  final Future<EquipmentLibraryItem?> Function(EquipmentLibraryItem)?
+  onRequestEditCustomItem;
+  final Future<bool> Function(EquipmentLibraryItem)? onRequestDeleteCustomItem;
   final String? createCustomTooltip;
 
   @override
@@ -558,6 +563,9 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
       allowedTypes: widget.allowedItemTypes,
       inMemoryItemsByCategory: inMemoryItemsByCategory,
       title: widget.pickTitle,
+      onRequestCreateCustomItem: widget.onCreateCustomItem,
+      onRequestEditCustomItem: widget.onRequestEditCustomItem,
+      onRequestDeleteCustomItem: widget.onRequestDeleteCustomItem,
     );
     if (!mounted || selectedKey == null || selectedKey.isEmpty) {
       return;
@@ -923,7 +931,9 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
             if (widget.onCreateCustomItem != null) ...<Widget>[
               const SizedBox(width: 8),
               _actionButton(
-                onTap: widget.onCreateCustomItem,
+                onTap: () async {
+                  await widget.onCreateCustomItem?.call();
+                },
                 enabled: true,
                 tooltip: widget.createCustomTooltip ?? 'Create custom item',
                 icon: Icons.add,
@@ -1882,7 +1892,7 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
   Widget _clearButton({required VoidCallback? onTap}) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Tooltip(
-      message: 'Clear crystal',
+      message: 'Clear',
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(8),

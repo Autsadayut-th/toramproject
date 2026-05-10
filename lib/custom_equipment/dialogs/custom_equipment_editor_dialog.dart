@@ -254,6 +254,17 @@ class _CustomEquipmentEditorDialogState
     return text.replaceAll('_', ' ');
   }
 
+  InputDecoration _outlinedFieldDecoration({
+    required String labelText,
+    String? hintText,
+  }) {
+    return InputDecoration(
+      labelText: labelText,
+      hintText: hintText,
+      border: const OutlineInputBorder(),
+    );
+  }
+
   void _submit() {
     final FormState? state = _formKey.currentState;
     if (state == null || !state.validate()) {
@@ -325,13 +336,13 @@ class _CustomEquipmentEditorDialogState
               children: <Widget>[
                 if (_isCategoryLockedByTrigger)
                   InputDecorator(
-                    decoration: const InputDecoration(labelText: 'Category'),
+                    decoration: _outlinedFieldDecoration(labelText: 'Category'),
                     child: Text(_category),
                   )
                 else
                   DropdownButtonFormField<String>(
                     initialValue: _category,
-                    decoration: const InputDecoration(labelText: 'Category'),
+                    decoration: _outlinedFieldDecoration(labelText: 'Category'),
                     items: _categories
                         .map(
                           (String value) => DropdownMenuItem<String>(
@@ -362,7 +373,7 @@ class _CustomEquipmentEditorDialogState
                 const SizedBox(height: 12),
                 TextFormField(
                   controller: _nameController,
-                  decoration: const InputDecoration(labelText: 'Item Name'),
+                  decoration: _outlinedFieldDecoration(labelText: 'Item Name'),
                   validator: (String? value) {
                     return (value?.trim().isNotEmpty ?? false)
                         ? null
@@ -372,7 +383,7 @@ class _CustomEquipmentEditorDialogState
                 const SizedBox(height: 12),
                 DropdownButtonFormField<String>(
                   initialValue: _equipmentType,
-                  decoration: const InputDecoration(
+                  decoration: _outlinedFieldDecoration(
                     labelText: 'Equipment Type Preset',
                   ),
                   items: _equipmentTypeOptionsForCategory(_category)
@@ -443,50 +454,63 @@ class _CustomEquipmentEditorDialogState
                           ],
                         ),
                         const SizedBox(height: 12),
-                        TextFormField(
-                          controller: draft.valueController,
-                          keyboardType: const TextInputType.numberWithOptions(
-                            decimal: true,
-                            signed: true,
-                          ),
-                          decoration: const InputDecoration(
-                            labelText: 'Stat Value',
-                            border: OutlineInputBorder(),
-                          ),
-                          validator: (String? value) {
-                            return num.tryParse(value?.trim() ?? '') != null
-                                ? null
-                                : 'Please enter a number.';
-                          },
-                        ),
-                        const SizedBox(height: 12),
-                        DropdownButtonFormField<String>(
-                          initialValue: draft.valueType,
-                          decoration: const InputDecoration(
-                            labelText: 'Stat Value Type',
-                          ),
-                          items: const <DropdownMenuItem<String>>[
-                            DropdownMenuItem<String>(
-                              value: 'flat',
-                              child: Text('flat'),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Expanded(
+                              child: TextFormField(
+                                controller: draft.valueController,
+                                keyboardType:
+                                    const TextInputType.numberWithOptions(
+                                      decimal: true,
+                                      signed: true,
+                                    ),
+                                decoration: const InputDecoration(
+                                  labelText: 'Stat Value',
+                                  border: OutlineInputBorder(),
+                                ),
+                                validator: (String? value) {
+                                  return num.tryParse(value?.trim() ?? '') !=
+                                          null
+                                      ? null
+                                      : 'Please enter a number.';
+                                },
+                              ),
                             ),
-                            DropdownMenuItem<String>(
-                              value: 'percent',
-                              child: Text('percent'),
-                            ),
-                            DropdownMenuItem<String>(
-                              value: 'base',
-                              child: Text('base'),
+                            const SizedBox(width: 8),
+                            SizedBox(
+                              width: 140,
+                              child: DropdownButtonFormField<String>(
+                                initialValue: draft.valueType,
+                                decoration: const InputDecoration(
+                                  labelText: 'Type',
+                                  border: OutlineInputBorder(),
+                                ),
+                                items: const <DropdownMenuItem<String>>[
+                                  DropdownMenuItem<String>(
+                                    value: 'flat',
+                                    child: Text('flat'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'percent',
+                                    child: Text('percent'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'base',
+                                    child: Text('base'),
+                                  ),
+                                ],
+                                onChanged: (String? value) {
+                                  if (value == null) {
+                                    return;
+                                  }
+                                  setState(() {
+                                    draft.valueType = value;
+                                  });
+                                },
+                              ),
                             ),
                           ],
-                          onChanged: (String? value) {
-                            if (value == null) {
-                              return;
-                            }
-                            setState(() {
-                              draft.valueType = value;
-                            });
-                          },
                         ),
                       ],
                     ),
@@ -505,7 +529,7 @@ class _CustomEquipmentEditorDialogState
                   controller: _notesController,
                   minLines: 2,
                   maxLines: 4,
-                  decoration: const InputDecoration(
+                  decoration: _outlinedFieldDecoration(
                     labelText: 'Notes',
                     hintText: 'Optional description or reminder',
                   ),

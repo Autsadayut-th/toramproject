@@ -23,6 +23,12 @@ extension _EquipmentLibraryDetailsSheet on _EquipmentLibraryDataViewState {
     final Color miniIconBackgroundColor = accentColor.withValues(
       alpha: isLight ? 0.22 : 0.16,
     );
+    final bool isPlayerCreated = _isPlayerCreatedItem(item);
+    final bool canEditCustomItem =
+        isPlayerCreated && widget.onRequestEditCustomItem != null;
+    final bool canDeleteCustomItem =
+        isPlayerCreated && widget.onRequestDeleteCustomItem != null;
+    final bool showDetailActionGroup = canEditCustomItem || canDeleteCustomItem;
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
@@ -107,6 +113,64 @@ extension _EquipmentLibraryDetailsSheet on _EquipmentLibraryDataViewState {
                           ),
                         ),
                       ),
+                      if (showDetailActionGroup)
+                        Container(
+                          margin: const EdgeInsets.only(left: 10),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 4,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: colorScheme.surfaceContainerHighest,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: colorScheme.outline.withValues(
+                                alpha: isLight ? 0.42 : 0.34,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              if (canEditCustomItem)
+                                IconButton(
+                                  tooltip: 'Edit',
+                                  icon: const Icon(
+                                    Icons.edit_outlined,
+                                    size: 18,
+                                  ),
+                                  visualDensity: VisualDensity.compact,
+                                  splashRadius: 16,
+                                  constraints: const BoxConstraints(
+                                    minWidth: 34,
+                                    minHeight: 34,
+                                  ),
+                                  onPressed: () async {
+                                    Navigator.of(context).pop();
+                                    await _requestEditCustomItem(item);
+                                  },
+                                ),
+                              if (canDeleteCustomItem)
+                                IconButton(
+                                  tooltip: 'Delete',
+                                  icon: const Icon(
+                                    Icons.delete_outline,
+                                    size: 18,
+                                  ),
+                                  visualDensity: VisualDensity.compact,
+                                  splashRadius: 16,
+                                  constraints: const BoxConstraints(
+                                    minWidth: 34,
+                                    minHeight: 34,
+                                  ),
+                                  onPressed: () async {
+                                    Navigator.of(context).pop();
+                                    await _requestDeleteCustomItem(item);
+                                  },
+                                ),
+                            ],
+                          ),
+                        ),
                     ],
                   ),
                   if (elementLabels.isNotEmpty) ...<Widget>[

@@ -15,10 +15,12 @@ extension _BuildSimulatorCustomEquipment on BuildSimulatorScreenState {
     unawaited(_deleteCustomEquipmentById(id));
   }
 
-  Future<void> _openCustomEquipmentCreator({required String category}) async {
+  Future<EquipmentLibraryItem?> _openCustomEquipmentCreator({
+    required String category,
+  }) async {
     if (!widget.isAuthenticated) {
       _showCustomEquipmentLoginPrompt();
-      return;
+      return null;
     }
 
     final CustomEquipmentItem? item = await showDialog<CustomEquipmentItem>(
@@ -29,10 +31,11 @@ extension _BuildSimulatorCustomEquipment on BuildSimulatorScreenState {
     );
 
     if (item == null) {
-      return;
+      return null;
     }
 
     await _createCustomEquipment(item);
+    return CustomEquipmentMapper.toEquipmentLibraryItem(item);
   }
 
   CustomEquipmentItem? _findCustomEquipmentItemByKey(String? equipmentKey) {
@@ -43,12 +46,14 @@ extension _BuildSimulatorCustomEquipment on BuildSimulatorScreenState {
     return _customEquipmentItemByKey[normalized];
   }
 
-  Future<void> _openCustomEquipmentEditorByKey(String? equipmentKey) async {
+  Future<EquipmentLibraryItem?> _openCustomEquipmentEditorByKey(
+    String? equipmentKey,
+  ) async {
     final CustomEquipmentItem? initial = _findCustomEquipmentItemByKey(
       equipmentKey,
     );
     if (initial == null) {
-      return;
+      return null;
     }
 
     final CustomEquipmentItem? updated = await showDialog<CustomEquipmentItem>(
@@ -61,12 +66,12 @@ extension _BuildSimulatorCustomEquipment on BuildSimulatorScreenState {
       },
     );
     if (updated == null) {
-      return;
+      return null;
     }
 
     await _upsertCustomEquipment(updated);
     if (!mounted) {
-      return;
+      return CustomEquipmentMapper.toEquipmentLibraryItem(updated);
     }
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -74,14 +79,15 @@ extension _BuildSimulatorCustomEquipment on BuildSimulatorScreenState {
         behavior: SnackBarBehavior.floating,
       ),
     );
+    return CustomEquipmentMapper.toEquipmentLibraryItem(updated);
   }
 
-  Future<void> _confirmDeleteCustomEquipmentByKey(String? equipmentKey) async {
+  Future<bool> _confirmDeleteCustomEquipmentByKey(String? equipmentKey) async {
     final CustomEquipmentItem? target = _findCustomEquipmentItemByKey(
       equipmentKey,
     );
     if (target == null) {
-      return;
+      return false;
     }
 
     final bool? confirmed = await showDialog<bool>(
@@ -104,12 +110,15 @@ extension _BuildSimulatorCustomEquipment on BuildSimulatorScreenState {
       },
     );
     if (confirmed != true) {
-      return;
+      return false;
     }
 
-    await _deleteCustomEquipmentById(target.id);
+    final bool deleted = await _deleteCustomEquipmentById(target.id);
+    if (!deleted) {
+      return false;
+    }
     if (!mounted) {
-      return;
+      return true;
     }
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -117,6 +126,7 @@ extension _BuildSimulatorCustomEquipment on BuildSimulatorScreenState {
         behavior: SnackBarBehavior.floating,
       ),
     );
+    return true;
   }
 
   List<CustomEquipmentItem> _mergeCustomEquipmentItems({
@@ -256,7 +266,9 @@ extension _BuildSimulatorCustomEquipment on BuildSimulatorScreenState {
         stackTrace: stackTrace,
       );
       try {
-        await _customEquipmentStorageService.loadItems();
+        final List<CustomEquipmentItem> fallbackItems =
+            await _customEquipmentStorageService.loadItems();
+        _syncCustomEquipmentCache(fallbackItems);
       } catch (_) {}
     } finally {
       _isSyncingCustomEquipment = false;
@@ -305,10 +317,10 @@ extension _BuildSimulatorCustomEquipment on BuildSimulatorScreenState {
     );
   }
 
-  Future<void> _deleteCustomEquipmentById(String id) async {
+  Future<bool> _deleteCustomEquipmentById(String id) async {
     final String targetId = id.trim();
     if (targetId.isEmpty) {
-      return;
+      return false;
     }
     try {
       final List<CustomEquipmentItem> items =
@@ -317,12 +329,13 @@ extension _BuildSimulatorCustomEquipment on BuildSimulatorScreenState {
 
       final String? activeUserId = _activeUserId;
       if (activeUserId == null) {
-        return;
+        return true;
       }
       await _syncCustomEquipmentItemsToCloud(
         items,
         expectedUserId: activeUserId,
       );
+      return true;
     } catch (error, stackTrace) {
       _reportBackgroundLoadFailure(
         label: 'Custom equipment cloud delete',
@@ -330,6 +343,7 @@ extension _BuildSimulatorCustomEquipment on BuildSimulatorScreenState {
         stackTrace: stackTrace,
       );
       _showActionableCustomEquipmentError(isDelete: true);
+      return false;
     }
   }
 

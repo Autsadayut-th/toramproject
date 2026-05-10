@@ -100,6 +100,12 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
         .take(previewLimit)
         .toList(growable: false);
     final bool isPlayerCreated = _isPlayerCreatedItem(item);
+    final bool showCustomCardActions = widget.pickMode && isPlayerCreated;
+    final bool canEditCustomItem =
+        showCustomCardActions && widget.onRequestEditCustomItem != null;
+    final bool canDeleteCustomItem =
+        showCustomCardActions && widget.onRequestDeleteCustomItem != null;
+    final bool showTopActionGroup = canEditCustomItem || canDeleteCustomItem;
     final String actionLabel = widget.pickMode
         ? 'Tap to equip'
         : 'Open details';
@@ -214,6 +220,64 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
                           ],
                         ),
                       ),
+                      if (showTopActionGroup) ...<Widget>[
+                        const SizedBox(width: 10),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 4,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: colorScheme.surfaceContainerHighest
+                                .withValues(alpha: isLight ? 0.62 : 0.5),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: actionBorderColor.withValues(
+                                alpha: isLight ? 0.82 : 0.72,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              if (canEditCustomItem)
+                                IconButton(
+                                  tooltip: 'Edit',
+                                  icon: const Icon(
+                                    Icons.edit_outlined,
+                                    size: 17,
+                                  ),
+                                  visualDensity: VisualDensity.compact,
+                                  splashRadius: 16,
+                                  constraints: const BoxConstraints(
+                                    minWidth: 34,
+                                    minHeight: 34,
+                                  ),
+                                  onPressed: () async {
+                                    await _requestEditCustomItem(item);
+                                  },
+                                ),
+                              if (canDeleteCustomItem)
+                                IconButton(
+                                  tooltip: 'Delete',
+                                  icon: const Icon(
+                                    Icons.delete_outline,
+                                    size: 17,
+                                  ),
+                                  visualDensity: VisualDensity.compact,
+                                  splashRadius: 16,
+                                  constraints: const BoxConstraints(
+                                    minWidth: 34,
+                                    minHeight: 34,
+                                  ),
+                                  onPressed: () async {
+                                    await _requestDeleteCustomItem(item);
+                                  },
+                                ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                   const SizedBox(height: 12),
@@ -277,8 +341,10 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
                       vertical: 11,
                     ),
                     decoration: BoxDecoration(
-                      color: colorScheme.surfaceContainerHighest,
-                      borderRadius: BorderRadius.circular(14),
+                      color: colorScheme.surfaceContainerHighest.withValues(
+                        alpha: isLight ? 0.58 : 0.48,
+                      ),
+                      borderRadius: BorderRadius.circular(22),
                       border: Border.all(color: actionBorderColor),
                     ),
                     child: Row(
@@ -290,20 +356,17 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: colorScheme.onSurface.withValues(
-                                alpha: 0.75,
+                                alpha: 0.82,
                               ),
-                              fontSize: 12,
-                              fontWeight: FontWeight.w700,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
                             ),
                           ),
                         ),
-                        Text(
-                          '>',
-                          style: TextStyle(
-                            color: accentColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w800,
-                          ),
+                        Icon(
+                          Icons.chevron_right_rounded,
+                          color: colorScheme.primary.withValues(alpha: 0.9),
+                          size: 28,
                         ),
                       ],
                     ),
