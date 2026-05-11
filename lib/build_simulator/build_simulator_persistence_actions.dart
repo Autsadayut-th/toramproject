@@ -4,6 +4,23 @@ extension _BuildSimulatorPersistenceActions on BuildSimulatorScreenState {
   int _findBuildIndexById(String buildId) {
     return BuildPersistenceService.findBuildIndexById(_savedBuilds, buildId);
   }
+  
+  bool _hasValidStatPointsForSave() {
+    return _usedStatPoints() <= _totalStatPoints;
+  }
+
+  /// ✅ NEW: ตรวจสอบว่า build นี้ valid หรือไม่
+  bool _isValidBuildForSave() {
+    // ตรวจสอบ stat points
+    if (!_hasValidStatPointsForSave()) {
+      _showRestrictionMessage(
+        'Cannot save: Stat points exceeded by ${_usedStatPoints() - _totalStatPoints} points.',
+      );
+      return false;
+    }
+
+    return true;
+  }
 
   void _applyBuildSnapshot(Map<String, dynamic> build) {
     _applyCharacterSnapshot(build);
@@ -210,6 +227,12 @@ extension _BuildSimulatorPersistenceActions on BuildSimulatorScreenState {
     if (normalizedName.isEmpty) {
       return;
     }
+
+    // ✅ CHECK: ตรวจสอบ validation ก่อนบันทึก
+    if (!_isValidBuildForSave()) {
+      return;
+    }
+
     final int? maxSavedBuilds = _maxSavedBuilds;
     if (maxSavedBuilds != null && _savedBuilds.length >= maxSavedBuilds) {
       _showRestrictionMessage(BuildSimulatorScreenState._guestSaveLimitMessage);
@@ -582,3 +605,5 @@ extension _BuildSimulatorPersistenceActions on BuildSimulatorScreenState {
     });
   }
 }
+
+

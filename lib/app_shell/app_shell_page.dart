@@ -14,11 +14,9 @@ import '../compare_builds_page/compare_builds_page.dart';
 import '../critical_simulator_page/critical_simulator_page.dart';
 import '../equipment_library/equipment_library_page.dart';
 import '../saved_builds_page/saved_builds_page.dart';
-import '../settings_data_page/settings_data_page.dart';
 import '../shared/app_navigation_drawer.dart';
 import '../shared/app_mobile_bottom_navigation_bar.dart';
 import '../shared/app_theme_controller.dart';
-import '../skill_menu_page/skill_menu_page.dart';
 
 part 'widgets/build_mobile_drawer.dart';
 part 'widgets/build_mobile_drawer_widgets.dart';
@@ -92,10 +90,9 @@ class _AppShellScreenState extends State<AppShellScreen> {
 
   @override
   void dispose() {
+    _coordinator.removeListener(_onCoordinatorChanged);
     _authStateSubscription?.cancel();
-    _coordinator
-      ..removeListener(_onCoordinatorChanged)
-      ..detachHandlers();
+    _coordinator.dispose();
     super.dispose();
   }
 
@@ -141,14 +138,13 @@ class _AppShellScreenState extends State<AppShellScreen> {
         return 1;
       case AppNavigationPage.critical:
         return 2;
-      case AppNavigationPage.skill:
-        return 3;
       case AppNavigationPage.saved:
-        return 4;
+        return 3;
       case AppNavigationPage.compare:
-        return 5;
+        return 4;
+      case AppNavigationPage.skill:
       case AppNavigationPage.settings:
-        return 6;
+        return 0;
     }
   }
 
@@ -271,7 +267,6 @@ class _AppShellScreenState extends State<AppShellScreen> {
           ),
           EquipmentLibraryScreen(onNavigate: _onNavigate),
           const CriticalSimulatorPage(embeddedInShell: true),
-          SkillMenuPage(onNavigate: _onNavigate),
           SavedBuildsPage(
             savedBuilds: _coordinator.savedBuilds,
             onLoadBuild: _coordinator.loadBuildById,
@@ -283,16 +278,6 @@ class _AppShellScreenState extends State<AppShellScreen> {
           CompareBuildsPage(
             savedBuilds: _coordinator.savedBuilds,
             onLoadBuild: _coordinator.loadBuildById,
-            onNavigate: _onNavigate,
-          ),
-          SettingsDataPage(
-            savedBuilds: _coordinator.savedBuilds,
-            equipmentCacheCount: _coordinator.equipmentCacheCount,
-            showRecommendations: _coordinator.showRecommendations,
-            onShowRecommendationsChanged: _coordinator.setShowRecommendations,
-            onReplaceSavedBuilds: _coordinator.replaceSavedBuilds,
-            onMergeSavedBuilds: _coordinator.mergeSavedBuilds,
-            onClearAllData: _coordinator.clearAllData,
             onNavigate: _onNavigate,
           ),
         ],
@@ -344,3 +329,4 @@ class _AppShellScreenState extends State<AppShellScreen> {
     }
   }
 }
+

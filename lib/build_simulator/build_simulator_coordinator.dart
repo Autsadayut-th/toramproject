@@ -24,11 +24,12 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     'MP': 0,
   };
 
-  List<Map<String, dynamic>> _savedBuilds = <Map<String, dynamic>>[];
+  List<Map<String, dynamic>> _savedBuilds = const <Map<String, dynamic>>[];
   bool _showRecommendations = true;
   int _equipmentCacheCount = 0;
-  Map<String, num> _summary = Map<String, num>.from(_summaryTemplate);
-  List<Map<String, dynamic>> _selectedItemDetails = <Map<String, dynamic>>[];
+  Map<String, num> _summary = Map<String, num>.unmodifiable(_summaryTemplate);
+  List<Map<String, dynamic>> _selectedItemDetails =
+      const <Map<String, dynamic>>[];
   List<String> _aiRecommendations = const <String>[];
   bool _isAiRecommendationLoading = false;
   String _aiRecommendationSource = 'rule';
@@ -47,31 +48,13 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
   VoidCallback? _clearAllData;
   VoidCallback? _generateAiRecommendations;
 
-  List<Map<String, dynamic>> get savedBuilds => _savedBuilds
-      .map((Map<String, dynamic> item) {
-        return Map<String, dynamic>.from(item);
-      })
-      .toList(growable: false);
+  List<Map<String, dynamic>> get savedBuilds => _savedBuilds;
 
   bool get showRecommendations => _showRecommendations;
   int get equipmentCacheCount => _equipmentCacheCount;
-  Map<String, num> get summary => Map<String, num>.from(_summary);
-  List<Map<String, dynamic>> get selectedItemDetails => _selectedItemDetails
-      .map((Map<String, dynamic> item) {
-        final Map<String, dynamic> copy = Map<String, dynamic>.from(item);
-        final dynamic rawStats = item['stats'];
-        if (rawStats is List) {
-          copy['stats'] = rawStats
-              .whereType<Map>()
-              .map((Map<dynamic, dynamic> stat) {
-                return Map<String, dynamic>.from(stat);
-              })
-              .toList(growable: false);
-        }
-        return copy;
-      })
-      .toList(growable: false);
-  List<String> get aiRecommendations => List<String>.from(_aiRecommendations);
+  Map<String, num> get summary => _summary;
+  List<Map<String, dynamic>> get selectedItemDetails => _selectedItemDetails;
+  List<String> get aiRecommendations => _aiRecommendations;
   bool get isAiRecommendationLoading => _isAiRecommendationLoading;
   String get aiRecommendationSource => _aiRecommendationSource;
   String get aiRecommendationMessage => _aiRecommendationMessage;
@@ -121,6 +104,16 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     _generateAiRecommendations = null;
   }
 
+  void _clearSnapshotData() {
+    _savedBuilds = const <Map<String, dynamic>>[];
+    _summary = Map<String, num>.unmodifiable(_summaryTemplate);
+    _selectedItemDetails = const <Map<String, dynamic>>[];
+    _aiRecommendations = const <String>[];
+    _isAiRecommendationLoading = false;
+    _aiRecommendationSource = 'rule';
+    _aiRecommendationMessage = 'Using local recommendation rules.';
+  }
+
   void updateSnapshot({
     required List<Map<String, dynamic>> savedBuilds,
     required bool showRecommendations,
@@ -132,30 +125,33 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     required String aiRecommendationSource,
     required String aiRecommendationMessage,
   }) {
-    _savedBuilds = savedBuilds
-        .map((Map<String, dynamic> item) {
-          return Map<String, dynamic>.from(item);
-        })
-        .toList(growable: false);
+    _savedBuilds = List<Map<String, dynamic>>.unmodifiable(
+      savedBuilds.map((Map<String, dynamic> item) {
+        return Map<String, dynamic>.unmodifiable(item);
+      }),
+    );
     _showRecommendations = showRecommendations;
     _equipmentCacheCount = equipmentCacheCount;
-    _summary = Map<String, num>.from(_summaryTemplate)..addAll(summary);
-    _selectedItemDetails = selectedItemDetails
-        .map((Map<String, dynamic> item) {
+    final Map<String, num> nextSummary = Map<String, num>.from(_summaryTemplate)
+      ..addAll(summary);
+    _summary = Map<String, num>.unmodifiable(nextSummary);
+    _selectedItemDetails = List<Map<String, dynamic>>.unmodifiable(
+      selectedItemDetails.map((Map<String, dynamic> item) {
           final Map<String, dynamic> copy = Map<String, dynamic>.from(item);
           final dynamic rawStats = item['stats'];
           if (rawStats is List) {
-            copy['stats'] = rawStats
-                .whereType<Map>()
-                .map((Map<dynamic, dynamic> stat) {
-                  return Map<String, dynamic>.from(stat);
-                })
-                .toList(growable: false);
+            copy['stats'] = List<Map<String, dynamic>>.unmodifiable(
+              rawStats.whereType<Map>().map((Map<dynamic, dynamic> stat) {
+                return Map<String, dynamic>.unmodifiable(
+                  Map<String, dynamic>.from(stat),
+                );
+              }),
+            );
           }
-          return copy;
-        })
-        .toList(growable: false);
-    _aiRecommendations = List<String>.from(aiRecommendations);
+          return Map<String, dynamic>.unmodifiable(copy);
+        }),
+    );
+    _aiRecommendations = List<String>.unmodifiable(aiRecommendations);
     _isAiRecommendationLoading = isAiRecommendationLoading;
     _aiRecommendationSource = aiRecommendationSource;
     _aiRecommendationMessage = aiRecommendationMessage;
@@ -210,5 +206,12 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
 
   void generateAiRecommendations() {
     _generateAiRecommendations?.call();
+  }
+
+  @override
+  void dispose() {
+    detachHandlers();
+    _clearSnapshotData();
+    super.dispose();
   }
 }

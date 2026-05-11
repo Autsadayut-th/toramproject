@@ -149,6 +149,7 @@ class CharacterStatsSelector extends StatelessWidget {
           min: _minStat,
           max: _maxStat,
           onChanged: (value) => onStatChanged('STR', value),
+          deferSliderCommit: true,
         ),
         const SizedBox(height: 8),
         _StatRow(
@@ -157,6 +158,7 @@ class CharacterStatsSelector extends StatelessWidget {
           min: _minStat,
           max: _maxStat,
           onChanged: (value) => onStatChanged('DEX', value),
+          deferSliderCommit: true,
         ),
         const SizedBox(height: 8),
         _StatRow(
@@ -165,6 +167,7 @@ class CharacterStatsSelector extends StatelessWidget {
           min: _minStat,
           max: _maxStat,
           onChanged: (value) => onStatChanged('INT', value),
+          deferSliderCommit: true,
         ),
         const SizedBox(height: 8),
         _StatRow(
@@ -173,6 +176,7 @@ class CharacterStatsSelector extends StatelessWidget {
           min: _minStat,
           max: _maxStat,
           onChanged: (value) => onStatChanged('AGI', value),
+          deferSliderCommit: true,
         ),
         const SizedBox(height: 8),
         _StatRow(
@@ -181,6 +185,7 @@ class CharacterStatsSelector extends StatelessWidget {
           min: _minStat,
           max: _maxStat,
           onChanged: (value) => onStatChanged('VIT', value),
+          deferSliderCommit: true,
         ),
         const SizedBox(height: 10),
         Container(
@@ -260,6 +265,7 @@ class CharacterStatsSelector extends StatelessWidget {
                 min: _minPersonalStat,
                 max: _maxPersonalStat,
                 onChanged: onPersonalStatValueChanged,
+                deferSliderCommit: true,
               ),
             ],
           ),

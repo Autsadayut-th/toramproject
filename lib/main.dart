@@ -7,6 +7,7 @@ import 'package:toramonline/firebase_options.dart';
 import 'app_shell/app_shell_page.dart';
 import 'critical_simulator_page/critical_simulator_page.dart';
 import 'login_builds_page/login_screen.dart';
+import 'splash/splash_screen.dart';
 import 'shared/app_theme_controller.dart';
 
 Future<void> main() async {
@@ -128,7 +129,7 @@ class _FirebaseBootstrapGateState extends State<FirebaseBootstrapGate> {
       future: _initializeFuture,
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
-          return const _LoadingScreen();
+          return const SplashScreen(message: 'กำลังเตรียมระบบ...');
         }
 
         if (snapshot.data == true) {
@@ -156,7 +157,7 @@ class AuthGate extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const _LoadingScreen();
+          return const SplashScreen(message: 'กำลังตรวจสอบบัญชี...');
         }
 
         if (snapshot.data != null) {
@@ -165,21 +166,6 @@ class AuthGate extends StatelessWidget {
 
         return const LoginScreen();
       },
-    );
-  }
-}
-
-class _LoadingScreen extends StatelessWidget {
-  const _LoadingScreen();
-
-  @override
-  Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    return Scaffold(
-      backgroundColor: colorScheme.surface,
-      body: Center(
-        child: CircularProgressIndicator(color: colorScheme.primary),
-      ),
     );
   }
 }

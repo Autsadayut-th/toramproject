@@ -11,6 +11,33 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
     return used + _personalStatValue.clamp(0, 255).toInt();
   }
 
+  int _mainStatValue(String key) {
+    final dynamic raw = _character[key];
+    if (raw is num) {
+      return raw.toInt().clamp(0, 510).toInt();
+    }
+    return 1;
+  }
+
+  int _maxAllowedMainStatValue(String key) {
+    final int currentValue = _mainStatValue(key);
+    final int currentCost = (currentValue - 1).clamp(0, 510).toInt();
+    final int usedWithoutCurrent = _usedStatPoints() - currentCost;
+    final int remainingPoints = (_totalStatPoints - usedWithoutCurrent)
+        .clamp(0, 510)
+        .toInt();
+    return (remainingPoints + 1).clamp(0, 510).toInt();
+  }
+
+  int _maxAllowedPersonalStatValue() {
+    final int usedWithoutPersonal =
+        _usedStatPoints() - _personalStatValue.clamp(0, 255).toInt();
+    final int remainingPoints = (_totalStatPoints - usedWithoutPersonal)
+        .clamp(0, 255)
+        .toInt();
+    return remainingPoints;
+  }
+
   Widget _buildEquipmentPanel() {
     return ToramCard(
       title: 'Equipment Configuration',
@@ -202,19 +229,23 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         usedStatPoints: _usedStatPoints(),
         totalStatPoints: _totalStatPoints,
         onTotalStatPointsChanged: (int value) {
-          _setStateAndRecalculate(() => _totalStatPoints = value);
+          _setStateAndRecalculateCharacterOnly(() => _totalStatPoints = value);
         },
         onStatChanged: (String key, int value) {
-          _setStateAndRecalculate(() => _character[key] = value);
+          final int allowedMax = _maxAllowedMainStatValue(key);
+          final int nextValue = value.clamp(0, allowedMax).toInt();
+          _setStateAndRecalculateCharacterOnly(() => _character[key] = nextValue);
         },
         onLevelChanged: (int level) {
-          _setStateAndRecalculate(() => _level = level);
+          _setStateAndRecalculateCharacterOnly(() => _level = level);
         },
         onPersonalStatTypeChanged: (String type) {
-          _setStateAndRecalculate(() => _personalStatType = type);
+          _setStateAndRecalculateCharacterOnly(() => _personalStatType = type);
         },
         onPersonalStatValueChanged: (int value) {
-          _setStateAndRecalculate(() => _personalStatValue = value);
+          final int allowedMax = _maxAllowedPersonalStatValue();
+          final int nextValue = value.clamp(0, allowedMax).toInt();
+          _setStateAndRecalculateCharacterOnly(() => _personalStatValue = nextValue);
         },
         onRecalculate: () {
           _setUiState(_recalculateAll);

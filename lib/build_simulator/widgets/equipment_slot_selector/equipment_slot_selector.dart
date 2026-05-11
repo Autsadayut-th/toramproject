@@ -253,7 +253,8 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
       return null;
     }
 
-    EquipmentLibraryItem? fuzzyMatch;
+    EquipmentLibraryItem? bestMatch;
+    int bestScore = -1;
     for (final EquipmentLibraryItem item in widget.inlineSearchCandidates) {
       if (!_itemMatchesInlineSearch(item: item, parsed: parsed)) {
         continue;
@@ -261,9 +262,13 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
       if (_itemExactInlineMatch(item: item, parsed: parsed)) {
         return item;
       }
-      fuzzyMatch ??= item;
+      final int score = _inlineMatchScore(item: item, parsed: parsed);
+      if (score > bestScore) {
+        bestScore = score;
+        bestMatch = item;
+      }
     }
-    return fuzzyMatch;
+    return bestMatch;
   }
 
   List<EquipmentLibraryItem> _inlineCandidates() {
@@ -277,12 +282,25 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
       return const <EquipmentLibraryItem>[];
     }
 
-    final List<EquipmentLibraryItem> matches = <EquipmentLibraryItem>[];
+    final List<({EquipmentLibraryItem item, int score})> scored =
+        <({EquipmentLibraryItem item, int score})>[];
     for (final EquipmentLibraryItem item in widget.inlineSearchCandidates) {
       if (!_itemMatchesInlineSearch(item: item, parsed: parsed)) {
         continue;
       }
-      matches.add(item);
+      scored.add((item: item, score: _inlineMatchScore(item: item, parsed: parsed)));
+    }
+    scored.sort((a, b) {
+      final int byScore = b.score.compareTo(a.score);
+      if (byScore != 0) {
+        return byScore;
+      }
+      return a.item.name.toLowerCase().compareTo(b.item.name.toLowerCase());
+    });
+
+    final List<EquipmentLibraryItem> matches = <EquipmentLibraryItem>[];
+    for (final ({EquipmentLibraryItem item, int score}) entry in scored) {
+      matches.add(entry.item);
       if (matches.length >= 8) {
         break;
       }
@@ -425,13 +443,13 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
     final String color = item.color.trim().toLowerCase();
     switch (parsed.mode) {
       case 'name':
-        return name.contains(parsed.term);
+        return _fieldMatchesInline(name, parsed.term);
       case 'key':
-        return key.contains(parsed.term);
+        return _fieldMatchesInline(key, parsed.term);
       case 'type':
-        return type.contains(parsed.term);
+        return _fieldMatchesInline(type, parsed.term);
       case 'color':
-        return color.contains(parsed.term);
+        return _fieldMatchesInline(color, parsed.term);
       case 'stat':
         return _itemStatKeyMatches(item: item, query: parsed.term);
       default:
@@ -447,6 +465,69 @@ class _EquipmentSlotSelectorState extends State<EquipmentSlotSelector> {
         }
         return _itemStatKeyMatches(item: item, query: parsed.term);
     }
+  }
+
+  int _inlineMatchScore({
+    required EquipmentLibraryItem item,
+    required ({String mode, String term}) parsed,
+  }) {
+    final String name = item.name.trim().toLowerCase();
+    final String key = item.key.trim().toLowerCase();
+    final String type = item.type.trim().toLowerCase();
+    final String color = item.color.trim().toLowerCase();
+    final String term = parsed.term.trim().toLowerCase();
+    if (term.isEmpty) {
+      return 0;
+    }
+
+    int scoreField(String value) {
+      if (value == term) {
+        return 100;
+      }
+      if (value.startsWith(term)) {
+        return 80;
+      }
+      final List<String> tokens = _normalizeStatTokens(value);
+      if (tokens.any((String token) => token == term)) {
+        return 70;
+      }
+      if (tokens.any((String token) => token.startsWith(term))) {
+        return 55;
+      }
+      if (value.contains(term)) {
+        return 35;
+      }
+      return 0;
+    }
+
+    switch (parsed.mode) {
+      case 'name':
+        return scoreField(name);
+      case 'key':
+        return scoreField(key);
+      case 'type':
+        return scoreField(type);
+      case 'color':
+        return scoreField(color);
+      case 'stat':
+        return _itemStatKeyMatches(item: item, query: term, exact: true) ? 90 : 50;
+      default:
+        final int nameScore = scoreField(name);
+        final int keyScore = widget.inlineSearchByNameOnly ? 0 : scoreField(key);
+        final int typeScore = scoreField(type);
+        final int colorScore = scoreField(color);
+        final int statScore = _itemStatKeyMatches(item: item, query: term) ? 45 : 0;
+        return <int>[nameScore, keyScore, typeScore, colorScore, statScore]
+            .reduce((int a, int b) => a > b ? a : b);
+    }
+  }
+
+  bool _fieldMatchesInline(String value, String term) {
+    if (value.contains(term)) {
+      return true;
+    }
+    final List<String> tokens = _normalizeStatTokens(value);
+    return tokens.any((String token) => token.startsWith(term));
   }
 
   bool _itemStatKeyMatches({

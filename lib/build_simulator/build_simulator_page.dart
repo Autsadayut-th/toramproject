@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../shared/debouncer.dart';
 import 'build_simulator_coordinator.dart';
 import '../custom_equipment/custom_equipment.dart';
 import '../equipment_library/models/equipment_library_item.dart';
@@ -60,6 +61,8 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   final TextEditingController _buildNameController = TextEditingController();
   final EquipmentLibraryRepository _equipmentRepository =
       EquipmentLibraryRepository();
+  late final Debouncer _recalculationDebouncer;
+  late final Debouncer _coordinatorSyncDebouncer;
   final AiBuildRecommendationService _aiRecommendationService =
       const AiBuildRecommendationService();
   final FirebaseSavedBuildsService _savedBuildsService =
@@ -114,6 +117,8 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   Map<String, String> _subWeaponTypeAlias = <String, String>{};
   Map<String, List<String>> _mainToAllowedSubTypes = <String, List<String>>{};
   BuildRuleSet? _ruleSet;
+  BuildCalculationContext? _calculationContextCache;
+  bool _isCalculationContextDirty = true;
 
   bool _isCharacterStatsExpanded = false;
   bool _isMainWeaponExpanded = false;
@@ -204,6 +209,12 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   @override
   void initState() {
     super.initState();
+    _recalculationDebouncer = Debouncer(
+      delay: const Duration(milliseconds: 300),
+    );
+    _coordinatorSyncDebouncer = Debouncer(
+      delay: const Duration(milliseconds: 120),
+    );
     _recalculateAll();
     _attachCoordinator();
     _loadEquipmentLibrary();
@@ -245,14 +256,25 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
 
   @override
   void dispose() {
+    _recalculationDebouncer.dispose();
+    _coordinatorSyncDebouncer.dispose();
     widget.coordinator?.detachHandlers();
     _buildNameController.dispose();
     super.dispose();
   }
 
+  void _scheduleCoordinatorSync() {
+    _coordinatorSyncDebouncer.call(() {
+      if (!mounted) {
+        return;
+      }
+      _syncCoordinatorSnapshot();
+    });
+  }
+
   void _setUiState(VoidCallback action) {
     setState(action);
-    _syncCoordinatorSnapshot();
+    _scheduleCoordinatorSync();
   }
 
   @override

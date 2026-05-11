@@ -858,7 +858,9 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
             AsyncSnapshot<Map<String, List<EquipmentLibraryItem>>> snapshot,
           ) {
             if (snapshot.connectionState != ConnectionState.done) {
-              return const Center(child: CircularProgressIndicator());
+              return const SplashScreen(
+                message: 'กำลังโหลดข้อมูล Equipment จาก GitHub...',
+              );
             }
 
             if (snapshot.hasError) {

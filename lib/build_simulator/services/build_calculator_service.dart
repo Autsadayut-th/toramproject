@@ -229,11 +229,47 @@ class BuildCalculatorService {
     required Map<String, List<String>> mainToAllowedSubTypes,
     BuildRuleSet? ruleSet,
   }) {
-    final _CalculationBuckets buckets = _CalculationBuckets();
     final int normalizedLevel = level.clamp(1, 999).toInt();
     final String normalizedPersonalType = personalStatType.trim().toUpperCase();
     final int normalizedPersonalValue = personalStatValue.clamp(0, 255).toInt();
+    final BuildCalculationContext context = buildCalculationContext(
+      armorState: armorState,
+      mainWeapon: mainWeapon,
+      subWeapon: subWeapon,
+      armor: armor,
+      helmet: helmet,
+      ring: ring,
+      equippedCrystalStats: equippedCrystalStats,
+      avatarStats: avatarStats,
+      mainToAllowedSubTypes: mainToAllowedSubTypes,
+    );
+    return calculateSummaryFromContext(
+      context: context,
+      character: character,
+      level: normalizedLevel,
+      personalStatType: normalizedPersonalType,
+      personalStatValue: normalizedPersonalValue,
+      enhanceMain: enhanceMain,
+      enhanceSub: enhanceSub,
+      enhanceArmor: enhanceArmor,
+      enhanceHelmet: enhanceHelmet,
+      enhanceRing: enhanceRing,
+      ruleSet: ruleSet,
+    );
+  }
 
+  static BuildCalculationContext buildCalculationContext({
+    required String armorState,
+    required EquipmentLibraryItem? mainWeapon,
+    required EquipmentLibraryItem? subWeapon,
+    required EquipmentLibraryItem? armor,
+    required EquipmentLibraryItem? helmet,
+    required EquipmentLibraryItem? ring,
+    required Iterable<EquipmentStat> equippedCrystalStats,
+    required Iterable<EquipmentStat> avatarStats,
+    required Map<String, List<String>> mainToAllowedSubTypes,
+  }) {
+    final _CalculationBuckets buckets = _CalculationBuckets();
     final String normalizedMainWeaponType = _normalizeWeaponType(
       mainWeapon?.type,
     );
@@ -328,10 +364,51 @@ class BuildCalculatorService {
       );
     }
 
+    return BuildCalculationContext(
+      primaryPercentByKey: Map<String, double>.from(buckets.primaryPercentByKey),
+      primaryFlatByKey: Map<String, double>.from(buckets.primaryFlatByKey),
+      derivedPercentByKey: Map<String, double>.from(buckets.derivedPercentByKey),
+      derivedFlatByKey: Map<String, double>.from(buckets.derivedFlatByKey),
+      mainWeaponAtkBase: buckets.mainWeaponAtkBase,
+      supplementalWeaponAtkBase: buckets.supplementalWeaponAtkBase,
+      weaponAtkFlat: buckets.weaponAtkFlat,
+      weaponAtkPercent: buckets.weaponAtkPercent,
+      mainWeaponBaseStability: buckets.mainWeaponBaseStability,
+      supplementalStabilityBase: buckets.supplementalStabilityBase,
+      armorDefBase: buckets.armorDefBase,
+      helmetDefBase: buckets.helmetDefBase,
+      ringDefBase: buckets.ringDefBase,
+      otherEquipmentDefBase: buckets.otherEquipmentDefBase,
+      armorMdefBase: buckets.armorMdefBase,
+      helmetMdefBase: buckets.helmetMdefBase,
+      ringMdefBase: buckets.ringMdefBase,
+      otherEquipmentMdefBase: buckets.otherEquipmentMdefBase,
+      combatWeaponType: combatWeaponType,
+      mainWeaponType: normalizedMainWeaponType,
+      subWeaponType: normalizedSubWeaponType,
+      effectiveArmorState: effectiveArmorState,
+      isSubWeaponAllowed: isSubWeaponAllowed,
+      subWeaponHasBaseWeaponAtk: _itemHasBaseWeaponAtk(subWeapon),
+    );
+  }
+
+  static Map<String, num> calculateSummaryFromContext({
+    required BuildCalculationContext context,
+    required Map<String, dynamic> character,
+    required int level,
+    required String personalStatType,
+    required int personalStatValue,
+    required int enhanceMain,
+    required int enhanceSub,
+    required int enhanceArmor,
+    required int enhanceHelmet,
+    required int enhanceRing,
+    BuildRuleSet? ruleSet,
+  }) {
     final Map<String, double> effectivePrimaryStats = _effectivePrimaryStats(
       character: character,
-      percentByKey: buckets.primaryPercentByKey,
-      flatByKey: buckets.primaryFlatByKey,
+      percentByKey: context.primaryPercentByKey,
+      flatByKey: context.primaryFlatByKey,
     );
     final double strValue = effectivePrimaryStats['STR'] ?? 0;
     final double dexValue = effectivePrimaryStats['DEX'] ?? 0;
@@ -340,23 +417,23 @@ class BuildCalculatorService {
     final double vitValue = effectivePrimaryStats['VIT'] ?? 0;
 
     final double effectiveWeaponAtk = _effectiveWeaponAtk(
-      mainWeaponAtkBase: buckets.mainWeaponAtkBase,
-      supplementalWeaponAtkBase: buckets.supplementalWeaponAtkBase,
-      weaponAtkFlat: buckets.weaponAtkFlat,
-      weaponAtkPercent: buckets.weaponAtkPercent,
+      mainWeaponAtkBase: context.mainWeaponAtkBase,
+      supplementalWeaponAtkBase: context.supplementalWeaponAtkBase,
+      weaponAtkFlat: context.weaponAtkFlat,
+      weaponAtkPercent: context.weaponAtkPercent,
       enhanceMain: enhanceMain,
       enhanceSub: enhanceSub,
-      mainWeaponType: normalizedMainWeaponType,
-      combatWeaponType: combatWeaponType,
-      subWeaponType: normalizedSubWeaponType,
-      isSubWeaponAllowed: isSubWeaponAllowed,
-      subWeaponHasBaseWeaponAtk: _itemHasBaseWeaponAtk(subWeapon),
+      mainWeaponType: context.mainWeaponType,
+      combatWeaponType: context.combatWeaponType,
+      subWeaponType: context.subWeaponType,
+      isSubWeaponAllowed: context.isSubWeaponAllowed,
+      subWeaponHasBaseWeaponAtk: context.subWeaponHasBaseWeaponAtk,
       ruleSet: ruleSet,
     );
     final double baseStability = _baseStability(
-      combatWeaponType: combatWeaponType,
-      mainWeaponBaseStability: buckets.mainWeaponBaseStability,
-      supplementalStabilityBase: buckets.supplementalStabilityBase,
+      combatWeaponType: context.combatWeaponType,
+      mainWeaponBaseStability: context.mainWeaponBaseStability,
+      supplementalStabilityBase: context.supplementalStabilityBase,
       strValue: strValue,
       dexValue: dexValue,
       intValue: intValue,
@@ -364,20 +441,20 @@ class BuildCalculatorService {
       vitValue: vitValue,
     );
     final double refinedEquipmentDefBase = _effectiveRefinedEquipmentBase(
-      armorBase: buckets.armorDefBase,
-      helmetBase: buckets.helmetDefBase,
-      ringBase: buckets.ringDefBase,
-      otherBase: buckets.otherEquipmentDefBase,
+      armorBase: context.armorDefBase,
+      helmetBase: context.helmetDefBase,
+      ringBase: context.ringDefBase,
+      otherBase: context.otherEquipmentDefBase,
       enhanceArmor: enhanceArmor,
       enhanceHelmet: enhanceHelmet,
       enhanceRing: enhanceRing,
       ruleSet: ruleSet,
     );
     final double refinedEquipmentMdefBase = _effectiveRefinedEquipmentBase(
-      armorBase: buckets.armorMdefBase,
-      helmetBase: buckets.helmetMdefBase,
-      ringBase: buckets.ringMdefBase,
-      otherBase: buckets.otherEquipmentMdefBase,
+      armorBase: context.armorMdefBase,
+      helmetBase: context.helmetMdefBase,
+      ringBase: context.ringMdefBase,
+      otherBase: context.otherEquipmentMdefBase,
       enhanceArmor: enhanceArmor,
       enhanceHelmet: enhanceHelmet,
       enhanceRing: enhanceRing,
@@ -386,10 +463,10 @@ class BuildCalculatorService {
 
     final Map<String, double> derivedBaseByKey = <String, double>{
       'ATK':
-          normalizedLevel +
+          level +
           effectiveWeaponAtk +
           _weaponScaleValue(
-            combatWeaponType: combatWeaponType,
+            combatWeaponType: context.combatWeaponType,
             targetKey: 'atk',
             strValue: strValue,
             dexValue: dexValue,
@@ -398,10 +475,10 @@ class BuildCalculatorService {
             vitValue: vitValue,
           ),
       'MATK':
-          normalizedLevel +
+          level +
           effectiveWeaponAtk +
           _weaponScaleValue(
-            combatWeaponType: combatWeaponType,
+            combatWeaponType: context.combatWeaponType,
             targetKey: 'matk',
             strValue: strValue,
             dexValue: dexValue,
@@ -410,18 +487,18 @@ class BuildCalculatorService {
             vitValue: vitValue,
           ),
       'DEF':
-          normalizedLevel +
-          (vitValue * _defArmorModifier[effectiveArmorState]!) +
+          level +
+          (vitValue * _defArmorModifier[context.effectiveArmorState]!) +
           refinedEquipmentDefBase,
       'MDEF':
-          normalizedLevel +
-          (intValue * _mdefArmorModifier[effectiveArmorState]!) +
+          level +
+          (intValue * _mdefArmorModifier[context.effectiveArmorState]!) +
           refinedEquipmentMdefBase,
       'ASPD':
-          normalizedLevel +
-          (_aspdBaseByWeapon[combatWeaponType] ?? 0) +
+          level +
+          (_aspdBaseByWeapon[context.combatWeaponType] ?? 0) +
           _weaponScaleValue(
-            combatWeaponType: combatWeaponType,
+            combatWeaponType: context.combatWeaponType,
             targetKey: 'aspd',
             strValue: strValue,
             dexValue: dexValue,
@@ -429,27 +506,26 @@ class BuildCalculatorService {
             agiValue: agiValue,
             vitValue: vitValue,
           ),
-      'CSPD': normalizedLevel + (dexValue * 2.94) + (agiValue * 1.16),
+      'CSPD': level + (dexValue * 2.94) + (agiValue * 1.16),
       'FLEE':
-          normalizedLevel +
-          (agiValue * _fleeArmorModifier[effectiveArmorState]!),
+          level + (agiValue * _fleeArmorModifier[context.effectiveArmorState]!),
       'CritRate':
           25 +
-          (normalizedPersonalType == 'CRT' ? normalizedPersonalValue / 3.4 : 0),
+          (personalStatType == 'CRT' ? personalStatValue / 3.4 : 0),
       'PhysicalPierce': 0,
       'MagicPierce': 0,
-      'Accuracy': normalizedLevel + dexValue,
+      'Accuracy': level + dexValue,
       'Stability': baseStability,
       'HP': _baseHp(
-        level: normalizedLevel,
+        level: level,
         vitValue: vitValue,
-        armorState: effectiveArmorState,
+        armorState: context.effectiveArmorState,
       ),
       'MP': _baseMp(
-        level: normalizedLevel,
+        level: level,
         intValue: intValue,
-        personalStatType: normalizedPersonalType,
-        personalStatValue: normalizedPersonalValue,
+        personalStatType: personalStatType,
+        personalStatValue: personalStatValue,
       ),
     };
 
@@ -464,8 +540,8 @@ class BuildCalculatorService {
         continue;
       }
       final double baseValue = derivedBaseByKey[key] ?? 0;
-      final double flatValue = (buckets.derivedFlatByKey[key] ?? 0).toDouble();
-      final double percentValue = (buckets.derivedPercentByKey[key] ?? 0)
+      final double flatValue = (context.derivedFlatByKey[key] ?? 0).toDouble();
+      final double percentValue = (context.derivedPercentByKey[key] ?? 0)
           .toDouble();
       if (_pointBasedPercentSummaryKeys.contains(key)) {
         nextSummary[key] = _panelValue(baseValue + flatValue + percentValue);
@@ -1065,6 +1141,60 @@ class BuildCalculatorService {
     }
     return 0;
   }
+}
+
+class BuildCalculationContext {
+  const BuildCalculationContext({
+    required this.primaryPercentByKey,
+    required this.primaryFlatByKey,
+    required this.derivedPercentByKey,
+    required this.derivedFlatByKey,
+    required this.mainWeaponAtkBase,
+    required this.supplementalWeaponAtkBase,
+    required this.weaponAtkFlat,
+    required this.weaponAtkPercent,
+    required this.mainWeaponBaseStability,
+    required this.supplementalStabilityBase,
+    required this.armorDefBase,
+    required this.helmetDefBase,
+    required this.ringDefBase,
+    required this.otherEquipmentDefBase,
+    required this.armorMdefBase,
+    required this.helmetMdefBase,
+    required this.ringMdefBase,
+    required this.otherEquipmentMdefBase,
+    required this.combatWeaponType,
+    required this.mainWeaponType,
+    required this.subWeaponType,
+    required this.effectiveArmorState,
+    required this.isSubWeaponAllowed,
+    required this.subWeaponHasBaseWeaponAtk,
+  });
+
+  final Map<String, double> primaryPercentByKey;
+  final Map<String, double> primaryFlatByKey;
+  final Map<String, double> derivedPercentByKey;
+  final Map<String, double> derivedFlatByKey;
+  final double mainWeaponAtkBase;
+  final double supplementalWeaponAtkBase;
+  final double weaponAtkFlat;
+  final double weaponAtkPercent;
+  final double mainWeaponBaseStability;
+  final double supplementalStabilityBase;
+  final double armorDefBase;
+  final double helmetDefBase;
+  final double ringDefBase;
+  final double otherEquipmentDefBase;
+  final double armorMdefBase;
+  final double helmetMdefBase;
+  final double ringMdefBase;
+  final double otherEquipmentMdefBase;
+  final String combatWeaponType;
+  final String mainWeaponType;
+  final String subWeaponType;
+  final String effectiveArmorState;
+  final bool isSubWeaponAllowed;
+  final bool subWeaponHasBaseWeaponAtk;
 }
 
 class _CalculationBuckets {

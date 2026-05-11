@@ -1,12 +1,34 @@
 part of 'build_simulator_page.dart';
 
 extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
+  void _markCalculationContextDirty() {
+    _isCalculationContextDirty = true;
+  }
+
   void _setStateAndRecalculate(VoidCallback action) {
+    // อัพเดท UI ทันที สำหรับ immediate feedback
     _setUiState(() {
       action();
       _enforceMainWeaponRule();
       _enforceSubWeaponRule();
-      _recalculateAll();
+      _markCalculationContextDirty();
+    });
+
+    // ดีบาว นซ์ recalculation เพื่อลด lag
+    // ถ้า user เปลี่ยนค่าหลายครั้งต่อเนื่อง จะรวม recalculation เป็นครั้งเดียว
+    _recalculationDebouncer.call(() {
+      if (!mounted) return;
+      _setUiState(_recalculateAll);
+    });
+  }
+
+  void _setStateAndRecalculateCharacterOnly(VoidCallback action) {
+    _setUiState(action);
+    _recalculationDebouncer.call(() {
+      if (!mounted) {
+        return;
+      }
+      _setUiState(_recalculateCharacterOnly);
     });
   }
 
@@ -363,16 +385,7 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
     final List<EquipmentStat> equippedCrystalStats =
         _equippedCrystalStatsList();
     final List<EquipmentStat> avatarStats = _selectedGachaStatsList();
-    _summary = BuildCalculatorService.calculateSummary(
-      character: _character,
-      level: _level,
-      personalStatType: _personalStatType,
-      personalStatValue: _personalStatValue,
-      enhanceMain: _enhMain,
-      enhanceSub: _enhSub,
-      enhanceArmor: _enhArmor,
-      enhanceHelmet: _enhHelmet,
-      enhanceRing: _enhRing,
+    _calculationContextCache = BuildCalculatorService.buildCalculationContext(
       armorState: _armorMode,
       mainWeapon: mainWeapon,
       subWeapon: subWeapon,
@@ -382,8 +395,80 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
       equippedCrystalStats: equippedCrystalStats,
       avatarStats: avatarStats,
       mainToAllowedSubTypes: _mainToAllowedSubTypes,
+    );
+    _isCalculationContextDirty = false;
+    _summary = BuildCalculatorService.calculateSummaryFromContext(
+      context: _calculationContextCache!,
+      character: _character,
+      level: _level,
+      personalStatType: _personalStatType,
+      personalStatValue: _personalStatValue,
+      enhanceMain: _enhMain,
+      enhanceSub: _enhSub,
+      enhanceArmor: _enhArmor,
+      enhanceHelmet: _enhHelmet,
+      enhanceRing: _enhRing,
       ruleSet: _ruleSet,
     );
+    _recommendationItems = BuildRecommendationService.generateItems(
+      summary: _summary,
+      character: _character,
+      level: _level,
+      personalStatType: _personalStatType,
+      personalStatValue: _personalStatValue,
+      mainWeaponId: _mainWeaponId,
+      subWeaponId: _subWeaponId,
+      armorId: _armorId,
+      helmetId: _helmetId,
+      ringId: _ringId,
+      enhanceMain: _enhMain,
+      enhanceArmor: _enhArmor,
+      enhanceHelmet: _enhHelmet,
+      enhanceRing: _enhRing,
+      equippedItems: equippedItems,
+      equippedCrystalStats: equippedCrystalStats,
+      crystalKeysByEquipment: _crystalKeysByEquipment(),
+      crystalUpgradeFromByKey: _crystalUpgradeFromByKey(),
+      normalizedMainWeaponType: _normalizeMainWeaponType(
+        _findEquipmentByKey(_mainWeaponId)?.type,
+      ),
+      ruleSet: _ruleSet,
+    );
+    _recommendations = _recommendationItems
+        .map((AiRecommendationItem item) => item.normalizedMessage)
+        .toList(growable: false);
+    _pruneRecommendationFeedback();
+    _aiRecommendationSource = 'rule';
+    _aiRecommendationMessage = _canUseAiGeneration
+        ? BuildSimulatorScreenState._ruleRecommendationMessage
+        : BuildSimulatorScreenState._guestAiLockedMessage;
+  }
+
+  void _recalculateCharacterOnly() {
+    final BuildCalculationContext? cached = _calculationContextCache;
+    if (_isCalculationContextDirty || cached == null) {
+      _recalculateAll();
+      return;
+    }
+
+    _summary = BuildCalculatorService.calculateSummaryFromContext(
+      context: cached,
+      character: _character,
+      level: _level,
+      personalStatType: _personalStatType,
+      personalStatValue: _personalStatValue,
+      enhanceMain: _enhMain,
+      enhanceSub: _enhSub,
+      enhanceArmor: _enhArmor,
+      enhanceHelmet: _enhHelmet,
+      enhanceRing: _enhRing,
+      ruleSet: _ruleSet,
+    );
+
+    final List<EquipmentLibraryItem> equippedItems = _equippedItems().toList(
+      growable: false,
+    );
+    final List<EquipmentStat> equippedCrystalStats = _equippedCrystalStatsList();
     _recommendationItems = BuildRecommendationService.generateItems(
       summary: _summary,
       character: _character,

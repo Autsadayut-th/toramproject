@@ -762,13 +762,32 @@ class _SavedBuildsPageState extends State<SavedBuildsPage> {
               ),
             ),
           ),
+
           Expanded(
             child: visibleBuilds.isEmpty
                 ? Center(
-                    child: Text(
-                      'No saved builds found.',
-                      style: TextStyle(
-                        color: colorScheme.onSurface.withValues(alpha: 0.75),
+                    child: Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Image.asset(
+                            'assets/logo/logo.png',
+                            width: 92,
+                            height: 92,
+                            fit: BoxFit.cover,
+                          ),
+                          const SizedBox(height: 14),
+                          Text(
+                            'No saved builds found.',
+                            style: TextStyle(
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.75,
+                              ),
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
                     ),
                   )
