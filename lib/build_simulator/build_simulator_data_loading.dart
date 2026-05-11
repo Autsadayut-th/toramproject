@@ -706,6 +706,8 @@ extension _BuildSimulatorDataLoading on BuildSimulatorScreenState {
       _libraryEquipmentCategoryByKey = categoryByKey;
       _equipmentByKey = _mergedEquipmentCacheByKey();
       _equipmentCategoryByKey = _mergedEquipmentCategoryByKey();
+      _equipmentSearchCandidatesCacheByCategory =
+          <String, List<EquipmentLibraryItem>>{};
       _recalculateAll();
     });
   }
@@ -719,6 +721,8 @@ extension _BuildSimulatorDataLoading on BuildSimulatorScreenState {
       _customEquipmentCategoryByKey = categoryByKey;
       _equipmentByKey = _mergedEquipmentCacheByKey();
       _equipmentCategoryByKey = _mergedEquipmentCategoryByKey();
+      _equipmentSearchCandidatesCacheByCategory =
+          <String, List<EquipmentLibraryItem>>{};
       _recalculateAll();
     });
   }

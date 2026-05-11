@@ -109,6 +109,9 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   Map<String, EquipmentLibraryItem> _customEquipmentByKey =
       <String, EquipmentLibraryItem>{};
   Map<String, String> _customEquipmentCategoryByKey = <String, String>{};
+  Map<String, List<EquipmentLibraryItem>>
+  _equipmentSearchCandidatesCacheByCategory =
+      <String, List<EquipmentLibraryItem>>{};
   Map<String, CustomEquipmentItem> _customEquipmentItemByKey =
       <String, CustomEquipmentItem>{};
   Map<String, CrystalLibraryEntry> _crystalsByKey =
@@ -178,6 +181,8 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   List<String> _recommendations = const <String>[];
   List<AiRecommendationItem> _recommendationItems =
       const <AiRecommendationItem>[];
+  List<AiRecommendationItem>? _effectiveRecommendationItemsCache;
+  int _effectiveRecommendationItemsCacheKey = 0;
   final Map<String, String> _feedbackByRecommendationId = <String, String>{};
   int _aiRecommendationRequestToken = 0;
   bool _isAiRecommendationLoading = false;

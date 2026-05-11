@@ -62,6 +62,32 @@ class CharacterStatsSelector extends StatelessWidget {
     return _personalStatOptions.first;
   }
 
+  int _maxAllowedMainStatValue({
+    required String key,
+    required int safeUsed,
+    required int safeTotal,
+  }) {
+    final int currentValue = _valueOf(key);
+    final int currentCost = (currentValue - 1).clamp(0, _maxStat).toInt();
+    final int usedWithoutCurrent = (safeUsed - currentCost).clamp(0, 999999);
+    final int remainingPoints = (safeTotal - usedWithoutCurrent)
+        .clamp(0, _maxStat)
+        .toInt();
+    return (remainingPoints + 1).clamp(_minStat, _maxStat).toInt();
+  }
+
+  int _maxAllowedPersonalStatValue({
+    required int safeUsed,
+    required int safeTotal,
+  }) {
+    final int usedWithoutPersonal =
+        (safeUsed - personalStatValue.clamp(0, _maxPersonalStat).toInt()).clamp(
+          0,
+          999999,
+        );
+    return (safeTotal - usedWithoutPersonal).clamp(0, _maxPersonalStat).toInt();
+  }
+
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -135,55 +161,87 @@ class CharacterStatsSelector extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         _StatRow(
+          key: const ValueKey<String>('stat_row_level'),
           label: 'Lv',
           value: level.clamp(_minLevel, _maxLevel).toInt(),
           min: _minLevel,
           max: _maxLevel,
+          effectiveMax: _maxLevel,
           onChanged: onLevelChanged,
           deferSliderCommit: true,
         ),
         const SizedBox(height: 8),
         _StatRow(
+          key: const ValueKey<String>('stat_row_str'),
           label: 'STR',
           value: _valueOf('STR'),
           min: _minStat,
           max: _maxStat,
+          effectiveMax: _maxAllowedMainStatValue(
+            key: 'STR',
+            safeUsed: safeUsed,
+            safeTotal: safeTotal,
+          ),
           onChanged: (value) => onStatChanged('STR', value),
           deferSliderCommit: true,
         ),
         const SizedBox(height: 8),
         _StatRow(
+          key: const ValueKey<String>('stat_row_dex'),
           label: 'DEX',
           value: _valueOf('DEX'),
           min: _minStat,
           max: _maxStat,
+          effectiveMax: _maxAllowedMainStatValue(
+            key: 'DEX',
+            safeUsed: safeUsed,
+            safeTotal: safeTotal,
+          ),
           onChanged: (value) => onStatChanged('DEX', value),
           deferSliderCommit: true,
         ),
         const SizedBox(height: 8),
         _StatRow(
+          key: const ValueKey<String>('stat_row_int'),
           label: 'INT',
           value: _valueOf('INT'),
           min: _minStat,
           max: _maxStat,
+          effectiveMax: _maxAllowedMainStatValue(
+            key: 'INT',
+            safeUsed: safeUsed,
+            safeTotal: safeTotal,
+          ),
           onChanged: (value) => onStatChanged('INT', value),
           deferSliderCommit: true,
         ),
         const SizedBox(height: 8),
         _StatRow(
+          key: const ValueKey<String>('stat_row_agi'),
           label: 'AGI',
           value: _valueOf('AGI'),
           min: _minStat,
           max: _maxStat,
+          effectiveMax: _maxAllowedMainStatValue(
+            key: 'AGI',
+            safeUsed: safeUsed,
+            safeTotal: safeTotal,
+          ),
           onChanged: (value) => onStatChanged('AGI', value),
           deferSliderCommit: true,
         ),
         const SizedBox(height: 8),
         _StatRow(
+          key: const ValueKey<String>('stat_row_vit'),
           label: 'VIT',
           value: _valueOf('VIT'),
           min: _minStat,
           max: _maxStat,
+          effectiveMax: _maxAllowedMainStatValue(
+            key: 'VIT',
+            safeUsed: safeUsed,
+            safeTotal: safeTotal,
+          ),
           onChanged: (value) => onStatChanged('VIT', value),
           deferSliderCommit: true,
         ),
@@ -258,12 +316,19 @@ class CharacterStatsSelector extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               _StatRow(
+                key: ValueKey<String>(
+                  'stat_row_personal_$selectedPersonalType',
+                ),
                 label: selectedPersonalType,
                 value: personalStatValue
                     .clamp(_minPersonalStat, _maxPersonalStat)
                     .toInt(),
                 min: _minPersonalStat,
                 max: _maxPersonalStat,
+                effectiveMax: _maxAllowedPersonalStatValue(
+                  safeUsed: safeUsed,
+                  safeTotal: safeTotal,
+                ),
                 onChanged: onPersonalStatValueChanged,
                 deferSliderCommit: true,
               ),
@@ -432,10 +497,12 @@ class _HeaderIconButton extends StatelessWidget {
 
 class _StatRow extends StatefulWidget {
   const _StatRow({
+    super.key,
     required this.label,
     required this.value,
     required this.min,
     required this.max,
+    required this.effectiveMax,
     required this.onChanged,
     this.deferSliderCommit = false,
   });
@@ -444,6 +511,7 @@ class _StatRow extends StatefulWidget {
   final int value;
   final int min;
   final int max;
+  final int effectiveMax;
   final ValueChanged<int> onChanged;
   final bool deferSliderCommit;
 
@@ -466,11 +534,14 @@ class _StatRowState extends State<_StatRow> {
   @override
   void didUpdateWidget(covariant _StatRow oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (!_focusNode.hasFocus && oldWidget.value != widget.value) {
-      _controller.text = widget.value.toString();
-    }
     if (_dragValue != null && oldWidget.value != widget.value) {
       _dragValue = null;
+    }
+
+    final int nextEffectiveValue = _effectiveValue;
+    final String nextText = nextEffectiveValue.toString();
+    if (!_focusNode.hasFocus && _controller.text != nextText) {
+      _controller.text = nextText;
     }
   }
 
@@ -483,23 +554,29 @@ class _StatRowState extends State<_StatRow> {
 
   void _commitCurrentText() {
     final parsed = int.tryParse(_controller.text);
+    final int effectiveMax = _effectiveMax;
     if (parsed == null) {
       _controller.text = _effectiveValue.toString();
       return;
     }
-    final clamped = parsed.clamp(widget.min, widget.max);
+    final int clamped = parsed.clamp(widget.min, effectiveMax).toInt();
     _dragValue = null;
     widget.onChanged(clamped);
     _controller.text = clamped.toString();
   }
 
+  int get _effectiveMax {
+    return widget.effectiveMax.clamp(widget.min, widget.max).toInt();
+  }
+
   int get _effectiveValue =>
-      (_dragValue ?? widget.value).clamp(widget.min, widget.max).toInt();
+      (_dragValue ?? widget.value).clamp(widget.min, _effectiveMax).toInt();
 
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final int effectiveValue = _effectiveValue;
+    final int effectiveMax = _effectiveMax;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
@@ -527,7 +604,7 @@ class _StatRowState extends State<_StatRow> {
               _SquareIconButton(
                 icon: Icons.remove,
                 onTap: () => widget.onChanged(
-                  (effectiveValue - 1).clamp(widget.min, widget.max),
+                  (effectiveValue - 1).clamp(widget.min, effectiveMax),
                 ),
               ),
               const SizedBox(width: 8),
@@ -578,7 +655,7 @@ class _StatRowState extends State<_StatRow> {
               _SquareIconButton(
                 icon: Icons.add,
                 onTap: () => widget.onChanged(
-                  (effectiveValue + 1).clamp(widget.min, widget.max),
+                  (effectiveValue + 1).clamp(widget.min, effectiveMax),
                 ),
               ),
             ],
@@ -587,14 +664,14 @@ class _StatRowState extends State<_StatRow> {
             value: effectiveValue.toDouble(),
             min: widget.min.toDouble(),
             max: widget.max.toDouble(),
-            divisions: widget.max - widget.min,
+            divisions: (widget.max - widget.min).clamp(1, 99999),
             label: effectiveValue.toString(),
             activeColor: colorScheme.primary,
             inactiveColor: colorScheme.onSurface.withValues(alpha: 0.24),
             onChanged: (double value) {
               final int nextValue = value.round().clamp(
                 widget.min,
-                widget.max,
+                effectiveMax,
               );
               if (widget.deferSliderCommit) {
                 setState(() {
@@ -609,7 +686,7 @@ class _StatRowState extends State<_StatRow> {
                 ? (double value) {
                     final int nextValue = value.round().clamp(
                       widget.min,
-                      widget.max,
+                      effectiveMax,
                     );
                     _dragValue = null;
                     widget.onChanged(nextValue);

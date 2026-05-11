@@ -91,6 +91,7 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
 
   final EquipmentLibraryRepository _repository = EquipmentLibraryRepository();
   final TextEditingController _searchController = TextEditingController();
+  late final Debouncer _searchDebouncer;
 
   static const String _sourceFilterAll = 'all_sources';
   static const String _sourceFilterPlayerCreated = 'player_created';
@@ -101,16 +102,23 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
   int _currentPage = 1;
   String? _selectedTypeFilterKey;
   String _sourceFilterKey = _sourceFilterAll;
+  Set<String>? _normalizedAllowedTypes;
   final Set<String> _locallyHiddenItemKeys = <String>{};
   final Map<String, EquipmentLibraryItem> _locallyEditedItemsByKey =
       <String, EquipmentLibraryItem>{};
   final Map<String, List<EquipmentLibraryItem>>
   _locallyCreatedItemsByCategoryKey = <String, List<EquipmentLibraryItem>>{};
+  Map<String, List<EquipmentLibraryItem>>? _cachedRepositoryItemsByCategory;
+  Map<String, List<EquipmentLibraryItem>>? _cachedInMemoryItemsByCategory;
+  Map<String, List<EquipmentLibraryItem>> _cachedMergedItemsByCategory =
+      const <String, List<EquipmentLibraryItem>>{};
 
   @override
   void initState() {
     super.initState();
     _selectedCategory = widget.initialCategory;
+    _searchDebouncer = Debouncer(delay: const Duration(milliseconds: 120));
+    _normalizedAllowedTypes = _normalizeTypeSet(widget.allowedTypes);
     _libraryFuture = _repository.loadAllCategories();
   }
 
@@ -127,9 +135,20 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
       oldWidget.allowedTypes,
       widget.allowedTypes,
     );
+    final bool inMemoryItemsChanged = !identical(
+      oldWidget.inMemoryItemsByCategory,
+      widget.inMemoryItemsByCategory,
+    );
+    if (allowedTypesChanged) {
+      _normalizedAllowedTypes = _normalizeTypeSet(widget.allowedTypes);
+    }
+    if (inMemoryItemsChanged) {
+      _resetMergedCategoryCache();
+    }
     if (!initialCategoryChanged &&
         !allowedCategoriesChanged &&
-        !allowedTypesChanged) {
+        !allowedTypesChanged &&
+        !inMemoryItemsChanged) {
       return;
     }
     setState(() {
@@ -146,6 +165,7 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
 
   @override
   void dispose() {
+    _searchDebouncer.dispose();
     _searchController.dispose();
     super.dispose();
   }
@@ -172,7 +192,36 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
     setState(() {
       _libraryFuture = _repository.loadAllCategories();
       _currentPage = 1;
+      _resetMergedCategoryCache();
     });
+  }
+
+  void _resetMergedCategoryCache() {
+    _cachedRepositoryItemsByCategory = null;
+    _cachedInMemoryItemsByCategory = null;
+    _cachedMergedItemsByCategory = const <String, List<EquipmentLibraryItem>>{};
+  }
+
+  Map<String, List<EquipmentLibraryItem>> _resolveMergedCategories(
+    Map<String, List<EquipmentLibraryItem>> repositoryItemsByCategory,
+  ) {
+    final Map<String, List<EquipmentLibraryItem>> inMemoryItemsByCategory =
+        widget.inMemoryItemsByCategory ??
+        const <String, List<EquipmentLibraryItem>>{};
+    if (identical(
+          _cachedRepositoryItemsByCategory,
+          repositoryItemsByCategory,
+        ) &&
+        identical(_cachedInMemoryItemsByCategory, inMemoryItemsByCategory)) {
+      return _cachedMergedItemsByCategory;
+    }
+
+    final Map<String, List<EquipmentLibraryItem>> merged =
+        _mergeInMemoryItemsByCategory(repositoryItemsByCategory);
+    _cachedRepositoryItemsByCategory = repositoryItemsByCategory;
+    _cachedInMemoryItemsByCategory = inMemoryItemsByCategory;
+    _cachedMergedItemsByCategory = merged;
+    return merged;
   }
 
   void _setCurrentPage(int page) {
@@ -182,9 +231,25 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
   }
 
   void _updateSearchQuery(String value) {
-    setState(() {
-      _searchQuery = value;
-      _currentPage = 1;
+    final String nextQuery = value;
+    if (nextQuery == _searchQuery) {
+      return;
+    }
+    if (nextQuery.trim().isEmpty) {
+      setState(() {
+        _searchQuery = '';
+        _currentPage = 1;
+      });
+      return;
+    }
+    _searchDebouncer.call(() {
+      if (!mounted || nextQuery == _searchQuery) {
+        return;
+      }
+      setState(() {
+        _searchQuery = nextQuery;
+        _currentPage = 1;
+      });
     });
   }
 
@@ -289,12 +354,16 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
     });
   }
 
-  Future<void> _requestEditCustomItem(EquipmentLibraryItem item) async {
+  Future<void> _requestEditCustomItem(
+    EquipmentLibraryItem item, {
+    required String activeCategory,
+  }) async {
     final Future<EquipmentLibraryItem?> Function(EquipmentLibraryItem)? onEdit =
         widget.onRequestEditCustomItem;
     if (onEdit == null) {
       return;
     }
+    final String previousNormalizedKey = _normalizedItemKey(item.key);
     final EquipmentLibraryItem? updated = await onEdit(item);
     if (!mounted || updated == null) {
       return;
@@ -306,6 +375,25 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
     setState(() {
       _locallyEditedItemsByKey[normalizedKey] = updated;
       _locallyHiddenItemKeys.remove(normalizedKey);
+      if (previousNormalizedKey.isNotEmpty &&
+          previousNormalizedKey != normalizedKey) {
+        _locallyHiddenItemKeys.add(previousNormalizedKey);
+        _locallyEditedItemsByKey.remove(previousNormalizedKey);
+        final String normalizedCategory = _normalizedCategoryKey(
+          activeCategory,
+        );
+        final List<EquipmentLibraryItem> createdItems =
+            _locallyCreatedItemsByCategoryKey.putIfAbsent(
+              normalizedCategory,
+              () => <EquipmentLibraryItem>[],
+            );
+        createdItems.removeWhere((EquipmentLibraryItem createdItem) {
+          final String createdKey = _normalizedItemKey(createdItem.key);
+          return createdKey == previousNormalizedKey ||
+              createdKey == normalizedKey;
+        });
+        createdItems.insert(0, updated);
+      }
     });
   }
 
@@ -528,9 +616,7 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
     required bool customFilterAvailable,
     required String activeSourceFilterKey,
   }) async {
-    final Set<String>? widgetAllowedTypes = _normalizeTypeSet(
-      widget.allowedTypes,
-    );
+    final Set<String>? widgetAllowedTypes = _normalizedAllowedTypes;
     if (categories.length <= 1 &&
         typeFilterKeys.length <= 1 &&
         !customFilterAvailable) {
@@ -886,7 +972,7 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
             }
 
             final Map<String, List<EquipmentLibraryItem>> allCategories =
-                _mergeInMemoryItemsByCategory(
+                _resolveMergedCategories(
                   snapshot.data ?? <String, List<EquipmentLibraryItem>>{},
                 );
             final List<String> categories =
@@ -943,9 +1029,7 @@ class _EquipmentLibraryDataViewState extends State<_EquipmentLibraryDataView> {
                 sourceFilteredItems = allItems;
                 break;
             }
-            final Set<String>? widgetAllowedTypes = _normalizeTypeSet(
-              widget.allowedTypes,
-            );
+            final Set<String>? widgetAllowedTypes = _normalizedAllowedTypes;
             final List<String> typeFilterKeys = _buildTypeFilterKeys(
               items: sourceFilteredItems,
               activeCategory: activeCategory,
@@ -1195,7 +1279,10 @@ extension _EquipmentLibraryDataViewLayout on _EquipmentLibraryDataViewState {
               ),
             );
             final Widget? createButton =
-                widget.onRequestCreateCustomItem == null
+                widget.onRequestCreateCustomItem == null ||
+                    activeSourceFilterKey !=
+                        _EquipmentLibraryDataViewState
+                            ._sourceFilterPlayerCreated
                 ? null
                 : Tooltip(
                     message: 'Create custom item',

@@ -254,7 +254,10 @@ extension _EquipmentLibraryGrid on _EquipmentLibraryDataViewState {
                                     minHeight: 34,
                                   ),
                                   onPressed: () async {
-                                    await _requestEditCustomItem(item);
+                                    await _requestEditCustomItem(
+                                      item,
+                                      activeCategory: activeCategory,
+                                    );
                                   },
                                 ),
                               if (canDeleteCustomItem)

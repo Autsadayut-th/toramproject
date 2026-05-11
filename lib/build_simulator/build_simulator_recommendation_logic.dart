@@ -1,6 +1,33 @@
 part of 'build_simulator_page.dart';
 
 extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
+  void _invalidateEffectiveRecommendationItemsCache() {
+    _effectiveRecommendationItemsCache = null;
+    _effectiveRecommendationItemsCacheKey = 0;
+  }
+
+  int _buildEffectiveRecommendationItemsCacheKey() {
+    final List<String> recommendationItemSignatures = _recommendationItems
+        .map((AiRecommendationItem item) {
+          return '${item.id}|${item.priority}|${item.confidence}|${item.source}|${item.normalizedMessage}';
+        })
+        .toList(growable: false);
+    final List<String> feedbackEntries =
+        _feedbackByRecommendationId.entries
+            .map((MapEntry<String, String> entry) {
+              return '${entry.key}:${entry.value}';
+            })
+            .toList(growable: false)
+          ..sort();
+    return Object.hash(
+      _aiRecommendationSource,
+      _feedbackSnapshot.hashCode,
+      Object.hashAll(_recommendations),
+      Object.hashAll(recommendationItemSignatures),
+      Object.hashAll(feedbackEntries),
+    );
+  }
+
   void _markCalculationContextDirty() {
     _isCalculationContextDirty = true;
   }
@@ -437,6 +464,7 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
     _recommendations = _recommendationItems
         .map((AiRecommendationItem item) => item.normalizedMessage)
         .toList(growable: false);
+    _invalidateEffectiveRecommendationItemsCache();
     _pruneRecommendationFeedback();
     _aiRecommendationSource = 'rule';
     _aiRecommendationMessage = _canUseAiGeneration
@@ -468,7 +496,8 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
     final List<EquipmentLibraryItem> equippedItems = _equippedItems().toList(
       growable: false,
     );
-    final List<EquipmentStat> equippedCrystalStats = _equippedCrystalStatsList();
+    final List<EquipmentStat> equippedCrystalStats =
+        _equippedCrystalStatsList();
     _recommendationItems = BuildRecommendationService.generateItems(
       summary: _summary,
       character: _character,
@@ -496,6 +525,7 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
     _recommendations = _recommendationItems
         .map((AiRecommendationItem item) => item.normalizedMessage)
         .toList(growable: false);
+    _invalidateEffectiveRecommendationItemsCache();
     _pruneRecommendationFeedback();
     _aiRecommendationSource = 'rule';
     _aiRecommendationMessage = _canUseAiGeneration
@@ -509,6 +539,7 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
         _aiRecommendationSource = 'rule';
         _aiRecommendationMessage =
             BuildSimulatorScreenState._guestAiLockedMessage;
+        _invalidateEffectiveRecommendationItemsCache();
       });
       _showRestrictionMessage('Login required to use AI Generate.');
       return;
@@ -572,6 +603,7 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
       _setUiState(() {
         _recommendationItems = result.recommendationItems;
         _recommendations = result.recommendations;
+        _invalidateEffectiveRecommendationItemsCache();
         _pruneRecommendationFeedback();
         _isAiRecommendationLoading = false;
         _aiRecommendationSource = result.source;
@@ -598,6 +630,7 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
             .toList(growable: false);
         _isAiRecommendationLoading = false;
         _aiRecommendationSource = 'fallback';
+        _invalidateEffectiveRecommendationItemsCache();
         _aiRecommendationMessage = _buildAiStatusMessage(
           source: 'fallback',
           details: error.toString(),
@@ -616,6 +649,13 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
   }
 
   List<AiRecommendationItem> _effectiveRecommendationItems() {
+    final int cacheKey = _buildEffectiveRecommendationItemsCacheKey();
+    final List<AiRecommendationItem>? cached =
+        _effectiveRecommendationItemsCache;
+    if (cached != null && cacheKey == _effectiveRecommendationItemsCacheKey) {
+      return cached;
+    }
+
     final List<AiRecommendationItem> items = _recommendationItems.isNotEmpty
         ? _recommendationItems.toList(growable: false)
         : _recommendations
@@ -695,10 +735,15 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
       return b.confidence.compareTo(a.confidence);
     });
 
-    return ranked.toList(growable: false);
+    final List<AiRecommendationItem> readonlyRanked =
+        List<AiRecommendationItem>.unmodifiable(ranked);
+    _effectiveRecommendationItemsCacheKey = cacheKey;
+    _effectiveRecommendationItemsCache = readonlyRanked;
+    return readonlyRanked;
   }
 
   void _pruneRecommendationFeedback() {
+    final int previousLength = _feedbackByRecommendationId.length;
     final Set<String> allowedIds = _effectiveRecommendationItems()
         .map((AiRecommendationItem item) => item.id.trim())
         .where((String id) => id.isNotEmpty)
@@ -706,6 +751,9 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
     _feedbackByRecommendationId.removeWhere((String id, String _) {
       return !allowedIds.contains(id);
     });
+    if (previousLength != _feedbackByRecommendationId.length) {
+      _invalidateEffectiveRecommendationItemsCache();
+    }
   }
 
   Future<void> _onRecommendationFeedback({
@@ -727,6 +775,7 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
 
     _setUiState(() {
       _feedbackByRecommendationId[id] = normalizedReaction;
+      _invalidateEffectiveRecommendationItemsCache();
       final List<AiRecommendationItem> sorted = _effectiveRecommendationItems();
       _recommendationItems = sorted;
       _recommendations = sorted

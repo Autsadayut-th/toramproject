@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../shared/app_mobile_bottom_navigation_bar.dart';
 import '../shared/app_navigation_drawer.dart';
+import '../shared/debouncer.dart';
 import '../splash/splash_screen.dart';
 import 'models/equipment_library_item.dart';
 import 'models/equipment_library_page_slice.dart';

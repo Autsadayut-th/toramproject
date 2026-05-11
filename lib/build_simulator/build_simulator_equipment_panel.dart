@@ -234,7 +234,9 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         onStatChanged: (String key, int value) {
           final int allowedMax = _maxAllowedMainStatValue(key);
           final int nextValue = value.clamp(0, allowedMax).toInt();
-          _setStateAndRecalculateCharacterOnly(() => _character[key] = nextValue);
+          _setStateAndRecalculateCharacterOnly(
+            () => _character[key] = nextValue,
+          );
         },
         onLevelChanged: (int level) {
           _setStateAndRecalculateCharacterOnly(() => _level = level);
@@ -245,7 +247,9 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         onPersonalStatValueChanged: (int value) {
           final int allowedMax = _maxAllowedPersonalStatValue();
           final int nextValue = value.clamp(0, allowedMax).toInt();
-          _setStateAndRecalculateCharacterOnly(() => _personalStatValue = nextValue);
+          _setStateAndRecalculateCharacterOnly(
+            () => _personalStatValue = nextValue,
+          );
         },
         onRecalculate: () {
           _setUiState(_recalculateAll);
@@ -350,6 +354,11 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
     String category,
   ) {
     final String normalizedCategory = category.trim().toLowerCase();
+    final List<EquipmentLibraryItem>? cachedCandidates =
+        _equipmentSearchCandidatesCacheByCategory[normalizedCategory];
+    if (cachedCandidates != null) {
+      return cachedCandidates;
+    }
     final List<EquipmentLibraryItem> candidates = <EquipmentLibraryItem>[];
     for (final MapEntry<String, EquipmentLibraryItem> entry
         in _equipmentByKey.entries) {
@@ -362,7 +371,11 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
     candidates.sort((EquipmentLibraryItem a, EquipmentLibraryItem b) {
       return a.name.toLowerCase().compareTo(b.name.toLowerCase());
     });
-    return candidates;
+    final List<EquipmentLibraryItem> readonlyCandidates =
+        List<EquipmentLibraryItem>.unmodifiable(candidates);
+    _equipmentSearchCandidatesCacheByCategory[normalizedCategory] =
+        readonlyCandidates;
+    return readonlyCandidates;
   }
 
   Widget _buildSubWeaponSection({
@@ -500,12 +513,6 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         onCrystal2Changed: (v) {
           _setStateAndRecalculate(() => _helmetCrystal2 = v);
         },
-        onRequestEditCustomItem: (EquipmentLibraryItem item) async {
-          return await _openCustomEquipmentEditorByKey(item.key);
-        },
-        onRequestDeleteCustomItem: (EquipmentLibraryItem item) async {
-          return await _confirmDeleteCustomEquipmentByKey(item.key);
-        },
       ),
       minHeight: minHeight,
     );
@@ -541,12 +548,6 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
         },
         onCrystal2Changed: (v) {
           _setStateAndRecalculate(() => _ringCrystal2 = v);
-        },
-        onRequestEditCustomItem: (EquipmentLibraryItem item) async {
-          return await _openCustomEquipmentEditorByKey(item.key);
-        },
-        onRequestDeleteCustomItem: (EquipmentLibraryItem item) async {
-          return await _confirmDeleteCustomEquipmentByKey(item.key);
         },
       ),
       minHeight: minHeight,

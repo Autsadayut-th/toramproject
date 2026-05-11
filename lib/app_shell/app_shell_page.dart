@@ -153,6 +153,12 @@ class _AppShellScreenState extends State<AppShellScreen> {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final bool isMobile = MediaQuery.sizeOf(context).width < 1024;
+    final bool hideMobileNavigationMenuButton =
+        isMobile &&
+        (_currentPage == AppNavigationPage.equipment ||
+            _currentPage == AppNavigationPage.critical ||
+            _currentPage == AppNavigationPage.saved ||
+            _currentPage == AppNavigationPage.compare);
     final bool usesMobileBuildSummaryDrawer =
         isMobile && _currentPage == AppNavigationPage.build;
 
@@ -180,13 +186,15 @@ class _AppShellScreenState extends State<AppShellScreen> {
           builder: (BuildContext context) {
             return Row(
               children: <Widget>[
-                IconButton(
-                  icon: const Icon(Icons.menu),
-                  onPressed: () => Scaffold.of(context).openDrawer(),
-                  tooltip: usesMobileBuildSummaryDrawer
-                      ? 'Build Summary'
-                      : 'Navigation menu',
-                ),
+                if (!hideMobileNavigationMenuButton)
+                  IconButton(
+                    icon: const Icon(Icons.menu),
+                    onPressed: () => Scaffold.of(context).openDrawer(),
+                    tooltip: usesMobileBuildSummaryDrawer
+                        ? 'Build Summary'
+                        : 'Navigation menu',
+                  ),
+                if (hideMobileNavigationMenuButton) const SizedBox(width: 35),
                 Container(
                   width: 28,
                   height: 28,
@@ -329,4 +337,3 @@ class _AppShellScreenState extends State<AppShellScreen> {
     }
   }
 }
-

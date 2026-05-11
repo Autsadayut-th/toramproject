@@ -147,7 +147,10 @@ extension _EquipmentLibraryDetailsSheet on _EquipmentLibraryDataViewState {
                                   ),
                                   onPressed: () async {
                                     Navigator.of(context).pop();
-                                    await _requestEditCustomItem(item);
+                                    await _requestEditCustomItem(
+                                      item,
+                                      activeCategory: activeCategory,
+                                    );
                                   },
                                 ),
                               if (canDeleteCustomItem)
