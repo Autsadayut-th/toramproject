@@ -251,9 +251,6 @@ extension _BuildSimulatorEquipmentPanelUI on BuildSimulatorScreenState {
             () => _personalStatValue = nextValue,
           );
         },
-        onRecalculate: () {
-          _setUiState(_recalculateAll);
-        },
       ),
       minHeight: minHeight,
     );

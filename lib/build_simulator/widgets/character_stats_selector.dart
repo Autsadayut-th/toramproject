@@ -15,7 +15,6 @@ class CharacterStatsSelector extends StatelessWidget {
     required this.onLevelChanged,
     required this.onPersonalStatTypeChanged,
     required this.onPersonalStatValueChanged,
-    required this.onRecalculate,
   });
 
   final Map<String, dynamic> character;
@@ -29,7 +28,6 @@ class CharacterStatsSelector extends StatelessWidget {
   final ValueChanged<int> onLevelChanged;
   final ValueChanged<String> onPersonalStatTypeChanged;
   final ValueChanged<int> onPersonalStatValueChanged;
-  final VoidCallback onRecalculate;
 
   static const int _minStat = 0;
   static const int _maxStat = 510;
@@ -333,18 +331,6 @@ class CharacterStatsSelector extends StatelessWidget {
                 deferSliderCommit: true,
               ),
             ],
-          ),
-        ),
-        const SizedBox(height: 12),
-        SizedBox(
-          width: double.infinity,
-          child: FilledButton(
-            onPressed: onRecalculate,
-            style: FilledButton.styleFrom(
-              backgroundColor: colorScheme.primary,
-              foregroundColor: colorScheme.onPrimary,
-            ),
-            child: const Text('Recalculate'),
           ),
         ),
       ],
