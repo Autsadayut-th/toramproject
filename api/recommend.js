@@ -6,10 +6,12 @@ const DEFAULT_FALLBACK = [
 const DEFAULT_GEMINI_MODEL = 'gemini-3.1-flash-lite-preview';
 const DEFAULT_GROQ_MODEL = 'llama-3.1-8b-instant';
 const DEFAULT_OPENAI_MODEL = 'gpt-4o-mini';
+const DEFAULT_HUGGINGFACE_MODEL = 'microsoft/DialoGPT-medium';
 const DEFAULT_EXPLANATION_MAX_OUTPUT_TOKENS = 128;
 const DEFAULT_GEMINI_REQUEST_TIMEOUT_MS = 15000;
 const DEFAULT_GROQ_REQUEST_TIMEOUT_MS = 10000;
 const DEFAULT_OPENAI_REQUEST_TIMEOUT_MS = 10000;
+const DEFAULT_HUGGINGFACE_REQUEST_TIMEOUT_MS = 15000;
 const DEFAULT_AI_RETRY_ATTEMPTS = 2;
 const DEFAULT_AI_RETRY_BASE_DELAY_MS = 350;
 const DEFAULT_AI_CACHE_TTL_MS = 5 * 60 * 1000;
@@ -25,6 +27,7 @@ const OPENAI_MODEL_ALIASES = {
   'gpt-4-mini': 'gpt-4o-mini',
   'gpt4-mini': 'gpt-4o-mini',
 };
+const HUGGINGFACE_MODEL_ALIASES = {};
 const AI_EXPLANATION_CACHE = new Map();
 const SUPPORTED_RECOMMENDATION_CATEGORIES = new Set([
   'analysis',
@@ -717,10 +720,10 @@ function buildExplanationPrompt({ input, recommendations }) {
 
 function resolveProvider() {
   const configured = (process.env.AI_PROVIDER || '').trim().toLowerCase();
-  const validProviders = new Set(['auto', 'gemini', 'groq', 'openai']);
+  const validProviders = new Set(['auto', 'gemini', 'groq', 'openai', 'huggingface']);
   if (configured && !validProviders.has(configured)) {
     throw new Error(
-      'Invalid AI_PROVIDER. Use "gemini", "groq", "openai", "auto", or leave empty.',
+      'Invalid AI_PROVIDER. Use "gemini", "groq", "openai", "huggingface", "auto", or leave empty.',
     );
   }
   if (configured === 'auto' || !configured) {
@@ -738,6 +741,9 @@ function providerLabel(provider) {
   }
   if (provider === 'openai') {
     return 'OpenAI';
+  }
+  if (provider === 'huggingface') {
+    return 'Hugging Face';
   }
   return 'AI';
 }
@@ -881,6 +887,15 @@ function normalizeOpenAIModel(rawModel) {
   return OPENAI_MODEL_ALIASES[canonical] || normalized;
 }
 
+function normalizeHuggingFaceModel(rawModel) {
+  const normalized = String(rawModel || '').trim();
+  if (!normalized) {
+    return DEFAULT_HUGGINGFACE_MODEL;
+  }
+  const canonical = normalized.toLowerCase();
+  return HUGGINGFACE_MODEL_ALIASES[canonical] || normalized;
+}
+
 function isGeminiModelFormatError(status, bodyText) {
   const text = String(bodyText || '');
   if (status === 400) {
@@ -925,6 +940,34 @@ function resolveOpenAIRequestTimeoutMs() {
     return Math.floor(configured);
   }
   return DEFAULT_OPENAI_REQUEST_TIMEOUT_MS;
+}
+
+function resolveHuggingFaceRequestTimeoutMs() {
+  const configured = Number(process.env.HUGGINGFACE_REQUEST_TIMEOUT_MS ?? '');
+  if (Number.isFinite(configured) && configured >= 1000 && configured <= 15000) {
+    return Math.floor(configured);
+  }
+  return DEFAULT_HUGGINGFACE_REQUEST_TIMEOUT_MS;
+}
+
+function extractHuggingFaceText(json) {
+  if (typeof json?.generated_text === 'string' && json.generated_text.trim()) {
+    return json.generated_text.trim();
+  }
+  if (Array.isArray(json)) {
+    for (const row of json) {
+      if (typeof row?.generated_text === 'string' && row.generated_text.trim()) {
+        return row.generated_text.trim();
+      }
+    }
+  }
+  if (Array.isArray(json?.choices)) {
+    const content = json.choices[0]?.message?.content;
+    if (typeof content === 'string' && content.trim()) {
+      return content.trim();
+    }
+  }
+  throw new Error('Hugging Face response has empty content.');
 }
 
 function extractGeminiText(json) {
@@ -1197,6 +1240,75 @@ async function requestOpenAIExplanation(input, recommendations, options = {}) {
   throw new Error(`OpenAI request failed (${response.status}): ${bodyText}`);
 }
 
+async function requestHuggingFaceExplanation(input, recommendations, options = {}) {
+  const apiKey = process.env.HUGGINGFACE_API_KEY;
+  if (!apiKey) {
+    throw new Error('HUGGINGFACE_API_KEY is not configured.');
+  }
+
+  const promptText = buildExplanationPrompt({ input, recommendations });
+  const maxOutputTokens = resolveGeminiMaxOutputTokens();
+  const configuredRequestTimeoutMs = resolveHuggingFaceRequestTimeoutMs();
+  const limitFromBudget = Number(options.requestTimeoutMs);
+  const requestTimeoutMs = Number.isFinite(limitFromBudget)
+    ? Math.max(
+      1000,
+      Math.min(configuredRequestTimeoutMs, Math.floor(limitFromBudget)),
+    )
+    : configuredRequestTimeoutMs;
+  const configuredModel = normalizeHuggingFaceModel(process.env.HUGGINGFACE_MODEL);
+
+  const endpoint =
+    `https://api-inference.huggingface.co/models/${encodeURIComponent(configuredModel)}`;
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), requestTimeoutMs);
+  let response;
+  try {
+    response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        inputs: promptText,
+        parameters: {
+          max_new_tokens: maxOutputTokens,
+          temperature: 0.2,
+          return_full_text: false,
+        },
+      }),
+      signal: controller.signal,
+    });
+  } catch (error) {
+    if (error && (error.name === 'AbortError' || /aborted/i.test(String(error)))) {
+      throw new Error(`Hugging Face request timed out after ${requestTimeoutMs}ms.`);
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+
+  if (response.ok) {
+    const json = await response.json();
+    const outputText = extractHuggingFaceText(json);
+    const explanation = parseModelExplanationPayload(
+      outputText,
+      recommendations,
+    );
+    return {
+      provider: 'huggingface',
+      model: configuredModel,
+      summary: explanation.summary,
+      explanations: explanation.explanations,
+    };
+  }
+
+  const bodyText = await response.text();
+  throw new Error(`Hugging Face request failed (${response.status}): ${bodyText}`);
+}
+
 async function requestAiExplanation(input, recommendations) {
   const provider = resolveProvider();
   const maxAttempts = resolveAiRetryAttempts();
@@ -1206,7 +1318,7 @@ async function requestAiExplanation(input, recommendations) {
 
   const providerChain = [];
   if (provider === 'auto') {
-    providerChain.push('gemini', 'groq', 'openai');
+    providerChain.push('gemini', 'groq', 'openai', 'huggingface');
   } else {
     providerChain.push(provider);
   }
@@ -1231,6 +1343,11 @@ async function requestAiExplanation(input, recommendations) {
         }
         if (currentProvider === 'openai') {
           return await requestOpenAIExplanation(input, recommendations, {
+            requestTimeoutMs: remainingMs,
+          });
+        }
+        if (currentProvider === 'huggingface') {
+          return await requestHuggingFaceExplanation(input, recommendations, {
             requestTimeoutMs: remainingMs,
           });
         }
