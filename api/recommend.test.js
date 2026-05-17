@@ -158,6 +158,18 @@ describe('POST /api/recommend', () => {
       expect(res._getHeaders()['access-control-allow-origin']).toBeDefined();
       expect(res._getHeaders()['access-control-allow-methods']).toBeDefined();
     });
+
+    it('should include request id header', async () => {
+      const req = createRequest({
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({}),
+      });
+      const res = createResponse();
+      await handler(req, res);
+
+      expect(res._getHeaders()['x-request-id']).toBeDefined();
+    });
   });
 
   describe('Response format', () => {
@@ -223,6 +235,23 @@ describe('POST /api/recommend', () => {
       await handler(req, res);
       // Empty or invalid JSON should not be 400 (treated as empty object)
       expect([200, 400]).toContain(res._getStatusCode());
+    });
+
+    it('should include INVALID_INPUT code for invalid payload', async () => {
+      const req = createRequest({
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          character: { STR: 99999 },
+        }),
+      });
+      const res = createResponse();
+      await handler(req, res);
+
+      const data = JSON.parse(res._getData());
+      expect(res._getStatusCode()).toBe(400);
+      expect(data.errorCode).toBe('INVALID_INPUT');
+      expect(data.requestId).toBeDefined();
     });
   });
 });

@@ -28,6 +28,8 @@ import 'widgets/main_weapon_selector.dart';
 import 'widgets/ring_selector.dart';
 import 'widgets/sub_weapon_selector.dart';
 import 'widgets/toram_card.dart';
+import 'widgets/ai_recommendations_content.dart';
+import 'widgets/save_load_build_content.dart';
 
 part 'build_simulator_layout.dart';
 part 'build_simulator_equipment_panel.dart';
@@ -38,6 +40,7 @@ part 'build_simulator_persistence_actions.dart';
 part 'build_simulator_custom_equipment.dart';
 
 enum _SummaryViewMode { metricList, itemDetails }
+enum _AiRecommendationUiState { loading, success, fallback, error }
 
 class BuildSimulatorScreen extends StatefulWidget {
   const BuildSimulatorScreen({
@@ -181,11 +184,14 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   List<String> _recommendations = const <String>[];
   List<AiRecommendationItem> _recommendationItems =
       const <AiRecommendationItem>[];
+  bool _showAllRecommendations = false;
   List<AiRecommendationItem>? _effectiveRecommendationItemsCache;
   int _effectiveRecommendationItemsCacheKey = 0;
   final Map<String, String> _feedbackByRecommendationId = <String, String>{};
   int _aiRecommendationRequestToken = 0;
   bool _isAiRecommendationLoading = false;
+  _AiRecommendationUiState _aiRecommendationUiState =
+      _AiRecommendationUiState.fallback;
   String _aiRecommendationSource = 'rule';
   String _aiRecommendationMessage = _ruleRecommendationMessage;
   bool _showRecommendationsPanel = true;
@@ -242,6 +248,7 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
       _setUiState(() {
         if (!_canUseAiGeneration) {
           _isAiRecommendationLoading = false;
+          _aiRecommendationUiState = _AiRecommendationUiState.error;
         }
         _aiRecommendationSource = 'rule';
         _aiRecommendationMessage = _canUseAiGeneration

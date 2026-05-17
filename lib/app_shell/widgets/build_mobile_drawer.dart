@@ -19,6 +19,7 @@ class _BuildStatsSummaryDrawer extends StatefulWidget {
 class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
   final TextEditingController _buildNameController = TextEditingController();
   _DrawerSummaryViewMode _summaryViewMode = _DrawerSummaryViewMode.metricList;
+  bool _showAllMobileRecommendations = false;
   static const int _guestSavedBuildLimit = 2;
   static const String _guestSaveLimitMessage = 'Limit 2 builds only.';
 
@@ -29,6 +30,25 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
     'Accuracy',
     'Stability',
   };
+
+  String _sourceLabelForAi(String source) {
+    final String normalized = source.trim().toLowerCase();
+    switch (normalized) {
+      case 'gemini':
+        return 'Source: Gemini';
+      case 'openai':
+        return 'Source: OpenAI';
+      case 'groq':
+        return 'Source: Groq';
+      case 'huggingface':
+        return 'Source: HuggingFace';
+      case 'fallback':
+      case 'rule':
+        return 'Source: Fallback rule';
+      default:
+        return 'Source: Local rule';
+    }
+  }
 
   @override
   void dispose() {
@@ -77,14 +97,6 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
     final String hour = localSavedAt.hour.toString().padLeft(2, '0');
     final String minute = localSavedAt.minute.toString().padLeft(2, '0');
     return 'Saved: $day/$month/$year $hour:$minute';
-  }
-
-  bool _isRemoteAiSource(String source) {
-    final String normalized = source.trim().toLowerCase();
-    if (normalized.isEmpty) {
-      return false;
-    }
-    return normalized != 'rule' && normalized != 'fallback';
   }
 
   Widget _buildSummaryModeSwitch() {
@@ -572,17 +584,71 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                 .toList(growable: false);
             final List<String> aiRecommendations =
                 coordinator.aiRecommendations;
+            final List<AiRecommendationItem> aiRecommendationItems =
+                coordinator.aiRecommendationItems;
             final bool isAiLoading = coordinator.isAiRecommendationLoading;
             final String aiSource = coordinator.aiRecommendationSource;
             final String aiMessage = coordinator.aiRecommendationMessage;
-            final bool hasRemoteAi = _isRemoteAiSource(aiSource);
+            final Map<String, String> feedbackByRecommendationId =
+                coordinator.feedbackByRecommendationId;
             final bool canUseAiGeneration = widget.hasAdvancedAccess;
             final bool canTriggerAi =
                 canUseAiGeneration && coordinator.canGenerateAiRecommendations;
             final bool shouldShowRecommendations =
                 coordinator.showRecommendations && canUseAiGeneration;
+            final List<AiRecommendationItem> visibleRecommendationItems =
+                aiRecommendationItems.isNotEmpty
+                ? aiRecommendationItems
+                : aiRecommendations
+                      .asMap()
+                      .entries
+                      .map((MapEntry<int, String> entry) {
+                        return AiRecommendationItem(
+                          id: 'mobile_recommendation_${entry.key + 1}',
+                          message: entry.value,
+                          category: 'analysis',
+                          priority: 3,
+                          confidence: 0.67,
+                          explanation: '',
+                          source: aiSource,
+                        );
+                      })
+                      .toList(growable: false);
             final bool hasSaveLimit = _hasSaveLimit;
             final bool canSaveBuild = _canSaveBuild;
+            final String sourceLabel = _sourceLabelForAi(aiSource);
+            final String normalizedSource = aiSource.trim().toLowerCase();
+            final String normalizedMessage = aiMessage.trim().toLowerCase();
+            final bool isErrorState =
+                !isAiLoading &&
+                (normalizedSource == 'error' ||
+                    normalizedMessage.contains('unavailable') ||
+                    normalizedMessage.contains('failed') ||
+                    normalizedMessage.contains('error'));
+            final bool isFallbackState =
+                !isAiLoading &&
+                !isErrorState &&
+                (normalizedSource == 'fallback' || normalizedSource == 'rule');
+            IconData statusIcon;
+            Color statusColor;
+            String statusLabel;
+            if (isAiLoading) {
+              statusIcon = Icons.sync;
+              statusColor = colorScheme.tertiary;
+              statusLabel = 'Loading';
+            } else if (isErrorState) {
+              statusIcon = Icons.error_outline;
+              statusColor = colorScheme.error;
+              statusLabel = 'Error';
+            } else if (isFallbackState) {
+              statusIcon = Icons.rule;
+              statusColor = colorScheme.primary;
+              statusLabel = 'Fallback';
+            } else {
+              statusIcon = Icons.check_circle_outline;
+              statusColor = colorScheme.secondary;
+              statusLabel = 'Success';
+            }
             return ListView(
               padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
               children: <Widget>[
@@ -622,91 +688,44 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                   _DrawerSectionCard(
                     title: 'AI Recommendations',
                     icon: Icons.lightbulb_outline,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Icon(
-                              isAiLoading
-                                  ? Icons.sync
-                                  : hasRemoteAi
-                                  ? Icons.psychology
-                                  : Icons.rule,
-                              size: 14,
-                              color: isAiLoading
-                                  ? colorScheme.tertiary
-                                  : hasRemoteAi
-                                  ? colorScheme.secondary
-                                  : colorScheme.primary,
-                            ),
-                            const SizedBox(width: 6),
-                            Expanded(
-                              child: Text(
-                                aiMessage,
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: isAiLoading
-                                      ? colorScheme.tertiary
-                                      : colorScheme.onSurface.withValues(
-                                          alpha: 0.75,
-                                        ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        Align(
-                          alignment: Alignment.center,
-                          child: OutlinedButton.icon(
-                            onPressed: !canTriggerAi || isAiLoading
-                                ? null
-                                : coordinator.generateAiRecommendations,
-                            icon: Icon(
-                              isAiLoading ? Icons.sync : Icons.auto_awesome,
-                              size: 14,
-                            ),
-                            label: Text(
-                              isAiLoading ? 'Generating...' : 'Generate',
-                            ),
-                            style: OutlinedButton.styleFrom(
-                              foregroundColor: colorScheme.onSurface,
-                              side: BorderSide(
-                                color: colorScheme.onSurface.withValues(
-                                  alpha: 0.35,
-                                ),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 18,
-                                vertical: 8,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        if (aiRecommendations.isEmpty)
-                          Text(
-                            'No recommendations yet.',
-                            style: TextStyle(
-                              color: colorScheme.onSurface.withValues(
-                                alpha: 0.75,
-                              ),
-                              fontSize: 12,
-                            ),
-                          )
-                        else
-                          ...List<Widget>.generate(aiRecommendations.length, (
-                            int index,
-                          ) {
-                            return _RecommendationTile(
-                              index: index + 1,
-                              message: aiRecommendations[index],
-                            );
-                          }),
-                      ],
+                    trailing: IconButton(
+                      onPressed: !canTriggerAi || isAiLoading
+                          ? null
+                          : coordinator.generateAiRecommendations,
+                      icon: const Icon(Icons.refresh_rounded, size: 18),
+                      visualDensity: VisualDensity.compact,
+                      tooltip: 'Refresh',
+                    ),
+                    child: AiRecommendationsContent(
+                      aiMessage: aiMessage,
+                      statusIcon: statusIcon,
+                      statusColor: statusColor,
+                      statusLabel: statusLabel,
+                      sourceLabel: sourceLabel,
+                      canGenerateAi: canTriggerAi,
+                      canSendFeedback: true,
+                      isLoading: isAiLoading,
+                      onGenerate: coordinator.generateAiRecommendations,
+                      recommendationItems: visibleRecommendationItems,
+                      feedbackByRecommendationId: feedbackByRecommendationId,
+                      showAllRecommendations: _showAllMobileRecommendations,
+                      onToggleShowAll: () {
+                        setState(() {
+                          _showAllMobileRecommendations =
+                              !_showAllMobileRecommendations;
+                        });
+                      },
+                      onFeedback: (
+                        AiRecommendationItem recommendation,
+                        String reaction,
+                      ) {
+                        coordinator.submitRecommendationFeedback(
+                          recommendation: recommendation,
+                          reaction: reaction,
+                        );
+                      },
+                      isSmallScreen: true,
+                      useCardShadow: false,
                     ),
                   ),
                 ],
@@ -734,183 +753,42 @@ class _BuildStatsSummaryDrawerState extends State<_BuildStatsSummaryDrawer> {
                       ),
                     ),
                   ),
-                  child: Column(
-                    children: <Widget>[
-                      if (hasSaveLimit) ...<Widget>[
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            _guestSaveLimitMessage,
-                            style: TextStyle(
-                              color: canSaveBuild
-                                  ? colorScheme.onSurface.withValues(
-                                      alpha: 0.75,
-                                    )
-                                  : colorScheme.error,
-                              fontSize: 11,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                      ],
-                      TextField(
-                        controller: _buildNameController,
-                        onSubmitted: (_) => _onSaveBuild(),
-                        style: TextStyle(
-                          color: colorScheme.onSurface,
-                          fontSize: 13,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: 'Enter build name...',
-                          hintStyle: TextStyle(
-                            color: colorScheme.onSurface.withValues(
-                              alpha: 0.54,
-                            ),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 14,
-                          ),
-                          filled: true,
-                          fillColor: colorScheme.surfaceContainerHighest,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(
-                              color: colorScheme.onSurface.withValues(
-                                alpha: 0.24,
-                              ),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(
-                              color: colorScheme.onSurface.withValues(
-                                alpha: 0.45,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: OutlinedButton.icon(
-                              onPressed: canSaveBuild ? _onSaveBuild : null,
-                              icon: const Icon(Icons.save, size: 16),
-                              label: const Text('Save Build'),
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: colorScheme.onSurface,
-                                side: BorderSide(
-                                  color: colorScheme.onSurface.withValues(
-                                    alpha: 0.35,
-                                  ),
-                                ),
-                                shape: const StadiumBorder(),
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 12,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: OutlinedButton.icon(
-                              onPressed: _onRequestImportBuildShareCode,
-                              icon: const Icon(
-                                Icons.download_for_offline,
-                                size: 16,
-                              ),
-                              label: const Text('Import Code'),
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: colorScheme.onSurface
-                                    .withValues(alpha: 0.75),
-                                side: BorderSide(
-                                  color: colorScheme.onSurface.withValues(
-                                    alpha: 0.24,
-                                  ),
-                                ),
-                                shape: const StadiumBorder(),
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 12,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      if (savedBuilds.isEmpty)
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: colorScheme.surfaceContainerHighest,
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: colorScheme.onSurface.withValues(
-                                alpha: 0.2,
-                              ),
-                            ),
-                          ),
-                          child: Text(
-                            'No saved builds yet.',
-                            style: TextStyle(
-                              color: colorScheme.onSurface.withValues(
-                                alpha: 0.75,
-                              ),
-                              fontSize: 12,
-                            ),
-                          ),
-                        )
-                      else
-                        Column(
-                          children: List<Widget>.generate(
-                            visibleSavedBuilds.length,
-                            (int index) {
-                              final Map<String, dynamic> build =
-                                  visibleSavedBuilds[index];
-                              final String buildId = _buildIdOf(build);
-                              final bool canControl = buildId.isNotEmpty;
-                              return _SavedBuildTile(
-                                name: _buildNameOf(build, index),
-                                codeLine: _savedBuildCodeLine(build),
-                                savedAtLine: _savedBuildSavedAtLine(build),
-                                onTap: canControl
-                                    ? () {
-                                        coordinator.loadBuildById(buildId);
-                                        Navigator.of(context).pop();
-                                      }
-                                    : null,
-                                onLoad: canControl
-                                    ? () {
-                                        coordinator.loadBuildById(buildId);
-                                        Navigator.of(context).pop();
-                                      }
-                                    : null,
-                                onDelete: canControl
-                                    ? () => coordinator.deleteBuildById(buildId)
-                                    : null,
-                                onShare: () => _onCopyBuildShareCode(build),
-                              );
-                            },
-                          ),
-                        ),
-                      if (savedBuilds.length > visibleSavedBuilds.length)
-                        Padding(
-                          padding: EdgeInsets.only(top: 2),
-                          child: Text(
-                            'Showing first 5 builds.',
-                            style: TextStyle(
-                              color: colorScheme.onSurface.withValues(
-                                alpha: 0.54,
-                              ),
-                              fontSize: 11,
-                            ),
-                          ),
-                        ),
-                    ],
+                  child: SaveLoadBuildContent(
+                    hasSaveLimit: hasSaveLimit,
+                    canSaveBuild: canSaveBuild,
+                    saveLimitMessage: _guestSaveLimitMessage,
+                    buildNameController: _buildNameController,
+                    onSaveBuild: _onSaveBuild,
+                    onImportCode: _onRequestImportBuildShareCode,
+                    savedBuilds: visibleSavedBuilds.asMap().entries.map((
+                      MapEntry<int, Map<String, dynamic>> entry,
+                    ) {
+                      final int index = entry.key;
+                      final Map<String, dynamic> build = entry.value;
+                      final String buildId = _buildIdOf(build);
+                      final bool canControl = buildId.isNotEmpty;
+                      return SaveBuildEntry(
+                        name: _buildNameOf(build, index),
+                        codeLine: _savedBuildCodeLine(build),
+                        savedAtLine: _savedBuildSavedAtLine(build),
+                        onTap: canControl
+                            ? () {
+                                coordinator.loadBuildById(buildId);
+                                Navigator.of(context).pop();
+                              }
+                            : null,
+                        onLoad: canControl
+                            ? () {
+                                coordinator.loadBuildById(buildId);
+                                Navigator.of(context).pop();
+                              }
+                            : null,
+                        onDelete: canControl
+                            ? () => coordinator.deleteBuildById(buildId)
+                            : null,
+                        onShare: () => _onCopyBuildShareCode(build),
+                      );
+                    }).toList(growable: false),
                   ),
                 ),
               ],

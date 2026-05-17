@@ -15,6 +15,13 @@ extension _BuildSimulatorDataLoading on BuildSimulatorScreenState {
       onDeleteCustomEquipmentById: _onDeleteCustomEquipmentById,
       onClearAllData: _onClearAll,
       onGenerateAiRecommendations: _generateAiRecommendationsNow,
+      onSubmitRecommendationFeedback: (
+        AiRecommendationItem recommendation,
+        String reaction,
+      ) => _onRecommendationFeedback(
+        recommendation: recommendation,
+        reaction: reaction,
+      ),
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) {
@@ -32,6 +39,8 @@ extension _BuildSimulatorDataLoading on BuildSimulatorScreenState {
       summary: _summary,
       selectedItemDetails: _selectedItemDetailsSnapshot(),
       aiRecommendations: _recommendations,
+      aiRecommendationItems: _recommendationItems,
+      feedbackByRecommendationId: _feedbackByRecommendationId,
       isAiRecommendationLoading: _isAiRecommendationLoading,
       aiRecommendationSource: _aiRecommendationSource,
       aiRecommendationMessage: _aiRecommendationMessage,

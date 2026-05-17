@@ -9,7 +9,9 @@ class AiBuildRecommendationResult {
   const AiBuildRecommendationResult({
     required this.recommendationItems,
     required this.recommendations,
+    required this.status,
     required this.source,
+    required this.errorCode,
     required this.message,
     required this.providerMessage,
     required this.summary,
@@ -18,11 +20,33 @@ class AiBuildRecommendationResult {
 
   final List<AiRecommendationItem> recommendationItems;
   final List<String> recommendations;
+  final String status;
   final String source;
+  final String errorCode;
   final String message;
   final String providerMessage;
   final String summary;
   final List<String> explanations;
+}
+
+class AiRecommendationRequestException implements Exception {
+  const AiRecommendationRequestException({
+    required this.statusCode,
+    required this.errorCode,
+    required this.message,
+  });
+
+  final int statusCode;
+  final String errorCode;
+  final String message;
+
+  @override
+  String toString() {
+    if (errorCode.isEmpty) {
+      return message;
+    }
+    return '$errorCode: $message';
+  }
 }
 
 class AiBuildRecommendationService {
@@ -68,9 +92,7 @@ class AiBuildRecommendationService {
         }
 
         if (response.statusCode < 200 || response.statusCode >= 300) {
-          throw Exception(
-            'AI recommendation request failed (${response.statusCode})',
-          );
+          throw _buildRequestException(response);
         }
 
         final dynamic decoded = jsonDecode(response.body);
@@ -80,6 +102,10 @@ class AiBuildRecommendationService {
 
         final String source =
             decoded['source']?.toString().trim().toLowerCase() ?? 'unknown';
+        final String status =
+            decoded['status']?.toString().trim().toLowerCase() ?? 'unknown';
+        final String errorCode =
+            decoded['errorCode']?.toString().trim().toUpperCase() ?? '';
         final String message = decoded['message']?.toString().trim() ?? '';
         final String providerMessage =
             decoded['providerMessage']?.toString().trim() ?? '';
@@ -120,7 +146,9 @@ class AiBuildRecommendationService {
               .take(6)
               .toList(growable: false),
           recommendations: recommendations,
+          status: status.isEmpty ? 'unknown' : status,
           source: source.isEmpty ? 'unknown' : source,
+          errorCode: errorCode,
           message: message,
           providerMessage: providerMessage,
           summary: summary,
@@ -208,10 +236,38 @@ class AiBuildRecommendationService {
   }
 
   bool _isRetryableError(Object error) {
+    if (error is AiRecommendationRequestException) {
+      return _isRetryableStatusCode(error.statusCode) ||
+          error.errorCode == 'AI_TIMEOUT' ||
+          error.errorCode == 'AI_QUOTA';
+    }
     if (error is http.ClientException) {
       return true;
     }
     return false;
+  }
+
+  AiRecommendationRequestException _buildRequestException(http.Response response) {
+    String errorCode = '';
+    String message = 'AI recommendation request failed (${response.statusCode})';
+    try {
+      final dynamic decoded = jsonDecode(response.body);
+      if (decoded is Map<String, dynamic>) {
+        errorCode =
+            decoded['errorCode']?.toString().trim().toUpperCase() ?? '';
+        final String apiMessage = decoded['message']?.toString().trim() ?? '';
+        if (apiMessage.isNotEmpty) {
+          message = apiMessage;
+        }
+      }
+    } catch (_) {
+      // Keep default message for non-JSON payloads.
+    }
+    return AiRecommendationRequestException(
+      statusCode: response.statusCode,
+      errorCode: errorCode,
+      message: message,
+    );
   }
 
   Duration _retryDelay(int attempt) {

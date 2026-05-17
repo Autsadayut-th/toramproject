@@ -464,8 +464,10 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
     _recommendations = _recommendationItems
         .map((AiRecommendationItem item) => item.normalizedMessage)
         .toList(growable: false);
+    _showAllRecommendations = false;
     _invalidateEffectiveRecommendationItemsCache();
     _pruneRecommendationFeedback();
+    _aiRecommendationUiState = _AiRecommendationUiState.fallback;
     _aiRecommendationSource = 'rule';
     _aiRecommendationMessage = _canUseAiGeneration
         ? BuildSimulatorScreenState._ruleRecommendationMessage
@@ -525,8 +527,10 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
     _recommendations = _recommendationItems
         .map((AiRecommendationItem item) => item.normalizedMessage)
         .toList(growable: false);
+    _showAllRecommendations = false;
     _invalidateEffectiveRecommendationItemsCache();
     _pruneRecommendationFeedback();
+    _aiRecommendationUiState = _AiRecommendationUiState.fallback;
     _aiRecommendationSource = 'rule';
     _aiRecommendationMessage = _canUseAiGeneration
         ? BuildSimulatorScreenState._ruleRecommendationMessage
@@ -536,6 +540,7 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
   void _generateAiRecommendationsNow() {
     if (!_canUseAiGeneration) {
       _setUiState(() {
+        _aiRecommendationUiState = _AiRecommendationUiState.error;
         _aiRecommendationSource = 'rule';
         _aiRecommendationMessage =
             BuildSimulatorScreenState._guestAiLockedMessage;
@@ -591,6 +596,7 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
 
     _setUiState(() {
       _isAiRecommendationLoading = true;
+      _aiRecommendationUiState = _AiRecommendationUiState.loading;
       _aiRecommendationMessage = 'AI explaining local recommendations...';
     });
 
@@ -603,10 +609,15 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
       _setUiState(() {
         _recommendationItems = result.recommendationItems;
         _recommendations = result.recommendations;
+        _showAllRecommendations = false;
         _invalidateEffectiveRecommendationItemsCache();
         _pruneRecommendationFeedback();
         _isAiRecommendationLoading = false;
         _aiRecommendationSource = result.source;
+        _aiRecommendationUiState =
+            result.status == 'fallback' || result.source == 'fallback'
+            ? _AiRecommendationUiState.fallback
+            : _AiRecommendationUiState.success;
         _aiRecommendationMessage = _buildAiStatusMessage(
           source: result.source,
           details: result.summary.isNotEmpty ? result.summary : result.message,
@@ -628,15 +639,28 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
               );
             })
             .toList(growable: false);
+        _showAllRecommendations = false;
         _isAiRecommendationLoading = false;
+        _aiRecommendationUiState = _AiRecommendationUiState.error;
         _aiRecommendationSource = 'fallback';
         _invalidateEffectiveRecommendationItemsCache();
         _aiRecommendationMessage = _buildAiStatusMessage(
           source: 'fallback',
-          details: error.toString(),
+          details: _aiErrorDetails(error),
         );
       });
     }
+  }
+
+  String _aiErrorDetails(Object error) {
+    if (error is AiRecommendationRequestException) {
+      final String code = error.errorCode.trim();
+      if (code.isNotEmpty) {
+        return '$code: ${error.message}';
+      }
+      return error.message;
+    }
+    return error.toString();
   }
 
   String _buildAiStatusMessage({required String source, String? details}) {

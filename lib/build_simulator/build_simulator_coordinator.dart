@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'services/ai/recommendation_item.dart';
 
 class BuildSimulatorCoordinator extends ChangeNotifier {
   static const Map<String, num> _summaryTemplate = <String, num>{
@@ -31,6 +32,9 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
   List<Map<String, dynamic>> _selectedItemDetails =
       const <Map<String, dynamic>>[];
   List<String> _aiRecommendations = const <String>[];
+  List<AiRecommendationItem> _aiRecommendationItems =
+      const <AiRecommendationItem>[];
+  Map<String, String> _feedbackByRecommendationId = const <String, String>{};
   bool _isAiRecommendationLoading = false;
   String _aiRecommendationSource = 'rule';
   String _aiRecommendationMessage = 'Using local recommendation rules.';
@@ -47,6 +51,8 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
   void Function(String id)? _deleteCustomEquipmentById;
   VoidCallback? _clearAllData;
   VoidCallback? _generateAiRecommendations;
+  Future<void> Function(AiRecommendationItem recommendation, String reaction)?
+  _submitRecommendationFeedback;
 
   List<Map<String, dynamic>> get savedBuilds => _savedBuilds;
 
@@ -55,6 +61,9 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
   Map<String, num> get summary => _summary;
   List<Map<String, dynamic>> get selectedItemDetails => _selectedItemDetails;
   List<String> get aiRecommendations => _aiRecommendations;
+  List<AiRecommendationItem> get aiRecommendationItems => _aiRecommendationItems;
+  Map<String, String> get feedbackByRecommendationId =>
+      _feedbackByRecommendationId;
   bool get isAiRecommendationLoading => _isAiRecommendationLoading;
   String get aiRecommendationSource => _aiRecommendationSource;
   String get aiRecommendationMessage => _aiRecommendationMessage;
@@ -74,6 +83,11 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     required void Function(String id) onDeleteCustomEquipmentById,
     required VoidCallback onClearAllData,
     required VoidCallback onGenerateAiRecommendations,
+    required Future<void> Function(
+      AiRecommendationItem recommendation,
+      String reaction,
+    )
+    onSubmitRecommendationFeedback,
   }) {
     _loadBuildById = onLoadBuildById;
     _saveBuildByName = onSaveBuildByName;
@@ -87,6 +101,7 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     _deleteCustomEquipmentById = onDeleteCustomEquipmentById;
     _clearAllData = onClearAllData;
     _generateAiRecommendations = onGenerateAiRecommendations;
+    _submitRecommendationFeedback = onSubmitRecommendationFeedback;
   }
 
   void detachHandlers() {
@@ -102,6 +117,7 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     _deleteCustomEquipmentById = null;
     _clearAllData = null;
     _generateAiRecommendations = null;
+    _submitRecommendationFeedback = null;
   }
 
   void _clearSnapshotData() {
@@ -109,6 +125,8 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     _summary = Map<String, num>.unmodifiable(_summaryTemplate);
     _selectedItemDetails = const <Map<String, dynamic>>[];
     _aiRecommendations = const <String>[];
+    _aiRecommendationItems = const <AiRecommendationItem>[];
+    _feedbackByRecommendationId = const <String, String>{};
     _isAiRecommendationLoading = false;
     _aiRecommendationSource = 'rule';
     _aiRecommendationMessage = 'Using local recommendation rules.';
@@ -121,6 +139,8 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
     required Map<String, num> summary,
     required List<Map<String, dynamic>> selectedItemDetails,
     required List<String> aiRecommendations,
+    required List<AiRecommendationItem> aiRecommendationItems,
+    required Map<String, String> feedbackByRecommendationId,
     required bool isAiRecommendationLoading,
     required String aiRecommendationSource,
     required String aiRecommendationMessage,
@@ -152,6 +172,12 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
         }),
     );
     _aiRecommendations = List<String>.unmodifiable(aiRecommendations);
+    _aiRecommendationItems = List<AiRecommendationItem>.unmodifiable(
+      aiRecommendationItems,
+    );
+    _feedbackByRecommendationId = Map<String, String>.unmodifiable(
+      feedbackByRecommendationId,
+    );
     _isAiRecommendationLoading = isAiRecommendationLoading;
     _aiRecommendationSource = aiRecommendationSource;
     _aiRecommendationMessage = aiRecommendationMessage;
@@ -206,6 +232,17 @@ class BuildSimulatorCoordinator extends ChangeNotifier {
 
   void generateAiRecommendations() {
     _generateAiRecommendations?.call();
+  }
+
+  Future<void> submitRecommendationFeedback({
+    required AiRecommendationItem recommendation,
+    required String reaction,
+  }) async {
+    final handler = _submitRecommendationFeedback;
+    if (handler == null) {
+      return;
+    }
+    await handler(recommendation, reaction);
   }
 
   @override

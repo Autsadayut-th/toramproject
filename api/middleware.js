@@ -71,7 +71,7 @@ function getClientIp(req) {
  * @returns {object} - Validated/sanitized input, or throws on invalid
  */
 function validateInput(input) {
-  if (!input || typeof input !== 'object') {
+  if (!input || typeof input !== 'object' || Array.isArray(input)) {
     throw new Error('Request body must be a JSON object.');
   }
 

@@ -21,38 +21,6 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
     );
   }
 
-  Widget _sectionTitle(IconData iconData, String title) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    return Row(
-      children: [
-        Container(
-          width: 30,
-          height: 30,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: colorScheme.surfaceContainerHighest,
-          ),
-          child: Icon(iconData, color: colorScheme.onSurface, size: 17),
-        ),
-        const SizedBox(width: 10),
-        Expanded(
-          child: Text(
-            title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontFamily: 'Orbitron',
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface,
-              letterSpacing: 0.3,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _buildStatsSummary() {
     return Container(
       decoration: _panelDecoration(),
@@ -808,273 +776,118 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
 
   Widget _buildRecommendationsSection() {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final bool hasRemoteAi = _isRemoteAiSource(_aiRecommendationSource);
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final bool isSmallScreen = screenWidth < 420;
     final bool canGenerateAi = _canUseAiGeneration;
     final bool canSendFeedback = _activeUserId != null;
+    IconData statusIcon;
+    Color statusColor;
+    String statusLabel;
+    switch (_aiRecommendationUiState) {
+      case _AiRecommendationUiState.loading:
+        statusIcon = Icons.sync;
+        statusColor = colorScheme.tertiary;
+        statusLabel = 'Loading';
+        break;
+      case _AiRecommendationUiState.success:
+        statusIcon = Icons.check_circle_outline;
+        statusColor = colorScheme.secondary;
+        statusLabel = 'Success';
+        break;
+      case _AiRecommendationUiState.fallback:
+        statusIcon = Icons.rule;
+        statusColor = colorScheme.primary;
+        statusLabel = 'Fallback';
+        break;
+      case _AiRecommendationUiState.error:
+        statusIcon = Icons.error_outline;
+        statusColor = colorScheme.error;
+        statusLabel = 'Error';
+        break;
+    }
+    final String sourceLabel = _sourceLabelForAi(_aiRecommendationSource);
     final List<AiRecommendationItem> recommendationItems =
         _effectiveRecommendationItems();
-    final List<Widget> children = <Widget>[];
-    for (int i = 0; i < recommendationItems.length; i++) {
-      final AiRecommendationItem recommendation = recommendationItems[i];
-      final String feedbackState =
-          _feedbackByRecommendationId[recommendation.id] ?? '';
-      final String categoryLabel = recommendation.category
-          .replaceAll('_', ' ')
-          .trim();
-      children.add(
-        Container(
-          margin: const EdgeInsets.only(bottom: 10),
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
-          decoration: BoxDecoration(
-            color: colorScheme.surfaceContainerHighest,
-            borderRadius: BorderRadius.circular(10),
-            border: Border(
-              left: BorderSide(color: colorScheme.primary, width: 3),
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '${i + 1}.',
-                    style: TextStyle(
-                      color: colorScheme.onSurface,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      recommendation.message,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: colorScheme.onSurface,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: colorScheme.surfaceContainerHigh,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        color: colorScheme.onSurface.withValues(alpha: 0.2),
-                      ),
-                    ),
-                    child: Text(
-                      categoryLabel,
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: colorScheme.onSurface.withValues(alpha: 0.75),
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              if (recommendation.explanation.trim().isNotEmpty) ...<Widget>[
-                const SizedBox(height: 6),
-                Text(
-                  recommendation.explanation.trim(),
-                  style: TextStyle(
-                    fontSize: 11,
-                    color: colorScheme.onSurface.withValues(alpha: 0.75),
-                  ),
-                ),
-              ],
-              const SizedBox(height: 8),
-              Row(
-                children: <Widget>[
-                  InkWell(
-                    onTap: !canSendFeedback
-                        ? null
-                        : () {
-                            _onRecommendationFeedback(
-                              recommendation: recommendation,
-                              reaction: 'like',
-                            );
-                          },
-                    borderRadius: BorderRadius.circular(14),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 6,
-                        vertical: 2,
-                      ),
-                      child: Icon(
-                        Icons.thumb_up_alt_outlined,
-                        size: 14,
-                        color: feedbackState == 'like'
-                            ? colorScheme.primary
-                            : colorScheme.onSurface.withValues(alpha: 0.54),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 4),
-                  InkWell(
-                    onTap: !canSendFeedback
-                        ? null
-                        : () {
-                            _onRecommendationFeedback(
-                              recommendation: recommendation,
-                              reaction: 'dislike',
-                            );
-                          },
-                    borderRadius: BorderRadius.circular(14),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 6,
-                        vertical: 2,
-                      ),
-                      child: Icon(
-                        Icons.thumb_down_alt_outlined,
-                        size: 14,
-                        color: feedbackState == 'dislike'
-                            ? colorScheme.error
-                            : colorScheme.onSurface.withValues(alpha: 0.54),
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    'p${recommendation.priority} • ${(recommendation.confidence * 100).round()}%',
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: colorScheme.onSurface.withValues(alpha: 0.54),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
     return Container(
-      decoration: _panelDecoration(),
-      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: colorScheme.outlineVariant),
+      ),
+      padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _sectionTitle(Icons.lightbulb, 'AI Recommendations'),
-          const SizedBox(height: 10),
           Row(
-            children: [
-              Icon(
-                _isAiRecommendationLoading
-                    ? Icons.sync
-                    : hasRemoteAi
-                    ? Icons.psychology
-                    : Icons.rule,
-                size: 14,
-                color: _isAiRecommendationLoading
-                    ? colorScheme.tertiary
-                    : hasRemoteAi
-                    ? colorScheme.secondary
-                    : colorScheme.primary,
+            children: <Widget>[
+              Container(
+                width: 28,
+                height: 28,
+                decoration: BoxDecoration(
+                  color: colorScheme.surfaceContainerHighest,
+                  borderRadius: BorderRadius.circular(999),
+                ),
+                child: Icon(
+                  Icons.lightbulb_outline,
+                  size: 14,
+                  color: colorScheme.onSurface.withValues(alpha: 0.85),
+                ),
               ),
-              const SizedBox(width: 6),
+              const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  _aiRecommendationMessage,
-                  maxLines: 3,
+                  'AI Recommendations',
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    fontSize: 11,
-                    color: _isAiRecommendationLoading
-                        ? colorScheme.tertiary
-                        : colorScheme.onSurface.withValues(alpha: 0.75),
+                    fontFamily: 'Orbitron',
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                    letterSpacing: 0.3,
                   ),
                 ),
+              ),
+              IconButton(
+                onPressed: _isAiRecommendationLoading
+                    ? null
+                    : _generateAiRecommendationsNow,
+                icon: const Icon(Icons.refresh_rounded, size: 18),
+                visualDensity: VisualDensity.compact,
+                tooltip: 'Refresh',
               ),
             ],
           ),
-          const SizedBox(height: 12),
-          Align(
-            alignment: Alignment.center,
-            child: OutlinedButton.icon(
-              onPressed: !canGenerateAi || _isAiRecommendationLoading
-                  ? null
-                  : _generateAiRecommendationsNow,
-              icon: Icon(
-                !canGenerateAi
-                    ? Icons.lock_outline
-                    : _isAiRecommendationLoading
-                    ? Icons.sync
-                    : Icons.auto_awesome,
-                size: 14,
-              ),
-              label: Text(
-                !canGenerateAi
-                    ? 'Login for AI'
-                    : _isAiRecommendationLoading
-                    ? 'Generating...'
-                    : 'Generate',
-              ),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: colorScheme.onSurface,
-                side: BorderSide(
-                  color: colorScheme.onSurface.withValues(alpha: 0.35),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 18,
-                  vertical: 8,
-                ),
-              ),
-            ),
+          const SizedBox(height: 10),
+          AiRecommendationsContent(
+            aiMessage: _aiRecommendationMessage,
+            statusIcon: statusIcon,
+            statusColor: statusColor,
+            statusLabel: statusLabel,
+            sourceLabel: sourceLabel,
+            canGenerateAi: canGenerateAi,
+            canSendFeedback: canSendFeedback,
+            isLoading: _isAiRecommendationLoading,
+            onGenerate: _generateAiRecommendationsNow,
+            recommendationItems: recommendationItems,
+            feedbackByRecommendationId: _feedbackByRecommendationId,
+            showAllRecommendations: _showAllRecommendations,
+            onToggleShowAll: () {
+              _setUiState(() {
+                _showAllRecommendations = !_showAllRecommendations;
+              });
+            },
+            onFeedback: (AiRecommendationItem recommendation, String reaction) {
+              _onRecommendationFeedback(
+                recommendation: recommendation,
+                reaction: reaction,
+              );
+            },
+            isSmallScreen: isSmallScreen,
+            useCardShadow: true,
+            showLoginGenerateHint: !canGenerateAi,
+            showLoginFeedbackHint: !canSendFeedback,
           ),
-          if (canGenerateAi &&
-              !_isAiRecommendationLoading &&
-              !hasRemoteAi) ...<Widget>[
-            const SizedBox(height: 6),
-            Align(
-              alignment: Alignment.center,
-              child: TextButton.icon(
-                onPressed: _generateAiRecommendationsNow,
-                icon: const Icon(Icons.refresh, size: 14),
-                label: const Text('Retry'),
-                style: TextButton.styleFrom(
-                  foregroundColor: colorScheme.onSurface.withValues(
-                    alpha: 0.78,
-                  ),
-                ),
-              ),
-            ),
-          ],
-          if (!canGenerateAi) ...<Widget>[
-            const SizedBox(height: 6),
-            Center(
-              child: Text(
-                'Login is required for AI Generate.',
-                style: TextStyle(
-                  fontSize: 11,
-                  color: colorScheme.onSurface.withValues(alpha: 0.54),
-                ),
-              ),
-            ),
-          ],
-          if (!canSendFeedback) ...<Widget>[
-            const SizedBox(height: 6),
-            Center(
-              child: Text(
-                'Login to send recommendation feedback.',
-                style: TextStyle(
-                  fontSize: 11,
-                  color: colorScheme.onSurface.withValues(alpha: 0.54),
-                ),
-              ),
-            ),
-          ],
-          const SizedBox(height: 12),
-          Column(children: children),
         ],
       ),
     );
@@ -1086,6 +899,25 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
       return 'Build ${index + 1}';
     }
     return rawName;
+  }
+
+  String _sourceLabelForAi(String source) {
+    final String normalized = source.trim().toLowerCase();
+    switch (normalized) {
+      case 'gemini':
+        return 'Source: Gemini';
+      case 'openai':
+        return 'Source: OpenAI';
+      case 'groq':
+        return 'Source: Groq';
+      case 'huggingface':
+        return 'Source: HuggingFace';
+      case 'fallback':
+      case 'rule':
+        return 'Source: Fallback rule';
+      default:
+        return 'Source: Local rule';
+    }
   }
 
   String _savedBuildCodePreview(Map<String, dynamic> build) {
@@ -1124,112 +956,23 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
     final int? maxSavedBuilds = _maxSavedBuilds;
     final bool hasSaveLimit = maxSavedBuilds != null;
     final bool canSaveBuild = !hasSaveLimit || !_isSavedBuildLimitReached;
-    const int maxVisibleSavedBuilds = 5;
-    final int visibleSavedBuildCount =
-        _savedBuilds.length > maxVisibleSavedBuilds
-        ? maxVisibleSavedBuilds
-        : _savedBuilds.length;
-    final savedWidgets = <Widget>[];
-    for (int i = 0; i < visibleSavedBuildCount; i++) {
-      final Map<String, dynamic> build = _savedBuilds[i];
-      final String name = _savedBuildDisplayName(build, i);
-      savedWidgets.add(
-        InkWell(
-          onTap: () => _onLoadBuild(i),
-          borderRadius: BorderRadius.circular(12),
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 10),
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: colorScheme.surfaceContainerHigh,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: colorScheme.onSurface.withValues(alpha: 0.18),
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: colorScheme.onSurface,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
-                  alignment: WrapAlignment.center,
-                  runAlignment: WrapAlignment.center,
-                  children: <Widget>[
-                    _buildDesktopSavedBuildActionChip(
-                      label: 'Load',
-                      color: colorScheme.onSurface,
-                      onTap: () => _onLoadBuild(i),
-                    ),
-                    _buildDesktopSavedBuildActionChip(
-                      label: 'Export Code',
-                      color: colorScheme.onSurface.withValues(alpha: 0.75),
-                      onTap: () => _onCopyBuildShareCode(i),
-                    ),
-                    _buildDesktopSavedBuildActionChip(
-                      label: 'X',
-                      color: colorScheme.onSurface.withValues(alpha: 0.75),
-                      onTap: () => _onDeleteBuild(i),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 8,
-                  ),
-                  decoration: BoxDecoration(
-                    color: colorScheme.surfaceContainerHighest,
-                    borderRadius: BorderRadius.circular(6),
-                    border: Border.all(
-                      color: colorScheme.onSurface.withValues(alpha: 0.14),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        _savedBuildCodePreview(build),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: colorScheme.onSurface.withValues(alpha: 0.62),
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        _savedBuildSavedAtPreview(build),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: colorScheme.onSurface.withValues(alpha: 0.54),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-    }
+    final List<SaveBuildEntry> savedBuildEntries = _savedBuilds
+        .asMap()
+        .entries
+        .map((MapEntry<int, Map<String, dynamic>> entry) {
+          final int index = entry.key;
+          final Map<String, dynamic> build = entry.value;
+          return SaveBuildEntry(
+            name: _savedBuildDisplayName(build, index),
+            codeLine: _savedBuildCodePreview(build),
+            savedAtLine: _savedBuildSavedAtPreview(build),
+            onTap: () => _onLoadBuild(index),
+            onLoad: () => _onLoadBuild(index),
+            onDelete: () => _onDeleteBuild(index),
+            onShare: () => _onCopyBuildShareCode(index),
+          );
+        })
+        .toList(growable: false);
 
     return Container(
       padding: const EdgeInsets.all(12),
@@ -1283,166 +1026,19 @@ extension _BuildSimulatorScreenSectionsUI on BuildSimulatorScreenState {
             ],
           ),
           const SizedBox(height: 10),
-          if (hasSaveLimit) ...<Widget>[
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                BuildSimulatorScreenState._guestSaveLimitMessage,
-                style: TextStyle(
-                  color: canSaveBuild
-                      ? colorScheme.onSurface.withValues(alpha: 0.75)
-                      : colorScheme.error,
-                  fontSize: 11,
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-          ],
-          TextField(
-            controller: _buildNameController,
-            onSubmitted: (_) => _onSaveBuild(),
-            style: TextStyle(color: colorScheme.onSurface, fontSize: 13),
-            decoration: InputDecoration(
-              hintText: 'Enter build name...',
-              hintStyle: TextStyle(
-                color: colorScheme.onSurface.withValues(alpha: 0.54),
-              ),
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 12,
-                vertical: 14,
-              ),
-              filled: true,
-              fillColor: colorScheme.surfaceContainerHighest,
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(
-                  color: colorScheme.onSurface.withValues(alpha: 0.24),
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(
-                  color: colorScheme.onSurface.withValues(alpha: 0.45),
-                ),
-              ),
-            ),
+          SaveLoadBuildContent(
+            hasSaveLimit: hasSaveLimit,
+            canSaveBuild: canSaveBuild,
+            saveLimitMessage: BuildSimulatorScreenState._guestSaveLimitMessage,
+            buildNameController: _buildNameController,
+            onSaveBuild: _onSaveBuild,
+            onImportCode: _onRequestImportBuildShareCode,
+            savedBuilds: savedBuildEntries,
           ),
-          const SizedBox(height: 10),
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: canSaveBuild ? _onSaveBuild : null,
-                  icon: const Icon(Icons.save, size: 16),
-                  label: const Text('Save Build'),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: colorScheme.onSurface,
-                    side: BorderSide(
-                      color: colorScheme.onSurface.withValues(alpha: 0.35),
-                    ),
-                    shape: const StadiumBorder(),
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: _onRequestImportBuildShareCode,
-                  icon: const Icon(Icons.download_for_offline, size: 16),
-                  label: const Text('Import Code'),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: colorScheme.onSurface.withValues(
-                      alpha: 0.75,
-                    ),
-                    side: BorderSide(
-                      color: colorScheme.onSurface.withValues(alpha: 0.24),
-                    ),
-                    shape: const StadiumBorder(),
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          if (_savedBuilds.isEmpty)
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: colorScheme.surfaceContainerHighest,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: colorScheme.onSurface.withValues(alpha: 0.2),
-                ),
-              ),
-              child: Text(
-                'No saved builds yet.',
-                style: TextStyle(
-                  color: colorScheme.onSurface.withValues(alpha: 0.75),
-                  fontSize: 12,
-                ),
-              ),
-            )
-          else
-            Column(children: savedWidgets),
-          if (_savedBuilds.length > visibleSavedBuildCount)
-            Padding(
-              padding: EdgeInsets.only(top: 2),
-              child: Text(
-                'Showing first 5 builds.',
-                style: TextStyle(
-                  color: colorScheme.onSurface.withValues(alpha: 0.54),
-                  fontSize: 11,
-                ),
-              ),
-            ),
         ],
       ),
     );
   }
-
-  Widget _buildDesktopSavedBuildActionChip({
-    required String label,
-    required Color color,
-    required VoidCallback? onTap,
-  }) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final bool isEnabled = onTap != null;
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(9),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-          constraints: const BoxConstraints(minHeight: 36),
-          decoration: BoxDecoration(
-            color: isEnabled
-                ? colorScheme.surfaceContainerHighest
-                : colorScheme.surfaceContainerHigh,
-            borderRadius: BorderRadius.circular(9),
-            border: Border.all(
-              color: isEnabled
-                  ? colorScheme.onSurface.withValues(alpha: 0.35)
-                  : colorScheme.onSurface.withValues(alpha: 0.15),
-            ),
-          ),
-          child: Text(
-            label,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: isEnabled
-                  ? color
-                  : colorScheme.onSurface.withValues(alpha: 0.24),
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }
+
+

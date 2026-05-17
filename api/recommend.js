@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const {
   checkRateLimit,
   getClientIp,
@@ -46,19 +48,6 @@ const SUPPORTED_RECOMMENDATION_CATEGORIES = new Set([
   'equipment',
   'upgrade_path',
 ]);
-
-const RECOMMENDATION_SCHEMA = {
-  type: 'OBJECT',
-  required: ['recommendations'],
-  properties: {
-    recommendations: {
-      type: 'ARRAY',
-      minItems: 1,
-      maxItems: 6,
-      items: { type: 'STRING' },
-    },
-  },
-};
 
 const EXPLANATION_SCHEMA = {
   type: 'OBJECT',
@@ -736,7 +725,8 @@ function resolveProvider() {
     );
   }
   if (configured === 'auto' || !configured) {
-    return 'auto';
+    // Default to a single provider to reduce deployment misconfiguration risk.
+    return 'gemini';
   }
   return configured;
 }
@@ -849,10 +839,53 @@ function readAiCache(cacheKey) {
 }
 
 function writeAiCache(cacheKey, value) {
+  // Cleanup expired entries if cache is too large
+  if (AI_EXPLANATION_CACHE.size > 1000) {
+    cleanupAiCache();
+  }
+  
   AI_EXPLANATION_CACHE.set(cacheKey, {
     expiresAt: Date.now() + resolveAiCacheTtlMs(),
     value,
   });
+}
+
+function cleanupAiCache() {
+  const now = Date.now();
+  let cleaned = 0;
+  
+  for (const [key, row] of AI_EXPLANATION_CACHE.entries()) {
+    if (!row.expiresAt || row.expiresAt < now) {
+      AI_EXPLANATION_CACHE.delete(key);
+      cleaned += 1;
+    }
+  }
+  
+  // If still too large, remove oldest entries
+  if (AI_EXPLANATION_CACHE.size > 1000) {
+    const entriesToDelete = Array.from(AI_EXPLANATION_CACHE.entries())
+      .sort((a, b) => (a[1].expiresAt || 0) - (b[1].expiresAt || 0))
+      .slice(0, Math.floor(AI_EXPLANATION_CACHE.size * 0.1))
+      .map(([key]) => key);
+    
+    for (const key of entriesToDelete) {
+      AI_EXPLANATION_CACHE.delete(key);
+    }
+  }
+}
+
+// Setup periodic cleanup every 5 minutes
+if (typeof setInterval !== 'undefined') {
+  const cleanupInterval = setInterval(() => {
+    if (AI_EXPLANATION_CACHE.size > 100) {
+      cleanupAiCache();
+    }
+  }, 5 * 60 * 1000);
+  
+  // Don't keep process alive for this timer (for testing)
+  if (cleanupInterval.unref) {
+    cleanupInterval.unref();
+  }
 }
 
 function isRetryableAiError(error) {
@@ -1324,13 +1357,7 @@ async function requestAiExplanation(input, recommendations) {
   const totalTimeoutMs = resolveAiTotalTimeoutMs();
   const startedAt = Date.now();
   let lastError;
-
-  const providerChain = [];
-  if (provider === 'auto') {
-    providerChain.push('gemini', 'groq', 'openai', 'huggingface');
-  } else {
-    providerChain.push(provider);
-  }
+  const providerChain = [provider];
 
   for (const currentProvider of providerChain) {
     for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
@@ -1381,26 +1408,125 @@ async function requestAiExplanation(input, recommendations) {
   throw lastError || new Error('AI request failed.');
 }
 
+// Validate API provider configuration at startup
+function validateAiProviderConfiguration() {
+  const provider = resolveProvider();
+  const errors = [];
+
+  if (provider === 'gemini') {
+    if (!process.env.GEMINI_API_KEY) {
+      errors.push('GEMINI_API_KEY is not set in environment variables.');
+    }
+  }
+  if (provider === 'groq') {
+    if (!process.env.GROQ_API_KEY) {
+      errors.push('GROQ_API_KEY is not set in environment variables.');
+    }
+  }
+  if (provider === 'openai') {
+    if (!process.env.OPENAI_API_KEY) {
+      errors.push('OPENAI_API_KEY is not set in environment variables.');
+    }
+  }
+  if (provider === 'huggingface') {
+    if (!process.env.HUGGINGFACE_API_KEY) {
+      errors.push('HUGGINGFACE_API_KEY is not set in environment variables.');
+    }
+  }
+
+  if (errors.length > 0) {
+    const message = `AI Configuration Error:\n${errors.join('\n')}`;
+    console.error(message);
+    throw new Error(message);
+  }
+}
+
+function createRequestId() {
+  const timestamp = Date.now().toString(36);
+  const random = Math.random().toString(36).slice(2, 8);
+  return `req_${timestamp}_${random}`;
+}
+
+function logEvent(level, event, details = {}) {
+  const payload = {
+    level,
+    event,
+    timestamp: new Date().toISOString(),
+    ...details,
+  };
+  const line = JSON.stringify(payload);
+  if (level === 'error') {
+    console.error(line);
+    return;
+  }
+  console.info(line);
+}
+
+function buildErrorResponse(errorCode, message, extras = {}) {
+  return {
+    errorCode,
+    message,
+    ...extras,
+  };
+}
+
+function classifyAiErrorCode(error) {
+  const message = errorMessage(error).toLowerCase();
+  if (message.includes('timed out') || message.includes('timeout')) {
+    return 'AI_TIMEOUT';
+  }
+  if (
+    message.includes('quota')
+    || message.includes('rate limit')
+    || message.includes('too many requests')
+  ) {
+    return 'AI_QUOTA';
+  }
+  if (message.includes('not configured') || message.includes('api key')) {
+    return 'AI_CONFIG';
+  }
+  return 'AI_UNAVAILABLE';
+}
+
+// Run validation on module load
+validateAiProviderConfiguration();
+
 module.exports = async function handler(req, res) {
+  const requestId = createRequestId();
+  const startedAt = Date.now();
+  res.setHeader('X-Request-Id', requestId);
+
   // Set security headers on all responses
   setSecurityHeaders(res);
 
   // Handle OPTIONS preflight requests
   if (req.method === 'OPTIONS') {
+    logEvent('info', 'api.options', { requestId });
     return handleOptions(res);
   }
 
   // Only POST allowed
   if (req.method !== 'POST') {
+    logEvent('info', 'api.method_not_allowed', {
+      requestId,
+      method: req.method,
+    });
     res.setHeader('Allow', 'POST, OPTIONS');
-    return res.status(405).json({ error: 'Method Not Allowed' });
+    return res.status(405).json({
+      error: 'Method Not Allowed',
+      requestId,
+      ...buildErrorResponse('METHOD_NOT_ALLOWED', 'Only POST and OPTIONS are allowed.'),
+    });
   }
 
   // Rate limiting by IP
   const clientIp = getClientIp(req);
   if (!checkRateLimit(clientIp)) {
+    logEvent('info', 'api.rate_limited', { requestId, clientIp });
     return res.status(429).json({
       error: 'Too Many Requests',
+      requestId,
+      ...buildErrorResponse('RATE_LIMITED', 'Rate limit exceeded. Maximum 30 requests per minute.'),
       message: 'Rate limit exceeded. Maximum 30 requests per minute.',
     });
   }
@@ -1408,8 +1534,14 @@ module.exports = async function handler(req, res) {
   // Check request size
   const contentLength = Number(req.headers['content-length'] || 0);
   if (contentLength > REQUEST_SIZE_LIMIT) {
+    logEvent('info', 'api.payload_too_large_header', {
+      requestId,
+      contentLength,
+    });
     return res.status(413).json({
       error: 'Payload Too Large',
+      requestId,
+      ...buildErrorResponse('PAYLOAD_TOO_LARGE', `Request size exceeds limit of ${REQUEST_SIZE_LIMIT} bytes.`),
       message: `Request size exceeds limit of ${REQUEST_SIZE_LIMIT} bytes.`,
     });
   }
@@ -1418,10 +1550,39 @@ module.exports = async function handler(req, res) {
   let input;
   try {
     input = parseBody(req);
+    
+    // Check actual request body size (not just header)
+    const bodyString = typeof input === 'string' ? input : JSON.stringify(input);
+    const sizeInBytes = Buffer.byteLength(bodyString, 'utf8');
+    if (sizeInBytes > REQUEST_SIZE_LIMIT) {
+      logEvent('info', 'api.payload_too_large_body', {
+        requestId,
+        sizeInBytes,
+      });
+      return res.status(413).json({
+        error: 'Payload Too Large',
+        requestId,
+        ...buildErrorResponse(
+          'PAYLOAD_TOO_LARGE',
+          `Request body exceeds limit of ${REQUEST_SIZE_LIMIT} bytes (actual: ${sizeInBytes}).`,
+        ),
+        message: `Request body exceeds limit of ${REQUEST_SIZE_LIMIT} bytes (actual: ${sizeInBytes}).`,
+      });
+    }
+    
     validateInput(input);
   } catch (validationError) {
+    logEvent('info', 'api.validation_error', {
+      requestId,
+      error: validationError.message || String(validationError),
+    });
     return res.status(400).json({
       error: 'Bad Request',
+      requestId,
+      ...buildErrorResponse(
+        'INVALID_INPUT',
+        validationError.message || 'Invalid request payload.',
+      ),
       message: validationError.message || 'Invalid request payload.',
     });
   }
@@ -1446,9 +1607,15 @@ module.exports = async function handler(req, res) {
       cached.explanations,
       { preferGeneratedExplanations: true },
     );
+    logEvent('info', 'api.response_cached', {
+      requestId,
+      source: 'gemini',
+      latencyMs: Date.now() - startedAt,
+    });
     return res.status(200).json({
       status: 'ok',
       source: 'gemini',
+      requestId,
       message: cached.summary,
       providerMessage: `${providerLabel('gemini')} (cache)` ,
       summary: cached.summary,
@@ -1473,9 +1640,16 @@ module.exports = async function handler(req, res) {
         aiResult.explanations,
         { preferGeneratedExplanations: true },
       );
+    logEvent('info', 'api.response_ai_success', {
+      requestId,
+      source: aiResult.provider,
+      model: aiResult.model,
+      latencyMs: Date.now() - startedAt,
+    });
     return res.status(200).json({
       status: 'ok',
       source: aiResult.provider,
+      requestId,
       message: aiResult.summary,
       providerMessage: `${providerLabel(aiResult.provider)} (${aiResult.model})`,
       summary: aiResult.summary,
@@ -1488,9 +1662,23 @@ module.exports = async function handler(req, res) {
       fallbackRecommendationItems,
       [],
     );
-    return res.status(200).json({
+    
+    // Return 503 for retryable errors, 200 for others
+    const statusCode = isRetryableAiError(error) ? 503 : 200;
+    const errorCode = classifyAiErrorCode(error);
+    logEvent('error', 'api.response_fallback', {
+      requestId,
+      statusCode,
+      errorCode,
+      error: errorMessage(error),
+      latencyMs: Date.now() - startedAt,
+    });
+    
+    return res.status(statusCode).json({
       status: 'fallback',
       source: 'fallback',
+      requestId,
+      errorCode,
       message: buildClientSafeAiError(error),
       providerMessage: '',
       error: buildClientSafeAiError(error),

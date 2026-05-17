@@ -6,6 +6,7 @@ const middleware = require('./middleware');
 describe('middleware', () => {
   beforeEach(() => {
     // Clear rate limit store before each test
+    middleware.resetRateLimitStore();
     jest.clearAllMocks();
     // Reset time
     jest.useFakeTimers();
