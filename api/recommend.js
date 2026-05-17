@@ -1,3 +1,12 @@
+const {
+  checkRateLimit,
+  getClientIp,
+  validateInput,
+  setSecurityHeaders,
+  handleOptions,
+  REQUEST_SIZE_LIMIT,
+} = require('./middleware');
+
 const DEFAULT_FALLBACK = [
   'Fill empty equipment slots first to stabilize your build baseline.',
   'Refine main weapon and armor before chasing niche min-max stats.',
@@ -1373,12 +1382,50 @@ async function requestAiExplanation(input, recommendations) {
 }
 
 module.exports = async function handler(req, res) {
+  // Set security headers on all responses
+  setSecurityHeaders(res);
+
+  // Handle OPTIONS preflight requests
+  if (req.method === 'OPTIONS') {
+    return handleOptions(res);
+  }
+
+  // Only POST allowed
   if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
+    res.setHeader('Allow', 'POST, OPTIONS');
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  const input = parseBody(req);
+  // Rate limiting by IP
+  const clientIp = getClientIp(req);
+  if (!checkRateLimit(clientIp)) {
+    return res.status(429).json({
+      error: 'Too Many Requests',
+      message: 'Rate limit exceeded. Maximum 30 requests per minute.',
+    });
+  }
+
+  // Check request size
+  const contentLength = Number(req.headers['content-length'] || 0);
+  if (contentLength > REQUEST_SIZE_LIMIT) {
+    return res.status(413).json({
+      error: 'Payload Too Large',
+      message: `Request size exceeds limit of ${REQUEST_SIZE_LIMIT} bytes.`,
+    });
+  }
+
+  // Validate input
+  let input;
+  try {
+    input = parseBody(req);
+    validateInput(input);
+  } catch (validationError) {
+    return res.status(400).json({
+      error: 'Bad Request',
+      message: validationError.message || 'Invalid request payload.',
+    });
+  }
+
   const fallbackRecommendations = normalizeRecommendations(
     input.fallbackRecommendations,
     DEFAULT_FALLBACK,
@@ -1400,6 +1447,7 @@ module.exports = async function handler(req, res) {
       { preferGeneratedExplanations: true },
     );
     return res.status(200).json({
+      status: 'ok',
       source: 'gemini',
       message: cached.summary,
       providerMessage: `${providerLabel('gemini')} (cache)` ,
@@ -1426,6 +1474,7 @@ module.exports = async function handler(req, res) {
         { preferGeneratedExplanations: true },
       );
     return res.status(200).json({
+      status: 'ok',
       source: aiResult.provider,
       message: aiResult.summary,
       providerMessage: `${providerLabel(aiResult.provider)} (${aiResult.model})`,
@@ -1440,9 +1489,11 @@ module.exports = async function handler(req, res) {
       [],
     );
     return res.status(200).json({
+      status: 'fallback',
       source: 'fallback',
       message: buildClientSafeAiError(error),
       providerMessage: '',
+      error: buildClientSafeAiError(error),
       summary: '',
       explanations: normalizeExplanations([], fallbackRecommendationTexts),
       recommendations: fallbackRecommendationTexts,

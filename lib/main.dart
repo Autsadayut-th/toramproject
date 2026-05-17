@@ -1,6 +1,10 @@
+import 'dart:async';
+import 'dart:ui';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toramonline/firebase_options.dart';
 
@@ -8,13 +12,63 @@ import 'app_shell/app_shell_page.dart';
 import 'critical_simulator_page/critical_simulator_page.dart';
 import 'login_builds_page/login_screen.dart';
 import 'splash/splash_screen.dart';
+import 'shared/app_logger.dart';
 import 'shared/app_theme_controller.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await AppThemeController.instance.load();
+  runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(const MyApp());
+      FlutterError.onError = (FlutterErrorDetails details) {
+        AppLogger.error(
+          'Unhandled Flutter framework error',
+          error: details.exception,
+          stackTrace: details.stack,
+        );
+        FlutterError.presentError(details);
+      };
+
+      PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
+        AppLogger.error(
+          'Unhandled platform-dispatched error',
+          error: error,
+          stackTrace: stack,
+        );
+        return true;
+      };
+
+      ErrorWidget.builder = (FlutterErrorDetails details) {
+        AppLogger.error(
+          'Widget build error',
+          error: details.exception,
+          stackTrace: details.stack,
+        );
+        return Material(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                'Something went wrong while rendering this screen.',
+                textAlign: TextAlign.center,
+                style: ThemeData.light().textTheme.bodyMedium,
+              ),
+            ),
+          ),
+        );
+      };
+
+      await AppThemeController.instance.load();
+      runApp(const MyApp());
+    },
+    (Object error, StackTrace stackTrace) {
+      AppLogger.error(
+        'Unhandled zone error',
+        error: error,
+        stackTrace: stackTrace,
+      );
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -114,7 +168,26 @@ class _FirebaseBootstrapGateState extends State<FirebaseBootstrapGate> {
         );
       }
       return true;
-    } catch (_) {
+    } on FirebaseException catch (error, stackTrace) {
+      AppLogger.error(
+        'Firebase initialization failed',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      return false;
+    } on PlatformException catch (error, stackTrace) {
+      AppLogger.error(
+        'Firebase platform initialization failed',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      return false;
+    } catch (error, stackTrace) {
+      AppLogger.error(
+        'Unexpected Firebase initialization failure',
+        error: error,
+        stackTrace: stackTrace,
+      );
       return false;
     }
   }
