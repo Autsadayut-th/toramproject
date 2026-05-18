@@ -14,11 +14,16 @@ import 'login_builds_page/login_screen.dart';
 import 'splash/splash_screen.dart';
 import 'shared/app_logger.dart';
 import 'shared/app_theme_controller.dart';
+import 'shared/lazy_page_route.dart';
+import 'shared/app_optimization_initializer.dart';
 
 Future<void> main() async {
   runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
+
+      // Initialize app optimization (lazy loading, image caching, etc.)
+      await AppOptimizationInitializer.initialize();
 
       FlutterError.onError = (FlutterErrorDetails details) {
         AppLogger.error(
@@ -128,10 +133,8 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Toram Build Simulator',
           debugShowCheckedModeBanner: false,
-          routes: <String, WidgetBuilder>{
-            '/login': (_) => const LoginScreen(),
-            '/app': (_) => const AppShellScreen(),
-            '/critical-simulator': (_) => const CriticalSimulatorPage(),
+          onGenerateRoute: (RouteSettings settings) {
+            return _buildRoute(settings);
           },
           theme: lightTheme,
           darkTheme: darkTheme,
@@ -140,6 +143,24 @@ class MyApp extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+/// Lazy route builder for optimal web performance
+Route<dynamic>? _buildRoute(RouteSettings settings) {
+  switch (settings.name) {
+    case '/login':
+      return LazyPageRoute<void>(pageBuilder: (context) => const LoginScreen());
+    case '/app':
+      return LazyPageRoute<void>(
+        pageBuilder: (context) => const AppShellScreen(),
+      );
+    case '/critical-simulator':
+      return LazyPageRoute<void>(
+        pageBuilder: (context) => const CriticalSimulatorPage(),
+      );
+    default:
+      return null;
   }
 }
 

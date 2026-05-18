@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toramonline/shared/app_theme_controller.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   group('AppThemeController', () {
+    setUp(() async {
+      SharedPreferences.setMockInitialValues(<String, Object>{});
+      await AppThemeController.instance.setThemeMode(ThemeMode.dark);
+    });
+
     test('should be singleton', () {
       final instance1 = AppThemeController.instance;
       final instance2 = AppThemeController.instance;

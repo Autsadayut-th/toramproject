@@ -7,16 +7,20 @@ import '../shared/debouncer.dart';
 import 'build_simulator_coordinator.dart';
 import '../custom_equipment/custom_equipment.dart';
 import '../equipment_library/models/equipment_library_item.dart';
+import 'models/build_snapshot.dart';
 import '../equipment_library/repository/equipment_library_repository.dart';
 import 'services/ai_build_recommendation_service.dart';
+import 'services/ai_recommendation_request_payload.dart';
 import 'services/ai/recommendation_item.dart';
 import 'services/avatar_gacha_data_service.dart';
 import 'services/build_ai_status_service.dart';
 import 'services/build_calculator_service.dart';
 import 'services/build_persistence_service.dart';
-import 'services/build_recommendation_service.dart';
+import 'services/build_recommendation_controller.dart';
 import 'services/build_rule_set_service.dart';
 import 'services/build_weapon_rule_service.dart';
+import 'services/build_cloud_sync_controller.dart';
+import 'controllers/build_simulation_controller.dart';
 import 'services/crystal_library_service.dart';
 import 'services/firebase_saved_builds_service.dart';
 import 'services/recommendation_feedback_service.dart';
@@ -68,6 +72,11 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   late final Debouncer _coordinatorSyncDebouncer;
   final AiBuildRecommendationService _aiRecommendationService =
       const AiBuildRecommendationService();
+  late final BuildRecommendationController _buildRecommendationController;
+  final BuildCloudSyncController _buildCloudSyncController =
+      const BuildCloudSyncController();
+  final BuildSimulationController _buildSimulationController =
+      const BuildSimulationController();
   final FirebaseSavedBuildsService _savedBuildsService =
       FirebaseSavedBuildsService();
   final RecommendationFeedbackService _recommendationFeedbackService =
@@ -220,6 +229,9 @@ class BuildSimulatorScreenState extends State<BuildSimulatorScreen> {
   @override
   void initState() {
     super.initState();
+    _buildRecommendationController = BuildRecommendationController(
+      aiService: _aiRecommendationService,
+    );
     _recalculationDebouncer = Debouncer(
       delay: const Duration(milliseconds: 300),
     );

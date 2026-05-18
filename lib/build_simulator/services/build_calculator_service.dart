@@ -365,9 +365,13 @@ class BuildCalculatorService {
     }
 
     return BuildCalculationContext(
-      primaryPercentByKey: Map<String, double>.from(buckets.primaryPercentByKey),
+      primaryPercentByKey: Map<String, double>.from(
+        buckets.primaryPercentByKey,
+      ),
       primaryFlatByKey: Map<String, double>.from(buckets.primaryFlatByKey),
-      derivedPercentByKey: Map<String, double>.from(buckets.derivedPercentByKey),
+      derivedPercentByKey: Map<String, double>.from(
+        buckets.derivedPercentByKey,
+      ),
       derivedFlatByKey: Map<String, double>.from(buckets.derivedFlatByKey),
       mainWeaponAtkBase: buckets.mainWeaponAtkBase,
       supplementalWeaponAtkBase: buckets.supplementalWeaponAtkBase,
@@ -510,8 +514,7 @@ class BuildCalculatorService {
       'FLEE':
           level + (agiValue * _fleeArmorModifier[context.effectiveArmorState]!),
       'CritRate':
-          25 +
-          (personalStatType == 'CRT' ? personalStatValue / 3.4 : 0),
+          25 + (personalStatType == 'CRT' ? personalStatValue / 3.4 : 0),
       'PhysicalPierce': 0,
       'MagicPierce': 0,
       'Accuracy': level + dexValue,
@@ -736,10 +739,11 @@ class BuildCalculatorService {
         )
         ? _refinedWeaponAtk(
             baseWeaponAtk: supplementalWeaponAtkBase,
-            refineLevel: _subWeaponUsesWeaponRefine(
-              subWeaponType: subWeaponType,
-              subWeaponHasBaseWeaponAtk: subWeaponHasBaseWeaponAtk,
-            )
+            refineLevel:
+                _subWeaponUsesWeaponRefine(
+                  subWeaponType: subWeaponType,
+                  subWeaponHasBaseWeaponAtk: subWeaponHasBaseWeaponAtk,
+                )
                 ? enhanceSub
                 : 0,
             ruleSet: ruleSet,
@@ -1042,11 +1046,42 @@ class BuildCalculatorService {
     if (mainWeaponType.isEmpty) {
       return true;
     }
-    final List<String>? allowed = mainToAllowedSubTypes[mainWeaponType];
+    final Map<String, List<String>> normalizedRules =
+        _normalizeAllowedSubWeaponRules(mainToAllowedSubTypes);
+    final List<String>? allowed = normalizedRules[mainWeaponType];
     if (allowed == null) {
       return true;
     }
     return allowed.contains(subWeaponType);
+  }
+
+  static Map<String, List<String>> _normalizeAllowedSubWeaponRules(
+    Map<String, List<String>> source,
+  ) {
+    if (source.isEmpty) {
+      return const <String, List<String>>{};
+    }
+
+    final Map<String, List<String>> normalized = <String, List<String>>{};
+    for (final MapEntry<String, List<String>> entry in source.entries) {
+      final String mainWeaponType = _normalizeWeaponType(entry.key);
+      if (mainWeaponType.isEmpty) {
+        continue;
+      }
+
+      final Set<String> allowedTypes = <String>{};
+      for (final String rawAllowedType in entry.value) {
+        final String allowedType = _normalizeWeaponType(rawAllowedType);
+        if (allowedType.isNotEmpty) {
+          allowedTypes.add(allowedType);
+        }
+      }
+
+      if (allowedTypes.isNotEmpty) {
+        normalized[mainWeaponType] = allowedTypes.toList(growable: false);
+      }
+    }
+    return normalized;
   }
 
   static bool _itemHasBaseWeaponAtk(EquipmentLibraryItem? item) {

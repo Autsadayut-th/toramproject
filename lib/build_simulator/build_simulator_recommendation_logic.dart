@@ -238,10 +238,6 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
     _mainWeaponId = null;
   }
 
-  bool _isRemoteAiSource(String source) {
-    return BuildAiStatusService.isRemoteAiSource(source);
-  }
-
   EquipmentLibraryItem? _findEquipmentByKey(String? equipmentKey) {
     final String normalizedKey = (equipmentKey ?? '').trim().toLowerCase();
     if (normalizedKey.isEmpty) {
@@ -278,29 +274,6 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
       return const <String>[];
     }
     return item.stats.map(_formatStatPreview).toList(growable: false);
-  }
-
-  Iterable<EquipmentLibraryItem> _equippedItems() sync* {
-    final EquipmentLibraryItem? main = _findEquipmentByKey(_mainWeaponId);
-    if (main != null) {
-      yield main;
-    }
-    final EquipmentLibraryItem? sub = _findEquipmentByKey(_subWeaponId);
-    if (sub != null) {
-      yield sub;
-    }
-    final EquipmentLibraryItem? armor = _findEquipmentByKey(_armorId);
-    if (armor != null) {
-      yield armor;
-    }
-    final EquipmentLibraryItem? helmet = _findEquipmentByKey(_helmetId);
-    if (helmet != null) {
-      yield helmet;
-    }
-    final EquipmentLibraryItem? ring = _findEquipmentByKey(_ringId);
-    if (ring != null) {
-      yield ring;
-    }
   }
 
   Iterable<String?> _equippedCrystalKeys() sync* {
@@ -400,70 +373,40 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
     return keys.toList(growable: false);
   }
 
-  void _recalculateAll() {
-    final EquipmentLibraryItem? mainWeapon = _findEquipmentByKey(_mainWeaponId);
-    final EquipmentLibraryItem? subWeapon = _findEquipmentByKey(_subWeaponId);
-    final EquipmentLibraryItem? armor = _findEquipmentByKey(_armorId);
-    final EquipmentLibraryItem? helmet = _findEquipmentByKey(_helmetId);
-    final EquipmentLibraryItem? ring = _findEquipmentByKey(_ringId);
-    final List<EquipmentLibraryItem> equippedItems = _equippedItems().toList(
-      growable: false,
-    );
-    final List<EquipmentStat> equippedCrystalStats =
-        _equippedCrystalStatsList();
-    final List<EquipmentStat> avatarStats = _selectedGachaStatsList();
-    _calculationContextCache = BuildCalculatorService.buildCalculationContext(
-      armorState: _armorMode,
-      mainWeapon: mainWeapon,
-      subWeapon: subWeapon,
-      armor: armor,
-      helmet: helmet,
-      ring: ring,
-      equippedCrystalStats: equippedCrystalStats,
-      avatarStats: avatarStats,
+  BuildSimulationRequest _buildSimulationRequest() {
+    return BuildSimulationRequest(
+      character: Map<String, dynamic>.from(_character),
+      level: _level,
+      personalStatType: _personalStatType,
+      personalStatValue: _personalStatValue,
+      enhMain: _enhMain,
+      enhSub: _enhSub,
+      enhArmor: _enhArmor,
+      enhHelmet: _enhHelmet,
+      enhRing: _enhRing,
+      armorMode: _armorMode,
       mainToAllowedSubTypes: _mainToAllowedSubTypes,
-    );
-    _isCalculationContextDirty = false;
-    _summary = BuildCalculatorService.calculateSummaryFromContext(
-      context: _calculationContextCache!,
-      character: _character,
-      level: _level,
-      personalStatType: _personalStatType,
-      personalStatValue: _personalStatValue,
-      enhanceMain: _enhMain,
-      enhanceSub: _enhSub,
-      enhanceArmor: _enhArmor,
-      enhanceHelmet: _enhHelmet,
-      enhanceRing: _enhRing,
       ruleSet: _ruleSet,
-    );
-    _recommendationItems = BuildRecommendationService.generateItems(
-      summary: _summary,
-      character: _character,
-      level: _level,
-      personalStatType: _personalStatType,
-      personalStatValue: _personalStatValue,
       mainWeaponId: _mainWeaponId,
       subWeaponId: _subWeaponId,
       armorId: _armorId,
       helmetId: _helmetId,
       ringId: _ringId,
-      enhanceMain: _enhMain,
-      enhanceArmor: _enhArmor,
-      enhanceHelmet: _enhHelmet,
-      enhanceRing: _enhRing,
-      equippedItems: equippedItems,
-      equippedCrystalStats: equippedCrystalStats,
+      findEquipmentByKey: _findEquipmentByKey,
+      equippedCrystalStats: _equippedCrystalStatsList(),
+      avatarStats: _selectedGachaStatsList(),
       crystalKeysByEquipment: _crystalKeysByEquipment(),
       crystalUpgradeFromByKey: _crystalUpgradeFromByKey(),
-      normalizedMainWeaponType: _normalizeMainWeaponType(
-        _findEquipmentByKey(_mainWeaponId)?.type,
-      ),
-      ruleSet: _ruleSet,
+      normalizeMainWeaponType: _normalizeMainWeaponType,
     );
-    _recommendations = _recommendationItems
-        .map((AiRecommendationItem item) => item.normalizedMessage)
-        .toList(growable: false);
+  }
+
+  void _applySimulationResult(BuildSimulationResult result) {
+    _calculationContextCache = result.context;
+    _isCalculationContextDirty = false;
+    _summary = result.summary;
+    _recommendationItems = result.recommendationItems;
+    _recommendations = result.recommendations;
     _showAllRecommendations = false;
     _invalidateEffectiveRecommendationItemsCache();
     _pruneRecommendationFeedback();
@@ -474,67 +417,24 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
         : BuildSimulatorScreenState._guestAiLockedMessage;
   }
 
+  void _recalculateAll() {
+    final BuildSimulationResult result = _buildSimulationController
+        .recalculateAll(_buildSimulationRequest());
+    _applySimulationResult(result);
+  }
+
   void _recalculateCharacterOnly() {
     final BuildCalculationContext? cached = _calculationContextCache;
     if (_isCalculationContextDirty || cached == null) {
       _recalculateAll();
       return;
     }
-
-    _summary = BuildCalculatorService.calculateSummaryFromContext(
-      context: cached,
-      character: _character,
-      level: _level,
-      personalStatType: _personalStatType,
-      personalStatValue: _personalStatValue,
-      enhanceMain: _enhMain,
-      enhanceSub: _enhSub,
-      enhanceArmor: _enhArmor,
-      enhanceHelmet: _enhHelmet,
-      enhanceRing: _enhRing,
-      ruleSet: _ruleSet,
-    );
-
-    final List<EquipmentLibraryItem> equippedItems = _equippedItems().toList(
-      growable: false,
-    );
-    final List<EquipmentStat> equippedCrystalStats =
-        _equippedCrystalStatsList();
-    _recommendationItems = BuildRecommendationService.generateItems(
-      summary: _summary,
-      character: _character,
-      level: _level,
-      personalStatType: _personalStatType,
-      personalStatValue: _personalStatValue,
-      mainWeaponId: _mainWeaponId,
-      subWeaponId: _subWeaponId,
-      armorId: _armorId,
-      helmetId: _helmetId,
-      ringId: _ringId,
-      enhanceMain: _enhMain,
-      enhanceArmor: _enhArmor,
-      enhanceHelmet: _enhHelmet,
-      enhanceRing: _enhRing,
-      equippedItems: equippedItems,
-      equippedCrystalStats: equippedCrystalStats,
-      crystalKeysByEquipment: _crystalKeysByEquipment(),
-      crystalUpgradeFromByKey: _crystalUpgradeFromByKey(),
-      normalizedMainWeaponType: _normalizeMainWeaponType(
-        _findEquipmentByKey(_mainWeaponId)?.type,
-      ),
-      ruleSet: _ruleSet,
-    );
-    _recommendations = _recommendationItems
-        .map((AiRecommendationItem item) => item.normalizedMessage)
-        .toList(growable: false);
-    _showAllRecommendations = false;
-    _invalidateEffectiveRecommendationItemsCache();
-    _pruneRecommendationFeedback();
-    _aiRecommendationUiState = _AiRecommendationUiState.fallback;
-    _aiRecommendationSource = 'rule';
-    _aiRecommendationMessage = _canUseAiGeneration
-        ? BuildSimulatorScreenState._ruleRecommendationMessage
-        : BuildSimulatorScreenState._guestAiLockedMessage;
+    final BuildSimulationResult result = _buildSimulationController
+        .recalculateCharacterOnly(
+          request: _buildSimulationRequest(),
+          cachedContext: cached,
+        );
+    _applySimulationResult(result);
   }
 
   void _generateAiRecommendationsNow() {
@@ -549,7 +449,7 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
       _showRestrictionMessage('Login required to use AI Generate.');
       return;
     }
-    final Map<String, dynamic> payload = _buildAiRequestPayload(
+    final AiRecommendationRequestPayload payload = _buildAiRequestPayload(
       fallbackRecommendations: _recommendations,
       fallbackRecommendationItems: _recommendationItems,
     );
@@ -557,17 +457,17 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
     _refreshAiRecommendations(token: token, payload: payload);
   }
 
-  Map<String, dynamic> _buildAiRequestPayload({
+  AiRecommendationRequestPayload _buildAiRequestPayload({
     required List<String> fallbackRecommendations,
     required List<AiRecommendationItem> fallbackRecommendationItems,
   }) {
-    return <String, dynamic>{
-      'level': _level,
-      'personalStatType': _personalStatType,
-      'personalStatValue': _personalStatValue,
-      'character': Map<String, dynamic>.from(_character),
-      'summary': Map<String, num>.from(_summary),
-      'equipmentSlots': <String, dynamic>{
+    return AiRecommendationRequestPayload(
+      level: _level,
+      personalStatType: _personalStatType,
+      personalStatValue: _personalStatValue,
+      character: Map<String, dynamic>.from(_character),
+      summary: Map<String, num>.from(_summary),
+      equipmentSlots: <String, dynamic>{
         'mainWeaponId': _mainWeaponId,
         'subWeaponId': _subWeaponId,
         'armorId': _armorId,
@@ -579,16 +479,16 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
         'enhanceHelmet': _enhHelmet,
         'enhanceRing': _enhRing,
       },
-      'fallbackRecommendations': List<String>.from(fallbackRecommendations),
-      'fallbackRecommendationItems': fallbackRecommendationItems
-          .map((AiRecommendationItem item) => item.toJson())
-          .toList(growable: false),
-    };
+      fallbackRecommendations: List<String>.from(fallbackRecommendations),
+      fallbackRecommendationItems: List<AiRecommendationItem>.from(
+        fallbackRecommendationItems,
+      ),
+    );
   }
 
   Future<void> _refreshAiRecommendations({
     required int token,
-    required Map<String, dynamic> payload,
+    required AiRecommendationRequestPayload payload,
   }) async {
     if (!mounted) {
       return;
@@ -601,8 +501,10 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
     });
 
     try {
-      final AiBuildRecommendationResult result = await _aiRecommendationService
-          .fetchRecommendations(payload: payload);
+      final BuildRecommendationUiResult result =
+          await _buildRecommendationController.fetchRecommendations(
+            payload: payload,
+          );
       if (!mounted || token != _aiRecommendationRequestToken) {
         return;
       }
@@ -614,13 +516,12 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
         _pruneRecommendationFeedback();
         _isAiRecommendationLoading = false;
         _aiRecommendationSource = result.source;
-        _aiRecommendationUiState =
-            result.status == 'fallback' || result.source == 'fallback'
+        _aiRecommendationUiState = result.isFallback
             ? _AiRecommendationUiState.fallback
             : _AiRecommendationUiState.success;
         _aiRecommendationMessage = _buildAiStatusMessage(
           source: result.source,
-          details: result.summary.isNotEmpty ? result.summary : result.message,
+          details: result.message,
         );
       });
     } catch (error) {
@@ -628,17 +529,9 @@ extension _BuildSimulatorRecommendationLogic on BuildSimulatorScreenState {
         return;
       }
       _setUiState(() {
-        _recommendationItems = _recommendations
-            .map((String message) {
-              return AiRecommendationItem.fromText(
-                message: message,
-                category: 'analysis',
-                priority: 3,
-                source: 'rule',
-                confidence: 0.7,
-              );
-            })
-            .toList(growable: false);
+        _recommendationItems = _buildRecommendationController.buildFallbackItems(
+          _recommendations,
+        );
         _showAllRecommendations = false;
         _isAiRecommendationLoading = false;
         _aiRecommendationUiState = _AiRecommendationUiState.error;

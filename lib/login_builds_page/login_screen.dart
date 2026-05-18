@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../app_shell/app_shell_page.dart';
 import '../auth/firebase_auth_service.dart';
 import '../forgot_password_page/forgot_password_page.dart';
-import '../register_bulids_page/register_screen.dart';
+import '../register_builds_page/register_screen.dart';
 import '../shared/app_theme_controller.dart';
 import 'services/login_form_service.dart';
 

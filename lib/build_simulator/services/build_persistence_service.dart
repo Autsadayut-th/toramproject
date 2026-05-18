@@ -1,4 +1,5 @@
 import 'dart:convert';
+import '../models/build_snapshot.dart';
 
 class BuildPersistenceService {
   static const int defaultTotalStatPoints = 776;
@@ -386,6 +387,55 @@ class BuildPersistenceService {
       'isGachaExpanded': isGachaExpanded,
       'summary': Map<String, num>.from(summary),
     };
+  }
+
+  static Map<String, dynamic> createBuildSnapshotFromModel(
+    BuildSnapshot snapshot,
+  ) {
+    return createBuildSnapshot(
+      name: snapshot.name,
+      character: snapshot.character,
+      level: snapshot.level,
+      totalStatPoints: snapshot.totalStatPoints,
+      personalStatType: snapshot.personalStatType,
+      personalStatValue: snapshot.personalStatValue,
+      mainWeaponId: snapshot.equipment.mainWeaponId,
+      enhMain: snapshot.equipment.enhMain,
+      mainCrystal1: snapshot.equipment.mainCrystal1,
+      mainCrystal2: snapshot.equipment.mainCrystal2,
+      subWeaponId: snapshot.equipment.subWeaponId,
+      enhSub: snapshot.equipment.enhSub,
+      armorId: snapshot.equipment.armorId,
+      armorMode: snapshot.equipment.armorMode,
+      enhArmor: snapshot.equipment.enhArmor,
+      armorCrystal1: snapshot.equipment.armorCrystal1,
+      armorCrystal2: snapshot.equipment.armorCrystal2,
+      helmetId: snapshot.equipment.helmetId,
+      enhHelmet: snapshot.equipment.enhHelmet,
+      helmetCrystal1: snapshot.equipment.helmetCrystal1,
+      helmetCrystal2: snapshot.equipment.helmetCrystal2,
+      ringId: snapshot.equipment.ringId,
+      enhRing: snapshot.equipment.enhRing,
+      ringCrystal1: snapshot.equipment.ringCrystal1,
+      ringCrystal2: snapshot.equipment.ringCrystal2,
+      gacha1Stat1: snapshot.gacha.gacha1Stat1,
+      gacha1Stat2: snapshot.gacha.gacha1Stat2,
+      gacha1Stat3: snapshot.gacha.gacha1Stat3,
+      gacha2Stat1: snapshot.gacha.gacha2Stat1,
+      gacha2Stat2: snapshot.gacha.gacha2Stat2,
+      gacha2Stat3: snapshot.gacha.gacha2Stat3,
+      gacha3Stat1: snapshot.gacha.gacha3Stat1,
+      gacha3Stat2: snapshot.gacha.gacha3Stat2,
+      gacha3Stat3: snapshot.gacha.gacha3Stat3,
+      isCharacterStatsExpanded: snapshot.isCharacterStatsExpanded,
+      isMainWeaponExpanded: snapshot.isMainWeaponExpanded,
+      isSubWeaponExpanded: snapshot.isSubWeaponExpanded,
+      isArmorExpanded: snapshot.isArmorExpanded,
+      isHelmetExpanded: snapshot.isHelmetExpanded,
+      isRingExpanded: snapshot.isRingExpanded,
+      isGachaExpanded: snapshot.isGachaExpanded,
+      summary: snapshot.summary,
+    );
   }
 
   static String encodeBuildShareCode(Map<String, dynamic> build) {

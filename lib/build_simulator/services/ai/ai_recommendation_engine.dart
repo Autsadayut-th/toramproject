@@ -19,6 +19,15 @@ class AiRecommendationEngine {
     'Track your stat goals each 10 levels so equipment upgrades stay efficient.',
   ];
 
+  static const Map<String, int> _categoryRank = <String, int>{
+    'rule': 0,
+    'equipment': 1,
+    'crysta': 2,
+    'upgrade_path': 3,
+    'stat': 4,
+    'analysis': 5,
+  };
+
   final AiBuildAnalyzer buildAnalyzer;
   final AiStatOptimizer statOptimizer;
   final AiRuleEngine ruleEngine;
@@ -77,6 +86,12 @@ class AiRecommendationEngine {
       if (priorityDiff != 0) {
         return priorityDiff;
       }
+      final int categoryDiff = _categoryWeight(
+        a.category,
+      ).compareTo(_categoryWeight(b.category));
+      if (categoryDiff != 0) {
+        return categoryDiff;
+      }
       return b.confidence.compareTo(a.confidence);
     });
 
@@ -122,12 +137,27 @@ class AiRecommendationEngine {
     if (!candidate.isValid) {
       return;
     }
-    final String message = candidate.normalizedMessage;
+    final String dedupeKey = _dedupeKey(candidate.normalizedMessage);
     for (final AiRecommendationItem existing in recommendations) {
-      if (existing.normalizedMessage == message) {
+      if (_dedupeKey(existing.normalizedMessage) == dedupeKey) {
         return;
       }
     }
     recommendations.add(candidate);
+  }
+
+  int _categoryWeight(String category) {
+    return _categoryRank[category.trim().toLowerCase()] ??
+        _categoryRank['analysis']!;
+  }
+
+  String _dedupeKey(String value) {
+    final String normalized = value
+        .trim()
+        .toLowerCase()
+        .replaceAll(RegExp(r'[^a-z0-9]+'), ' ')
+        .replaceAll(RegExp(r'\s+'), ' ')
+        .trim();
+    return normalized;
   }
 }

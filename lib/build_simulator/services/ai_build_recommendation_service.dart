@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+import 'ai_recommendation_request_payload.dart';
 import 'ai/recommendation_item.dart';
 
 class AiBuildRecommendationResult {
@@ -61,10 +62,11 @@ class AiBuildRecommendationService {
       <String, _AiRecommendationCacheEntry>{};
 
   Future<AiBuildRecommendationResult> fetchRecommendations({
-    required Map<String, dynamic> payload,
+    required AiRecommendationRequestPayload payload,
     Duration timeout = const Duration(seconds: 22),
   }) async {
-    final String cacheKey = _payloadCacheKey(payload);
+    final Map<String, dynamic> payloadMap = payload.toJson();
+    final String cacheKey = _payloadCacheKey(payloadMap);
     final DateTime now = DateTime.now();
     final _AiRecommendationCacheEntry? cached = _cache[cacheKey];
     if (cached != null && now.difference(cached.cachedAt) <= _cacheTtl) {
@@ -81,7 +83,7 @@ class AiBuildRecommendationService {
               headers: const <String, String>{
                 'Content-Type': 'application/json',
               },
-              body: jsonEncode(payload),
+              body: jsonEncode(payloadMap),
             )
             .timeout(timeout);
 

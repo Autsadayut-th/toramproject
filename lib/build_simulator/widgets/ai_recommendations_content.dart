@@ -148,7 +148,8 @@ class AiRecommendationsContent extends StatelessWidget {
       );
     } else {
       for (int i = 0; i < visibleRecommendationItems.length; i++) {
-        final AiRecommendationItem recommendation = visibleRecommendationItems[i];
+        final AiRecommendationItem recommendation =
+            visibleRecommendationItems[i];
         final String feedbackState =
             feedbackByRecommendationId[recommendation.id] ?? '';
         final String categoryLabel = recommendation.category
@@ -164,11 +165,8 @@ class AiRecommendationsContent extends StatelessWidget {
             decoration: BoxDecoration(
               color: colorScheme.surfaceContainerHigh,
               borderRadius: BorderRadius.circular(12),
-              border: Border(
-                left: BorderSide(
-                  color: colorScheme.primary.withValues(alpha: 0.85),
-                  width: 3,
-                ),
+              border: Border.all(
+                color: colorScheme.onSurface.withValues(alpha: 0.24),
               ),
               boxShadow: useCardShadow
                   ? <BoxShadow>[

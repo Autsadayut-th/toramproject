@@ -135,17 +135,15 @@ extension _BuildSimulatorDataLoading on BuildSimulatorScreenState {
         return;
       }
 
-      List<Map<String, dynamic>> normalized =
-          BuildPersistenceService.normalizeBuildList(
-            cloudBuilds,
-            summaryTemplate: BuildCalculatorService.summaryTemplate,
-          );
+      List<Map<String, dynamic>> normalized = _buildCloudSyncController
+          .normalizeCloudBuilds(cloudBuilds);
       final int? maxSavedBuilds = _maxSavedBuilds;
-      bool truncated = false;
-      if (maxSavedBuilds != null && normalized.length > maxSavedBuilds) {
-        normalized = normalized.take(maxSavedBuilds).toList(growable: false);
-        truncated = true;
-      }
+      final int originalLength = normalized.length;
+      normalized = _buildCloudSyncController.applySavedBuildLimit(
+        builds: normalized,
+        maxSavedBuilds: maxSavedBuilds,
+      );
+      final bool truncated = normalized.length != originalLength;
 
       _setUiState(() {
         _savedBuilds

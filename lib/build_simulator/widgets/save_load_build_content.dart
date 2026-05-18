@@ -125,7 +125,9 @@ class SaveLoadBuildContent extends StatelessWidget {
                 icon: const Icon(Icons.download_for_offline, size: 16),
                 label: const Text('Import Code'),
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: colorScheme.onSurface.withValues(alpha: 0.75),
+                  foregroundColor: colorScheme.onSurface.withValues(
+                    alpha: 0.75,
+                  ),
                   side: BorderSide(
                     color: colorScheme.onSurface.withValues(alpha: 0.24),
                   ),
@@ -146,7 +148,7 @@ class SaveLoadBuildContent extends StatelessWidget {
               color: colorScheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: colorScheme.onSurface.withValues(alpha: 0.2),
+                color: colorScheme.onSurface.withValues(alpha: 0.24),
               ),
             ),
             child: Text(
@@ -159,17 +161,19 @@ class SaveLoadBuildContent extends StatelessWidget {
           )
         else
           Column(
-            children: visibleSavedBuilds.map((SaveBuildEntry build) {
-              return _SavedBuildTile(
-                name: build.name,
-                codeLine: build.codeLine,
-                savedAtLine: build.savedAtLine,
-                onTap: build.onTap,
-                onLoad: build.onLoad,
-                onDelete: build.onDelete,
-                onShare: build.onShare,
-              );
-            }).toList(growable: false),
+            children: visibleSavedBuilds
+                .map((SaveBuildEntry build) {
+                  return _SavedBuildTile(
+                    name: build.name,
+                    codeLine: build.codeLine,
+                    savedAtLine: build.savedAtLine,
+                    onTap: build.onTap,
+                    onLoad: build.onLoad,
+                    onDelete: build.onDelete,
+                    onShare: build.onShare,
+                  );
+                })
+                .toList(growable: false),
           ),
         if (savedBuilds.length > visibleSavedBuildCount)
           Padding(
@@ -219,7 +223,9 @@ class _SavedBuildTile extends StatelessWidget {
         decoration: BoxDecoration(
           color: colorScheme.surfaceContainerHigh,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.2)),
+          border: Border.all(
+            color: colorScheme.onSurface.withValues(alpha: 0.24),
+          ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
